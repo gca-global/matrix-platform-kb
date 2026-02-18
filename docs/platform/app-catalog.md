@@ -10,7 +10,7 @@
 | **Manager App** | Sales Managers | Kanban pipelines, analytics, team management | Planned |
 | **Client Portal** | Buyers, Sellers | Property search, Curated Lists, documents, communication | Planned |
 | **Marketing App** | Marketing Team | Campaigns, automation, lead capture, analytics | Planned |
-| **Listings Management** | Listing Coordinators | Listing lifecycle, syndication, media management | Planned |
+| **Listings Management (MLS)** | Brokers, Listing Coordinators, Marketing, Finance | Listing lifecycle, syndication, media management | CDL Deployed |
 | **Contact Center** | Welcome Team | Omnichannel communication, lead qualification | Planned |
 | **Finance App** | Finance Team | Commissions, invoicing, payment tracking | Planned |
 | **AI Copilot** | All internal users | Next Best Action, matching, forecasting, automation | Planned |
@@ -63,15 +63,24 @@
 - Marketing funnel analytics (CTR, opens, conversions)
 - Syndication management to portals
 
-### Listings Management
-**Users**: Listing coordinators, brokers
-**RESO Resources**: Property, Media, Member, Office
+### Listings Management (Matrix MLS)
+**Users**: Brokers, listing coordinators, marketing, finance
+**RESO Resources**: Property, Media, Contacts, Member, Office
+**App Type**: CDL-Connected (18 `mls_*` tables on shared CDL instance)
+**Repo**: `/home/bitnami/matrix-mls`
+**CDL Schema**: `docs/data-models/mls-cdl-schema.md`
+**Status**: Data model deployed, app under development
 **Key Features**:
-- Listing lifecycle from checklist to publication
-- Media management (photos, videos, brochures)
-- Syndication to: SIR Portal, Cyprus Website, MLS, Social Media
-- Days on Market monitoring
-- Listing quality scoring
+- Multi-step conditional listing form replacing Excel checklists (Apartment/House/Land/Development)
+- Shared contact registry with role-based linking (seller, introducer, keyholder, lawyer)
+- Document compliance with conditional mandatory rules (with/without title deed, land)
+- Media management with Dash category alignment and development inheritance
+- 9-stage status pipeline (DRAFT → PUBLISHED → SOLD) with immutable audit trail
+- Multi-language marketing descriptions (EN/RU/HU) with approval workflow
+- Portal syndication tracking (SIR Global, Cyprus Website, MLS Feed, social media)
+- Role-based checklists (29 Broker, 10 Marketing, 5 Finance steps)
+- Price history with approval workflow for large changes
+- Task assignment system (photoshoot, marketing review, portal upload, finance filing)
 
 ### Contact Center
 **Users**: Welcome Team, call center

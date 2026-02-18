@@ -49,6 +49,7 @@ docs/
 │   ├── reso-dd-overview.md           ← RESO DD 2.0 — interop standard for syndication
 │   ├── reso-canonical-schema.md      ← Which RESO resources/fields map to Dash
 │   ├── platform-extensions.md        ← All x_sm_* fields not in Dash or RESO DD
+│   ├── mls-cdl-schema.md            ← MLS Listing Management CDL schema (18 tables, 422 cols)
 │   ├── etl-pipeline.md              ← Bronze/Silver/Gold ETL pipeline architecture
 │   ├── reso-web-api.md              ← RESO Web API (OData 4.0) endpoint reference
 │   ├── qobrix-data-model.md          ← Qobrix CRM reference & migration source
@@ -88,6 +89,7 @@ docs/
 | Map a property field across systems            | `docs/data-models/property-field-mapping.md`      |
 | See which RESO fields map to Dash              | `docs/data-models/reso-canonical-schema.md`       |
 | Find or add a platform extension (x_sm_*)     | `docs/data-models/platform-extensions.md`         |
+| See the MLS CDL schema (18 tables)             | `docs/data-models/mls-cdl-schema.md`              |
 | Understand the ETL pipeline (Bronze→Gold)     | `docs/data-models/etl-pipeline.md`                |
 | Use the RESO Web API (OData)                  | `docs/data-models/reso-web-api.md`                |
 | Understand Qobrix entities & migration        | `docs/data-models/qobrix-data-model.md`           |
@@ -107,6 +109,7 @@ docs/
 |------------|--------|---------|
 | `/home/bitnami/matrix-apps-template` | React/TS | App template: dual-Supabase, SSO, permissions, RLS, UI |
 | `/home/bitnami/matrix-hrms` | React/TS | Example app: HRMS (25+ tables, 30+ hooks, domain-specific) |
+| `/home/bitnami/matrix-mls` | React/TS | MLS Listing Management app (CDL-Connected, 18 tables on CDL) |
 | `/home/bitnami/mls_2_0` | Python/FastAPI | MLS 2.0 pipeline: Databricks ETL + RESO Web API |
 | `vision/Sharp-Sothebys-International-Realty.pdf` | PDF | Full 28-slide digital strategy 2026-2028 |
 | `vision/Sarp SIR Platform-2026-02-18-125014.mmd` | Mermaid | Platform ecosystem architecture diagram |

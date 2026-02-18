@@ -232,6 +232,20 @@ RLS helper functions (created by `001_sso_helper_functions.sql`):
 - `get_crud()` — extracts `crud` from JWT
 - `is_sso_admin_v2()` — checks if user is admin
 
+> **CDL Instance Reality (important for CDL-Connected apps):**
+> The shared CDL instance (`xgubaguglsnokjyudgvc`) does NOT have `001_sso_helper_functions.sql` deployed.
+> It uses a different set of helper functions:
+> `get_my_tenant_id()`, `auth.uid()`, `is_admin()`, `can_access_all_tenant_data()`, `is_manager_or_above()`, `is_same_tenant(uuid)`.
+> When building RLS for CDL-Connected apps (e.g., MLS), use these existing CDL functions
+> instead of Patterns A-E. See `docs/data-models/mls-cdl-schema.md` for a working example.
+
+> **CDL Instance Reality**: The shared CDL instance (`xgubaguglsnokjyudgvc`) does NOT have
+> `001_sso_helper_functions.sql` deployed. It uses a different set of functions:
+> `get_my_tenant_id()`, `is_admin()`, `can_access_all_tenant_data()`, `is_manager_or_above()`,
+> `is_same_tenant(uuid)`, and `auth.uid()`. Apps deploying tables to CDL (like MLS) must use
+> these existing functions instead of the Pattern A-E model above.
+> See `docs/data-models/mls-cdl-schema.md` for the CDL-adapted RLS strategy.
+
 ## UI Conventions
 
 ### Layout

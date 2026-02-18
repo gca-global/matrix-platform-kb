@@ -35,6 +35,7 @@
 | [reso-dd-overview.md](reso-dd-overview.md) | RESO DD 2.0 interop standard: resources, fields, lookups |
 | [reso-canonical-schema.md](reso-canonical-schema.md) | Which RESO resources Sharp Matrix uses, with Dash field mappings |
 | [platform-extensions.md](platform-extensions.md) | All `x_sm_*` fields not in Dash or RESO DD |
+| [mls-cdl-schema.md](mls-cdl-schema.md) | **MLS CDL Schema** — 18 tables, 422 columns deployed to CDL for Listing Management |
 | [etl-pipeline.md](etl-pipeline.md) | Bronze/Silver/Gold ETL pipeline: how Dash data reaches Supabase |
 | [reso-web-api.md](reso-web-api.md) | RESO Web API (OData 4.0): syndication and external integrations |
 | [qobrix-data-model.md](qobrix-data-model.md) | Qobrix CRM reference: legacy migration source |
