@@ -18,12 +18,12 @@ Start with **[AGENTS.md](AGENTS.md)** — it contains the reading order and navi
 To fetch any file via URL:
 
 ```
-https://raw.githubusercontent.com/humatic-ai/matrix-platform-kb/main/{path}
+https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/{path}
 ```
 
 Example:
 ```
-https://raw.githubusercontent.com/humatic-ai/matrix-platform-kb/main/AGENTS.md
+https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/AGENTS.md
 ```
 
 ## Structure
