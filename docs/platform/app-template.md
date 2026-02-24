@@ -454,7 +454,7 @@ Source: `/home/bitnami/matrix-hrms` — a Domain-Specific app built from the tem
 | `supabase/migrations/001_sso_helper_functions.sql` | RLS helper functions |
 | `supabase/migrations/003_data_model_template.sql` | 5 RLS patterns (A-E) |
 
-### In `matrix-hrms` (example extensions)
+### In `matrix-hrms` (Domain-Specific example)
 
 | File | What It Shows |
 |------|--------------|
@@ -464,3 +464,59 @@ Source: `/home/bitnami/matrix-hrms` — a Domain-Specific app built from the tem
 | `src/hooks/useInternalChanges.ts` | Change request workflow (create, approve, apply) |
 | `src/hooks/useRoleConfig.ts` | Extended page/action permissions |
 | `src/components/AppSidebar.tsx` | 4-section sidebar with badge counts and role-based visibility |
+
+### In `matrix-mls` (CDL-Connected example)
+
+| File | What It Shows |
+|------|--------------|
+| `src/lib/cdlWrite.ts` | CDL write helper — sends operations via `cdl-write` Edge Function with native token |
+| `src/integrations/supabase/dataLayerClient.ts` | CDL read client — prioritizes Supabase native token for PostgREST |
+| `supabase/functions/cdl-write/index.ts` | Edge Function proxy — table allowlist, conflict resolution, error `_debug` |
+| `src/components/settings/DevToolsPanel.tsx` | Test data seeder — seeds 18 tables with SEED-prefixed records |
+| `src/pages/AuthCallback.tsx` | Stores `supabase_access_token` from `oauth-token` into localStorage |
+| `src/hooks/useActiveRole.ts` | `canCreate`/`canRead`/`canUpdate`/`canDelete` + `isAdmin`, `isGlobalOrAbove` |
+
+## Common Pitfalls (LLM Guidance)
+
+These are hard-learned lessons. Violating any of them will cause silent failures.
+
+### 1. Never use SSO JWT for CDL PostgREST calls
+
+**Wrong**: Send `MatrixSSOStorage.getAccessToken()` (SSO JWT) to CDL PostgREST.
+**Why it fails**: PostgREST validates tokens against the **project's own JWT secret**, not the SSO `JWT_SECRET`. The SSO JWT is signed with a different key → `PGRST301: No suitable key or wrong key type`.
+**Correct**: Use `localStorage.getItem('matrix_supabase_access_token')` (Supabase native token). This token is issued by Supabase Auth and signed with the correct project key.
+
+### 2. CDL RLS helpers MUST have app_metadata fallback
+
+**Wrong**: RLS helpers that only read `current_setting('request.jwt.claims')`.
+**Why it fails**: Supabase native tokens don't contain custom SSO claims (`scope`, `crud`, `team_ids`). The functions return NULL → all RLS policies block access → empty query results.
+**Correct**: CDL RLS helpers must fall back to `auth.users.raw_app_meta_data` where `oauth-token` persists these claims. Use `SECURITY DEFINER` to access `auth.users`.
+
+### 3. oauth-token MUST persist claims to app_metadata
+
+**Wrong**: `oauth-token` only returns tokens in the response body.
+**Why it fails**: If claims aren't persisted to `app_metadata`, the RLS fallback has nothing to read.
+**Correct**: After resolving the user's active role, scope, CRUD, and teams, persist them:
+```typescript
+await supabase.auth.admin.updateUserById(userId, {
+  app_metadata: { ...existing, active_scope, active_crud, active_team_ids }
+});
+```
+
+### 4. CDL writes need an Edge Function proxy
+
+**Wrong**: Call CDL PostgREST directly from the browser.
+**Why it fails**: CORS blocks cross-origin Supabase requests from `lovable.dev` to the CDL instance.
+**Correct**: Route writes through an Edge Function on the app's own Supabase instance. The Edge Function creates a CDL client with the user's token and forwards the operation.
+
+### 5. Don't conflate scope with admin privileges
+
+**Wrong**: Treating `global` scope as admin for write operations on config tables.
+**Why it fails**: `global` means visibility (see all records in tenant), not admin privileges. A Sales Director with `global` scope should NOT be able to modify checklist templates or document type configs.
+**Correct**: Restrict config table writes to `(SELECT get_active_scope()) IN ('org_admin', 'system_admin')`.
+
+### 6. Use `get_my_tenant_id()` (not `get_current_tenant_id()`) on CDL
+
+**Wrong**: Using `get_current_tenant_id()` on CDL (only reads JWT `uoi` claim).
+**Why it fails**: Legacy apps and some token types don't have the `uoi` claim.
+**Correct**: CDL uses `get_my_tenant_id()` which has a 4-step fallback: `uoi` → `user_metadata.tenant_id` → `auth.users` → `admin_settings`.

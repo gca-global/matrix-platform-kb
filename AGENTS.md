@@ -4,18 +4,50 @@
 > It is deliberately short. Each pointer leads to a deeper source of truth in `docs/`.
 > When working in this repository, read this file first, then navigate to the relevant chapter.
 
-## For Lovable — Start Here
+## For LLMs — Start Here
 
-Before building ANY Matrix App:
+Before building or modifying ANY Matrix App:
 
-1. Read `docs/platform/app-template.md` — how apps are built (dual-Supabase, SSO, permissions, RLS, UI patterns)
-2. Determine app type: **CDL-Connected** (Dash tables) or **Domain-Specific** (own tables)
-3. If CDL-Connected: read `docs/data-models/dash-data-model.md` for field names (practical core)
-4. Read the relevant `docs/business-processes/` doc for your feature's workflow logic
-5. For syndication/exports: use the RESO mapping column in `dash-data-model.md`
-6. For SSO security: read `docs/platform/security-model.md`
-7. For deployment: read `docs/platform/operations.md`
-8. For data protection (GDPR): read `docs/platform/compliance.md`
+### Step 1: Read the App Template (mandatory)
+→ `docs/platform/app-template.md` — dual-Supabase, SSO auth, permissions, RLS, UI patterns, token architecture
+
+### Step 2: Determine App Type
+
+| Question | → App Type | Example Repo | Read Next |
+|----------|-----------|-------------|-----------|
+| Does the app work with listings, contacts, agents, showings? | **CDL-Connected** | `/home/bitnami/matrix-mls` | Steps 3a-3c below |
+| Does the app have its own domain (HR, finance, operations)? | **Domain-Specific** | `/home/bitnami/matrix-hrms` | Step 3d below |
+
+### Step 3a (CDL-Connected): Read the CDL Schema
+→ `docs/data-models/mls-cdl-schema.md` — 18 MLS tables, RLS patterns, CDL connection architecture, key files
+→ `docs/data-models/dash-data-model.md` — Dash field names used as column names
+
+### Step 3b (CDL-Connected): Understand Token Architecture (critical)
+CDL-Connected apps use **two tokens**:
+- **SSO JWT** (custom claims) — for Edge Function calls and App DB PostgREST
+- **Supabase native token** (project JWT secret) — for CDL PostgREST reads/writes
+
+The `oauth-token` Edge Function persists role claims (`active_scope`, `active_crud`, `active_team_ids`) to `auth.users.raw_app_meta_data`. CDL RLS helpers fall back to this `app_metadata` when JWT claims aren't present.
+
+→ `docs/platform/security-model.md` — full RLS helpers, app_metadata fallback, JWT claims
+
+### Step 3c (CDL-Connected): CDL Write Pattern
+Writes to CDL go through an Edge Function proxy on the app's Supabase instance:
+`cdlWrite.ts` → `cdl-write` Edge Function → CDL PostgREST
+
+### Step 3d (Domain-Specific): Read the HRMS Example
+→ `/home/bitnami/matrix-hrms` — 25+ domain tables, 30+ hooks, Domain-Specific patterns
+
+### Step 4: Read Relevant Business Processes
+→ `docs/business-processes/listing-pipeline.md` — seller-side (8 stages)
+→ `docs/business-processes/sales-pipeline.md` — buyer-side (8 stages)
+→ `docs/business-processes/listing-checklist.md` — operational checklists
+
+### Step 5 (as needed)
+- Syndication/exports: `docs/data-models/dash-data-model.md` (RESO mapping column)
+- Security deep-dive: `docs/platform/security-model.md`
+- Deployment: `docs/platform/operations.md`
+- GDPR/compliance: `docs/platform/compliance.md`
 
 ## Platform Identity
 
