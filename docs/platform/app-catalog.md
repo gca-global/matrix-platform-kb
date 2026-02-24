@@ -51,6 +51,8 @@
 - Document exchange (contracts, title deeds)
 - Communication with assigned broker
 - Transaction status tracking
+- **Personalized property recommendations** based on visit history and preferences (Phase 4)
+- **Curated Lists powered by semantic matching** — not just manual broker curation (Phase 4)
 
 ### Marketing App
 **Users**: Marketing team
@@ -81,6 +83,10 @@
 - Role-based checklists (29 Broker, 10 Marketing, 5 Finance steps)
 - Price history with approval workflow for large changes
 - Task assignment system (photoshoot, marketing review, portal upload, finance filing)
+- **Ingress channel configuration**: manage which external sources feed into CDL (CDL MLS 2.1)
+- **Local vs ingress listings**: agents create local listings directly, or override/localize ingress listings from external sources
+- **Soft-deactivate** (archive) instead of hard delete — preserves historical data and audit trail
+- **Egress syndication controls**: per-listing toggle for which egress channels receive the listing
 
 ### Contact Center
 **Users**: Welcome Team, call center
@@ -123,6 +129,14 @@
 - Marketing funnel visualization
 - Sales pipeline health
 - Regional comparisons (Cyprus, Hungary, Kazakhstan)
+
+### Website CMS (Active)
+**Users**: Content managers
+**Key Features**:
+- Public website content management and SEO optimization
+- Property listing pages synced from CDL
+- **Anonymous visitor profiling**: IP geolocation, device, visit patterns (Phase 4)
+- **Personalized listing ranking** on property search pages (Phase 4)
 
 ### SSO Console (Active)
 **Users**: System administrators

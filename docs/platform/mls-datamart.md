@@ -82,6 +82,96 @@ Matrix Apps ←→ Supabase CDL (sole system of record)
 - Data flows outward from CDL for syndication and analytics
 - Databricks shifts to pure analytics/BI/ML
 
+### CDL MLS 2.1 — Channel-Managed Evolution
+
+CDL MLS 2.1 formalizes the Phase 3 target into a managed platform with explicit ingress and egress channel management.
+
+**Version naming**: MLS 2.0 = Databricks inbound pipeline (current). CDL MLS 2.1 = Supabase CDL-centric with managed channels (target).
+
+```
+Ingress Channels                       Egress Channels
+┌─────────────────────┐               ┌─────────────────────┐
+│ Matrix Apps (direct) │               │ Dash CRUD (push)    │
+│ New Constructions    │               │ RESO Web API        │
+│ Partner MLS Feeds    │               │ Portal Feeds (XML)  │
+│ DASH API (legacy)    │               │ Website Realtime    │
+└──────────┬──────────┘               └──────────┬──────────┘
+           │                                     │
+      ┌────┴─────────────────────────────────────┴────┐
+      │   Supabase CDL (sole system of record)        │
+      │   Ingress/Egress Channel Manager              │
+      ├───────────────────────────────────────────────┤
+      │   Databricks (DWH / BI / ML — analytics only) │
+      └───────────────────────────────────────────────┘
+```
+
+#### Ingress Channel Management
+
+Each data source is a managed "ingress channel" with configuration properties:
+
+| Property | Type | Purpose |
+|----------|------|---------|
+| `source_id` | text | Unique channel identifier |
+| `source_type` | enum | API, FILE, WEBHOOK, DIRECT |
+| `market` | text | Cyprus, Hungary, Kazakhstan |
+| `office_key` | text | `SHARPSIR-CY-001`, etc. |
+| `filter_rules` | jsonb | Algebraic filters (price range, location, property type) |
+| `record_limit` | int | Maximum records to ingest per sync |
+| `sync_frequency` | interval | How often to pull (for API/FILE types) |
+| `dedup_rules` | jsonb | Deduplication strategy (by ListingKey, by address, etc.) |
+| `active` | boolean | Enable/disable channel |
+
+**Channel types**:
+
+| Type | Description | Example |
+|------|------------|---------|
+| **DIRECT** | Matrix Apps writing directly to CDL — no pipeline involved | Broker creates a listing in the Listings Management app |
+| **API** | External REST API pulled on schedule via Databricks or Edge Function | New construction feeds from developers, partner MLS |
+| **FILE** | JSON/XML file import | DASH FILE for Hungary |
+| **WEBHOOK** | External system pushes data to a CDL Edge Function endpoint | Future: real-time partner notifications |
+
+**Current channels**: Qobrix API (Cyprus, being decommissioned → DIRECT), DASH API (Kazakhstan, flipping to push), DASH FILE (Hungary, flipping to push).
+
+**Future channels**: New construction feeds from developers/government registries, partner MLS feeds via RESO Web API.
+
+#### Egress Channel Management
+
+| Category | Description | Examples |
+|----------|------------|---------|
+| **Quasi-static feeds** | Generated on schedule, cached as files | HomeOverseas XML, Bazaraki feed |
+| **Real-time API push** | CDL changes trigger outbound API calls | Dash CRUD for SIR syndication, RESO Web API for 3rd parties |
+| **Website sync** | Supabase Realtime subscriptions | Public website, Client Portal see listing updates instantly |
+
+**Current egress**: HomeOverseas XML export, RESO Web API.
+
+**Target egress**: Dash API bidirectional CRUD, multiple portal feeds, expanded RESO Web API, website real-time sync via Supabase Realtime.
+
+#### Listing Management: Local vs Ingress
+
+| Listing Origin | Description | Editable? |
+|---------------|-------------|-----------|
+| **Local** | Created directly by agents in Matrix Apps | Full CRUD by the creating agent |
+| **Ingress** | Arrived via an ingress channel (API, FILE, WEBHOOK) | Override/localize: agent can modify local copy while preserving source link |
+
+Agents can localize ingress listings (custom pricing, photos, descriptions) without affecting the source record. The CDL maintains `origin_source` and `origin_key` fields for lineage tracking.
+
+**Deactivation**: Soft-deactivate (archive) instead of hard delete — preserves historical data for analytics and audit trail.
+
+## Why Supabase for CDL (Not Databricks)
+
+Both platforms were evaluated for the CDL role:
+
+| Capability | Supabase | Databricks (Lakebase) |
+|-----------|----------|----------------------|
+| Edge Functions (serverless API) | Native | Not available |
+| Realtime subscriptions | Native (WebSocket) | Not available |
+| Row-Level Security with JWT | Native, declarative | Requires custom implementation |
+| Lovable integration | Native — Lovable generates Supabase client code | No integration |
+| PostgreSQL pgvector | Available as extension | Not available (different query engine) |
+| Auth / OAuth / SSO | Built-in via Edge Functions | Requires external integration |
+
+Databricks retains its role as the DWH/ETL engine: medallion architecture, CDC pipelines, BI analytics, and AI/ML training data. The CDL role went to Supabase because it provides the app-facing capabilities that Databricks lacks.
+
 ## Databricks Catalog Structure
 
 Catalog: `mls2`

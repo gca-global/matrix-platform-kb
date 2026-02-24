@@ -136,6 +136,8 @@ Company-controlled digital properties.
 ### Integration Layer
 **API Gateway / ESB** — central hub connecting all channels to application systems. Every request flows through this layer for consistent authentication (Matrix SSO), logging, and rate limiting.
 
+**Ingress/Egress Channel Manager** (CDL MLS 2.1) — orchestration layer that manages data flow between external sources, the CDL, and syndication targets. Handles channel configuration, deduplication, filtering, and routing. See [mls-datamart.md](mls-datamart.md) for channel taxonomy.
+
 ### Matrix Apps (Application Layer)
 
 All apps are built by **Lovable** from the `matrix-apps-template`. Two categories:
@@ -186,8 +188,17 @@ See [mls-datamart.md](mls-datamart.md) for details.
 | RAG | Knowledge-grounded AI responses |
 | Semantic Search | Natural language property and client search |
 | Recommendation Engine | Property matching, Curated List generation |
+| Personalization Engine | Visitor profiling, semantic ranking, personalized listing order |
+| Visitor Profiling | Anonymous + authenticated user behavior tracking for recommendation input |
 
 ## Data Flow Patterns
+
+### Listing Ingress Flow (CDL MLS 2.1)
+```
+Direct CDL write (Matrix Apps) → Supabase CDL → Realtime → all apps
+API ingress (new constructions)  → Edge Function → Supabase CDL → Realtime
+Legacy pipeline (Databricks)     → Gold sync → Supabase CDL (being phased out)
+```
 
 ### Listing Creation Flow (Target State)
 ```

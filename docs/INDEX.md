@@ -16,6 +16,12 @@ What Sharp Matrix is, the three-platform architecture (Supabase + Databricks + L
 | [platform/mls-datamart.md](platform/mls-datamart.md) | MLS 2.0 data pipeline: Databricks ETL, CDC, Supabase CDL sync, phased migration |
 | [platform/ecosystem-architecture.md](platform/ecosystem-architecture.md) | Full ecosystem: channels, apps, data & analytics, AI/ML, external services |
 | [platform/app-catalog.md](platform/app-catalog.md) | All 12 platform apps: purpose, users, RESO resources consumed |
+| [platform/security-model.md](platform/security-model.md) | Security model: 5-level scope, 23 roles, JWT claims, RLS patterns A-E |
+| [platform/operations.md](platform/operations.md) | Operations: CI/CD, deployment, monitoring, logging, audit trail, DR/backup |
+| [platform/compliance.md](platform/compliance.md) | Compliance: GDPR, data protection, retention policy, DSAR procedures |
+| [platform/kb-methodology.md](platform/kb-methodology.md) | KB design principles, versioning, contribution guidelines |
+| [platform/testing-strategy.md](platform/testing-strategy.md) | Testing: unit (Vitest), integration, E2E (Playwright), contract testing |
+| [platform/api-contracts.md](platform/api-contracts.md) | Edge Function API surface, OpenAPI reference, per-app dependencies |
 
 ## Chapter 1: Vision & Strategy
 
@@ -46,6 +52,8 @@ Dash/Anywhere.com as the practical core data model. RESO DD 2.0 as interop stand
 | [reso-canonical-schema.md](data-models/reso-canonical-schema.md) | Which RESO resources/fields map to Dash, extension governance |
 | [platform-extensions.md](data-models/platform-extensions.md) | All 28 `x_sm_*` extensions: fields and lookup values not in Dash or RESO DD |
 | [etl-pipeline.md](data-models/etl-pipeline.md) | Bronze/Silver/Gold ETL pipeline: table schemas, notebooks, CDC |
+| [data-contracts.md](data-models/data-contracts.md) | ETL schema contracts: layer boundaries, JSON Schema, validation |
+| [data-quality.md](data-models/data-quality.md) | Data quality: verification scripts, RESO validation, email reporting |
 | [reso-web-api.md](data-models/reso-web-api.md) | RESO Web API (OData 4.0): endpoints, queries, auth, office filtering |
 | [qobrix-data-model.md](data-models/qobrix-data-model.md) | Qobrix CRM reference & legacy migration source |
 | [property-field-mapping.md](data-models/property-field-mapping.md) | Cross-reference: Dash ↔ RESO ↔ Qobrix ↔ SIR field mapping |
@@ -92,7 +100,9 @@ Raw API catalogs, data dictionary summaries, and source repositories.
 4. Read the relevant `business-processes/` doc for workflow logic
 5. Use Dash-derived field names for all CDL table columns (RESO names for syndication only)
 6. Follow the dual-Supabase, SSO, RLS patterns from the template
-7. For security model details: see `/home/bitnami/matrix-platform-foundation/SECURITY_MODEL.md`
+7. For security model details: see `platform/security-model.md`
+8. For deployment and operations: see `platform/operations.md`
+9. For data protection (GDPR): see `platform/compliance.md`
 
 **For general context:**
 1. Start with `AGENTS.md` (repository root) for quick navigation

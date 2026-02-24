@@ -76,6 +76,8 @@ Every Matrix App connects to two Supabase instances:
 | Integration API | RESO Web API (FastAPI + OData 4.0) | External consumers & syndication |
 | Reference CRM | Qobrix (REST API v2) | Migration source (being decommissioned) |
 | Reference Forms | SIR / Anywhere.com | Field requirements for listings |
+| Channel Management | Supabase Edge Functions + CDL tables | Ingress/egress channel config and routing (CDL MLS 2.1) |
+| Security Model | SSO JWT + RLS helper functions | 5-level scope, 23 roles, patterns A-E |
 
 ## Phased Data Flow Evolution
 
@@ -87,18 +89,25 @@ DASH API (Kazakhstan) ─┼──→ Databricks (Bronze→Silver→Gold) ──
 DASH FILE (Hungary) ───┘                                  └──→ RESO Web API → some apps
 ```
 
-### Target: Outbound from Matrix Apps
+### CDL MLS 2.1: Channel-Managed Platform
 
 ```
-Matrix Apps (Lovable) ←→ Supabase CDL (sole system of record)
-                              │
-                              ├──→ Databricks (analytics/BI/ML)
-                              ├──→ Dash / SIR (push for syndication)
-                              ├──→ RESO Web API (3rd-party integrations)
-                              └──→ Portal Exports (HomeOverseas, etc.)
+Ingress Channels                       Egress Channels
+┌─────────────────────┐               ┌─────────────────────┐
+│ Matrix Apps (direct) │               │ Dash CRUD (push)    │
+│ New Constructions    │               │ RESO Web API        │
+│ Partner MLS Feeds    │               │ Portal Feeds (XML)  │
+└──────────┬──────────┘               └──────────┬──────────┘
+           │                                     │
+      ┌────┴─────────────────────────────────────┴────┐
+      │   Supabase CDL (sole system of record)        │
+      │   Ingress/Egress Channel Manager              │
+      ├───────────────────────────────────────────────┤
+      │   Databricks (DWH / BI / ML — analytics only) │
+      └───────────────────────────────────────────────┘
 ```
 
-Qobrix will be decommissioned. Dash flips from pull to push.
+Qobrix is decommissioned. Dash flips from pull to push. Managed ingress/egress channels replace ad-hoc integrations. See [mls-datamart.md](platform/mls-datamart.md) for full channel taxonomy.
 
 ## Supabase Instances
 

@@ -13,7 +13,9 @@ Before building ANY Matrix App:
 3. If CDL-Connected: read `docs/data-models/dash-data-model.md` for field names (practical core)
 4. Read the relevant `docs/business-processes/` doc for your feature's workflow logic
 5. For syndication/exports: use the RESO mapping column in `dash-data-model.md`
-6. For SSO security: read `/home/bitnami/matrix-platform-foundation/SECURITY_MODEL.md`
+6. For SSO security: read `docs/platform/security-model.md`
+7. For deployment: read `docs/platform/operations.md`
+8. For data protection (GDPR): read `docs/platform/compliance.md`
 
 ## Platform Identity
 
@@ -33,9 +35,15 @@ docs/
 ├── platform/
 │   ├── index.md                      ← Platform overview & three-platform architecture
 │   ├── app-template.md              ← How to build Matrix Apps (Lovable must read first)
+│   ├── security-model.md            ← Auth, roles, permissions, RLS patterns, JWT claims
+│   ├── operations.md                ← CI/CD, deployment, monitoring, DR/backup
+│   ├── compliance.md                ← GDPR, data protection, retention, DSAR procedures
 │   ├── mls-datamart.md              ← MLS 2.0 data pipeline & phased migration roadmap
 │   ├── ecosystem-architecture.md     ← Full ecosystem: channels, apps, data, AI/ML
-│   └── app-catalog.md               ← All platform apps: purpose, users, RESO resources
+│   ├── app-catalog.md               ← All platform apps: purpose, users, RESO resources
+│   ├── performance.md              ← Latency targets, capacity planning, load testing
+│   ├── mobile-strategy.md           ← PWA, responsive design, offline requirements
+│   └── kb-methodology.md            ← KB design principles, versioning, contribution
 ├── INDEX.md                          ← Master index with chapter summaries
 ├── ARCHITECTURE.md                   ← System architecture & technology map
 ├── vision/
@@ -51,6 +59,7 @@ docs/
 │   ├── platform-extensions.md        ← All x_sm_* fields not in Dash or RESO DD
 │   ├── mls-cdl-schema.md            ← MLS Listing Management CDL schema (18 tables, 422 cols)
 │   ├── etl-pipeline.md              ← Bronze/Silver/Gold ETL pipeline architecture
+│   ├── data-quality.md              ← Data quality verification, validation, reporting
 │   ├── reso-web-api.md              ← RESO Web API (OData 4.0) endpoint reference
 │   ├── qobrix-data-model.md          ← Qobrix CRM reference & migration source
 │   └── property-field-mapping.md     ← Field mapping: Dash ↔ RESO ↔ Qobrix ↔ SIR
@@ -65,7 +74,12 @@ docs/
 │   ├── index.md                      ← Product specs chapter index
 │   ├── sir-listing-forms.md          ← SIR/Anywhere.com form field specifications
 │   ├── broker-dashboard.md           ← AI-powered broker dashboard design
-│   └── manager-kanban.md             ← Manager pipeline & Kanban views
+│   ├── manager-kanban.md             ← Manager pipeline & Kanban views
+│   ├── personalization.md            ← Personalization & recommendation engine (Phase 4)
+│   ├── client-portal.md              ← Buyer/seller self-service portal
+│   ├── contact-center.md             ← Lead processing and routing system
+│   ├── marketing-platform.md        ← Campaign management and marketing automation
+│   └── personas.md                   ← User personas for UX decisions
 ├── references/
 │   ├── index.md                      ← References chapter index
 │   ├── qobrix-api-summary.md         ← Qobrix OpenAPI resource catalog
@@ -94,12 +108,22 @@ docs/
 | Use the RESO Web API (OData)                  | `docs/data-models/reso-web-api.md`                |
 | Understand Qobrix entities & migration        | `docs/data-models/qobrix-data-model.md`           |
 | Understand RESO DD 2.0 (interop standard)      | `docs/data-models/reso-dd-overview.md`            |
-| Understand SSO security model                  | `/home/bitnami/matrix-platform-foundation/SECURITY_MODEL.md` |
+| Understand auth, roles, permissions, RLS       | `docs/platform/security-model.md`                 |
+| Deploy an app or Edge Function                | `docs/platform/operations.md`                     |
+| Performance targets, capacity planning        | `docs/platform/performance.md`                   |
+| Mobile strategy (PWA, offline)                | `docs/platform/mobile-strategy.md`                |
+| Test Matrix Apps (unit, E2E, contract)         | `docs/platform/testing-strategy.md`               |
+| Edge Function API contracts                   | `docs/platform/api-contracts.md`                  |
+| Handle GDPR, data retention, DSARs            | `docs/platform/compliance.md`                     |
+| Understand KB methodology and contribution   | `docs/platform/kb-methodology.md`                 |
+| Verify data quality in the pipeline           | `docs/data-models/data-quality.md`                |
 | Build a listing workflow                      | `docs/business-processes/listing-pipeline.md`     |
 | Build a buyer/sales workflow                  | `docs/business-processes/sales-pipeline.md`       |
 | Implement lead scoring / qualification        | `docs/business-processes/lead-qualification.md`   |
 | Design the broker dashboard UI                | `docs/product-specs/broker-dashboard.md`          |
 | Design listing input forms                    | `docs/product-specs/sir-listing-forms.md`         |
+| Build Client Portal, Contact Center, Marketing | `docs/product-specs/client-portal.md`, etc.      |
+| Use user personas for UX                     | `docs/product-specs/personas.md`                  |
 | Look up Qobrix API endpoints                  | `docs/references/qobrix-api-summary.md`           |
 | Look up RESO standard field names             | `docs/references/reso-dd-fields-summary.md`       |
 

@@ -37,6 +37,7 @@
 | [platform-extensions.md](platform-extensions.md) | All `x_sm_*` fields not in Dash or RESO DD |
 | [mls-cdl-schema.md](mls-cdl-schema.md) | **MLS CDL Schema** — 18 tables, 422 columns deployed to CDL for Listing Management |
 | [etl-pipeline.md](etl-pipeline.md) | Bronze/Silver/Gold ETL pipeline: how Dash data reaches Supabase |
+| [data-contracts.md](data-contracts.md) | ETL schema contracts: layer boundaries, JSON Schema format, validation |
 | [reso-web-api.md](reso-web-api.md) | RESO Web API (OData 4.0): syndication and external integrations |
 | [qobrix-data-model.md](qobrix-data-model.md) | Qobrix CRM reference: legacy migration source |
 | [property-field-mapping.md](property-field-mapping.md) | Cross-reference: Dash ↔ RESO ↔ Qobrix ↔ SIR field mapping |

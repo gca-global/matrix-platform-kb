@@ -60,9 +60,15 @@ See [app-template.md](app-template.md) for full technical details.
 | Document | What It Contains |
 |----------|-----------------|
 | [app-template.md](app-template.md) | **Start here** — How to build Matrix Apps: stack, auth, permissions, RLS, UI |
+| [security-model.md](security-model.md) | Security model: 5-level scope, 23 roles, JWT claims, RLS patterns A-E |
+| [operations.md](operations.md) | Operations: CI/CD, deployment, monitoring, logging, audit, DR/backup |
+| [compliance.md](compliance.md) | Compliance: GDPR, data protection, retention, DSAR procedures |
 | [mls-datamart.md](mls-datamart.md) | MLS 2.0 data pipeline: sources, Databricks ETL, Supabase CDL sync |
 | [ecosystem-architecture.md](ecosystem-architecture.md) | Full platform architecture: channels, apps, data layer, AI/ML |
 | [app-catalog.md](app-catalog.md) | All apps in the platform: purpose, users, RESO resources consumed |
+| [testing-strategy.md](testing-strategy.md) | Testing: unit (Vitest), integration, E2E (Playwright), contract testing |
+| [api-contracts.md](api-contracts.md) | Edge Function API surface, OpenAPI reference, per-app dependencies |
+| [kb-methodology.md](kb-methodology.md) | KB design principles, versioning, contribution guidelines |
 
 ## How Apps Share Data
 
