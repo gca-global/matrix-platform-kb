@@ -1,6 +1,6 @@
 # MLS CDL Schema — Listing Management Data Model
 
-> 18 tables, 422 columns, 72 RLS policies deployed to `supabase-matrix-data-layer` (CDL instance `xgubaguglsnokjyudgvc`).
+> 18 tables, 422 columns, 70 RLS policies deployed to `supabase-matrix-data-layer` (CDL instance `xgubaguglsnokjyudgvc`).
 > All tables use the `mls_` prefix. Column names follow Dash conventions; Cyprus-specific fields use `x_sm_*`.
 
 ## Architecture Decision
@@ -15,28 +15,47 @@ The MLS Listing Management tables are deployed to the **shared CDL instance**, n
 
 ## RLS Strategy
 
-Uses **existing CDL functions** (not the KB's Pattern A-E `get_active_scope()`/`get_crud()` model):
+Uses the KB's **5-level scope + CRUD model** (Patterns A-E) with CDL helper functions:
 
 | CDL Function | Used For |
 |-------------|----------|
-| `get_my_tenant_id()` | Tenant isolation on every policy |
-| `auth.uid()` | Broker/creator ownership checks |
-| `is_admin()` | Admin-only write on reference tables |
-| `can_access_all_tenant_data()` | Org-wide read for managers |
-| `is_manager_or_above()` | Manager-level access |
-
-**Why the deviation:** The CDL instance does not have `001_sso_helper_functions.sql` deployed (no `get_active_scope()`, `get_crud()`, `get_current_tenant_id()`). Rather than deploying new SECURITY DEFINER functions to the shared CDL, we use the existing 3-level permission model.
+| `get_my_tenant_id()` | Tenant isolation (4-step fallback: `uoi` → `user_metadata.tenant_id` → `auth.users` → `admin_settings`) |
+| `get_active_scope()` | Scope from JWT (`self` / `team` / `global` / `org_admin` / `system_admin`) |
+| `get_crud()` | CRUD permission string from JWT (e.g., `"crud"`, `"cr"`, `"r"`) |
+| `get_current_user_id()` | SSO User UUID from JWT `sub` claim |
+| `is_in_my_teams(user_id)` | Team-scope resolution via `sso_user_group_memberships` |
+| `get_active_scope()` | Scope from JWT — used in explicit checks like `IN ('org_admin', 'system_admin')` |
 
 **Patterns applied:**
 
 | Pattern | Tables | Description |
 |---------|--------|-------------|
-| **Reference** | `mls_checklist_templates`, `mls_document_type_config`, `mls_portal_definitions`, `mls_developments`, `mls_development_buildings` | All tenant users read; admin-only write |
-| **Broker-owned** | `mls_listings` | Broker sees own listings; managers/admins see all |
-| **Creator-owned** | `mls_contacts` | Creator sees own contacts; managers/admins see all |
-| **Cascade** | `mls_listing_*` child tables | Inherits access from parent `mls_listings` via `listing_id IN (SELECT id FROM mls_listings)` |
-| **Append-only** | `mls_status_history`, `mls_price_history` | INSERT via cascade; no UPDATE; admin-only DELETE |
-| **Author-owned** | `mls_listing_notes` | Author writes; tenant-wide read |
+| **B (Owner-scoped)** | `mls_listings`, `mls_contacts` | 5-level CASE: self=own, team=own+teammates, global+=all tenant. DELETE: org_admin+ only |
+| **A (Reference)** | `mls_checklist_templates`, `mls_document_type_config`, `mls_portal_definitions`, `mls_developments`, `mls_development_buildings` | Tenant-wide read; `org_admin`/`system_admin` write and delete |
+| **Cascade** | `mls_listing_checklist_items`, `mls_listing_contact_roles`, `mls_listing_documents`, `mls_listing_media`, `mls_listing_remarks`, `mls_listing_syndications` | Inherits scope from parent `mls_listings` via `listing_id IN (SELECT id FROM mls_listings)` |
+| **Cascade + Assignee** | `mls_listing_notes`, `mls_listing_tasks`, `mls_listing_approvals` | Cascade from listings OR author/assignee can see own records |
+| **Append-only Cascade** | `mls_status_history`, `mls_price_history` | INSERT via cascade; no UPDATE; admin-only DELETE |
+
+### Pattern B Example (mls_listings)
+
+```sql
+CREATE POLICY "mls_listings_select" ON mls_listings
+  FOR SELECT TO authenticated
+  USING (
+    (SELECT get_crud()) LIKE '%r%'
+    AND CASE (SELECT get_active_scope())
+      WHEN 'system_admin' THEN true
+      WHEN 'org_admin'    THEN tenant_id = (SELECT get_my_tenant_id())
+      WHEN 'global'       THEN tenant_id = (SELECT get_my_tenant_id())
+      WHEN 'team'         THEN tenant_id = (SELECT get_my_tenant_id())
+                               AND (broker_id = (SELECT get_current_user_id())
+                                    OR is_in_my_teams(broker_id))
+      WHEN 'self'         THEN tenant_id = (SELECT get_my_tenant_id())
+                               AND broker_id = (SELECT get_current_user_id())
+      ELSE false
+    END
+  );
+```
 
 ## Tables
 
@@ -44,8 +63,8 @@ Uses **existing CDL functions** (not the KB's Pattern A-E `get_active_scope()`/`
 
 | Table | Cols | RLS | Description |
 |-------|------|-----|-------------|
-| `mls_listings` | 175 | Broker-owned | Main listing table with full Dash field parity — RESO Property Resource alignment |
-| `mls_contacts` | 30 | Creator-owned | Shared contact registry (SIR Person form). Reusable across listings |
+| `mls_listings` | 175 | Pattern B (owner: `broker_id`) | Main listing table with full Dash field parity — RESO Property Resource alignment |
+| `mls_contacts` | 30 | Pattern B (owner: `created_by`) | Shared contact registry (SIR Person form). Reusable across listings |
 | `mls_listing_contact_roles` | 9 | Cascade | Junction: contacts → listings with role. UNIQUE(listing_id, contact_id, role) |
 | `mls_checklist_templates` | 13 | Reference | Step templates by role (BROKER/MARKETING/FINANCE). Seeded: 44 steps |
 | `mls_listing_checklist_items` | 12 | Cascade | Per-listing checklist completion tracking |
@@ -76,7 +95,7 @@ Uses **existing CDL functions** (not the KB's Pattern A-E `get_active_scope()`/`
 | `mls_listing_tasks` | 14 | Cascade | Workflow tasks — assignable with priority and due date |
 | `mls_portal_definitions` | 12 | Reference | Portal/channel definitions. Seeded: 6 portals |
 | `mls_listing_syndications` | 13 | Cascade | Per-portal publishing tracking |
-| `mls_listing_notes` | 9 | Author-owned | Internal notes by type (GENERAL, DUE_DILIGENCE, MARKETING, FINANCE, VIEWING_FEEDBACK) |
+| `mls_listing_notes` | 9 | Cascade + Assignee (`author_id`) | Internal notes by type (GENERAL, DUE_DILIGENCE, MARKETING, FINANCE, VIEWING_FEEDBACK) |
 
 ## Status Pipeline
 
@@ -177,13 +196,12 @@ Seeded per active tenant on deployment:
 ## Compliance Notes
 
 **Supabase best practice (known issues to fix):**
-- 8 RLS policies use bare `auth.uid()` instead of `(SELECT auth.uid())` — causes per-row re-evaluation at scale
 - 4 foreign keys missing covering indexes: `template_id`, `document_type_id`, `building_id`, `development_id`
 
-**KB deviation (documented, intentional):**
-- Uses CDL 3-level permission model instead of KB 5-level scope (Pattern A-E)
+**Design decisions (documented, intentional):**
 - `tenant_id` has no DEFAULT (Postgres disallows subquery defaults; app must supply)
-- Append-only tables correctly omit `updated_at` triggers
+- Append-only tables (`mls_status_history`, `mls_price_history`) correctly omit UPDATE policies and `updated_at` triggers
+- Uses `get_my_tenant_id()` (with 4-step fallback) instead of `get_current_tenant_id()` for backward compatibility with legacy JWT models
 
 ## Source
 

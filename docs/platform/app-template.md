@@ -88,16 +88,19 @@ The `accessToken` hook injects the SSO JWT into every request. RLS policies read
 
 ```typescript
 {
-  sub: string;           // User ID
-  email: string;         // User email
-  sso_role: string;      // Role name
-  scope: string;         // "self" | "team" | "global" | "org_admin" | "system_admin"
-  crud: string;          // "r" | "rw" | "crud" | etc.
-  tenant_id: string;     // Tenant UUID
-  teams: string[];       // Team IDs user belongs to
-  allowed_apps: string[];// App IDs user can access
+  sub: string;                     // User UUID (permanent ID across all apps)
+  email: string;                   // User email
+  sso_role: { id: string; name: string };   // Active role (object, not string)
+  scope: { id: string; name: string };      // Access scope (object, not string)
+  crud: string;                    // "crud" | "cr" | "r" | "ru" | etc. (c/r/u/d letters)
+  uoi: string;                     // Tenant UUID (organization ID)
+  teams: Array<{ id: string; name: string }>;  // Team memberships
+  team_ids: string[];              // Team UUIDs (flat array for RLS)
+  allowed_apps: Array<{ id: string; name: string }>;  // Apps user can access
 }
 ```
+
+> See [security-model.md](security-model.md) for the full JWT claims structure with all fields.
 
 ### SSO Edge Functions Called
 
@@ -226,25 +229,19 @@ From `supabase/migrations/003_data_model_template.sql` — use the correct patte
 | **D** | Org-admin | Full tenant CRUD | `WHERE tenant_id = get_current_tenant_id() AND is_org_admin()` |
 | **E** | System-admin | Cross-tenant | `WHERE is_system_admin()` |
 
-RLS helper functions (created by `001_sso_helper_functions.sql`):
-- `get_current_tenant_id()` — extracts `tenant_id` from JWT
-- `get_active_scope()` — extracts `scope` from JWT
-- `get_crud()` — extracts `crud` from JWT
-- `is_sso_admin_v2()` — checks if user is admin
+RLS helper functions (available on both App DB and CDL instances):
+- `get_current_tenant_id()` — extracts tenant UUID from JWT `uoi` claim
+- `get_active_scope()` — extracts scope from JWT (handles both `{ id, name }` object and plain string)
+- `get_crud()` — extracts CRUD permission string from JWT
+- `get_current_user_id()` — extracts SSO user UUID from JWT `sub` claim
+- `get_current_team_ids()` — extracts team UUID array from JWT `team_ids` claim
+- `is_sso_admin_v2()` — returns true if scope is `org_admin` or `system_admin`
+- `is_in_my_teams(user_id)` — (CDL only) checks if user shares a team with the current JWT user
 
-> **CDL Instance Reality (important for CDL-Connected apps):**
-> The shared CDL instance (`xgubaguglsnokjyudgvc`) does NOT have `001_sso_helper_functions.sql` deployed.
-> It uses a different set of helper functions:
-> `get_my_tenant_id()`, `auth.uid()`, `is_admin()`, `can_access_all_tenant_data()`, `is_manager_or_above()`, `is_same_tenant(uuid)`.
-> When building RLS for CDL-Connected apps (e.g., MLS), use these existing CDL functions
-> instead of Patterns A-E. See `docs/data-models/mls-cdl-schema.md` for a working example.
-
-> **CDL Instance Reality**: The shared CDL instance (`xgubaguglsnokjyudgvc`) does NOT have
-> `001_sso_helper_functions.sql` deployed. It uses a different set of functions:
-> `get_my_tenant_id()`, `is_admin()`, `can_access_all_tenant_data()`, `is_manager_or_above()`,
-> `is_same_tenant(uuid)`, and `auth.uid()`. Apps deploying tables to CDL (like MLS) must use
-> these existing functions instead of the Pattern A-E model above.
-> See `docs/data-models/mls-cdl-schema.md` for the CDL-adapted RLS strategy.
+> **CDL Instance Note:** The shared CDL instance (`xgubaguglsnokjyudgvc`) has both the new SSO helper
+> functions above AND legacy functions (`is_admin()`, `has_rw_global_permission()`, etc.) for backward
+> compatibility with older apps. New CDL-Connected apps (e.g., MLS) should use the Pattern A-E model
+> with the functions listed above. See `docs/data-models/mls-cdl-schema.md` for MLS-specific RLS patterns.
 
 ## UI Conventions
 

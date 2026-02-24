@@ -151,7 +151,7 @@ All functions are `STABLE` with `SET search_path = public` for security and perf
 | `get_current_user_id()` | `uuid` | SSO User UUID from JWT `sub` claim |
 | `get_current_team_ids()` | `uuid[]` | Array of team UUIDs from JWT `team_ids` claim |
 | `is_sso_admin_v2()` | `boolean` | `true` if scope is `org_admin` or `system_admin` (`SECURITY DEFINER`) |
-| `is_admin_scope()` | `boolean` | `true` if scope is `global`, `org_admin`, or `system_admin` |
+| `is_in_my_teams(user_id)` | `boolean` | (CDL) `true` if `user_id` shares a team with the current JWT user via `sso_user_group_memberships` (`SECURITY DEFINER`) |
 | `update_updated_at_column()` | trigger | Auto-sets `updated_at = now()` on UPDATE |
 
 ### SQL Implementations
@@ -195,9 +195,35 @@ SELECT COALESCE(
   false
 );
 
--- is_admin_scope()
-SELECT (SELECT get_active_scope()) IN ('global', 'org_admin', 'system_admin');
+-- is_in_my_teams(target_user_id) — CDL only, SECURITY DEFINER
+SELECT EXISTS (
+  SELECT 1 FROM sso_user_group_memberships m
+  WHERE m.user_id = target_user_id
+    AND m.group_id = ANY(get_current_team_ids())
+);
 ```
+
+### Team-Scope Resolution
+
+The `team` scope requires checking whether a record's owner is in the same team as the current user. Two resolver functions exist for different contexts:
+
+| Function | Location | Resolution Method | Used By |
+|----------|----------|------------------|---------|
+| `is_my_direct_report_v2(target_id)` | App DB | Checks manager-subordinate hierarchy via app's manager table | HRMS (employees) |
+| `is_in_my_teams(user_id)` | CDL | Checks shared team membership via `sso_user_group_memberships` | MLS (listings, contacts) |
+
+Apps deploying tables to CDL should use `is_in_my_teams()`. Apps with their own DB should create an app-specific `get_my_record_id_v2()` and `is_my_direct_report_v2()` following the template in `001_sso_helper_functions.sql`.
+
+### Legacy CDL Functions (Backward Compatibility)
+
+The CDL instance also has legacy helper functions used by older apps (`matrix-client-connect-vm-sso-v1`, `matrix-meeting-hub-vm-sso-v1`). These are kept for backward compatibility and should NOT be used by new apps:
+
+| Legacy Function | New Equivalent |
+|----------------|---------------|
+| `get_my_tenant_id()` | `get_current_tenant_id()` (note: `get_my_tenant_id()` has a 4-step fallback and is still used by MLS for compatibility) |
+| `is_admin()` / `has_rw_global_permission()` | `(SELECT get_active_scope()) IN ('org_admin', 'system_admin')` for admin ops; `get_crud() LIKE '%u%'` for write checks |
+| `can_access_all_tenant_data()` | `get_active_scope() IN ('global', 'org_admin', 'system_admin')` |
+| `is_manager_or_above()` | `get_active_scope() IN ('team', 'global', 'org_admin', 'system_admin')` |
 
 ## RLS Policy Patterns
 
