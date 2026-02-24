@@ -75,14 +75,48 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
 
 The `accessToken` hook injects the SSO JWT into every request. RLS policies read claims from `current_setting('request.jwt.claims')`.
 
+### CDL Client Setup (for CDL-Connected Apps)
+
+CDL-Connected apps (e.g., MLS) make PostgREST calls to the shared CDL instance. These calls use the **Supabase native token** (signed with the CDL project's JWT secret), not the SSO JWT. This is because PostgREST validates tokens against its own project JWT secret.
+
+```typescript
+// dataLayerClient.ts — prioritize Supabase native token for PostgREST
+const accessToken = localStorage.getItem('matrix_supabase_access_token')
+  || MatrixSSOStorage.getAccessToken();  // SSO JWT fallback
+const cdlClient = createClient(CDL_URL, CDL_ANON_KEY, {
+  auth: { persistSession: false, autoRefreshToken: false },
+  global: { headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {} },
+});
+```
+
+**How RLS claims reach PostgREST**: The `oauth-token` Edge Function persists `active_scope`, `active_crud`, and `active_team_ids` to the user's `app_metadata` (`auth.users.raw_app_meta_data`). CDL RLS helper functions fall back to `app_metadata` when JWT claims aren't present. See [security-model.md](security-model.md#app_metadata-fallback-cdl-instance).
+
+### CDL Write Proxy (Edge Function Pattern)
+
+CDL-Connected apps proxy write operations through an Edge Function to avoid CORS and maintain a clean security boundary:
+
+```
+App UI → cdlWrite.ts → supabase.functions.invoke('cdl-write') → CDL PostgREST
+```
+
+The `cdl-write` Edge Function on the app's Supabase instance:
+1. Receives the operation, table, data, and the user's Supabase native token
+2. Creates a CDL client with that token as the Authorization header
+3. Executes the operation on the CDL instance
+4. Returns the result (with `_debug` info on errors)
+
 ## SSO Auth Flow
 
 1. App redirects to `https://intranet.sharpsir.group/sso-login/` with PKCE code challenge
 2. User authenticates via Azure AD
 3. Callback at `/auth/callback` exchanges authorization code for JWT via `oauth-token` Edge Function
-4. JWT stored in `localStorage` as `matrix_sso_access_token` and `matrix_sso_refresh_token`
-5. JWT injected into both Supabase clients via `accessToken` hook
-6. Proactive token refresh at 80% of expiry time
+4. Tokens stored in `localStorage`:
+   - `matrix_sso_access_token` — SSO JWT (custom claims: scope, crud, team_ids, uoi)
+   - `matrix_sso_refresh_token` — for token renewal
+   - `matrix_supabase_access_token` — Supabase native token (for CDL PostgREST calls)
+5. `oauth-token` also persists `active_scope`, `active_crud`, `active_team_ids` to user's `app_metadata` (enables RLS for native token)
+6. SSO JWT injected into App DB client via `accessToken` hook; native token used for CDL client
+7. Proactive token refresh at 80% of expiry time (also refreshes `app_metadata`)
 
 ### JWT Claims Structure
 
@@ -231,17 +265,19 @@ From `supabase/migrations/003_data_model_template.sql` — use the correct patte
 
 RLS helper functions (available on both App DB and CDL instances):
 - `get_current_tenant_id()` — extracts tenant UUID from JWT `uoi` claim
-- `get_active_scope()` — extracts scope from JWT (handles both `{ id, name }` object and plain string)
-- `get_crud()` — extracts CRUD permission string from JWT
+- `get_active_scope()` — extracts scope from JWT; **on CDL: falls back to `app_metadata`** for Supabase native tokens
+- `get_crud()` — extracts CRUD string from JWT; **on CDL: falls back to `app_metadata`**
 - `get_current_user_id()` — extracts SSO user UUID from JWT `sub` claim
-- `get_current_team_ids()` — extracts team UUID array from JWT `team_ids` claim
+- `get_current_team_ids()` — extracts team UUID array; **on CDL: falls back to `app_metadata`**
 - `is_sso_admin_v2()` — returns true if scope is `org_admin` or `system_admin`
-- `is_in_my_teams(user_id)` — (CDL only) checks if user shares a team with the current JWT user
+- `is_in_my_teams(user_id)` — (CDL only) checks if user shares a team via `sso_user_group_memberships`
 
-> **CDL Instance Note:** The shared CDL instance (`xgubaguglsnokjyudgvc`) has both the new SSO helper
-> functions above AND legacy functions (`is_admin()`, `has_rw_global_permission()`, etc.) for backward
-> compatibility with older apps. New CDL-Connected apps (e.g., MLS) should use the Pattern A-E model
-> with the functions listed above. See `docs/data-models/mls-cdl-schema.md` for MLS-specific RLS patterns.
+> **CDL Token Architecture:** CDL-Connected apps use Supabase native tokens (signed with the project
+> JWT secret) for PostgREST calls. These tokens don't carry custom SSO claims, so CDL RLS helpers
+> fall back to `auth.users.raw_app_meta_data` where `oauth-token` persists `active_scope`, `active_crud`,
+> and `active_team_ids`. See [security-model.md](security-model.md#app_metadata-fallback-cdl-instance).
+>
+> **Legacy Functions:** The CDL also has `is_admin()`, `has_rw_global_permission()`, `can_access_all_tenant_data()`, etc. for backward compatibility with older apps (meeting-hub, client-connect). New apps should use Pattern A-E with the functions listed above.
 
 ## UI Conventions
 

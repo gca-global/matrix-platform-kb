@@ -13,6 +13,12 @@ The MLS Listing Management tables are deployed to the **shared CDL instance**, n
 - RLS policies use existing CDL helper functions
 - Consistent with the "CDL = system of record" principle
 
+**CDL Connection Pattern (proven working):**
+- **Reads**: `dataLayerClient.ts` → Supabase native token → CDL PostgREST (RLS via `app_metadata` fallback)
+- **Writes**: `cdlWrite.ts` → `cdl-write` Edge Function (on MLS App DB) → CDL PostgREST with native token
+- **Token**: `localStorage.getItem('matrix_supabase_access_token')` — Supabase native token signed with CDL project JWT secret
+- **RLS claims**: `oauth-token` persists `active_scope`/`active_crud`/`active_team_ids` to `auth.users.raw_app_meta_data`; CDL RLS helpers fall back to this
+
 ## RLS Strategy
 
 Uses the KB's **5-level scope + CRUD model** (Patterns A-E) with CDL helper functions:
@@ -203,9 +209,19 @@ Seeded per active tenant on deployment:
 - Append-only tables (`mls_status_history`, `mls_price_history`) correctly omit UPDATE policies and `updated_at` triggers
 - Uses `get_my_tenant_id()` (with 4-step fallback) instead of `get_current_tenant_id()` for backward compatibility with legacy JWT models
 
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `src/lib/cdlWrite.ts` | CDL write helper — invokes `cdl-write` Edge Function with native token |
+| `src/integrations/supabase/dataLayerClient.ts` | CDL read client — prioritizes Supabase native token for PostgREST |
+| `supabase/functions/cdl-write/index.ts` | Edge Function proxy — forwards CRUD operations to CDL PostgREST |
+| `src/integrations/supabase/dataLayerTypes.ts` | Auto-generated CDL TypeScript types |
+| `src/components/settings/DevToolsPanel.tsx` | Test data seeder — seeds 18 tables with SEED-prefixed records |
+
 ## Source
 
 - App repo: `/home/bitnami/matrix-mls`
 - CDL instance: `xgubaguglsnokjyudgvc` (supabase-matrix-data-layer)
-- Migrations: 004–011 (mls_lookup_tables through mls_seed_data)
+- Migrations: 004–011 (mls_lookup_tables through mls_seed_data), plus 5-scope RLS migrations
 - TypeScript types: `src/integrations/supabase/dataLayerTypes.ts`
