@@ -1,6 +1,7 @@
 # MLS CDL Schema — Listing Management Data Model
 
-> 18 tables, 422 columns, 70 RLS policies deployed to `supabase-matrix-data-layer` (CDL instance `xgubaguglsnokjyudgvc`).
+> 18 tables, 422 columns, 70 RLS policies on `supabase-matrix-data-layer` (CDL instance `xgubaguglsnokjyudgvc`).
+> **RLS is currently DISABLED** on all MLS tables for development. Policies are preserved and will be re-enabled after dev stabilization.
 > All tables use the `mls_` prefix. Column names follow Dash conventions; Cyprus-specific fields use `x_sm_*`.
 
 ## Architecture Decision
@@ -20,6 +21,8 @@ The MLS Listing Management tables are deployed to the **shared CDL instance**, n
 - **RLS claims**: `oauth-token` persists `active_scope`/`active_crud`/`active_team_ids` to `auth.users.raw_app_meta_data`; CDL RLS helpers fall back to this
 
 ## RLS Strategy
+
+> **Current state (Feb 2026):** RLS is **disabled** on all 18 MLS tables (`ALTER TABLE ... DISABLE ROW LEVEL SECURITY`). All 70 policies remain defined and will be re-enabled once the MLS app dev workflow stabilizes. During this period, the `cdl-write` Edge Function is the sole access-control gate.
 
 Uses the KB's **5-level scope + CRUD model** (Patterns A-E) with CDL helper functions:
 
@@ -70,7 +73,7 @@ CREATE POLICY "mls_listings_select" ON mls_listings
 | Table | Cols | RLS | Description |
 |-------|------|-----|-------------|
 | `mls_listings` | 175 | Pattern B (owner: `broker_id`) | Main listing table with full Dash field parity — RESO Property Resource alignment |
-| `mls_contacts` | 30 | Pattern B (owner: `created_by`) | Shared contact registry (SIR Person form). Reusable across listings |
+| `mls_contacts` | 30 | Pattern B (owner: `created_by`) | Shared contact registry (SIR Person form). Reusable across listings. `full_name` is a **GENERATED ALWAYS** column (`COALESCE(first_name,'') \|\| ' ' \|\| COALESCE(last_name,'')`) — do NOT include it in INSERT/UPDATE payloads |
 | `mls_listing_contact_roles` | 9 | Cascade | Junction: contacts → listings with role. UNIQUE(listing_id, contact_id, role) |
 | `mls_checklist_templates` | 13 | Reference | Step templates by role (BROKER/MARKETING/FINANCE). Seeded: 44 steps |
 | `mls_listing_checklist_items` | 12 | Cascade | Per-listing checklist completion tracking |
@@ -174,20 +177,30 @@ DRAFT → PENDING_DUE_DILIGENCE → AGREEMENT_PENDING → PHOTOS_PENDING → MAR
 
 ## Indexes
 
-Every table has `idx_mls_{table}_tenant` on `tenant_id`. Key additional indexes:
+Every table has `idx_mls_{table}_tenant` on `tenant_id`. Every child table has `idx_mls_{table}_listing` on `listing_id`. Key additional indexes:
 
-| Table | Index | Columns |
-|-------|-------|---------|
-| `mls_listings` | `idx_mls_listings_broker` | `broker_id` |
-| `mls_listings` | `idx_mls_listings_status` | `tenant_id, status` |
-| `mls_listings` | `idx_mls_listings_city` | `tenant_id, city` |
-| `mls_listings` | `idx_mls_listings_market` | `tenant_id, market` |
-| `mls_listings` | `idx_mls_listings_property_type` | `tenant_id, property_type` |
-| `mls_listings` | `mls_listings_ref_key` | `ref` (UNIQUE) |
-| `mls_contacts` | `idx_mls_contacts_email` | `tenant_id, email` |
-| `mls_contacts` | `idx_mls_contacts_name` | `tenant_id, last_name, first_name` |
-| `mls_listing_media` | `idx_mls_listing_media_order` | `listing_id, display_order` |
-| `mls_listing_tasks` | `idx_mls_tasks_assigned` | `assigned_to` |
+| Table | Index | Columns | Notes |
+|-------|-------|---------|-------|
+| `mls_listings` | `idx_mls_listings_broker` | `broker_id` | |
+| `mls_listings` | `idx_mls_listings_co_broker` | `co_broker_id` | Partial: `WHERE co_broker_id IS NOT NULL` |
+| `mls_listings` | `idx_mls_listings_status` | `tenant_id, status` | |
+| `mls_listings` | `idx_mls_listings_city` | `tenant_id, city` | |
+| `mls_listings` | `idx_mls_listings_market` | `tenant_id, market` | |
+| `mls_listings` | `idx_mls_listings_property_type` | `tenant_id, property_type` | |
+| `mls_listings` | `mls_listings_ref_key` | `ref` | UNIQUE |
+| `mls_contacts` | `idx_mls_contacts_created_by` | `created_by` | For RLS owner-scope |
+| `mls_contacts` | `idx_mls_contacts_email` | `tenant_id, email` | |
+| `mls_contacts` | `idx_mls_contacts_name` | `tenant_id, last_name, first_name` | |
+| `mls_checklist_templates` | `idx_mls_checklist_tmpl_role` | `tenant_id, role` | |
+| `mls_listing_contact_roles` | `idx_mls_contact_roles_contact` | `contact_id` | |
+| `mls_listing_documents` | `idx_mls_listing_docs_status` | `listing_id, status` | |
+| `mls_listing_media` | `idx_mls_listing_media_order` | `listing_id, display_order` | |
+| `mls_listing_notes` | `idx_mls_notes_author` | `author_id` | |
+| `mls_listing_syndications` | `idx_mls_syndications_portal` | `portal_id` | |
+| `mls_listing_tasks` | `idx_mls_tasks_assigned` | `assigned_to` | Partial: `WHERE assigned_to IS NOT NULL` |
+| `mls_listing_tasks` | `idx_mls_tasks_status` | `tenant_id, status` | |
+| `mls_listing_approvals` | `idx_mls_approvals_status` | `tenant_id, status` | |
+| `mls_development_buildings` | `idx_mls_dev_buildings_dev` | `development_id` | |
 
 ## Seed Data
 
@@ -204,10 +217,14 @@ Seeded per active tenant on deployment:
 **Supabase best practice (known issues to fix):**
 - 4 foreign keys missing covering indexes: `template_id`, `document_type_id`, `building_id`, `development_id`
 
+**Generated columns (cannot be set in INSERT/UPDATE):**
+- `mls_contacts.full_name` — `GENERATED ALWAYS AS (COALESCE(first_name, '') || ' ' || COALESCE(last_name, ''))` — auto-computed, omit from write payloads
+
 **Design decisions (documented, intentional):**
 - `tenant_id` has no DEFAULT (Postgres disallows subquery defaults; app must supply)
 - Append-only tables (`mls_status_history`, `mls_price_history`) correctly omit UPDATE policies and `updated_at` triggers
 - Uses `get_my_tenant_id()` (with 4-step fallback) instead of `get_current_tenant_id()` for backward compatibility with legacy JWT models
+- RLS disabled for dev (Feb 2026) — 70 policies preserved, will be re-enabled post-stabilization
 
 ## Key Files
 
