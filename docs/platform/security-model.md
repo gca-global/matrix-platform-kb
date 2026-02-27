@@ -239,7 +239,7 @@ Apps deploying tables to CDL should use `is_in_my_teams()`. Apps with their own 
 
 ### Legacy CDL Functions (Backward Compatibility)
 
-The CDL instance also has legacy helper functions used by older apps (`matrix-client-connect-vm-sso-v1`, `matrix-meeting-hub-vm-sso-v1`). These are kept for backward compatibility and should NOT be used by new apps:
+The CDL instance also has legacy helper functions used by older apps (`matrix-client-connect`, `matrix-meeting-hub`). These are kept for backward compatibility and should NOT be used by new apps:
 
 | Legacy Function | New Equivalent |
 |----------------|---------------|
