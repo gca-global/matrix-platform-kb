@@ -118,7 +118,7 @@ Inbound communication touchpoints managed through the API Gateway.
 
 | Channel | Purpose | Integration |
 |---------|---------|-------------|
-| Email | Client correspondence, marketing campaigns | SMTP/IMAP via API Gateway |
+| Email | Client correspondence, marketing campaigns, opportunity context | SMTP/IMAP via API Gateway; Exchange Online via Microsoft Graph API (delegated, for broker mailbox read + attach to opportunity) |
 | Telegram | Instant messaging (high priority: Cyprus, Kazakhstan) | Bot API via Gateway |
 | WhatsApp BSP | Business messaging (high priority: all markets) | BSP API via Gateway |
 | Voice | Phone calls, contact center | VoIP/SIP via Gateway |
@@ -216,6 +216,30 @@ Ads/Website/Referral → API Gateway → Marketing Platform → Contact Center
     → AI/ML (scoring, qualification, Next Best Action)
     → Assignment to broker via Manager App
 ```
+
+### O365 Integration Flows
+
+**Email (read + attach to opportunity):**
+```
+Broker App → email-messages Edge Function → Microsoft Graph API (/me/messages)
+    → Exchange Online (broker's mailbox, delegated access)
+    → Broker selects email → email-attach Edge Function
+    → Snapshot stored in Supabase CDL (opportunity_emails table)
+```
+
+**Calendar (CRM ↔ Outlook sync):**
+```
+Broker creates viewing/meeting in CRM → calendar-events Edge Function
+    → Microsoft Graph API (POST /me/calendar/events)
+    → Outlook event created with attendees (client, seller/keyholder)
+    → outlook_event_id stored back in CRM (showing_appointment / broker_meetings)
+
+Broker views calendar in CRM → calendar-events Edge Function
+    → Microsoft Graph API (GET /me/calendarView)
+    → Merged view: CRM-linked events + Outlook-only events
+```
+
+See [o365-exchange-integration.md](o365-exchange-integration.md) for full architecture, data model, and security details.
 
 ### Analytics Flow
 ```

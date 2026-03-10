@@ -35,6 +35,17 @@ The full OpenAPI specification lives in `matrix-platform-foundation/openapi.yaml
 | admin-microsoft-auth | `/admin-microsoft-auth` | POST | Bearer (admin) | Microsoft auth config |
 | admin-ad-users | `/admin-ad-users` | GET | Bearer (admin) | Query Azure AD user directory |
 
+### O365 Integration (4 functions)
+
+| Name | Path | Method(s) | Auth | Purpose |
+|------|------|------------|------|---------|
+| email-messages | `/email-messages` | GET | Bearer | Read/search broker's Exchange emails via Graph API |
+| email-attach | `/email-attach` | GET, POST, DELETE | Bearer | Attach/detach email snapshots to/from opportunities |
+| calendar-events | `/calendar-events` | GET, POST, PATCH, DELETE | Bearer | CRUD on broker's Outlook calendar events |
+| calendar-sync | `/calendar-sync` | POST | Bearer (admin) | Bidirectional sync between CRM showings/meetings and Outlook |
+
+All O365 functions use the user's Microsoft `provider_token` (stored server-side) to call Microsoft Graph API with delegated permissions (`Mail.Read`, `Calendars.ReadWrite`). See [o365-exchange-integration.md](o365-exchange-integration.md) for full details.
+
 ### Utility (6 functions)
 
 | Name | Path | Method(s) | Auth | Purpose |
@@ -70,9 +81,11 @@ Apps send `Authorization: Bearer <token>` with the SSO JWT obtained from the OAu
 | SSO Console | All OAuth | ✓ | ✓ | admin-* (all 8) | register-app |
 | HRMS | All OAuth | ✓ | ✓ | — | sync-ad-users |
 | MLS | All OAuth | ✓ | ✓ | — | check-mls-duplicate |
-| Broker, Manager, Client Portal, etc. | All OAuth | ✓ | ✓ | — | — |
+| Broker App | All OAuth | ✓ | ✓ | — | email-messages, email-attach, calendar-events, calendar-sync |
+| Manager App | All OAuth | ✓ | ✓ | — | email-messages (read-only on team), calendar-events (team view) |
+| Client Portal, etc. | All OAuth | ✓ | ✓ | — | — |
 
-**Common subset**: Every app calls `oauth-authorize`, `oauth-token`, `switch-role`, `check-permissions`. Admin apps add `admin-*` functions. HRMS adds `sync-ad-users` for AD sync.
+**Common subset**: Every app calls `oauth-authorize`, `oauth-token`, `switch-role`, `check-permissions`. Admin apps add `admin-*` functions. HRMS adds `sync-ad-users` for AD sync. Broker and Manager apps add O365 integration functions for Exchange email and calendar.
 
 ## Cross-Reference
 
@@ -81,3 +94,4 @@ Apps send `Authorization: Bearer <token>` with the SSO JWT obtained from the OAu
 | JWT structure and RLS | [security-model.md](security-model.md) |
 | Deployment and CI/CD | [operations.md](operations.md) |
 | App integration patterns | [app-template.md](app-template.md) |
+| O365 email & calendar integration | [o365-exchange-integration.md](o365-exchange-integration.md) |

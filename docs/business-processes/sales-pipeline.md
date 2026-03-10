@@ -26,7 +26,8 @@ QUALIFICATION → DEMAND RESEARCH → SOLUTION/VIEWING → DECISION MAKING → D
 |--------|---------|
 | Broker tasks | Initial client assessment, create opportunity, assign responsible broker |
 | AI Copilot tasks | Auto-suggest optimal meeting time, select properties for showing (Curated List), optimize showing routes |
-| Artifacts | Lead context (chat, viewing history), contact info, interest in property, estimated deal value |
+| O365 integration | Schedule initial meeting → synced to Outlook as event with client. Attach relevant inbound emails (inquiry, referral) to opportunity. |
+| Artifacts | Lead context (chat, viewing history), contact info, interest in property, estimated deal value, attached emails, Outlook-synced meeting |
 | Exit criteria | BANT criteria assessed, lead accepted or rejected |
 
 ### Stage 2: DEMAND RESEARCH
@@ -37,7 +38,8 @@ QUALIFICATION → DEMAND RESEARCH → SOLUTION/VIEWING → DECISION MAKING → D
 |--------|---------|
 | Broker tasks | Discovery calls to identify needs, budget analysis, preliminary property selection |
 | AI Copilot tasks | Suggest questions for need identification, remind about preparation for meeting, track appointment→deal conversion |
-| Artifacts | Activity history, engagement metrics, budget analysis, auto-selected properties |
+| O365 integration | Follow-up call scheduled → Outlook event with client. Email correspondence (budget discussions, preference refinement) attached to opportunity for context continuity. |
+| Artifacts | Activity history, engagement metrics, budget analysis, auto-selected properties, attached emails, calendar-synced follow-up calls |
 | Exit criteria | Client needs clearly defined, initial property shortlist ready |
 
 ### Stage 3: SOLUTION / VIEWING
@@ -48,7 +50,8 @@ QUALIFICATION → DEMAND RESEARCH → SOLUTION/VIEWING → DECISION MAKING → D
 |--------|---------|
 | Broker tasks | Conduct professional showings, reveal objections, collect detailed feedback |
 | AI Copilot tasks | Generate Curated List, plan showings schedule, generate PDF brochures, optimize routes |
-| Artifacts | Curated property list, showing schedule, showing logs, PDF brochures |
+| O365 integration | Property viewings created in CRM → Outlook events with client + seller/keyholder + property address as location. Free/busy conflict detection before booking. Post-viewing follow-up emails attached to opportunity. |
+| Artifacts | Curated property list, showing schedule, showing logs, PDF brochures, calendar-synced viewings, attached follow-up emails |
 | Exit criteria | Client identifies 1-3 preferred properties |
 
 ### Stage 4: DECISION MAKING
@@ -59,7 +62,8 @@ QUALIFICATION → DEMAND RESEARCH → SOLUTION/VIEWING → DECISION MAKING → D
 |--------|---------|
 | Broker tasks | Discuss final variants, address objections, involve team for support |
 | AI Copilot tasks | Track engagement, predict probability, suggest discussion points |
-| Artifacts | Updated notes, team assignments, full activity history |
+| O365 integration | Negotiation meetings scheduled → Outlook events with client + broker + manager. Offer/counter-offer emails attached to opportunity for deal history. |
+| Artifacts | Updated notes, team assignments, full activity history, attached negotiation emails, calendar-synced meetings |
 | Exit criteria | Client ready to make an offer |
 
 ### Stage 5: DEAL SIGNING
@@ -69,7 +73,8 @@ QUALIFICATION → DEMAND RESEARCH → SOLUTION/VIEWING → DECISION MAKING → D
 | Aspect | Details |
 |--------|---------|
 | Broker tasks | Prepare contract, coordinate legal services, plan signing |
-| Artifacts | Document activity, service recommendations (Legal, Property Management, Interior Design) |
+| O365 integration | Contract signing appointment → Outlook event with client + legal + broker at office. Legal correspondence emails attached to opportunity. |
+| Artifacts | Document activity, service recommendations (Legal, Property Management, Interior Design), calendar-synced signing appointment, attached legal emails |
 | Exit criteria | Contract signed by all parties |
 
 ### Stage 6: PAYMENT PROCESS
@@ -79,7 +84,8 @@ QUALIFICATION → DEMAND RESEARCH → SOLUTION/VIEWING → DECISION MAKING → D
 | Aspect | Details |
 |--------|---------|
 | Broker tasks | Control financial transactions, final price corrections, coordinate closing |
-| Artifacts | Final price corrections, closing date records |
+| O365 integration | Payment follow-up reminders → Outlook reminder events. Payment confirmation emails attached to opportunity. |
+| Artifacts | Final price corrections, closing date records, attached payment emails |
 | Exit criteria | Payment completed |
 
 ### Stage 7: CLOSED WON
@@ -119,3 +125,16 @@ QUALIFICATION → DEMAND RESEARCH → SOLUTION/VIEWING → DECISION MAKING → D
 | 1 | Real-time control | Instant updates when brokers act, notifications on critical events |
 | 2 | Analytics & reports | Conversion by stage, time in each stage, broker comparison |
 | 3 | Interventions | Reassign client, add task, leave comment |
+| 4 | Team calendar | Aggregated view of all broker Outlook calendars (viewings, meetings) |
+| 5 | Email audit | View emails attached to any opportunity for context during pipeline reviews |
+
+## O365 Integration Summary
+
+Every opportunity record has two O365-linked artifact types:
+
+| Artifact | Source | Storage |
+|----------|--------|---------|
+| **Attached Emails** | Broker selects emails from their Exchange inbox and attaches them to the opportunity | `opportunity_emails` table (metadata snapshot; full email remains in Exchange) |
+| **Calendar Events** | Viewings, meetings, and follow-ups created in CRM auto-sync to Outlook | `showing_appointment` and `broker_meetings` tables with `outlook_event_id` |
+
+See [o365-exchange-integration.md](../platform/o365-exchange-integration.md) for technical details.

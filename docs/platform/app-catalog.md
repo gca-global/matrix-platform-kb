@@ -24,6 +24,7 @@
 ### Broker App
 **Users**: Brokers and agents
 **RESO Resources**: Property, Contacts, Member, ShowingAppointment, Media
+**O365 Dependency**: Exchange Online (Mail.Read, Calendars.ReadWrite via Microsoft Graph API)
 **Key Features**:
 - Personal daily dashboard with auto-prioritized actions
 - AI Copilot with Next Best Action per client
@@ -31,16 +32,22 @@
 - Follow-up management (zero tolerance for missed)
 - Property matching and Curated List generation
 - Document generation (PDF brochures)
+- **Exchange email integration**: Read inbox from CRM, search by contact/subject, attach emails to opportunities for deal context
+- **Outlook calendar sync**: Viewings, meetings, and follow-ups created in CRM auto-sync to broker's Outlook with attendee invitations (client, seller/keyholder)
+- **Free/busy conflict detection**: Scheduling warnings when creating events that overlap with existing calendar entries
 
 ### Manager App
 **Users**: Sales managers, team leads
 **RESO Resources**: Property, Contacts, Member, Office, Teams
+**O365 Dependency**: Exchange Online (Calendars.ReadWrite, Mail.Read via Microsoft Graph API)
 **Key Features**:
 - Dual Kanban: seller-side (listings) + buyer-side (sales) pipelines
 - Revenue forecast with probability-weighted calculations
 - Team productivity metrics and broker comparisons
 - Intervention tools: reassign, add tasks, comment
 - Real-time pipeline monitoring with trouble spot detection
+- **Team calendar overview**: Aggregated view of all broker Outlook calendars (viewings, meetings, availability)
+- **Email audit on opportunities**: View emails attached to any team opportunity during pipeline reviews
 
 ### Client Portal
 **Users**: Buyers and sellers (authenticated)
@@ -162,3 +169,16 @@
 | Prospecting | R/W | R | — | R/W | — | R/W | — | R |
 
 R = Read, W = Write, R/W = Read and Write
+
+## O365 Integration Matrix
+
+| Capability | Broker | Manager | Other Apps |
+|-----------|--------|---------|------------|
+| Exchange email read (own mailbox) | ✓ | — | — |
+| Attach email to opportunity | ✓ | — | — |
+| View attached emails (team) | ✓ (own) | ✓ (team) | — |
+| Outlook calendar sync (own) | ✓ | — | — |
+| Team calendar view | — | ✓ | — |
+| Free/busy conflict detection | ✓ | ✓ | — |
+
+See [o365-exchange-integration.md](o365-exchange-integration.md) for full technical details.

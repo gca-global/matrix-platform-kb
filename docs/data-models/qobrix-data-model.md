@@ -21,12 +21,15 @@ Qobrix is the CRM currently used by Sharp Sotheby's International Realty. The Sh
 | Agent / User | Member | Agent profiles map to Member resource |
 | Groups | Teams | Team structures |
 | Opportunity | HistoryTransactional | Deal/pipeline data; RESO doesn't have a direct "Opportunity" equivalent |
-| Property Viewing | ShowingAppointment | Viewing records |
+| Property Viewing | ShowingAppointment | Viewing records; add `outlook_event_id` for Outlook calendar sync |
 | Task | — | No direct RESO equivalent; platform extension needed |
 | Contract | — | No direct RESO equivalent; platform extension needed |
 | Offer | — | No direct RESO equivalent; platform extension needed |
 | Media | Media | Photo/video/document records |
 | Project | — | Development projects; platform extension needed |
+| Email Messages | `opportunity_emails` | Email metadata snapshots linked to opportunities; full emails remain in Exchange Online via Graph API. See [o365-exchange-integration.md](../platform/o365-exchange-integration.md) |
+| Meetings | `broker_meetings` | Meeting records synced to Outlook calendar; types: seller_meeting, team_meeting, contract_signing, other |
+| Calls | `broker_meetings` (type=follow_up_call) | Phone call records stored as broker_meetings with type `follow_up_call`; Outlook calendar events for scheduled calls |
 
 ## Authentication
 
@@ -142,9 +145,9 @@ Development projects containing multiple properties.
 | **Workflow Stages** | Pipeline stage definitions |
 | **Action Plans** | Step-by-step action plan templates |
 | **Campaigns** | Marketing campaign records |
-| **Calls** | Phone call logs |
-| **Meetings** | Meeting records |
-| **Email Messages** | Email correspondence |
+| **Calls** | Phone call logs → migrates to `broker_meetings` (type=follow_up_call) with Outlook sync |
+| **Meetings** | Meeting records → migrates to `broker_meetings` with Outlook calendar sync |
+| **Email Messages** | Email correspondence → migrates to `opportunity_emails` (snapshots); live access via Exchange Online / Graph API |
 | **SMS Messages** | SMS correspondence |
 | **Media** | Photos, videos, documents |
 | **Lists** | Custom lists (e.g., Curated Lists) |
@@ -200,6 +203,8 @@ Qobrix provides capabilities that the Sharp Matrix Platform must match or exceed
 | Property viewings | Broker App, Client Portal | Scheduling with client-facing booking |
 | Media management | Broker App, Marketing App | Photo/video/virtual tour management |
 | Campaigns & marketing | Marketing App | Syndication, email campaigns, SMM |
+| Email correspondence | Broker App | Exchange Online read via Graph API; attach to opportunities. Replaces Qobrix internal email module. |
+| Meeting scheduling | Broker App | Outlook calendar sync via Graph API; replaces Qobrix Meetings/Calls. |
 | Dashboards & reporting | Manager App | Enhanced with BI/analytics layer |
 | Workflow automation | All apps | Platform-level workflow engine |
 | API integrations (feeds, portals) | Integration Layer | API Gateway with RESO-compliant endpoints |
