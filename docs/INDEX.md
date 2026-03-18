@@ -91,6 +91,24 @@ Raw API catalogs, data dictionary summaries, and source repositories.
 
 ---
 
+## Chapter 7: Zoe AI Assistant Knowledge Base
+
+RAG-optimized support documentation for the Zoe AI assistant — 1st line support for end users and 2nd line technical reference.
+
+| Document | Description |
+|----------|-------------|
+| [zoe-ai-assistant-kb/index.md](zoe-ai-assistant-kb/index.md) | Zoe AI KB index — purpose, audience, document list |
+| [zoe-ai-assistant-kb/platform-overview.md](zoe-ai-assistant-kb/platform-overview.md) | Platform overview for users — all apps, getting started, cross-app troubleshooting, incident guide, glossary |
+| [zoe-ai-assistant-kb/portal.md](zoe-ai-assistant-kb/portal.md) | Agency Portal — dashboard, app launcher, AI Advisor, stats, Quick Access |
+| [zoe-ai-assistant-kb/client-connect.md](zoe-ai-assistant-kb/client-connect.md) | Client Connect — registration, verification, MLS duplicate check, approval workflow |
+| [zoe-ai-assistant-kb/meeting-hub.md](zoe-ai-assistant-kb/meeting-hub.md) | Meeting Hub — appointments, buyer/seller/tenant/landlord forms, analytics, reports |
+| [zoe-ai-assistant-kb/comms.md](zoe-ai-assistant-kb/comms.md) | Matrix Comms — WhatsApp messaging, conversations, templates, campaigns, AI replies |
+| [zoe-ai-assistant-kb/platform-sso-auth.md](zoe-ai-assistant-kb/platform-sso-auth.md) | SSO & Auth — login, roles, permissions, scope, SSO Console, user management |
+| [zoe-ai-assistant-kb/second-line-tech-reference.md](zoe-ai-assistant-kb/second-line-tech-reference.md) | 2nd Line Support — technology overview, architecture, links to deep-dive docs |
+| [zoe-ai-assistant-kb/kb-generation-guide.md](zoe-ai-assistant-kb/kb-generation-guide.md) | How to generate a support KB article for any new Matrix app |
+
+---
+
 ## How to Use This Knowledge Base
 
 **For Lovable (building Matrix Apps):**

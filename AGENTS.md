@@ -118,6 +118,26 @@ docs/
 │   └── reso-dd-fields-summary.md     ← RESO DD 2.0 field & lookup summary
 ```
 
+## For Zoe AI Assistant (1st & 2nd Line Support)
+
+If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
+
+→ `docs/zoe-ai-assistant-kb/index.md` — KB index and usage guide
+→ `docs/zoe-ai-assistant-kb/platform-overview.md` — Start here for general questions
+
+**1st Line (end-user facing):** Navigate to the relevant app article:
+- `docs/zoe-ai-assistant-kb/portal.md` — Agency Portal
+- `docs/zoe-ai-assistant-kb/client-connect.md` — Client Connect
+- `docs/zoe-ai-assistant-kb/meeting-hub.md` — Meeting Hub
+- `docs/zoe-ai-assistant-kb/comms.md` — Matrix Comms (WhatsApp)
+- `docs/zoe-ai-assistant-kb/platform-sso-auth.md` — SSO, Login, Roles, Permissions
+
+**2nd Line (technical):**
+- `docs/zoe-ai-assistant-kb/second-line-tech-reference.md` — Architecture, tech stack, and links to deep-dive docs
+
+**Generating new KB articles:**
+- `docs/zoe-ai-assistant-kb/kb-generation-guide.md` — How to create a support KB article for any new app
+
 ## Quick Navigation by Task
 
 | If you need to…                              | Read this                                         |
