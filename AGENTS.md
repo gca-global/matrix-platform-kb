@@ -48,6 +48,7 @@ Writes to CDL go through an Edge Function proxy on the app's Supabase instance:
 - Security deep-dive: `docs/platform/security-model.md`
 - Deployment: `docs/platform/operations.md`
 - GDPR/compliance: `docs/platform/compliance.md`
+- **New app can't auth?**: `docs/platform/new-app-auth-troubleshooting.md` — 401/400/403 flowchart, stale sessions, Lovable preview issues
 
 ## Platform Identity
 
@@ -71,6 +72,7 @@ docs/
 │   ├── operations.md                ← CI/CD, deployment, monitoring, DR/backup
 │   ├── compliance.md                ← GDPR, data protection, retention, DSAR procedures
 │   ├── mls-datamart.md              ← MLS 2.0 data pipeline & phased migration roadmap
+│   ├── new-app-auth-troubleshooting.md ← Troubleshooting new app auth (401/400/403)
 │   ├── ecosystem-architecture.md     ← Full ecosystem: channels, apps, data, AI/ML
 │   ├── app-catalog.md               ← All platform apps: purpose, users, RESO resources
 │   ├── performance.md              ← Latency targets, capacity planning, load testing

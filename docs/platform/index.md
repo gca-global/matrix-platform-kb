@@ -68,6 +68,7 @@ See [app-template.md](app-template.md) for full technical details.
 | [app-catalog.md](app-catalog.md) | All apps in the platform: purpose, users, RESO resources consumed |
 | [testing-strategy.md](testing-strategy.md) | Testing: unit (Vitest), integration, E2E (Playwright), contract testing |
 | [api-contracts.md](api-contracts.md) | Edge Function API surface, OpenAPI reference, per-app dependencies |
+| [new-app-auth-troubleshooting.md](new-app-auth-troubleshooting.md) | Troubleshooting: new app auth failures (401/400/403), stale sessions, Lovable preview issues |
 | [kb-methodology.md](kb-methodology.md) | KB design principles, versioning, contribution guidelines |
 
 ## How Apps Share Data

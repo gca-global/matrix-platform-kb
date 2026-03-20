@@ -126,15 +126,7 @@ QUALIFICATION → DEMAND RESEARCH → SOLUTION/VIEWING → DECISION MAKING → D
 | 2 | Analytics & reports | Conversion by stage, time in each stage, broker comparison |
 | 3 | Interventions | Reassign client, add task, leave comment |
 | 4 | Team calendar | Aggregated view of all broker Outlook calendars (viewings, meetings) |
-| 5 | Email audit | View emails attached to any opportunity for context during pipeline reviews |
-
-## O365 Integration Summary
-
-Every opportunity record has two O365-linked artifact types:
-
-| Artifact | Source | Storage |
+| 5 | Email audit | View emails attached to any opportunity for context during pipeline reviews |## O365 Integration SummaryEvery opportunity record has two O365-linked artifact types:| Artifact | Source | Storage |
 |----------|--------|---------|
 | **Attached Emails** | Broker selects emails from their Exchange inbox and attaches them to the opportunity | `opportunity_emails` table (metadata snapshot; full email remains in Exchange) |
-| **Calendar Events** | Viewings, meetings, and follow-ups created in CRM sync to Outlook | `calendar_events` and `broker_meetings` tables with `outlook_event_id` |
-
-See [o365-exchange-integration.md](../platform/o365-exchange-integration.md) for technical details.
+| **Calendar Events** | Viewings, meetings, and follow-ups created in CRM auto-sync to Outlook | `showing_appointment` and `broker_meetings` tables with `outlook_event_id` |See [o365-exchange-integration.md](../platform/o365-exchange-integration.md) for technical details.
