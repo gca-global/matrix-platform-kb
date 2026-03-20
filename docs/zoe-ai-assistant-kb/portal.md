@@ -114,7 +114,7 @@ All apps share the same login session (Single Sign-On). You do not need to log i
 
 Admins can manage which roles can access which portal pages:
 
-1. Click your avatar → **App Permissions**.
+1. Navigate to `/admin/permissions` directly (this page is not in the user dropdown).
 2. Select a role (Broker, Office Manager, MLS Staff).
 3. Toggle page access on or off for each page.
 4. Click **Save**.
@@ -130,16 +130,9 @@ If your Admin has enabled role switching for your account:
 
 ### Accessing Admin Tools
 
-Admins see additional links in the user menu:
+All admin functions (User Management, Connected Apps, SSO Permissions, Groups, Settings) are accessed directly through the **SSO Management Console** at `https://intranet.sharpsir.group/sso-console/`. The Agency Portal user dropdown no longer contains admin links.
 
-- **User Management** — manage users in the SSO Console
-- **Connected Apps** — see registered applications
-- **SSO Permissions** — manage global permissions
-- **App Permissions** — manage portal page access by role
-- **Groups** — manage teams and group memberships
-- **Settings** — platform configuration
-
-These link to the SSO Console (a separate admin application).
+The **App Permissions** page for the Portal is accessible at `/admin/permissions` via direct URL for administrators.
 
 ---
 
@@ -274,6 +267,95 @@ If you cannot resolve the issue using the troubleshooting steps above, submit an
 
 ---
 
+## Getting Started — Your First Day
+
+### For Everyone (All Roles)
+
+1. **Open the Portal** at `https://intranet.sharpsir.group/agency-portal/` and log in.
+2. **Explore the Dashboard** — look at your stat widgets (Pipeline Value, Approved Clients, New Clients, This Week Meetings).
+3. **Open your main app** from the App Launcher:
+   - **Broker/Agent** → Click **Client Connect** to register clients, then **Meeting Hub** to record appointments.
+   - **Contact Center** → Click **Client Connect** to verify incoming registrations.
+   - **Sales Manager** → Click **Client Connect** to review flagged clients.
+4. **Set up Quick Access** — click "More" in the Quick Access bar and toggle on the apps you use most. These appear as icons for one-click access.
+5. **Rearrange app cards** — drag and drop app tiles to put your favorites first. The layout saves automatically.
+6. **Try the AI Advisor** — click the chat icon (bottom-right) and ask "What's my pipeline value?" or "Show today's agenda."
+
+### For Admins
+
+1. After exploring the dashboard, head to the **SSO Console** at `/sso-console/` to manage users, permissions, and connected apps.
+2. To manage portal-specific page permissions, navigate to `/admin/permissions` directly.
+3. Remember: admin functions are in the **SSO Console**, not in the portal dropdown.
+
+---
+
+## Step-by-Step Workflows
+
+### Workflow: Customize Your Dashboard Layout
+
+1. **Rearrange app cards**: Click and hold any app card, drag it to a new position, release. Your order is saved.
+2. **Set Quick Access shortcuts**: Click "More" in the Quick Access bar → toggle on your top 3–5 apps → click outside to close.
+3. **Check your numbers**: the stat widgets pull data automatically from Client Connect and Meeting Hub. If they show zero, you may not have data yet.
+
+### Workflow: Start Your Workday via the Portal
+
+1. Open the Portal — review your **stats** at the top. Are your client counts growing? Any new meetings this week?
+2. Check **Today's Agenda** (right panel) — see what meetings are scheduled.
+3. Check **Recent Activity** — review last few client registrations and appointments.
+4. Click into the app you need:
+   - Have new clients to register? → **Client Connect**
+   - Have appointments to record? → **Meeting Hub**
+   - Need to check messages? → **Matrix Comms**
+5. When done in any app, click "Back to SharpMatrix" in the sidebar to return to the Portal.
+
+### Workflow: Use the AI Advisor for Quick Actions
+
+1. Click the **chat icon** (bottom-right corner).
+2. **Ask a question:**
+   - "How many meetings did I have this week?"
+   - "What is my pipeline value?"
+   - "Show my upcoming appointments"
+3. **Request an action:**
+   - "Open Client Connect"
+   - "Register a new client named Anna Smith, phone 99223344"
+   - "Take me to Meeting Hub"
+4. **Use voice:** Click the microphone icon, speak your question, and listen to the AI's response with the speaker icon.
+5. Close the chat by clicking the X or clicking outside the panel.
+
+---
+
+## Tips and Best Practices
+
+### Dashboard Tips
+
+- **Start every workday here** — the Portal gives you a 30-second overview of your business. Check stats, review agenda, then dive into apps.
+- **Refresh if numbers look stale** — a page refresh (F5 or pull-down on mobile) reloads all widgets with the latest data.
+- **Pipeline Value = active deals** — this includes approved clients and reservations. If it drops, check Client Connect for rejected or expired entries.
+- **Stats are role-scoped** — Brokers see only their own data; Managers and Admins see the full team. This is by design.
+
+### AI Advisor Power Tips
+
+- **Be specific** — "Show today's meetings" is better than "Show meetings."
+- **Use it for navigation** — saying "Open Meeting Hub" is faster than scrolling to find the app card.
+- **Ask about data** — the AI can pull your pipeline numbers, client counts, and meeting totals without you opening another app.
+- **Try follow-ups** — after asking "How many clients did I register this month?", you can ask "And how many were approved?"
+- **Voice works in noisy environments** — speak clearly and close to the mic. Short sentences work best.
+- **If the AI misunderstands**, rephrase with simpler words. For example, instead of "Show me my KPIs" try "What are my numbers?"
+
+### Quick Access Bar Tips
+
+- **Put your top 3 apps there** — Quick Access is for apps you open multiple times a day.
+- **Remove unused shortcuts** — too many icons defeats the purpose. Keep it focused.
+- **The bar persists** — your selection is saved and appears every time you log in.
+
+### For Managers and Admins
+
+- **Use the Portal as a team status view** — the aggregate stats show how the whole team is performing.
+- **Bookmark the SSO Console** — admin functions like user management and permissions are accessed from `/sso-console/`, not from the Portal dropdown.
+- **Check the Portal once a day** — even if you spend most of your time in Client Connect or Meeting Hub, a quick Portal check gives you the big picture.
+
+---
+
 ## Quick Reference Card
 
 | Task | Where to Go |
@@ -281,9 +363,14 @@ If you cannot resolve the issue using the troubleshooting steps above, submit an
 | See your dashboard | Open Agency Portal (home page) |
 | Open an app | Click its card on the dashboard |
 | Configure Quick Access shortcuts | Quick Access bar → More |
+| Rearrange app tiles | Drag and drop on the dashboard |
+| Check today's agenda | Right panel on the dashboard |
+| Check recent activity | Dashboard → Recent Activity section |
 | Ask the AI Advisor | Click the chat icon (bottom-right) |
+| Use voice with AI Advisor | Chat panel → Microphone icon |
 | View your profile | Top-right avatar → Profile |
-| Manage permissions (Admin) | Top-right avatar → App Permissions |
-| Manage users (Admin) | Top-right avatar → User Management |
+| Manage permissions (Admin) | Navigate to `/admin/permissions` directly |
+| Manage users (Admin) | SSO Console (`/sso-console/users`) |
+| Manage connected apps (Admin) | SSO Console (`/sso-console/apps`) |
 | Switch role (Act As) | Top-right avatar → Role dropdown |
 | Sign out | Top-right avatar → Sign Out |

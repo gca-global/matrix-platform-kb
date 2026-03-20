@@ -28,10 +28,10 @@ If you cannot log in, your account may not have access to Meeting Hub. Contact y
 
 | Role | Home Page | What They Can Do |
 |------|-----------|-----------------|
-| **Broker / Agent** | Broker Dashboard | Create and edit their own appointments, view own stats |
-| **Sales Manager (Office Manager)** | Dashboard | View all team appointments, analytics, build reports |
-| **Contact Center (MLS Staff)** | Dashboard | View all appointments, analytics |
-| **Admin** | Dashboard | Full access: manage users, roles, permissions, settings, all appointments |
+| **Broker / Agent** | Dashboard | Create and edit their own appointments, view own stats and counts |
+| **Sales Manager (Office Manager)** | Dashboard | View all team appointments and aggregate counts, analytics, build reports |
+| **Contact Center (MLS Staff)** | Dashboard | View all appointments and aggregate counts, analytics |
+| **Admin** | Dashboard | Full access: permissions, settings, all appointments across all brokers |
 
 ---
 
@@ -133,7 +133,7 @@ Supported languages: English, Russian, and other languages if enabled by Admin.
 3. View charts showing:
    - Number of appointments by type
    - Trends over time
-   - Broker performance (who had the most meetings)
+   - Broker performance — "Appointments by Broker" chart shows each broker's name (in "First L." format, e.g., "Nadejda S.") with a stacked bar for each appointment type. The chart scales dynamically based on the number of brokers.
    - Budget distribution
    - Reservation rates
 
@@ -164,9 +164,11 @@ Meeting Hub includes a powerful Report Builder:
 
 The main Dashboard shows:
 
+- **Your appointment counts** — Buyer, Seller, Tenant, and Landlord counts for your own appointments (Managers and Admins see totals across all brokers)
+- **This Week** — number of your appointments scheduled this week
+- **Reserved** — number of buyer appointments where a property was reserved
 - **Recent appointments** — your latest recorded meetings
-- **Quick stats** — total appointments, by type, this week/month
-- **Report widgets** — saved reports displayed as dashboard cards
+- **Report widgets** — saved reports displayed as dashboard cards (Managers/Admins only)
 
 ---
 
@@ -255,6 +257,7 @@ A: It lets you describe a report in plain language, and the AI configures the fi
 
 | Problem | Possible Cause | What to Do |
 |---------|---------------|------------|
+| **Dashboard counts seem too high** | You may be a Manager/Admin seeing all brokers' data | Managers and Admins see aggregate totals across all brokers. Brokers and Agents see only their own counts. This is by design. |
 | **Appointment data looks wrong** | Incorrect data entry or data migration issue | Verify by opening the appointment. If the data was entered incorrectly, edit it. If it seems like a system error, report to 2nd Line. |
 | **Duplicate appointments** | Accidental double-save | Delete the duplicate. If the same client was entered twice, keep the most complete record. |
 
@@ -303,16 +306,151 @@ If you cannot resolve the issue using the troubleshooting steps above, submit an
 
 ---
 
+## Getting Started by Role
+
+### New Broker — Your First Day
+
+1. **Log in** at `https://intranet.sharpsir.group/meeting-hub/` using your company credentials.
+2. You land on the **Dashboard** — it shows your appointment counts, this week's total, and recent meetings.
+3. Click **New Appointment** (top-right button).
+4. Select the type: **Buyer**, **Seller**, **Tenant**, or **Landlord**.
+5. Fill in the date, client name, and type-specific fields (budget, listings, rent, etc.).
+6. Optionally complete the **Client Questionnaire** — this helps analytics.
+7. Click **Save**.
+8. Your appointment appears in **All Appointments** and your Dashboard counts update immediately.
+
+**Tip:** Register the client first in **Client Connect** — then their name will auto-complete when you type it in Meeting Hub.
+
+### Manager / Admin — Your First Day
+
+1. **Log in** — you land on the **Dashboard** showing aggregate counts across all brokers.
+2. Check **Analytics** (sidebar) to see team performance: appointments by broker, trends over time, top cities.
+3. Use **Reports** (sidebar) to build weekly or monthly summaries. Start with the "Weekly Summary" template.
+4. **Export to Excel** from any report for offline review or sharing.
+
+**Tip:** The "Appointments by Broker" chart on Analytics shows each broker's name and their appointment breakdown. Use it in team meetings to review performance.
+
+---
+
+## Step-by-Step Workflows
+
+### Workflow: Record a Buyer Showing
+
+1. Click **New Appointment** → select **Buyer**.
+2. Enter the **appointment date and time**.
+3. Type the **client name** — select from suggestions or type a new name.
+4. Set the **budget range** (from–to). You can type exact amounts; the slider adjusts visually but doesn't change what you typed.
+5. Add **listings viewed** — search by name and add each property you showed.
+6. Add **developers visited** and **projects** if applicable.
+7. Set **Reservation**: Yes/No. If Yes, enter the contract value.
+8. Select an **outcome** (e.g., Interested, Follow-up Needed, Not Interested).
+9. Fill in the **Client Questionnaire** if this is a first meeting.
+10. Add any **notes** about the meeting.
+11. Click **Save**.
+
+### Workflow: Record a Seller Meeting
+
+1. Click **New Appointment** → select **Seller**.
+2. Enter the **date and time**.
+3. Enter the **seller/owner name**.
+4. Enter the **asking price** and currency.
+5. Select the **city** and **property type**.
+6. Select an **outcome**.
+7. Add notes.
+8. Click **Save**.
+
+### Workflow: Record a Tenant or Landlord Meeting
+
+1. Click **New Appointment** → select **Tenant** or **Landlord**.
+2. Enter the **date and time** and **client name**.
+3. For Tenants: set the **monthly rent budget** range.
+4. For Landlords: set the **monthly rent expectations**.
+5. Select an outcome and add notes.
+6. Click **Save**.
+
+### Workflow: Use Voice Input for Appointments
+
+1. Open the appointment form (any type).
+2. Click the **microphone icon** next to a field or at the top of the form.
+3. Speak naturally. Example for a buyer showing: *"Meeting with John Smith today at 2pm, showed three apartments in Limassol, budget 300 to 500 thousand euros, he liked the sea view apartment, wants to schedule a second viewing."*
+4. The AI fills the form fields — **review carefully**.
+5. Correct any errors (especially names, numbers, and dates).
+6. Click **Save**.
+
+### Workflow: Build a Report (Managers/Admins)
+
+1. Go to **Reports** in the sidebar.
+2. Select a template:
+   - **Weekly Summary** — quick overview of this week's activity
+   - **Monthly Overview** — month-over-month comparison
+   - **Broker Performance** — compare brokers side by side
+   - **City Report** — activity by city
+   - **Property Type Analysis** — breakdown by property type
+   - **Outcome Analysis** — success rates and follow-up needs
+3. Set your **date range** and any filters (specific broker, appointment type).
+4. Click **Generate**.
+5. Review the report on screen.
+6. Click **Export to Excel** to download.
+7. Click **Save** to keep the report for later.
+
+### Workflow: Read the Analytics Dashboard
+
+1. Go to **Analytics** in the sidebar.
+2. Set the **date range** at the top (default is last 30 days).
+3. Review the charts:
+   - **Appointments by Broker** (horizontal bar chart) — each broker's name with stacked colors for Buyer/Seller/Tenant/Landlord. Hover over a bar for exact numbers.
+   - **Property Types** (pie chart) — what property types are most common.
+   - **Appointments Over Time** (line chart) — daily/weekly trend lines per type.
+   - **Top Cities** (bar chart) — which cities have the most activity.
+
+---
+
+## Tips and Best Practices
+
+### For Brokers
+
+- **Record appointments the same day** — details are freshest right after the meeting. Voice input makes this quick even from your phone.
+- **Always fill in budget** — even an approximate range helps analytics and reports immensely.
+- **Complete the Client Questionnaire on first meetings** — country of origin, occupation, family status, and how they found you provide valuable marketing insights.
+- **Use the client name autocomplete** — type a few characters and select from the list. This links the appointment to an existing contact.
+- **Check your Dashboard daily** — the stat cards show your current totals. If something looks off, check whether an appointment was saved correctly.
+- **Add developer names for new-build showings** — the "Developers Visited" and "Projects Viewed" fields help track which developments are getting the most interest.
+
+### For Managers
+
+- **Use "Broker Performance" report for weekly team reviews** — it shows each broker's appointment count, reservation rate, and outcomes side by side.
+- **Export reports to Excel before meetings** — share with team leads or send to management.
+- **Check Analytics weekly** — the "Appointments Over Time" chart reveals trends before they become problems (e.g., a sudden drop in showings).
+- **Use "City Report" for market analysis** — see where client activity is concentrated.
+
+### Voice Input Tips
+
+- **Include the date** — "meeting today at 3pm" or "meeting on March 15" works well.
+- **Say currency amounts clearly** — "budget three hundred to five hundred thousand euros."
+- **Mention the meeting type** — "buyer showing" or "seller meeting" helps the AI choose the right fields.
+- **Pause briefly between details** — "Client name is Anna Petrova. [pause] Budget 200 to 400 thousand. [pause] Showed apartment in Paphos."
+
+---
+
 ## Quick Reference Card
 
 | Task | Where to Go |
 |------|-------------|
-| Create a new appointment | Sidebar → All Appointments → New Appointment |
+| Create a new appointment | Dashboard → New Appointment button, or Sidebar → All Appointments → New |
+| Record a buyer showing | New Appointment → Buyer tab |
+| Record a seller meeting | New Appointment → Seller tab |
+| Record a tenant showing | New Appointment → Tenant tab |
+| Record a landlord meeting | New Appointment → Landlord tab |
+| Use voice input | Any appointment form → Microphone icon |
 | View all appointments | Sidebar → All Appointments |
-| View my dashboard (Broker) | Sidebar → Dashboard |
-| View analytics | Sidebar → Analytics |
-| Build a report | Sidebar → Reports |
-| Manage users (Admin) | Sidebar → Admin |
+| Filter by type | All Appointments → Buyer / Seller / Tenant / Landlord tabs |
+| Search appointments | All Appointments → Search bar |
+| Edit an appointment | All Appointments → Click appointment → Edit |
+| Delete an appointment | All Appointments → Click delete icon → Confirm |
+| View my dashboard | Sidebar → Dashboard |
+| View team analytics | Sidebar → Analytics |
+| Build a report | Sidebar → Reports → Choose template |
+| Export report to Excel | Reports → Generate → Export button |
 | Manage permissions (Admin) | Sidebar → App Permissions |
 | View your profile | Top-right menu → Profile |
 | Switch role (Act As) | Top-right menu → Role dropdown |

@@ -35,6 +35,7 @@ Help support analysts and IT staff with:
 | [meeting-hub.md](meeting-hub.md) | Meeting Hub — appointments, 4 meeting types, analytics, reports |
 | [comms.md](comms.md) | Matrix Comms — WhatsApp messaging, conversations, templates, campaigns, AI replies |
 | [platform-sso-auth.md](platform-sso-auth.md) | SSO & Authentication — login, roles, permissions, scope, SSO Console |
+| [cross-app-workflows.md](cross-app-workflows.md) | Cross-app workflows — client lifecycle, daily routines by role, data flow between apps, scenarios |
 
 ### 2nd Line — Technical Reference
 
@@ -56,5 +57,6 @@ Help support analysts and IT staff with:
 - Section headers are descriptive for semantic search chunking.
 - FAQ entries use natural questions that users actually ask.
 - Troubleshooting tables use Problem → Cause → Solution format.
+- Use `cross-app-workflows.md` when a user asks about data flow between apps, daily routines, or end-to-end client lifecycle.
 - Start with `platform-overview.md` for general questions; use app-specific docs for targeted queries.
 - Use `second-line-tech-reference.md` when a 2nd line analyst needs architectural context.
