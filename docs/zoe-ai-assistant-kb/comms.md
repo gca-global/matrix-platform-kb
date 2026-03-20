@@ -290,31 +290,7 @@ A: You can see delivery and read receipts in the campaign analytics, subject to 
 
 If you cannot resolve the issue using the troubleshooting steps above, submit an incident to the 2nd Line Support team.
 
-### What to Include in an Incident Report
-
-1. **Your name and role** (e.g., "Alexei Volkov, Marketing Manager")
-2. **App name:** Matrix Comms
-3. **Date and time** the issue occurred
-4. **Page/section** where the issue happened (e.g., "Chats inbox", "Campaign launch", "Templates")
-5. **What you were trying to do** (step by step)
-6. **What happened instead** (exact error message if any — click "Show Details" on error popups)
-7. **Conversation or campaign ID** if applicable
-8. **Screenshot** if possible
-9. **Browser and device** (e.g., "Chrome on Windows laptop", "Safari on iPhone")
-10. **Is the issue reproducible?** (Does it happen every time?)
-11. **Severity:**
-    - **Critical** — Cannot send or receive messages; Comms is completely down
-    - **High** — Major feature broken (e.g., campaigns don't send, assignments fail)
-    - **Medium** — Minor feature issue (e.g., analytics not loading, cosmetic bug)
-    - **Low** — Suggestion or cosmetic issue
-
-### Escalation Path
-
-| Level | Team | Handles |
-|-------|------|---------|
-| **1st Line** | AI Support Assistant (you are here) | Common questions, how-to guidance, known issues, workarounds |
-| **2nd Line** | Support / Operations Team | Issue analysis, Twilio configuration, data corrections, template issues |
-| **3rd Line** | Development Team | Bug fixes, API issues, infrastructure problems |
+Report the issue using the standard incident template — see [How to Report an Incident](incident-reporting.md). Mention **Matrix Comms** as the app name and include the **conversation or campaign ID** if relevant.
 
 ---
 

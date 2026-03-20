@@ -193,47 +193,11 @@ When you encounter an issue that cannot be resolved with the information in this
 | **Data Issue** | Data appears wrong, missing, or duplicated | "My pipeline value shows zero even though I have active deals" |
 | **Feature Request** | You want something new or different | "It would be nice if I could export to PDF" |
 
-### Step 2: Gather Information
+### Step 2: Submit Using the Standard Template
 
-For bugs and data issues, collect:
+Use the incident reporting template to describe the issue, classify severity, and submit.
 
-1. **Your name and role**
-2. **Which app** (Client Connect, Meeting Hub, Comms, Portal, SSO)
-3. **Date and time** of the issue
-4. **Page or screen** where it happened
-5. **What you did** (step-by-step)
-6. **What you expected to happen**
-7. **What actually happened** (exact error text if shown)
-8. **Screenshot or screen recording** if possible
-9. **Browser and device** (e.g., "Chrome 120 on Windows 11 laptop")
-10. **Can you reproduce it?** (every time, sometimes, just once)
-11. **How many people are affected?** (just me, my team, everyone)
-
-### Step 3: Classify Severity
-
-| Severity | Criteria | Examples |
-|----------|----------|---------|
-| **Critical** | App or system completely down; cannot work at all | SSO login broken for all users, Comms cannot send any messages |
-| **High** | Major feature broken; significant work disruption | Cannot register clients, reports not loading, campaigns failing |
-| **Medium** | Feature partially broken; workaround exists | Voice input not working (can type manually), analytics chart wrong |
-| **Low** | Cosmetic issue or minor inconvenience | Button misaligned, text truncated, typo in label |
-
-### Step 4: Submit
-
-Send the incident report to the 2nd Line Support team through your established channel (email, ticket system, or Teams).
-
-### Escalation Path
-
-| Level | Team | What They Do |
-|-------|------|-------------|
-| **1st Line** | AI Support Assistant | Answer questions, provide guidance, identify known issues, suggest workarounds |
-| **2nd Line** | Support / Operations / IT | Analyze and qualify incidents, fix configurations, correct data, escalate bugs |
-| **3rd Line** | Development Team | Fix bugs, deploy patches, develop new features |
-
-**Typical resolution times:**
-- 1st Line (AI): Immediate
-- 2nd Line: Same business day for Critical/High; 1-3 days for Medium/Low
-- 3rd Line: Varies by complexity — days to weeks
+See the full guide: **[How to Report an Incident](incident-reporting.md)** — includes the 4-question template, a filled-out example, app-specific hints, severity guide, and escalation path.
 
 ---
 

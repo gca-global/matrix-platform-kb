@@ -279,32 +279,7 @@ A: Your Admin will deactivate your account in the SSO Console. Your data (client
 
 If you cannot resolve the issue using the troubleshooting steps above, submit an incident to the 2nd Line Support team.
 
-### What to Include in an Incident Report
-
-1. **Your name and role**
-2. **System:** SSO / Login / User Management
-3. **Date and time** the issue occurred
-4. **What you were trying to do** (e.g., "Log in to Client Connect", "Access Analytics page")
-5. **What happened instead** (exact error message)
-6. **Which app** were you trying to access
-7. **Login method** used (email/password or Microsoft)
-8. **Screenshot** if possible
-9. **Browser and device**
-10. **Is the issue reproducible?**
-11. **How many users are affected?** (just you, your team, everyone)
-12. **Severity:**
-    - **Critical** — No one can log in; SSO is completely down
-    - **High** — Some users cannot log in or access apps
-    - **Medium** — Individual permission or role issue
-    - **Low** — Minor inconvenience or question
-
-### Escalation Path
-
-| Level | Team | Handles |
-|-------|------|---------|
-| **1st Line** | AI Support Assistant (you are here) | Login guidance, permission questions, known issues |
-| **2nd Line** | Support / Operations / IT Team | Account issues, role assignments, AD sync, configuration |
-| **3rd Line** | Development Team | SSO bugs, OAuth flow issues, Edge Function failures |
+Report the issue using the standard incident template — see [How to Report an Incident](incident-reporting.md). Mention **SSO / Login** as the system, **which app** you were trying to access, and **how many users are affected**.
 
 ---
 

@@ -36,6 +36,7 @@ Help support analysts and IT staff with:
 | [comms.md](comms.md) | Matrix Comms — WhatsApp messaging, conversations, templates, campaigns, AI replies |
 | [platform-sso-auth.md](platform-sso-auth.md) | SSO & Authentication — login, roles, permissions, scope, SSO Console |
 | [cross-app-workflows.md](cross-app-workflows.md) | Cross-app workflows — client lifecycle, daily routines by role, data flow between apps, scenarios |
+| [incident-reporting.md](incident-reporting.md) | How to report an incident — 4-question template, severity guide, app-specific hints, escalation path |
 
 ### 2nd Line — Technical Reference
 
@@ -58,5 +59,6 @@ Help support analysts and IT staff with:
 - FAQ entries use natural questions that users actually ask.
 - Troubleshooting tables use Problem → Cause → Solution format.
 - Use `cross-app-workflows.md` when a user asks about data flow between apps, daily routines, or end-to-end client lifecycle.
+- Use `incident-reporting.md` when a user needs to report a bug, wants to know how to submit an incident, or asks about escalation.
 - Start with `platform-overview.md` for general questions; use app-specific docs for targeted queries.
 - Use `second-line-tech-reference.md` when a 2nd line analyst needs architectural context.

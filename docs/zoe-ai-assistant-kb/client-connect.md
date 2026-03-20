@@ -226,30 +226,7 @@ A: If your admin has enabled role switching for your account, click your name in
 
 If you cannot resolve the issue using the troubleshooting steps above, submit an incident to the 2nd Line Support team. Include the following information:
 
-### What to Include in an Incident Report
-
-1. **Your name and role** (e.g., "Maria Petrova, Broker")
-2. **App name:** Client Connect
-3. **Date and time** the issue occurred
-4. **Page/section** where the issue happened (e.g., "New Client form", "Client Verification dashboard")
-5. **What you were trying to do** (step by step)
-6. **What happened instead** (exact error message if any)
-7. **Screenshot** if possible
-8. **Browser and device** (e.g., "Chrome on Windows laptop", "Safari on iPhone")
-9. **Is the issue reproducible?** (Does it happen every time, or was it a one-time event?)
-10. **Severity:**
-    - **Critical** — Cannot register or verify clients at all; work is blocked
-    - **High** — A major feature is broken but there is a partial workaround
-    - **Medium** — Minor feature issue; does not block work
-    - **Low** — Cosmetic issue or suggestion
-
-### Escalation Path
-
-| Level | Team | Handles |
-|-------|------|---------|
-| **1st Line** | AI Support Assistant (you are here) | Common questions, how-to guidance, known issues, workarounds |
-| **2nd Line** | Support / Operations Team | Issue analysis, qualification, configuration fixes, data corrections |
-| **3rd Line** | Development Team | Bug fixes, new features, infrastructure issues |
+Report the issue using the standard incident template — see [How to Report an Incident](incident-reporting.md). Mention **Client Connect** as the app name.
 
 ---
 

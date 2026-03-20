@@ -278,31 +278,7 @@ A: It lets you describe a report in plain language, and the AI configures the fi
 
 If you cannot resolve the issue using the troubleshooting steps above, submit an incident to the 2nd Line Support team.
 
-### What to Include in an Incident Report
-
-1. **Your name and role** (e.g., "Nikos Papadopoulos, Broker")
-2. **App name:** Meeting Hub
-3. **Date and time** the issue occurred
-4. **Page/section** where the issue happened (e.g., "New Buyer Showing form", "Analytics", "Report Builder")
-5. **What you were trying to do** (step by step)
-6. **What happened instead** (exact error message if any)
-7. **Appointment ID** if applicable (visible in the URL when viewing an appointment)
-8. **Screenshot** if possible
-9. **Browser and device** (e.g., "Chrome on Windows", "Safari on iPad")
-10. **Is the issue reproducible?**
-11. **Severity:**
-    - **Critical** — Cannot create or view appointments at all
-    - **High** — Major feature broken (reports, analytics, voice input)
-    - **Medium** — Minor feature issue
-    - **Low** — Cosmetic issue or suggestion
-
-### Escalation Path
-
-| Level | Team | Handles |
-|-------|------|---------|
-| **1st Line** | AI Support Assistant (you are here) | Common questions, how-to, known issues, workarounds |
-| **2nd Line** | Support / Operations Team | Issue analysis, data corrections, configuration fixes |
-| **3rd Line** | Development Team | Bug fixes, feature requests, infrastructure issues |
+Report the issue using the standard incident template — see [How to Report an Incident](incident-reporting.md). Mention **Meeting Hub** as the app name and include the **Appointment ID** if the issue is about a specific appointment.
 
 ---
 

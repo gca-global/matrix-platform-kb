@@ -162,29 +162,11 @@ A: [Clear, direct answer. No jargon.]
 
 ## When to Escalate — Incident Reporting
 
-[Standard escalation section — copy from existing articles and adjust app name]
+If the user cannot resolve the issue, direct them to the standard incident template:
 
-### What to Include in an Incident Report
+> Report the issue using the standard template — see [How to Report an Incident](incident-reporting.md). Mention **[App Name]** as the app name.
 
-1. Your name and role
-2. App name: [App Name]
-3. Date and time
-4. Page/section
-5. What you were trying to do
-6. What happened instead
-7. [App-specific ID if applicable]
-8. Screenshot
-9. Browser and device
-10. Reproducible?
-11. Severity: Critical / High / Medium / Low
-
-### Escalation Path
-
-| Level | Team | Handles |
-|-------|------|---------|
-| 1st Line | AI Support Assistant | Questions, guidance, known issues, workarounds |
-| 2nd Line | Support / Operations | Analysis, qualification, config fixes, data corrections |
-| 3rd Line | Development Team | Bug fixes, features, infrastructure |
+Do **not** duplicate the template or severity guide in each app article. The centralized [incident-reporting.md](incident-reporting.md) contains the 4-question template, app-specific hints, severity guide, and escalation path.
 
 ---
 

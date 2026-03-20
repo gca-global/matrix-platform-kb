@@ -241,29 +241,7 @@ A: Your session may have expired. This happens after a period of inactivity. Log
 
 If you cannot resolve the issue using the troubleshooting steps above, submit an incident to the 2nd Line Support team.
 
-### What to Include in an Incident Report
-
-1. **Your name and role** (e.g., "Elena Christou, Agent")
-2. **App name:** Agency Portal
-3. **Date and time** the issue occurred
-4. **What you were trying to do** (e.g., "Opened the portal and tried to see my pipeline value")
-5. **What happened instead** (e.g., "Dashboard shows all zeros", "Got a blank page")
-6. **Screenshot** if possible
-7. **Browser and device** (e.g., "Chrome on Windows laptop")
-8. **Is the issue reproducible?**
-9. **Severity:**
-    - **Critical** — Cannot access the portal at all
-    - **High** — Dashboard data is wrong or major feature is broken
-    - **Medium** — Minor display issue
-    - **Low** — Cosmetic or suggestion
-
-### Escalation Path
-
-| Level | Team | Handles |
-|-------|------|---------|
-| **1st Line** | AI Support Assistant (you are here) | Common questions, how-to, known issues, workarounds |
-| **2nd Line** | Support / Operations Team | Issue analysis, permission fixes, configuration |
-| **3rd Line** | Development Team | Bug fixes, new features, infrastructure |
+Report the issue using the standard incident template — see [How to Report an Incident](incident-reporting.md). Mention **Agency Portal** as the app name.
 
 ---
 
