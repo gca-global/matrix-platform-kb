@@ -135,6 +135,6 @@ Every opportunity record has two O365-linked artifact types:
 | Artifact | Source | Storage |
 |----------|--------|---------|
 | **Attached Emails** | Broker selects emails from their Exchange inbox and attaches them to the opportunity | `opportunity_emails` table (metadata snapshot; full email remains in Exchange) |
-| **Calendar Events** | Viewings, meetings, and follow-ups created in CRM auto-sync to Outlook | `showing_appointment` and `broker_meetings` tables with `outlook_event_id` |
+| **Calendar Events** | Viewings, meetings, and follow-ups created in CRM sync to Outlook | `calendar_events` and `broker_meetings` tables with `outlook_event_id` |
 
 See [o365-exchange-integration.md](../platform/o365-exchange-integration.md) for technical details.
