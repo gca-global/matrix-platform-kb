@@ -74,7 +74,7 @@ docs/
 │   ├── mls-datamart.md              ← MLS 2.0 data pipeline & phased migration roadmap
 │   ├── new-app-auth-troubleshooting.md ← Troubleshooting new app auth (401/400/403)
 │   ├── ecosystem-architecture.md     ← Full ecosystem: channels, apps, data, AI/ML
-│   ├── app-catalog.md               ← All platform apps: purpose, users, RESO resources
+│   ├── app-catalog.md               ← All platform apps (11 live, 7 in progress, 6 planned)
 │   ├── performance.md              ← Latency targets, capacity planning, load testing
 │   ├── mobile-strategy.md           ← PWA, responsive design, offline requirements
 │   └── kb-methodology.md            ← KB design principles, versioning, contribution
@@ -148,7 +148,7 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 | Understand the Sharp Matrix platform          | `docs/platform/index.md`                          |
 | See the full ecosystem architecture           | `docs/platform/ecosystem-architecture.md`         |
 | Understand the data pipeline (MLS 2.0)        | `docs/platform/mls-datamart.md`                   |
-| Know which apps exist and what they do        | `docs/platform/app-catalog.md`                    |
+| Know which apps exist and their status        | `docs/platform/app-catalog.md`                    |
 | Understand the 2026-2028 strategy & roadmap   | `docs/vision/digital-strategy-2026-2028.md`       |
 | Understand the AI-driven sales model          | `docs/vision/ai-driven-sales-model.md`            |
 | Know the design philosophy                    | `docs/vision/core-beliefs.md`                     |

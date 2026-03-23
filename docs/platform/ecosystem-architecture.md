@@ -37,23 +37,29 @@
     └──┬──────────┬──────────┬──────────────┬──────────────┬───────┘
        │          │          │              │              │
 ┌──────┴──────────┴──────────┴──────────────┴──────────────┴───────────┐
-│              MATRIX APPS (Built by Lovable from template)             │
+│              MATRIX APPS (Built by Lovable from App Builder Template) │
 │                                                                       │
-│  CDL-Connected:                                                       │
+│  Live:                                                                │
 │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌─────────────┐ │
-│  │ Broker App   │ │ Manager App  │ │ Marketing    │ │ Client      │ │
-│  │ (Sales +     │ │ (Pipeline +  │ │ Platform     │ │ Portal      │ │
-│  │  Listings)   │ │  Kanban)     │ │              │ │             │ │
+│  │ Agency       │ │ Client       │ │ Meeting Hub  │ │ Matrix      │ │
+│  │ Portal       │ │ Connect      │ │              │ │ Comms       │ │
 │  └──────┬───────┘ └──────┬───────┘ └──────┬───────┘ └──────┬──────┘ │
 │         │                │                │                │         │
-│  Domain-Specific:                                                     │
+│  In Progress (CDL-Connected):                                         │
 │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐                  │
-│  │ HRMS         │ │ Finance App  │ │ Contact      │                  │
-│  │ (own DB)     │ │ (own DB)     │ │ Center       │                  │
+│  │ Pipeline     │ │ Contact      │ │ Integration  │                  │
+│  │ Management   │ │ Management   │ │ Management   │                  │
 │  └──────┬───────┘ └──────┬───────┘ └──────┬───────┘                  │
-│         │                │                │                           │
+│                                                                       │
+│  In Progress (Domain-Specific):                                       │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌─────────────┐ │
+│  │ HRMS         │ │ Finance      │ │ ITSM         │ │ Notification│ │
+│  │ (own DB)     │ │ Portal       │ │              │ │ Management  │ │
+│  └──────┬───────┘ └──────┬───────┘ └──────┬───────┘ └──────┬──────┘ │
+│         │                │                │                │         │
+│  Platform Services:                                                   │
 │  ┌──────┴────────────────┴────────────────┴──────────────────────┐   │
-│  │ SSO Console │ Admin Console │ BI Dashboard │ Website CMS       │   │
+│  │ SSO Console │ Website CMS │ AI Web Asst │ Zoe AI │ Blog AI    │   │
 │  └───────────────────────────────────────────────────────────────┘   │
 └──────────┬───────────────┬────────────────┬──────────────────────────┘
            │               │                │
@@ -140,12 +146,12 @@ Company-controlled digital properties.
 
 ### Matrix Apps (Application Layer)
 
-All apps are built by **Lovable** from the `matrix-apps-template`. Two categories:
+All apps are built by **Lovable** from the **App Builder Template** (`matrix-apps-template`). Two categories:
 
-| Type | Apps | Supabase Tables |
-|------|------|----------------|
-| **CDL-Connected** | Broker, Manager, Marketing, Client Portal, Listings, Website CMS | Shared RESO tables: `property`, `member`, `contacts`, `media` |
-| **Domain-Specific** | HRMS, Finance, Contact Center | Own tables: `employees`, `vacations`, `transactions`, etc. |
+| Type | Live | In Progress | Planned | Supabase Tables |
+|------|------|-------------|---------|----------------|
+| **CDL-Connected** | Agency Portal, Client Connect, Meeting Hub, Matrix Comms, Website CMS | Pipeline Mgmt, Contact Mgmt, Integration Mgmt | Broker App, Manager App, Client Portal, Marketing App | Shared RESO tables: `property`, `member`, `contacts`, `media` |
+| **Domain-Specific** | SSO Console | HRMS, Finance Portal, ITSM, Notification Mgmt | Admin Console, BI Dashboard | Own tables: `employees`, `vacations`, `transactions`, `tickets`, etc. |
 
 All apps share: SSO auth, dual-Supabase architecture, 5-level scope, CRUD permissions, shadcn/ui.
 

@@ -4,7 +4,7 @@
 > Three parallel checklists for broker, marketing, and finance roles.
 >
 > **Sharp Matrix target**: These checklists document the current manual processes that
-> the Sharp Matrix Broker App, Marketing App, and Finance App will digitize and automate.
+> the Sharp Matrix Pipeline Management, Marketing App, and Finance Portal will digitize and automate.
 > Each step maps to a workflow stage in the platform. Field names referenced here
 > correspond to RESO DD standard names — see [property-field-mapping.md](../data-models/property-field-mapping.md).
 

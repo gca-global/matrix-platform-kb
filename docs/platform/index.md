@@ -25,13 +25,16 @@ Sharp Matrix is a **multi-app platform** where every application — from broker
 
 ## Two Types of Matrix Apps
 
-| Type | CDL Usage | Example Apps |
-|------|-----------|-------------|
-| **CDL-Connected** | Reads/writes shared RESO tables (`property`, `member`, `contacts`) | Broker, Manager, Client Portal, Marketing |
-| **Domain-Specific** | Uses CDL only for auth/permissions; has own Supabase instance | HRMS, Finance, Contact Center |
+| Type | CDL Usage | Live | In Progress | Planned |
+|------|-----------|------|-------------|---------|
+| **CDL-Connected** | Reads/writes shared RESO tables (`property`, `member`, `contacts`) | Agency Portal, Client Connect, Meeting Hub, Matrix Comms, Website CMS | Pipeline Mgmt, Contact Mgmt, Integration Mgmt | Broker App, Manager App, Client Portal, Marketing App |
+| **Domain-Specific** | Uses CDL only for auth/permissions; has own Supabase instance | SSO Console | HRMS, Finance Portal, ITSM, Notification Mgmt | Admin Console, BI Dashboard |
 
 Both types share the same template patterns: dual-Supabase, SSO auth, permissions, RLS, shadcn/ui.
 See [app-template.md](app-template.md) for full technical details.
+
+**Platform infrastructure (Done):** App Builder Template, EDW + MLS Pipelines (Databricks).
+**AI services (Done):** AI Web Assistant, Zoe AI Assistant, AI Blog Generator.
 
 ## Reference Sources
 
@@ -75,10 +78,12 @@ See [app-template.md](app-template.md) for full technical details.
 
 CDL-Connected apps operate on the same RESO-named Supabase tables:
 
-1. **Broker App** writes a listing → stored in RESO `property` table
-2. **Marketing App** reads the same listing → uses the same RESO field names
-3. **Client Portal** displays the listing → renders from the same RESO data
-4. **AI Copilot** analyzes the listing → reasons over the same RESO fields
-5. **BI Dashboard** reports on the listing → aggregates from Databricks (synced from CDL)
+1. **Client Connect** registers a contact → stored in RESO `contacts` table
+2. **Meeting Hub** records an appointment → linked to the same contact
+3. **Matrix Comms** sends a WhatsApp message → conversation attached to the same contact
+4. **Pipeline Management** (in progress) tracks listings and deals → RESO `property` table
+5. **Agency Portal** aggregates stats → reads from all CDL tables
+6. **AI Web Assistant** captures leads from website → routes to CDL contacts
+7. **BI Dashboard** (planned) reports KPIs → aggregates from Databricks (synced from CDL)
 
-Domain-Specific apps (like HRMS) use their own tables but share auth, permissions, and UI framework through the SSO instance.
+Domain-Specific apps (like HRMS, Finance Portal, ITSM) use their own tables but share auth, permissions, and UI framework through the SSO instance.

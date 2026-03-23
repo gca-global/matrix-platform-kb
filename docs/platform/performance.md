@@ -23,7 +23,7 @@
 
 ## CDL Capacity
 
-- **12 apps** sharing Supabase connection pool
+- **24 apps/components** (11 live, 7 in progress, 6 planned) sharing Supabase connection pool
 - **Pro plan**: 60 direct connections + Supavisor pooling
 - **PgBouncer** for connection management
 

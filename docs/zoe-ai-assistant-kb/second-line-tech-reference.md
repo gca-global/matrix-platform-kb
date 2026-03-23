@@ -49,7 +49,7 @@ Sharp Matrix is built on three platforms:
 | Full architecture | `docs/ARCHITECTURE.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/ARCHITECTURE.md) |
 | Platform overview | `docs/platform/index.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/index.md) |
 | Ecosystem architecture | `docs/platform/ecosystem-architecture.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/ecosystem-architecture.md) |
-| App catalog (all 12 apps) | `docs/platform/app-catalog.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/app-catalog.md) |
+| App catalog (all apps & status) | `docs/platform/app-catalog.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/app-catalog.md) |
 
 ---
 

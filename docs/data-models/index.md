@@ -59,12 +59,15 @@
 ## How Apps Use the Data Layer
 
 ```
-Broker App ──┐
-Manager App ─┤
-Client Portal┤── All read/write through ──→ RESO DD Canonical Schema
-Marketing App┤                              + Platform Extensions (x_sm_*)
-Finance App ─┤
-AI Copilot ──┘
+Agency Portal ──────┐
+Client Connect ─────┤  (Live)
+Meeting Hub ────────┤
+Matrix Comms ───────┤
+Pipeline Management ┤  (In Progress)
+Contact Management ─┤── All read/write through ──→ RESO DD Canonical Schema
+Integration Mgmt ───┤                              + Platform Extensions (x_sm_*)
+Finance Portal ─────┤
+AI Services ────────┘
 ```
 
 When building any new feature:

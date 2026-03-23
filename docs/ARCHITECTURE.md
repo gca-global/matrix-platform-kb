@@ -20,8 +20,9 @@ Sharp Matrix is built on three platforms, each chosen for what it does best:
 │  matrix-apps-template → Vite + React + TypeScript + shadcn/ui       │
 ├─────────────────────────────────────────────────────────────────────┤
 │  MATRIX APPS                                                         │
-│  CDL-Connected: Broker │ Manager │ Client Portal │ Marketing         │
-│  Domain-Specific: HRMS │ Finance │ Contact Center                    │
+│  Live: Agency Portal │ Client Connect │ Meeting Hub │ Matrix Comms   │
+│  In Progress: Pipeline Mgmt │ Contact Mgmt │ HRMS │ Finance Portal  │
+│  In Progress: ITSM │ Integration Mgmt │ Notification Mgmt            │
 ├─────────────────────────────────────────────────────────────────────┤
 │  SUPABASE CDL (System of Record)                                     │
 │  ┌─────────────────────────────┐ ┌────────────────────────────────┐ │
@@ -43,10 +44,10 @@ Sharp Matrix is built on three platforms, each chosen for what it does best:
 
 ## Two Types of Matrix Apps
 
-| Type | CDL Usage | Supabase Tables | Example |
-|------|-----------|----------------|---------|
-| **CDL-Connected** | Reads/writes shared Dash-derived tables | `property`, `member`, `contacts`, `media` (Dash field names) | Broker, Manager, Client Portal |
-| **Domain-Specific** | Only uses CDL for auth/permissions | Own domain tables (e.g., `employees`, `vacations`) | HRMS, Finance |
+| Type | CDL Usage | Supabase Tables | Live | In Progress |
+|------|-----------|----------------|------|-------------|
+| **CDL-Connected** | Reads/writes shared Dash-derived tables | `property`, `member`, `contacts`, `media` (Dash field names) | Agency Portal, Client Connect, Meeting Hub, Matrix Comms | Pipeline Mgmt, Contact Mgmt, Integration Mgmt |
+| **Domain-Specific** | Only uses CDL for auth/permissions | Own domain tables (e.g., `employees`, `vacations`, `tickets`) | SSO Console | HRMS, Finance Portal, ITSM, Notification Mgmt |
 
 Both types use the same template: dual-Supabase, SSO auth, 5-level scope, CRUD permissions, shadcn/ui.
 See [app-template.md](platform/app-template.md) for full details.
