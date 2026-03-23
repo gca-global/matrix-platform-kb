@@ -1,7 +1,7 @@
 # Digital Strategy 2026-2028
 
 > Source: `vision/Sharp-Sothebys-International-Realty.pdf` (28-slide strategy deck)
-> Authors: Sergey Bobov (CDSO), Sergey Seregin (CDTO)
+> Authors: Sergey Lobov (CDSO), Sergey Seregin (CDTO)
 > Date: December 2025
 
 ## Mission
