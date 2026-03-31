@@ -1,9 +1,10 @@
 # Sharp Matrix Agency Portal — 1st Line Support Knowledge Base
 
-> **App name:** Agency Portal (Agency Hub)
+> **App name:** Matrix Agency Portal (Agency Hub)
 > **URL:** `https://intranet.sharpsir.group/agency-portal/`
 > **Purpose:** Central dashboard and app launcher for all Sharp Matrix applications. Your starting point for daily work.
 > **Users:** All Sharp Sotheby's staff — Agents, Brokers, Sales Managers, Contact Center, Staff, Admins.
+> **Note:** This app uses a header-based layout (no sidebar). Navigation is through the top header bar, Quick Access bar, and app launcher cards.
 
 ---
 
@@ -34,32 +35,29 @@ Four key metrics displayed at the top of the dashboard:
 
 | Widget | What It Shows |
 |--------|---------------|
-| **Pipeline Value** | Total value of your active deals and reservations |
+| **Pipeline Value** | Total budget value (€M) from your contacts |
 | **Approved Clients** | Number of clients with Approved status |
-| **New Clients** | Number of recently registered clients |
-| **This Week Meetings** | Number of appointments scheduled this week |
+| **New Clients** | Number of clients registered this calendar month |
+| **This Week** | Number of meetings this week (displayed as "N Meetings") |
 
 These numbers update in near real-time based on your data in Client Connect and Meeting Hub.
 
-### App Launcher
+### Applications
 
-A grid of app cards in the center of the dashboard. Click any card to open that app.
+A grid of app cards in the center of the dashboard (section title: **Applications**). Click any card to open that app.
 
-**Available apps may include:**
-- Client Connect — client registration and verification
-- Meeting Hub — appointment reports
-- Matrix Comms — WhatsApp communications
-- SSO Console — user and access management (Admin only)
-- Other apps as configured by your Admin
+**Live app tiles** are loaded automatically based on your permissions. The apps you see depend on what has been set up by your Admin.
+
+**Static "Coming Soon" tiles** are also displayed for planned features such as Listings & Pipeline, Calendar, Clients, Documents, Photography, Legal, Analytics, Finance, and Communications.
 
 You can **reorder app cards** by dragging and dropping them to your preferred layout. Your order is saved automatically.
 
 ### Quick Access Bar
 
-A shortcut bar at the top of the screen (or bottom on mobile) with icons for frequently used apps. Click an icon to jump directly to that app.
+A shortcut bar fixed at the top of the screen (on desktop) or bottom (on mobile) with icons for frequently used apps. Click an icon to jump directly to that app.
 
 To configure which apps appear in the Quick Access Bar:
-1. Click the **"More"** button in the Quick Access Bar.
+1. On desktop: click the **⋯** (three dots) icon to open the **Customize Quick Access** popover. On mobile: tap the **More** button.
 2. Toggle apps on or off.
 3. Your selection is saved automatically.
 
@@ -73,7 +71,7 @@ Shows meetings and appointments scheduled for today, so you can see your daily p
 
 ### AI Advisor
 
-A floating chat icon (usually in the bottom-right corner) that opens an AI assistant.
+A floating button with a **Sparkles (✨)** icon (bottom-right corner) that opens an AI assistant panel.
 
 **What you can ask the AI Advisor:**
 - "What's my pipeline value?"
@@ -82,7 +80,7 @@ A floating chat icon (usually in the bottom-right corner) that opens an AI assis
 - Any question about your clients, meetings, or pipeline
 
 **How to use the AI Advisor:**
-1. Click the AI chat icon.
+1. Click the floating Sparkles (✨) button.
 2. Type your question or request, or use the microphone for voice input.
 3. The AI responds with information or takes actions (e.g., opens a form, navigates to a page).
 4. You can listen to responses using the text-to-speech button.
@@ -95,7 +93,7 @@ A floating chat icon (usually in the bottom-right corner) that opens an AI assis
 
 From the dashboard, you can reach any Sharp Matrix app:
 
-- **Click an app card** in the App Launcher
+- **Click an app card** in the Applications section
 - **Click a Quick Access icon** in the shortcut bar
 - **Use the AI Advisor** — ask it to navigate you (e.g., "Open Client Connect")
 
@@ -103,19 +101,19 @@ All apps share the same login session (Single Sign-On). You do not need to log i
 
 ### Profile
 
-1. Click your avatar or name in the top-right corner.
+1. Click your avatar or name in the top-right corner of the header.
 2. Select **Profile**.
-3. View your:
-   - Account information (name, email, role)
-   - Permissions (what you can access)
-   - Groups/Teams you belong to
+3. View your profile sections (displayed as cards, not tabs):
+   - **Account Information** — name, email, role
+   - **Permissions** — what pages and actions you can access
+   - **Groups** — teams/groups you belong to (if any)
 
 ### App Permissions (Admin Only)
 
 Admins can manage which roles can access which portal pages:
 
 1. Navigate to `/admin/permissions` directly (this page is not in the user dropdown).
-2. Select a role (Broker, Office Manager, MLS Staff).
+2. Select a role (Broker, Sales Manager, Contact Center).
 3. Toggle page access on or off for each page.
 4. Click **Save**.
 
@@ -161,7 +159,7 @@ A: Pipeline Value and Client counts come from Client Connect data. Meeting count
 A: Try refreshing the page. If the numbers still seem incorrect, the underlying data may need correction in Client Connect or Meeting Hub. Contact your Admin or 2nd Line Support.
 
 **Q: I don't see any stats or recent activity.**
-A: You may not have any data yet, or your role may not have visibility to the data. Brokers see only their own data; Managers and Admins see team or company-wide data.
+A: You may not have any data yet, or your role may not have visibility to the data. Currently, stats are filtered by your own user ID — each user sees their own data.
 
 ### AI Advisor
 
@@ -169,7 +167,7 @@ A: You may not have any data yet, or your role may not have visibility to the da
 A: It can answer questions about your clients and meetings, show your pipeline, open forms, and navigate you to other apps. Think of it as a helpful assistant that knows your data.
 
 **Q: The AI Advisor is not responding.**
-A: Try refreshing the page. If you see "AI service is busy", wait a moment and try again. If the issue persists, use the apps directly — the AI Advisor is a convenience feature.
+A: Try refreshing the page. If you see "AI service is busy. Please wait.", wait a moment and try again. If the issue persists, use the apps directly — the AI Advisor is a convenience feature.
 
 **Q: Can I use voice with the AI Advisor?**
 A: Yes. Click the microphone icon, speak your question, and the AI will process it. You can also listen to responses with the speaker icon.
@@ -210,8 +208,8 @@ A: Your session may have expired. This happens after a period of inactivity. Log
 | Problem | Possible Cause | What to Do |
 |---------|---------------|------------|
 | **"Not authenticated" message** | Session expired | Log in again. |
-| **"AI service is busy"** | Too many requests or service overload | Wait 10-15 seconds and try again. |
-| **"Session expired"** | Token expired during conversation | Refresh the page and log in again. |
+| **"AI service is busy. Please wait."** | Too many requests or service overload | Wait 10-15 seconds and try again. |
+| **"Session expired"** | Your login session timed out | Refresh the page and log in again. |
 | **Voice input not working** | Microphone permission denied | Allow microphone access in browser settings. |
 | **"No speech detected"** | Microphone issue or silence | Check that your microphone is working. Speak louder. |
 | **AI gives incorrect or irrelevant answer** | AI misunderstood the question | Rephrase your question. If the issue is consistent, report it. |
@@ -220,7 +218,7 @@ A: Your session may have expired. This happens after a period of inactivity. Log
 
 | Problem | Possible Cause | What to Do |
 |---------|---------------|------------|
-| **Clicking an app opens a "Coming Soon" page** | Feature not yet built (Listings, Calendar, Clients, Documents) | These are planned features. Use the specific apps (Client Connect, Meeting Hub) instead. |
+| **Clicking an app opens a "Coming Soon" page** | Feature not yet built (Listings & Pipeline, Calendar, Clients, Documents, etc.) | These are planned features. Use the specific apps (Client Connect, Meeting Hub) instead. |
 | **"Back to Dashboard" button not working** | Browser navigation issue | Click the logo in the header, or type the URL directly. |
 
 ---
@@ -231,9 +229,9 @@ A: Your session may have expired. This happens after a period of inactivity. Log
 |-------|-----------|--------|
 | Listings, Calendar, Clients, and Documents pages show "Coming Soon" | These features are under development. Use Client Connect for clients and Meeting Hub for calendar/appointments. | Planned |
 | Some Quick Access shortcuts may not have matching pages | Clicking them leads to a 404 or blank page. Remove them from your Quick Access bar. | Known |
-| Admin Permissions page only shows Broker, Office Manager, and MLS Staff — not Agent or Staff | To set permissions for Agent or Staff roles, use the SSO Console directly. | Planned fix |
-| Stats may show data for roles with broader visibility (Managers see all, Brokers see own) | This is by design — not a bug. Your numbers reflect data within your visibility scope. | By design |
-| App card order may reset if the database is cleared | Re-arrange your cards after any major system update. | Rare |
+| Admin Permissions page only shows Broker, Sales Manager, and Contact Center — not Agent or Staff | To set permissions for Agent or Staff roles, use the SSO Console directly. | Planned fix |
+| Stats currently show only your own data (filtered by your user ID) regardless of role | This is the current implementation. Contact Admin if team-wide stats are needed. | By design |
+| App card order may reset after a system update | Re-arrange your cards after any major system update. | Rare |
 
 ---
 
@@ -250,14 +248,14 @@ Report the issue using the standard incident template — see [How to Report an 
 ### For Everyone (All Roles)
 
 1. **Open the Portal** at `https://intranet.sharpsir.group/agency-portal/` and log in.
-2. **Explore the Dashboard** — look at your stat widgets (Pipeline Value, Approved Clients, New Clients, This Week Meetings).
-3. **Open your main app** from the App Launcher:
+2. **Explore the Dashboard** — look at your stat widgets (Pipeline Value, Approved Clients, New Clients, This Week).
+3. **Open your main app** from the Applications section:
    - **Broker/Agent** → Click **Client Connect** to register clients, then **Meeting Hub** to record appointments.
    - **Contact Center** → Click **Client Connect** to verify incoming registrations.
    - **Sales Manager** → Click **Client Connect** to review flagged clients.
 4. **Set up Quick Access** — click "More" in the Quick Access bar and toggle on the apps you use most. These appear as icons for one-click access.
 5. **Rearrange app cards** — drag and drop app tiles to put your favorites first. The layout saves automatically.
-6. **Try the AI Advisor** — click the chat icon (bottom-right) and ask "What's my pipeline value?" or "Show today's agenda."
+6. **Try the AI Advisor** — click the Sparkles (✨) button (bottom-right) and ask "What's my pipeline value?" or "Show today's agenda."
 
 ### For Admins
 
@@ -284,11 +282,11 @@ Report the issue using the standard incident template — see [How to Report an 
    - Have new clients to register? → **Client Connect**
    - Have appointments to record? → **Meeting Hub**
    - Need to check messages? → **Matrix Comms**
-5. When done in any app, click "Back to SharpMatrix" in the sidebar to return to the Portal.
+5. When done in any app, click **← Back to Dashboard** in the header to return to the Portal (or use the **Hub** link in the header from non-dashboard pages).
 
 ### Workflow: Use the AI Advisor for Quick Actions
 
-1. Click the **chat icon** (bottom-right corner).
+1. Click the **Sparkles (✨) button** (bottom-right corner).
 2. **Ask a question:**
    - "How many meetings did I have this week?"
    - "What is my pipeline value?"
@@ -308,8 +306,8 @@ Report the issue using the standard incident template — see [How to Report an 
 
 - **Start every workday here** — the Portal gives you a 30-second overview of your business. Check stats, review agenda, then dive into apps.
 - **Refresh if numbers look stale** — a page refresh (F5 or pull-down on mobile) reloads all widgets with the latest data.
-- **Pipeline Value = active deals** — this includes approved clients and reservations. If it drops, check Client Connect for rejected or expired entries.
-- **Stats are role-scoped** — Brokers see only their own data; Managers and Admins see the full team. This is by design.
+- **Pipeline Value** — this shows the total budget value (€M) from your contacts. If it drops, check Client Connect for changes.
+- **Stats show your own data** — currently, all users see their own personal data on the dashboard.
 
 ### AI Advisor Power Tips
 
@@ -328,7 +326,7 @@ Report the issue using the standard incident template — see [How to Report an 
 
 ### For Managers and Admins
 
-- **Use the Portal as a team status view** — the aggregate stats show how the whole team is performing.
+- **Use the Portal as your daily status view** — check your stats, recent activity, and today's agenda at a glance.
 - **Bookmark the SSO Console** — admin functions like user management and permissions are accessed from `/sso-console/`, not from the Portal dropdown.
 - **Check the Portal once a day** — even if you spend most of your time in Client Connect or Meeting Hub, a quick Portal check gives you the big picture.
 
@@ -344,8 +342,8 @@ Report the issue using the standard incident template — see [How to Report an 
 | Rearrange app tiles | Drag and drop on the dashboard |
 | Check today's agenda | Right panel on the dashboard |
 | Check recent activity | Dashboard → Recent Activity section |
-| Ask the AI Advisor | Click the chat icon (bottom-right) |
-| Use voice with AI Advisor | Chat panel → Microphone icon |
+| Ask the AI Advisor | Click the Sparkles (✨) button (bottom-right) |
+| Use voice with AI Advisor | AI Advisor panel → Microphone icon |
 | View your profile | Top-right avatar → Profile |
 | Manage permissions (Admin) | Navigate to `/admin/permissions` directly |
 | Manage users (Admin) | SSO Console (`/sso-console/users`) |

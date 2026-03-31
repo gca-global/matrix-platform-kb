@@ -21,7 +21,7 @@ Sharp Matrix is built on three platforms, each chosen for what it does best:
 ├─────────────────────────────────────────────────────────────────────┤
 │  MATRIX APPS                                                         │
 │  Live: Agency Portal │ Client Connect │ Meeting Hub │ Matrix Comms   │
-│  In Progress: Pipeline Mgmt │ Contact Mgmt │ HRMS │ Finance Portal  │
+│  In Progress: Matrix Pipeline │ Contact Mgmt │ HRMS │ Matrix FM       │
 │  In Progress: ITSM │ Integration Mgmt │ Notification Mgmt            │
 ├─────────────────────────────────────────────────────────────────────┤
 │  SUPABASE CDL (System of Record)                                     │
@@ -46,8 +46,8 @@ Sharp Matrix is built on three platforms, each chosen for what it does best:
 
 | Type | CDL Usage | Supabase Tables | Live | In Progress |
 |------|-----------|----------------|------|-------------|
-| **CDL-Connected** | Reads/writes shared Dash-derived tables | `property`, `member`, `contacts`, `media` (Dash field names) | Agency Portal, Client Connect, Meeting Hub, Matrix Comms | Pipeline Mgmt, Contact Mgmt, Integration Mgmt |
-| **Domain-Specific** | Only uses CDL for auth/permissions | Own domain tables (e.g., `employees`, `vacations`, `tickets`) | SSO Console | HRMS, Finance Portal, ITSM, Notification Mgmt |
+| **CDL-Connected** | Reads/writes shared Dash-derived tables | `property`, `member`, `contacts`, `media` (Dash field names) | Agency Portal, Client Connect, Meeting Hub, Matrix Comms | Matrix Pipeline, Contact Mgmt, Integration Mgmt |
+| **Domain-Specific** | Only uses CDL for auth/permissions | Own domain tables (e.g., `employees`, `vacations`, `financial_entries`, `service_desk_tickets`) | SSO Console | HRMS, Matrix FM, ITSM, Notification Mgmt |
 
 Both types use the same template: dual-Supabase, SSO auth, 5-level scope, CRUD permissions, shadcn/ui.
 See [app-template.md](platform/app-template.md) for full details.
@@ -114,9 +114,12 @@ Qobrix is decommissioned. Dash flips from pull to push. Managed ingress/egress c
 
 | Name | Project ID | Role |
 |------|-----------|------|
-| Sharp Matrix SSO | `xgubaguglsnokjyudgvc` | SSO, Auth, RBAC, Tenants, AD Users |
+| Sharp Matrix SSO | `xgubaguglsnokjyudgvc` | SSO, Auth, RBAC, Tenants, AD Users, CDL shared data |
+| Matrix Pipeline | `tiuansahlsgautkjsajk` | Pipeline CRM (leads, opportunities, contacts) |
+| HRMS | `wltuhltnwhudgkkdsvsr` | HR Management (employees, vacations, performance) |
+| ITSM | `irjrcskfcyierdbefrpk` | IT Service & Asset Management (tickets, assets, licenses) |
+| Matrix FM | `retujkznogwplfrbniet` | Financial Management (reporting, budgets, planning) |
 | CY Web Site | `yugymdytplmalumtmyct` | Cyprus real estate website |
-| HRMS | `wltuhltnwhudgkkdsvsr` | HR Management System (domain-specific app) |
 | Lovable Source | `ibqheiuakfjoznqzrpfe` | Development source (read-only) |
 
 ## Strategic Markets

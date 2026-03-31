@@ -1,8 +1,21 @@
 # Sharp Matrix — 2nd Line Support Technical Reference
 
-> **Audience:** 2nd Line Support analysts, IT operations, technical staff
+> **Audience:** 2nd Line Support analysts, IT operations, technical staff ONLY
 > **Purpose:** Technology orientation and pointers to deep-dive documentation for incident qualification and resolution.
 > **Repository:** [github.com/sharpsir-group/matrix-platform-kb](https://github.com/sharpsir-group/matrix-platform-kb)
+
+---
+
+> **⚠️ ZOE AI ASSISTANT — DO NOT SERVE THIS CONTENT TO END USERS.**
+>
+> This document is for IT support staff only. It contains technical details (database tables, server functions, security policies, code references) that will confuse regular users.
+>
+> **If a regular user asks a question and this document is retrieved:**
+> - Do NOT quote or reference any content from this file.
+> - Instead, answer using the appropriate 1st-line KB article (portal.md, client-connect.md, meeting-hub.md, comms.md, pipeline.md, hrms.md, itsm.md, financial-management.md, platform-sso-auth.md).
+> - If the user's issue cannot be resolved with 1st-line articles, tell them: "This looks like it needs help from the IT team. Please submit a request in ITSM or contact your Admin."
+>
+> **Only serve this content when the user explicitly identifies themselves as IT staff, 2nd-line support, or asks a clearly technical question about infrastructure, server logs, or system internals.**
 
 ---
 
@@ -37,8 +50,12 @@ Sharp Matrix is built on three platforms:
 
 | Instance | Project ID | Purpose |
 |----------|-----------|---------|
-| **Sharp Matrix SSO** | `xgubaguglsnokjyudgvc` | SSO, authentication, user management, shared data |
+| **Sharp Matrix SSO** | `xgubaguglsnokjyudgvc` | SSO, authentication, user management, shared data (CDL) |
 | **Matrix Comms** | `ujowkipnqgtazmtdsnlm` | WhatsApp/Comms dedicated database |
+| **Matrix Pipeline** | `tiuansahlsgautkjsajk` | Pipeline CRM app database (leads, opportunities, contacts) |
+| **HRMS** | `wltuhltnwhudgkkdsvsr` | HR Management app database (employees, vacations, performance) |
+| **ITSM** | `irjrcskfcyierdbefrpk` | IT Service & Asset Management app database |
+| **Matrix FM** | `retujkznogwplfrbniet` | Financial Management app database (reporting, budgets, planning) |
 | **CY Web Site** | `yugymdytplmalumtmyct` | Cyprus real estate website |
 | **Lovable Source** | `ibqheiuakfjoznqzrpfe` | Development source (read-only) |
 
@@ -146,6 +163,26 @@ Edge Functions run on Supabase's Deno runtime. They handle OAuth, admin APIs, AI
 | `twilio-webhook` | Comms | Receive inbound WhatsApp | Webhook URL misconfiguration |
 | `templates` | Comms | WhatsApp template management | Template approval delays (WhatsApp) |
 | `campaigns` | Comms | Bulk messaging | Rate limits, invalid numbers |
+| `service-desk-tickets` | ITSM | Ticket CRUD and stats | DB connection, permission issues |
+| `incident-webhook` | ITSM | External incident ingestion | Webhook secret mismatch, payload format |
+| `vendor-logo` | ITSM | Vendor logo proxy (Clearbit/Google) | External API unavailable |
+| `lead-webhook` | Pipeline | External lead ingestion | Integration config missing in app_settings |
+| `mls-sync-orchestrator` | Pipeline | MLS data sync orchestration | MLS credentials, connection timeout |
+| `semantic-search` | Pipeline | Semantic/AI property search | Humatic AI service unavailable |
+| `parse-opportunity-info` | Pipeline | Voice/text → structured deal data | AI API key missing |
+| `date-reminders` | Pipeline | Scheduled contact date reminders | Cron scheduling, notification delivery |
+| `log-share-event` | Pipeline | Shared list access analytics | — |
+| `hrms-sync-permissions` | HRMS | SSO permission sync to HRMS DB | SSO token expired |
+| `hrms-ad-admin` | HRMS | AD sync and employee management | AD credentials, rate limits |
+| `hrms-auto-sync` | HRMS | Scheduled AD auto-sync | Service role config, AD API |
+| `employee-sync` | HRMS | Excel + AD employee sync | File format, duplicate handling |
+| `vacation-reminders` | HRMS | Vacation notification generation | — |
+| `holiday-auto-post` | HRMS | Auto-post upcoming holidays | Public holidays not configured |
+| `read-financial-entries` | Matrix FM | Read financial data | SSO token, entity permissions |
+| `save-financial-entries` | Matrix FM | Save/upsert financial entries | Submitted month locked, write permission |
+| `submit-financial-data` | Matrix FM | Submit/withdraw financial data | Permission denied (not admin/rw_global) |
+| `submission-deadlines` | Matrix FM | Deadline management | — |
+| `get-audit-log` | Matrix FM | Paginated audit log | — |
 
 ### Troubleshooting Edge Functions
 
@@ -218,6 +255,22 @@ All Supabase tables use RLS policies enforced by JWT claims. Key RLS helper func
 | `offices` | SSO | Office locations |
 | `conversations` | Comms | WhatsApp conversations |
 | `messages` | Comms | WhatsApp messages |
+| `leads` | Pipeline | Sales leads |
+| `opportunities` | Pipeline | Pipeline deals/opportunities |
+| `crm_contacts` | Pipeline | CRM contact records |
+| `pipeline_stages` | Pipeline | Configurable pipeline stage definitions |
+| `employees` | HRMS | Employee records |
+| `vacations` | HRMS | Vacation/leave requests and approvals |
+| `review_cycles` | HRMS | Performance review cycles |
+| `onboarding_checklists` | HRMS | New hire onboarding tasks |
+| `service_desk_tickets` | ITSM | IT service desk tickets |
+| `it_assets` | ITSM | IT asset inventory (CMDB) |
+| `software_assets` | ITSM | Software license records |
+| `vendors` | ITSM | IT vendor records |
+| `entities` | Matrix FM | Group entities/companies |
+| `financial_entries` | Matrix FM | Financial line item data |
+| `financial_submissions` | Matrix FM | Monthly submission status (draft/submitted) |
+| `core_allocations` | Matrix FM | CORE cost allocation percentages |
 
 ### Deep-Dive Documentation
 
@@ -294,6 +347,10 @@ All Sharp Matrix apps share the same stack:
 | Client Connect | `/client-connect/` | `/client-connect` |
 | Meeting Hub | `/meeting-hub/` | `/meeting-hub` |
 | Matrix Comms | `/comms/` | `/comms` |
+| Matrix Pipeline | `/matrix-pipeline/` | `/matrix-apps-template` (needs update) |
+| HRMS | `/matrix-hr-management/` | `/matrix-hr-management` |
+| ITSM | `/itsm/` | `/matrix-apps-template` (needs update) |
+| Matrix FM | `/matrix-fm/` | `/matrix-apps-template` (needs update) |
 | SSO Console | `/sso-console/` | `/console` |
 | SSO Login | `/sso-login/` | `/sso-login` |
 
@@ -345,10 +402,14 @@ When you receive an escalated incident, follow this decision tree:
 | User reports... | Component | Check first |
 |----------------|-----------|-------------|
 | Cannot log in | SSO / Auth | SSO Edge Functions, user account status |
-| Cannot access a page | Permissions | `app_permissions` table, user role |
+| Cannot access a page | Permissions | `app_permissions` or `role_configurations` table, user role |
 | Data not showing | Database / RLS | RLS policies, scope, tenant_id |
 | Feature not working | App / Edge Function | Edge Function logs, browser console |
 | Messages not sending | Comms / Twilio | Twilio dashboard, webhook config |
+| IT ticket not saving | ITSM Edge Functions | `service-desk-tickets` function logs, required asset validation |
+| Vacation approval stuck | HRMS workflow | `vacations` table `approval_step`, manager assignment |
+| Financial data locked | Matrix FM submission | `financial_submissions` table status, month already submitted |
+| Pipeline deal not moving | Pipeline stage rules | Required fields for stage, opportunity status |
 | AI not responding | AI Services | API key validity, external service status |
 | Slow performance | Infrastructure | Supabase dashboard, network |
 
@@ -396,6 +457,10 @@ When you receive an escalated incident, follow this decision tree:
 | Knowledge Base (GitHub) | [github.com/sharpsir-group/matrix-platform-kb](https://github.com/sharpsir-group/matrix-platform-kb) |
 | Supabase Dashboard (SSO) | `https://supabase.com/dashboard/project/xgubaguglsnokjyudgvc` |
 | Supabase Dashboard (Comms) | `https://supabase.com/dashboard/project/ujowkipnqgtazmtdsnlm` |
+| Supabase Dashboard (Pipeline) | `https://supabase.com/dashboard/project/tiuansahlsgautkjsajk` |
+| Supabase Dashboard (HRMS) | `https://supabase.com/dashboard/project/wltuhltnwhudgkkdsvsr` |
+| Supabase Dashboard (ITSM) | `https://supabase.com/dashboard/project/irjrcskfcyierdbefrpk` |
+| Supabase Dashboard (Matrix FM) | `https://supabase.com/dashboard/project/retujkznogwplfrbniet` |
 | SSO Console | `https://intranet.sharpsir.group/sso-console/` |
 | Agency Portal | `https://intranet.sharpsir.group/agency-portal/` |
 | Full KB Index | [docs/INDEX.md](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/INDEX.md) |

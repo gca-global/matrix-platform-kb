@@ -103,6 +103,10 @@ RAG-optimized support documentation for the Zoe AI assistant — 1st line suppor
 | [zoe-ai-assistant-kb/client-connect.md](zoe-ai-assistant-kb/client-connect.md) | Client Connect — registration, verification, MLS duplicate check, approval workflow |
 | [zoe-ai-assistant-kb/meeting-hub.md](zoe-ai-assistant-kb/meeting-hub.md) | Meeting Hub — appointments, buyer/seller/tenant/landlord forms, analytics, reports |
 | [zoe-ai-assistant-kb/comms.md](zoe-ai-assistant-kb/comms.md) | Matrix Comms — WhatsApp messaging, conversations, templates, campaigns, AI replies |
+| [zoe-ai-assistant-kb/pipeline.md](zoe-ai-assistant-kb/pipeline.md) | Matrix Pipeline — leads, deal pipeline, contacts, MLS data, M365 email/calendar, call center |
+| [zoe-ai-assistant-kb/hrms.md](zoe-ai-assistant-kb/hrms.md) | Matrix HR Management — employee directory, vacations, onboarding/offboarding, performance, documents |
+| [zoe-ai-assistant-kb/itsm.md](zoe-ai-assistant-kb/itsm.md) | ITSM — IT service desk, assets, software licenses, vendors, projects, budgets |
+| [zoe-ai-assistant-kb/financial-management.md](zoe-ai-assistant-kb/financial-management.md) | Matrix Financial Management — monthly/annual reporting, budgeting, planning, CORE allocation |
 | [zoe-ai-assistant-kb/platform-sso-auth.md](zoe-ai-assistant-kb/platform-sso-auth.md) | SSO & Auth — login, roles, permissions, scope, SSO Console, user management |
 | [zoe-ai-assistant-kb/second-line-tech-reference.md](zoe-ai-assistant-kb/second-line-tech-reference.md) | 2nd Line Support — technology overview, architecture, links to deep-dive docs |
 | [zoe-ai-assistant-kb/kb-generation-guide.md](zoe-ai-assistant-kb/kb-generation-guide.md) | How to generate a support KB article for any new Matrix app |

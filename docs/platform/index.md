@@ -27,8 +27,8 @@ Sharp Matrix is a **multi-app platform** where every application — from broker
 
 | Type | CDL Usage | Live | In Progress | Planned |
 |------|-----------|------|-------------|---------|
-| **CDL-Connected** | Reads/writes shared RESO tables (`property`, `member`, `contacts`) | Agency Portal, Client Connect, Meeting Hub, Matrix Comms, Website CMS | Pipeline Mgmt, Contact Mgmt, Integration Mgmt | Broker App, Manager App, Client Portal, Marketing App |
-| **Domain-Specific** | Uses CDL only for auth/permissions; has own Supabase instance | SSO Console | HRMS, Finance Portal, ITSM, Notification Mgmt | Admin Console, BI Dashboard |
+| **CDL-Connected** | Reads/writes shared RESO tables (`property`, `member`, `contacts`) | Agency Portal, Client Connect, Meeting Hub, Matrix Comms, Website CMS | Matrix Pipeline, Contact Mgmt, Integration Mgmt | Broker App, Manager App, Client Portal, Marketing App |
+| **Domain-Specific** | Uses CDL only for auth/permissions; has own Supabase instance | SSO Console | HRMS, Matrix FM, ITSM, Notification Mgmt | Admin Console, BI Dashboard |
 
 Both types share the same template patterns: dual-Supabase, SSO auth, permissions, RLS, shadcn/ui.
 See [app-template.md](app-template.md) for full technical details.
@@ -81,9 +81,13 @@ CDL-Connected apps operate on the same RESO-named Supabase tables:
 1. **Client Connect** registers a contact → stored in RESO `contacts` table
 2. **Meeting Hub** records an appointment → linked to the same contact
 3. **Matrix Comms** sends a WhatsApp message → conversation attached to the same contact
-4. **Pipeline Management** (in progress) tracks listings and deals → RESO `property` table
+4. **Matrix Pipeline** (in progress) manages leads, deals, contacts → CDL `property`, `contacts` tables + own `opportunities`, `leads` tables
 5. **Agency Portal** aggregates stats → reads from all CDL tables
 6. **AI Web Assistant** captures leads from website → routes to CDL contacts
 7. **BI Dashboard** (planned) reports KPIs → aggregates from Databricks (synced from CDL)
 
-Domain-Specific apps (like HRMS, Finance Portal, ITSM) use their own tables but share auth, permissions, and UI framework through the SSO instance.
+Domain-Specific apps use their own Supabase instances but share auth, permissions, and UI framework through the SSO instance:
+- **HRMS** (`wltuhltnwhudgkkdsvsr`) — employee records, vacations, onboarding, performance, documents
+- **Matrix FM** (`retujkznogwplfrbniet`) — financial reporting, budgeting, planning, CORE allocation
+- **ITSM** (`irjrcskfcyierdbefrpk`) — IT service desk, assets, software licenses, vendors, projects
+- **Notification Management** (in progress) — centralized notification engine for all apps

@@ -63,10 +63,10 @@ Agency Portal ──────┐
 Client Connect ─────┤  (Live)
 Meeting Hub ────────┤
 Matrix Comms ───────┤
-Pipeline Management ┤  (In Progress)
+Matrix Pipeline ────┤  (In Progress)
 Contact Management ─┤── All read/write through ──→ RESO DD Canonical Schema
 Integration Mgmt ───┤                              + Platform Extensions (x_sm_*)
-Finance Portal ─────┤
+Matrix FM ──────────┤
 AI Services ────────┘
 ```
 

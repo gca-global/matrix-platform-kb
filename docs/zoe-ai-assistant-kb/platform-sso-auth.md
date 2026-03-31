@@ -3,14 +3,14 @@
 > **System name:** Sharp Matrix SSO (Single Sign-On) and Platform Foundation
 > **SSO Login URL:** `https://intranet.sharpsir.group/sso-login/`
 > **SSO Console URL:** `https://intranet.sharpsir.group/sso-console/` (Admin only)
-> **Purpose:** Centralized authentication, user management, roles, permissions, and security for all Sharp Matrix applications.
+> **Purpose:** The shared login system, user management, roles, permissions, and security for all Sharp Matrix applications.
 > **Users:** All Sharp Sotheby's staff (for login); Admins and IT (for management).
 
 ---
 
 ## What Is Sharp Matrix SSO?
 
-Sharp Matrix SSO is the Single Sign-On system that manages user authentication across all Sharp Matrix applications. When you log in to any app (Client Connect, Meeting Hub, Comms, Agency Portal), you are actually logging in through the SSO system. This means:
+Sharp Matrix SSO (Single Sign-On) is the shared login system for all Sharp Matrix applications. When you log in to any app (Client Connect, Meeting Hub, Communications, Agency Portal), you are using the same login system. This means:
 
 - **One login for all apps** — You sign in once and can access any app you are authorized for without logging in again.
 - **Centralized user management** — Admins manage all user accounts, roles, and permissions in one place (the SSO Console).
@@ -38,9 +38,9 @@ Sharp Matrix SSO is the Single Sign-On system that manages user authentication a
 
 ### Session Expiration
 
-- Your login session lasts until you sign out or it expires (typically after extended inactivity).
-- If your session expires, you will be redirected to the login page next time you open an app.
-- Your data is never lost due to session expiration — just log in again.
+- Your login lasts until you sign out or until you have been inactive for a long time.
+- If your login expires, you will be taken to the login page next time you open an app.
+- Your data is never lost when this happens — just log in again and continue where you left off.
 
 ---
 
@@ -105,16 +105,16 @@ Beyond page access, some actions are also permission-controlled:
 - Running campaigns
 - Accessing admin settings
 
-### CRUD Permissions
+### What You Can Do With Data
 
-CRUD stands for Create, Read, Update, Delete. Your role defines which of these operations you can perform:
+Your role defines which actions you can perform with records in each app:
 
-- **C** = Create new records
-- **R** = Read (view) records
-- **U** = Update (edit) records
-- **D** = Delete records
+- **Create** — add new records (clients, appointments, etc.)
+- **View** — see existing records
+- **Edit** — change existing records
+- **Delete** — remove records
 
-For example, a Broker might have "CRU" (create, read, update but not delete), while an Admin has full "CRUD".
+For example, a Broker might be able to create, view, and edit records, but not delete them. An Admin can do everything.
 
 ---
 
@@ -144,8 +144,8 @@ The SSO Console is the administration interface for managing the Sharp Matrix pl
 | **Role Management** | View and manage roles (predefined roles; custom roles may be added) |
 | **Team Management** | Create teams, add/remove members |
 | **App Management** | View registered applications, manage app access |
-| **Permission Management** | Assign global permissions (rw_global, rw_org, rw_own) |
-| **Microsoft AD Integration** | Configure Microsoft Azure AD sync for automatic user provisioning |
+| **Permission Management** | Control what data each role can see and edit |
+| **Microsoft Account Sync** | Set up automatic employee account creation from the company Microsoft directory |
 | **Password Reset** | Reset a user's password |
 | **Activity Log** | View user login and activity history |
 
@@ -202,7 +202,7 @@ A: Your Microsoft account was authenticated, but your Sharp Matrix account may n
 A: No. Once you log in through SSO, you are authenticated for all Sharp Matrix apps. Just click the app in the Agency Portal.
 
 **Q: My session keeps expiring too quickly.**
-A: Sessions expire after a period of inactivity (typically 1 hour for the access token, refreshed automatically). If your session keeps expiring unexpectedly, try clearing your browser cookies and logging in again. Contact IT if it persists.
+A: Your login expires after a period of inactivity (usually about an hour, but the system tries to keep you logged in automatically). If you keep getting logged out unexpectedly, close your browser completely, reopen it, and log in again. Contact IT if it keeps happening.
 
 ### Roles and Permissions
 
@@ -239,17 +239,17 @@ A: Your Admin will deactivate your account in the SSO Console. Your data (client
 |---------|---------------|------------|
 | **"Invalid credentials"** | Wrong email or password | Re-enter carefully. Contact Admin for password reset. |
 | **Login page does not load** | Network issue or server down | Check your internet. Try again in a few minutes. If the problem persists, contact IT. |
-| **Login redirects in a loop** | Cookie or session conflict | Clear browser cookies for `intranet.sharpsir.group` and `supabase.co`. Close and reopen the browser. |
-| **Microsoft login fails** | AD integration issue or account not linked | Contact IT. Your Microsoft account may not be synced with Sharp Matrix. |
+| **Login redirects in a loop** | Stored login data conflict | Press Ctrl+Shift+Delete, select "Cookies and other site data", click Clear. Then close and reopen your browser, and try logging in again. |
+| **Microsoft login fails** | Your Microsoft account may not be linked to Sharp Matrix | Contact IT. Your company Microsoft account may need to be connected to Sharp Matrix. |
 | **"You do not have access" after login** | Account exists but no role/permissions | Contact Admin to assign role and app access. |
-| **"Session expired" while using an app** | Access token expired and could not refresh | Log in again. This is normal after long inactivity. |
+| **"Session expired" while using an app** | Your login timed out due to inactivity | Log in again. This is normal after being inactive for a while. |
 
 ### Permission Issues
 
 | Problem | Possible Cause | What to Do |
 |---------|---------------|------------|
 | **"Access Denied" on a page** | Your role does not have permission | Contact Admin to enable the page for your role. |
-| **Cannot create/edit/delete records** | CRUD restrictions on your role | Your role may only have Read access. Contact Admin if you need write access. |
+| **Cannot create/edit/delete records** | Your role does not allow this action | Your role may only allow viewing data. Contact your Admin if you need to be able to create or edit records. |
 | **Data is missing (cannot see other users' records)** | Scope limitation (Self scope) | This is by design. You see only data within your scope. Ask a Manager or Admin for a report if you need broader data. |
 
 ### SSO Console Issues (Admin)
@@ -259,7 +259,7 @@ A: Your Admin will deactivate your account in the SSO Console. Your data (client
 | **Cannot access SSO Console** | Not an Admin role | Only Org Admin, System Admin, and IT Support roles can access the Console. |
 | **User changes not taking effect** | User has not re-logged | Changes take effect on the user's next login. Ask them to log out and log back in. |
 | **Cannot assign a role** | Role does not exist | Check the available roles in the Console. Custom roles may need to be created. |
-| **AD sync not updating users** | Microsoft AD sync configuration issue | Check the AD integration settings. Verify the sync schedule. Contact IT if needed. |
+| **Employee accounts not syncing from Microsoft** | Company directory sync settings need adjustment | Check the employee sync settings in the SSO Console. Contact IT if needed. |
 
 ---
 

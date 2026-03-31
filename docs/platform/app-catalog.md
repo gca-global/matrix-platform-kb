@@ -25,11 +25,11 @@
 
 | # | Component | KB Name | Type | Primary Users |
 |---|-----------|---------|------|---------------|
-| 12 | Pipeline Management | **Pipeline Management** | App (CDL-Connected) | Brokers, Sales Managers, Listing Coordinators |
+| 12 | Pipeline Management | **Matrix Pipeline** | App (CDL-Connected) | Brokers, Sales Managers, Call Center Staff |
 | 13 | Contact Management | **Contact Management** | App (CDL-Connected) | Brokers, Sales Managers, Contact Center |
-| 14 | IT Service Management | **ITSM** | App (Domain-Specific) | IT, All internal users |
-| 15 | Human Resources Management | **HRMS** | App (Domain-Specific) | HR, Employees, Managers |
-| 16 | Finance Portal | **Finance Portal** | App (Domain-Specific) | Finance Team, Brokers |
+| 14 | IT Service & Asset Management | **ITSM** | App (Domain-Specific) | IT Staff, All internal users |
+| 15 | Human Resources Management | **HRMS** | App (Domain-Specific) | All Employees, HR, Managers, Finance |
+| 16 | Financial Management | **Matrix FM** | App (Domain-Specific) | Finance Team, Entity Managers, Senior Mgmt |
 | 17 | Integration Management for External MLS and Portals | **Integration Management** | App / Service | Data Engineers, Admins |
 | 18 | Notification Management | **Notification Management** | App / Service | All internal users, Admins |
 
@@ -177,23 +177,30 @@
 
 ## App Details — In Progress
 
-### Pipeline Management
+### Pipeline Management (Matrix Pipeline)
 **Status**: In Progress
-**Users**: Brokers, Sales Managers, Listing Coordinators, Marketing, Finance
+**Users**: Brokers, Sales Managers, Call Center Staff, Listing Coordinators, Marketing, Finance
 **RESO Resources**: Property, Media, Contacts, Member, Office
 **App Type**: CDL-Connected
+**Supabase Instance**: `tiuansahlsgautkjsajk`
+**Repo**: `/home/bitnami/matrix-pipeline`
 **Key Features** (target):
-- Seller-side listing pipeline (8 stages: Prospect → Closed)
-- Buyer-side sales pipeline (8 stages: Qualification → Closed)
-- Multi-step conditional listing forms (Apartment/House/Land/Development)
-- Dual Kanban views for managers
-- Shared contact registry with role-based linking
-- Document compliance with conditional mandatory rules
-- Media management with Dash category alignment
-- 9-stage status pipeline with immutable audit trail
-- Portal syndication tracking (SIR Global, Cyprus Website, MLS Feed)
-- Role-based checklists (Broker, Marketing, Finance steps)
-- Price history with approval workflow
+- Lead capture and management with webhook ingestion from external sources
+- Sales pipeline with Kanban board and drag-and-drop stage management
+- Opportunity detail with contacts, properties, tasks, timeline, and email linking
+- Opportunity review workflow for manager oversight
+- Comprehensive contact management with relationship tracking
+- Microsoft 365 email integration (read inbox, link emails to deals)
+- Microsoft 365 calendar integration (events linked to opportunities)
+- MLS property data browsing and linking to pipeline opportunities
+- Call center module with contact verification and MLS duplicate checking
+- Shared property lists via public token links for client sharing
+- AI-powered data entry: voice transcription and opportunity info parsing
+- Semantic search and Humatic AI matching
+- Date-based reminders for contact follow-ups
+- Notification system with real-time updates
+- CDL write proxy for app settings and role configurations
+- Role-based permissions via `role_configurations` (app_id: `smpipeline`)
 - Revenue forecasting with probability-weighted calculations
 
 ### Contact Management
@@ -210,42 +217,75 @@
 - Contact deduplication across sources
 - Segmentation and tagging
 
-### ITSM (IT Service Management)
+### ITSM (IT Service & Asset Management)
 **Status**: In Progress
-**Users**: IT staff, All internal users (ticket submitters)
+**Users**: IT staff, IT Admins, All internal users (ticket submitters)
 **App Type**: Domain-Specific (own Supabase instance)
+**Supabase Instance**: `irjrcskfcyierdbefrpk`
+**Repo**: `/home/bitnami/itsm-2-1`
 **Key Features** (target):
-- IT service request management
-- Incident tracking and resolution
-- Asset management
-- Knowledge base for IT support
-- SLA tracking and reporting
+- Service desk with ticket lifecycle (Incident, Service Request, Change, Problem)
+- SLA tracking with priority-based breach time
+- Multi-level agent assignment (L1/L2/L3 escalation)
+- CMDB: hardware/software asset registry with classification tree and bill of materials
+- Software asset and license management with seat allocation
+- Vendor and IT project management
+- IT budget management with categories
+- Analytics dashboards (service desk + IT operations)
+- IT architecture documentation
+- Microsoft 365 integration (Graph API)
+- Active Directory employee sync
+- External incident ingestion via webhook
+- MLS integration settings (inherited from template)
+- Role-based permissions via `app_permissions` (app_id: `itsm`)
 
 ### HRMS (Human Resources Management)
 **Status**: In Progress
-**Users**: HR team, Employees, Managers
+**Users**: All employees, Managers, HR team, Finance team, Admins
 **App Type**: Domain-Specific (own Supabase instance)
 **Supabase Instance**: `wltuhltnwhudgkkdsvsr`
 **Repo**: `/home/bitnami/matrix-hrms`
 **Key Features** (target):
-- Employee directory and profiles
-- Vacation and leave management
-- Onboarding workflows
-- Document management
-- Organizational structure
+- Employee directory with public profiles and search
+- Interactive organizational structure chart
+- Multi-step vacation approval workflow (Employee → Manager → HR → Finance)
+- Leave balance tracking and policy management
+- Onboarding and offboarding checklists with templates
+- Internal change requests (transfers, promotions) with approval
+- Performance review cycles with goals and participant assignment
+- Compensation history tracking
+- Document management with templates, distribution, and signing
+- Employee profile edit requests with HR approval
+- Internal social feed (posts, comments, reactions, holiday auto-posts)
+- Active Directory sync and employee linking
+- Excel bulk upload for employee data
+- Public holiday management by country
+- HR reports (headcount, turnover, leave statistics)
+- Finance module for vacation payroll processing
+- Role-based permissions via `sso_role_configurations` (app_id: `hrms`)
 - 25+ domain tables, 30+ hooks
 
-### Finance Portal
+### Financial Management (Matrix FM)
 **Status**: In Progress
-**Users**: Finance team, Brokers
-**RESO Resources**: Property (transaction data), Member
+**Users**: Finance team, Entity Managers, Country Managers, Senior Management, CFO/Board
 **App Type**: Domain-Specific (own Supabase instance)
+**Supabase Instance**: `retujkznogwplfrbniet`
+**Repo**: `/home/bitnami/matrix-fm`
 **Key Features** (target):
-- Commission calculation and tracking
-- Invoice generation
-- Payment follow-up
-- Agreement registry
-- Financial reporting
+- Monthly financial reporting (P&L, Cash Flow, Balance Sheet, Working Capital)
+- Annual reporting with full-year actuals
+- Multi-year annual planning (Y-1 Actual, Y Budget, Y+1/Y+2/Y+3 Budget)
+- CORE cost allocation by entity and year
+- Submission workflow (Draft → Submitted → Withdrawn)
+- Submission deadline management and tracking
+- Data entry progress monitoring across entities
+- Financial analytics and variance analysis
+- Clipboard paste from Excel into financial grids
+- Audit log with export capability
+- Built-in bilingual documentation (EN/RU)
+- Test data generation for development
+- Edge Function-backed reads/writes with SSO JWT validation
+- Role-based permissions via `app_permissions` (app_id: `matrix-financial-management`)
 
 ### Integration Management (External MLS and Portals)
 **Status**: In Progress

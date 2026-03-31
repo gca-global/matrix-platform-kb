@@ -43,10 +43,10 @@ If you have never logged in before, your account must first be created by an Adm
 2. Fill in the required fields:
    - **First Name** (required)
    - **Phone** (required — minimum 8 digits; 10 for Russian numbers). Phone numbers are automatically normalized (spaces, dashes, and parentheses removed) before saving to ensure accurate duplicate checking.
-   - **Lead Origin** (required — how the lead was obtained; if "Agent Referral", "Marketing", or "Other" is selected, a comment is also required)
+   - **Lead Source** (required — how the lead was obtained: Broker, Agent, Marketing, or Other; if Agent, Marketing, or Other is selected, additional details are required)
    - **Client Intent** (required — select at least one: Buyer, Seller, Tenant, Landlord)
-3. Optionally fill in: Last Name, Company, Email, Budget range, Rent Budget.
-4. Click **Submit**.
+3. Optionally fill in: Last Name, Organisation, Email, Budget range, Rent Budget, Notes.
+4. Click **Submit Client**.
 5. The registration appears in the Contact Center queue with status **Pending**.
 
 ### Voice Input (AI Form Fill)
@@ -64,7 +64,7 @@ Brokers can dictate client details instead of typing:
 ### Viewing Your Requests (Brokers)
 
 - Go to **My Requests** (visible on the Broker page).
-- You can see the status of each client you registered: Pending, In Review, Approved, Rejected, or RFI (Request for Information).
+- You can see the status of each client you registered: **Pending**, **Review**, **Approved**, **Rejected**, or **Information Requested**.
 - Click any client card to see full details and comments from the verification team.
 
 ### Verifying Clients (Contact Center / MLS Staff)
@@ -76,10 +76,10 @@ Brokers can dictate client details instead of typing:
 5. Take one of these actions:
    - **Approve** — client is confirmed and moves to Active status.
    - **Reject** — client is declined (provide a reason in the comments).
-   - **Return (RFI)** — send back to the broker for more information.
-   - **Flag for Review** — escalate to a Sales Manager. You must select a specific Sales Manager from the dropdown before sending.
+   - **Return to Broker** — send back to the broker for more information (shown as "Information Requested" / "Returned" in lists).
+   - **Request Sales Manager Review** — escalate to a Sales Manager. You must assign a specific Sales Manager from the dropdown before sending.
 6. Add comments as needed — the broker will see them.
-7. Optionally set **WT Responsible** (the responsible person) and mark **CRM Entered** when added to the CRM.
+7. Optionally set **WT Responsible** (the responsible person) and mark **Entered in CRM** when added to the CRM.
 
 ### MLS Contacts Search (Contact Center)
 
@@ -92,14 +92,14 @@ Brokers can dictate client details instead of typing:
 1. Go to **Review Requests** in the sidebar.
 2. You see clients that were flagged by the Contact Center.
 3. Open a client, review the details and comments.
-4. Approve, Reject, or Return (RFI) the client.
+4. Review and take action. For clients in Review status, the Sales Manager may **Request CC Clarification** to send back to the Contact Center, or process directly.
 5. You can assign yourself or another Sales Manager as responsible.
 
 ### Admin Functions
 
 - **Admin Dashboard** — overview of all clients across all statuses.
-- **Settings** — configure Voice API key, MLS API settings, multi-language input, dashboard URL.
-- **Permissions** — set which roles can access which pages.
+- **Settings** — configure Voice Commands, Multi-Language Input, Dashboard URL, Passkeys, and MLS Integration (connection to the shared property database). Settings are displayed as stacked sections, not tabs.
+- **App Permissions** — accessible from the user menu (not the sidebar), set which roles can access which pages.
 
 **Note:** User and role management is handled in the SSO Management Console (`/sso-console/`), not within Client Connect.
 
@@ -107,13 +107,13 @@ Brokers can dictate client details instead of typing:
 
 ## Client Statuses Explained
 
-| Status | Meaning | Who Sets It |
-|--------|---------|-------------|
-| **Pending** (Prospect) | Newly registered, waiting for verification | System (on submit) |
-| **In Review** (PendingReview) | Being reviewed by Contact Center | Contact Center |
-| **RFI** (Request for Information) | Returned to broker — more info needed | Contact Center or Sales Manager |
-| **Approved** (Active/Client) | Verified and accepted | Contact Center or Sales Manager |
-| **Rejected** (Do Not Contact) | Declined | Contact Center or Sales Manager |
+| Status | Display Label | Meaning | Who Sets It |
+|--------|--------------|---------|-------------|
+| **pending** | Pending | Newly registered, waiting for verification | System (on submit) |
+| **review** | Review | Flagged for Sales Manager review | Contact Center |
+| **rfi** | Information Requested / Returned | Returned to broker — more info needed | Contact Center or Sales Manager |
+| **approved** | Approved | Verified and accepted | Contact Center or Sales Manager |
+| **rejected** | Rejected | Declined | Contact Center or Sales Manager |
 
 ---
 
@@ -133,7 +133,7 @@ A: Your manager or an Admin must create your account in the SSO Console and assi
 ### Registration
 
 **Q: Which fields are required to register a client?**
-A: First Name, Phone, Lead Origin, and at least one Client Intent (Buyer/Seller/Tenant/Landlord).
+A: First Name, Phone, Lead Source, and at least one Client Intent (Buyer/Seller/Tenant/Landlord).
 
 **Q: Can I register a client by voice?**
 A: Yes. Tap the microphone button, speak the client details, and the AI will fill the form. Review and submit.
@@ -144,8 +144,8 @@ A: English, Russian, German, and Greek.
 **Q: I submitted a client but made a mistake. Can I edit it?**
 A: Once submitted, only the Contact Center or Admin can edit client details. Contact them to request a correction.
 
-**Q: What does "Lead Origin" mean?**
-A: It records how the client lead was obtained (e.g., Walk-in, Phone Call, Website, Agent Referral, Marketing Campaign, Other).
+**Q: What does "Lead Source" mean?**
+A: It records how the client lead was obtained. Options are: Broker, Agent, Marketing, or Other. If you select Agent, Marketing, or Other, you must provide additional details.
 
 ### Verification
 
@@ -163,7 +163,7 @@ A: Contact Center staff and Sales Managers with the appropriate permissions.
 **Q: What does "WT Responsible" mean?**
 A: It indicates the person responsible for following up with this client in the Wealth Track system.
 
-**Q: What does "CRM Entered" mean?**
+**Q: What does "Entered in CRM" mean?**
 A: A checkbox indicating that the client has been entered into the CRM system.
 
 **Q: How do I switch roles (Act As)?**
@@ -187,7 +187,7 @@ A: If your admin has enabled role switching for your account, click your name in
 
 | Problem | Possible Cause | What to Do |
 |---------|---------------|------------|
-| **"Please complete all required fields" error** | One or more required fields are empty | Check that First Name, Phone, Lead Origin, and Client Intent are all filled in. |
+| **"Please complete all required fields" error** | One or more required fields are empty | Check that First Name, Phone, Lead Source, and Client Intent are all filled in. |
 | **Phone number rejected** | Too few digits | Enter at least 8 digits (10 for Russian numbers). You may include spaces or dashes for readability — they are automatically removed before saving. |
 | **Form does not submit** | Network issue or you are offline | Check your internet connection. If offline, the system will queue the submission and sync when you reconnect. |
 | **Voice recording does not start** | Microphone permission denied | Allow microphone access in your browser settings (usually a popup or padlock icon in the address bar). |
@@ -199,7 +199,7 @@ A: If your admin has enabled role switching for your account, click your name in
 | Problem | Possible Cause | What to Do |
 |---------|---------------|------------|
 | **Client list is empty** | No clients match your filters, or data has not loaded | Clear filters and refresh. If still empty, check that you are looking at the correct tab. |
-| **MLS duplicate check returns no results** | MLS API may be temporarily unavailable | Try again in a few minutes. If persistent, report to Admin (MLS API configuration issue). |
+| **MLS duplicate check returns no results** | The connection to the property database may be temporarily down | Try again in a few minutes. If it keeps happening, report to your Admin. |
 | **Notifications not appearing** | Real-time connection issue | Refresh the page. Notifications rely on a live connection to the server. |
 
 ### Offline Mode

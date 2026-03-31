@@ -54,6 +54,10 @@ Some apps have additional details that help the support team:
 | **Meeting Hub** | Appointment ID (visible in the URL when viewing an appointment) |
 | **Matrix Comms** | Conversation ID or Campaign ID |
 | **Agency Portal** | Which dashboard widget or app card is affected |
+| **Matrix Pipeline** | Opportunity ID or Lead ID, pipeline stage, contact name if relevant |
+| **HRMS** | Employee name, vacation request ID, approval step where the issue occurred |
+| **ITSM** | Service desk ticket ID, asset name or ID, the service type (Incident/Service Request/Change/Problem) |
+| **Matrix FM** | Entity name, reporting period (month/year), statement type (P&L/CF/BS/WC), submission status |
 | **SSO / Login** | Login method used (email/password or Microsoft), which app you were trying to access, how many users are affected |
 
 ---

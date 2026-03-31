@@ -14,7 +14,7 @@ Every component in the Sharp Matrix platform deploys via a different mechanism:
 | SSO Edge Functions (17) | Supabase (Deno) | GitHub Actions → `supabase functions deploy` | Push to `main` in `matrix-platform-foundation` |
 | SSO Console | Apache htdocs | Manual build → rsync | Manual |
 | SSO Login Page | Apache htdocs | Manual build → rsync | Manual |
-| Matrix Apps (HRMS, etc.) | Apache htdocs / Lovable | Manual build → rsync, or Lovable Publish | Manual |
+| Matrix Apps (HRMS, Pipeline, ITSM, FM, etc.) | Apache htdocs / Lovable | Manual build → rsync, or Lovable Publish | Manual |
 | RESO Web API | PM2 (FastAPI) | `pm2 restart mls2-api` | Manual |
 | MLS 2.0 ETL Pipeline | Databricks | `databricks runs submit` via cron | Cron (3:00 AM MSK daily) |
 | Database Migrations | Supabase | `supabase db push` or MCP `apply_migration` | Manual |

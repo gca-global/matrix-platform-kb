@@ -34,8 +34,12 @@ Help support analysts and IT staff with:
 | [client-connect.md](client-connect.md) | Client Connect — registration, verification, MLS duplicates, approval workflow |
 | [meeting-hub.md](meeting-hub.md) | Meeting Hub — appointments, 4 meeting types, analytics, reports |
 | [comms.md](comms.md) | Matrix Comms — WhatsApp messaging, conversations, templates, campaigns, AI replies |
+| [pipeline.md](pipeline.md) | Matrix Pipeline — leads, deal pipeline, contacts, MLS data, M365 email/calendar, call center |
+| [hrms.md](hrms.md) | Matrix HR Management — employee directory, vacations, onboarding/offboarding, performance, documents |
+| [itsm.md](itsm.md) | ITSM — IT service desk, assets, software licenses, vendors, projects, budgets |
+| [financial-management.md](financial-management.md) | Matrix Financial Management — monthly/annual reporting, budgeting, planning, CORE allocation |
 | [platform-sso-auth.md](platform-sso-auth.md) | SSO & Authentication — login, roles, permissions, scope, SSO Console |
-| [cross-app-workflows.md](cross-app-workflows.md) | Cross-app workflows — client lifecycle, daily routines by role, data flow between apps, scenarios |
+| [cross-app-workflows.md](cross-app-workflows.md) | Cross-app workflows — client lifecycle, daily routines by role, data flow between apps, scenarios (includes Pipeline, HRMS, ITSM, Matrix FM) |
 | [incident-reporting.md](incident-reporting.md) | How to report an incident — 4-question template, severity guide, app-specific hints, escalation path |
 
 ### 2nd Line — Technical Reference

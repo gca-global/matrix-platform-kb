@@ -11,10 +11,66 @@ Each app in the Sharp Matrix platform should have a dedicated support KB article
 The articles must be:
 
 - **Self-contained** — each article covers one app completely without requiring external references.
-- **Non-technical** — written for business users (brokers, agents, managers), not developers.
+- **Non-technical** — written for everyday business users, not developers or IT professionals.
 - **RAG-optimized** — clear section headers, natural-language FAQ, structured troubleshooting tables.
 - **Actionable** — step-by-step instructions, not abstract descriptions.
 - **Consistent** — all articles follow the same structure for predictable retrieval.
+
+---
+
+## Who Is the Reader? (Zoe's Audience)
+
+Zoe's primary users are **real estate professionals, office staff, and support employees** who:
+
+- Have **limited technology knowledge** — they know how to use a web browser, email, and basic office tools, but they are not "tech-savvy."
+- Think in terms of **tasks and outcomes**, not systems and data flows.
+- Do **not** understand developer or IT terminology (API, JWT, WebSocket, RLS, Edge Function, database, migration, token, webhook, payload, endpoint, schema, CRUD, etc.).
+- May be **frustrated or confused** when something doesn't work — Zoe's tone must be calm, patient, and reassuring.
+- Speak **English or Russian** — keep sentences short and simple for easier comprehension and translation.
+
+### Persona Examples
+
+| User | Typical question | What they DON'T know |
+|------|-----------------|---------------------|
+| Broker (age 45) | "How do I register a new client?" | What an API is, what a database is, what SSO means technically |
+| Office assistant | "My page shows an error, what do I do?" | How to open browser console, what a token is, what cache means |
+| Sales Manager | "Where do I see my team's numbers?" | What scope or RLS means, what a query is |
+| HR coordinator | "How do I approve a vacation?" | What an approval chain is called technically, what AD sync means |
+| Finance analyst | "How do I enter last month's numbers?" | What a data layer is, what an Edge Function does |
+
+### Golden Rule
+
+**If a sentence would confuse a 50-year-old real estate broker who only uses their phone and email, rewrite it.**
+
+---
+
+## Tone and Language Rules
+
+### DO:
+- Use **plain, everyday language**: "click", "type", "choose", "go to", "you will see"
+- Explain **what the user sees on screen**, not what happens behind the scenes
+- Use **friendly, patient tone** — assume the user is asking for the first time
+- Say **"the system"** or **"the app"** instead of naming technical components
+- Describe errors as **"something went wrong"** before giving specific guidance
+- Use **analogies** when helpful: "Think of it as your inbox for IT requests"
+- Write **short sentences** — aim for 15-20 words per sentence maximum
+- Define abbreviations **on first use** in each article: "MLS (the shared property database)"
+
+### DON'T:
+- Use developer terms: ~~API~~, ~~endpoint~~, ~~webhook~~, ~~token~~, ~~JWT~~, ~~RLS~~, ~~Edge Function~~, ~~schema~~, ~~migration~~, ~~CRUD~~, ~~payload~~, ~~query~~, ~~WebSocket~~, ~~cache~~ (say "temporary saved data" or "stored page data" instead)
+- Reference database tables, column names, or code files
+- Mention Supabase, Deno, React, TypeScript, or any framework
+- Use IT jargon without explanation: ~~SLA~~, ~~CMDB~~, ~~AD sync~~, ~~OAuth~~, ~~PKCE~~
+- Assume the user knows what "clearing browser cache" means — give exact steps instead
+- Use passive voice: say "Click Save" not "The record will be saved"
+- Use conditional/subjunctive mood: say "Click Save" not "You would click Save"
+
+### When Technical Terms Are Unavoidable
+
+Some terms appear in the UI itself (e.g., "CMDB" is a sidebar label in ITSM). In these cases:
+1. Use the term as it appears in the app
+2. Immediately explain it in plain language: "CMDB (the list of all IT equipment and software in the company)"
+3. Never assume the user already knows what it means
 
 ---
 
@@ -184,19 +240,27 @@ Do **not** duplicate the template or severity guide in each app article. The cen
 
 Before finalizing, verify:
 
+### Structure
 - [ ] **Header block** has app name, URL, purpose, and users.
 - [ ] **"What Is"** section uses no technical jargon.
-- [ ] **"How to Access"** includes SSO login steps.
+- [ ] **"How to Access"** includes login steps (say "log in with your company email" — avoid "SSO" as a user-facing term).
 - [ ] **Roles table** lists every role the app supports.
 - [ ] **Features** section has step-by-step instructions (numbered) for every major workflow.
 - [ ] **FAQ** has 10+ entries covering common user questions.
 - [ ] **Troubleshooting** has 10+ entries in Problem/Cause/Solution table format.
 - [ ] **Known Issues** table exists (even if empty — "No known issues at this time").
-- [ ] **Escalation** section has incident report template and severity definitions.
+- [ ] **Escalation** section points to the incident reporting guide.
 - [ ] **Quick Reference Card** covers all main tasks.
-- [ ] No code snippets, API references, or developer terminology.
-- [ ] Statuses and domain terms are explained in plain language.
 - [ ] File is saved as `docs/zoe-ai-assistant-kb/[app-slug].md`.
+
+### Language (Critical — read every sentence aloud)
+- [ ] No code snippets, API references, or developer terminology anywhere.
+- [ ] No mention of: Supabase, Edge Functions, JWT, tokens, RLS, webhooks, schemas, CRUD, WebSocket, Deno, React.
+- [ ] Statuses and domain terms are explained in plain language on first use.
+- [ ] "Clearing cache" is replaced with specific browser steps (e.g., "Press Ctrl+Shift+Delete, select 'Cached images and files', and click Clear").
+- [ ] Every instruction uses active voice and starts with a verb: "Click", "Go to", "Type", "Select".
+- [ ] Sentences average 15-20 words. No paragraphs longer than 4 sentences.
+- [ ] The article passes the "50-year-old broker" test — would they understand every sentence without help?
 
 ---
 
@@ -234,7 +298,15 @@ Thoroughly explore the repository at /home/bitnami/[app-directory]. Gather:
 
 Then write a support KB article following the template in
 docs/zoe-ai-assistant-kb/kb-generation-guide.md.
-Write for business users with zero technical knowledge.
+
+CRITICAL — Audience and tone:
+- Write for real estate professionals with LIMITED technology knowledge.
+- They know how to use a browser and email. That's it.
+- Never use developer terms (API, token, cache, webhook, database, schema, CRUD, RLS, JWT, Edge Function, WebSocket, etc.).
+- Explain everything as "what you see on screen" and "what to click".
+- If a technical term appears in the UI (like "CMDB"), always explain it in parentheses on first use.
+- Keep sentences short (15-20 words). Use active voice. Start instructions with verbs.
+- The article must pass the "50-year-old broker" test — would they understand every word?
 Use the exact section structure from the template.
 ```
 
@@ -258,6 +330,10 @@ Use the exact section structure from the template.
 | Client Connect | `client-connect.md` | Yes |
 | Meeting Hub | `meeting-hub.md` | Yes |
 | Matrix Comms | `comms.md` | Yes |
+| Matrix Pipeline | `pipeline.md` | Yes |
+| Matrix HR Management | `hrms.md` | Yes |
+| ITSM | `itsm.md` | Yes |
+| Matrix Financial Management | `financial-management.md` | Yes |
 | SSO & Auth | `platform-sso-auth.md` | Yes |
 | Platform Overview | `platform-overview.md` | Yes |
 | 2nd Line Tech Reference | `second-line-tech-reference.md` | Yes |

@@ -13,10 +13,10 @@ Before building or modifying ANY Matrix App:
 
 ### Step 2: Determine App Type
 
-| Question | → App Type | Example Repo | Read Next |
-|----------|-----------|-------------|-----------|
-| Does the app work with listings, contacts, agents, showings? | **CDL-Connected** | `/home/bitnami/matrix-mls` | Steps 3a-3c below |
-| Does the app have its own domain (HR, finance, operations)? | **Domain-Specific** | `/home/bitnami/matrix-hrms` | Step 3d below |
+| Question | → App Type | Example Repos | Read Next |
+|----------|-----------|--------------|-----------|
+| Does the app work with listings, contacts, agents, showings? | **CDL-Connected** | `/home/bitnami/matrix-pipeline`, `/home/bitnami/matrix-mls` | Steps 3a-3c below |
+| Does the app have its own domain (HR, finance, IT ops)? | **Domain-Specific** | `/home/bitnami/matrix-hrms`, `/home/bitnami/matrix-fm`, `/home/bitnami/itsm-2-1` | Step 3d below |
 
 ### Step 3a (CDL-Connected): Read the CDL Schema
 → `docs/data-models/mls-cdl-schema.md` — 18 MLS tables, RLS patterns, CDL connection architecture, key files
@@ -35,8 +35,10 @@ The `oauth-token` Edge Function persists role claims (`active_scope`, `active_cr
 Writes to CDL go through an Edge Function proxy on the app's Supabase instance:
 `cdlWrite.ts` → `cdl-write` Edge Function → CDL PostgREST
 
-### Step 3d (Domain-Specific): Read the HRMS Example
-→ `/home/bitnami/matrix-hrms` — 25+ domain tables, 30+ hooks, Domain-Specific patterns
+### Step 3d (Domain-Specific): Read Domain-Specific Examples
+→ `/home/bitnami/matrix-hrms` — HRMS: 25+ domain tables, 30+ hooks, multi-step vacation approval
+→ `/home/bitnami/matrix-fm` — Financial Management: reporting, planning, Edge Function-backed reads/writes
+→ `/home/bitnami/itsm-2-1` — ITSM: service desk tickets, CMDB, software assets, webhook ingestion
 
 ### Step 4: Read Relevant Business Processes
 → `docs/business-processes/listing-pipeline.md` — seller-side (8 stages)
@@ -132,6 +134,10 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 - `docs/zoe-ai-assistant-kb/client-connect.md` — Client Connect
 - `docs/zoe-ai-assistant-kb/meeting-hub.md` — Meeting Hub
 - `docs/zoe-ai-assistant-kb/comms.md` — Matrix Comms (WhatsApp)
+- `docs/zoe-ai-assistant-kb/pipeline.md` — Matrix Pipeline (CRM, leads, deals, contacts)
+- `docs/zoe-ai-assistant-kb/hrms.md` — Matrix HR Management (employees, vacations, onboarding)
+- `docs/zoe-ai-assistant-kb/itsm.md` — ITSM (IT service desk, assets, licenses)
+- `docs/zoe-ai-assistant-kb/financial-management.md` — Matrix Financial Management (reporting, budgets, planning)
 - `docs/zoe-ai-assistant-kb/platform-sso-auth.md` — SSO, Login, Roles, Permissions
 
 **2nd Line (technical):**
@@ -186,7 +192,10 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 | Repo / File | Format | Contents |
 |------------|--------|---------|
 | `/home/bitnami/matrix-apps-template` | React/TS | App template: dual-Supabase, SSO, permissions, RLS, UI |
-| `/home/bitnami/matrix-hrms` | React/TS | Example app: HRMS (25+ tables, 30+ hooks, domain-specific) |
+| `/home/bitnami/matrix-hrms` | React/TS | HRMS app (Domain-Specific, 25+ tables, vacations, onboarding, performance) |
+| `/home/bitnami/matrix-pipeline` | React/TS | Pipeline CRM app (CDL-Connected, leads, opportunities, contacts, M365) |
+| `/home/bitnami/itsm-2-1` | React/TS | ITSM app (Domain-Specific, service desk, CMDB, software assets, vendors) |
+| `/home/bitnami/matrix-fm` | React/TS | Financial Management app (Domain-Specific, reporting, budgets, planning, CORE) |
 | `/home/bitnami/matrix-mls` | React/TS | MLS Listing Management app (CDL-Connected, 18 tables on CDL) |
 | `/home/bitnami/mls_2_0` | Python/FastAPI | MLS 2.0 pipeline: Databricks ETL + RESO Web API |
 | `vision/Sharp-Sothebys-International-Realty.pdf` | PDF | Full 28-slide digital strategy 2026-2028 |

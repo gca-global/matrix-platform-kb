@@ -75,17 +75,20 @@ Apps send `Authorization: Bearer <token>` with the SSO JWT obtained from the OAu
 
 ## Per-App API Dependency Map
 
-| App | OAuth | switch-role | check-permissions | Admin | Other |
-|-----|-------|-------------|-------------------|-------|-------|
-| All Matrix Apps | oauth-authorize, oauth-token, oauth-userinfo | ✓ | ✓ | — | — |
-| SSO Console | All OAuth | ✓ | ✓ | admin-* (all 8) | register-app |
-| HRMS | All OAuth | ✓ | ✓ | — | sync-ad-users |
-| MLS | All OAuth | ✓ | ✓ | — | check-mls-duplicate |
-| Broker App | All OAuth | ✓ | ✓ | — | email-messages, email-attach, calendar-events, calendar-sync |
-| Manager App | All OAuth | ✓ | ✓ | — | email-messages (read-only on team), calendar-events (team view) |
-| Client Portal, etc. | All OAuth | ✓ | ✓ | — | — |
+| App | OAuth | switch-role | check-permissions | Admin | Other SSO Functions | App-Specific Edge Functions |
+|-----|-------|-------------|-------------------|-------|--------------------|-----------------------------|
+| All Matrix Apps | oauth-authorize, oauth-token, oauth-userinfo | ✓ | ✓ | — | — | — |
+| SSO Console | All OAuth | ✓ | ✓ | admin-* (all 8) | register-app | — |
+| HRMS | All OAuth | ✓ | ✓ | admin-roles | sync-ad-users | hrms-sync-permissions, hrms-ad-admin, hrms-auto-sync, employee-sync, vacation-reminders, holiday-auto-post |
+| Matrix Pipeline | All OAuth | ✓ | ✓ | admin-roles | check-mls-duplicate | lead-webhook, mls-sync-orchestrator, mls-fetch, ms-graph-proxy, semantic-search, parse-opportunity-info, transcribe-audio, date-reminders, log-share-event, cdl-write |
+| ITSM | All OAuth | ✓ | ✓ | admin-roles | — | service-desk-tickets, incident-webhook, vendor-logo, ms-graph-proxy, mls-fetch |
+| Matrix FM | All OAuth | ✓ | ✓ | admin-roles | — | read-financial-entries, save-financial-entries, submit-financial-data, submission-deadlines, get-submission-progress, get-audit-log, export-audit-log, get-recent-updates, generate-test-data, delete-test-data, sso-oauth |
+| MLS | All OAuth | ✓ | ✓ | — | check-mls-duplicate | — |
+| Broker App | All OAuth | ✓ | ✓ | — | email-messages, email-attach, calendar-events, calendar-sync | — |
+| Manager App | All OAuth | ✓ | ✓ | — | email-messages (read-only on team), calendar-events (team view) | — |
+| Client Portal, etc. | All OAuth | ✓ | ✓ | — | — | — |
 
-**Common subset**: Every app calls `oauth-authorize`, `oauth-token`, `switch-role`, `check-permissions`. Admin apps add `admin-*` functions. HRMS adds `sync-ad-users` for AD sync. Broker and Manager apps add O365 integration functions for Exchange email and calendar.
+**Common subset**: Every app calls `oauth-authorize`, `oauth-token`, `switch-role`, `check-permissions`. Admin apps add `admin-*` functions. Apps with AD sync add `sync-ad-users`. Pipeline and Broker apps add O365 integration functions. Each app deploys its own Edge Functions to its app-specific Supabase instance (see app-catalog.md for project IDs).
 
 ## Cross-Reference
 

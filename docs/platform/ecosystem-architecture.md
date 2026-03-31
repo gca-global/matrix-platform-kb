@@ -53,8 +53,8 @@
 │                                                                       │
 │  In Progress (Domain-Specific):                                       │
 │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌─────────────┐ │
-│  │ HRMS         │ │ Finance      │ │ ITSM         │ │ Notification│ │
-│  │ (own DB)     │ │ Portal       │ │              │ │ Management  │ │
+│  │ HRMS         │ │ Matrix FM    │ │ ITSM         │ │ Notification│ │
+│  │ (own DB)     │ │ (Financial)  │ │ (IT Service) │ │ Management  │ │
 │  └──────┬───────┘ └──────┬───────┘ └──────┬───────┘ └──────┬──────┘ │
 │         │                │                │                │         │
 │  Platform Services:                                                   │
@@ -150,8 +150,8 @@ All apps are built by **Lovable** from the **App Builder Template** (`matrix-app
 
 | Type | Live | In Progress | Planned | Supabase Tables |
 |------|------|-------------|---------|----------------|
-| **CDL-Connected** | Agency Portal, Client Connect, Meeting Hub, Matrix Comms, Website CMS | Pipeline Mgmt, Contact Mgmt, Integration Mgmt | Broker App, Manager App, Client Portal, Marketing App | Shared RESO tables: `property`, `member`, `contacts`, `media` |
-| **Domain-Specific** | SSO Console | HRMS, Finance Portal, ITSM, Notification Mgmt | Admin Console, BI Dashboard | Own tables: `employees`, `vacations`, `transactions`, `tickets`, etc. |
+| **CDL-Connected** | Agency Portal, Client Connect, Meeting Hub, Matrix Comms, Website CMS | Matrix Pipeline, Contact Mgmt, Integration Mgmt | Broker App, Manager App, Client Portal, Marketing App | Shared RESO tables: `property`, `member`, `contacts`, `media` |
+| **Domain-Specific** | SSO Console | HRMS, Matrix FM, ITSM, Notification Mgmt | Admin Console, BI Dashboard | Own tables: `employees`, `vacations`, `financial_entries`, `service_desk_tickets`, etc. |
 
 All apps share: SSO auth, dual-Supabase architecture, 5-level scope, CRUD permissions, shadcn/ui.
 

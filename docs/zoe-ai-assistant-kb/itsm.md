@@ -1,0 +1,425 @@
+# Sharp Matrix ITSM — 1st Line Support Knowledge Base
+
+> **App name:** ITSM (IT Service & Asset Management)
+> **URL:** `https://intranet.sharpsir.group/itsm/`
+> **Purpose:** Submit and track IT service requests, manage IT assets, software licenses, vendors, projects, and budgets.
+> **Users:** All internal users (ticket submitters), IT Staff, IT Admins
+
+---
+
+## What Is ITSM?
+
+ITSM is the IT service and asset management app for Sharp Sotheby's International Realty. It provides a service desk where you can submit and track IT requests (like "my laptop is broken" or "I need new software"). It also includes a list of all company IT equipment (called CMDB), and tools for managing vendors, projects, budgets, and IT documentation. All employees can submit requests; IT staff handle everything else.
+
+---
+
+## How to Access ITSM
+
+1. Open your browser and go to `https://intranet.sharpsir.group/itsm/`.
+2. You will be redirected to the Sharp Matrix SSO login page.
+3. Sign in with your company email and password, or use "Sign in with Microsoft".
+4. After login you land on the **Home Dashboard**.
+
+If you cannot log in, your account may not have access to ITSM. Contact your Admin or IT department.
+
+---
+
+## User Roles and What They Can Do
+
+| Role | Home Page | What They Can Do |
+|------|-----------|-----------------|
+| **Employee (any role)** | Home Dashboard | Submit IT service requests, view own request status, receive notifications |
+| **IT Staff** | Home Dashboard | All employee capabilities plus: manage service desk queue, assign tickets, manage assets, vendors, projects, software assets, budgets |
+| **IT Admin** | Home Dashboard | Full access: all IT staff capabilities plus settings, permissions, equipment list configuration, employee directory sync, integrations |
+
+---
+
+## Main Features
+
+### Home Dashboard
+
+The home page shows:
+- **Service desk statistics** — open tickets, response time targets, recent activity
+- **Quick actions** — create a new ticket, view your requests
+- **KPI widgets** — asset counts, project status, budget summaries
+
+### My Requests (For All Users)
+
+This is where you submit and track your own IT requests.
+
+1. Click **My Requests** in the sidebar.
+2. To create a new request, click **New Request**.
+3. Fill in the form:
+   - **Title** (minimum 5 characters) — describe the issue briefly
+   - **Description** (minimum 10 characters) — explain the problem or request in detail
+   - **Priority** — Low, Medium, High, or Urgent
+   - **Service Type** — Incident, Service Request, Change Request, or Problem
+   - **Related Asset** — you must select at least one IT asset related to the request
+4. Click **Submit**.
+5. Your request appears in the My Requests list with its current status.
+
+### Service Desk Queue (IT Staff)
+
+The service desk queue shows all submitted tickets.
+
+1. Click **SD Queue** in the sidebar.
+2. Browse or filter tickets by priority, status, service type, or assignee.
+3. Click a ticket to view details, add comments, change status, or reassign.
+4. **Assign** a ticket to an IT staff member (L1, L2, or L3 support level).
+5. **Escalate** a ticket to a higher support level if needed.
+6. **Resolve** a ticket when the issue is fixed.
+
+### Service Desk Analytics (IT Staff)
+
+1. Click **SD Analytics** in the sidebar.
+2. View charts and metrics: ticket volumes, resolution times, whether response targets are being met, breakdown by type and priority.
+
+### IT Assets (CMDB — the list of all company IT equipment and software)
+
+Manage all IT hardware and infrastructure.
+
+1. Click **Assets** in the sidebar.
+2. Browse, search, or filter the asset list by domain, status, or classification.
+3. Click **New Asset** to register a new item (computer, server, network device, etc.).
+4. Click any asset to view details including:
+   - **Bill of Materials** — components and parts
+   - **Linked vendors** — suppliers and service providers
+   - **Related tickets** — service desk tickets for this asset
+5. Export the asset list for reporting.
+
+### Software Assets & Licenses
+
+Track software purchases, license seats, and allocations.
+
+1. Click **Software Assets** in the sidebar.
+2. View all software licenses with seat counts (purchased vs. allocated).
+3. Click **New Software Asset** to register a new license.
+4. **Allocate** seats to users, devices, or offices.
+5. Monitor expiring licenses via sidebar badge notifications.
+
+### Vendors
+
+Manage IT vendors and service providers.
+
+1. Click **Vendors** in the sidebar.
+2. Add, edit, or view vendor details including contact information and risk rating.
+3. Link vendors to assets and projects.
+
+### Projects
+
+Track IT projects and their resource allocations.
+
+1. Click **Projects** in the sidebar.
+2. Create and manage IT projects with timelines and budgets.
+3. Link assets and vendors to projects.
+
+### Budget
+
+Manage IT department budgets.
+
+1. Click **Budget** in the sidebar.
+2. View budget categories and spending.
+3. Add new budget categories and track expenditures.
+
+### Analytics
+
+View IT department analytics and reports.
+
+1. Click **Analytics** in the sidebar.
+2. Browse dashboards with KPIs across assets, tickets, projects, and budget.
+
+### IT Architecture
+
+View IT architecture documentation and diagrams.
+
+1. Click **IT Architecture** in the sidebar.
+2. Browse architecture documentation and visual diagrams.
+
+### Documentation
+
+Access IT documentation and reference materials.
+
+1. Click **Documentation** in the sidebar.
+2. Browse available documentation topics.
+
+### Settings (IT Admin)
+
+Admins can configure:
+
+- **General** — app-wide settings (theme, language)
+- **Permissions** — role-based page and action access for each user role
+- **Data Model** — data model configuration
+- **Data Layer** — data source configuration
+- **MLS** — MLS integration settings
+- **AI Providers** — AI and speech recognition settings (set up by Admin for AI-powered form filling)
+- **Agency Hub URL** — return URL for the Back to Agency Hub link
+- **Microsoft 365** — Microsoft 365 integration (connect/disconnect)
+- **AD Sync** — sync employee information from the company Microsoft directory
+- **CMDB** — equipment list: classification tree and categories
+- **Classifications** — asset classification management
+- **Webhooks** — set up automatic import of IT issues from external monitoring systems (Admin only)
+
+---
+
+## Zoe Can Help You Submit IT Requests
+
+You don't need to figure out ITSM alone. Zoe (the AI assistant) can help you create a well-structured IT request:
+
+### How It Works
+1. **Tell Zoe your problem.** For example: "My laptop screen is flickering" or "I need access to Matrix FM."
+2. **Zoe suggests the right request type:**
+   - Something broken? → **Incident**
+   - Need something new? → **Service Request**
+   - Planned IT change? → **Change Request**
+   - Recurring issue? → **Problem**
+3. **Zoe suggests a priority:**
+   - Total outage for many users → **Urgent**
+   - Can't do your job, no workaround → **High**
+   - Inconvenient but can work around it → **Medium**
+   - Minor or cosmetic → **Low**
+4. **Zoe reminds you what to include:** app name, error message, screenshot, and which asset is affected.
+5. **Zoe directs you to ITSM:** Go to My Requests → New Request, fill in the form, and submit.
+
+### Common Requests Zoe Can Help You Draft
+
+| Your situation | Service Type | Priority | Example title |
+|---------------|-------------|----------|---------------|
+| App shows blank page | Incident | High | "Meeting Hub loads blank page after login" |
+| Need a new laptop | Service Request | Medium | "Request new laptop for new hire Maria P." |
+| Software license needed | Service Request | Medium | "Need Adobe Acrobat Pro license for contracts" |
+| Email not working | Incident | High | "Outlook emails not syncing in Matrix Pipeline" |
+| Printer broken | Incident | Medium | "Office printer on 3rd floor not printing" |
+| Request VPN access | Service Request | Low | "VPN access for remote work" |
+| Recurring app crash | Problem | Medium | "Client Connect crashes weekly during bulk export" |
+| Server upgrade planned | Change Request | Low | "Upgrade staging server to latest OS" |
+
+---
+
+## Use Cases: When Do I Use ITSM?
+
+### For All Employees
+
+**Use Case 1: "An app is not working"**
+You open Meeting Hub and see a blank page or an error message.
+1. Try refreshing the page. If that does not help, press Ctrl+Shift+Delete, select "Cached images and files", and click Clear.
+2. If the problem persists, ask Zoe for help.
+3. If Zoe can't fix it, go to ITSM → My Requests → New Request.
+4. Title: "Meeting Hub shows blank page after login"
+5. Description: Explain what you see, what browser you use, and attach a screenshot.
+6. Service Type: Incident. Priority: High (if you can't work).
+7. Related Asset: Select your laptop or the relevant system.
+
+**Use Case 2: "I need new equipment or software"**
+You need a new monitor or a software license.
+1. Go to ITSM → My Requests → New Request.
+2. Title: "Request second monitor for desk 4B"
+3. Service Type: Service Request. Priority: Low or Medium.
+4. Description: Explain why you need it and any specifications.
+
+**Use Case 3: "I can't access an app or page"**
+You see "Access Denied" or "Page Not Available."
+1. First, check with your Admin — it may be a permissions issue.
+2. If it's a technical error (not permissions), submit an ITSM request.
+3. Service Type: Incident. Include the exact URL and error message.
+
+### For IT Staff
+
+**Use Case 4: "Managing the ticket queue"**
+1. Start your day by opening SD Queue and sorting by priority (Urgent first).
+2. Assign unassigned tickets to team members based on expertise.
+3. Update ticket status as you work: Open → In Progress → Resolved → Closed.
+4. Use comments to document your troubleshooting steps — this helps if the ticket is escalated.
+
+**Use Case 5: "Tracking software license compliance"**
+1. Go to Software Assets to see all licenses.
+2. Check "Purchased" vs "Allocated" seat counts.
+3. Set up alerts for expiring licenses (check the sidebar badge).
+4. When an employee leaves, deallocate their seats promptly.
+
+---
+
+## Best Practices for IT Requests
+
+### For Requesters (All Employees)
+- **Be specific in your title** — "Email not working" is too vague. Try "Outlook not syncing in Matrix Pipeline since Monday."
+- **Always include**: what you were doing, what happened, what you expected, and a screenshot.
+- **Select the right service type** — Incidents are for broken things. Service Requests are for new things.
+- **Choose priority honestly** — Urgent is for outages affecting many people. Don't mark a cosmetic issue as Urgent.
+- **Select a related asset** — this is required. If unsure, describe the device in your description and IT will fix the link.
+- **Check before submitting** — search My Requests to see if you already have an open ticket for the same issue.
+
+### For IT Staff
+- **Respond to Urgent tickets within minutes** — acknowledge receipt even if you can't resolve immediately.
+- **Document everything in comments** — future tickets for the same asset will benefit from your notes.
+- **Link tickets to assets** — this builds a history for each asset that helps with replacement decisions.
+- **Use the analytics dashboard** — track response times and identify recurring problems that need deeper investigation.
+
+---
+
+## Service Request Types
+
+| Type | When to Use |
+|------|-------------|
+| **Incident** | Something is broken or not working (e.g., "My email is down") |
+| **Service Request** | You need something new or a change to existing service (e.g., "I need a new laptop") |
+| **Change Request** | A planned change to IT infrastructure (e.g., "Upgrade server memory") |
+| **Problem** | A recurring issue that needs root cause investigation |
+
+## Ticket Priorities and Response Times
+
+| Priority | Response Time | Description |
+|----------|--------------|-------------|
+| **Urgent** | Immediate | Total service outage affecting many users |
+| **High** | Within hours | Major feature broken, no workaround |
+| **Medium** | Within 1 business day | Feature partially broken, workaround exists |
+| **Low** | Within 3 business days | Minor issue, cosmetic, or enhancement |
+
+## Ticket Statuses
+
+| Status | Meaning |
+|--------|---------|
+| **Open** | Ticket has been submitted and is awaiting assignment |
+| **In Progress** | An IT staff member is working on it |
+| **Pending** | Ticket is waiting for a response (from user, vendor, or third party) |
+| **Resolved** | The issue has been fixed |
+| **Closed** | Ticket is complete and archived |
+
+---
+
+## Languages
+
+ITSM supports two interface languages:
+- **English**
+- **Russian**
+
+To switch language, click the language toggle (globe icon) in the sidebar footer.
+
+---
+
+## Frequently Asked Questions
+
+### General
+
+**Q: What is ITSM?**
+A: It is the Sharp Matrix app for managing IT service requests, assets, software licenses, vendors, projects, and budgets. All employees can submit IT requests through it.
+
+**Q: Who can see my service request?**
+A: IT staff can see all service requests. Other employees can only see their own requests.
+
+**Q: How do I know the status of my request?**
+A: Go to My Requests in the sidebar. Your request shows its current status (Open, In Progress, Pending, Resolved, Closed).
+
+**Q: How long will it take to resolve my request?**
+A: Resolution time depends on the priority level. Urgent issues are addressed immediately; low-priority items may take up to 3 business days. You will receive notifications when your ticket is updated.
+
+### Submitting Requests
+
+**Q: Why do I need to select a related asset?**
+A: Every service request must be linked to at least one IT asset so the IT team knows which equipment or system is affected.
+
+**Q: I don't know which asset to select. What should I do?**
+A: Ask your manager or IT department which asset is related to your issue. If unsure, describe the equipment in your request description and IT staff will link the correct asset.
+
+**Q: Can I update my request after submitting?**
+A: You can add comments to your request. For major changes, contact IT staff directly.
+
+**Q: Can I cancel a request?**
+A: Contact IT staff to close or cancel a request.
+
+### Assets and Licenses
+
+**Q: How do I check if a software license is available?**
+A: Go to Software Assets in the sidebar and check the available seats column for the software you need.
+
+**Q: Who manages the asset inventory?**
+A: IT staff and IT Admins manage the asset inventory. Contact IT if you notice missing or incorrect asset information.
+
+**Q: Can I see assets assigned to me?**
+A: IT staff can search and filter assets. Your assigned devices should be visible in your related tickets and software allocations.
+
+### Notifications
+
+**Q: How will I know when my ticket is updated?**
+A: You receive in-app notifications when your request status changes or when IT staff adds a comment. Check the notification badge in the sidebar.
+
+**Q: I'm not getting notifications. What should I do?**
+A: Refresh the page. If notifications still don't appear, contact your Admin.
+
+---
+
+## Troubleshooting
+
+### Login and Access
+
+| Problem | Possible Cause | What to Do |
+|---------|---------------|------------|
+| **Cannot log in** | Wrong credentials or no account | Check email/password. Contact Admin if you don't have an account. |
+| **"Page Not Available" on a page** | Your role doesn't have permission | Contact your Admin to check your role and ITSM permissions. |
+| **Session expired unexpectedly** | Your login session timed out | Log in again. This is normal after periods of inactivity. |
+
+### Service Desk
+
+| Problem | Possible Cause | What to Do |
+|---------|---------------|------------|
+| **Cannot create a ticket** | Missing required fields or no asset selected | Fill in all required fields (title ≥5 chars, description ≥10 chars) and select at least one related asset. |
+| **Ticket not appearing in My Requests** | Page not refreshed | Refresh the page. If the ticket still doesn't appear, try logging out and back in. |
+| **Cannot add a comment** | Ticket may be closed or you lack permission | Check the ticket status. Contact IT if you believe this is an error. |
+| **Badge shows "breached" next to a ticket** | The response time target was not met for this ticket | This is informational. IT staff are aware and working on it. |
+
+### Assets
+
+| Problem | Possible Cause | What to Do |
+|---------|---------------|------------|
+| **Cannot find an asset** | Asset not registered or different name | Try different search terms. Contact IT staff to verify the asset exists in the system. |
+| **Asset details are incorrect** | Data entry error | Report to IT staff to update the asset record. |
+| **Software allocation fails with "Not enough seats"** | All license seats are in use | Contact IT to purchase additional seats or deallocate unused ones. |
+
+### General
+
+| Problem | Possible Cause | What to Do |
+|---------|---------------|------------|
+| **Page loads slowly** | Large dataset or network issue | Wait a moment and refresh. If persistent, check your internet connection. |
+| **Data not updating in real time** | Page needs to be refreshed | Refresh the page. If that does not help, press Ctrl+Shift+Delete, select "Cached images and files", and click Clear. |
+| **Error message after clicking Save** | Validation error or server issue | Check all required fields are filled correctly. If the error persists, note the exact error message and report to IT. |
+
+---
+
+## Known Issues and Workarounds
+
+| Issue | Workaround | Status |
+|-------|-----------|--------|
+| Documentation page links are placeholders | Documentation content is being developed. Use this KB article for support guidance. | Known |
+| Software Assets sidebar badge may not display count | Does not affect functionality — navigate to the Software Assets page directly. | Known |
+| Some settings tabs may show template-default values | Admin should verify and update settings after deployment. | Configuration |
+
+---
+
+## When to Escalate — Incident Reporting
+
+If you cannot resolve the issue using the troubleshooting steps above, submit an incident to the 2nd Line Support team.
+
+Report the issue using the standard incident template — see [How to Report an Incident](incident-reporting.md). Mention **ITSM** as the app name and include the **ticket ID** if relevant.
+
+---
+
+## Quick Reference Card
+
+| Task | Where to Go |
+|------|-------------|
+| Submit an IT request | Sidebar → My Requests → New Request |
+| View my requests | Sidebar → My Requests |
+| View all tickets (IT staff) | Sidebar → SD Queue |
+| View ticket analytics | Sidebar → SD Analytics |
+| Manage IT assets | Sidebar → Assets |
+| Register a new asset | Sidebar → Assets → New Asset |
+| Manage software licenses | Sidebar → Software Assets |
+| Manage vendors | Sidebar → Vendors |
+| Manage IT projects | Sidebar → Projects |
+| View budget | Sidebar → Budget |
+| View analytics | Sidebar → Analytics |
+| View IT architecture | Sidebar → IT Architecture |
+| View documentation | Sidebar → Documentation |
+| Configure settings (admin) | Sidebar → Settings |
+| Switch language | Sidebar footer → Globe icon |
+| Switch theme (light/dark) | Sidebar footer → Theme toggle |
+| Return to Agency Hub | Sidebar footer → Back to Agency Hub |

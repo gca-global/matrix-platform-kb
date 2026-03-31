@@ -41,10 +41,10 @@ Meeting Hub supports four types of appointments:
 
 | Type | Icon | Description |
 |------|------|-------------|
-| **Buyer Showing** | Blue | Showing properties to a potential buyer. Includes listings viewed, developers, projects, budget, reservation status. |
-| **Seller Meeting** | Green | Meeting with a property owner/seller. Includes asking price, city, property type. |
-| **Tenant Showing** | Orange | Showing rental properties to a potential tenant. Includes monthly rent budget. |
-| **Landlord Meeting** | Purple | Meeting with a property owner for rental. Includes monthly rent expectations. |
+| **Buyer Appointment** | Blue | Showing properties to a potential buyer. Includes listings viewed, developers, projects, budget, reservation status. |
+| **Seller Appointment** | Green | Meeting with a property owner/seller. Includes price (EUR), city, property type. |
+| **Tenant Appointment** | Orange | Showing rental properties to a potential tenant. Includes monthly rent. |
+| **Landlord Appointment** | Purple | Meeting with a property owner for rental. Includes monthly rent. |
 
 ---
 
@@ -57,10 +57,11 @@ Meeting Hub supports four types of appointments:
 3. Fill in the form:
    - **Date and time** of the appointment
    - **Client name** (type to search existing clients, or add new)
-   - **Description / notes**
+   - **Outcome** (free-text description of the meeting result)
    - Type-specific fields (see below)
-   - **Client Questionnaire** (optional but recommended)
-4. Click **Save**.
+   - **Client Questionnaire** (buyer appointments only — see below)
+   - **Notes** — any interesting details
+4. Click **Submit Report**.
 
 #### Buyer Showing Fields
 - **Budget range** (from–to, currency)
@@ -70,25 +71,25 @@ Meeting Hub supports four types of appointments:
 - **Reservation** — was a property reserved? (Yes/No, contract value)
 - **Outcome** — result of the showing
 
-#### Seller Meeting Fields
-- **Asking price** and currency
+#### Seller Appointment Fields
+- **Price (EUR)** — the asking price (currency is fixed to EUR in the form)
 - **City**
 - **Property type**
 
-#### Tenant Showing Fields
-- **Monthly rent budget** (from–to, currency)
+#### Tenant Appointment Fields
+- **Monthly rent** — a single rent amount (not a from–to range)
 
-#### Landlord Meeting Fields
-- **Monthly rent** expectations
+#### Landlord Appointment Fields
+- **Monthly rent** — expected monthly rental income
 
-#### Client Questionnaire (All Types)
+#### Client Questionnaire (Buyer Appointments Only)
+The questionnaire is only shown for buyer appointments. It includes:
 - Is this the client's first appointment?
 - Country of origin
 - Country of residence
 - Occupation
 - Family status
-- Reason to buy/rent
-- How did the client find us?
+- Reason to buy — options: Cyprus Permanent Residency Investment, Holiday home, Relocation, Education for children, Tax residency, Other
 
 ### Voice Input (AI Form Fill)
 
@@ -108,7 +109,7 @@ Supported languages: English, Russian, and other languages if enabled by Admin.
 2. Find the appointment (use search, filters, or tabs).
 3. Click the appointment to open it.
 4. Click **Edit**.
-5. Make your changes and **Save**.
+5. Make your changes and click **Update Report**.
 
 ### Deleting an Appointment
 
@@ -128,26 +129,31 @@ Supported languages: English, Russian, and other languages if enabled by Admin.
 
 ### Analytics
 
-1. Go to **Analytics** in the sidebar.
-2. Select a date range.
-3. View charts showing:
-   - Number of appointments by type
-   - Trends over time
-   - Broker performance — "Appointments by Broker" chart shows each broker's name (in "First L." format, e.g., "Nadejda S.") with a stacked bar for each appointment type. The chart scales dynamically based on the number of brokers.
-   - Budget distribution
-   - Reservation rates
+1. Go to **Analytics** in the sidebar (available to Managers and Admins).
+2. Select a date range preset: Last 7 days, Last 30 days, Last 90 days, or Last year.
+3. View stat cards: **Total Appointments**, **Reservations**, **Reservation Rate**, **Avg Budget**.
+4. View charts:
+   - **Appointments by Broker** — horizontal stacked bar chart showing each broker's name (in "First L." format, e.g., "Nadejda S.") with breakdown by appointment type
+   - **Property Types** — pie chart of property type distribution
+   - **Appointments Over Time** — line chart showing daily/weekly trends
+   - **Top Cities** — bar chart for seller, tenant, and landlord activity by city
 
 ### Reports
 
 Meeting Hub includes a powerful Report Builder:
 
-1. Go to **Reports** in the sidebar.
+1. Go to **Reports** in the sidebar (available to Managers and Admins).
 2. Choose a report template:
-   - **Weekly Summary** — appointments this week by type
-   - **Monthly Summary** — appointments this month
-   - **Broker Performance** — compare brokers by meeting count and outcomes
+   - **Weekly Appointment Summary** — quick overview of this week's activity
+   - **Monthly Overview** — month-over-month comparison
+   - **Broker Performance** — compare brokers side by side
    - **Budget Analysis** — budget distribution across buyer showings
-   - **Client Origin** — where clients come from
+   - **City/Location Report** — activity by city
+   - **Reservation Report** — reservation tracking and values
+   - **Property Type Analysis** — breakdown by property type
+   - **Developer Report** — developer and project activity
+   - **Conversion Funnel** — lead-to-appointment conversion tracking
+   - **Outcome Analysis** — success rates and follow-up needs
 3. Configure filters (date range, broker, type).
 4. View the report.
 5. **Export to Excel** if needed.
@@ -168,7 +174,7 @@ The main Dashboard shows:
 - **This Week** — number of your appointments scheduled this week
 - **Reserved** — number of buyer appointments where a property was reserved
 - **Recent appointments** — your latest recorded meetings
-- **Report widgets** — saved reports displayed as dashboard cards (Managers/Admins only)
+- **Manager Tools** — buttons to access Analytics Dashboard and Report Builder (visible to Managers and Admins only)
 
 ---
 
@@ -183,21 +189,21 @@ A: Meeting Hub is the Sharp Matrix app for recording and managing real-estate ap
 A: Every broker/agent should record their client meetings here. Sales Managers and Admins use it to track team performance and build reports.
 
 **Q: Is Meeting Hub connected to Client Connect?**
-A: Both apps share the same client database. Clients registered in Client Connect appear as searchable contacts in Meeting Hub.
+A: Both apps share the same client information. Clients registered in Client Connect appear as searchable contacts in Meeting Hub.
 
 ### Appointments
 
 **Q: How do I record a meeting?**
-A: Click New Appointment, choose the type (Buyer/Seller/Tenant/Landlord), fill in the details, and Save.
+A: Click New Appointment, choose the type (Buyer/Seller/Tenant/Landlord), fill in the details, and click Submit Report.
 
 **Q: Can I edit an appointment after saving?**
-A: Yes. Go to All Appointments, find it, click Edit, make changes, and Save.
+A: Yes. Go to All Appointments, find it, click Edit, make changes, and click Update Report.
 
 **Q: Can I delete an appointment?**
 A: Yes, but be careful — deleted appointments cannot be recovered.
 
 **Q: What is the Client Questionnaire?**
-A: An optional section where you record client background information: where they are from, occupation, family status, how they found us, etc. This data helps with analytics and marketing.
+A: A section on buyer appointment forms where you record client background information: country of origin, residence, occupation, family status, and reason to buy. This data helps with analytics and marketing. The questionnaire is shown for buyer appointments only.
 
 **Q: What does "Reservation" mean in a Buyer Showing?**
 A: It indicates whether the client reserved (put a hold on) a property during the showing. If yes, you can also record the contract value.
@@ -239,10 +245,10 @@ A: It lets you describe a report in plain language, and the AI configures the fi
 |---------|---------------|------------|
 | **Cannot save appointment — validation error** | Required fields are missing | Check that date/time and client name are filled in. |
 | **Client name not found in search** | Client not yet registered | Type the name manually. The client can be registered in Client Connect later. |
-| **Listings/developers not showing in autocomplete** | Data not yet loaded or list is empty | Type a few characters and wait. If still empty, the listing/developer database may need updating — contact Admin. |
+| **Listings/developers not showing in autocomplete** | Data not yet loaded or list is empty | Type a few characters and wait. If still empty, the listing or developer list may need updating — contact your Admin. |
 | **Voice input not working** | Microphone permission denied | Allow microphone access in your browser settings. |
 | **Voice input filled wrong fields** | AI misinterpretation | Correct the fields manually. Speak more clearly next time, including explicit labels like "client name is..." or "budget is...". |
-| **Form resets after navigating away** | Unsaved changes are lost | Always click Save before leaving the form page. |
+| **Form resets after navigating away** | Unsaved changes are lost | Always click Submit Report before leaving the form page. |
 
 ### Analytics and Reports
 
@@ -258,7 +264,7 @@ A: It lets you describe a report in plain language, and the AI configures the fi
 | Problem | Possible Cause | What to Do |
 |---------|---------------|------------|
 | **Dashboard counts seem too high** | You may be a Manager/Admin seeing all brokers' data | Managers and Admins see aggregate totals across all brokers. Brokers and Agents see only their own counts. This is by design. |
-| **Appointment data looks wrong** | Incorrect data entry or data migration issue | Verify by opening the appointment. If the data was entered incorrectly, edit it. If it seems like a system error, report to 2nd Line. |
+| **Appointment data looks wrong** | Incorrect data entry or system error | Open the appointment and check the details. If the data was entered incorrectly, edit it. If it seems like a system error, report to your IT department. |
 | **Duplicate appointments** | Accidental double-save | Delete the duplicate. If the same client was entered twice, keep the most complete record. |
 
 ---
@@ -292,7 +298,7 @@ Report the issue using the standard incident template — see [How to Report an 
 4. Select the type: **Buyer**, **Seller**, **Tenant**, or **Landlord**.
 5. Fill in the date, client name, and type-specific fields (budget, listings, rent, etc.).
 6. Optionally complete the **Client Questionnaire** — this helps analytics.
-7. Click **Save**.
+7. Click **Submit Report**.
 8. Your appointment appears in **All Appointments** and your Dashboard counts update immediately.
 
 **Tip:** Register the client first in **Client Connect** — then their name will auto-complete when you type it in Meeting Hub.
@@ -319,30 +325,30 @@ Report the issue using the standard incident template — see [How to Report an 
 5. Add **listings viewed** — search by name and add each property you showed.
 6. Add **developers visited** and **projects** if applicable.
 7. Set **Reservation**: Yes/No. If Yes, enter the contract value.
-8. Select an **outcome** (e.g., Interested, Follow-up Needed, Not Interested).
-9. Fill in the **Client Questionnaire** if this is a first meeting.
+8. Write an **outcome** — this is a free-text field where you describe the result (e.g., "Client interested in sea view apartments, wants second viewing next week").
+9. Fill in the **Client Questionnaire** (buyer appointments only).
 10. Add any **notes** about the meeting.
-11. Click **Save**.
+11. Click **Submit Report**.
 
 ### Workflow: Record a Seller Meeting
 
 1. Click **New Appointment** → select **Seller**.
 2. Enter the **date and time**.
 3. Enter the **seller/owner name**.
-4. Enter the **asking price** and currency.
+4. Enter the **Price (EUR)** — the asking price.
 5. Select the **city** and **property type**.
-6. Select an **outcome**.
+6. Write an **outcome** (free text).
 7. Add notes.
-8. Click **Save**.
+8. Click **Submit Report**.
 
 ### Workflow: Record a Tenant or Landlord Meeting
 
 1. Click **New Appointment** → select **Tenant** or **Landlord**.
 2. Enter the **date and time** and **client name**.
-3. For Tenants: set the **monthly rent budget** range.
-4. For Landlords: set the **monthly rent expectations**.
-5. Select an outcome and add notes.
-6. Click **Save**.
+3. For Tenants: enter the **monthly rent** amount.
+4. For Landlords: enter the **monthly rent** amount.
+5. Write an outcome (free text) and add notes.
+6. Click **Submit Report**.
 
 ### Workflow: Use Voice Input for Appointments
 
@@ -351,18 +357,22 @@ Report the issue using the standard incident template — see [How to Report an 
 3. Speak naturally. Example for a buyer showing: *"Meeting with John Smith today at 2pm, showed three apartments in Limassol, budget 300 to 500 thousand euros, he liked the sea view apartment, wants to schedule a second viewing."*
 4. The AI fills the form fields — **review carefully**.
 5. Correct any errors (especially names, numbers, and dates).
-6. Click **Save**.
+6. Click **Submit Report**.
 
 ### Workflow: Build a Report (Managers/Admins)
 
 1. Go to **Reports** in the sidebar.
-2. Select a template:
-   - **Weekly Summary** — quick overview of this week's activity
+2. Select a template (10 templates available):
+   - **Weekly Appointment Summary** — quick overview of this week's activity
    - **Monthly Overview** — month-over-month comparison
    - **Broker Performance** — compare brokers side by side
-   - **City Report** — activity by city
+   - **City/Location Report** — activity by city
    - **Property Type Analysis** — breakdown by property type
    - **Outcome Analysis** — success rates and follow-up needs
+   - **Budget Analysis** — budget distribution across buyer showings
+   - **Reservation Report** — reservation tracking and values
+   - **Developer Report** — developer and project activity
+   - **Conversion Funnel** — lead-to-appointment conversion
 3. Set your **date range** and any filters (specific broker, appointment type).
 4. Click **Generate**.
 5. Review the report on screen.
@@ -431,4 +441,4 @@ Report the issue using the standard incident template — see [How to Report an 
 | View your profile | Top-right menu → Profile |
 | Switch role (Act As) | Top-right menu → Role dropdown |
 | Return to Sharp Matrix portal | Sidebar → Back to SharpMatrix |
-| Get help | Sidebar → Help |
+| Get help | Top-right menu → Help & Support |
