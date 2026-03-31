@@ -34,7 +34,7 @@ Whether you're building a new Matrix App, mapping RESO fields, or understanding 
 
 ### For AI Agents (Lovable, Cursor, Copilot)
 
-Start with **[AGENTS.md](AGENTS.md)** — it contains the reading order and navigation map.
+Start with **[AGENTS.md](AGENTS.md)** — it contains the reading order and navigation map for building and extending Matrix Apps.
 
 #### Quick Reading Order
 
@@ -45,11 +45,37 @@ Start with **[AGENTS.md](AGENTS.md)** — it contains the reading order and navi
 
 #### Raw URL Pattern
 
-To fetch any file via URL:
-
 ```
 https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/{path}
 ```
+
+### For Zoe — Our First AI Employee
+
+**Zoe** is Sharp Matrix's AI-powered assistant — not a chatbot, but a full-time digital colleague who fills multiple roles across the organization:
+
+| Role | What Zoe Does |
+|---|---|
+| **1st Line Tech Support** | Helps brokers, managers, and staff troubleshoot platform issues, guides incident reporting |
+| **Onboarding Assistant** | Walks new employees through Sharp Matrix apps, explains workflows, answers "how do I…?" questions |
+| **Sales Coach** | Provides brokers with next-best-action suggestions, lead qualification tips, and deal pipeline insights |
+| **Operations Guide** | Explains cross-app workflows — client lifecycle, daily routines by role, data flow between apps |
+| **Platform Expert** | Knows every app, every field, every business process — from Client Connect to Financial Management |
+
+Zoe's knowledge base lives in [`docs/zoe-ai-assistant-kb/`](docs/zoe-ai-assistant-kb/) — 15 structured documents covering all platform apps, designed for RAG retrieval:
+
+| Document | Covers |
+|---|---|
+| [platform-overview.md](docs/zoe-ai-assistant-kb/platform-overview.md) | All apps at a glance, getting started, cross-app troubleshooting |
+| [client-connect.md](docs/zoe-ai-assistant-kb/client-connect.md) | Client registration, verification, MLS duplicates, approval workflow |
+| [pipeline.md](docs/zoe-ai-assistant-kb/pipeline.md) | Leads, deal pipeline, contacts, MLS data, M365 email/calendar |
+| [comms.md](docs/zoe-ai-assistant-kb/comms.md) | WhatsApp messaging, templates, campaigns, AI replies |
+| [hrms.md](docs/zoe-ai-assistant-kb/hrms.md) | Employee directory, vacations, onboarding/offboarding, performance |
+| [itsm.md](docs/zoe-ai-assistant-kb/itsm.md) | IT service desk, assets, software licenses, vendors |
+| [financial-management.md](docs/zoe-ai-assistant-kb/financial-management.md) | Monthly/annual reporting, budgeting, planning, CORE allocation |
+| [cross-app-workflows.md](docs/zoe-ai-assistant-kb/cross-app-workflows.md) | Client lifecycle, daily routines by role, data flow between apps |
+| [incident-reporting.md](docs/zoe-ai-assistant-kb/incident-reporting.md) | How to report an incident — severity guide, escalation path |
+| [second-line-tech-reference.md](docs/zoe-ai-assistant-kb/second-line-tech-reference.md) | Architecture deep-dive for 2nd line support analysts |
+| [kb-generation-guide.md](docs/zoe-ai-assistant-kb/kb-generation-guide.md) | How to generate a KB article for any new Matrix app |
 
 ### Platform Overview
 
@@ -81,7 +107,7 @@ Supabase (CDL + Auth)  ◄──►  Databricks (DWH + ETL)  ◄──►  MLS /
 | **[Product Specs](docs/product-specs/)** | UI specs — dashboards, forms, Kanban boards |
 | **[Vision](docs/vision/)** | Digital strategy 2026–2028, AI sales model |
 | **[References](docs/references/)** | API catalogs, field summaries, integration endpoints |
-| **[Zoe AI KB](docs/zoe-ai-assistant-kb/)** | Zoe assistant context — client connect, incident reporting |
+| **[Zoe AI KB](docs/zoe-ai-assistant-kb/)** | Zoe's knowledge base — 15 docs covering all apps, workflows, troubleshooting, RAG-ready |
 
 ### Repository Structure
 
