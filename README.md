@@ -28,13 +28,15 @@
 
 ### What Is This?
 
-This repository is the **single source of truth** for everything about the Sharp Matrix platform. It's designed to be consumed by both humans and LLMs — every doc is structured for quick navigation, deep linking, and AI-assisted development.
+This repository is the **agent harness** for the Sharp Matrix platform — the structured, LLM-readable knowledge base that enables AI agents to build, extend, and operate a 24-app digital ecosystem for luxury real estate brokerage.
 
-Whether you're building a new Matrix App, mapping RESO fields, or understanding how the 24-app ecosystem fits together — start here.
+Following the principles of [harness engineering](https://openai.com/index/harness-engineering/), we treat this repo as the system of record that makes agent work possible. Humans steer — agents execute. Instead of writing one big instruction manual, we maintain a structured `docs/` directory where every document is designed for progressive disclosure: agents start with a small, stable entry point ([AGENTS.md](AGENTS.md)) and navigate deeper as needed. Architecture decisions, data models, business processes, and product specs are all versioned, indexed, and co-located — because from the agent's point of view, anything it can't access in-context effectively doesn't exist.
+
+This is how Sharp Matrix ships 24 apps across three countries with AI-native development: the knowledge base *is* the scaffolding.
 
 ### For AI Agents (Lovable, Cursor, Copilot)
 
-Start with **[AGENTS.md](AGENTS.md)** — it contains the reading order and navigation map for building and extending Matrix Apps.
+Start with **[AGENTS.md](AGENTS.md)** — the entry point and navigation map for building and extending Matrix Apps.
 
 #### Quick Reading Order
 
