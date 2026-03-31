@@ -168,6 +168,12 @@ current busienss practice/   ← Operational checklists (XLSX)
 
 ---
 
+### License
+
+This repository is proprietary. See [LICENSE](LICENSE) for details.
+
+© 2024–2026 Sharp Sotheby's International Realty. All rights reserved.
+
 <p align="center">
   <sub>Part of the <a href="https://github.com/sharpsir-group"><strong>Sharp Matrix</strong></a> platform · <a href="https://sharpsir.group">sharpsir.group</a></sub>
 </p>
