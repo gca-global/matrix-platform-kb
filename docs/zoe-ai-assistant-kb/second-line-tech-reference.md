@@ -455,13 +455,13 @@ When you receive an escalated incident, follow this decision tree:
 | Resource | URL |
 |----------|-----|
 | Knowledge Base (GitHub) | [github.com/sharpsir-group/matrix-platform-kb](https://github.com/sharpsir-group/matrix-platform-kb) |
-| Supabase Dashboard (SSO) | `https://supabase.com/dashboard/project/xgubaguglsnokjyudgvc` |
-| Supabase Dashboard (Comms) | `https://supabase.com/dashboard/project/ujowkipnqgtazmtdsnlm` |
-| Supabase Dashboard (Pipeline) | `https://supabase.com/dashboard/project/tiuansahlsgautkjsajk` |
-| Supabase Dashboard (HRMS) | `https://supabase.com/dashboard/project/wltuhltnwhudgkkdsvsr` |
-| Supabase Dashboard (ITSM) | `https://supabase.com/dashboard/project/irjrcskfcyierdbefrpk` |
-| Supabase Dashboard (Matrix FM) | `https://supabase.com/dashboard/project/retujkznogwplfrbniet` |
-| SSO Console | `https://intranet.sharpsir.group/sso-console/` |
-| Agency Portal | `https://intranet.sharpsir.group/agency-portal/` |
+| Supabase Dashboard (SSO) | [https://supabase.com/dashboard/project/xgubaguglsnokjyudgvc](https://supabase.com/dashboard/project/xgubaguglsnokjyudgvc) |
+| Supabase Dashboard (Comms) | [https://supabase.com/dashboard/project/ujowkipnqgtazmtdsnlm](https://supabase.com/dashboard/project/ujowkipnqgtazmtdsnlm) |
+| Supabase Dashboard (Pipeline) | [https://supabase.com/dashboard/project/tiuansahlsgautkjsajk](https://supabase.com/dashboard/project/tiuansahlsgautkjsajk) |
+| Supabase Dashboard (HRMS) | [https://supabase.com/dashboard/project/wltuhltnwhudgkkdsvsr](https://supabase.com/dashboard/project/wltuhltnwhudgkkdsvsr) |
+| Supabase Dashboard (ITSM) | [https://supabase.com/dashboard/project/irjrcskfcyierdbefrpk](https://supabase.com/dashboard/project/irjrcskfcyierdbefrpk) |
+| Supabase Dashboard (Matrix FM) | [https://supabase.com/dashboard/project/retujkznogwplfrbniet](https://supabase.com/dashboard/project/retujkznogwplfrbniet) |
+| SSO Console | [https://intranet.sharpsir.group/sso-console/](https://intranet.sharpsir.group/sso-console/) |
+| Agency Portal | [https://intranet.sharpsir.group/agency-portal/](https://intranet.sharpsir.group/agency-portal/) |
 | Full KB Index | [docs/INDEX.md](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/INDEX.md) |
 | AGENTS.md (entry point) | [AGENTS.md](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/AGENTS.md) |

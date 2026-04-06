@@ -1,8 +1,8 @@
 # Sharp Matrix SSO & Platform Foundation — 1st Line Support Knowledge Base
 
 > **System name:** Sharp Matrix SSO (Single Sign-On) and Platform Foundation
-> **SSO Login URL:** `https://intranet.sharpsir.group/sso-login/`
-> **SSO Console URL:** `https://intranet.sharpsir.group/sso-console/` (Admin only)
+> **SSO Login URL:** [https://intranet.sharpsir.group/sso-login/](https://intranet.sharpsir.group/sso-login/)
+> **SSO Console URL:** [https://intranet.sharpsir.group/sso-console/](https://intranet.sharpsir.group/sso-console/) (Admin only)
 > **Purpose:** The shared login system, user management, roles, permissions, and security for all Sharp Matrix applications.
 > **Users:** All Sharp Sotheby's staff (for login); Admins and IT (for management).
 
@@ -22,7 +22,7 @@ Sharp Matrix SSO (Single Sign-On) is the shared login system for all Sharp Matri
 
 ### Logging In
 
-1. Open any Sharp Matrix app (e.g., Agency Portal at `https://intranet.sharpsir.group/agency-portal/`).
+1. Open any Sharp Matrix app (e.g., Agency Portal at [https://intranet.sharpsir.group/agency-portal/](https://intranet.sharpsir.group/agency-portal/)).
 2. You are redirected to the SSO Login page.
 3. Choose your login method:
    - **Email and Password** — enter your company email and the password provided by your Admin.
@@ -134,7 +134,7 @@ Your team membership is managed by your Admin in the SSO Console.
 
 The SSO Console is the administration interface for managing the Sharp Matrix platform. Only users with Admin or IT Support roles can access it.
 
-**URL:** `https://intranet.sharpsir.group/sso-console/`
+**URL:** [https://intranet.sharpsir.group/sso-console/](https://intranet.sharpsir.group/sso-console/)
 
 ### What Admins Can Do in the SSO Console
 

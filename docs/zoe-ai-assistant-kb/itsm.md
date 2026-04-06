@@ -1,7 +1,7 @@
 # Sharp Matrix ITSM — 1st Line Support Knowledge Base
 
 > **App name:** ITSM (IT Service & Asset Management)
-> **URL:** `https://intranet.sharpsir.group/itsm/`
+> **URL:** [https://intranet.sharpsir.group/itsm/](https://intranet.sharpsir.group/itsm/)
 > **Purpose:** Submit and track IT service requests, manage IT assets, software licenses, vendors, projects, and budgets.
 > **Users:** All internal users (ticket submitters), IT Staff, IT Admins
 
@@ -15,7 +15,7 @@ ITSM is the IT service and asset management app for Sharp Sotheby's Internationa
 
 ## How to Access ITSM
 
-1. Open your browser and go to `https://intranet.sharpsir.group/itsm/`.
+1. Open your browser and go to [https://intranet.sharpsir.group/itsm/](https://intranet.sharpsir.group/itsm/).
 2. You will be redirected to the Sharp Matrix SSO login page.
 3. Sign in with your company email and password, or use "Sign in with Microsoft".
 4. After login you land on the **Home Dashboard**.

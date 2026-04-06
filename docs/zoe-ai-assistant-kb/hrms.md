@@ -1,7 +1,7 @@
 # Sharp Matrix HR Management — 1st Line Support Knowledge Base
 
 > **App name:** Matrix HR Management (HRMS)
-> **URL:** `https://intranet.sharpsir.group/matrix-hr-management/`
+> **URL:** [https://intranet.sharpsir.group/matrix-hr-management/](https://intranet.sharpsir.group/matrix-hr-management/)
 > **Purpose:** Manage employee records, vacations, onboarding/offboarding, performance reviews, compensation, documents, and organizational structure.
 > **Users:** All employees, Managers, HR Team, Finance Team, Admins
 
@@ -15,7 +15,7 @@ Matrix HR Management (HRMS) is the human resources app for Sharp Sotheby's Inter
 
 ## How to Access Matrix HR Management
 
-1. Open your browser and go to `https://intranet.sharpsir.group/matrix-hr-management/`.
+1. Open your browser and go to [https://intranet.sharpsir.group/matrix-hr-management/](https://intranet.sharpsir.group/matrix-hr-management/).
 2. You will be redirected to the Sharp Matrix SSO login page.
 3. Sign in with your company email and password, or use "Sign in with Microsoft".
 4. After login you land on your **My Dashboard** (Welcome page).

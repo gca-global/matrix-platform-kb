@@ -1,7 +1,7 @@
 # Sharp Matrix Meeting Hub — 1st Line Support Knowledge Base
 
 > **App name:** Meeting Hub (Appointment Reports)
-> **URL:** `https://intranet.sharpsir.group/meeting-hub/`
+> **URL:** [https://intranet.sharpsir.group/meeting-hub/](https://intranet.sharpsir.group/meeting-hub/)
 > **Purpose:** Record, manage, and analyze buyer, seller, tenant, and landlord appointments.
 > **Users:** Brokers/Agents, Sales Managers (Office Managers), Contact Center (MLS Staff), Admins.
 
@@ -15,7 +15,7 @@ Meeting Hub is the appointment reporting app for Sharp Sotheby's International R
 
 ## How to Access Meeting Hub
 
-1. Open your browser and go to `https://intranet.sharpsir.group/meeting-hub/`.
+1. Open your browser and go to [https://intranet.sharpsir.group/meeting-hub/](https://intranet.sharpsir.group/meeting-hub/).
 2. You will be redirected to the Sharp Matrix SSO login page.
 3. Sign in with your company email and password, or use "Sign in with Microsoft".
 4. After login you land on your role-specific home page (Dashboard or Broker Dashboard).
@@ -292,7 +292,7 @@ Report the issue using the standard incident template — see [How to Report an 
 
 ### New Broker — Your First Day
 
-1. **Log in** at `https://intranet.sharpsir.group/meeting-hub/` using your company credentials.
+1. **Log in** at [https://intranet.sharpsir.group/meeting-hub/](https://intranet.sharpsir.group/meeting-hub/) using your company credentials.
 2. You land on the **Dashboard** — it shows your appointment counts, this week's total, and recent meetings.
 3. Click **New Appointment** (top-right button).
 4. Select the type: **Buyer**, **Seller**, **Tenant**, or **Landlord**.

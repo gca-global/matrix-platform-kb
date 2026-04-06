@@ -3,7 +3,7 @@
 > **Platform name:** Sharp Matrix
 > **Organization:** Sharp Sotheby's International Realty
 > **Markets:** Cyprus, Hungary, Kazakhstan
-> **Portal URL:** `https://intranet.sharpsir.group/agency-portal/`
+> **Portal URL:** [https://intranet.sharpsir.group/agency-portal/](https://intranet.sharpsir.group/agency-portal/)
 > **Purpose:** Digital brokerage platform for real estate operations — client management, appointments, communications, listings, analytics, and more.
 
 ---
@@ -31,7 +31,7 @@ The platform is accessed through a web browser. There is nothing to install — 
 | **SSO Console** | `/sso-console/` | User and access management | Admins only |
 | **SSO Login** | `/sso-login/` | Login page | Everyone (automatic) |
 
-All apps are hosted at `https://intranet.sharpsir.group/` followed by the path listed above.
+All apps are hosted at [https://intranet.sharpsir.group/](https://intranet.sharpsir.group/) followed by the path listed above.
 
 ---
 
@@ -69,7 +69,7 @@ All apps are hosted at `https://intranet.sharpsir.group/` followed by the path l
 ### First-Time Users
 
 1. **Get your credentials.** Your Admin will create your account and give you an email and temporary password.
-2. **Open the portal.** Go to `https://intranet.sharpsir.group/agency-portal/`.
+2. **Open the portal.** Go to [https://intranet.sharpsir.group/agency-portal/](https://intranet.sharpsir.group/agency-portal/).
 3. **Log in.** Enter your email and password, or click "Sign in with Microsoft."
 4. **Explore the dashboard.** See your stats, access apps, and try the AI Advisor.
 5. **Open the apps you need.** Click the app cards or use the Quick Access bar.
@@ -95,7 +95,7 @@ Your first week is about getting comfortable with the platform. Here is a day-by
 
 ### Day 1 — Get Connected
 1. **Receive your credentials** from your Admin (email + temporary password).
-2. **Log in** to the Agency Portal at `https://intranet.sharpsir.group/agency-portal/`.
+2. **Log in** to the Agency Portal at [https://intranet.sharpsir.group/agency-portal/](https://intranet.sharpsir.group/agency-portal/).
 3. **Change your password** if prompted.
 4. **Explore the dashboard** — see the app cards, your stats, and the AI Advisor.
 5. **Check your profile** — click your avatar → Profile to see your role, scope, and team.
@@ -144,7 +144,7 @@ If you have a technical problem with any Sharp Matrix app, Zoe can guide you thr
 1. **Describe the problem to Zoe.** For example: "My Meeting Hub is showing a blank page."
 2. **Zoe will try to help first** — checking if it's a known issue, suggesting troubleshooting steps (refresh the page, check your permissions).
 3. **If the issue persists**, Zoe will guide you to open an ITSM request:
-   - Go to `https://intranet.sharpsir.group/itsm/`
+   - Go to [https://intranet.sharpsir.group/itsm/](https://intranet.sharpsir.group/itsm/)
    - Navigate to **My Requests → New Request**
    - Fill in: Title, Description, Priority, Service Type, and Related Asset
    - Zoe can suggest appropriate priority and service type based on your description
@@ -347,16 +347,16 @@ For detailed support on each app, refer to the dedicated knowledge base articles
 
 | App | Support Article |
 |-----|----------------|
-| Agency Portal | `docs/zoe-ai-assistant-kb/portal.md` |
-| Client Connect | `docs/zoe-ai-assistant-kb/client-connect.md` |
-| Meeting Hub | `docs/zoe-ai-assistant-kb/meeting-hub.md` |
-| Matrix Communications | `docs/zoe-ai-assistant-kb/comms.md` |
-| Matrix Pipeline | `docs/zoe-ai-assistant-kb/pipeline.md` |
-| Matrix HR Management | `docs/zoe-ai-assistant-kb/hrms.md` |
-| ITSM | `docs/zoe-ai-assistant-kb/itsm.md` |
-| Matrix Financial Management | `docs/zoe-ai-assistant-kb/financial-management.md` |
-| SSO & Authentication | `docs/zoe-ai-assistant-kb/platform-sso-auth.md` |
-| 2nd Line Tech Reference | `docs/zoe-ai-assistant-kb/second-line-tech-reference.md` |
+| Agency Portal | [portal.md](portal.md) |
+| Client Connect | [client-connect.md](client-connect.md) |
+| Meeting Hub | [meeting-hub.md](meeting-hub.md) |
+| Matrix Communications | [comms.md](comms.md) |
+| Matrix Pipeline | [pipeline.md](pipeline.md) |
+| Matrix HR Management | [hrms.md](hrms.md) |
+| ITSM | [itsm.md](itsm.md) |
+| Matrix Financial Management | [financial-management.md](financial-management.md) |
+| SSO & Authentication | [platform-sso-auth.md](platform-sso-auth.md) |
+| 2nd Line Tech Reference | [second-line-tech-reference.md](second-line-tech-reference.md) |
 
 ---
 

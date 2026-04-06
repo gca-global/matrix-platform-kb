@@ -1,7 +1,7 @@
 # Sharp Matrix Pipeline — 1st Line Support Knowledge Base
 
 > **App name:** Matrix Pipeline
-> **URL:** `https://intranet.sharpsir.group/matrix-pipeline/`
+> **URL:** [https://intranet.sharpsir.group/matrix-pipeline/](https://intranet.sharpsir.group/matrix-pipeline/)
 > **Purpose:** Manage sales leads, deal pipeline, contacts, MLS property data, Microsoft 365 email/calendar, opportunity reviews, and call center workflows.
 > **Users:** Brokers, Sales Managers, Call Center Staff, Admins
 
@@ -15,7 +15,7 @@ Matrix Pipeline is the CRM and sales pipeline management app for Sharp Sotheby's
 
 ## How to Access Matrix Pipeline
 
-1. Open your browser and go to `https://intranet.sharpsir.group/matrix-pipeline/`.
+1. Open your browser and go to [https://intranet.sharpsir.group/matrix-pipeline/](https://intranet.sharpsir.group/matrix-pipeline/).
 2. You will be redirected to the Sharp Matrix SSO login page.
 3. Sign in with your company email and password, or use "Sign in with Microsoft".
 4. After login you land on the **Dashboard**.

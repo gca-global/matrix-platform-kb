@@ -1,7 +1,7 @@
 # Sharp Matrix Agency Portal — 1st Line Support Knowledge Base
 
 > **App name:** Matrix Agency Portal (Agency Hub)
-> **URL:** `https://intranet.sharpsir.group/agency-portal/`
+> **URL:** [https://intranet.sharpsir.group/agency-portal/](https://intranet.sharpsir.group/agency-portal/)
 > **Purpose:** Central dashboard and app launcher for all Sharp Matrix applications. Your starting point for daily work.
 > **Users:** All Sharp Sotheby's staff — Agents, Brokers, Sales Managers, Contact Center, Staff, Admins.
 > **Note:** This app uses a header-based layout (no sidebar). Navigation is through the top header bar, Quick Access bar, and app launcher cards.
@@ -18,7 +18,7 @@ Think of it as your "control center" for the Sharp Matrix platform.
 
 ## How to Access the Agency Portal
 
-1. Open your browser and go to `https://intranet.sharpsir.group/agency-portal/`.
+1. Open your browser and go to [https://intranet.sharpsir.group/agency-portal/](https://intranet.sharpsir.group/agency-portal/).
 2. You will be redirected to the Sharp Matrix SSO login page.
 3. Sign in with your company email and password, or use "Sign in with Microsoft".
 4. After login you land on the main Dashboard.
@@ -128,7 +128,7 @@ If your Admin has enabled role switching for your account:
 
 ### Accessing Admin Tools
 
-All admin functions (User Management, Connected Apps, SSO Permissions, Groups, Settings) are accessed directly through the **SSO Management Console** at `https://intranet.sharpsir.group/sso-console/`. The Agency Portal user dropdown no longer contains admin links.
+All admin functions (User Management, Connected Apps, SSO Permissions, Groups, Settings) are accessed directly through the **SSO Management Console** at [https://intranet.sharpsir.group/sso-console/](https://intranet.sharpsir.group/sso-console/). The Agency Portal user dropdown no longer contains admin links.
 
 The **App Permissions** page for the Portal is accessible at `/admin/permissions` via direct URL for administrators.
 
@@ -247,7 +247,7 @@ Report the issue using the standard incident template — see [How to Report an 
 
 ### For Everyone (All Roles)
 
-1. **Open the Portal** at `https://intranet.sharpsir.group/agency-portal/` and log in.
+1. **Open the Portal** at [https://intranet.sharpsir.group/agency-portal/](https://intranet.sharpsir.group/agency-portal/) and log in.
 2. **Explore the Dashboard** — look at your stat widgets (Pipeline Value, Approved Clients, New Clients, This Week).
 3. **Open your main app** from the Applications section:
    - **Broker/Agent** → Click **Client Connect** to register clients, then **Meeting Hub** to record appointments.

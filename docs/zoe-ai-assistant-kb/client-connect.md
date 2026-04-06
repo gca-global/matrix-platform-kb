@@ -1,7 +1,7 @@
 # Sharp Matrix Client Connect — 1st Line Support Knowledge Base
 
 > **App name:** Client Connect
-> **URL:** `https://intranet.sharpsir.group/client-connect/`
+> **URL:** [https://intranet.sharpsir.group/client-connect/](https://intranet.sharpsir.group/client-connect/)
 > **Purpose:** Register new real-estate clients, verify their data, and manage the approval pipeline.
 > **Users:** Brokers, Contact Center (MLS Staff), Sales Managers (Office Managers), Admins.
 
@@ -15,7 +15,7 @@ Client Connect is the client registration and verification app for Sharp Sotheby
 
 ## How to Access Client Connect
 
-1. Open your browser and go to `https://intranet.sharpsir.group/client-connect/`.
+1. Open your browser and go to [https://intranet.sharpsir.group/client-connect/](https://intranet.sharpsir.group/client-connect/).
 2. You will be redirected to the Sharp Matrix SSO login page.
 3. Sign in with your company email and password, or use "Sign in with Microsoft".
 4. After successful login you are redirected back to Client Connect and land on your role-specific home page.
@@ -234,7 +234,7 @@ Report the issue using the standard incident template — see [How to Report an 
 
 ### New Broker — Your First Day
 
-1. **Log in** at `https://intranet.sharpsir.group/client-connect/` using your company credentials.
+1. **Log in** at [https://intranet.sharpsir.group/client-connect/](https://intranet.sharpsir.group/client-connect/) using your company credentials.
 2. You land on the **New Client** page — this is your home base.
 3. **Register your first client**: fill in First Name, Phone, Lead Origin, and Client Intent, then click Submit.
 4. Check **My Requests** (scroll down on the same page) to see the status of your submission.

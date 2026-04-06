@@ -1,7 +1,7 @@
 # Sharp Matrix Financial Management — 1st Line Support Knowledge Base
 
 > **App name:** Matrix Financial Management (Matrix FM)
-> **URL:** `https://intranet.sharpsir.group/matrix-fm/`
+> **URL:** [https://intranet.sharpsir.group/matrix-fm/](https://intranet.sharpsir.group/matrix-fm/)
 > **Purpose:** Group financial reporting, budgeting, annual planning, CORE cost allocation, and financial analytics across all Sharp Group entities.
 > **Users:** Finance Team, Entity Managers, Senior Management, CFO/Board
 
@@ -15,7 +15,7 @@ Matrix Financial Management is the financial reporting and planning app for Shar
 
 ## How to Access Matrix Financial Management
 
-1. Open your browser and go to `https://intranet.sharpsir.group/matrix-fm/`.
+1. Open your browser and go to [https://intranet.sharpsir.group/matrix-fm/](https://intranet.sharpsir.group/matrix-fm/).
 2. You will be redirected to the Sharp Matrix SSO login page.
 3. Sign in with your company email and password, or use "Sign in with Microsoft".
 4. After login you land on the **Home Dashboard**.

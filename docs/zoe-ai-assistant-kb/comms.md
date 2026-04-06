@@ -1,7 +1,7 @@
 # Sharp Matrix Comms — 1st Line Support Knowledge Base
 
 > **App name:** Matrix Communications (Matrix Comms)
-> **URL:** `https://intranet.sharpsir.group/comms/`
+> **URL:** [https://intranet.sharpsir.group/comms/](https://intranet.sharpsir.group/comms/)
 > **Purpose:** Send and receive WhatsApp messages with clients, manage conversations, run campaigns, and use AI-assisted replies.
 > **Users:** Brokers, Marketing Managers, Sales staff, Admins.
 
@@ -15,7 +15,7 @@ Matrix Communications is the WhatsApp messaging platform for Sharp Sotheby's Int
 
 ## How to Access Matrix Comms
 
-1. Open your browser and go to `https://intranet.sharpsir.group/comms/`.
+1. Open your browser and go to [https://intranet.sharpsir.group/comms/](https://intranet.sharpsir.group/comms/).
 2. You will be redirected to the Sharp Matrix SSO login page.
 3. Sign in with your company email and password, or use "Sign in with Microsoft".
 4. After login you land on the **Chats** page (your inbox).
