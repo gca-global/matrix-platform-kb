@@ -440,6 +440,10 @@ A: The system automatically creates posts for upcoming public holidays to keep e
 | Full UI translation to Russian is not yet complete for all screens | Key features work in both languages; some labels may appear in English. | In progress |
 | No in-app help section | Use this KB article and contact HR for guidance. | Planned |
 | Design Showcase page is for internal development only | Ignore this page if you see it. | By design |
+| Some new employees may not appear linked to their SSO account | HR Admin should verify the employee record has an SSO User ID set. If missing, re-link via Personnel management. | Investigating |
+| Public holidays may not be visible to all employees | Contact HR Admin to verify holiday configuration. HR is working on a fix. | In progress |
+| Notifications may fail to appear for some actions | System is being updated. Check back later or contact HR directly. | In progress |
+| Offboarding templates visible to non-HR roles | No action needed — access is being tightened. | In progress |
 
 ---
 

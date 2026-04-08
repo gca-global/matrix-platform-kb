@@ -60,7 +60,7 @@ Every Matrix App connects to **two Supabase instances**:
 | `tenants` | Organization/tenant records |
 | `app_settings` | Per-tenant app configuration (JSON) |
 | `sso_user_groups` | Team/group memberships |
-| `role_configurations` | Per-role page and action access lists |
+| `sso_role_configurations` | Per-role page and action access lists |
 
 ### App DB Client Setup
 
