@@ -1,7 +1,9 @@
 # Sharp Matrix Platform — App Catalog
 
 > All applications and platform components in the Sharp Matrix ecosystem, with current delivery status.
-> Last updated: March 2026
+> Last updated: April 2026
+>
+> **Development model**: All Matrix business apps are **Lovable-managed projects**. Changes are applied through structured Lovable prompts, not direct code edits. SSO/CDL Edge Functions and database migrations are managed directly. See [app-template.md — Lovable-Managed Apps](app-template.md#lovable-managed-apps--development--maintenance-model) for details.
 
 ## Delivery Status Summary
 

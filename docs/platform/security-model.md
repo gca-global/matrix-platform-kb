@@ -20,7 +20,17 @@ Each higher scope includes the visibility of all lower scopes.
 | `team` | Own + team members' records | Team Leader, Manager | A sales manager sees all records for their team |
 | `global` | All records in tenant | Director, C-suite | A sales director sees every listing and deal across all teams |
 | `org_admin` | Full tenant access + admin functions | Organization Admin | Can manage users, roles, app configurations for the organization |
-| `system_admin` | Cross-tenant access | System Admin | Platform-wide access across all organizations |
+| `system_admin` | Cross-tenant access + tenant switching | System Admin | Platform-wide access across all organizations; can switch active tenant via `switch-tenant` |
+
+### Tenant Switching (system_admin only)
+
+Users with `system_admin` scope can switch their active tenant context via the `switch-tenant` Edge Function. This re-issues the JWT with updated `organization`/`uoi` claims pointing to the target tenant, while keeping the current role and scope unchanged. The switch is persisted in `user_metadata.tenant_id` so that token refresh and subsequent logins preserve the selected tenant.
+
+This is analogous to role switching (`switch-role`) but operates on the organizational axis:
+- **Role switching** changes *what you can do* (scope level + CRUD permissions)
+- **Tenant switching** changes *which organization's data you see* (cross-tenant context)
+
+Both produce a fresh JWT with new tokens. The frontend clears all cached data on tenant switch to prevent cross-tenant data leaks.
 
 ## CRUD Permission Strings
 
@@ -45,7 +55,8 @@ Format: any combination of characters `c`, `r`, `u`, `d`.
 | Role Key | Name | CRUD | Description |
 |----------|------|------|-------------|
 | `broker` | Broker | r | Default role — view own records only |
-| `senior_broker` | Senior Broker | cru | Create and edit own records |
+| `staff` | Staff | ru | Read and update own records |
+| `senior_broker` | Senior Broker | ru | Read and update own records |
 
 ### Team Level (scope: team)
 
@@ -87,6 +98,61 @@ Format: any combination of characters `c`, `r`, `u`, `d`.
 |----------|------|-------|------|-------------|
 | `org_admin` | Organization Admin | org_admin | crud | Organization-wide admin with full access |
 | `system_admin` | System Admin | system_admin | crud | System administrator with full cross-tenant access |
+
+## JWT Signing — ES256 (Target) + HS256 (Legacy)
+
+> **Goal**: All SSO JWTs should be signed with **ES256 (ECDSA P-256)** asymmetric keys. HS256 (HMAC symmetric) is **deprecated** and retained only for backward compatibility during migration.
+
+### Current State (April 2026)
+
+The `oauth-token` and `switch-role` Edge Functions implement a **hybrid signing strategy**:
+
+| Condition | Algorithm | Key Source | Used By |
+|-----------|-----------|-----------|---------|
+| App has **no** `jwt_secret_name` (uses SSO PostgREST) | **ES256** | Vault secret `sso_es256_signing_key` (JWK with `kid`) | Apps running on SSO instance |
+| App **has** `jwt_secret_name` (own Supabase project) | **HS256** | App-specific secret from vault, or SSO `JWT_SECRET` fallback | Domain-Specific apps (HRMS, FM, ITSM) |
+| ES256 key unavailable in vault | **HS256** | SSO `JWT_SECRET` env var | Fallback only |
+
+**Why hybrid**: Each Supabase project's PostgREST only trusts keys registered in that project. The ES256 standby key is imported into the SSO project. Domain-Specific apps with their own Supabase projects still need HS256 tokens signed with their project's legacy JWT secret until those projects also import the shared ES256 key.
+
+### Migration Path to Full ES256
+
+1. **Done**: ES256 key pair generated and stored in SSO vault (`sso_es256_signing_key`)
+2. **Done**: ES256 public key imported as standby key in SSO project (`xgubaguglsnokjyudgvc`)
+3. **Done**: `oauth-token` and `switch-role` sign with ES256 for SSO-direct apps
+4. **Next**: Import ES256 public key into each app's Supabase project as standby key
+5. **Next**: Update Edge Functions to sign ES256 for all apps (remove `jwt_secret_name` gate)
+6. **Next**: Promote ES256 to "current" key in all projects, retire HS256 secrets
+7. **Final**: Remove HS256 fallback code from Edge Functions
+
+### Token Verification Order (in `switch-role`)
+
+Incoming bearer tokens are verified in this order:
+
+1. **ES256** — via vault key (new asymmetric tokens)
+2. **App-specific HS256** — via `get_vault_secret(app.jwt_secret_name)` (app project tokens)
+3. **SSO HS256** — via `JWT_SECRET` env var (legacy SSO tokens)
+4. **Opaque lookup** — match raw token string in `sso_access_tokens` table
+
+### ES256 Key Details
+
+| Property | Value |
+|----------|-------|
+| Algorithm | ES256 (ECDSA with P-256 curve) |
+| Key format | JWK (JSON Web Key) with `kid` header |
+| Vault secret name | `sso_es256_signing_key` |
+| Key operations | `["sign", "verify"]` |
+| JWT header | `{ alg: "ES256", kid: "<uuid>", typ: "JWT" }` |
+
+### Why ES256 over HS256
+
+| Factor | HS256 (Symmetric) | ES256 (Asymmetric) |
+|--------|-------------------|-------------------|
+| Key sharing | Same secret for signing AND verification — must be shared with every PostgREST instance | Private key stays in vault; only public key distributed |
+| Supabase native | Not the default since Supabase moved to ES256 | Supabase's default signing algorithm |
+| Key rotation | Requires coordinated secret rotation across all services | Public key rotation via JWKS, no secret exposure |
+| PostgREST compat | Requires legacy key in "Previously used" status | Native support as standby or current key |
+| Security | Shared secret is a single point of compromise | Private key never leaves the vault |
 
 ## JWT Claims Structure
 
@@ -131,6 +197,9 @@ The `oauth-token` Edge Function produces this JWT payload, consumed by all Matri
     scope: string;
     is_primary: boolean;
   }>;
+
+  // Flat claims for RLS backward compat
+  active_scope: string;            // Flat copy of scope.id for RLS helpers that read ->> 'active_scope'
 
   // Legacy (backward compat)
   permissions: string[];           // ["app_access", "org_admin"]
@@ -363,11 +432,48 @@ Apps use `role_configurations.pages` to control which pages each role can access
 2. Use `canPerformAction('action-key')` in component logic
 3. Configure which roles can perform this action in `role_configurations`
 
+## Security Hardening Backlog
+
+> Tracked findings from Supabase security linter and platform audit (April 2026).
+> Items are ordered by priority. Resolve before promoting ES256 to "current" key.
+
+### Immediate (Security)
+
+| # | Finding | Severity | Detail | Remediation |
+|---|---------|----------|--------|-------------|
+| S1 | **18 `mls_*` tables have RLS policies but RLS is not enabled** | CRITICAL | Policies exist but `ALTER TABLE ... ENABLE ROW LEVEL SECURITY` was never run. All data is unprotected. | Run one migration: `ALTER TABLE mls_listings ENABLE ROW LEVEL SECURITY;` for all 18 tables. |
+| S2 | **4 SECURITY DEFINER views on SSO tables** | HIGH | `user_role_assignments`, `tenants`, `role_configurations`, `app_permissions` bypass the caller's RLS context. | Convert to `SECURITY INVOKER` (Postgres 15+) or add explicit `WHERE` clauses that re-check caller permissions. |
+| S3 | **`app_settings` allows anonymous INSERT/UPDATE** | HIGH | RLS policies `Anon can insert app_settings` and `Anon can update app_settings` use `WITH CHECK (true)`. | Restrict to `authenticated` role or add tenant/scope checks. |
+| S4 | **Leaked password protection disabled** | MEDIUM | Supabase Auth's HaveIBeenPwned integration is off. | Enable in Dashboard → Auth → Security → "Leaked password protection". |
+| S5 | **`sso_scope_levels` RLS disabled** | MEDIUM | SSO config table exposed to PostgREST without RLS. | `ALTER TABLE sso_scope_levels ENABLE ROW LEVEL SECURITY;` + add read-only policy for authenticated. |
+
+### Medium-Term (Hardening)
+
+| # | Finding | Severity | Detail | Remediation |
+|---|---------|----------|--------|-------------|
+| H1 | **Promote ES256 standby key to "current"** | MEDIUM | ES256 key is standby in SSO project. Once stable, promote to current and retire HS256. | Dashboard → Settings → JWT Signing Keys → Promote. Then update Edge Functions to remove HS256 fallback. |
+| H2 | **5 functions with mutable `search_path`** | LOW | `match_kb_embeddings`, `create_jwt_secret`, `mask_secret`, `update_ad_users_updated_at`, `audit_sso_applications` lack `SET search_path = public`. | Add `SET search_path = public` to each function definition. |
+| H3 | **`pg_trgm` extension in public schema** | LOW | Should be in a dedicated `extensions` schema. | `ALTER EXTENSION pg_trgm SET SCHEMA extensions;` (create schema first if needed). |
+| H4 | **`oauth-userinfo` not updated for ES256** | LOW | `oauth-userinfo` still uses HS256-only verification. Should try ES256 first. | Update verification chain to match `switch-role` pattern (ES256 → app HS256 → SSO HS256). |
+| H5 | **`developer_projects` / `developers` permissive INSERT/UPDATE** | LOW | RLS policies use `WITH CHECK (true)` for all roles. | Add tenant_id checks to INSERT/UPDATE policies. |
+
+### Completed
+
+| # | Finding | Date | Resolution |
+|---|---------|------|------------|
+| ~~C1~~ | sso_roles CRUD flags wrong (Broker=cru, Staff=cru) | 2026-04-09 | Migration 041: Broker→r, Staff→ru, Senior Broker→ru |
+| ~~C2~~ | sso_user_permissions RLS uses stale `active_scope` claim | 2026-04-09 | Migration 041: replaced with `get_active_scope()` helper |
+| ~~C3~~ | sso_role_configurations not readable by native tokens | 2026-04-09 | Migration 041: added `auth.uid()` tenant fallback |
+| ~~C4~~ | sso_applications anonymous read exposes all columns | 2026-04-09 | Migration 041: restricted anon to display columns only |
+| ~~C5~~ | ES256 JWT signing for SSO instance | 2026-04-09 | ADR-011: ES256 key generated, vault stored, standby imported, Edge Functions updated |
+| ~~C6~~ | HRMS edge functions used old `rw_global`/`rw_org` permission model | 2026-04-13 | Migrated `employee-sync`, `hrms-ad-admin`, `hrms-sync-permissions` to scope-based checks (`scope.id` from JWT claims). Dropped `sso_user_permissions` cache table. `hrms-sync-permissions` rewritten to be stateless. |
+
 ## Cross-Reference
 
 | For | See |
 |-----|-----|
 | How apps consume auth/permissions | [app-template.md](app-template.md) |
+| ES256 migration decision and progress | [ADR-011](../architecture/decisions/ADR-011.md) |
 | App catalog with per-app RESO resource access | [app-catalog.md](app-catalog.md) |
 | Full ecosystem architecture | [ecosystem-architecture.md](ecosystem-architecture.md) |
 | Compliance and data protection | [compliance.md](compliance.md) |

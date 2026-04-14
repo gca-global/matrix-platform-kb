@@ -174,6 +174,18 @@ Lovable deployment:
 - **Preview**: Automatic on every change in Lovable editor
 - **Production**: Manual via Share → Publish, then build output deployed to Apache htdocs
 
+### Lovable App Maintenance
+
+All Matrix business apps (HRMS, Pipeline, ITSM, FM, Client Connect, Meeting Hub, etc.) are **Lovable-managed**. Changes to these apps should be made through Lovable prompts rather than direct code edits:
+
+1. Write a structured markdown prompt describing the change (file paths, before/after code, testing steps)
+2. Store the prompt in the project's prompt archive (e.g., `matrix-testing-suite/hrms-uat/prompts/`)
+3. Apply the prompt in the Lovable editor
+4. Verify the change in Lovable preview
+5. Publish to production when verified
+
+**Direct code edits are reserved for**: SSO/CDL Edge Functions, database migrations, RLS policies, and infrastructure configuration. See [app-template.md — Lovable-Managed Apps](app-template.md#lovable-managed-apps--development--maintenance-model) for the full model.
+
 ## Disaster Recovery & Backup
 
 ### Supabase (CDL + SSO — system of record)

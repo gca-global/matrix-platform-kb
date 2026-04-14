@@ -39,7 +39,7 @@ Before building, determine which type of app you're creating:
 | UI | shadcn/ui (60+ Radix components) + Tailwind CSS |
 | Design | Sharp design system: Navy palette, Playfair Display (headings) + Inter (body) |
 | Data | `@supabase/supabase-js` v2 + TanStack Query (React Query) |
-| Auth | Custom SSO (OAuth 2.0 + PKCE) via Supabase Edge Functions |
+| Auth | Custom SSO (OAuth 2.0 + PKCE) via Supabase Edge Functions, ES256 JWT signing ([ADR-011](../architecture/decisions/ADR-011.md)) |
 | i18n | i18next (EN/RU) |
 | Routing | React Router v6 with `ProtectedRoute` guards |
 
@@ -140,14 +140,21 @@ The `cdl-write` Edge Function on the app's Supabase instance:
 
 > See [security-model.md](security-model.md) for the full JWT claims structure with all fields.
 
+### JWT Signing Algorithm
+
+SSO JWTs are signed with **ES256 (ECDSA P-256)** — Supabase's default asymmetric algorithm. During migration, apps with their own Supabase project may receive **HS256** tokens signed with an app-specific secret. See [ADR-011](../architecture/decisions/ADR-011.md) for the full migration plan and [security-model.md](security-model.md#jwt-signing--es256-target--hs256-legacy) for implementation details.
+
+**For app developers**: The signing algorithm is transparent. The Supabase JS client passes the token string; PostgREST validates it against registered keys. No app code changes are needed.
+
 ### SSO Edge Functions Called
 
 | Function | When Called |
 |----------|-----------|
 | `oauth-authorize` | Initiating login redirect |
-| `oauth-token` | Exchanging auth code for JWT |
+| `oauth-token` | Exchanging auth code for JWT (signs ES256 or HS256 per app config) |
 | `oauth-userinfo` | Fetching user info with claims |
-| `switch-role` | User switches active role → re-issues JWT |
+| `switch-role` | User switches active role → re-issues JWT (signs ES256 or HS256 per app config) |
+| `switch-tenant` | System admin switches active tenant → re-issues JWT with new org context |
 | `admin-ad-users` | Querying Azure AD user directory |
 
 ### Lovable Environment Detection
@@ -178,7 +185,7 @@ self → team → global → org_admin → system_admin
 | `team` | Own records + team members' records |
 | `global` | All records in tenant |
 | `org_admin` | Full tenant access + admin functions |
-| `system_admin` | Cross-tenant access |
+| `system_admin` | Cross-tenant access + tenant switching via `switch-tenant` |
 
 ### CRUD Permission String
 
@@ -257,15 +264,17 @@ const createMutation = useMutation({
 
 ## RLS Migration Patterns
 
-From `supabase/migrations/003_data_model_template.sql` — use the correct pattern for each table:
+From `supabase/migrations/003_data_model_template.sql` — choose the pattern that matches the table's **use case**, not just a scope level. Each pattern uses `get_active_scope()` internally to apply the full 5-level hierarchy.
 
-| Pattern | Scope | When to Use | SQL Policy Logic |
-|---------|-------|-------------|-----------------|
-| **A** | Self | User sees only own records | `WHERE user_id = get_my_user_id()` |
-| **B** | Team | User sees team records | `WHERE team_id = ANY(get_my_team_ids())` |
-| **C** | Global | All records in tenant | `WHERE tenant_id = get_current_tenant_id()` |
-| **D** | Org-admin | Full tenant CRUD | `WHERE tenant_id = get_current_tenant_id() AND is_org_admin()` |
-| **E** | System-admin | Cross-tenant | `WHERE is_system_admin()` |
+> **Authoritative reference**: [security-model.md — RLS Policy Patterns](security-model.md#rls-policy-patterns) has the full SQL for each pattern.
+
+| Pattern | Use Case | When to Use | Logic Summary |
+|---------|----------|-------------|---------------|
+| **A** | Reference tables (lookups, types) | Tenant-isolated read for all; admin-only write | Tenant isolation + CRUD check; `org_admin`/`system_admin` for INSERT/UPDATE/DELETE |
+| **B** | User-owned records (listings, contacts, deals) | Record ownership matters | Scope-aware CASE: self→own, team→own+reports, global+→all in tenant |
+| **C** | Tenant-wide records (config, announcements) | Everyone in tenant reads all | All records in tenant for anyone with read access |
+| **D** | Admin-only tables (audit, configuration) | Only admins write | Full CRUD restricted to `org_admin` / `system_admin` |
+| **E** | System tables (cross-tenant) | Platform-wide data | Cross-tenant access for `system_admin` only |
 
 RLS helper functions (available on both App DB and CDL instances):
 - `get_current_tenant_id()` — extracts tenant UUID from JWT `uoi` claim
@@ -366,6 +375,46 @@ function MyComponent() {
 
 Supported languages: English (`en`), Russian (`ru`).
 Language detected from `localStorage` or browser `navigator.language`.
+
+## Lovable-Managed Apps — Development & Maintenance Model
+
+All Matrix business apps (HRMS, Pipeline, ITSM, Financial Management, Client Connect, Meeting Hub, MLS, etc.) are **Lovable-managed projects**. This means:
+
+### Change Management via Lovable Prompts
+
+The primary mechanism for modifying, fixing, or extending these apps is through **Lovable prompts** — structured instructions provided to the Lovable AI builder. Direct code edits outside Lovable are avoided because Lovable maintains its own state and may overwrite external changes on next publish.
+
+**Best practices**:
+
+| Practice | Detail |
+|----------|--------|
+| **Write prompts, not code** | Describe the desired change in a Lovable prompt; Lovable generates and applies the code |
+| **Prompt files** | Store prompts as markdown files in the testing suite or project repo (e.g., `hrms-uat/prompts/`) for traceability |
+| **One concern per prompt** | Each prompt should address a single feature, fix, or refactor for clarity |
+| **Include file paths** | Reference exact file paths and existing code patterns so Lovable targets the right locations |
+| **Specify what NOT to change** | Explicitly list files or patterns that must remain untouched to prevent regressions |
+| **Test instructions** | Include testing steps in the prompt so the change can be verified after Lovable applies it |
+
+**What CAN be changed directly (outside Lovable)**:
+- SSO Edge Functions on the CDL/SSO instance (`switch-role`, `switch-tenant`, `admin-*`, etc.)
+- Database migrations and RLS policies (via Supabase dashboard or CLI)
+- CDL Edge Functions (`update-tenant-settings`, etc.)
+- Apache deployment configuration
+
+**What MUST go through Lovable prompts**:
+- React component changes (pages, hooks, UI)
+- `matrix-sso.ts` modifications (auth flow, token handling)
+- Routing changes (`App.tsx`)
+- State management (`AuthContext.tsx`, custom contexts)
+- App-specific Edge Functions deployed from Lovable (e.g., `hrms-sync-permissions`)
+
+### Prompt Archive
+
+Lovable prompts for each app are stored alongside UAT materials:
+
+| App | Prompt Location |
+|-----|-----------------|
+| HRMS | `/home/bitnami/matrix-testing-suite/hrms-uat/prompts/` |
 
 ## Lovable-Specific Rules
 
@@ -484,11 +533,12 @@ Source: `/home/bitnami/matrix-hrms` — a Domain-Specific app built from the tem
 
 These are hard-learned lessons. Violating any of them will cause silent failures.
 
-### 1. Never use SSO JWT for CDL PostgREST calls
+### 1. Never use SSO JWT for CDL PostgREST calls (unless ES256 key is imported)
 
-**Wrong**: Send `MatrixSSOStorage.getAccessToken()` (SSO JWT) to CDL PostgREST.
-**Why it fails**: PostgREST validates tokens against the **project's own JWT secret**, not the SSO `JWT_SECRET`. The SSO JWT is signed with a different key → `PGRST301: No suitable key or wrong key type`.
-**Correct**: Use `localStorage.getItem('matrix_supabase_access_token')` (Supabase native token). This token is issued by Supabase Auth and signed with the correct project key.
+**Wrong**: Send `MatrixSSOStorage.getAccessToken()` (SSO JWT) to CDL PostgREST without importing the SSO ES256 key.
+**Why it fails**: PostgREST validates tokens against its registered keys. If the SSO ES256 public key is not imported as a standby key in the CDL project, the SSO JWT is rejected → `PGRST301: No suitable key or wrong key type`.
+**Correct**: Use `localStorage.getItem('matrix_supabase_access_token')` (Supabase native token). This token is issued by Supabase Auth and signed with the correct project key. CDL RLS helpers fall back to `app_metadata` for custom claims.
+**Future**: Once the SSO ES256 public key is imported into the CDL project, SSO JWTs will be accepted directly by CDL PostgREST, eliminating the need for separate native tokens. See [ADR-011](../architecture/decisions/ADR-011.md).
 
 ### 2. CDL RLS helpers MUST have app_metadata fallback
 
