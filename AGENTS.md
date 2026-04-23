@@ -23,17 +23,44 @@ Before building or modifying ANY Matrix App:
 → `docs/data-models/dash-data-model.md` — Dash field names used as column names
 
 ### Step 3b (CDL-Connected): Understand Token Architecture (critical)
-CDL-Connected apps use **two tokens**:
-- **SSO JWT** (custom claims) — for Edge Function calls and App DB PostgREST
-- **Supabase native token** (project JWT secret) — for CDL PostgREST reads/writes
 
-The `oauth-token` Edge Function persists role claims (`active_scope`, `active_crud`, `active_team_ids`) to `auth.users.raw_app_meta_data`. CDL RLS helpers fall back to this `app_metadata` when JWT claims aren't present.
+> **Updated Apr 2026 (ADR-012 / ADR-013):** SSO and CDL are **two
+> separate Supabase projects**. CDL is configured with Supabase
+> **Third-Party Auth** pointing at the SSO JWKS URL + issuer, so CDL
+> PostgREST verifies SSO-issued ES256 tokens directly. There is no
+> "Supabase native token" dance for the CDL anymore, and no
+> `app_metadata` fallback on the CDL RLS helpers.
 
-→ `docs/platform/security-model.md` — full RLS helpers, app_metadata fallback, JWT claims
+CDL-Connected apps hold a single token: the **SSO JWT** (custom claims,
+ES256-signed). They send it as `Authorization: Bearer …` to:
+
+- **SSO PostgREST** (`xgubaguglsnokjyudgvc`) — for roles, permissions, display names.
+- **CDL PostgREST** (`ofzcokolkeejgqfjaszq`) — for shared `mls_*` reads.
+- **SSO / CDL Edge Functions** — all `verify_jwt: false`; each function verifies the JWT against the SSO JWKS itself.
+- **App DB PostgREST** (per-app) — unchanged.
+
+**JWT signing**: SSO issues ES256 tokens. See `docs/architecture/decisions/ADR-011.md` (ES256 migration) and ADR-012 (Third-Party Auth boundary between SSO and CDL).
+
+→ `docs/platform/security-model.md` — RLS helpers (JWT-only on CDL), claims, ES256 signing
+→ `docs/architecture/decisions/ADR-012.md` — dedicated CDL project + Third-Party Auth
 
 ### Step 3c (CDL-Connected): CDL Write Pattern
-Writes to CDL go through an Edge Function proxy on the app's Supabase instance:
-`cdlWrite.ts` → `cdl-write` Edge Function → CDL PostgREST
+Writes to CDL go through the `cdl-write` Edge Function deployed on the
+CDL project itself (not the app's Supabase instance). Apps never hold
+a CDL service-role key:
+
+`cdlWrite.ts` → `cdl-write` EF on CDL project → CDL PostgREST
+
+### Step 3c′ (CDL-Connected): MLS Ingestion Pattern
+All MLS data ingestion (external RESO, `mls_2_0` RESO API, CSV, CRM
+webhook, manual) funnels through the unified pipeline:
+`mls_sources` → staging (`reso-import` / `csv-import` / `crm-import`)
+→ `listing-merge` → `public.mls_listings`. See ADR-014.
+
+### Step 3c″ (CDL-Connected): Cross-project user display
+Apps must NOT SQL-join CDL rows to `auth.users` or `sso_users`. Use the
+`useUserDisplay` React hook from `matrix-apps-template`, which batches
+IDs through the `resolve-users` SSO Edge Function.
 
 ### Step 3d (Domain-Specific): Read Domain-Specific Examples
 → `/home/bitnami/matrix-hrms` — HRMS: 25+ domain tables, 30+ hooks, multi-step vacation approval
@@ -67,21 +94,30 @@ luxury real estate brokerage operating in Cyprus, Hungary, and Kazakhstan.
 
 ```
 docs/
+├── GOLDEN_PRINCIPLES.md              ← Engineering invariants & taste rules (prevents entropy)
+├── QUALITY_SCORE.md                  ← Domain quality grades (where to focus improvement)
+├── INDEX.md                          ← Master index with chapter summaries
+├── ARCHITECTURE.md                   ← System architecture & technology map
 ├── platform/
 │   ├── index.md                      ← Platform overview & three-platform architecture
 │   ├── app-template.md              ← How to build Matrix Apps (Lovable must read first)
 │   ├── security-model.md            ← Auth, roles, permissions, RLS patterns, JWT claims
+│   ├── sso-edge-functions.md        ← SSO Edge Function API contracts (38 functions)
 │   ├── operations.md                ← CI/CD, deployment, monitoring, DR/backup
 │   ├── compliance.md                ← GDPR, data protection, retention, DSAR procedures
 │   ├── mls-datamart.md              ← MLS 2.0 data pipeline & phased migration roadmap
 │   ├── new-app-auth-troubleshooting.md ← Troubleshooting new app auth (401/400/403)
+│   ├── alignment-audit-playbook.md   ← Harness-style audit: kill schema↔code↔UI drift
 │   ├── ecosystem-architecture.md     ← Full ecosystem: channels, apps, data, AI/ML
 │   ├── app-catalog.md               ← All platform apps (11 live, 7 in progress, 6 planned)
 │   ├── performance.md              ← Latency targets, capacity planning, load testing
 │   ├── mobile-strategy.md           ← PWA, responsive design, offline requirements
-│   └── kb-methodology.md            ← KB design principles, versioning, contribution
-├── INDEX.md                          ← Master index with chapter summaries
-├── ARCHITECTURE.md                   ← System architecture & technology map
+│   └── kb-methodology.md            ← KB design, versioning, entropy management, doc gardening
+├── exec-plans/
+│   ├── index.md                      ← Execution plan format, lifecycle, usage guide
+│   ├── tech-debt-tracker.md          ← Known technical debt by domain with severity
+│   ├── active/                       ← Currently in-progress execution plans
+│   └── completed/                    ← Archived finished plans
 ├── vision/
 │   ├── index.md                      ← Vision chapter index
 │   ├── digital-strategy-2026-2028.md ← Digital strategy: 3 markets, 7 phases, KPIs
@@ -120,6 +156,8 @@ docs/
 │   ├── index.md                      ← References chapter index
 │   ├── qobrix-api-summary.md         ← Qobrix OpenAPI resource catalog
 │   └── reso-dd-fields-summary.md     ← RESO DD 2.0 field & lookup summary
+scripts/
+└── validate-kb.sh                    ← Mechanical KB validation (links, refs, IDs, staleness)
 ```
 
 ## For Zoe AI Assistant (1st & 2nd Line Support)
@@ -169,13 +207,21 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 | Understand Qobrix entities & migration        | `docs/data-models/qobrix-data-model.md`           |
 | Understand RESO DD 2.0 (interop standard)      | `docs/data-models/reso-dd-overview.md`            |
 | Understand auth, roles, permissions, RLS       | `docs/platform/security-model.md`                 |
+| Understand ES256 JWT migration from HS256      | `docs/architecture/decisions/ADR-011.md`          |
+| See SSO Edge Function API contracts            | `docs/platform/sso-edge-functions.md`             |
 | Deploy an app or Edge Function                | `docs/platform/operations.md`                     |
 | Performance targets, capacity planning        | `docs/platform/performance.md`                   |
 | Mobile strategy (PWA, offline)                | `docs/platform/mobile-strategy.md`                |
 | Test Matrix Apps (unit, E2E, contract)         | `docs/platform/testing-strategy.md`               |
+| Run an alignment / drift audit on an app       | `docs/platform/alignment-audit-playbook.md`       |
 | Edge Function API contracts                   | `docs/platform/api-contracts.md`                  |
 | Handle GDPR, data retention, DSARs            | `docs/platform/compliance.md`                     |
 | Understand KB methodology and contribution   | `docs/platform/kb-methodology.md`                 |
+| See engineering invariants & taste rules      | `docs/GOLDEN_PRINCIPLES.md`                       |
+| See quality grades by domain                  | `docs/QUALITY_SCORE.md`                           |
+| See execution plans (active, completed)       | `docs/exec-plans/index.md`                        |
+| See known technical debt                      | `docs/exec-plans/tech-debt-tracker.md`            |
+| Validate KB structure and links               | `scripts/validate-kb.sh`                          |
 | Verify data quality in the pipeline           | `docs/data-models/data-quality.md`                |
 | Build a listing workflow                      | `docs/business-processes/listing-pipeline.md`     |
 | Build a buyer/sales workflow                  | `docs/business-processes/sales-pipeline.md`       |
@@ -196,7 +242,7 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 | `/home/bitnami/matrix-pipeline` | React/TS | Pipeline CRM app (CDL-Connected, leads, opportunities, contacts, M365) |
 | `/home/bitnami/itsm-2-1` | React/TS | ITSM app (Domain-Specific, service desk, CMDB, software assets, vendors) |
 | `/home/bitnami/matrix-fm` | React/TS | Financial Management app (Domain-Specific, reporting, budgets, planning, CORE) |
-| `/home/bitnami/matrix-mls` | React/TS | MLS Listing Management app (CDL-Connected, 18 tables on CDL) |
+| `/home/bitnami/matrix-mls` | React/TS | MLS Listing Management app (CDL-Connected, 18 tables on CDL). **Cursor-managed, not Lovable-linked** — see ADR-013. |
 | `/home/bitnami/mls_2_0` | Python/FastAPI | MLS 2.0 pipeline: Databricks ETL + RESO Web API |
 | `vision/Sharp-Sothebys-International-Realty.pdf` | PDF | Full 28-slide digital strategy 2026-2028 |
 | `vision/Sarp SIR Platform-2026-02-18-125014.mmd` | Mermaid | Platform ecosystem architecture diagram |

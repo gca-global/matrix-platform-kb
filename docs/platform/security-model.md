@@ -215,64 +215,55 @@ All functions are `STABLE` with `SET search_path = public` for security and perf
 | Function | Returns | Purpose |
 |----------|---------|---------|
 | `get_current_tenant_id()` | `uuid` | Tenant UUID from JWT `uoi` claim — used in every RLS policy for tenant isolation |
-| `get_active_scope()` | `text` | Scope string — defaults to `'self'` if missing. Falls back to `app_metadata` on CDL. |
-| `get_crud()` | `text` | CRUD permission string (e.g., `"crud"`, `"cr"`, `"r"`). Falls back to `app_metadata` on CDL. |
+| `get_active_scope()` | `text` | Scope string from JWT — defaults to `'self'` if missing. |
+| `get_crud()` | `text` | CRUD permission string (e.g., `"crud"`, `"cr"`, `"r"`) from JWT. |
 | `get_current_user_id()` | `uuid` | SSO User UUID from JWT `sub` claim |
-| `get_current_team_ids()` | `uuid[]` | Array of team UUIDs. Falls back to `app_metadata` on CDL. |
-| `is_sso_admin_v2()` | `boolean` | `true` if scope is `org_admin` or `system_admin` (`SECURITY DEFINER`) |
-| `is_in_my_teams(user_id)` | `boolean` | (CDL) `true` if `user_id` shares a team with the current JWT user via `sso_user_group_memberships` (`SECURITY DEFINER`) |
+| `get_current_team_ids()` | `uuid[]` | Array of team UUIDs from JWT. |
+| `is_sso_admin_v2()` / `is_admin_scope()` | `boolean` | `true` if scope is `org_admin` or `system_admin` |
 | `update_updated_at_column()` | trigger | Auto-sets `updated_at = now()` on UPDATE |
 
-### app_metadata Fallback (CDL Instance)
+### CDL is JWT-only (no `app_metadata` fallback) — ADR-012
 
-On the CDL instance, three RLS helpers have a **fallback to `auth.users.raw_app_meta_data`**. This is critical because CDL-Connected apps (e.g., MLS) use **Supabase native tokens** for PostgREST calls (signed with the project JWT secret, which PostgREST accepts). These native tokens don't contain custom SSO claims like `scope`, `crud`, or `team_ids`.
-
-The `oauth-token` Edge Function persists these claims to the user's `app_metadata` during login and token refresh:
-
-```
-oauth-token → auth.users.raw_app_meta_data:
-  active_scope   = "system_admin" | "org_admin" | "global" | "team" | "self"
-  active_crud    = "crud" | "cr" | "r" | etc.
-  active_team_ids = ["uuid1", "uuid2", ...]
-```
-
-The RLS helpers then resolve claims in this priority order:
-1. JWT claims (`current_setting('request.jwt.claims')`) — works with SSO JWTs
-2. `auth.users.raw_app_meta_data` — works with Supabase native tokens
-3. Default value (`'self'` for scope, `''` for crud, `'{}'` for team_ids)
+> **Updated Apr 2026 (ADR-012):** The Matrix CDL is a **separate
+> Supabase project** (`ofzcokolkeejgqfjaszq`) configured with
+> **Supabase Third-Party Auth** against the SSO JWKS URL + issuer. CDL
+> PostgREST verifies SSO-issued ES256 tokens natively. All CDL RLS
+> helpers read claims exclusively from `auth.jwt()` — no
+> `auth.users.raw_app_meta_data` fallback, no
+> `current_setting('request.jwt.*')` GUC dependency. Keeping the
+> helpers JWT-only is what makes the shared CDL schema portable to
+> Databricks Lakebase.
+>
+> Historically (before Apr 2026) the CDL lived inside the SSO project
+> and CDL RLS helpers had an `app_metadata` fallback to support the
+> "Supabase native token" path. That code is gone on the new CDL
+> project. Per-app DBs may still read `app_metadata` if they choose,
+> but this is not required and not the recommended pattern.
 
 ### SQL Implementations
 
 ```sql
--- get_current_tenant_id()
-SELECT NULLIF(current_setting('request.jwt.claims', true)::json->>'uoi', '')::uuid;
+-- get_current_tenant_id() — reads JWT "uoi" claim
+SELECT NULLIF(auth.jwt() ->> 'uoi', '')::uuid;
 
--- get_active_scope() — CDL version with app_metadata fallback (SECURITY DEFINER)
+-- get_active_scope() — JWT-only, defaults to 'self'
 SELECT coalesce(
-  nullif(current_setting('request.jwt.claims', true)::json->'scope'->>'id', ''),
-  nullif(current_setting('request.jwt.claims', true)::json->>'scope', ''),
-  (SELECT raw_app_meta_data->>'active_scope' FROM auth.users WHERE id = auth.uid()),
+  nullif(auth.jwt() -> 'scope' ->> 'id', ''),
+  nullif(auth.jwt() ->> 'scope', ''),
   'self'
 );
 
--- get_crud() — CDL version with app_metadata fallback (SECURITY DEFINER)
-SELECT coalesce(
-  nullif(current_setting('request.jwt.claims', true)::json->>'crud', ''),
-  (SELECT raw_app_meta_data->>'active_crud' FROM auth.users WHERE id = auth.uid()),
-  ''
-);
+-- get_crud() — JWT-only, defaults to ''
+SELECT coalesce(nullif(auth.jwt() ->> 'crud', ''), '');
 
--- get_current_user_id()
-SELECT NULLIF(current_setting('request.jwt.claims', true)::json->>'sub', '')::uuid;
+-- get_current_user_id() — JWT "sub" claim
+SELECT NULLIF(auth.jwt() ->> 'sub', '')::uuid;
 
--- get_current_team_ids() — CDL version with app_metadata fallback (SECURITY DEFINER)
+-- get_current_team_ids() — JWT "team_ids" array, defaults to {}
 SELECT coalesce(
-  ARRAY(SELECT (value)::uuid FROM json_array_elements_text(
-    COALESCE(current_setting('request.jwt.claims', true)::json->'team_ids', '[]'::json)
+  ARRAY(SELECT (value)::uuid FROM jsonb_array_elements_text(
+    coalesce(auth.jwt() -> 'team_ids', '[]'::jsonb)
   )),
-  (SELECT ARRAY(SELECT (jsonb_array_elements_text(
-    coalesce(raw_app_meta_data->'active_team_ids', '[]'::jsonb)
-  ))::uuid) FROM auth.users WHERE id = auth.uid()),
   '{}'::uuid[]
 );
 

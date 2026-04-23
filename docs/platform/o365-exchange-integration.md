@@ -2,7 +2,7 @@
 
 > **Source:** SM Pipeline (`matrix-pipeline`), Edge Function `ms-graph-proxy`, Microsoft Graph API v1.0
 >
-> **Supabase instance:** `tiuansahlsgautkjsajk` (SM Pipeline)
+> **Supabase instance:** `tiuansahlsgautkjsajk` (Sharp Matrix Sandbox — used here as the ad-hoc host for this integration; this is NOT the Matrix Pipeline production DB, which is `mydojctcewxrbwjckuyz`)
 >
 > This document describes the **implemented** O365 integration in SM Pipeline. All features below are live and working.
 

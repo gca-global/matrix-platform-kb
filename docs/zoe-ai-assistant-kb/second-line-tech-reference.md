@@ -50,9 +50,11 @@ Sharp Matrix is built on three platforms:
 
 | Instance | Project ID | Purpose |
 |----------|-----------|---------|
-| **Sharp Matrix SSO** | `xgubaguglsnokjyudgvc` | SSO, authentication, user management, shared data (CDL) |
+| **Sharp Matrix SSO** | `xgubaguglsnokjyudgvc` | SSO, authentication, user management (identity only — see ADR-012) |
+| **Matrix CDL** | `ofzcokolkeejgqfjaszq` | Shared `mls_*` business data + ingestion pipeline (ADR-012/013/014) |
 | **Matrix Comms** | `ujowkipnqgtazmtdsnlm` | WhatsApp/Comms dedicated database |
-| **Matrix Pipeline** | `tiuansahlsgautkjsajk` | Pipeline CRM app database (leads, opportunities, contacts) |
+| **Matrix Pipeline** | `mydojctcewxrbwjckuyz` | Pipeline CRM app database (leads, opportunities, contacts) |
+| **Sharp Matrix Sandbox** | `tiuansahlsgautkjsajk` | Large scratch / sandbox project — NOT a production app DB. Sometimes used for ad-hoc integrations (e.g. `lead-webhook`, O365 Exchange tests). |
 | **HRMS** | `wltuhltnwhudgkkdsvsr` | HR Management app database (employees, vacations, performance) |
 | **ITSM** | `irjrcskfcyierdbefrpk` | IT Service & Asset Management app database |
 | **Matrix FM** | `retujkznogwplfrbniet` | Financial Management app database (reporting, budgets, planning) |
@@ -457,7 +459,8 @@ When you receive an escalated incident, follow this decision tree:
 | Knowledge Base (GitHub) | [github.com/sharpsir-group/matrix-platform-kb](https://github.com/sharpsir-group/matrix-platform-kb) |
 | Supabase Dashboard (SSO) | [https://supabase.com/dashboard/project/xgubaguglsnokjyudgvc](https://supabase.com/dashboard/project/xgubaguglsnokjyudgvc) |
 | Supabase Dashboard (Comms) | [https://supabase.com/dashboard/project/ujowkipnqgtazmtdsnlm](https://supabase.com/dashboard/project/ujowkipnqgtazmtdsnlm) |
-| Supabase Dashboard (Pipeline) | [https://supabase.com/dashboard/project/tiuansahlsgautkjsajk](https://supabase.com/dashboard/project/tiuansahlsgautkjsajk) |
+| Supabase Dashboard (Pipeline) | [https://supabase.com/dashboard/project/mydojctcewxrbwjckuyz](https://supabase.com/dashboard/project/mydojctcewxrbwjckuyz) |
+| Supabase Dashboard (Sandbox)  | [https://supabase.com/dashboard/project/tiuansahlsgautkjsajk](https://supabase.com/dashboard/project/tiuansahlsgautkjsajk) |
 | Supabase Dashboard (HRMS) | [https://supabase.com/dashboard/project/wltuhltnwhudgkkdsvsr](https://supabase.com/dashboard/project/wltuhltnwhudgkkdsvsr) |
 | Supabase Dashboard (ITSM) | [https://supabase.com/dashboard/project/irjrcskfcyierdbefrpk](https://supabase.com/dashboard/project/irjrcskfcyierdbefrpk) |
 | Supabase Dashboard (Matrix FM) | [https://supabase.com/dashboard/project/retujkznogwplfrbniet](https://supabase.com/dashboard/project/retujkznogwplfrbniet) |

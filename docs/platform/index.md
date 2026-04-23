@@ -72,6 +72,7 @@ See [app-template.md](app-template.md) for full technical details.
 | [testing-strategy.md](testing-strategy.md) | Testing: unit (Vitest), integration, E2E (Playwright), contract testing |
 | [api-contracts.md](api-contracts.md) | Edge Function API surface, OpenAPI reference, per-app dependencies |
 | [new-app-auth-troubleshooting.md](new-app-auth-troubleshooting.md) | Troubleshooting: new app auth failures (401/400/403), stale sessions, Lovable preview issues |
+| [alignment-audit-playbook.md](alignment-audit-playbook.md) | Harness-style audit playbook: eliminate DB ↔ types ↔ code ↔ UI ↔ EF ↔ permission-key drift |
 | [kb-methodology.md](kb-methodology.md) | KB design principles, versioning, contribution guidelines |
 
 ## How Apps Share Data

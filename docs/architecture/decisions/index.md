@@ -16,3 +16,7 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-008](ADR-008.md) | Why 5-level scope hierarchy over simpler RBAC | Accepted |
 | [ADR-009](ADR-009.md) | Why medallion architecture (Bronze/Silver/Gold) for ETL | Accepted |
 | [ADR-010](ADR-010.md) | Why PM2 + cron over Kubernetes/ECS for pipeline orchestration | Accepted |
+| [ADR-011](ADR-011.md) | ES256 JWT Signing — Migration from HS256 | Accepted (in progress) |
+| [ADR-012](ADR-012.md) | Dedicated Matrix CDL Supabase project (separate from SSO) | Accepted |
+| [ADR-013](ADR-013.md) | `matrix-platform-foundation` owns both SSO and CDL projects | Accepted |
+| [ADR-014](ADR-014.md) | Unified MLS ingestion pipeline (sources → staging → merge) | Accepted |

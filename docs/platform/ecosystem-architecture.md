@@ -64,16 +64,17 @@
 └──────────┬───────────────┬────────────────┬──────────────────────────┘
            │               │                │
 ┌──────────┴───────────────┴────────────────┴──────────────────────────┐
-│  SUPABASE (Common Data Layer & System of Record)                      │
+│  SUPABASE (Identity + Common Data Layer + Per-App Databases)          │
 │                                                                       │
-│  ┌─────────────────────────────┐ ┌────────────────────────────────┐  │
-│  │ SSO Instance                │ │ App DB Instances                │  │
-│  │ xgubaguglsnokjyudgvc       │ │ CDL: RESO tables (Property,   │  │
-│  │ Auth, Tenants, Permissions  │ │   Member, Contacts, Media)     │  │
-│  │ Edge Functions (OAuth,      │ │ Domain: HRMS tables, Finance   │  │
-│  │   admin, switch-role)       │ │   tables, etc.                 │  │
-│  │ AD Users, Role Config       │ │ RLS enforced via SSO JWT       │  │
-│  └─────────────────────────────┘ └────────────────────────────────┘  │
+│  ┌────────────────────────┐ ┌────────────────────────┐ ┌──────────┐  │
+│  │ SSO                     │ │ Matrix CDL              │ │ App DBs  │  │
+│  │ xgubaguglsnokjyudgvc   │ │ ofzcokolkeejgqfjaszq    │ │ per app  │  │
+│  │ Auth, Tenants,          │ │ Shared mls_* + ingestion│ │ Domain + │  │
+│  │   Permissions, OAuth,   │ │ pipeline (ADR-014);     │ │ app-     │  │
+│  │   ES256 JWTs (ADR-011)  │ │ JWKS-verified SSO JWTs  │ │ specific │  │
+│  │                         │ │ (ADR-012 Third-Party)   │ │ tables   │  │
+│  └────────────────────────┘ └────────────────────────┘ └──────────┘  │
+│        SSO and CDL both owned by matrix-platform-foundation (ADR-013).│
 └──────────┬───────────────────────────────────────────────────────────┘
            │
 ┌──────────┴───────────────────────────────────────────────────────────┐
@@ -81,9 +82,9 @@
 │                                                                       │
 │  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐                  │
 │  │ Bronze       │ │ Silver       │ │ Gold (RESO)  │                  │
-│  │ (raw strings)│→│ (normalized) │→│ (unified)    │──→ Supabase CDL  │
+│  │ (raw strings)│→│ (normalized) │→│ (unified)    │→ RESO Web API    │
 │  └──────────────┘ └──────────────┘ └──────────────┘                  │
-│  CDC every 15 min │ Analytics + BI │ AI/ML training data             │
+│  CDC every 15 min. CDL pulls Gold via reso-import EF (ADR-014).      │
 └──────────────────────────────────────────────────────────────────────┘
            │
 ┌──────────┴───────────────────────────────────────────────────────────┐
@@ -155,13 +156,16 @@ All apps are built by **Lovable** from the **App Builder Template** (`matrix-app
 
 All apps share: SSO auth, dual-Supabase architecture, 5-level scope, CRUD permissions, shadcn/ui.
 
-### Supabase (CDL & System of Record)
+### Supabase (Identity + CDL + Per-App)
 
-**Dual-instance architecture per app:**
-- SSO Instance (`xgubaguglsnokjyudgvc`) — auth, permissions, tenants
-- App DB Instance (per app) — business data with RLS
+**Three project roles (ADR-012 / ADR-013):**
+- **SSO project** (`xgubaguglsnokjyudgvc`) — identity only (auth, permissions, tenants, AD users, SSO EFs).
+- **Matrix CDL project** (`ofzcokolkeejgqfjaszq`) — shared `mls_*` business data + the unified ingestion pipeline (`mls_sources`, staging, `listing-merge`, audit). Uses Supabase Third-Party Auth against SSO JWKS so SSO-issued ES256 JWTs verify directly.
+- **App DB projects** (per app) — app-specific tables with RLS.
 
-CDL-Connected apps share RESO-named tables. Domain-Specific apps define their own schemas.
+CDL-Connected apps read shared MLS data via `cdlClient`; writes go
+through the `cdl-write` Edge Function on the CDL project. Domain-
+Specific apps define their own schemas in their own project.
 
 ### Databricks (DWH & ETL)
 

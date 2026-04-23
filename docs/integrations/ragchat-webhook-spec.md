@@ -91,7 +91,7 @@ RagChat marks the lead as "Failed" and stores the error message for display and 
 
 ## Matrix Pipeline implementation
 
-- **Edge Function:** `lead-webhook` on `tiuansahlsgautkjsajk`
+- **Edge Function:** `lead-webhook` on `tiuansahlsgautkjsajk` (Sharp Matrix Sandbox — hosts this ad-hoc integration; the Matrix Pipeline production DB is `mydojctcewxrbwjckuyz`)
 - **Auth:** Bearer token matched against `app_settings.leads_integration.webhook_secret`
 - **Settings UI:** Matrix Pipeline → Settings → Leads Integration tab
 - **Creates:** Contact (crm_contacts) + Lead (leads) + Deal (deals) + deal_contacts link

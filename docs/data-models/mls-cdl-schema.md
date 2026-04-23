@@ -1,28 +1,58 @@
 # MLS CDL Schema — Listing Management Data Model
 
-> 18 tables, 422 columns, 70 RLS policies on `supabase-matrix-data-layer` (CDL instance `xgubaguglsnokjyudgvc`).
-> **RLS is currently DISABLED** on all MLS tables for development. Policies are preserved and will be re-enabled after dev stabilization.
-> All tables use the `mls_` prefix. Column names follow Dash conventions; Cyprus-specific fields use `x_sm_*`.
+> **Status (Apr 2026, ADR-012 / ADR-013 / ADR-014):** The Matrix CDL now
+> lives on a **dedicated Supabase project** `ofzcokolkeejgqfjaszq`
+> (Matrix CDL), separate from the SSO project `xgubaguglsnokjyudgvc`.
+> The CDL is owned and managed exclusively by
+> `matrix-platform-foundation/supabase-cdl/`. It is not linked to Lovable.
+>
+> Schema: 18 domain `mls_*` tables + the ingestion control plane
+> (`mls_sources`, `mls_source_field_mappings`, `mls_import_runs`,
+> `mls_staging_listings`, `mls_import_events`). RLS is **enabled** on
+> every table from day one and policies use JWT-only helpers so the
+> schema stays portable to Databricks Lakebase. Canonical column
+> names follow RESO DD 2.0; Cyprus-specific fields use the `x_sm_*`
+> prefix.
 
-## Architecture Decision
+## Architecture Decision (updated)
 
-The MLS Listing Management tables are deployed to the **shared CDL instance**, not a separate app database. This makes listing data a canonical, cross-app asset — consumed by Broker, Marketing, Finance, and Client Portal apps through the same Supabase client.
+The MLS CDL is a **dedicated project** — see ADR-012. It is consumed
+by Broker, Marketing, Finance, Client Portal, and Portfolio apps
+through a split Supabase client:
 
-**Why CDL, not a separate app DB:**
-- Listings are shared data (like Property in RESO) — multiple apps need read/write access
-- Avoids cross-instance joins or data duplication
-- RLS policies use existing CDL helper functions
-- Consistent with the "CDL = system of record" principle
+- `ssoClient` → `xgubaguglsnokjyudgvc` (identity, roles, display lookups)
+- `cdlClient` → `ofzcokolkeejgqfjaszq` (listings, contacts, transactions)
 
-**CDL Connection Pattern (proven working):**
-- **Reads**: `dataLayerClient.ts` → Supabase native token → CDL PostgREST (RLS via `app_metadata` fallback)
-- **Writes**: `cdlWrite.ts` → `cdl-write` Edge Function (on MLS App DB) → CDL PostgREST with native token
-- **Token**: `localStorage.getItem('matrix_supabase_access_token')` — Supabase native token signed with CDL project JWT secret
-- **RLS claims**: `oauth-token` persists `active_scope`/`active_crud`/`active_team_ids` to `auth.users.raw_app_meta_data`; CDL RLS helpers fall back to this
+**Why a dedicated project:**
+- Isolates shared business data from the identity layer. An MLS
+  schema incident cannot take down SSO.
+- Forces JWT-only RLS helpers → Lakebase-portable.
+- Single-writer via `matrix-platform-foundation` prevents Lovable
+  apps from drifting the shared schema.
+
+**CDL Connection Pattern (current):**
+- **Identity:** CDL uses Supabase Third-Party Auth with the SSO JWKS
+  URL + issuer. CDL PostgREST verifies SSO-issued ES256 tokens natively.
+- **Reads:** apps call `cdlClient.from('mls_...')` with the SSO token
+  as bearer. RLS policies call `public.get_active_scope()` /
+  `public.get_crud()` / `public.get_current_tenant_id()` which read
+  claims directly from `auth.jwt()`.
+- **Writes:** apps call the `cdl-write` Edge Function (on the CDL
+  project) which acts as a CORS proxy for authorized writes. No app
+  ever holds a CDL service-role key.
+- **User display:** apps never join CDL rows to `sso_users` in SQL —
+  they call the `resolve-users` SSO Edge Function via the
+  `useUserDisplay` React hook.
 
 ## RLS Strategy
 
-> **Current state (Feb 2026):** RLS is **disabled** on all 18 MLS tables (`ALTER TABLE ... DISABLE ROW LEVEL SECURITY`). All 70 policies remain defined and will be re-enabled once the MLS app dev workflow stabilizes. During this period, the `cdl-write` Edge Function is the sole access-control gate.
+> **Current state (Apr 2026, per ADR-012):** RLS is **enabled on every
+> CDL table from day one.** The `cdl-write` Edge Function remains a
+> CORS / write-authorization proxy, but it is no longer the sole gate
+> — PostgREST-level RLS now enforces reads and writes using
+> JWT-derived claims. Helpers live in the CDL project's `public`
+> schema and never depend on Supabase-specific GUCs, so the policies
+> remain valid under Databricks Lakebase.
 
 Uses the KB's **5-level scope + CRUD model** (Patterns A-E) with CDL helper functions:
 
@@ -236,9 +266,49 @@ Seeded per active tenant on deployment:
 | `src/integrations/supabase/dataLayerTypes.ts` | Auto-generated CDL TypeScript types |
 | `src/components/settings/DevToolsPanel.tsx` | Test data seeder — seeds 18 tables with SEED-prefixed records |
 
+## Ingestion control plane (ADR-014)
+
+On top of the 18 domain tables, the CDL hosts a unified ingestion
+control plane that every data feed funnels through. Complete design
+and rationale live in ADR-014; summary below.
+
+| Table | Role |
+|---|---|
+| `mls_sources` | Registry of data feeds (reso_web_api, databricks_gold, csv_upload, crm_webhook, manual_entry). Per-tenant, unique on `(tenant_id, slug)`. |
+| `mls_source_field_mappings` | Per-source mapping from `source_field` → `canonical_field` (RESO DD 2.0 column name on `mls_listings`). Supports lightweight `transform` (trim/upper/lower/cast/enum_map). |
+| `mls_import_runs` | One row per sync execution. Tracks `status`, counters, `cursor`, and `error_summary`. |
+| `mls_staging_listings` | Landing zone. Holds `raw_payload` + `mapped_payload` + provenance; `validation_status` enum: `staged`, `validated`, `promoted`, `rejected`, `superseded`. |
+| `mls_import_events` | Append-only audit log of every ingestion decision. |
+
+Every promoted row in `public.mls_listings` carries the provenance
+columns `x_sm_source_id`, `x_sm_source_record_id`, `x_sm_ingested_at`,
+`x_sm_ingested_by_run_id`, `x_sm_last_source_sync_at`. A unique
+partial index on `(x_sm_source_id, x_sm_source_record_id)` keeps
+dedup deterministic across retries.
+
+**Flow:** ingest EF → `mls_staging_listings` → `listing-merge` EF →
+`public.mls_listings`.
+
+**Edge functions** (all on CDL project, `verify_jwt: false`):
+
+- `reso-import` — OData 4.01 incremental pagination with OAuth2
+  `client_credentials`. Seeded to pull from the `mls_2_0` RESO API.
+- `csv-import` — direct CSV payload ingestion from the admin UI.
+- `crm-import` — webhook ingestion with optional HMAC verification.
+- `listing-merge` — staging → canonical promotion with three
+  resolution strategies: `prefer_incoming`, `prefer_existing`,
+  `reject`.
+
+**Admin UI:** `matrix-mls/src/pages/admin/mls/*` (Sources, Field
+Mappings, Import Runs, Staging Review, Manual Entry, CSV Import,
+CRM Import, Merge, Audit), gated by the `data_ops` SSO role.
+
 ## Source
 
-- App repo: `/home/bitnami/matrix-mls`
-- CDL instance: `xgubaguglsnokjyudgvc` (supabase-matrix-data-layer)
-- Migrations: 004–011 (mls_lookup_tables through mls_seed_data), plus 5-scope RLS migrations
-- TypeScript types: `src/integrations/supabase/dataLayerTypes.ts`
+- CDL project: `ofzcokolkeejgqfjaszq` (Matrix CDL)
+- Owning repo: `/home/bitnami/matrix-platform-foundation/supabase-cdl/`
+- Migrations: `supabase-cdl/migrations/20260420000000_infra_schema.sql`
+  through `20260420001100_seed_mls_sources_reso_api.sql`
+- Edge functions: `supabase-cdl/functions/{cdl-write, reso-import, csv-import, crm-import, listing-merge}/`
+- Consumer app (admin UI): `/home/bitnami/matrix-mls`
+- Retired writer app: `/home/bitnami/matrix-cdl-studio` (see `RETIREMENT.md`)

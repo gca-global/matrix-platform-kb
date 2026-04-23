@@ -24,21 +24,23 @@ Sharp Matrix is built on three platforms, each chosen for what it does best:
 │  In Progress: Matrix Pipeline │ Contact Mgmt │ HRMS │ Matrix FM       │
 │  In Progress: ITSM │ Integration Mgmt │ Notification Mgmt            │
 ├─────────────────────────────────────────────────────────────────────┤
-│  SUPABASE CDL (System of Record)                                     │
-│  ┌─────────────────────────────┐ ┌────────────────────────────────┐ │
-│  │ SSO Instance                │ │ App DB Instances (per app)     │ │
-│  │ xgubaguglsnokjyudgvc       │ │ RESO tables (CDL-Connected)   │ │
-│  │ Auth, Tenants, Permissions  │ │ Domain tables (Domain-Specific)│ │
-│  │ Edge Functions, AD Users    │ │ RLS enforced via SSO JWT      │ │
-│  └─────────────────────────────┘ └────────────────────────────────┘ │
+│  SUPABASE PROJECTS (Identity + Shared Data + Per-App)                │
+│  ┌──────────────────────┐ ┌──────────────────────┐ ┌─────────────┐  │
+│  │ SSO                   │ │ Matrix CDL            │ │ App DBs     │  │
+│  │ xgubaguglsnokjyudgvc │ │ ofzcokolkeejgqfjaszq  │ │ (per app)   │  │
+│  │ Identity only         │ │ Shared mls_* +        │ │ Domain +    │  │
+│  │ ES256 SSO JWTs        │ │ ingestion pipeline    │ │ app tables  │  │
+│  │ (ADR-011)             │ │ (ADR-012/013/014)     │ │             │  │
+│  └──────────────────────┘ └──────────────────────┘ └─────────────┘  │
+│       Both SSO and CDL owned by matrix-platform-foundation.          │
 ├─────────────────────────────────────────────────────────────────────┤
-│  DATABRICKS (DWH & ETL)                                             │
-│  mls_2_0 pipeline: Sources → Bronze → Silver → Gold → CDL sync     │
-│  Analytics, BI, AI/ML training data                                  │
+│  DATABRICKS (DWH & ETL)                                              │
+│  mls_2_0 pipeline: Sources → Bronze → Silver → Gold → RESO Web API   │
+│  CDL pulls from mls_2_0 via reso-import EF (ADR-014)                 │
 ├─────────────────────────────────────────────────────────────────────┤
 │  EXTERNAL SOURCES & SYNDICATION                                      │
-│  Inbound: Qobrix API, DASH API/FILE → Databricks (being phased out)│
-│  Outbound: RESO Web API, Dash push, Portal exports (target state)   │
+│  Inbound: Qobrix API, DASH API/FILE → Databricks (being phased out) │
+│  Outbound: RESO Web API, Dash push, Portal exports (target state)    │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -52,14 +54,18 @@ Sharp Matrix is built on three platforms, each chosen for what it does best:
 Both types use the same template: dual-Supabase, SSO auth, 5-level scope, CRUD permissions, shadcn/ui.
 See [app-template.md](platform/app-template.md) for full details.
 
-## Dual-Supabase Architecture
+## Supabase Topology (ADR-012 / ADR-013)
 
-Every Matrix App connects to two Supabase instances:
+Every Matrix App connects to up to three Supabase projects:
 
 | Instance | Project ID | Purpose | Client |
 |----------|-----------|---------|--------|
-| **SSO / CDL** | `xgubaguglsnokjyudgvc` | Auth, permissions, tenants, AD users | `dataLayerClient.ts` |
-| **App Database** | Per-app | Business data with RLS | `client.ts` |
+| **SSO** | `xgubaguglsnokjyudgvc` | Identity: auth, permissions, tenants, AD users | `ssoClient` (from `dataLayerClient.ts`) |
+| **Matrix CDL** | `ofzcokolkeejgqfjaszq` | Shared `mls_*` business data + ingestion pipeline | `cdlClient` (from `dataLayerClient.ts`) |
+| **App Database** | Per-app (e.g., HRMS `wltuhltnwhudgkkdsvsr`, MLS app DB `wckwfbbqiupvallmhqbu`) | App-specific tables with RLS | `supabase` (from `client.ts`) |
+
+CDL uses Supabase Third-Party Auth against the SSO JWKS — apps send
+the SSO-issued ES256 JWT directly to CDL PostgREST. See ADR-012.
 
 ## Technology Stack
 
@@ -114,8 +120,10 @@ Qobrix is decommissioned. Dash flips from pull to push. Managed ingress/egress c
 
 | Name | Project ID | Role |
 |------|-----------|------|
-| Sharp Matrix SSO | `xgubaguglsnokjyudgvc` | SSO, Auth, RBAC, Tenants, AD Users, CDL shared data |
-| Matrix Pipeline | `tiuansahlsgautkjsajk` | Pipeline CRM (leads, opportunities, contacts) |
+| Sharp Matrix SSO | `xgubaguglsnokjyudgvc` | SSO, Auth, RBAC, Tenants, AD Users (identity only — see ADR-012) |
+| Matrix CDL | `ofzcokolkeejgqfjaszq` | Common Data Layer: shared `mls_*` tables + ingestion control plane (ADR-012/013/014) |
+| Matrix Pipeline | `mydojctcewxrbwjckuyz` | Pipeline CRM (leads, opportunities, contacts) |
+| Sharp Matrix Sandbox | `tiuansahlsgautkjsajk` | Large scratch / sandbox project — NOT a production app DB |
 | HRMS | `wltuhltnwhudgkkdsvsr` | HR Management (employees, vacations, performance) |
 | ITSM | `irjrcskfcyierdbefrpk` | IT Service & Asset Management (tickets, assets, licenses) |
 | Matrix FM | `retujkznogwplfrbniet` | Financial Management (reporting, budgets, planning) |

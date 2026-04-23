@@ -3,7 +3,11 @@
 > All applications and platform components in the Sharp Matrix ecosystem, with current delivery status.
 > Last updated: April 2026
 >
-> **Development model**: All Matrix business apps are **Lovable-managed projects**. Changes are applied through structured Lovable prompts, not direct code edits. SSO/CDL Edge Functions and database migrations are managed directly. See [app-template.md — Lovable-Managed Apps](app-template.md#lovable-managed-apps--development--maintenance-model) for details.
+> **Development model**: Most Matrix business apps are **Lovable-managed projects** — changes flow through structured Lovable prompts, not direct code edits. SSO/CDL Edge Functions and database migrations are managed directly. See [app-template.md — Lovable-Managed Apps](app-template.md#lovable-managed-apps--development--maintenance-model) for details.
+>
+> **Exceptions (Cursor-managed, not Lovable-linked):**
+> - `matrix-mls` (app DB `wckwfbbqiupvallmhqbu`) — detached from Lovable after the CDL cutover (ADR-013/014). Changes go through Cursor + git directly.
+> - `matrix-cdl-studio` — **retired** as a write surface (see `matrix-cdl-studio/RETIREMENT.md`). Any future CDL inspector must be read-only with the CDL anon key.
 
 ## Delivery Status Summary
 
@@ -184,7 +188,7 @@
 **Users**: Brokers, Sales Managers, Call Center Staff, Listing Coordinators, Marketing, Finance
 **RESO Resources**: Property, Media, Contacts, Member, Office
 **App Type**: CDL-Connected
-**Supabase Instance**: `tiuansahlsgautkjsajk`
+**Supabase Instance**: `mydojctcewxrbwjckuyz` (Matrix Pipeline app DB)
 **Repo**: `/home/bitnami/matrix-pipeline`
 **Key Features** (target):
 - Lead capture and management with webhook ingestion from external sources

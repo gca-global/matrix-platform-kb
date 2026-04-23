@@ -54,14 +54,81 @@ Checklist for changes that could affect Lovable:
 
 ## Validation Process
 
-Periodic check that KB references match codebase:
+### Automated Validation (`scripts/validate-kb.sh`)
 
-- Table names in data model docs vs Supabase schema
-- File paths in AGENTS.md vs actual files
-- Supabase project IDs (SSO: `xgubaguglsnokjyudgvc`, etc.)
-- Edge Function names vs deployed functions
+The KB includes a mechanical validation script that checks:
 
-Run validation when: adding new data model docs, changing AGENTS.md structure, or before major Lovable builds.
+| Check | What It Validates |
+|-------|-------------------|
+| File references | All paths in `AGENTS.md` tree resolve to actual files |
+| Cross-links | All `[text](path.md)` links in every doc resolve |
+| Project IDs | Supabase project IDs in docs match known instances |
+| Staleness | Flags docs not updated via git in 90+ days |
+
+Run: `bash scripts/validate-kb.sh` from the repo root.
+
+Exit code 0 = all checks pass. Exit code 1 = errors found (broken links, missing files).
+
+### When to Run Validation
+
+- Before major Lovable builds
+- After adding new data model docs
+- After changing AGENTS.md structure
+- After adding/renaming any KB file
+- Weekly as part of doc-gardening (see below)
+
+### Manual Validation (supplemental)
+
+Checks that require human or database access:
+
+- Table names in data model docs vs live Supabase schema
+- Edge Function names vs deployed functions (via `supabase functions list`)
+- Content accuracy of business process docs
+
+## Entropy Management & Doc Gardening
+
+Inspired by [OpenAI's harness engineering approach](https://openai.com/index/harness-engineering/),
+the KB treats documentation entropy like technical debt: pay it down continuously
+in small increments rather than letting it compound.
+
+### The Problem
+
+Agents replicate patterns that already exist in the repository — even stale or
+incorrect ones. Over time this leads to drift. Without active maintenance:
+
+- Stale rules quietly become "attractive nuisances" (agents follow them faithfully)
+- Cross-references rot as files are renamed or restructured
+- Golden principles diverge from actual codebase behavior
+
+### Doc-Gardening Process
+
+| Cadence | Activity | Tooling |
+|---------|----------|---------|
+| **Weekly** | Run `scripts/validate-kb.sh`, fix broken links and missing refs | Automated script |
+| **Monthly** | Review stale docs flagged by the script (90+ day threshold) | Git history + manual review |
+| **Per-sprint** | Update [QUALITY_SCORE.md](../QUALITY_SCORE.md) grades if domains improved or regressed | Manual assessment |
+| **Per-sprint** | Update [tech-debt-tracker.md](../exec-plans/tech-debt-tracker.md) — resolve or add items | Manual assessment |
+| **On-change** | When a decision contradicts an existing doc, update the doc immediately | Human or agent |
+
+### Agent-Driven Gardening
+
+Use this prompt template to have an AI agent perform a gardening pass:
+
+> Run `scripts/validate-kb.sh` and fix all errors. Then review docs flagged as
+> stale. For each stale doc, either update it to reflect current codebase state
+> or add a note explaining why the content is still accurate. Update the
+> `QUALITY_SCORE.md` grades and `tech-debt-tracker.md` based on your findings.
+
+### Taste Feedback Loop
+
+When a human reviews agent output and finds a pattern violation:
+
+1. Identify which golden principle was violated (see [GOLDEN_PRINCIPLES.md](../GOLDEN_PRINCIPLES.md))
+2. If the principle exists but was ignored → check if the principle is discoverable (is it linked from relevant docs?)
+3. If no principle covers the case → add a new principle to `GOLDEN_PRINCIPLES.md`
+4. If the principle should be mechanically enforced → add a check to `validate-kb.sh` or app linters
+
+This loop ensures human taste is captured once and applied continuously.
 
 ## Document Conventions
 
@@ -78,3 +145,8 @@ Run validation when: adding new data model docs, changing AGENTS.md structure, o
 | Chapter index and summaries | [INDEX.md](../INDEX.md) |
 | App template (Lovable entry point) | [app-template.md](app-template.md) |
 | Platform chapter index | [platform/index.md](index.md) |
+| Golden principles (engineering invariants) | [GOLDEN_PRINCIPLES.md](../GOLDEN_PRINCIPLES.md) |
+| Quality grades by domain | [QUALITY_SCORE.md](../QUALITY_SCORE.md) |
+| Execution plans | [exec-plans/index.md](../exec-plans/index.md) |
+| Technical debt tracker | [exec-plans/tech-debt-tracker.md](../exec-plans/tech-debt-tracker.md) |
+| KB validation script | `scripts/validate-kb.sh` |

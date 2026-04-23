@@ -47,10 +47,17 @@ Before building, determine which type of app you're creating:
 
 Every Matrix App connects to **two Supabase instances**:
 
-| Instance | Project ID | Client File | Purpose |
-|----------|-----------|-------------|---------|
-| **SSO / CDL** | `xgubaguglsnokjyudgvc` | `src/integrations/supabase/dataLayerClient.ts` | Authentication, permissions, tenants, shared data |
-| **App Database** | Per-app (e.g., HRMS: `wltuhltnwhudgkkdsvsr`) | `src/integrations/supabase/client.ts` | App-specific business data with RLS |
+> **Updated Apr 2026 (ADR-012 / ADR-013):** SSO and CDL are now **two
+> separate Supabase projects**, both owned by
+> `matrix-platform-foundation`. Client code splits into `ssoClient`
+> and `cdlClient` (exported from the same `dataLayerClient.ts` for
+> migration ergonomics, but pointing at different projects).
+
+| Instance | Project ID | Client Export | Purpose |
+|----------|-----------|---------------|---------|
+| **SSO** | `xgubaguglsnokjyudgvc` | `ssoClient` from `dataLayerClient.ts` | Authentication, roles, permissions, tenants, SSO admin EFs |
+| **CDL** | `ofzcokolkeejgqfjaszq` | `cdlClient` from `dataLayerClient.ts` | Shared `mls_*` business data, ingestion control plane |
+| **App Database** | Per-app (e.g., HRMS: `wltuhltnwhudgkkdsvsr`) | `supabase` from `client.ts` | App-specific business data with RLS |
 
 ### SSO Instance Tables
 
@@ -81,19 +88,38 @@ The `accessToken` hook injects the SSO JWT into every request. RLS policies read
 
 ### CDL Client Setup (for CDL-Connected Apps)
 
-CDL-Connected apps (e.g., MLS) make PostgREST calls to the shared CDL instance. These calls use the **Supabase native token** (signed with the CDL project's JWT secret), not the SSO JWT. This is because PostgREST validates tokens against its own project JWT secret.
+CDL-Connected apps read the shared CDL tables through the `cdlClient`
+exported from `dataLayerClient.ts`. The CDL project is configured with
+**Supabase Third-Party Auth** pointing at the SSO JWKS URL + issuer,
+so PostgREST verifies SSO-issued ES256 tokens directly. Apps forward
+the SSO access token as the bearer — no Supabase-native token juggling.
 
 ```typescript
-// dataLayerClient.ts — prioritize Supabase native token for PostgREST
-const accessToken = localStorage.getItem('matrix_supabase_access_token')
-  || MatrixSSOStorage.getAccessToken();  // SSO JWT fallback
-const cdlClient = createClient(CDL_URL, CDL_ANON_KEY, {
-  auth: { persistSession: false, autoRefreshToken: false },
-  global: { headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {} },
-});
+// dataLayerClient.ts — split SSO and CDL clients
+export const SSO_SUPABASE_URL = 'https://xgubaguglsnokjyudgvc.supabase.co';
+export const CDL_SUPABASE_URL = 'https://ofzcokolkeejgqfjaszq.supabase.co';
+
+export function buildSsoClient() { /* …SSO anon key… */ }
+export function buildCdlClient() { /* …CDL anon key… */ }
+
+export const ssoClient = buildSsoClient();
+export const cdlClient = buildCdlClient();
 ```
 
-**How RLS claims reach PostgREST**: The `oauth-token` Edge Function persists `active_scope`, `active_crud`, and `active_team_ids` to the user's `app_metadata` (`auth.users.raw_app_meta_data`). CDL RLS helper functions fall back to `app_metadata` when JWT claims aren't present. See [security-model.md](security-model.md#app_metadata-fallback-cdl-instance).
+**How RLS claims reach CDL PostgREST**: the CDL RLS helpers
+(`public.get_active_scope`, `public.get_crud`,
+`public.get_current_tenant_id`, …) read claims directly from
+`auth.jwt()`. There is no `app_metadata` fallback on the CDL project
+— the helpers are JWT-only so the policies remain portable to
+Databricks Lakebase. See [security-model.md](security-model.md) and
+ADR-012.
+
+### Resolving user display names across projects
+
+Because `mls_*` rows live on a different Supabase project than
+`auth.users`, apps must NOT try to SQL-join listings to SSO users.
+Use the `useUserDisplay` React hook (from `matrix-apps-template`),
+which batches IDs and calls the `resolve-users` SSO Edge Function.
 
 ### CDL Write Proxy (Edge Function Pattern)
 
@@ -276,21 +302,21 @@ From `supabase/migrations/003_data_model_template.sql` — choose the pattern th
 | **D** | Admin-only tables (audit, configuration) | Only admins write | Full CRUD restricted to `org_admin` / `system_admin` |
 | **E** | System tables (cross-tenant) | Platform-wide data | Cross-tenant access for `system_admin` only |
 
-RLS helper functions (available on both App DB and CDL instances):
+RLS helper functions (available on both App DB and CDL projects — all read from `auth.jwt()` only):
 - `get_current_tenant_id()` — extracts tenant UUID from JWT `uoi` claim
-- `get_active_scope()` — extracts scope from JWT; **on CDL: falls back to `app_metadata`** for Supabase native tokens
-- `get_crud()` — extracts CRUD string from JWT; **on CDL: falls back to `app_metadata`**
+- `get_active_scope()` — extracts scope from JWT (`self` / `team` / `global` / `org_admin` / `system_admin`)
+- `get_crud()` — extracts CRUD string from JWT
 - `get_current_user_id()` — extracts SSO user UUID from JWT `sub` claim
-- `get_current_team_ids()` — extracts team UUID array; **on CDL: falls back to `app_metadata`**
-- `is_sso_admin_v2()` — returns true if scope is `org_admin` or `system_admin`
-- `is_in_my_teams(user_id)` — (CDL only) checks if user shares a team via `sso_user_group_memberships`
+- `get_current_team_ids()` — extracts team UUID array from JWT
+- `is_sso_admin_v2()` / `is_admin_scope()` — returns true if scope is `org_admin` or `system_admin`
 
-> **CDL Token Architecture:** CDL-Connected apps use Supabase native tokens (signed with the project
-> JWT secret) for PostgREST calls. These tokens don't carry custom SSO claims, so CDL RLS helpers
-> fall back to `auth.users.raw_app_meta_data` where `oauth-token` persists `active_scope`, `active_crud`,
-> and `active_team_ids`. See [security-model.md](security-model.md#app_metadata-fallback-cdl-instance).
->
-> **Legacy Functions:** The CDL also has `is_admin()`, `has_rw_global_permission()`, `can_access_all_tenant_data()`, etc. for backward compatibility with older apps (meeting-hub, client-connect). New apps should use Pattern A-E with the functions listed above.
+> **CDL Token Architecture (Apr 2026, ADR-012):** CDL PostgREST uses
+> **Supabase Third-Party Auth** against the SSO JWKS URL + issuer. Apps
+> send the SSO-issued ES256 JWT directly to CDL. There is **no**
+> Supabase-native-token path and **no** `app_metadata` fallback on CDL
+> RLS helpers — `oauth-token` embeds `scope`, `crud`, `team_ids`, and
+> `uoi` in the JWT payload itself. Keeping the helpers JWT-only is what
+> makes the CDL portable to Databricks Lakebase.
 
 ## UI Conventions
 
@@ -522,55 +548,93 @@ Source: `/home/bitnami/matrix-hrms` — a Domain-Specific app built from the tem
 
 | File | What It Shows |
 |------|--------------|
-| `src/lib/cdlWrite.ts` | CDL write helper — sends operations via `cdl-write` Edge Function with native token |
-| `src/integrations/supabase/dataLayerClient.ts` | CDL read client — prioritizes Supabase native token for PostgREST |
-| `supabase/functions/cdl-write/index.ts` | Edge Function proxy — table allowlist, conflict resolution, error `_debug` |
-| `src/components/settings/DevToolsPanel.tsx` | Test data seeder — seeds 18 tables with SEED-prefixed records |
-| `src/pages/AuthCallback.tsx` | Stores `supabase_access_token` from `oauth-token` into localStorage |
-| `src/hooks/useActiveRole.ts` | `canCreate`/`canRead`/`canUpdate`/`canDelete` + `isAdmin`, `isGlobalOrAbove` |
+| `src/lib/cdlWrite.ts` | CDL write helper — invokes the `cdl-write` EF deployed on the CDL project |
+| `src/integrations/supabase/dataLayerClient.ts` | Split `ssoClient` + `cdlClient`; both forward the SSO access token |
+| `src/hooks/useUserDisplay.ts` | Cross-project user display lookup via `resolve-users` EF |
+| `src/pages/admin/mls/*.tsx` | Admin UI for the MLS ingestion pipeline (Sources, Mappings, Runs, Staging, Manual, CSV, CRM, Merge, Audit) |
+| `src/components/settings/DevToolsPanel.tsx` | Test data seeder for the 18 MLS tables |
+| `src/pages/AuthCallback.tsx` | OAuth2 + PKCE callback handler |
+| `src/hooks/useActiveRole.ts` | `canCreate`/`canRead`/`canUpdate`/`canDelete` + admin flags |
 
 ## Common Pitfalls (LLM Guidance)
 
 These are hard-learned lessons. Violating any of them will cause silent failures.
 
-### 1. Never use SSO JWT for CDL PostgREST calls (unless ES256 key is imported)
+### 1. Do NOT reintroduce "Supabase native tokens" for CDL
 
-**Wrong**: Send `MatrixSSOStorage.getAccessToken()` (SSO JWT) to CDL PostgREST without importing the SSO ES256 key.
-**Why it fails**: PostgREST validates tokens against its registered keys. If the SSO ES256 public key is not imported as a standby key in the CDL project, the SSO JWT is rejected → `PGRST301: No suitable key or wrong key type`.
-**Correct**: Use `localStorage.getItem('matrix_supabase_access_token')` (Supabase native token). This token is issued by Supabase Auth and signed with the correct project key. CDL RLS helpers fall back to `app_metadata` for custom claims.
-**Future**: Once the SSO ES256 public key is imported into the CDL project, SSO JWTs will be accepted directly by CDL PostgREST, eliminating the need for separate native tokens. See [ADR-011](../architecture/decisions/ADR-011.md).
+**Wrong**: Juggling `localStorage.getItem('matrix_supabase_access_token')`
+for CDL PostgREST calls.
+**Why it's stale**: That path existed when CDL lived on the SSO project
+and PostgREST validated tokens against the local project key. The
+Matrix CDL is now a **separate project** (`ofzcokolkeejgqfjaszq`)
+configured with **Supabase Third-Party Auth** against the SSO JWKS
+URL + issuer.
+**Correct**: Send the SSO-issued ES256 JWT directly as
+`Authorization: Bearer …`. `buildCdlClient()` does this automatically.
+See ADR-012.
 
-### 2. CDL RLS helpers MUST have app_metadata fallback
+### 2. CDL RLS helpers are JWT-only — no `app_metadata` fallback
 
-**Wrong**: RLS helpers that only read `current_setting('request.jwt.claims')`.
-**Why it fails**: Supabase native tokens don't contain custom SSO claims (`scope`, `crud`, `team_ids`). The functions return NULL → all RLS policies block access → empty query results.
-**Correct**: CDL RLS helpers must fall back to `auth.users.raw_app_meta_data` where `oauth-token` persists these claims. Use `SECURITY DEFINER` to access `auth.users`.
+**Wrong**: Copy-pasting the old CDL helper definitions that read
+`auth.users.raw_app_meta_data`.
+**Why it's stale**: The CDL project now verifies SSO tokens natively
+via Third-Party Auth; `scope`, `crud`, `team_ids`, and `uoi` are in
+the JWT payload itself. Keeping the helpers JWT-only is what makes
+the CDL portable to Databricks Lakebase.
+**Correct**: Use the JWT-only helpers in
+`matrix-platform-foundation/supabase-cdl/migrations/20260420000100_jwt_helpers.sql`.
 
-### 3. oauth-token MUST persist claims to app_metadata
+### 3. `oauth-token` embeds claims in the JWT payload
 
-**Wrong**: `oauth-token` only returns tokens in the response body.
-**Why it fails**: If claims aren't persisted to `app_metadata`, the RLS fallback has nothing to read.
-**Correct**: After resolving the user's active role, scope, CRUD, and teams, persist them:
-```typescript
-await supabase.auth.admin.updateUserById(userId, {
-  app_metadata: { ...existing, active_scope, active_crud, active_team_ids }
-});
-```
+**Wrong**: Treating `app_metadata` as the source of truth for scope /
+crud / team claims.
+**Why it fails**: CDL RLS reads from `auth.jwt()` only. If the claims
+are not in the payload, CDL policies silently default to `'self'` /
+no CRUD and queries return empty results.
+**Correct**: `oauth-token` must add `scope`, `crud`, `team_ids`,
+`uoi`, and `active_app` to the JWT payload it signs. Populating
+`auth.users.raw_app_meta_data` is still allowed for SSO-side
+conveniences but is not the CDL fallback.
 
-### 4. CDL writes need an Edge Function proxy
+### 4. CDL writes go through the `cdl-write` EF on the CDL project
 
-**Wrong**: Call CDL PostgREST directly from the browser.
-**Why it fails**: CORS blocks cross-origin Supabase requests from `lovable.dev` to the CDL instance.
-**Correct**: Route writes through an Edge Function on the app's own Supabase instance. The Edge Function creates a CDL client with the user's token and forwards the operation.
+**Wrong**: Calling CDL PostgREST directly for INSERT/UPDATE/DELETE
+from the browser, or proxying through an EF on the app's own Supabase
+project.
+**Why it fails**: CORS blocks direct writes; putting a write proxy on
+each app's project fragments the write boundary and requires
+distributing the CDL service-role key to every app.
+**Correct**: Invoke the `cdl-write` Edge Function on the **CDL project**
+(`ofzcokolkeejgqfjaszq`). Apps never hold a CDL service-role key.
 
-### 5. Don't conflate scope with admin privileges
+### 5. Do NOT SQL-join CDL rows to `auth.users` / `sso_users`
 
-**Wrong**: Treating `global` scope as admin for write operations on config tables.
-**Why it fails**: `global` means visibility (see all records in tenant), not admin privileges. A Sales Director with `global` scope should NOT be able to modify checklist templates or document type configs.
-**Correct**: Restrict config table writes to `(SELECT get_active_scope()) IN ('org_admin', 'system_admin')`.
+**Wrong**: `select listings.*, auth.users.email from mls_listings join …`.
+**Why it fails**: `auth.users` is on the SSO project, not the CDL. The
+join is impossible across projects and breaks again when CDL moves to
+Lakebase.
+**Correct**: Resolve display names client-side with the `useUserDisplay`
+React hook (from `matrix-apps-template`), which batches IDs through the
+`resolve-users` SSO Edge Function.
 
-### 6. Use `get_my_tenant_id()` (not `get_current_tenant_id()`) on CDL
+### 6. Don't conflate scope with admin privileges
 
-**Wrong**: Using `get_current_tenant_id()` on CDL (only reads JWT `uoi` claim).
-**Why it fails**: Legacy apps and some token types don't have the `uoi` claim.
-**Correct**: CDL uses `get_my_tenant_id()` which has a 4-step fallback: `uoi` → `user_metadata.tenant_id` → `auth.users` → `admin_settings`.
+**Wrong**: Treating `global` scope as admin for write operations on
+config tables.
+**Why it fails**: `global` means visibility (see all records in
+tenant), not admin privileges. A Sales Director with `global` scope
+should NOT be able to modify checklist templates or document type
+configs.
+**Correct**: Restrict config table writes to
+`(SELECT get_active_scope()) IN ('org_admin', 'system_admin')`.
+
+### 7. Ingestion into CDL goes through the unified pipeline
+
+**Wrong**: Writing a bespoke EF that inserts directly into
+`public.mls_listings`.
+**Why it fails**: Skips staging, provenance, dedup, and audit; makes
+the source invisible to `mls_import_runs` and the Audit admin page.
+**Correct**: Register an `mls_sources` row, define
+`mls_source_field_mappings`, and route data through the appropriate
+ingest EF (`reso-import`, `csv-import`, `crm-import`) → staging →
+`listing-merge` → `mls_listings`. See ADR-014.

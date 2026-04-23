@@ -150,7 +150,7 @@ current busienss practice/   ← Operational checklists (XLSX)
 | Layer | Technology |
 |---|---|
 | Frontend | React 18, Vite, TypeScript, shadcn/ui, Tailwind CSS, Radix UI |
-| Auth & IAM | OAuth 2.0 + PKCE, custom JWT, HMAC-SHA256, 5-level RBAC |
+| Auth & IAM | OAuth 2.0 + PKCE, custom JWT, ES256 (ECDSA P-256), 5-level RBAC |
 | Backend | Supabase Edge Functions (Deno), PostgreSQL 15, Row-Level Security |
 | Data Standard | RESO DD 2.0 — canonical data layer, OData 4.0 Web API |
 | Data Pipeline | Databricks — Medallion ETL (Bronze → Silver → Gold), CDC, Delta Lake |

@@ -22,6 +22,7 @@ What Sharp Matrix is, the three-platform architecture (Supabase + Databricks + L
 | [platform/kb-methodology.md](platform/kb-methodology.md) | KB design principles, versioning, contribution guidelines |
 | [platform/testing-strategy.md](platform/testing-strategy.md) | Testing: unit (Vitest), integration, E2E (Playwright), contract testing |
 | [platform/api-contracts.md](platform/api-contracts.md) | Edge Function API surface, OpenAPI reference, per-app dependencies |
+| [platform/alignment-audit-playbook.md](platform/alignment-audit-playbook.md) | Harness-style audit playbook: eliminate DB ↔ types ↔ code ↔ UI ↔ EF ↔ permission-key drift |
 
 ## Chapter 1: Vision & Strategy
 
@@ -32,6 +33,17 @@ The digital strategy 2026-2028 and AI-driven sales model for three markets (Cypr
 | [digital-strategy-2026-2028.md](vision/digital-strategy-2026-2028.md) | Full digital strategy: 3 markets, client segments, 7-phase roadmap, KPI targets |
 | [ai-driven-sales-model.md](vision/ai-driven-sales-model.md) | 4-element AI-driven sales model with customer journeys and AI Copilot spec |
 | [core-beliefs.md](vision/core-beliefs.md) | Operating principles, platform beliefs, agent-first design philosophy |
+
+## Agent-First Governance
+
+Engineering invariants, quality tracking, execution plans, and validation — structured for agent-first workflows.
+
+| Document | Description |
+|----------|-------------|
+| [GOLDEN_PRINCIPLES.md](GOLDEN_PRINCIPLES.md) | Engineering invariants and taste rules — token, scope, client, and Lovable maintenance rules |
+| [QUALITY_SCORE.md](QUALITY_SCORE.md) | Domain quality grades (A-D) across docs, tests, reliability, architecture |
+| [exec-plans/index.md](exec-plans/index.md) | Execution plan format, lifecycle, and usage guide |
+| [exec-plans/tech-debt-tracker.md](exec-plans/tech-debt-tracker.md) | Known technical debt by domain with severity and ownership |
 
 ## Chapter 2: System Architecture
 
