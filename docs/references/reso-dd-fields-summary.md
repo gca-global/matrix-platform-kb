@@ -68,6 +68,15 @@
 | YearBuilt | Number | Year constructed |
 | Furnished | Lookup | Furnished, PartiallyFurnished, Unfurnished |
 
+### Construction & Development
+| StandardName | Type | Description |
+|-------------|------|-------------|
+| NewConstructionYN | Boolean | Newly constructed AND not previously occupied. Sharp Matrix approximates via `new_build=true` AND non-resale `construction_stage` AND `StandardStatus` not Closed/Withdrawn. See [property-field-mapping.md](../data-models/property-field-mapping.md#construction--development) for the full rule. |
+| DevelopmentStatus | Lookup Multi (Open) | Development lifecycle: `New Construction`, `Under Construction`, `Proposed`, `Existing`. Lookup is **Open** per [RESO DDwiki](https://ddwiki.reso.org/display/DDW20/DevelopmentStatus+Field) — MLSs may introduce additional land-specific values (`Site Cleared`, `Site Prepared`, `Final Development Plan Completed`, etc.) over time. |
+| BuilderName | String | Developer / seller company that built the property. |
+| BuilderModel | String | Project / development name. |
+| PropertyCondition | Lookup Multi | Contains `'New Construction'` when `NewConstructionYN = TRUE`. Industry-standard companion flag used by Trestle/Cotality, CRMLS, Bright MLS. |
+
 ### Features
 | StandardName | Type | Description |
 |-------------|------|-------------|

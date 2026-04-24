@@ -67,6 +67,11 @@
 | OriginalListPrice | Number | Original asking price |
 | DaysOnMarket | Number | Days since listing (calculated) |
 | ExpirationDate | Date | Listing expiration |
+| NewConstructionYN | Boolean | RESO DD 2.0 standard. TRUE when property is new-build AND not a resale AND not Closed/Withdrawn. See [property-field-mapping.md#construction--development](property-field-mapping.md#construction--development) for the semantic caveat around "never previously occupied". |
+| DevelopmentStatus | Lookup Multi (Open) | RESO DD 2.0 standard. Sharp Matrix emits `New Construction`, `Under Construction`, `Proposed`, `Existing`. Sourced from Qobrix property-level `construction_stage` with project-level fallback, or Dash `construction_stage` when available. |
+| BuilderName | String | RESO DD 2.0 standard. Developer / seller company that constructed the property (Qobrix developer lookup; NULL for Dash). |
+| BuilderModel | String | RESO DD 2.0 standard. Project / development name the unit belongs to (Qobrix project lookup; NULL for Dash). |
+| PropertyCondition | Lookup Multi | RESO DD 2.0 standard. Companion flag — emits `'New Construction'` when `NewConstructionYN = TRUE`, enabling consumers to find new-construction inventory via either field. |
 
 ### Optional Fields (context-dependent)
 

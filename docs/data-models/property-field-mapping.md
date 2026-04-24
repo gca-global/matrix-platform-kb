@@ -99,6 +99,48 @@
 | **x_sm_height_allowed** | property.height_allowed | Height allowed (m) | Number | **Yes** |
 | Electric | property.electricity_type | Electricity Type | String List | — |
 
+## Construction & Development
+
+All five fields below are **native RESO DD 2.0** — no `x_sm_*` extension is needed. They are
+populated by the MLS 2.0 Gold ETL ([`03_gold_reso_property_etl.py`](https://github.com/sharpsir-group/mls_2_0/blob/main/notebooks/03_gold_reso_property_etl.py))
+from Qobrix (Cyprus) and Dash (Hungary/Kazakhstan).
+
+| Sharp Matrix Field (RESO) | Qobrix Source | Dash Source | Type | Extension? |
+|---------------------------|---------------|-------------|------|------------|
+| NewConstructionYN | `property.new_build` AND `property.construction_stage` not `resale` AND `status` not `CL`/`WD` | `property.is_new_construction` | Boolean | — |
+| DevelopmentStatus | `property.construction_stage` (property-level) with fallback to `project.construction_stage` | `property.construction_stage` (best-effort, when ingested) | String List, Multi (Lookup — Open) | — |
+| BuilderName | `property.developer_id` → `developer.company_name` (via bronze denorm) | — (not exposed in Dash silver) | String | — |
+| BuilderModel | `property.project_id` → `project.project_name` (via bronze denorm) | — (not exposed in Dash silver) | String | — |
+| PropertyCondition | Companion flag: emits `'New Construction'` when `NewConstructionYN = TRUE` | Companion flag: emits `'New Construction'` when `is_new_construction = TRUE` | String List, Multi | — |
+
+### DevelopmentStatus Lookup Values
+
+RESO's `DevelopmentStatus` lookup is **Open** (consumers may encounter additional values from
+other MLSs). Sharp Matrix currently emits a subset of the standard display-form values:
+
+| Value | When Emitted |
+|-------|--------------|
+| `New Construction` | `new_build=true` AND `construction_stage=completed` AND not Closed/Withdrawn |
+| `Under Construction` | `construction_stage` ∈ `{under_construction, construction_phase}` |
+| `Proposed` | `construction_stage` ∈ `{off_plan, offplans, planning}` |
+| `Existing` | `construction_stage=resale` OR `new_build=false` |
+
+The legacy non-standard value `'Complete'` has been dropped — previously emitted by an earlier
+ETL revision, it never existed in the RESO DDwiki lookup.
+
+> **Semantic caveat — `NewConstructionYN`**
+>
+> RESO's strict definition is *"newly constructed AND has not been previously occupied"*.
+> Qobrix does not record an "occupied" flag, so Sharp Matrix approximates the RESO semantic by
+> requiring (a) `new_build='true'`, (b) `construction_stage` in the in-lifecycle set
+> `{off_plan, offplans, planning, under_construction, construction_phase, completed}` and not
+> `resale`, and (c) `StandardStatus` not in `{Closed, Withdrawn}`. This excludes completed units
+> that went through a full closed/withdrawn lifecycle, which is a reasonable proxy for
+> "previously occupied" but not a perfect match. Consumers who need the broader "developer-listed"
+> signal can still filter on the legacy `X_NewBuild` extension column.
+>
+> Dash (HU/KZ) relies on the native `is_new_construction` boolean with no such adjustment.
+
 ## Property Type Mapping
 
 | RESO PropertySubType (canonical) | Qobrix property_subtype | SIR Form Type | Extension? |
