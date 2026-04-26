@@ -65,6 +65,8 @@ Dash/Anywhere.com as the practical core data model. RESO DD 2.0 as interop stand
 | [reso-dd-overview.md](data-models/reso-dd-overview.md) | RESO DD 2.0 — interop standard for syndication and external APIs |
 | [reso-canonical-schema.md](data-models/reso-canonical-schema.md) | Which RESO resources/fields map to Dash, extension governance |
 | [platform-extensions.md](data-models/platform-extensions.md) | All 28 `x_sm_*` extensions: fields and lookup values not in Dash or RESO DD |
+| [cdl-schema.md](data-models/cdl-schema.md) | **CDL Schema** — canonical listings + 8 RESO resource tables + stewardship + lifecycle + SIR brand markers + 7 `v_dash_*` projection views + Phase-2 pgvector placeholders |
+| [read-path-performance.md](data-models/read-path-performance.md) | **Read-path performance contract** — `properties_published` indexes, `listings-search` keyset pagination + ETag/Cache-Control + estimated counts + p50/p95/p99 budgets |
 | [etl-pipeline.md](data-models/etl-pipeline.md) | Bronze/Silver/Gold ETL pipeline: table schemas, notebooks, CDC |
 | [data-contracts.md](data-models/data-contracts.md) | ETL schema contracts: layer boundaries, JSON Schema, validation |
 | [data-quality.md](data-models/data-quality.md) | Data quality: verification scripts, RESO validation, email reporting |

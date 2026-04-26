@@ -235,6 +235,160 @@ In order (see `matrix-platform-foundation/supabase/cdl/migrations/`):
 - Atlas consumer: `matrix-atlas-mls` at `/home/bitnami/matrix-atlas-mls` (sidebar groups `Overview` / `Application` / `MLS Sync` / `Administration`)
 - Original monolith source: `cy-web-2v0/supabase/functions/mls-sync` at `/home/bitnami/cy-web-2v0/supabase/functions/mls-sync` (the cy-web project keeps it as a legacy fallback; the canonical version is the CDL-hosted port)
 
+## Phase 1 expansion — Full RESO ingestion + Dash projection (Apr 2026)
+
+Three migrations land the Phase-1 foundation for full RESO 8-resource
+ingestion, source-of-record / lifecycle taxonomy, stewardship, perf, and
+the `v_dash_*` projection layer that is the SIR-affiliate contract surface
+to Anywhere Dash.
+
+### 8 new RESO resource tables (hybrid typed + `raw jsonb`)
+
+Each table follows the pattern `id uuid pk` + `source_id` + RESO-DD
+canonical typed columns + `raw jsonb` (RESO record verbatim) +
+`content_hash` (change detection) + soft-delete + `locked_fields jsonb`
+(stewardship) + per-resource indexes. The `raw` column is GIN-indexed
+(`jsonb_path_ops`) for arbitrary RESO field reach without schema churn.
+
+| Table | RESO Resource | Notes |
+|---|---|---|
+| `public.members` | Member | Roster identities + designations (`x_sm_sir_designation`). |
+| `public.offices` | Office | Companies-via-Office hierarchy (`main_office_key`). |
+| `public.contacts` | Contacts | PII; `service_role`-only RLS (no anon/authenticated SELECT). |
+| `public.open_houses` | OpenHouse | Append-only; no soft-delete sweep. |
+| `public.showings` | ShowingAppointment | Service-role only. |
+| `public.history_transactional` | HistoryTransactional | Append-only audit trail; bounded by `history_transactional_lookback_days`. |
+| `public.internet_tracking_events` | InternetTracking | Append-only events; bounded by `tracking_lookback_days`. |
+| `public.teams` | Teams | Team roster grouping; FK-shape to `members.member_key` via `team_lead_key`. |
+
+### Stewardship (`locked_fields`)
+
+`locked_fields jsonb default '{}'::jsonb` lives on the 6 editable canonical
+tables (`properties`, `members`, `offices`, `contacts`, `teams`,
+`open_houses`). When an agent edits a field through an Atlas/Pipeline UI,
+the field is "locked" — subsequent syncs **strip the locked column from
+the UPDATE payload** so source overwrites are blocked while INSERT-time
+defaults still flow.
+
+| Artefact | Purpose |
+|---|---|
+| `public.property_field_overrides` | Append-only audit of every lock/unlock action. |
+| `public.cdl_lock_field(table_name, row_id, field, source_value, by, reason)` | `SECURITY DEFINER` RPC. Locks a field + writes audit row. |
+| `public.cdl_unlock_field(table_name, row_id, field, by)` | `SECURITY DEFINER` RPC. Releases lock + writes audit row. |
+
+Both RPCs are granted to `authenticated` only (no anon execution).
+
+### Source of record + lifecycle
+
+`public.mls_sources` is now the canonical taxonomy. Columns:
+
+- `kind text not null check (kind in ('internal','legacy-internal','brand-network','external'))`
+- `is_internal boolean default false`
+- `is_sunsetting boolean default false`, `sunset_at timestamptz`
+
+Phase-1 seed rows: `matrix-internal` (internal), `qobrix`
+(legacy-internal, sunsetting), `dash` (brand-network, disabled until
+Phase-2.5). HU + KZ inbound is bundled under `dash` since those markets
+author directly in Anywhere Dash.
+
+`public.properties` / `public.properties_published` carry
+`lifecycle_state` + `lifecycle_state_changed_at`. Transitions are
+audited in `public.property_lifecycle_events` (append-only). The
+`v_dash_properties` view filters `lifecycle_state = 'Active'` per the
+Dash-network contract (Active inventory only); other lifecycle states
+remain queryable directly on `properties_published`.
+
+### SIR brand markers
+
+`x_sm_*` platform-extension prefix per
+[`platform-extensions.md`](platform-extensions.md):
+
+- `properties.x_sm_is_sir_branded boolean default false`
+- `properties.x_sm_sir_office_id text`
+- `properties_published.x_sm_is_sir_branded`, `x_sm_sir_office_id`
+- `members.x_sm_sir_designation text`
+
+The `v_dash_*` views alias these back to bare Dash names
+(`is_sir_branded`, `sir_office_id`, `designation`).
+
+### Read-path performance indexes (`properties_published`)
+
+Migration `20260426140000_cdl_properties_published_perf_indexes.sql`:
+
+- 8 selective B-tree indexes (keyset pagination, status/visibility,
+  lifecycle state, property type, geo, price, per-source pagination,
+  SIR branding).
+- 2 GIN trigram indexes (`pg_trgm`) on `title_en` + `description_en` for
+  fuzzy free-text.
+- Statistics targets bumped to 500/200 on high-cardinality columns
+  (`price`, `city`, `listing_agent_key`, `country`, `property_type`).
+- Autovacuum tuned (`autovacuum_vacuum_scale_factor=0.05`,
+  `autovacuum_analyze_scale_factor=0.02`).
+- `public.cdl_analyze_published()` `SECURITY DEFINER` RPC — `mls-sync`
+  calls this at the end of every sync that touched the snapshot, so
+  query plans stay current after large UPDATEs.
+
+### Phase-2 intelligence-layer placeholders
+
+Migration `20260426141000_cdl_phase2_intelligence_foundation.sql`:
+
+- `vector` extension enabled (pgvector).
+- `embedding vector(1536)` + `feature_vector jsonb` + `marketing_metadata jsonb`
+  on both `public.properties` and `public.properties_published`.
+- Partial indexes on `id where embedding is not null`; GIN on
+  `marketing_metadata`. Empty until the Phase-2 `embed-properties` EF
+  starts populating them; reads are unaffected.
+
+### Dash projection (`v_dash_*` views)
+
+Migration `20260426150000_cdl_dash_views.sql` — 7 views with
+`with (security_invoker = true)` so RLS evaluates as the caller.
+Storage tables stay RESO snake_case; views give Dash callers Dash names
+without a destructive schema rename. See
+[`dash-data-model.md`](dash-data-model.md) for the field-by-field map.
+
+| View | Backed by | Filter | Grants |
+|---|---|---|---|
+| `v_dash_properties` | `properties_published` | `is_visible AND NOT is_deleted AND lifecycle_state='Active'` | anon, authenticated |
+| `v_dash_members` | `members` | `NOT is_deleted` | anon, authenticated |
+| `v_dash_offices` | `offices` | `NOT is_deleted` | anon, authenticated |
+| `v_dash_teams` | `teams` | `NOT is_deleted` | anon, authenticated |
+| `v_dash_property_media` | `property_media JOIN properties` | `NOT properties.is_deleted` | anon, authenticated |
+| `v_dash_open_houses` | `open_houses` | `NOT is_deleted` | anon, authenticated |
+| `v_dash_contacts` | `contacts` | `NOT is_deleted` | **service_role only** (PII) |
+
+Phase-1 v_dash_properties is intentionally a minimal slice. Full Dash
+field coverage (`propertyDetails.*`, `days_on_market`, `list_price_usd`,
+denormalised `office.*`) is deferred to the Phase-2.5 `dash-export` EF.
+
+### Read-side Edge Function updates (`listings-search`)
+
+The `listings-search` EF added in this phase:
+
+- **Keyset pagination** on `(published_at desc, id desc)` — cursors are
+  base64url JSON `{published_at, id}`, returned as `nextCursor` and
+  passed back as `cursor`. Prevents O(N) deep-page scans.
+- **Estimated counts** by default (`countMode: 'estimated'`). Exact
+  counts are opt-in via `estimateCount: false` for admin dashboards.
+- **HTTP caching** — `Cache-Control: public, s-maxage=60,
+  stale-while-revalidate=120` plus `ETag` (W/-prefixed quick-hash) and
+  `If-None-Match` short-circuit to `304`. CDN-friendly.
+
+See [`read-path-performance.md`](read-path-performance.md) for the full
+budget + tuning playbook.
+
+## Migrations index (current)
+
+| # | File | Purpose |
+|---|---|---|
+| 1 | `20260425160712_cdl_ingestion_schema.sql` | Base ingestion schema |
+| 2 | `20260425162326_cdl_staging_grants.sql` | Staging grants |
+| 3 | `20260426120000_cdl_mls_sync_control_plane.sql` | MLS Sync control plane |
+| 4 | `20260426130000_cdl_full_reso_ingestion.sql` | 8 RESO tables + stewardship + lifecycle + SIR markers |
+| 5 | `20260426140000_cdl_properties_published_perf_indexes.sql` | Read-path indexes + autovacuum tuning + `cdl_analyze_published` RPC |
+| 6 | `20260426141000_cdl_phase2_intelligence_foundation.sql` | pgvector + Phase-2 column placeholders |
+| 7 | `20260426150000_cdl_dash_views.sql` | 7 `v_dash_*` projection views |
+
 ## Cross-reference
 
 | Topic | See |
@@ -244,4 +398,6 @@ In order (see `matrix-platform-foundation/supabase/cdl/migrations/`):
 | ADR — ingestion pipeline + status note on the actual implementation | [ADR-014](../architecture/decisions/ADR-014.md) |
 | RESO canonical fields | [reso-canonical-schema.md](reso-canonical-schema.md) |
 | Platform extensions (`x_sm_*`) | [platform-extensions.md](platform-extensions.md) |
+| Read-path perf budgets | [read-path-performance.md](read-path-performance.md) |
+| Dash projection map | [dash-data-model.md](dash-data-model.md) |
 | Security model (JWT, RLS helpers) | [../platform/security-model.md](../platform/security-model.md) |

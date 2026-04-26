@@ -1,6 +1,6 @@
 # Data Distribution & Stewardship Layer
 
-> **Status (Apr 2026)**: Phase-1 foundations land with the
+> **Status (Apr 2026)**: Phase-1 foundations **shipped Apr 2026** — see `cdl-mls-sync-full-reso` plan. Three CDL migrations applied (`20260426130000_cdl_full_reso_ingestion.sql`, `20260426140000_cdl_properties_published_perf_indexes.sql`, `20260426141000_cdl_phase2_intelligence_foundation.sql`, `20260426150000_cdl_dash_views.sql`). All 7 `v_dash_*` projection views deployed; `mls-sync` extended for full RESO 8-resource ingestion + locked-fields stewardship; `listings-search` switched to keyset pagination + ETag/Cache-Control + estimated counts. Phase-1 foundations land with the
 > [`cdl-mls-sync-full-reso`](../../README.md) plan (`mls_sources.is_internal` + `matrix-internal`
 > seed source, `lifecycle_state` columns, `property_lifecycle_events` audit table, `locked_fields jsonb`
 > columns, `public.property_field_overrides` audit table, `cdl_lock_field` / `cdl_unlock_field` RPCs,

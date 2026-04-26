@@ -17,7 +17,9 @@
 | **ShowingAppointment** | Property viewings and scheduling | Broker, Client Portal |
 | **HistoryTransactional** | Closed transactions, deal history | Manager, Finance |
 | **OpenHouse** | Open house events | Broker, Marketing |
-| **Prospecting** | Lead scoring, prospect status tracking | Broker, AI Copilot |
+| **InternetTracking** | Behavioural events (views, clicks, favourites) | Marketing, Recsys, BI |
+
+> **Prospecting.** RESO DD has no canonical `Prospecting` resource. Sharp Matrix tracks leads as `public.contacts` rows with `contact_type = 'Prospect'` (Phase-1 contacts table; service-role-only RLS). See [`cdl-schema.md`](cdl-schema.md#phase-1-expansion---full-reso-ingestion--dash-projection-apr-2026).
 
 ## Property Resource — Field Classification
 

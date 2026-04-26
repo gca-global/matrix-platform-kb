@@ -26,6 +26,9 @@
 | 9 | AI Assistant for Web Channel | **AI Web Assistant** | AI Service | Website visitors |
 | 10 | AI Assistant for Internal Support | **Zoe AI Assistant** | AI Service | All internal users (multi-role) |
 | 11 | AI Assistant for Blog Generation | **AI Blog Generator** | AI Service | Marketing, Content Managers |
+| 11a | MLS Data Studio (CDL admin) | **Matrix Atlas (`matrix-atlas-mls`)** | App (CDL admin, served at `/mls`) | Data ops, system_admin / org_admin |
+
+> **Atlas** is the Lovable-managed CDL admin SPA that drives `mls-sync` / `mls-sync-orchestrator` / `listings-search`. It's the operator UI for the 5-stage ingestion pipeline + the 8 RESO resource toggles + the source-of-record / lifecycle taxonomy + the data-stewardship `locked_fields` surface. See [`cdl-schema.md`](../data-models/cdl-schema.md) and the matrix-atlas-mls repo. Production path: `https://intranet.sharpsir.group/mls/`.
 
 ### In Progress
 

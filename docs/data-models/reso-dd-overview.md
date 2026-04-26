@@ -64,9 +64,11 @@ The RESO Data Dictionary defines **standard field names, data types, and lookup 
 | **Teams** | Agent teams | TeamName, TeamLead |
 | **OpenHouse** | Open house events | OpenHouseDate, OpenHouseStartTime |
 | **Media** | Photos, videos, documents | MediaURL, MediaType, MediaCategory |
-| **HistoryTransactional** | Transaction history | ClosePrice, CloseDate |
+| **HistoryTransactional** | Transaction history (audit trail) | ClosePrice, CloseDate, ChangeType |
 | **ShowingAppointment** | Showing scheduling | ShowingDate, ShowingStartTime |
-| **Prospecting** | Lead/prospect tracking | ProspectingStatus |
+| **InternetTracking** | Behavioural events (views, clicks, favourites) | EventDate, EventType, ListingKey |
+
+> **Note on Prospecting.** RESO DD has no first-class `Prospecting` resource. Sharp Matrix tracks leads/prospects as `contacts` rows where `contact_type = 'Prospect'`. The CDL `public.contacts` table covers this surface; see [`cdl-schema.md`](cdl-schema.md).
 
 ## Property Types (RESO Abbreviations)
 

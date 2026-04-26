@@ -22,7 +22,21 @@ The CDL `mls_sources` table classifies sources by `kind`:
 - **`brand-network`** — **Anywhere Dash** (this document); **bidirectional**; SIR-affiliate contract surface.
 - `external` — third-party feeds we ingest from organizations outside Sharp SIR (real estate **developers** with new-build inventory, **partner brokerages** with referrals / co-broke listings, future industry MLS exchanges). Inbound only; onward syndication restricted by per-partner terms-of-use.
 
-**Contract surface (Phase-1 deliverable)**: the `v_dash_*` views (`v_dash_properties`, `v_dash_members`, `v_dash_offices`, `v_dash_teams`, `v_dash_contacts`) project RESO-keyed CDL tables to Dash naming. The future `dash-export` EF reads exclusively through these views; the future `dash-import` EF normalizes incoming records into the underlying RESO-keyed tables. Both EFs are Phase-2.5; the views and source-row foundations land in Phase-1 (see [data-distribution-and-stewardship.md](../architecture/data-distribution-and-stewardship.md) and the `cdl-mls-sync-full-reso` plan).
+**Contract surface (Phase-1 deliverable, shipped Apr 2026)**: 7 `v_dash_*` views project RESO-keyed CDL tables to Dash naming. Storage stays RESO snake_case; views give Dash callers Dash-shaped names without a destructive schema rename. All views are `with (security_invoker = true)` so RLS evaluates as the caller.
+
+| View | Backed by | Filter | Grants |
+|---|---|---|---|
+| `v_dash_properties` | `properties_published` | `is_visible AND NOT is_deleted AND lifecycle_state='Active'` | anon, authenticated |
+| `v_dash_members` | `members` | `NOT is_deleted` | anon, authenticated |
+| `v_dash_offices` | `offices` | `NOT is_deleted` | anon, authenticated |
+| `v_dash_teams` | `teams` | `NOT is_deleted` | anon, authenticated |
+| `v_dash_property_media` | `property_media JOIN properties` | `NOT properties.is_deleted` | anon, authenticated |
+| `v_dash_open_houses` | `open_houses` | `NOT is_deleted` | anon, authenticated |
+| `v_dash_contacts` | `contacts` | `NOT is_deleted` | **service_role only** (PII) |
+
+The Phase-1 v_dash_properties is intentionally a minimal slice — full Dash field coverage (`propertyDetails.*`, `days_on_market`, `list_price_usd`, denormalised `office.*`) is deferred to the Phase-2.5 `dash-export` EF, which assembles the wire-format Dash payload by reading exclusively through these views. The Phase-2.5 `dash-import` EF normalises incoming Dash records into the underlying RESO-keyed tables. See [data-distribution-and-stewardship.md](../architecture/data-distribution-and-stewardship.md) and the `cdl-mls-sync-full-reso` plan.
+
+Storage uses the `x_sm_*` platform-extension prefix (per [platform-extensions.md](platform-extensions.md)); the views alias them to bare Dash names — `properties.x_sm_is_sir_branded` → `is_sir_branded`, `properties.x_sm_sir_office_id` → `sir_office_id`, `members.x_sm_sir_designation` → `designation`.
 
 **SIR brand markers** carried alongside RESO fields:
 - `properties.is_sir_branded boolean` — listing displays SIR branding on outbound feeds.
