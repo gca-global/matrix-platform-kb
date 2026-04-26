@@ -293,16 +293,16 @@
 - Edge Function-backed reads/writes with SSO JWT validation
 - Role-based permissions via `app_permissions` (app_id: `matrix-financial-management`)
 
-### Integration Management (External MLS and Portals)
+### Integration Management (Sources and Channels)
 **Status**: In Progress
 **Users**: Data Engineers, Admins, Listing Coordinators
 **Key Features** (target):
-- Ingress channel configuration (which external sources feed into CDL)
-- Egress syndication controls (per-listing toggle for target channels)
-- External MLS feed management
-- Portal export configuration (SIR Global, HomeOverseas, etc.)
+- Ingress source configuration — manages all four `mls_sources.kind` types: `internal` (matrix-internal), `legacy-internal` (Qobrix CY — sunsetting), `brand-network` (Anywhere Dash — bidirectional; covers HU + KZ inbound today), `external` (developer / partner-brokerage feeds)
+- Per-source onboarding wizard (RESO Web API creds, scheduling, field mapping, locked-field defaults, sunset markers)
+- Egress syndication controls (per-listing toggle for target channels; channel-distribution rules per source kind)
+- Portal export configuration (SIR Global / Anywhere Dash, HomeOverseas, Zillow, etc.)
 - Channel health monitoring and error reporting
-- Deduplication and conflict resolution rules
+- Deduplication and multi-source merge precedence (`source_field_priority`)
 
 ### Notification Management
 **Status**: In Progress

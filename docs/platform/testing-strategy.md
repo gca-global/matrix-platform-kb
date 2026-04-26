@@ -88,4 +88,4 @@ Periodic check that KB references match the codebase:
 |-----|-----|
 | Deployment and CI/CD | [operations.md](operations.md) |
 | App architecture and auth | [app-template.md](app-template.md) |
-| CDL schema and RLS | [mls-cdl-schema.md](../data-models/mls-cdl-schema.md) |
+| CDL schema and RLS | [cdl-schema.md](../data-models/cdl-schema.md) |

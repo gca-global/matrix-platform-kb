@@ -299,7 +299,9 @@ defend with a single lint or migration trigger.
   ADR-worthy decision.
 - Do **not** split large tables by sub-type unless explicitly in scope —
   it is rarely a local fix.
-- Do **not** invent new ingestion EFs; new sources register in `mls_sources`
+- Do **not** invent new ingestion EFs; new tenants/sources register in
+  `public.mls_settings` and field mappings in `public.field_mappings`
+  on the CDL project, then run via `mls-sync` / `mls-sync-orchestrator`
   (CDL invariant P9).
 - Every migration must be re-runnable (`IF EXISTS` / `IF NOT EXISTS` /
   guarded data-copy / idempotent upserts).

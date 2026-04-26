@@ -3,14 +3,13 @@
 > Source: `qobrix/qobrix_openapi.yaml` (OpenAPI 3.0, API version 2.0)
 > Documentation: https://qobrix.com/real-estate-crm/advanced-tools/rest-api/
 >
-> **Role in Sharp Matrix**: Qobrix is the **current CRM** used by Sharp Sotheby's International Realty.
-> It is a **reference source** for understanding what data and capabilities the platform must support,
-> and a **migration source** for existing data. It is NOT the system of record for the Sharp Matrix Platform —
-> RESO DD 2.0 is the canonical data layer. See [reso-dd-overview.md](reso-dd-overview.md).
+> **Role in Sharp Matrix**: Qobrix is the **legacy CRM** Sharp SIR currently uses for **Cyprus** listings. Today it is exposed to the CDL via the `mls.sharpsir.group` RESO Web API projection and ingested by `mls-sync` (CDL `mls_sources.kind = 'legacy-internal'`, `is_sunsetting = true`).
+>
+> **Decommission status**: Qobrix is being **decommissioned as the MLS source** once Atlas (`matrix-atlas-mls`) and `matrix-pipeline` CRM cover Cyprus listing creation. New listings authored in Atlas / `matrix-pipeline` use `source_id = matrix-internal` (`kind = 'internal'`); the `qobrix` source row will get `sunset_at` set at cutover. RESO DD 2.0 remains the canonical data layer — Qobrix is a migration source, not a permanent contract.
 
 ## Overview
 
-Qobrix is the CRM currently used by Sharp Sotheby's International Realty. The Sharp Matrix Platform will replicate and extend Qobrix's capabilities through purpose-built apps (Broker App, Manager App, etc.), all sharing the RESO DD canonical data layer. The Qobrix API documentation serves as a reference for what the platform must support. The API is RESTful (JSON), uses UUID identifiers, and supports search expressions, pagination, and resource expansion.
+Qobrix is the legacy CRM Sharp SIR uses today for Cyprus brokers. The Sharp Matrix Platform replicates and extends its capabilities through purpose-built apps (`matrix-pipeline` CRM, `matrix-atlas-mls`, `matrix-comms`, `matrix-client-connect`, etc.), all sharing the RESO DD canonical data layer. The Qobrix API documentation serves as a reference for what the platform must support during and after the migration. The API is RESTful (JSON), uses UUID identifiers, and supports search expressions, pagination, and resource expansion.
 
 ## Migration Mapping to RESO
 

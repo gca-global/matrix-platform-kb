@@ -30,7 +30,7 @@
 
 Supabase projects are split across two organizations:
 
-- **`Sharp SIR Group`** (Pro) — platform core (**Matrix SSO**, **Matrix CDL-MLS**) + target home for customer-facing sites (HU, CY). New project provisioning for platform/sites goes here.
+- **`Sharp SIR Group`** (Pro) — platform core (**Matrix SSO**, **Matrix CDL** — the cross-app Common Data Layer that hosts MLS listings today and any future shared platform data) + target home for customer-facing sites (HU, CY). New project provisioning for platform/sites goes here.
 - **`SharpMatrix`** (Pro) — hosts per-app DBs (Pipeline, HRMS, FM, MLS app, ITSM) and the CY prod project (under review). Also contains several legacy / dangling projects slated for cleanup (see "Cleanup candidates" below).
 
 ### Org `Sharp SIR Group` (platform core + site targets)
@@ -38,17 +38,17 @@ Supabase projects are split across two organizations:
 | Name | Project ID | Role |
 |------|-----------|------|
 | **Matrix SSO** | `xgubaguglsnokjyudgvc` | Identity only: Auth, RBAC, Tenants, AD Users (ADR-012). Nano, `eu-west-1` (Ireland). **Active** (~230k req / 7 days; last migration `fix_sso_roles_and_rls`). Owner: `matrix-platform-foundation/supabase/`. |
-| **Matrix CDL-MLS** | `ofzcokolkeejgqfjaszq` | Consolidated CDL + MLS backend (Micro, `eu-central-1` Frankfurt). Empty so far (0 migrations, ~18 req / 7 days). Will own shared `mls_*` tables + ingestion control plane (`reso-import` / `csv-import` / `crm-import` / `listing-merge`) per ADR-012/013/014, plus the MLS data currently served by Databricks `mls_2_0` RESO Web API. Owner: `matrix-platform-foundation/supabase-cdl/` (may be renamed `supabase-cdl-mls/`). See Matrix-CICD §7.3. |
+| **Matrix CDL** (a.k.a. "Matrix Data Model Studio") | `ofzcokolkeejgqfjaszq` | CDL backend (Micro, `eu-central-1` Frankfurt). Hosts the canonical listing tables (`public.properties`, `public.properties_published`, `public.property_media`), the `cdl_staging.*` raw/mapped tables, the MLS Sync control plane (`mls_settings`, `mls_sync_jobs`, `mls_sync_state`, `mls_orchestrator_runs`), and 8 Edge Functions: the 5-stage pipeline (`reso-import` / `field-mapping-apply` / `listing-merge` / `media-import` / `listing-publish`), the admin EFs (`mls-sync` lifted monolith + `mls-sync-orchestrator`), and the read EF (`listings-search`). Per ADR-012/013, ADR-014 implementation status note. Owner: `matrix-platform-foundation/supabase/cdl/`. See Matrix-CICD §7.3. |
 | **HU Website 1GH — prod** | TBD (to be provisioned) | Target prod Supabase for `sothebys-realty.hu`. Recommended region: `eu-central-1`. See Matrix-CICD §0.1. |
 | **HU Website 1GH — staging** | TBD (to be provisioned) | Target staging Supabase for `sothebys-realty.hu`. Recommended region: `eu-central-1`. See Matrix-CICD §0.1. |
 | **CY Website 2.0 — prod** | TBD (to be provisioned) | Target prod Supabase for CY SPA (after legacy-PHP cutover). See Matrix-CICD §0.3 / §5.2. |
 | **CY Website 2.0 — staging** | TBD (to be provisioned) | Target staging Supabase for CY SPA. See Matrix-CICD §0.3. |
 
-> **Regional note:** the org is regionally mixed — SSO is in `eu-west-1` (historical, not being moved), CDL-MLS is in `eu-central-1`. New HU/CY projects should go to `eu-central-1` for latency parity with Budapest / Nicosia and the AWS `eu-central-1` prod HU VM.
+> **Regional note:** the org is regionally mixed — SSO is in `eu-west-1` (historical, not being moved), CDL is in `eu-central-1`. New HU/CY projects should go to `eu-central-1` for latency parity with Budapest / Nicosia and the AWS `eu-central-1` prod HU VM.
 
 ### Org `SharpMatrix` (per-app DBs + under-review)
 
-> ⚠ Org membership of the per-app DBs below is **assumed from historical KB entries**; only `Matrix SSO` and `Matrix CDL-MLS` have been verified against the live dashboard. Run `supabase projects list` to confirm each row and update this file.
+> ⚠ Org membership of the per-app DBs below is **assumed from historical KB entries**; only `Matrix SSO` and `Matrix CDL` have been verified against the live dashboard. Run `supabase projects list` to confirm each row and update this file.
 
 | Name | Project ID | Role |
 |------|-----------|------|

@@ -58,6 +58,27 @@ All O365 functions use the user's Microsoft `provider_token` (stored server-side
 | sync-ad-users | `/sync-ad-users` | POST | Bearer (admin) | Sync Azure AD users |
 | sync-azure-profile | `/sync-azure-profile` | POST | Bearer | Sync user profile from Azure |
 
+### CDL Edge Functions (8 functions, project `ofzcokolkeejgqfjaszq`)
+
+Deployed from `matrix-platform-foundation/supabase/cdl/functions/`.
+All run with `verify_jwt: false` and verify SSO JWTs themselves
+(HS256 / JWKS fallback). Required SSO scopes default to
+`system_admin,org_admin` for admin/pipeline EFs and to
+`self,team,global,org_admin,system_admin` for the read EF.
+
+| Name | Path | Method(s) | Auth | Purpose |
+|------|------|----------|------|---------|
+| reso-import | `/reso-import` | POST | Bearer (admin) | RESO OData → `cdl_staging.listings_raw` (stage 1/5) |
+| field-mapping-apply | `/field-mapping-apply` | POST | Bearer (admin) | `listings_raw` → `listings_mapped` via `public.field_mappings` (stage 2/5) |
+| listing-merge | `/listing-merge` | POST | Bearer (admin) | `listings_mapped` → `public.properties` upsert + soft-delete (stage 3/5) |
+| media-import | `/media-import` | POST | Bearer (admin) | RESO Media → `public.property_media` (stage 4/5) |
+| listing-publish | `/listing-publish` | POST | Bearer (admin) | `public.properties` (visible) → `public.properties_published` snapshot (stage 5/5) |
+| mls-sync | `/mls-sync` | POST | Bearer (admin) | Lifted cy-web-2v0 monolith. Action surface: `get-settings` / `save-settings` / `list-jobs` / `get-job` / `get-running-job` / `get-recent-job` / `has-previous-sync` / `start` / `cancel` / `resume` / `test` / `sync-media` / `watchdog` |
+| mls-sync-orchestrator | `/mls-sync-orchestrator` | POST | Bearer (admin) | Same action surface as `mls-sync`; `start` chains the 5 pipeline stages and records per-stage state in `public.mls_orchestrator_runs` |
+| listings-search | `/listings-search` | POST | Bearer | Filtered/paginated reads of `public.properties_published` with optional `includeMedia` |
+
+Action surface for `mls-sync` / `mls-sync-orchestrator` is identical, so consumers (`matrix-atlas-mls`) pick the engine via `mls_settings.sync_mode` ∈ `{monolith, orchestrator}` without changing the call site. See [`docs/data-models/cdl-schema.md`](../data-models/cdl-schema.md) for full request/response contracts.
+
 ## Auth Requirements
 
 All functions use `verify_jwt: false` and implement **custom JWT verification** internally. They accept:

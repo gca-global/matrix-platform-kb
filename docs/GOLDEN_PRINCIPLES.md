@@ -116,9 +116,10 @@ Databricks Lakebase. Supabase-specific GUCs and Supabase-only
 `auth.users.raw_app_meta_data` columns do not exist on Lakebase. JWT-only
 helpers keep the policies intact during that migration.
 
-**Enforcement**: `supabase-cdl/migrations/20260420000100_jwt_helpers.sql`
-in `matrix-platform-foundation`. Any CDL migration introducing a
-Supabase-specific helper must justify it in ADR-form.
+**Enforcement**: JWT-only RLS helpers live alongside the CDL
+migrations in `matrix-platform-foundation/supabase/cdl/migrations/`.
+Any CDL migration introducing a Supabase-specific helper must justify
+it in ADR-form.
 
 ### T3. `oauth-token` MUST include scope / crud / team_ids in the JWT payload
 
@@ -134,19 +135,28 @@ query results.
 `auth.users.raw_app_meta_data` may still be populated for convenience
 on the SSO project, but it is no longer the fallback path for CDL RLS.
 
-### T4. CDL writes go through the `cdl-write` Edge Function on the CDL project
+### T4. CDL writes go through Edge Functions on the CDL project
 
-**Rule**: Browser code must not call CDL PostgREST directly for writes.
-Route writes through the `cdl-write` Edge Function deployed on the CDL
-project itself (`ofzcokolkeejgqfjaszq`). Apps never hold a CDL
-service-role key.
+**Rule**: Browser code must not call CDL PostgREST directly for writes,
+and apps must never hold a CDL service-role key. Route writes through
+the EFs deployed on the CDL project itself (`ofzcokolkeejgqfjaszq`).
+Today that means:
+
+- **Ingestion / MLS Sync admin** → `mls-sync` or `mls-sync-orchestrator` EF (action surface: `start`, `cancel`, `save-settings`, …).
+- **Programmatic listing reads (filtered)** → `listings-search` EF.
+- **Anon listing reads (public snapshot)** → direct PostgREST against `public.properties_published` with the CDL anon key (RLS gates `is_visible AND NOT is_deleted`).
+
+If a future app needs a generic CRUD proxy, add a new dedicated EF on
+the CDL project (the previously-planned `cdl-write` proxy was never
+built; ingestion-only flows did not need it).
 
 **Why it fails**: CORS blocks cross-origin browser writes; service-role
 distribution across Lovable apps is a credential-leak vector.
 
-**Enforcement**: `cdlWrite.ts` helper in consuming apps calls
-`cdlClient.functions.invoke('cdl-write', …)`. The `cdl-write` EF lives
-in `matrix-platform-foundation/supabase-cdl/functions/cdl-write/`.
+**Enforcement**: All CDL EFs live under
+`matrix-platform-foundation/supabase/cdl/functions/` and run with
+`verify_jwt = false`, performing custom SSO-JWT verification + scope
+checks themselves.
 
 ---
 
@@ -247,8 +257,9 @@ apps in Lovable).
 **Rule**: The SSO project (`xgubaguglsnokjyudgvc`) and the CDL project
 (`ofzcokolkeejgqfjaszq`) are the two highest-blast-radius Supabase
 projects in the platform. Both are managed **exclusively** via
-`matrix-platform-foundation` (`supabase/` for SSO, `supabase-cdl/` for
-CDL). Neither is linked to Lovable. No Matrix app may own CDL schema.
+`matrix-platform-foundation` (`supabase/sso/` for SSO,
+`supabase/cdl/` for CDL — sibling workspaces in one repo). Neither is
+linked to Lovable. No Matrix app may own CDL schema.
 
 **Why it fails**: Allowing a Lovable-linked app (including
 `matrix-cdl-studio`) to own CDL schema caused unpredictable drift that
@@ -276,32 +287,38 @@ are also impossible once CDL moves off Supabase — apps must not
 assume they exist.
 
 **Enforcement**: CDL migrations land through
-`matrix-platform-foundation/supabase-cdl/`. User display name
+`matrix-platform-foundation/supabase/cdl/`. User display name
 lookups go through `resolve-users` (SSO EF) + `useUserDisplay` React
 hook, never SQL joins. See ADR-012 and
-[mls-cdl-schema.md](data-models/mls-cdl-schema.md).
+[cdl-schema.md](data-models/cdl-schema.md).
 
-### P9. Ingestion always flows: source → staging → merge → mls_listings
+### P9. Ingestion always flows: source → staging → merge → published
 
-**Rule**: All MLS data ingestion (RESO endpoints, `mls_2_0` RESO API,
-CSV, CRM webhooks, manual entry) must go through the unified pipeline:
-registered `mls_sources` row → `mls_staging_listings` via the right
-ingest EF → `listing-merge` EF → `public.mls_listings`. Every
-promoted row carries full provenance via `x_sm_source_id`,
-`x_sm_source_record_id`, `x_sm_ingested_at`, `x_sm_ingested_by_run_id`,
-`x_sm_last_source_sync_at`.
+**Rule**: All MLS data ingestion (RESO endpoints, `mls_2_0` RESO API)
+must go through the unified pipeline on the CDL project:
+`reso-import` → `cdl_staging.listings_raw` → `field-mapping-apply` →
+`cdl_staging.listings_mapped` → `listing-merge` → `public.properties`
+→ `media-import` → `public.property_media` → `listing-publish` →
+`public.properties_published`. Per-source identity is tracked by the
+`(source_id, source_listing_key)` natural key plus per-row
+`content_hash` for dedup. Every stage writes one row to
+`public.ingest_audit`, and orchestrator runs additionally record
+per-stage state in `public.mls_orchestrator_runs`.
 
 **Why it fails**: Bespoke ingestion EFs drift in error handling,
 dedup, and audit. Skipping staging makes manual review impossible.
-Skipping provenance makes the same external record collide on
-subsequent syncs. Skipping the audit log destroys regulatory
-traceability.
+Skipping the natural key collides external records on retries.
+Skipping the audit log destroys regulatory traceability.
 
-**Enforcement**: ADR-014. The only ingestion EFs on the CDL project
-are `reso-import`, `csv-import`, `crm-import`, `listing-merge` plus
-the `cdl-write` CORS proxy. New sources are onboarded by registering
-a row in `mls_sources` and field mappings — never by writing a new
-bespoke EF.
+**Enforcement**: ADR-014 (with the 2026-04-26 implementation status
+note). The ingestion EFs on the CDL project are the 5 pipeline stages
+above plus the two admin/orchestration EFs (`mls-sync` lifted
+monolith, `mls-sync-orchestrator` chaining the 5 stages). New tenants
+are onboarded by adding a row in `public.mls_settings` (per-tenant
+RESO creds + `source_id`) and field mappings in
+`public.field_mappings` — never by writing a bespoke EF. CSV / CRM
+ingestion is on the roadmap; when added it should write to
+`cdl_staging.listings_raw` so the rest of the pipeline is reused.
 
 ---
 

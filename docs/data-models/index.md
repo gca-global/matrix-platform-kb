@@ -35,7 +35,7 @@
 | [reso-dd-overview.md](reso-dd-overview.md) | RESO DD 2.0 interop standard: resources, fields, lookups |
 | [reso-canonical-schema.md](reso-canonical-schema.md) | Which RESO resources Sharp Matrix uses, with Dash field mappings |
 | [platform-extensions.md](platform-extensions.md) | All `x_sm_*` fields not in Dash or RESO DD |
-| [mls-cdl-schema.md](mls-cdl-schema.md) | **MLS CDL Schema** — 18 tables, 422 columns deployed to CDL for Listing Management |
+| [cdl-schema.md](cdl-schema.md) | **CDL Schema** — Common Data Layer for Sharp Matrix apps. Canonical listing tables (`properties`, `properties_published`, `property_media`), `cdl_staging.*`, MLS Sync control plane, and the 8 CDL Edge Functions (5-stage pipeline + `mls-sync` / `mls-sync-orchestrator` + `listings-search`). Today hosts MLS data; designed to host any future cross-app shared platform data. |
 | [etl-pipeline.md](etl-pipeline.md) | Bronze/Silver/Gold ETL pipeline: how Dash data reaches Supabase |
 | [data-contracts.md](data-contracts.md) | ETL schema contracts: layer boundaries, JSON Schema format, validation |
 | [reso-web-api.md](reso-web-api.md) | RESO Web API (OData 4.0): syndication and external integrations |
@@ -49,12 +49,14 @@
 | Property listing | Property | Property | Broker, Manager, Client Portal, Marketing |
 | Client (buyer/seller) | Contacts | Contact | Broker, Manager, Client Portal |
 | Broker/Agent | Member | Agent / User | Broker, Manager, SSO Console |
-| Team/Office | Teams, Offices | Groups | Manager |
+| Team | Teams | Groups | Manager |
+| Office | Office | — | Manager, Marketing |
 | Showing | ShowingAppointment | Property Viewing | Broker, Client Portal |
-| Deal/Transaction | HistoryTransactional | Opportunity | Broker, Manager, Finance |
+| Deal/Transaction history | HistoryTransactional | Opportunity | Broker, Manager, Finance, Audit |
 | Media | Media | Media | Broker, Marketing |
 | Open house event | OpenHouse | — | Broker, Marketing |
-| Lead/Prospect | Prospecting | Contact (with status) | Broker, AI Copilot |
+| Behavioral event (view, click, favorite) | InternetTracking | — | Marketing, Recsys, BI |
+| Lead/Prospect | Contacts (with `status='Lead'`) — RESO `Prospecting` reclassified as a contact subtype | Contact (with status) | Broker, AI Copilot |
 
 ## How Apps Use the Data Layer
 

@@ -278,7 +278,7 @@ All Supabase tables use RLS policies enforced by JWT claims. Key RLS helper func
 
 | Topic | Document | GitHub Raw URL |
 |-------|----------|---------------|
-| MLS CDL schema (18 tables) | `docs/data-models/mls-cdl-schema.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/mls-cdl-schema.md) |
+| CDL schema (cross-app data layer — listings + control plane + EFs) | `docs/data-models/cdl-schema.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/cdl-schema.md) |
 | Dash data model | `docs/data-models/dash-data-model.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/dash-data-model.md) |
 | Platform extensions (x_sm_*) | `docs/data-models/platform-extensions.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/platform-extensions.md) |
 | RESO canonical schema | `docs/data-models/reso-canonical-schema.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/reso-canonical-schema.md) |

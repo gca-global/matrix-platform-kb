@@ -1,48 +1,144 @@
 # Performance Requirements & Capacity Planning
 
-> **For Lovable**: This document defines performance targets for Matrix Apps.
+> **For Lovable**: This document defines the performance contract Sharp Matrix
+> apps must meet. The CDL is the shared read foundation for **all** channels
+> (Atlas admin, public website, mobile, partner integrations, AI agents).
+> Apps must respect the budgets, indexes, and read patterns documented here.
 
 ---
 
-## Latency Targets
+## Latency Targets (p99, in-region)
 
-| Component | Target (p95) |
-|-----------|--------------|
-| CDL query | <200ms |
-| Edge Function | <500ms |
-| CDC lag | <15 min |
-| App page load | <2s |
-| Listing detail | <1s |
+| Surface | Budget | Notes |
+|---|---|---|
+| **CDL single-property read** (`public.properties_published` by `listing_id` or `slug`) | **≤ 20 ms** | Core multi-channel hit path. Index-only scan via covering b-tree. |
+| **CDL filtered search** (50 listings, ≤ 5 filters) | **≤ 30 ms** | Covering partial b-tree on `(source_id, status, published_at desc)` with `INCLUDE (id, listing_id, slug, title_en, price, bedrooms, ...)`. |
+| **CDL fuzzy text search** ("modern villa near sea") | **≤ 30 ms** | GIN trigram on `(city || address || postal_code || district)`. |
+| **CDL geo radius search** ("within 5 km of (lat,lng)") | **≤ 30 ms** | PostGIS GIST on a stored generated `geo geometry(Point, 4326)` column. |
+| **CDL semantic search** (NL → embedding → ANN) | **≤ 50 ms** | pgvector HNSW on `properties_published.embedding vector(1024)`. Phase 2. |
+| Edge Function compute path | < 100 ms | Includes auth + DB call + serialization. Most reads are direct PostgREST and skip this. |
+| Atlas admin "MLS Data" tab list | < 500 ms | Larger result set + `count=exact`; not on the hot path. |
+| App page load (any) | < 2 s | End-to-end including network and rendering. |
+| Listing-detail full page | < 1 s | Includes media, open houses, agent. |
+| CDC lag (Databricks → CDL) | < 15 min | Legacy ETL; being phased out as direct CDL writes scale. |
 
-## Concurrent Users
+**p99 cross-region with CDN hit**: ≤ 20 ms. **CDN miss**: ~120 ms (acceptable on cold cache).
+
+## Latency budget breakdown (single property, in-region)
+
+| Hop | Budget |
+|---|---|
+| Client → Supabase API edge | 5-10 ms |
+| PostgREST request parse + auth + RLS check | 1-3 ms |
+| Postgres query (single-row by `listing_id`, index-only scan) | < 3 ms |
+| Postgres query (filtered list, 50 rows, 5 filters, index-only scan) | < 12 ms |
+| JSON serialization | 1-2 ms |
+| **Total p99** | **≤ 20 ms** ✓ |
+
+## Index strategy on `public.properties_published`
+
+The hot read table is `properties_published`. The index strategy that achieves the budget above is documented in
+`matrix-platform-foundation/supabase/cdl/migrations/20260426140000_cdl_properties_published_perf_indexes.sql`:
+
+| Query pattern | Index |
+|---|---|
+| "Get listing by ID" (mobile, deep link) | `idx_pp_listing_id_covering` (covering partial b-tree) |
+| "Get listing by slug" (public website SEO URLs) | `idx_pp_slug` (partial b-tree) |
+| "Active listings, sorted recent" (default landing) | `idx_pp_active_search` (covering partial b-tree) |
+| "Active in price range $X-Y" | `idx_pp_price_active` (partial b-tree) |
+| "Active in city Limassol, sorted by price" | `idx_pp_city_active` + bitmap-AND |
+| "By property type" (Villa, Apartment, ...) | `idx_pp_type_active` (partial b-tree) |
+| "Recent updates" (admin, cache invalidation) | `idx_pp_recent` |
+| "Free-text search 'beach Paphos'" | `gin_pp_text_search` (GIN trigram, `pg_trgm`) |
+| "Within 5 km of (lat,lng)" | `gist_pp_geo` (PostGIS GIST on generated `geo` column) |
+| "Updated since timestamp" (large window) | `brin_pp_published_at` (BRIN, `pages_per_range=32`) |
+
+**Index design principles:**
+- **Covering** — list the columns the search EF returns in `INCLUDE (...)` so Postgres never visits the heap.
+- **Partial** — `WHERE is_visible AND NOT is_deleted AND status IN ('Active', ...)` keeps indexes small (30-50% of full-table size).
+- **Trigram + Geo + BRIN** — handle fuzzy text, radius search, and large time-range scans without falling back to seq scans.
+- **Statistics targets bumped to 1000** on `city`, `postal_code`, `property_type`, `listing_agent_key` for accurate planner estimates.
+- **Per-table autovacuum tuning** — hot tables vacuum at 5% dead tuples (vs default 20%); event tables at 10%.
+
+## Read EF (`listings-search`) optimizations
+
+| Optimization | Effect |
+|---|---|
+| `Cache-Control: public, max-age=30, s-maxage=300, stale-while-revalidate=60` for anonymous queries | CDN edge serves popular searches in ~5 ms |
+| `ETag` + `304 Not Modified` handling | Saves payload + DB hit on repeat requests |
+| Keyset (cursor) pagination on `(published_at desc, id desc)` | O(log n) at any depth (vs O(n) for `offset N`) |
+| `Prefer: count=estimated` (PostgREST) | Facet counts cost ~1 ms via `pg_class.reltuples` (vs 50-200 ms for `count(*) over()`) |
+| Module-scope `supabase-js` client | Eliminates per-request construction cold-start tax |
+| Field projection via explicit `select=` | Never `select *` — only return what the channel asks for |
+
+## Multi-channel capacity (RPS to Postgres)
+
+| Channel | Peak RPS | To Postgres |
+|---|---|---|
+| Public website (anon, CDN-cached) | 50-200 | ~5-20 |
+| Mobile app (auth) | 20-50 | 20-50 |
+| Atlas admin (auth) | 5-10 | 5-10 |
+| Partner integrations (auth) | 10-30 | 10-30 |
+| **Total to Postgres** | **40-110 RPS sustained** | Within Supabase Pro PgBouncer transaction-mode pool (60 connections) |
+
+**Exit ramps if load grows beyond the Pro tier:**
+1. Supabase **read replicas** (Team / Enterprise) — 1-2 read-only replicas; `listings-search` routes anon queries there.
+2. **Materialized views** for top-N searches with hourly `REFRESH ... CONCURRENTLY`.
+3. **Redis tier** in front of the read EF for sub-1ms repeated-query hits.
+
+## Anti-patterns (do not ship)
+
+- `select *` from `properties_published` — always project the columns the channel actually needs.
+- `offset N` for deep pagination — always use keyset cursors.
+- `count(*) over()` per page — always use estimated counts unless explicitly requested.
+- `%text%` ILIKE without trigram — always go through the GIN trigram index.
+- Constructing `supabase-js` per-request — module-scope only.
+- Joining roster tables to listings at query time — denormalize hot fields onto `properties_published`.
+- Holding raw `pg` connections in Edge Functions — Supabase PgBouncer handles pooling.
+- Returning the full `raw jsonb` payload to public channels — `raw` is admin/audit-only.
+
+## Performance regression test
+
+`matrix-testing-suite/tests/apps_atlas/test_atlas_listings_search_perf.sh`:
+1. Issues 100 sequential single-property GETs; computes p50/p95/p99.
+2. Issues 100 sequential filtered-list GETs (active + city + price range); computes p50/p95/p99.
+3. Asserts: p99 ≤ 50 ms (test env, with extra-region network) / p50 ≤ 15 ms.
+4. Output tracked over time to detect regressions.
+
+The 50ms test budget is laxer than the 20ms production budget because the test runs from outside the Supabase region. Production p99 is monitored via `histogram_quantile(0.99, …)` on the live `listings-search` EF.
+
+## Concurrent users (current)
 
 | User Type | Total | Peak Concurrent |
-|-----------|-------|-----------------|
+|---|---|---|
 | Agents (brokers, managers, contact center) | ~200 across 3 markets | 80 |
 | Portal clients | ~500 | 50 |
+| Anonymous website visitors | (varies, CDN-mediated) | n/a (CDN-served) |
 
-## CDL Capacity
-
-- **24 apps/components** (11 live, 7 in progress, 6 planned) sharing Supabase connection pool
-- **Pro plan**: 60 direct connections + Supavisor pooling
-- **PgBouncer** for connection management
-
-## Data Volume
+## Data volume (current → 2028 target)
 
 | Metric | Current | Scale Target (2028) |
-|--------|---------|---------------------|
+|---|---|---|
 | Active listings | ~2,000 | 10,000 across 5 markets |
+| Total `properties` rows (all sources, incl. soft-deleted) | ~16,000 | 50,000+ |
 | Contacts | ~10,000 | — |
-| Transactions/year | ~500 | — |
+| Transactions / year | ~500 | — |
+| `internet_tracking_events` (when populated) | — | ~10⁵-10⁶ / year |
+| `history_transactional` | — | ~10⁵ / year |
 
-## Load Testing Approach
+## Load testing approach
 
-- **Tools**: k6 or Artillery against staging instance
-- **Key scenarios**: Login flow, listing search, listing CRUD, concurrent API calls
+- **Tools**: k6 or Artillery against staging instance.
+- **Key scenarios**: Single-property hot path, filtered search hot path, fuzzy text, geo radius, deep cursor pagination, semantic search (Phase 2).
+- **CI gating**: `test_atlas_listings_search_perf.sh` runs on PR; production p99 monitored via Supabase logs / Grafana.
 
 ## Cross-Reference
 
 | For | See |
-|-----|-----|
+|---|---|
+| CDL schema (`properties_published` and 8 RESO resource tables) | [data-models/cdl-schema.md](../data-models/cdl-schema.md) |
+| Read-path indexes + perf migration source | `matrix-platform-foundation/supabase/cdl/migrations/20260426140000_cdl_properties_published_perf_indexes.sql` |
+| Phase-2 intelligence layer (semantic search, recsys, MCP, syndication) | [architecture/intelligence-layer.md](../architecture/intelligence-layer.md) |
+| Personalization + recommendation engine spec | [product-specs/personalization.md](../product-specs/personalization.md) |
 | Deployment, monitoring, DR | [operations.md](operations.md) |
-| MLS 2.0 pipeline, CDL schema | [mls-datamart.md](mls-datamart.md) |
+| MLS 2.0 pipeline | [mls-datamart.md](mls-datamart.md) |

@@ -154,5 +154,5 @@ Key differences from GDPR:
 |-----|-----|
 | Security model (auth, RLS, roles) | [security-model.md](security-model.md) |
 | Operations and audit trail | [operations.md](operations.md) |
-| Data models and RESO schema | [mls-cdl-schema.md](../data-models/mls-cdl-schema.md) |
+| Data models and RESO schema | [cdl-schema.md](../data-models/cdl-schema.md) |
 | Digital strategy and markets | [digital-strategy-2026-2028.md](../vision/digital-strategy-2026-2028.md) |

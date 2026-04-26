@@ -7,6 +7,30 @@
 > Use these field names in your Supabase tables. The RESO column shows the
 > interoperability name used for syndication and the RESO Web API.
 
+## Status: Primary bidirectional channel (SIR affiliate contract)
+
+**Sharp Matrix** is the technology platform (CRM + FM + HR + MLS modules) powering **Sharp SIR**, a Sotheby's International Realty affiliate under the **Anywhere Brands / Anywhere.com** network. Sharp SIR currently operates in Cyprus, Hungary, and Kazakhstan (more markets planned). That makes Dash the **primary, bidirectional data channel** for the CDL — distinct from any generic syndication target:
+
+| Direction | What flows | Source-of-record | When |
+|---|---|---|---|
+| **Outbound (CDL → Dash)** | Internally-sourced listings (`source_id = matrix-internal`, `lifecycle_state = Active`, `is_sir_branded = true`), our marketing copy, our media, our agent roster, our office hierarchy | Sharp Matrix | Every state transition that reaches `Active` and every subsequent edit (locked-fields-aware) |
+| **Inbound (Dash → CDL)** | Sister-SIR-office listings (cross-brokerage referrals, global SIR network), brand-supplied marketing assets, brand-required field values | Other SIR offices via Anywhere | On Dash-network refresh (Phase-2.5 `dash-import` EF) |
+
+The CDL `mls_sources` table classifies sources by `kind`:
+- `internal` — `matrix-internal` (`matrix-pipeline` CRM, Atlas, future broker apps); target state for all Sharp SIR markets.
+- `legacy-internal` — `qobrix` (Cyprus legacy CRM, currently exposed as `mls.sharpsir.group` RESO Web API; **being decommissioned once Atlas runs CY listing creation**). Marked `is_sunsetting = true`. HU + KZ Sharp SIR offices author directly in Dash today, so those markets are covered by the `dash` brand-network source rather than a separate legacy seed.
+- **`brand-network`** — **Anywhere Dash** (this document); **bidirectional**; SIR-affiliate contract surface.
+- `external` — third-party feeds we ingest from organizations outside Sharp SIR (real estate **developers** with new-build inventory, **partner brokerages** with referrals / co-broke listings, future industry MLS exchanges). Inbound only; onward syndication restricted by per-partner terms-of-use.
+
+**Contract surface (Phase-1 deliverable)**: the `v_dash_*` views (`v_dash_properties`, `v_dash_members`, `v_dash_offices`, `v_dash_teams`, `v_dash_contacts`) project RESO-keyed CDL tables to Dash naming. The future `dash-export` EF reads exclusively through these views; the future `dash-import` EF normalizes incoming records into the underlying RESO-keyed tables. Both EFs are Phase-2.5; the views and source-row foundations land in Phase-1 (see [data-distribution-and-stewardship.md](../architecture/data-distribution-and-stewardship.md) and the `cdl-mls-sync-full-reso` plan).
+
+**SIR brand markers** carried alongside RESO fields:
+- `properties.is_sir_branded boolean` — listing displays SIR branding on outbound feeds.
+- `properties.sir_office_id text` — the SIR office identifier (distinct from the general `office_key`).
+- `members.sir_designation text` — e.g. `'SIR Associate'`, `'SIR Senior Global Advisor'`.
+
+Other SIR-required fields stay in `marketing_metadata jsonb` until the Dash API contract is fully audited.
+
 ## Why Dash Is the Core Data Model
 
 RESO DD 2.0 is an industry interoperability standard — useful for data exchange but abstract. Dash/Anywhere.com is the actual platform Sharp SIR brokers use daily. Its fields are concrete, well-structured, and map directly to real brokerage workflows.

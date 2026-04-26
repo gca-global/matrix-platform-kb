@@ -5,6 +5,16 @@
 >
 > **For Lovable**: This shows the full ecosystem. For how to build apps, see [app-template.md](app-template.md).
 
+## Sharp Matrix vs Sharp SIR — what's what
+
+| Term | What it is |
+|---|---|
+| **Sharp Matrix** | The **technology platform** powering Sharp SIR. Comprises four module families that all share the CDL: **CRM** (`matrix-pipeline`, `matrix-comms`, `matrix-client-connect`), **FM / Financial Management** (financial-entries, commissions, deal closings), **HR** (`matrix-hrms`), **MLS** (`matrix-atlas-mls`, `matrix-mls-2-0`, `matrix-cy-website`). |
+| **Sharp SIR** | The **brokerage business** that operates on Sharp Matrix — a Sotheby's International Realty affiliate under Anywhere Brands. Currently active in **Cyprus**, **Hungary**, and **Kazakhstan**; more markets planned. |
+| **Anywhere Dash** | The **SIR network's data exchange** between affiliated SIR offices worldwide. For Sharp SIR, Dash is the **primary bidirectional data contract**. See [dash-data-model.md](../data-models/dash-data-model.md). |
+| **Qobrix** | Sharp SIR's **legacy CRM for Cyprus**. Currently exposed to the CDL via the `mls.sharpsir.group` RESO Web API projection. **Being decommissioned as the MLS source once Atlas runs Cyprus listing creation.** |
+| **`matrix-pipeline`** | The Sharp Matrix CRM (lead/opportunity/listing pipeline). Replaces Qobrix as the system of record for new listings. |
+
 ## Three-Platform Architecture
 
 | Platform | Role | Key Components |
@@ -160,12 +170,14 @@ All apps share: SSO auth, dual-Supabase architecture, 5-level scope, CRUD permis
 
 **Three project roles (ADR-012 / ADR-013):**
 - **SSO project** (`xgubaguglsnokjyudgvc`) — identity only (auth, permissions, tenants, AD users, SSO EFs).
-- **Matrix CDL project** (`ofzcokolkeejgqfjaszq`) — shared `mls_*` business data + the unified ingestion pipeline (`mls_sources`, staging, `listing-merge`, audit). Uses Supabase Third-Party Auth against SSO JWKS so SSO-issued ES256 JWTs verify directly.
+- **Matrix CDL project** (`ofzcokolkeejgqfjaszq`) — canonical listing tables (`public.properties`, `public.properties_published`, `public.property_media`), `cdl_staging.*` raw/mapped, and the MLS Sync control plane (`mls_settings`, `mls_sync_jobs`, `mls_sync_state`, `mls_orchestrator_runs`). Eight EFs: 5-stage pipeline (`reso-import` / `field-mapping-apply` / `listing-merge` / `media-import` / `listing-publish`), admin (`mls-sync` + `mls-sync-orchestrator`), and read (`listings-search`). Uses Supabase Third-Party Auth against SSO JWKS so SSO-issued ES256 JWTs verify directly.
 - **App DB projects** (per app) — app-specific tables with RLS.
 
-CDL-Connected apps read shared MLS data via `cdlClient`; writes go
-through the `cdl-write` Edge Function on the CDL project. Domain-
-Specific apps define their own schemas in their own project.
+CDL-Connected apps read shared listing data via the CDL anon client
+(`public.properties_published`) or the `listings-search` EF; ingestion
+and admin go through the `mls-sync` / `mls-sync-orchestrator` EFs on
+the CDL project. Domain-Specific apps define their own schemas in
+their own project.
 
 ### Databricks (DWH & ETL)
 
@@ -177,16 +189,31 @@ MLS 2.0 pipeline (`/home/bitnami/mls_2_0`):
 
 See [mls-datamart.md](mls-datamart.md) for details.
 
-### External Sources & Syndication
+### Data Sources & Syndication
 
-**Current state (inbound pull):**
-- Qobrix API → Databricks (being replaced by Matrix Apps)
-- DASH API/FILE → Databricks (flipping to outbound push)
+**Sharp Matrix is the platform; Sharp SIR is the brokerage operating in Cyprus, Hungary, and Kazakhstan.** Most current inbound is either our own data (legacy CRMs being decommissioned) or sister-SIR-office data via the Anywhere brand network. We additionally support `external` feeds from third parties (developers, partner brokerages).
 
-**Target state (outbound push):**
-- RESO Web API → 3rd-party integrations
-- Dash / SIR → syndication push
-- Portal exports → HomeOverseas.ru, etc.
+**Source-of-record taxonomy** (`mls_sources.kind`):
+
+| Kind | Sources | Notes |
+|---|---|---|
+| `internal` | `matrix-internal` | Target state. Listings authored in Atlas / `matrix-pipeline` CRM / future broker apps. |
+| `legacy-internal` | `qobrix` (Cyprus legacy CRM) | Sharp SIR's own data in a legacy CRM being decommissioned as Atlas takes over Cyprus listing creation. Marked `is_sunsetting = true`. HU + KZ have no legacy seed — those offices author directly in Anywhere Dash, so they're covered by the `dash` brand-network source. |
+| **`brand-network`** | **`dash`** (Anywhere Dash) | **Primary BIDIRECTIONAL channel** — SIR affiliate contract. Phase-2.5 `dash-import` / `dash-export` EFs. |
+| `external` | (added per onboarding) | Third-party feeds we ingest from organizations outside Sharp SIR — real estate **developers** (new-build / off-plan inventory), **partner brokerages** (referrals, co-broke), future industry MLS exchanges. Inbound only; onward syndication restricted by per-partner terms-of-use. |
+
+**Anywhere Dash (SIR network) — primary BIDIRECTIONAL channel.** Sharp Matrix powers an SIR affiliate under Anywhere Brands; Dash is therefore not a generic syndication target but a contractual two-way contract surface. Phase-1 lands the schema hooks (`mls_sources.kind = 'brand-network'`, `dash` source seed row, SIR brand markers, `v_dash_*` projection views). Phase-2.5 lands the EFs (`dash-import` for sister-SIR-office listings; `dash-export` for our internally-sourced `Active` listings).
+
+**Current state (Cyprus, today):**
+- Qobrix legacy CRM → exposed as `mls.sharpsir.group` (RESO Web API projection over our own data) → CDL `mls-sync` EF. **This is a self-loop during the migration period.** `qobrix` source is `kind = 'legacy-internal'`, `is_sunsetting = true`.
+- Anywhere Dash → Databricks bronze (via `mls_2_0` ETL); flipping to direct CDL bidirectional in Phase-2.5.
+
+**Target state (per market, as Atlas covers listing creation):**
+- Brokers author listings in `matrix-pipeline` CRM / Atlas → direct CDL writes (`source_id = matrix-internal`).
+- Legacy CRM (Qobrix CY) gets `sunset_at` set; `mls-sync` stops scheduling against it.
+- **Anywhere Dash ↔ CDL (bidirectional, primary contract)** — sister-SIR-office listings inbound, our `Active` SIR-branded listings outbound; both via `v_dash_*` views.
+- RESO Web API → 3rd-party integrations (outbound, secondary).
+- Portal exports → HomeOverseas.ru, Zillow, partner portals (outbound, secondary).
 
 ### AI/ML & Analytics Layer
 
@@ -212,10 +239,13 @@ Legacy pipeline (Databricks)     → Gold sync → Supabase CDL (being phased ou
 
 ### Listing Creation Flow (Target State)
 ```
-Broker (Broker App) → Supabase CDL (RESO Property table)
+Broker (Broker App / matrix-pipeline CRM)
+    → cdl-write EF → Supabase CDL (source_id=matrix-internal, lifecycle_state=Draft)
+    → cdl-listing-lifecycle EF (submitForReview → approve → publish)
     → Realtime → Manager App, Client Portal see updates instantly
     → Sync → Databricks (analytics/BI)
-    → Push → Dash/SIR (syndication), RESO Web API (3rd parties)
+    → dash-export EF (bidirectional) → Anywhere Dash via v_dash_properties (SIR-affiliate primary contract)
+    → Push (secondary) → RESO Web API (3rd parties), Zillow, partner portals
     → AI Copilot monitors: DOM, viewings, conversions
 ```
 

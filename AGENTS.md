@@ -19,7 +19,7 @@ Before building or modifying ANY Matrix App:
 | Does the app have its own domain (HR, finance, IT ops)? | **Domain-Specific** | `/home/bitnami/matrix-hrms`, `/home/bitnami/matrix-fm`, `/home/bitnami/itsm-2-1` | Step 3d below |
 
 ### Step 3a (CDL-Connected): Read the CDL Schema
-→ `docs/data-models/mls-cdl-schema.md` — 18 MLS tables, RLS patterns, CDL connection architecture, key files
+→ `docs/data-models/cdl-schema.md` — actual CDL tables (`properties`, `properties_published`, `property_media`, `cdl_staging.*`, MLS Sync control plane), 5-stage pipeline, EF contracts
 → `docs/data-models/dash-data-model.md` — Dash field names used as column names
 
 ### Step 3b (CDL-Connected): Understand Token Architecture (critical)
@@ -35,7 +35,7 @@ CDL-Connected apps hold a single token: the **SSO JWT** (custom claims,
 ES256-signed). They send it as `Authorization: Bearer …` to:
 
 - **SSO PostgREST** (`xgubaguglsnokjyudgvc`) — for roles, permissions, display names.
-- **CDL PostgREST** (`ofzcokolkeejgqfjaszq`) — for shared `mls_*` reads.
+- **CDL PostgREST** (`ofzcokolkeejgqfjaszq`) — for direct anon reads of `public.properties_published` and the EFs (`mls-sync`, `mls-sync-orchestrator`, `listings-search`, the 5 pipeline stages).
 - **SSO / CDL Edge Functions** — all `verify_jwt: false`; each function verifies the JWT against the SSO JWKS itself.
 - **App DB PostgREST** (per-app) — unchanged.
 
@@ -44,18 +44,33 @@ ES256-signed). They send it as `Authorization: Bearer …` to:
 → `docs/platform/security-model.md` — RLS helpers (JWT-only on CDL), claims, ES256 signing
 → `docs/architecture/decisions/ADR-012.md` — dedicated CDL project + Third-Party Auth
 
-### Step 3c (CDL-Connected): CDL Write Pattern
-Writes to CDL go through the `cdl-write` Edge Function deployed on the
-CDL project itself (not the app's Supabase instance). Apps never hold
-a CDL service-role key:
+### Step 3c (CDL-Connected): CDL Write & Read Pattern
+Writes to CDL go through Edge Functions deployed on the CDL project
+itself (not the app's Supabase instance). Apps never hold a CDL
+service-role key.
 
-`cdlWrite.ts` → `cdl-write` EF on CDL project → CDL PostgREST
+- **Listing reads (anon)**: `cdlAnonClient` → `public.properties_published` (RLS-gated: `is_visible AND NOT is_deleted`).
+- **Filtered listing reads**: `cdlClient` → `listings-search` EF (POST with `q`, `filters`, `page`, `pageSize`, `sort`, `includeMedia`).
+- **MLS Sync admin (per tenant)**: app → `mls-sync` *or* `mls-sync-orchestrator` EF (chosen by `mls_settings.sync_mode`). Same action surface (`get-settings`, `save-settings`, `list-jobs`, `start`, `cancel`, `test`, …).
 
 ### Step 3c′ (CDL-Connected): MLS Ingestion Pattern
-All MLS data ingestion (external RESO, `mls_2_0` RESO API, CSV, CRM
-webhook, manual) funnels through the unified pipeline:
-`mls_sources` → staging (`reso-import` / `csv-import` / `crm-import`)
-→ `listing-merge` → `public.mls_listings`. See ADR-014.
+All MLS data ingestion (external RESO Web API, our own `mls_2_0`
+RESO API) funnels through the **5-stage pipeline** on the CDL project:
+
+```
+reso-import → field-mapping-apply → listing-merge → media-import → listing-publish
+   ↓                ↓                     ↓               ↓                ↓
+cdl_staging.    cdl_staging.        public.         public.          public.
+listings_raw    listings_mapped     properties      property_media   properties_published
+```
+
+Each stage writes one row to `public.ingest_audit`. The orchestration
+itself is owned by `mls-sync-orchestrator` (or by the lifted
+`mls-sync` monolith for the cy-web-2v0-style direct-write path). See
+[`docs/data-models/cdl-schema.md`](docs/data-models/cdl-schema.md)
+and the implementation-status note in
+[ADR-014](docs/architecture/decisions/ADR-014.md). CSV / CRM webhook
+ingestion remains on the roadmap.
 
 ### Step 3c″ (CDL-Connected): Cross-project user display
 Apps must NOT SQL-join CDL rows to `auth.users` or `sso_users`. Use the
@@ -81,14 +96,23 @@ IDs through the `resolve-users` SSO Edge Function.
 
 ## Platform Identity
 
-**Sharp Matrix** is the multi-app digital platform for **Sharp Sotheby's International Realty** —
-luxury real estate brokerage operating in Cyprus, Hungary, and Kazakhstan.
+**Sharp Matrix** is the **technology platform** powering **Sharp SIR** (Sharp Sotheby's International Realty), a luxury real estate brokerage and SIR-network affiliate currently operating in **Cyprus**, **Hungary**, and **Kazakhstan** (more markets planned). Sharp Matrix comprises four module families that all share the CDL:
+
+- **CRM** — `matrix-pipeline` (lead/opportunity/listing pipeline), `matrix-comms`, `matrix-client-connect`
+- **FM** (Financial Management) — financial-entries, commissions, deal closings
+- **HR** — `matrix-hrms`
+- **MLS** — `matrix-atlas-mls`, `matrix-mls-2-0`, `matrix-cy-website`
+
+**Source-of-record taxonomy** (`mls_sources.kind`):
+- `internal` — `matrix-internal` (Atlas / `matrix-pipeline` / future broker apps); target state for all Sharp SIR markets.
+- `legacy-internal` — `qobrix` (Cyprus legacy CRM, currently exposed as `mls.sharpsir.group` RESO Web API; **being decommissioned once Atlas runs CY listing creation**). Marked `is_sunsetting = true`. HU + KZ have no Phase-1 legacy seed — those Sharp SIR offices author directly in Anywhere Dash today (covered by the `dash` brand-network source).
+- `brand-network` — `dash` (Anywhere Dash). **Primary bidirectional contract** as an SIR affiliate.
+- `external` — third-party feeds (real estate developers, partner brokerages, future MLS exchanges); inbound only with restricted onward syndication per the partner's terms-of-use.
 
 **Built with**: Lovable (app builder) + Supabase (CDL / system of record) + Databricks (DWH / ETL).
-**Practical data model**: Dash/Anywhere.com — CDL-Connected apps use Dash field names.
-**Interop standard**: RESO DD 2.0 — used for syndication and external APIs.
+**Practical data model**: RESO DD 2.0 in storage (snake_case canonical names); Dash names projected via `v_dash_*` views (Phase-1 contract surface for the SIR network).
 **App template**: `matrix-apps-template` — defines stack, auth, permissions, UI patterns.
-**Strategic goal**: Matrix Apps replace Qobrix CRM. Dash flips from pull to push (syndication).
+**Strategic goal**: Matrix Apps (`matrix-pipeline` CRM + Atlas) replace Qobrix for Cyprus listing creation; Dash flips from inbound-only to bidirectional via `dash-import` / `dash-export` EFs (HU + KZ already author in Dash today).
 
 ## Knowledge Base Structure
 
@@ -110,9 +134,13 @@ docs/
 │   ├── alignment-audit-playbook.md   ← Harness-style audit: kill schema↔code↔UI drift
 │   ├── ecosystem-architecture.md     ← Full ecosystem: channels, apps, data, AI/ML
 │   ├── app-catalog.md               ← All platform apps (11 live, 7 in progress, 6 planned)
-│   ├── performance.md              ← Latency targets, capacity planning, load testing
+│   ├── performance.md              ← Latency targets (p99 ≤ 20ms property read), index strategy, capacity planning
 │   ├── mobile-strategy.md           ← PWA, responsive design, offline requirements
 │   └── kb-methodology.md            ← KB design, versioning, entropy management, doc gardening
+├── architecture/
+│   ├── intelligence-layer.md        ← Phase-2 roadmap: semantic + algebraic search, recsys, MCP, syndication
+│   ├── data-distribution-and-stewardship.md  ← Phase-2.5 roadmap: source-of-record & listing lifecycle, channel distribution rules, multi-source merge precedence, field-level overrides (locked_fields)
+│   └── decisions/                   ← ADRs (numbered, immutable)
 ├── exec-plans/
 │   ├── index.md                      ← Execution plan format, lifecycle, usage guide
 │   ├── tech-debt-tracker.md          ← Known technical debt by domain with severity
@@ -129,7 +157,7 @@ docs/
 │   ├── reso-dd-overview.md           ← RESO DD 2.0 — interop standard for syndication
 │   ├── reso-canonical-schema.md      ← Which RESO resources/fields map to Dash
 │   ├── platform-extensions.md        ← All x_sm_* fields not in Dash or RESO DD
-│   ├── mls-cdl-schema.md            ← MLS Listing Management CDL schema (18 tables, 422 cols)
+│   ├── cdl-schema.md            ← Common Data Layer for Sharp Matrix apps (cross-app data; today: listings + ingestion + MLS Sync control plane)
 │   ├── etl-pipeline.md              ← Bronze/Silver/Gold ETL pipeline architecture
 │   ├── data-quality.md              ← Data quality verification, validation, reporting
 │   ├── reso-web-api.md              ← RESO Web API (OData 4.0) endpoint reference
@@ -201,7 +229,7 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 | Map a property field across systems            | `docs/data-models/property-field-mapping.md`      |
 | See which RESO fields map to Dash              | `docs/data-models/reso-canonical-schema.md`       |
 | Find or add a platform extension (x_sm_*)     | `docs/data-models/platform-extensions.md`         |
-| See the MLS CDL schema (18 tables)             | `docs/data-models/mls-cdl-schema.md`              |
+| See the CDL schema (cross-app data layer; properties + ingestion + MLS Sync) | `docs/data-models/cdl-schema.md`              |
 | Understand the ETL pipeline (Bronze→Gold)     | `docs/data-models/etl-pipeline.md`                |
 | Use the RESO Web API (OData)                  | `docs/data-models/reso-web-api.md`                |
 | Understand Qobrix entities & migration        | `docs/data-models/qobrix-data-model.md`           |
@@ -211,6 +239,8 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 | See SSO Edge Function API contracts            | `docs/platform/sso-edge-functions.md`             |
 | Deploy an app or Edge Function                | `docs/platform/operations.md`                     |
 | Performance targets, capacity planning        | `docs/platform/performance.md`                   |
+| Plan Phase-2 AI / semantic search / recsys / MCP | `docs/architecture/intelligence-layer.md`     |
+| Plan Phase-2.5 source-of-record / listing lifecycle / channel distribution / field overrides / multi-source merge | `docs/architecture/data-distribution-and-stewardship.md` |
 | Mobile strategy (PWA, offline)                | `docs/platform/mobile-strategy.md`                |
 | Test Matrix Apps (unit, E2E, contract)         | `docs/platform/testing-strategy.md`               |
 | Run an alignment / drift audit on an app       | `docs/platform/alignment-audit-playbook.md`       |
@@ -242,7 +272,8 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 | `/home/bitnami/matrix-pipeline` | React/TS | Pipeline CRM app (CDL-Connected, leads, opportunities, contacts, M365) |
 | `/home/bitnami/itsm-2-1` | React/TS | ITSM app (Domain-Specific, service desk, CMDB, software assets, vendors) |
 | `/home/bitnami/matrix-fm` | React/TS | Financial Management app (Domain-Specific, reporting, budgets, planning, CORE) |
-| `/home/bitnami/matrix-mls` | React/TS | MLS Listing Management app (CDL-Connected, 18 tables on CDL). **Cursor-managed, not Lovable-linked** — see ADR-013. |
+| `/home/bitnami/matrix-mls` | React/TS | MLS Listing Management app (CDL-Connected via the `properties_published` snapshot + `listings-search` EF; per-broker tables on the matrix-mls app DB). **Cursor-managed, not Lovable-linked** — see ADR-013. |
+| `/home/bitnami/matrix-atlas-mls` | React/TS | Atlas — MLS Sync admin & Listings Search consumer (CDL-Connected). Calls `mls-sync` / `mls-sync-orchestrator` and `listings-search` EFs on the CDL project. |
 | `/home/bitnami/mls_2_0` | Python/FastAPI | MLS 2.0 pipeline: Databricks ETL + RESO Web API |
 | `vision/Sharp-Sothebys-International-Realty.pdf` | PDF | Full 28-slide digital strategy 2026-2028 |
 | `vision/Sarp SIR Platform-2026-02-18-125014.mmd` | Mermaid | Platform ecosystem architecture diagram |

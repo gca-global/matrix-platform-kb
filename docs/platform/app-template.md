@@ -121,19 +121,23 @@ Because `mls_*` rows live on a different Supabase project than
 Use the `useUserDisplay` React hook (from `matrix-apps-template`),
 which batches IDs and calls the `resolve-users` SSO Edge Function.
 
-### CDL Write Proxy (Edge Function Pattern)
+### CDL Read & Write Patterns (current)
 
-CDL-Connected apps proxy write operations through an Edge Function to avoid CORS and maintain a clean security boundary:
+CDL-Connected apps reach the CDL project (`ofzcokolkeejgqfjaszq`) via
+EFs deployed on that project, never via direct PostgREST writes:
 
 ```
-App UI → cdlWrite.ts → supabase.functions.invoke('cdl-write') → CDL PostgREST
+App UI → cdlClient.functions.invoke('listings-search', body)            ← filtered listing reads
+App UI → cdlAnonClient.from('properties_published').select(...)         ← simple anon snapshot reads (RLS gated)
+App UI → cdlClient.functions.invoke('mls-sync' | 'mls-sync-orchestrator', { action, ... })
+                                                                         ← MLS Sync admin (start/cancel/save-settings/...)
 ```
 
-The `cdl-write` Edge Function on the app's Supabase instance:
-1. Receives the operation, table, data, and the user's Supabase native token
-2. Creates a CDL client with that token as the Authorization header
-3. Executes the operation on the CDL instance
-4. Returns the result (with `_debug` info on errors)
+Each CDL EF runs with `verify_jwt = false` and verifies the SSO JWT
+itself (HS256 / JWKS fallback) and checks `scope` ∈
+`SSO_ALLOWED_SCOPES`. The previously-planned generic `cdl-write` proxy
+was never built; if a future app needs generic CRUD, add a dedicated
+EF to `matrix-platform-foundation/supabase/cdl/functions/`.
 
 ## SSO Auth Flow
 
@@ -544,17 +548,17 @@ Source: `/home/bitnami/matrix-hrms` — a Domain-Specific app built from the tem
 | `src/hooks/useRoleConfig.ts` | Extended page/action permissions |
 | `src/components/AppSidebar.tsx` | 4-section sidebar with badge counts and role-based visibility |
 
-### In `matrix-mls` (CDL-Connected example)
+### In `matrix-atlas-mls` (CDL-Connected example)
 
 | File | What It Shows |
 |------|--------------|
-| `src/lib/cdlWrite.ts` | CDL write helper — invokes the `cdl-write` EF deployed on the CDL project |
-| `src/integrations/supabase/dataLayerClient.ts` | Split `ssoClient` + `cdlClient`; both forward the SSO access token |
-| `src/hooks/useUserDisplay.ts` | Cross-project user display lookup via `resolve-users` EF |
-| `src/pages/admin/mls/*.tsx` | Admin UI for the MLS ingestion pipeline (Sources, Mappings, Runs, Staging, Manual, CSV, CRM, Merge, Audit) |
-| `src/components/settings/DevToolsPanel.tsx` | Test data seeder for the 18 MLS tables |
+| `src/integrations/supabase/cdlClient.ts` | CDL anon client (project `ofzcokolkeejgqfjaszq`) — separate from the SSO `dataLayerClient.ts` |
+| `src/lib/cdl-edge-function-client.ts` | `invokeWithAuthCdl` helper — sends the SSO JWT to CDL EFs |
+| `src/hooks/useMLSSync.ts` / `useMLSSettings.ts` | Calls `mls-sync` or `mls-sync-orchestrator` based on `mls_settings.sync_mode` |
+| `src/hooks/useListingsSearch.ts` | Calls the `listings-search` EF (filters / pagination / sort) |
+| `src/hooks/useMlsData.ts` (`useProperties`) | Reads `public.properties_published` via the CDL anon client |
+| `src/components/AppSidebar.tsx` | Sidebar groups: `Overview` / `Application` / `MLS Sync` / `Administration` |
 | `src/pages/AuthCallback.tsx` | OAuth2 + PKCE callback handler |
-| `src/hooks/useActiveRole.ts` | `canCreate`/`canRead`/`canUpdate`/`canDelete` + admin flags |
 
 ## Common Pitfalls (LLM Guidance)
 
@@ -582,7 +586,7 @@ via Third-Party Auth; `scope`, `crud`, `team_ids`, and `uoi` are in
 the JWT payload itself. Keeping the helpers JWT-only is what makes
 the CDL portable to Databricks Lakebase.
 **Correct**: Use the JWT-only helpers in
-`matrix-platform-foundation/supabase-cdl/migrations/20260420000100_jwt_helpers.sql`.
+`matrix-platform-foundation/supabase/cdl/migrations/` (JWT-only RLS helpers).
 
 ### 3. `oauth-token` embeds claims in the JWT payload
 
@@ -596,7 +600,7 @@ no CRUD and queries return empty results.
 `auth.users.raw_app_meta_data` is still allowed for SSO-side
 conveniences but is not the CDL fallback.
 
-### 4. CDL writes go through the `cdl-write` EF on the CDL project
+### 4. CDL writes go through CDL-project EFs (never the app's project)
 
 **Wrong**: Calling CDL PostgREST directly for INSERT/UPDATE/DELETE
 from the browser, or proxying through an EF on the app's own Supabase
@@ -604,12 +608,17 @@ project.
 **Why it fails**: CORS blocks direct writes; putting a write proxy on
 each app's project fragments the write boundary and requires
 distributing the CDL service-role key to every app.
-**Correct**: Invoke the `cdl-write` Edge Function on the **CDL project**
-(`ofzcokolkeejgqfjaszq`). Apps never hold a CDL service-role key.
+**Correct**: Invoke an Edge Function on the **CDL project**
+(`ofzcokolkeejgqfjaszq`). Today the deployed write paths are
+`mls-sync` / `mls-sync-orchestrator` for MLS ingestion and admin, and
+the 5 pipeline-stage EFs for orchestrated runs. If a future feature
+needs a generic CRUD proxy, add a new EF to
+`matrix-platform-foundation/supabase/cdl/functions/` rather than
+distributing service-role keys.
 
 ### 5. Do NOT SQL-join CDL rows to `auth.users` / `sso_users`
 
-**Wrong**: `select listings.*, auth.users.email from mls_listings join …`.
+**Wrong**: `select properties.*, auth.users.email from properties join …`.
 **Why it fails**: `auth.users` is on the SSO project, not the CDL. The
 join is impossible across projects and breaks again when CDL moves to
 Lakebase.
@@ -631,10 +640,15 @@ configs.
 ### 7. Ingestion into CDL goes through the unified pipeline
 
 **Wrong**: Writing a bespoke EF that inserts directly into
-`public.mls_listings`.
-**Why it fails**: Skips staging, provenance, dedup, and audit; makes
-the source invisible to `mls_import_runs` and the Audit admin page.
-**Correct**: Register an `mls_sources` row, define
-`mls_source_field_mappings`, and route data through the appropriate
-ingest EF (`reso-import`, `csv-import`, `crm-import`) → staging →
-`listing-merge` → `mls_listings`. See ADR-014.
+`public.properties` or `public.properties_published`.
+**Why it fails**: Skips staging (`cdl_staging.listings_raw` /
+`listings_mapped`), the merge step's dedup-by-`(source_id,
+source_listing_key)`, and the per-stage `public.ingest_audit` log.
+**Correct**: Add a row in `public.mls_settings` (per tenant, with
+`source_id`, RESO creds, schedule), then trigger the pipeline by
+calling `mls-sync-orchestrator` (`action: 'start'`) or — if the lifted
+monolith is required — `mls-sync`. The orchestrator chains
+`reso-import → field-mapping-apply → listing-merge → media-import →
+listing-publish` and records per-stage state in
+`public.mls_orchestrator_runs`. See `docs/data-models/cdl-schema.md`
+and ADR-014's Implementation Status note.

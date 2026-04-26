@@ -52,6 +52,8 @@ Three-platform architecture: Supabase (CDL), Databricks (DWH), Lovable (app buil
 | Document | Description |
 |----------|-------------|
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Technology map, three-platform architecture, dual-Supabase, data flow |
+| [architecture/intelligence-layer.md](architecture/intelligence-layer.md) | **Phase-2 roadmap** — semantic + algebraic search, recsys, MCP server, syndication channels. Phase-1 → Phase-2 contract (pgvector + embeddings + `marketing_metadata`). |
+| [architecture/data-distribution-and-stewardship.md](architecture/data-distribution-and-stewardship.md) | **Phase-2.5 roadmap** — source-of-record & listing lifecycle, channel distribution rules, multi-source merge precedence, field-level overrides (data stewardship). Four source kinds: `internal` (matrix-internal — target state), `legacy-internal` (Qobrix CY — sunsetting), `brand-network` (Anywhere Dash — bidirectional SIR-affiliate primary; covers HU + KZ inbound today), `external` (developers, partner brokerages). Phase-1 → Phase-2.5 contract (`mls_sources.kind` + `is_sunsetting` + `sunset_at` + `lifecycle_state` + `property_lifecycle_events` + `locked_fields` + `property_field_overrides` + `cdl_lock_field` RPCs). |
 
 ## Chapter 3: Data Models
 
