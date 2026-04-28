@@ -51,7 +51,7 @@ service-role key.
 
 - **Listing reads (anon)**: `cdlAnonClient` → `public.properties_published` (RLS-gated: `is_visible AND NOT is_deleted`).
 - **Filtered listing reads**: `cdlClient` → `listings-search` EF (POST with `q`, `filters`, `page`, `pageSize`, `sort`, `includeMedia`).
-- **MLS Sync admin (per tenant)**: app → `mls-sync` *or* `mls-sync-orchestrator` EF (chosen by `mls_settings.sync_mode`). Same action surface (`get-settings`, `save-settings`, `list-jobs`, `start`, `cancel`, `test`, …).
+- **MLS Sync admin (per tenant)**: app → `mls-sync-orchestrator` EF for sync runs (the only sync engine post Phase 1 Best-in-Class) and `mls-sync` for admin/CRUD/read actions (`get-settings`, `save-settings`, `list-jobs`, `cancel`, `lock-field`, resource CRUD, etc.). Both expose identical action surfaces; `mls-sync.start` proxies to the orchestrator for backwards compatibility.
 
 ### Step 3c′ (CDL-Connected): MLS Ingestion Pattern
 All MLS data ingestion (external RESO Web API, our own `mls_2_0`
@@ -64,9 +64,14 @@ cdl_staging.    cdl_staging.        public.         public.          public.
 listings_raw    listings_mapped     properties      property_media   properties_published
 ```
 
-Each stage writes one row to `public.ingest_audit`. The orchestration
-itself is owned by `mls-sync-orchestrator` (or by the lifted
-`mls-sync` monolith for the cy-web-2v0-style direct-write path). See
+Each EF stage writes one row to `public.ingest_audit`. As of Phase 1
+Best-in-Class (Apr 2026) the orchestration is owned exclusively by
+`mls-sync-orchestrator`; the legacy `mls-sync` monolith engine has been
+retired (`mls-sync.start` proxies to the orchestrator) and the
+`mls_settings.sync_mode` selector has been dropped from the schema. The
+media stage is now page-capped — the orchestrator loops `media-import`
+into `cdl_staging.media_staging` (default 5 pages per invocation) and
+finalises with the `merge_media_from_staging` RPC. See
 [`docs/data-models/cdl-schema.md`](docs/data-models/cdl-schema.md)
 and the implementation-status note in
 [ADR-014](docs/architecture/decisions/ADR-014.md). CSV / CRM webhook

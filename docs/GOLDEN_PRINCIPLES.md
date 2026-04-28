@@ -312,8 +312,10 @@ Skipping the audit log destroys regulatory traceability.
 
 **Enforcement**: ADR-014 (with the 2026-04-26 implementation status
 note). The ingestion EFs on the CDL project are the 5 pipeline stages
-above plus the two admin/orchestration EFs (`mls-sync` lifted
-monolith, `mls-sync-orchestrator` chaining the 5 stages). New tenants
+above plus the admin/orchestration EFs: `mls-sync-orchestrator`
+(sole sync engine, chains the 6 stages including the new
+`media-import` (looped) → `media-merge` RPC pair) and `mls-sync`
+(admin/CRUD/read API; `start` proxies to the orchestrator). New tenants
 are onboarded by adding a row in `public.mls_settings` (per-tenant
 RESO creds + `source_id`) and field mappings in
 `public.field_mappings` — never by writing a bespoke EF. CSV / CRM

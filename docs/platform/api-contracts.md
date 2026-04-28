@@ -71,13 +71,14 @@ All run with `verify_jwt: false` and verify SSO JWTs themselves
 | reso-import | `/reso-import` | POST | Bearer (admin) | RESO OData → `cdl_staging.listings_raw` (stage 1/5) |
 | field-mapping-apply | `/field-mapping-apply` | POST | Bearer (admin) | `listings_raw` → `listings_mapped` via `public.field_mappings` (stage 2/5) |
 | listing-merge | `/listing-merge` | POST | Bearer (admin) | `listings_mapped` → `public.properties` upsert + soft-delete (stage 3/5) |
-| media-import | `/media-import` | POST | Bearer (admin) | RESO Media → `public.property_media` (stage 4/5) |
-| listing-publish | `/listing-publish` | POST | Bearer (admin) | `public.properties` (visible) → `public.properties_published` snapshot (stage 5/5) |
-| mls-sync | `/mls-sync` | POST | Bearer (admin) | Lifted cy-web-2v0 monolith. Action surface: `get-settings` / `save-settings` / `list-jobs` / `get-job` / `get-running-job` / `get-recent-job` / `has-previous-sync` / `start` / `cancel` / `resume` / `test` / `sync-media` / `watchdog` |
-| mls-sync-orchestrator | `/mls-sync-orchestrator` | POST | Bearer (admin) | Same action surface as `mls-sync`; `start` chains the 5 pipeline stages and records per-stage state in `public.mls_orchestrator_runs` |
+| media-import | `/media-import` | POST | Bearer (admin) | RESO Media → `cdl_staging.media_staging` (page-capped via `pagesPerInvocation`, default 5). Looped by orchestrator (stage 4a/6) |
+| media-merge | RPC `public.merge_media_from_staging(p_batch_id, p_source_id)` | n/a | service_role | Drains `cdl_staging.media_staging` for a batch into `public.property_media` (upsert + soft-prune). Called by orchestrator (stage 4b/6) |
+| listing-publish | `/listing-publish` | POST | Bearer (admin) | `public.properties` (visible) → `public.properties_published` snapshot (stage 5/6) |
+| mls-sync | `/mls-sync` | POST | Bearer (admin) | Admin/CRUD/read API. Action surface: `get-settings` / `save-settings` / `list-jobs` / `list-running-jobs` / `get-job` / `get-running-job` / `get-recent-job` / `has-previous-sync` / `start` (proxies to `mls-sync-orchestrator`) / `cancel` (cooperative) / `resume` / `test` / `sync-media` / `lock-field` / `unlock-field` / `run-side-resources` / `watchdog` plus per-resource CRUD/list/test |
+| mls-sync-orchestrator | `/mls-sync-orchestrator` | POST | Bearer (admin) | **Sole sync engine.** Same action surface as `mls-sync`; `start` chains the 6 pipeline stages (`reso-import` → `field-mapping-apply` → `listing-merge` → `media-import` (looped) → `media-merge` RPC → `listing-publish`) plus `run-side-resources`, recording per-stage state in `public.mls_orchestrator_runs`. Defaults `incremental = true` when caller omits it. |
 | listings-search | `/listings-search` | POST | Bearer | Filtered/paginated reads of `public.properties_published` with optional `includeMedia` |
 
-Action surface for `mls-sync` / `mls-sync-orchestrator` is identical, so consumers (`matrix-atlas-mls`) pick the engine via `mls_settings.sync_mode` ∈ `{monolith, orchestrator}` without changing the call site. See [`docs/data-models/cdl-schema.md`](../data-models/cdl-schema.md) for full request/response contracts.
+`mls-sync-orchestrator` is the only sync engine for new work (Phase 1 Best-in-Class, Apr 2026). The legacy engine selector `mls_settings.sync_mode` was dropped in `20260426170000_cdl_drop_sync_mode.sql`. Atlas (`matrix-atlas-mls`) calls the orchestrator directly via `useMLSSettings.invokeSync()` and routes admin/CRUD actions to `mls-sync` via the separate `invokeMlsSyncAdmin()` helper. See [`docs/data-models/cdl-schema.md`](../data-models/cdl-schema.md) for full request/response contracts.
 
 ## Auth Requirements
 

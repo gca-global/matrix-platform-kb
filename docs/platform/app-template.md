@@ -554,7 +554,7 @@ Source: `/home/bitnami/matrix-hrms` — a Domain-Specific app built from the tem
 |------|--------------|
 | `src/integrations/supabase/cdlClient.ts` | CDL anon client (project `ofzcokolkeejgqfjaszq`) — separate from the SSO `dataLayerClient.ts` |
 | `src/lib/cdl-edge-function-client.ts` | `invokeWithAuthCdl` helper — sends the SSO JWT to CDL EFs |
-| `src/hooks/useMLSSync.ts` / `useMLSSettings.ts` | Calls `mls-sync` or `mls-sync-orchestrator` based on `mls_settings.sync_mode` |
+| `src/hooks/useMLSSync.ts` / `useMLSSettings.ts` | Calls `mls-sync-orchestrator` for sync runs (sole engine) and `mls-sync` for admin/CRUD via `invokeMlsSyncAdmin()` |
 | `src/hooks/useListingsSearch.ts` | Calls the `listings-search` EF (filters / pagination / sort) |
 | `src/hooks/useMlsData.ts` (`useProperties`) | Reads `public.properties_published` via the CDL anon client |
 | `src/components/AppSidebar.tsx` | Sidebar groups: `Overview` / `Application` / `MLS Sync` / `Administration` |
@@ -646,9 +646,11 @@ configs.
 source_listing_key)`, and the per-stage `public.ingest_audit` log.
 **Correct**: Add a row in `public.mls_settings` (per tenant, with
 `source_id`, RESO creds, schedule), then trigger the pipeline by
-calling `mls-sync-orchestrator` (`action: 'start'`) or — if the lifted
-monolith is required — `mls-sync`. The orchestrator chains
-`reso-import → field-mapping-apply → listing-merge → media-import →
-listing-publish` and records per-stage state in
+calling `mls-sync-orchestrator` (`action: 'start'`). Phase 1
+Best-in-Class (Apr 2026) made the orchestrator the sole sync engine —
+the legacy `mls-sync` monolith path was retired and `mls-sync.start`
+now proxies to the orchestrator. The orchestrator chains
+`reso-import → field-mapping-apply → listing-merge → media-import (looped) →
+media-merge → listing-publish` (plus `run-side-resources`) and records per-stage state in
 `public.mls_orchestrator_runs`. See `docs/data-models/cdl-schema.md`
 and ADR-014's Implementation Status note.
