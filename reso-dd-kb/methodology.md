@@ -193,8 +193,39 @@ spanish_value, french_value, status, record_id
 Every host column whose `SimpleDataType = "String List, Single"` and
 whose `LookupName` is in our lookup set gets a 5th `Ref:` to
 `lookup_<name>.code`. Multi-value lookups (`String List, Multi`) stay
-`varchar` with a `lookup=<Name> (multi)` Note (DBML's single-column
-`Ref` doesn't model array membership).
+`varchar` with an explicit `(multi-value; column stores comma-separated
+codes)` tag in the column Note — DBML's single-column `Ref` can't model
+array membership, so no FK is emitted.
+
+The 193 generated `lookup_*` tables therefore split three ways:
+
+| Bucket | Count | DBML behaviour |
+|---|---:|---|
+| FK-targeted (at least one `String List, Single` user) | 99 | host columns carry a `Ref:` to `lookup_<name>.code` |
+| Documentation-only (only `String List, Multi` users) | 94 | table exists for value-set documentation; no `Ref:` targets it; host column tagged `(multi-value)` in Note |
+| **Total tables emitted** | **193** | one per distinct `LookupName` in `raw/lookups.csv` |
+
+A further **29 `LookupName`s** are *referenced* by columns but **not
+materialised** as tables — these are RESO's *open* enumerations
+(`City`, `PostalCity`, `CountyOrParish`, `MlsStatus`, `MediaStatus`,
+`OrganizationType`, `AOR`, `ElementarySchool`, `HighSchool`,
+`MiddleOrJuniorSchool`, `*District`, `MLSAreaMajor`, `MLSAreaMinor`,
+`StreetSuffix`, `RuleType`, `SavedSearchType`,
+`MemberMlsSecurityClass`, `TeamImpersonationLevel`,
+`SyndicateAgentOption`, `ImageSizeDescription`,
+`SearchQueryExceptions`, `BuildingFeatures`, `Disclosures`,
+`DocumentsAvailable`, `GreenLocation`, `IrrigationSource`,
+`ShowingDays`). RESO declares the `LookupName` but ships no closed
+value list because each MLS / jurisdiction defines its own. Columns
+that reference an open lookup carry an explicit `(open:
+jurisdiction-defined; no closed value list)` tag in their Note so the
+absence of a corresponding `lookup_<name>` table is intentional, not a
+generator bug.
+
+Total reconciliation: 99 FK-targeted + 94 docs-only + 29 open = 222
+distinct `LookupName`s referenced by RESO 2.0 fields. Zero orphan
+lookup tables (every emitted table has at least one referencing field
+in `raw/fields.csv`).
 
 ### Step 5 — Skip Collection-typed inverse references
 

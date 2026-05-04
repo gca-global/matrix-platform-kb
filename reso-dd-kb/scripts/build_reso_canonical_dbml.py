@@ -29,7 +29,7 @@ from __future__ import annotations
 
 import csv
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
@@ -362,7 +362,11 @@ def collection_inverse_targets(
     return out
 
 
-def field_note(f: Dict[str, str], meta: Dict[str, str]) -> str:
+def field_note(
+    f: Dict[str, str],
+    meta: Dict[str, str],
+    lookup_names: Optional[Set[str]] = None,
+) -> str:
     parts = [f["StandardName"]]
     defn = (f.get("Definition") or "").strip().replace("\n", " ")
     if defn:
@@ -370,10 +374,17 @@ def field_note(f: Dict[str, str], meta: Dict[str, str]) -> str:
     sdt = f.get("SimpleDataType") or ""
     if sdt:
         parts.append(f"type={sdt}")
-    lookup = f.get("LookupName") or ""
+    lookup = (f.get("LookupName") or "").strip()
     if lookup:
-        is_multi = (f.get("SimpleDataType") or "").strip() == "String List, Multi"
-        parts.append(f"lookup={lookup}" + (" (multi)" if is_multi else ""))
+        sdt_clean = (f.get("SimpleDataType") or "").strip()
+        is_multi = sdt_clean == "String List, Multi"
+        is_open = lookup_names is not None and lookup not in lookup_names
+        suffix = ""
+        if is_open:
+            suffix = " (open: jurisdiction-defined; no closed value list)"
+        elif is_multi:
+            suffix = " (multi-value; column stores comma-separated codes)"
+        parts.append(f"lookup={lookup}{suffix}")
     for label, key in [("max_len", "SugMaxLength"), ("max_prec", "SugMaxPrecision")]:
         v = (f.get(key) or "").strip()
         if v:
@@ -469,7 +480,7 @@ def build_table(
             attrs.append("pk")
 
         meta_row = meta.get((resource, f["StandardName"]), {})
-        attrs.append(f"note: {field_note(f, meta_row)}")
+        attrs.append(f"note: {field_note(f, meta_row, lookup_names)}")
         lines.append(f"  {col_name} {col_type} [{', '.join(attrs)}]")
 
         # Lookup FK ref (single-value lookups only; multi-value stays as text).
@@ -486,8 +497,30 @@ def build_table(
     return "\n".join(lines), refs
 
 
-def build_lookup_table(name: str) -> str:
+def build_lookup_table(
+    name: str,
+    is_multi_only: bool,
+    n_users: int,
+) -> str:
+    """Render one DBML reference table for a RESO LookupName.
+
+    `is_multi_only` flips the table-level Note to explain why no `Ref:`
+    targets it (multi-value columns store comma-separated codes; DBML's
+    single-column FK can't model array membership). `n_users` is the
+    number of fields that reference this LookupName."""
     table = f"lookup_{to_snake(name)}"
+    if is_multi_only:
+        note = (
+            f"RESO 2.0 lookup values for {name} - referenced ONLY by "
+            f"String List, Multi columns ({n_users} field(s)), so no DBML "
+            f"Ref targets this table; codes are stored comma-separated in "
+            f"the host column. See raw/lookups.csv for the value list."
+        )
+    else:
+        note = (
+            f"RESO 2.0 lookup values for {name} - referenced by "
+            f"{n_users} field(s). See raw/lookups.csv for the value list."
+        )
     lines = [
         f"// ---- {name} (RESO 2.0 lookup) ----",
         f"Table {table} {{",
@@ -500,7 +533,7 @@ def build_lookup_table(name: str) -> str:
         "  french_value varchar",
         "  status varchar [note: 'Active | Revised | Retired']",
         "  record_id varchar [note: 'RESO LookupId stable identifier']",
-        f"  Note: 'RESO 2.0 lookup values for {name} (see raw/lookups.csv for the value list)'",
+        f"  Note: '{note}'",
         "}",
         "",
     ]
@@ -575,8 +608,15 @@ def build_dbml() -> str:
     out.append("    the host - so they are NOT rendered as host columns. Each host table has a")
     out.append("    `// Inverse 1:N` comment listing them so the relationship is documented.")
     out.append("")
-    out.append("    Single-value lookup columns reference the corresponding lookup_<name>.code via DBML")
-    out.append("    Refs; multi-value lookup columns stay text and document the lookup in a Note.")
+    out.append("    Lookup tables: one `lookup_<snake_name>` table per distinct LookupName in")
+    out.append("    raw/lookups.csv. Single-value lookup columns (String List, Single) get a DBML")
+    out.append("    Ref to lookup_<name>.code. Multi-value lookup columns (String List, Multi) stay")
+    out.append("    varchar - DBML's single-column FK can't model array membership - and the lookup")
+    out.append("    table for those LookupNames carries a documentation-only Note. Open lookups")
+    out.append("    (LookupName declared by RESO but with no closed value list, e.g. `City`,")
+    out.append("    `CountyOrParish`, `MlsStatus`, `AOR`) are NOT materialised as tables; columns")
+    out.append("    that reference them carry an explicit `(open: jurisdiction-defined)` tag in")
+    out.append("    their Note so the absence of a `lookup_<name>` table is intentional.")
     out.append("")
     out.append("    No Atlas-specific decisions baked in. Atlas adapts this canonical in")
     out.append("    build_atlas_target_dbml.py (wiki/atlas/atlas-target.dbml), where a chosen")
@@ -641,12 +681,38 @@ def build_dbml() -> str:
             f"// {host}.{name} -> {target} [{signal}]"
         )
 
+    # Per-lookup usage stats so each lookup table can declare in its Note
+    # how many fields reference it and whether any of them is a single-
+    # value column (in which case a `Ref:` targets the table). Lookups
+    # used only by `String List, Multi` columns get a clearer Note that
+    # explains why no FK targets them.
+    lookup_users: Dict[str, Counter] = defaultdict(Counter)
+    for f in fields:
+        ln = (f.get("LookupName") or "").strip()
+        if not ln or ln not in lookup_set:
+            continue
+        sdt = (f.get("SimpleDataType") or "").strip()
+        lookup_users[ln][sdt] += 1
+    n_multi_only = sum(
+        1 for n in lookup_names
+        if lookup_users[n]
+        and "String List, Single" not in lookup_users[n]
+    )
+    n_with_fk = len(lookup_names) - n_multi_only
+
     out.append("// ============================================================")
-    out.append(f"// Lookup reference tables ({len(lookup_names)})")
+    out.append(
+        f"// Lookup reference tables ({len(lookup_names)} = {n_with_fk} "
+        f"FK-targeted by single-value columns + {n_multi_only} "
+        f"documentation-only for multi-value columns)"
+    )
     out.append("// ============================================================")
     out.append("")
     for n in lookup_names:
-        out.append(build_lookup_table(n))
+        users = lookup_users.get(n, Counter())
+        n_users = sum(users.values())
+        is_multi_only = bool(users) and "String List, Single" not in users
+        out.append(build_lookup_table(n, is_multi_only=is_multi_only, n_users=n_users))
 
     out.append("// ============================================================")
     out.append(
