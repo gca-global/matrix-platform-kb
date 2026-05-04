@@ -1,6 +1,8 @@
 # Media
 
-The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. Each media item carries a MediaURL, MediaCategory, and ordering information so consumers can render galleries in the intended sequence.
+Photos, virtual tours, documents, supplements and other media related to listings.
+
+**RESO DD 2.0** — 41 fields · last revised 8/27/2015 · [dd.reso.org](https://dd.reso.org/DD2.0/Media/)
 
 **Adoption** — weighted Org%: **23%** across 33 measured fields (median 23%, avg 23%).
 
@@ -11,49 +13,49 @@ The Media resource describes images, videos, virtual tours, documents, and other
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `ChangedByMember` | Resource |  |  |  |  | The member who changed the Media record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116417) |
-| `ChangedByMemberID` | String |  |  | 1% | 1% | The ID of the user, agent, member, etc., that uploaded the media this record refers to. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116422) |
-| `ChangedByMemberKey` | String |  |  | 10% | 1% | The primary key of the member who uploaded the media this record refers to. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116428) |
-| `ClassName` | String List, Single |  | [ClassName](#classname) | 30% | 5% | The class or table of the listing or other record of the media (e.g., Residential, Lease, Agent, Office, Contact). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116434) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135112) |
-| `ImageHeight` | Number |  |  | 35% | 4% | The height of the image expressed in pixels. | [link](https://ddwiki.reso.org/display/DDW20/ImageHeight+Field) |
-| `ImageOf` | String List, Single |  | [ImageOf](#imageof) |  | 13% | When the media is an image, a list of possible matches such as kitchen, bathroom, front of structure, etc. | [link](https://ddwiki.reso.org/display/DDW20/ImageOf+Field) |
-| `ImageSizeDescription` | String List, Single |  | ImageSizeDescription | 25% | 2% | A text description of the size of the image (i.e., Small, Thumbnail, Medium, Large, X-Large). | [link](https://ddwiki.reso.org/display/DDW20/ImageSizeDescription+Field) |
-| `ImageWidth` | Number |  |  |  | 14% | The width of the image expressed in pixels. | [link](https://ddwiki.reso.org/display/DDW20/ImageWidth+Field) |
-| `LongDescription` | String |  |  | 55% | 21% | The full robust description of the object. | [link](https://ddwiki.reso.org/display/DDW20/LongDescription+Field) |
-| `MediaAlteration` | String List, Multi | Listing | [MediaAlteration](#mediaalteration) |  | 1% | Photos may be enhanced, altered or even created by manual or computer drafting. | [link](https://ddwiki.reso.org/display/DDW20/MediaAlteration+Field) |
-| `MediaCategory` | String List, Single |  | [MediaCategory](#mediacategory) | 55% | 9% | The category of the media object. | [link](https://ddwiki.reso.org/display/DDW20/MediaCategory+Field) |
-| `MediaHTML` | String |  |  | 1% | 1% | The JavaScript or other method to embed a video, image, virtual tour or other media. | [link](https://ddwiki.reso.org/display/DDW20/MediaHTML+Field) |
-| `MediaKey` | String |  |  |  | 48% | A system-unique identifier for the media object. | [link](https://ddwiki.reso.org/display/DDW20/MediaKey+Field) |
-| `MediaModificationTimestamp` | Timestamp |  |  | 35% | 18% | A timestamp that is updated when a change to the object has been made, which may differ from a change to the Media Resource. | [link](https://ddwiki.reso.org/display/DDW20/MediaModificationTimestamp+Field) |
-| `MediaObjectID` | String |  |  | 25% | 13% | The ID of the image, supplement or other object specified by the given media record. | [link](https://ddwiki.reso.org/display/DDW20/MediaObjectID+Field) |
-| `MediaStatus` | String List, Single |  | MediaStatus | 25% | 4% | The status of the media item referenced by this record (i.e., updated, deleted, etc.). | [link](https://ddwiki.reso.org/display/DDW20/MediaStatus+Field) |
-| `MediaType` | String List, Single |  | [MediaType](#mediatype) | 55% | 19% | Media types as defined by the Internet Assigned Numbers Authority (IANA), http://www.iana.org/assignments/media-types/index.html. | [link](https://ddwiki.reso.org/display/DDW20/MediaType+Field) |
-| `MediaURL` | String |  |  |  | 51% | A URL pointing to the actual media object (image, video, document, virtual tour, etc.). | [link](https://ddwiki.reso.org/display/DDW20/MediaURL+Field) |
-| `ModificationTimestamp` | Timestamp |  |  | 60% | 23% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135193) |
-| `Order` | Number |  |  | 60% | 23% | The display order of the media object relative to other media objects of the same resource record. | [link](https://ddwiki.reso.org/display/DDW20/Order+Field) |
-| `OriginatingSystem` | Resource |  |  |  |  | The originating system of the Media record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135205) |
-| `OriginatingSystemID` | String |  |  | 30% | 3% | The RESO Unique Organization Identifier's OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135210) |
-| `OriginatingSystemMediaKey` | String |  |  | 55% | 15% | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemMediaKey+Field) |
-| `OriginatingSystemName` | String |  |  | 50% | 19% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135222) |
-| `OriginatingSystemResourceRecordId` | String | Listing |  |  | 1% | The originating system's well-known identifier of the related record from the source resource. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemResourceRecordID+Field) |
-| `OriginatingSystemResourceRecordKey` | String | Listing |  |  | 23% | The originating system's primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey, TeamKey). | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemResourceRecordKey+Field) |
-| `OriginatingSystemResourceRecordSystemId` | String | Listing |  |  |  | The system ID of the resource record from the originating system is used when the resource record is originated from a different system than the media. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemResourceRecordSystemID+Field) |
-| `Permission` | String List, Multi |  | [Permission](#permission) | 25% | 11% | The permission-level of the media (i.e., Public, Private, IDX, VOW, Office Only, Firm Only, Agent Only). | [link](https://ddwiki.reso.org/display/DDW20/Permission+Field) |
-| `PreferredPhotoYN` | Boolean |  |  | 25% | 2% | A flag indicating whether or not the media record in question is the preferred photo. | [link](https://ddwiki.reso.org/display/DDW20/PreferredPhotoYN+Field) |
-| `ResourceName` | String List, Single |  | [ResourceName](#resourcename) |  | 26% | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116572) |
-| `ResourceRecordID` | String |  |  |  | 43% | The well-known identifier of the related record from the source resource. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116577) |
-| `ResourceRecordKey` | String |  |  | 55% | 23% | The primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey, TeamKey). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116583) |
-| `ShortDescription` | String |  |  | 50% | 15% | A short caption / description of the media object, typically displayed below the image in galleries. | [link](https://ddwiki.reso.org/display/DDW20/ShortDescription+Field) |
-| `SourceSystem` | Resource |  |  |  |  | The source system of the Media record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135266) |
-| `SourceSystemID` | String |  |  | 10% | 15% | The OUID Resource's OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135271) |
-| `SourceSystemMediaKey` | String |  |  | 15% | 1% | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemMediaKey+Field) |
-| `SourceSystemName` | String |  |  | 10% | 1% | The name of the immediate record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135283) |
-| `SourceSystemResourceRecordId` | String | Listing |  |  |  | The source system's well-known identifier of the related record from the source resource. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemResourceRecordID+Field) |
-| `SourceSystemResourceRecordKey` | String | Listing |  |  |  | The source system's primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey, TeamKey). | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemResourceRecordKey+Field) |
-| `SourceSystemResourceRecordSystemId` | String | Listing |  |  |  | The system ID of the resource record from the source system is used when the resource record is sourced from a different system than the media. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemResourceRecordSystemID+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `ChangedByMember` | Resource |  |  |  | The member who changed the Media record. | [link](https://dd.reso.org/DD2.0/Media/ChangedByMember/) |
+| `ChangedByMemberID` | String |  |  | 0% | The ID of the user, agent, member, etc., that uploaded the media this record refers to. | [link](https://dd.reso.org/DD2.0/Media/ChangedByMemberID/) |
+| `ChangedByMemberKey` | String |  |  | 0% | The primary key of the member who uploaded the media this record refers to. | [link](https://dd.reso.org/DD2.0/Media/ChangedByMemberKey/) |
+| `ClassName` | String List, Single |  | [ClassName](#classname) | 8% | The class or table of the listing or other record of the media (e.g., Residential, Lease, Agent, Office, Contact). | [link](https://dd.reso.org/DD2.0/Media/ClassName/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/Media/HistoryTransactional/) |
+| `ImageHeight` | Number |  |  | 14% | The height of the image expressed in pixels. | [link](https://dd.reso.org/DD2.0/Media/ImageHeight/) |
+| `ImageOf` | String List, Single |  | [ImageOf](#imageof) | 13% | When the media is an image, a list of possible matches such as kitchen, bathroom, front of structure, etc. | [link](https://dd.reso.org/DD2.0/Media/ImageOf/) |
+| `ImageSizeDescription` | String List, Single |  | ImageSizeDescription | 10% | A text description of the size of the image (i.e., Small, Thumbnail, Medium, Large, X-Large). | [link](https://dd.reso.org/DD2.0/Media/ImageSizeDescription/) |
+| `ImageWidth` | Number |  |  | 14% | The width of the image expressed in pixels. | [link](https://dd.reso.org/DD2.0/Media/ImageWidth/) |
+| `LongDescription` | String |  |  | 48% | The full robust description of the object. | [link](https://dd.reso.org/DD2.0/Media/LongDescription/) |
+| `MediaAlteration` | String List, Multi | Listing | [MediaAlteration](#mediaalteration) | 1% | Photos may be enhanced, altered or even created by manual or computer drafting. | [link](https://dd.reso.org/DD2.0/Media/MediaAlteration/) |
+| `MediaCategory` | String List, Single |  | [MediaCategory](#mediacategory) | 30% | The category of the media object. | [link](https://dd.reso.org/DD2.0/Media/MediaCategory/) |
+| `MediaHTML` | String |  |  | 0% | The JavaScript or other method to embed a video, image, virtual tour or other media. | [link](https://dd.reso.org/DD2.0/Media/MediaHTML/) |
+| `MediaKey` | String |  |  | 48% | A system-unique identifier for the media object. | [link](https://dd.reso.org/DD2.0/Media/MediaKey/) |
+| `MediaModificationTimestamp` | Timestamp |  |  | 33% | A timestamp that is updated when a change to the object has been made, which may differ from a change to the Media Resource. | [link](https://dd.reso.org/DD2.0/Media/MediaModificationTimestamp/) |
+| `MediaObjectID` | String |  |  | 24% | The ID of the image, supplement or other object specified by the given media record. | [link](https://dd.reso.org/DD2.0/Media/MediaObjectID/) |
+| `MediaStatus` | String List, Single |  | MediaStatus | 7% | The status of the media item referenced by this record (i.e., updated, deleted, etc.). | [link](https://dd.reso.org/DD2.0/Media/MediaStatus/) |
+| `MediaType` | String List, Single |  | [MediaType](#mediatype) | 32% | Media types as defined by the Internet Assigned Numbers Authority (IANA), http://www.iana.org/assignments/media-types/index.html. | [link](https://dd.reso.org/DD2.0/Media/MediaType/) |
+| `MediaURL` | String |  |  | 51% | A URL pointing to the actual media object (image, video, document, virtual tour, etc.). | [link](https://dd.reso.org/DD2.0/Media/MediaURL/) |
+| `ModificationTimestamp` | Timestamp |  |  | 34% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Media/ModificationTimestamp/) |
+| `Order` | Number |  |  | 51% | The display order of the media object relative to other media objects of the same resource record. | [link](https://dd.reso.org/DD2.0/Media/Order/) |
+| `OriginatingSystem` | Resource |  |  |  | The originating system of the Media record. | [link](https://dd.reso.org/DD2.0/Media/OriginatingSystem/) |
+| `OriginatingSystemID` | String |  |  | 8% | The RESO Unique Organization Identifier's OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Media/OriginatingSystemID/) |
+| `OriginatingSystemMediaKey` | String |  |  | 37% | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Media/OriginatingSystemMediaKey/) |
+| `OriginatingSystemName` | String |  |  | 30% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Media/OriginatingSystemName/) |
+| `OriginatingSystemResourceRecordId` | String | Listing |  | 1% | The originating system's well-known identifier of the related record from the source resource. | [link](https://dd.reso.org/DD2.0/Media/OriginatingSystemResourceRecordId/) |
+| `OriginatingSystemResourceRecordKey` | String | Listing |  | 23% | The originating system's primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey, TeamKey). | [link](https://dd.reso.org/DD2.0/Media/OriginatingSystemResourceRecordKey/) |
+| `OriginatingSystemResourceRecordSystemId` | String | Listing |  |  | The system ID of the resource record from the originating system is used when the resource record is originated from a different system than the media. | [link](https://dd.reso.org/DD2.0/Media/OriginatingSystemResourceRecordSystemId/) |
+| `Permission` | String List, Multi |  | [Permission](#permission) | 25% | The permission-level of the media (i.e., Public, Private, IDX, VOW, Office Only, Firm Only, Agent Only). | [link](https://dd.reso.org/DD2.0/Media/Permission/) |
+| `PreferredPhotoYN` | Boolean |  |  | 15% | A flag indicating whether or not the media record in question is the preferred photo. | [link](https://dd.reso.org/DD2.0/Media/PreferredPhotoYN/) |
+| `ResourceName` | String List, Single |  | [ResourceName](#resourcename) | 26% | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://dd.reso.org/DD2.0/Media/ResourceName/) |
+| `ResourceRecordID` | String |  |  | 43% | The well-known identifier of the related record from the source resource. | [link](https://dd.reso.org/DD2.0/Media/ResourceRecordID/) |
+| `ResourceRecordKey` | String |  |  | 50% | The primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey, TeamKey). | [link](https://dd.reso.org/DD2.0/Media/ResourceRecordKey/) |
+| `ShortDescription` | String |  |  | 37% | A short caption / description of the media object, typically displayed below the image in galleries. | [link](https://dd.reso.org/DD2.0/Media/ShortDescription/) |
+| `SourceSystem` | Resource |  |  |  | The source system of the Media record. | [link](https://dd.reso.org/DD2.0/Media/SourceSystem/) |
+| `SourceSystemID` | String |  |  | 23% | The OUID Resource's OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Media/SourceSystemID/) |
+| `SourceSystemMediaKey` | String |  |  | 7% | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/Media/SourceSystemMediaKey/) |
+| `SourceSystemName` | String |  |  | 1% | The name of the immediate record provider. | [link](https://dd.reso.org/DD2.0/Media/SourceSystemName/) |
+| `SourceSystemResourceRecordId` | String | Listing |  |  | The source system's well-known identifier of the related record from the source resource. | [link](https://dd.reso.org/DD2.0/Media/SourceSystemResourceRecordId/) |
+| `SourceSystemResourceRecordKey` | String | Listing |  |  | The source system's primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey, TeamKey). | [link](https://dd.reso.org/DD2.0/Media/SourceSystemResourceRecordKey/) |
+| `SourceSystemResourceRecordSystemId` | String | Listing |  |  | The system ID of the resource record from the source system is used when the resource record is sourced from a different system than the media. | [link](https://dd.reso.org/DD2.0/Media/SourceSystemResourceRecordSystemId/) |
 
 ## Field details
 
@@ -61,311 +63,375 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>ChangedByMember</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ChangedByMemberID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Cambiado por ID de Miembro
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 17 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/17/2017
 
 </details>
 
 <details><summary><code>ChangedByMemberKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Cambiado por Clave de Miembro
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 17 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/17/2017
 
 </details>
 
 <details><summary><code>ClassName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Clase
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** AUG 12 2015
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 8/12/2015
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ImageHeight</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Altura de Imagen
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
+
+</details>
+
+<details><summary><code>ImageOf</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Imagen De
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
+  - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>ImageSizeDescription</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Descripción de Tamaño de Imagen
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
+
+</details>
+
+<details><summary><code>ImageWidth</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Anchura de Imagen
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>LongDescription</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Descripción Larga
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>MediaAlteration</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 21 2021
-  - **Revision Date:** APR 21 2021
+  - **Status:** Active
+  - **Status Change Date:** 4/21/2021
+  - **Revision Date:** 4/21/2021
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MediaCategory</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Categoría de Medio
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>MediaHTML</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** HTML de Medio
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** AUG 15 2013
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 8/15/2013
+
+</details>
+
+<details><summary><code>MediaKey</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Clave de Medio
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>MediaModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Modificación de Medio
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>MediaObjectID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Objeto de Medio
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** AUG 15 2013
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 8/15/2013
 
 </details>
 
 <details><summary><code>MediaStatus</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Medio
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>MediaType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Medio
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** AUG 27 2015
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 8/27/2015
+
+</details>
+
+<details><summary><code>MediaURL</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** URL de Medio
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>Order</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Orden
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>OriginatingSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OriginatingSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Sistema de Origen
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OriginatingSystemMediaKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Medio de Sistema de Origen
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>OriginatingSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Sistema de Origen
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
 
 </details>
 
 <details><summary><code>OriginatingSystemResourceRecordId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 17 2020
-  - **Revision Date:** DEC 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 12/17/2020
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OriginatingSystemResourceRecordKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 17 2020
-  - **Revision Date:** DEC 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 12/17/2020
+  - **Revision Date:** 12/17/2020
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>OriginatingSystemResourceRecordSystemId</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 12/17/2020
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>Permission</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Permiso
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 02 2018
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>PreferredPhotoYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fotografía Preferida SN
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** MAR 24 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 3/24/2016
   - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>ResourceName</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Nombre de Recurso
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
+
+</details>
+
+<details><summary><code>ResourceRecordID</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** ID de Registro de Recurso
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>ResourceRecordKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Registro de Recurso
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>ShortDescription</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Descripción Corta
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
 
 </details>
 
 <details><summary><code>SourceSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SourceSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Sistema Fuente
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemMediaKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Medios Sistema Fuente
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** DEC 05 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 12/5/2018
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Sistema Fuente
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemResourceRecordId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 17 2020
-  - **Revision Date:** DEC 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 12/17/2020
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SourceSystemResourceRecordKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 17 2020
-  - **Revision Date:** DEC 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 12/17/2020
+  - **Revision Date:** 12/17/2020
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SourceSystemResourceRecordSystemId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 17 2020
-  - **Revision Date:** DEC 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 12/17/2020
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
@@ -373,6 +439,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### ClassName
+
+17 values · used by 8 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ClassName/)
 
 | Value | Definition |
 |---|---|
@@ -395,6 +463,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Saved Search` | The class containing saved search data. |
 
 ### ImageOf
+
+86 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ImageOf/)
 
 | Value | Definition |
 |---|---|
@@ -487,6 +557,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### MediaAlteration
 
+10 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/MediaAlteration/)
+
 | Value | Definition |
 |---|---|
 | `Decluttered - Item Removed` | Removal of items that may be deceitful or depict a listing inaccuracy in some way, including the removal of items beyond the homeowner's control, such as power lines, poor views or unsightly property … |
@@ -502,6 +574,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### MediaCategory
 
+9 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/MediaCategory/)
+
 | Value | Definition |
 |---|---|
 | `Agent Photo` | The media is an agent photo. |
@@ -515,6 +589,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Video` | The media is a video. |
 
 ### MediaType
+
+16 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/MediaType/)
 
 | Value | Definition |
 |---|---|
@@ -537,6 +613,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Permission
 
+7 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Permission/)
+
 | Value | Definition |
 |---|---|
 | `Agent Only` | The image or document is for agent use only. |
@@ -548,6 +626,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `VOW` | The image or document is okay for VOW use. |
 
 ### ResourceName
+
+5 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ResourceName/)
 
 | Value | Definition |
 |---|---|

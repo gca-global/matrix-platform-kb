@@ -1,76 +1,41 @@
 #!/usr/bin/env python3
+"""Build the pure RESO Data Dictionary 2.0 canonical DBML for ALL 41 Resources.
+
+Output: reso-dd-kb/wiki/dbml/reso-2.0-canonical.dbml
+
+This is the upstream RESO 2.0 truth, with NO Atlas-specific decisions
+baked in. Every canonical RESO field for every Resource is rendered as
+a column; Resource-typed fields are rendered as DBML `Ref:` lines (FK
+relationships); every column carries its RESO Definition + SimpleDataType
++ LookupName + adoption metrics as a DBML `Note:` annotation.
+
+Lookups (enumerations) are materialised as **reference tables** named
+`lookup_<snake_name>`, one per distinct LookupName in `raw/lookups.csv`.
+Each ref table carries the canonical RESO LookupName columns:
+    code, legacy_odata_value, definition, bedes, synonyms,
+    spanish_value, french_value, status, record_id
+Single-value lookup columns (`String List, Single`) get a DBML `Ref:`
+to the corresponding `lookup_<name>.code`; multi-value lookup columns
+(`String List, Multi`) stay `text` and document the lookup in a Note.
+
+Inputs:
+    raw/fields.csv         (parsed from RESO_Data_Dictionary_2.0.xlsx)
+    raw/lookups.csv        (parsed from RESO_Data_Dictionary_2.0.xlsx)
+    raw/field_metadata.csv (scraped from dd.reso.org/DD2.0)
+
+Atlas adapts this canonical in `build_atlas_target_dbml.py`.
 """
-Build the pure RESO DD Canonical DBML for the 12 Resources Atlas uses.
-
-Output: wiki/atlas/reso-canonical.dbml
-
-This is the upstream RESO 2.0 truth, with NO Atlas-specific decisions baked in.
-Every canonical RESO field for each Atlas-used Resource is rendered as a column;
-Resource-typed fields are rendered as DBML `Ref:` lines (FK relationships); every
-column carries its RESO Definition + SimpleDataType + LookupName + adoption metrics
-as a DBML `Note:` annotation.
-
-Atlas adapts this canonical in PR0.5 (atlas-target.dbml).
-"""
-
 from __future__ import annotations
 
 import csv
 import re
+from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "raw"
-OUT = ROOT / "wiki" / "atlas" / "reso-canonical.dbml"
-
-# The 12 RESO Resources Atlas uses today
-ATLAS_RESOURCES = [
-    "Property",
-    "Member",
-    "Office",
-    "Contacts",
-    "OpenHouse",
-    "Showing",
-    "ShowingAppointment",
-    "HistoryTransactional",
-    "InternetTracking",
-    "Media",
-    "PropertyRooms",
-    "PropertyUnitTypes",
-]
-
-# RESO Resource -> snake_case Atlas table name (canonical mapping; identifier per Principle 6)
-RESOURCE_TO_TABLE = {
-    "Property": "property",
-    "Member": "member",
-    "Office": "office",
-    "Contacts": "contacts",
-    "OpenHouse": "open_house",
-    "Showing": "showing",
-    "ShowingAppointment": "showing_appointment",
-    "HistoryTransactional": "history_transactional",
-    "InternetTracking": "internet_tracking",
-    "Media": "media",
-    "PropertyRooms": "property_rooms",
-    "PropertyUnitTypes": "property_unit_types",
-}
-
-# Each resource's primary key field (the *Key column we mark [pk])
-RESOURCE_PK_FIELD = {
-    "Property": "ListingKey",
-    "Member": "MemberKey",
-    "Office": "OfficeKey",
-    "Contacts": "ContactKey",
-    "OpenHouse": "OpenHouseKey",
-    "Showing": "ShowingKey",
-    "ShowingAppointment": "ShowingAppointmentKey",
-    "HistoryTransactional": "HistoryTransactionalKey",
-    "InternetTracking": "EventKey",
-    "Media": "MediaKey",
-    "PropertyRooms": "RoomKey",
-    "PropertyUnitTypes": "UnitTypeKey",
-}
+OUT = ROOT / "wiki" / "dbml" / "reso-2.0-canonical.dbml"
 
 # RESO SimpleDataType -> DBML column type
 TYPE_MAP = {
@@ -79,40 +44,69 @@ TYPE_MAP = {
     "Boolean": "boolean",
     "Date": "date",
     "Timestamp": "timestamp",
-    "Collection": "text",  # rare; collection-typed fields
+    "Collection": "text",
+}
+
+# PK overrides for resources where `<Resource>Key` does not exist or
+# the canonical PK is named differently.
+PK_OVERRIDES: Dict[str, str] = {
+    "Property": "ListingKey",
+    "Contacts": "ContactKey",
+    "EntityEvent": "ResourceRecordKey",
+    "InternetTracking": "EventKey",
+    "OUID": "OrganizationUniqueIdKey",
+    "PropertyGreenVerification": "GreenBuildingVerificationKey",
+    "PropertyPowerProduction": "PowerProductionKey",
+    "PropertyPowerStorage": "PowerStorageKey",
+    "PropertyRooms": "RoomKey",
+    "PropertyUnitTypes": "UnitTypeKey",
+    "Queue": "QueueTransactionKey",
+    "Rules": "RuleKey",
+    "TeamMembers": "TeamMemberKey",
+    "Teams": "TeamKey",
+    "TransactionManagement": "TransactionKey",
 }
 
 
-def to_snake(pascal: str) -> str:
-    """Convert PascalCase / camelCase to snake_case.
-
-    Preserves contiguous capital runs at boundaries (e.g. ListAgentURL -> list_agent_url).
-    """
-    s = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1_\2", pascal)
+def to_snake(name: str) -> str:
+    """PascalCase / camelCase / acronym-runs -> snake_case."""
+    if not name:
+        return ""
+    s = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1_\2", name)
     s = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", s)
     return s.lower()
 
 
 def load_fields() -> List[Dict[str, str]]:
-    with (RAW / "fields.csv").open() as fh:
-        return list(csv.DictReader(fh))
+    with (RAW / "fields.csv").open(encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def load_lookup_names() -> List[str]:
+    seen: List[str] = []
+    with (RAW / "lookups.csv").open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            n = (r.get("LookupName") or "").strip()
+            if n and n not in seen:
+                seen.append(n)
+    return sorted(seen)
 
 
 def load_metadata() -> Dict[Tuple[str, str], Dict[str, str]]:
-    """Index field_metadata by (Resource, StandardName) -> row."""
     out: Dict[Tuple[str, str], Dict[str, str]] = {}
-    with (RAW / "field_metadata.csv").open() as fh:
-        for r in csv.DictReader(fh):
-            key = (r["Resource"], r["StandardName"])
-            out[key] = r
+    p = RAW / "field_metadata.csv"
+    if not p.exists():
+        return out
+    with p.open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            out[(r["Resource"], r["Field"])] = r
     return out
 
 
 def map_dbml_type(reso_type: str, sug_max_length: str) -> str:
-    """Map RESO SimpleDataType to a DBML type."""
-    t = reso_type or ""
+    t = (reso_type or "").strip()
     if t.startswith("String List"):
-        return "varchar"  # lookups stored as string code(s)
+        return "varchar"
     if t == "String":
         if sug_max_length:
             try:
@@ -126,224 +120,230 @@ def map_dbml_type(reso_type: str, sug_max_length: str) -> str:
     return TYPE_MAP.get(t, "text")
 
 
-# Manual FK target table inference (Resource-typed fields -> target table name)
-# Keyed on (host_resource, fk_expansion_field_name) -> target_table or None (skip)
-def infer_fk_target(host: str, fk_name: str) -> Optional[str]:
-    """Return the target Atlas table for a Resource-typed FK, or None to skip.
-
-    Skip = the target is OUID or some other resource Atlas doesn't ingest.
-    """
-    # Self-referential (Office.MainOffice -> Office)
-    if fk_name == "MainOffice" and host == "Office":
-        return "office"
-
-    # Member-pointing groups (the Resource-typed expansion)
-    member_patterns = [
-        "ListAgent", "BuyerAgent", "CoListAgent", "CoBuyerAgent",
-        "OfficeBroker", "OfficeManager",
-        "ChangedByMember", "OwnerMember",
-        "ShowingAgent", "Actor",
-    ]
-    for p in member_patterns:
-        if fk_name == p:
-            return "member"
-
-    # Office-pointing groups
-    office_patterns = [
-        "ListOffice", "BuyerOffice", "CoListOffice", "CoBuyerOffice", "Office",
-    ]
-    for p in office_patterns:
-        if fk_name == p and host in ("Property", "Member"):
-            return "office"
-
-    # Team-pointing
-    if fk_name in ("ListTeam", "BuyerTeam"):
-        return "teams"  # Atlas may drop this; canonical RESO still defines it
-
-    # Listing-pointing (child resources)
-    if fk_name == "Listing":
-        return "property"
-
-    # OUID-bound system satellites: out of scope; skip the FK
-    if fk_name in ("OriginatingSystem", "SourceSystem"):
-        return None
-    if fk_name.endswith("OriginatingSystem") or fk_name.endswith("SourceSystem"):
-        return None
-
-    # Polymorphic / explicitly skipped
-    if fk_name in ("ChangedByMember",):  # already handled
-        return "member"
-
-    return None  # unknown -> skip (will appear as plain column)
-
-
 def fmt_note(parts: List[str]) -> str:
-    """Format a DBML Note string. Escape single quotes."""
     text = " | ".join(p for p in parts if p)
-    text = text.replace("'", "\\'")
-    # DBML supports single-quoted notes; multi-line uses triple single quotes
+    text = text.replace("\\", "\\\\").replace("'", "\\'")
     return f"'{text}'"
+
+
+def derive_pk(resource: str, fields_for_res: List[Dict[str, str]]) -> Optional[str]:
+    if resource in PK_OVERRIDES:
+        return PK_OVERRIDES[resource]
+    cand = f"{resource}Key"
+    if any(f["StandardName"] == cand for f in fields_for_res):
+        return cand
+    for f in fields_for_res:
+        if (f.get("Groups", "").lower() in ("identifier", "identifiers")
+                and f["StandardName"].endswith("Key")):
+            return f["StandardName"]
+    return None
 
 
 def field_note(f: Dict[str, str], meta: Dict[str, str]) -> str:
     parts = [f["StandardName"]]
-    defn = (f.get("Definition") or "").strip()
+    defn = (f.get("Definition") or "").strip().replace("\n", " ")
     if defn:
-        parts.append(defn[:120].replace("\n", " "))
+        parts.append(defn[:160])
     sdt = f.get("SimpleDataType") or ""
     if sdt:
         parts.append(f"type={sdt}")
     lookup = f.get("LookupName") or ""
     if lookup:
-        parts.append(f"lookup={lookup}")
-    sml = f.get("SugMaxLength") or ""
-    if sml:
-        parts.append(f"max_len={sml}")
-    smp = f.get("SugMaxPrecision") or ""
-    if smp:
-        parts.append(f"max_prec={smp}")
-    sys_pct = (meta.get("SysPct") or "").strip()
+        is_multi = (f.get("SimpleDataType") or "").strip() == "String List, Multi"
+        parts.append(f"lookup={lookup}" + (" (multi)" if is_multi else ""))
+    for label, key in [("max_len", "SugMaxLength"), ("max_prec", "SugMaxPrecision")]:
+        v = (f.get(key) or "").strip()
+        if v:
+            parts.append(f"{label}={v}")
     org_pct = (meta.get("OrgPct") or "").strip()
-    if sys_pct or org_pct:
-        parts.append(f"adoption sys={sys_pct or '-'}% org={org_pct or '-'}%")
+    org_n = (meta.get("OrgAdopted") or "").strip()
+    org_total = (meta.get("OrgTotal") or "").strip()
+    if org_pct:
+        parts.append(f"adoption org={org_pct}% ({org_n}/{org_total})")
     return fmt_note(parts)
 
 
-def build_table(resource: str, all_fields: List[Dict[str, str]],
-                meta: Dict[Tuple[str, str], Dict[str, str]]) -> Tuple[str, List[str]]:
-    """Build a DBML Table block for one resource.
-
-    Returns (table_dbml_str, list_of_ref_lines).
-    """
-    fields = [f for f in all_fields if f["ResourceName"] == resource]
-    pk_field = RESOURCE_PK_FIELD.get(resource)
-    table_name = RESOURCE_TO_TABLE[resource]
-
+def build_table(
+    resource: str,
+    table_name: str,
+    fields_for_res: List[Dict[str, str]],
+    pk_field: Optional[str],
+    meta: Dict[Tuple[str, str], Dict[str, str]],
+    valid_resources: Set[str],
+    lookup_names: Set[str],
+    resource_to_table: Dict[str, str],
+    resource_pks: Dict[str, Optional[str]],
+) -> Tuple[str, List[str]]:
+    """Render one Table block + collect Refs (FK lines)."""
     lines: List[str] = []
     lines.append(f"// ---- {resource} (RESO 2.0 canonical) ----")
     lines.append(f"Table {table_name} {{")
 
     refs: List[str] = []
+    seen_cols: Set[str] = set()
 
-    # Sort: PK first, then alphabetical
     fields_sorted = sorted(
-        fields,
-        key=lambda f: (
-            0 if f["StandardName"] == pk_field else 1,
-            f["StandardName"],
-        ),
+        fields_for_res,
+        key=lambda f: (0 if f["StandardName"] == pk_field else 1, f["StandardName"]),
     )
 
     for f in fields_sorted:
-        sdt = f.get("SimpleDataType") or ""
-        if sdt == "Resource":
-            # FK pointer; emit a Ref: line if we can infer the target
-            target = infer_fk_target(resource, f["StandardName"])
-            target_key_col = f.get("TargetResourceKey") or ""  # e.g. ListAgentKey
-            if target and target_key_col:
-                fk_col_snake = to_snake(target_key_col)
-                # Map snake target table -> RESO Resource name -> canonical PK
-                target_resource = {
-                    "member": "Member",
-                    "office": "Office",
-                    "property": "Property",
-                    "contacts": "Contacts",
-                    "teams": "Teams",
-                }.get(target)
-                target_pk_field = RESOURCE_PK_FIELD.get(target_resource or "")
-                if not target_pk_field:
-                    # Canonical RESO PK fallbacks for resources NOT rendered as Atlas tables
-                    target_pk_field = {"Teams": "TeamKey"}.get(target_resource or "")
-                target_pk_snake = to_snake(target_pk_field) if target_pk_field else f"{target}_key"
+        sdt = (f.get("SimpleDataType") or "").strip()
 
-                # If target table is not in ATLAS_RESOURCES, comment the ref out
-                # so the canonical DBML still documents the relationship without
-                # producing a dangling reference to a non-rendered table.
-                target_in_atlas = target_resource in ATLAS_RESOURCES if target_resource else False
-                prefix = "Ref:" if target_in_atlas else "// Ref:"
-                trailing_note = (
-                    f"{resource}.{f['StandardName']} -> {target_resource or target.title()}"
-                )
-                if not target_in_atlas:
-                    trailing_note += " (out of Atlas scope: target table not rendered)"
-                refs.append(
-                    f"{prefix} {table_name}.{fk_col_snake} > {target}.{target_pk_snake} "
-                    f"// {trailing_note}"
-                )
+        # Resource-typed fields render as FK refs only; the scalar key column
+        # they point to is materialised by another row in fields.csv (the
+        # `<TargetResourceKey>` field).
+        if sdt == "Resource":
+            target_resource = (f.get("SourceResource") or "").strip()
+            target_key_col = (f.get("TargetResourceKey") or "").strip()
+            if not target_resource or not target_key_col:
+                continue
+            host_col = to_snake(target_key_col)
+            target_table = resource_to_table.get(target_resource)
+            target_pk = resource_pks.get(target_resource)
+            if not target_table or not target_pk:
+                continue
+            target_pk_snake = to_snake(target_pk)
+            refs.append(
+                f"Ref: {table_name}.{host_col} > {target_table}.{target_pk_snake} "
+                f"// {resource}.{f['StandardName']} -> {target_resource}"
+            )
             continue
 
         col_name = to_snake(f["StandardName"])
+        if not col_name or col_name in seen_cols:
+            continue
+        seen_cols.add(col_name)
+
         col_type = map_dbml_type(sdt, f.get("SugMaxLength") or "")
 
         attrs: List[str] = []
-        if f["StandardName"] == pk_field:
+        if pk_field and f["StandardName"] == pk_field:
             attrs.append("pk")
 
         meta_row = meta.get((resource, f["StandardName"]), {})
-        note = field_note(f, meta_row)
-        attrs.append(f"note: {note}")
+        attrs.append(f"note: {field_note(f, meta_row)}")
+        lines.append(f"  {col_name} {col_type} [{', '.join(attrs)}]")
 
-        attrs_str = ", ".join(attrs)
-        lines.append(f"  {col_name} {col_type} [{attrs_str}]")
+        # Lookup FK ref (single-value lookups only; multi-value stays as text).
+        lookup = (f.get("LookupName") or "").strip()
+        if lookup and lookup in lookup_names and sdt == "String List, Single":
+            refs.append(
+                f"Ref: {table_name}.{col_name} > lookup_{to_snake(lookup)}.code "
+                f"// {resource}.{f['StandardName']} -> {lookup}"
+            )
 
-    # Table-level note
     lines.append(f"  Note: 'RESO 2.0 canonical {resource} resource'")
     lines.append("}")
     lines.append("")
-
     return "\n".join(lines), refs
+
+
+def build_lookup_table(name: str) -> str:
+    table = f"lookup_{to_snake(name)}"
+    lines = [
+        f"// ---- {name} (RESO 2.0 lookup) ----",
+        f"Table {table} {{",
+        "  code varchar [pk, note: 'StandardLookupValue']",
+        "  legacy_odata_value varchar [note: 'LegacyODataValue (PascalCase code used by older OData APIs)']",
+        "  definition text",
+        "  bedes text",
+        "  synonyms text",
+        "  spanish_value varchar",
+        "  french_value varchar",
+        "  status varchar [note: 'Active | Revised | Retired']",
+        "  record_id varchar [note: 'RESO LookupId stable identifier']",
+        f"  Note: 'RESO 2.0 lookup values for {name} (see raw/lookups.csv for the value list)'",
+        "}",
+        "",
+    ]
+    return "\n".join(lines)
 
 
 def build_dbml() -> str:
     fields = load_fields()
-    meta = load_metadata()
+    metadata = load_metadata()
+    lookup_names = load_lookup_names()
 
-    out_lines: List[str] = []
+    by_res: Dict[str, List[Dict[str, str]]] = defaultdict(list)
+    for f in fields:
+        by_res[f["ResourceName"]].append(f)
 
-    # Project header
-    out_lines.append("// reso-canonical.dbml")
-    out_lines.append("// Pure RESO Data Dictionary 2.0 canonical schema")
-    out_lines.append("// for the 12 Resources Atlas uses.")
-    out_lines.append("//")
-    out_lines.append("// NO Atlas-specific decisions are baked in. This file")
-    out_lines.append("// represents what RESO 2.0 prescribes; Atlas adapts in PR0.5.")
-    out_lines.append("//")
-    out_lines.append("// Generated by reso-dd-kb/scripts/build_reso_canonical_dbml.py")
-    out_lines.append("// Source: reso-dd-kb/raw/fields.csv (RESO 2.0)")
-    out_lines.append("//         reso-dd-kb/raw/field_metadata.csv (Sys% / Org% adoption)")
-    out_lines.append("")
-    out_lines.append("Project reso_canonical {")
-    out_lines.append("  database_type: 'PostgreSQL'")
-    out_lines.append("  Note: '''")
-    out_lines.append("    Pure RESO Data Dictionary 2.0 canonical schema for the 12 Resources Atlas uses:")
-    out_lines.append("    Property, Member, Office, Contacts, OpenHouse, Showing, ShowingAppointment,")
-    out_lines.append("    HistoryTransactional, InternetTracking, Media, PropertyRooms, PropertyUnitTypes.")
-    out_lines.append("")
-    out_lines.append("    No Atlas-specific decisions baked in. Atlas adapts this canonical in PR0.5.")
-    out_lines.append("  '''")
-    out_lines.append("}")
-    out_lines.append("")
+    resources = sorted(by_res.keys())
+    resource_to_table = {r: to_snake(r) for r in resources}
+    resource_pks: Dict[str, Optional[str]] = {r: derive_pk(r, by_res[r]) for r in resources}
+
+    out: List[str] = []
+    out.append("// reso-2.0-canonical.dbml")
+    out.append("// Pure RESO Data Dictionary 2.0 canonical schema")
+    out.append(f"// {len(resources)} Resources, {len(fields)} Fields, {len(lookup_names)} Lookups")
+    out.append("//")
+    out.append("// NO Atlas-specific decisions baked in. This file represents what")
+    out.append("// RESO 2.0 prescribes; Atlas adapts in build_atlas_target_dbml.py.")
+    out.append("//")
+    out.append("// Generated by reso-dd-kb/scripts/build_reso_canonical_dbml.py")
+    out.append("// Source: dd.reso.org/DD2.0 + raw/fields.csv + raw/lookups.csv + raw/field_metadata.csv")
+    out.append("")
+    out.append("Project reso_canonical_dd_2_0 {")
+    out.append("  database_type: 'PostgreSQL'")
+    out.append("  Note: '''")
+    out.append(f"    Pure RESO Data Dictionary 2.0 canonical schema covering all {len(resources)} Resources,")
+    out.append(f"    {len(fields)} Fields, and {len(lookup_names)} Lookups (rendered as lookup_<name> ref tables).")
+    out.append("")
+    out.append("    Single-value lookup columns reference the corresponding lookup_<name>.code via DBML")
+    out.append("    Refs; multi-value lookup columns stay text and document the lookup in a Note.")
+    out.append("")
+    out.append("    No Atlas-specific decisions baked in. Atlas adapts this canonical in")
+    out.append("    build_atlas_target_dbml.py (wiki/atlas/atlas-target.dbml).")
+    out.append("  '''")
+    out.append("}")
+    out.append("")
+
+    out.append("// ============================================================")
+    out.append(f"// Resources ({len(resources)})")
+    out.append("// ============================================================")
+    out.append("")
 
     all_refs: List[str] = []
-    for res in ATLAS_RESOURCES:
-        table_block, refs = build_table(res, fields, meta)
-        out_lines.append(table_block)
+    lookup_set = set(lookup_names)
+    for res in resources:
+        block, refs = build_table(
+            res,
+            resource_to_table[res],
+            by_res[res],
+            resource_pks[res],
+            metadata,
+            valid_resources=set(resources),
+            lookup_names=lookup_set,
+            resource_to_table=resource_to_table,
+            resource_pks=resource_pks,
+        )
+        out.append(block)
         all_refs.extend(refs)
 
-    out_lines.append("// ---- Foreign-key relationships (Resource-typed fields) ----")
-    out_lines.append("")
-    for r in all_refs:
-        out_lines.append(r)
+    out.append("// ============================================================")
+    out.append(f"// Lookup reference tables ({len(lookup_names)})")
+    out.append("// ============================================================")
+    out.append("")
+    for n in lookup_names:
+        out.append(build_lookup_table(n))
 
-    return "\n".join(out_lines) + "\n"
+    out.append("// ============================================================")
+    out.append(f"// Foreign-key relationships ({len(all_refs)})")
+    out.append("// ============================================================")
+    out.append("")
+    for r in all_refs:
+        out.append(r)
+
+    return "\n".join(out) + "\n"
 
 
 def main() -> None:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     dbml = build_dbml()
-    OUT.write_text(dbml)
+    OUT.write_text(dbml, encoding="utf-8")
     n_lines = len(dbml.splitlines())
-    print(f"Wrote {OUT} ({n_lines} lines, {len(dbml)} bytes)")
+    print(f"Wrote {OUT.relative_to(ROOT)} ({n_lines} lines, {len(dbml)} bytes)")
 
 
 if __name__ == "__main__":

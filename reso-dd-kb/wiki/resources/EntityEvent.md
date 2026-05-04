@@ -1,6 +1,8 @@
 # EntityEvent
 
-_RESO Data Dictionary 2.0 resource — 4 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/EntityEvent+Resource) for the canonical page._
+An event log offering an alternative to timestamps, providing an OData-compliant logical timestamp methodology.
+
+**RESO DD 2.0** — 4 fields · last revised 6/20/2019 · [dd.reso.org](https://dd.reso.org/DD2.0/EntityEvent/)
 
 **Adoption** — weighted Org%: **0%** across 3 measured fields (median 0%, avg 0%).
 
@@ -10,40 +12,49 @@ _RESO Data Dictionary 2.0 resource — 4 fields. See [DDwiki](https://ddwiki.res
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `EntityEventSequence` | Number |  |  |  | 0% | A unique, system-wide ID that can be used to represent the sequence in which an EntityEvent occurred in a given system. | [link](https://ddwiki.reso.org/display/DDW20/EntityEventSequence+Field) |
-| `ResourceName` | String |  |  | 5% | 1% | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135897) |
-| `ResourceRecordKey` | String |  |  | 5% | 1% | The primary key of the related record or resource, such as ListingKey, OfficeKey or MemberKey, that allows the record to be uniquely identified as an entity so that it may be fetched from the producer… | [link](https://ddwiki.reso.org/display/DDW20/ResourceRecordKey+Field) |
-| `ResourceRecordUrl` | String |  |  | 1% | 1% | A Uniform Resource Locator (URL) that specifies where consumers may retrieve data corresponding to the given event. | [link](https://ddwiki.reso.org/display/DDW20/ResourceRecordUrl+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `EntityEventSequence` | Number |  |  | 0% | A unique, system-wide ID that can be used to represent the sequence in which an EntityEvent occurred in a given system. | [link](https://dd.reso.org/DD2.0/EntityEvent/EntityEventSequence/) |
+| `ResourceName` | String |  |  | 0% | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://dd.reso.org/DD2.0/EntityEvent/ResourceName/) |
+| `ResourceRecordKey` | String |  |  | 0% | The primary key of the related record or resource, such as ListingKey, OfficeKey or MemberKey, that allows the record to be uniquely identified as an entity so that it may be fetched from the producer… | [link](https://dd.reso.org/DD2.0/EntityEvent/ResourceRecordKey/) |
+| `ResourceRecordUrl` | String |  |  |  | A Uniform Resource Locator (URL) that specifies where consumers may retrieve data corresponding to the given event. | [link](https://dd.reso.org/DD2.0/EntityEvent/ResourceRecordUrl/) |
 
 ## Field details
 
 Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type applicability, Spanish / French-Canadian display names, change-history dates).
 
+<details><summary><code>EntityEventSequence</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 6/20/2019
+  - **Revision Date:** 6/20/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
 <details><summary><code>ResourceName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 20 2019
-  - **Revision Date:** JUN 20 2019
+  - **Status:** Active
+  - **Status Change Date:** 6/20/2019
+  - **Revision Date:** 6/20/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ResourceRecordKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 20 2019
-  - **Revision Date:** JUN 20 2019
+  - **Status:** Active
+  - **Status Change Date:** 6/20/2019
+  - **Revision Date:** 6/20/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ResourceRecordUrl</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 20 2019
-  - **Revision Date:** JUN 20 2019
+  - **Status:** Active
+  - **Status Change Date:** 6/20/2019
+  - **Revision Date:** 6/20/2019
   - **Added in Version:** 2.0.0
 
 </details>

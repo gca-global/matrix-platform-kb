@@ -1,6 +1,8 @@
 # Office
 
-The Office resource describes a brokerage office. Offices employ Members and are referenced from Property via ListOfficeKey / CoListOfficeKey. Each office has identity, contact information, and a designated broker.
+Roster of offices who are members of the MLS and/or association.
+
+**RESO DD 2.0** — 73 fields · last revised 8/5/2024 · [dd.reso.org](https://dd.reso.org/DD2.0/Office/)
 
 **Adoption** — weighted Org%: **43%** across 61 measured fields (median 29%, avg 43%).
 
@@ -10,81 +12,81 @@ The Office resource describes a brokerage office. Offices employ Members and are
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `BillingOfficeKey` | String |  |  |  | 0% | The office that will be billed (e.g., corporate headquarters). | [link](https://ddwiki.reso.org/display/DDW20/BillingOfficeKey+Field) |
-| `FranchiseAffiliation` | String |  |  | 30% | 2% | The name of the franchise to which the broker/office is contracted. | [link](https://ddwiki.reso.org/display/DDW20/FranchiseAffiliation+Field) |
-| `FranchiseNationalAssociationId` | String |  |  |  | 1% | The national association ID of the franchise (i.e., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/FranchiseNationalAssociationID+Field) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135098) |
-| `IDXOfficeParticipationYN` | Boolean |  |  | 50% | 45% | Indicates whether or not the office/broker participates in IDX. | [link](https://ddwiki.reso.org/display/DDW20/IDXOfficeParticipationYN+Field) |
-| `MainOffice` | Resource |  |  |  | 0% | The main office for the Office record. | [link](https://ddwiki.reso.org/display/DDW20/MainOffice+Field) |
-| `MainOfficeKey` | String |  |  | 50% | 55% | The OfficeKey of the main office in a firm/company of offices. | [link](https://ddwiki.reso.org/display/DDW20/MainOfficeKey+Field) |
-| `MainOfficeMlsId` | String |  |  | 50% | 55% | The OfficeMlsId of the main office in a firm/company of offices. | [link](https://ddwiki.reso.org/display/DDW20/MainOfficeMlsId+Field) |
-| `Media` | Collection |  |  | 1% | 1% | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135126) |
-| `ModificationTimestamp` | Timestamp |  |  | 85% | 82% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135132) |
-| `NumberOfBranches` | Number |  |  | 5% | 4% | The calculated value for the number of active branches. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfBranches+Field) |
-| `NumberOfNonMemberSalespersons` | Number |  |  |  |  | The total number of active salespersons that are not a member of the national association. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfNonMemberSalespersons+Field) |
-| `OfficeAOR` | String List, Single |  | AOR | 35% | 21% | The office's board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/OfficeAOR+Field) |
-| `OfficeAORMlsId` | String |  |  | 20% | 11% | The local, well-known identifier for the office's association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/OfficeAORMlsId+Field) |
-| `OfficeAORkey` | String |  |  | 10% | 11% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/OfficeAORkey+Field) |
-| `OfficeAddress1` | String |  |  | 80% | 82% | The first address line of the physical address of the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeAddress1+Field) |
-| `OfficeAddress2` | String |  |  | 65% | 69% | The unit/suite number of the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeAddress2+Field) |
-| `OfficeAlternateId` | String |  |  |  | 1% | An alternate ID with no specific use. | [link](https://ddwiki.reso.org/display/DDW20/OfficeAlternateId+Field) |
-| `OfficeAssociationComments` | String |  |  | 10% | 2% | Notes relating to the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeAssociationComments+Field) |
-| `OfficeBio` | String |  |  | 5% | 1% | A text field containing biography information for the office record. | [link](https://ddwiki.reso.org/display/DDW20/OfficeBio+Field) |
-| `OfficeBranchType` | String List, Single |  | [OfficeBranchType](#officebranchtype) |  | 11% | The level of the office in a hierarchy (i.e., Main, Branch, Stand-Alone, etc.). | [link](https://ddwiki.reso.org/display/DDW20/OfficeBranchType+Field) |
-| `OfficeBroker` | Resource |  |  |  |  | The broker for the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeBroker+Field) |
-| `OfficeBrokerKey` | String |  |  | 60% | 48% | The MemberKey of the responsible/owning broker. | [link](https://ddwiki.reso.org/display/DDW20/OfficeBrokerKey+Field) |
-| `OfficeBrokerMlsId` | String |  |  | 60% | 45% | The MemberMlsId of the broker of record for the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeBrokerMlsId+Field) |
-| `OfficeBrokerNationalAssociationId` | String |  |  |  |  | The national association ID of the broker (i.e., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/OfficeBrokerNationalAssociationID+Field) |
-| `OfficeCity` | String |  |  | 80% | 82% | The city of the physical address of the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeCity+Field) |
-| `OfficeCorporateLicense` | String |  |  | 65% | 56% | An independent license number is issued when an office/firm is a corporation. | [link](https://ddwiki.reso.org/display/DDW20/OfficeCorporateLicense+Field) |
-| `OfficeCountry` | String |  | [Country](#country) | 5% | 1% | The country of the physical address of the office (ISO country code). | [link](https://ddwiki.reso.org/display/DDW20/OfficeCountry+Field) |
-| `OfficeCountyOrParish` | String List, Single |  | CountyOrParish | 35% | 4% | The county or parish in which the offices is located. | [link](https://ddwiki.reso.org/display/DDW20/OfficeCountyOrParish+Field) |
-| `OfficeEmail` | String |  |  | 85% | 81% | The contact email address of the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeEmail+Field) |
-| `OfficeFax` | String |  |  | 75% | 77% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/OfficeFax+Field) |
-| `OfficeKey` | String |  |  | 75% | 82% | A system-unique identifier for the office. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135261) |
-| `OfficeMailAddress1` | String |  |  | 5% | 1% | The street number, direction, name and suffix of the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeMailAddress1+Field) |
-| `OfficeMailAddress2` | String |  |  | 5% | 1% | The unit/suite number of the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeMailAddress2+Field) |
-| `OfficeMailCareOf` | String |  |  |  | 11% | The care of (c/o) for the office's mailing address. | [link](https://ddwiki.reso.org/display/DDW20/OfficeMailCareOf+Field) |
-| `OfficeMailCity` | String |  |  | 5% | 1% | The office's city for the mailing address. | [link](https://ddwiki.reso.org/display/DDW20/OfficeMailCity+Field) |
-| `OfficeMailCountry` | String |  | [Country](#country) |  | 1% | The office's country code for the mailing address. | [link](https://ddwiki.reso.org/display/DDW20/OfficeMailCountry+Field) |
-| `OfficeMailCountyOrParish` | String List, Single |  | CountyOrParish |  | 1% | The office's county of the mailing address. | [link](https://ddwiki.reso.org/display/DDW20/OfficeMailCountyOrParish+Field) |
-| `OfficeMailPostalCode` | String |  |  |  | 17% | The postal code of the office's mailing address. | [link](https://ddwiki.reso.org/display/DDW20/OfficeMailPostalCode+Field) |
-| `OfficeMailPostalCodePlus4` | String |  |  |  | 12% | The four-digit extension of the U.S. | [link](https://ddwiki.reso.org/display/DDW20/OfficeMailPostalCodePlus4+Field) |
-| `OfficeMailStateOrProvince` | String |  | [StateOrProvince](#stateorprovince) |  | 17% | The office's state or province of the mailing address. | [link](https://ddwiki.reso.org/display/DDW20/OfficeMailStateOrProvince+Field) |
-| `OfficeManager` | Resource |  |  |  |  | The office manager for the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeManager+Field) |
-| `OfficeManagerKey` | String |  |  | 30% | 5% | The lead office manager for the given office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeManagerKey+Field) |
-| `OfficeManagerMlsId` | String |  |  | 30% | 7% | The lead office manager for the given office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeManagerMlsId+Field) |
-| `OfficeMlsId` | String |  |  | 75% | 80% | The local, well-known identifier for the office as assigned by the MLS. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135337) |
-| `OfficeName` | String |  |  |  | 100% | The legal or DBA name of the office. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135343) |
-| `OfficeNationalAssociationId` | String |  |  | 55% | 66% | The national association ID of the office (e.g., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135349) |
-| `OfficeNationalAssociationIdInsertDate` | Date |  |  |  |  | The date the office record was initially created in the national association's database (e.g., the date the record was added to NRDS in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/OfficeNationalAssociationIdInsertDate+Field) |
-| `OfficePhone` | String |  |  | 85% | 81% | The main contact phone number of the office. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116905) |
-| `OfficePhoneExt` | String |  |  | 35% | 21% | The extension of the given phone number (if applicable). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116911) |
-| `OfficePostalCode` | String |  |  | 80% | 81% | The postal code of the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficePostalCode+Field) |
-| `OfficePostalCodePlus4` | String |  |  | 45% | 31% | The four-digit extension of the U.S. | [link](https://ddwiki.reso.org/display/DDW20/OfficePostalCodePlus4+Field) |
-| `OfficePreferredMedia` | String List, Single |  | [PreferredMedia](#preferredmedia) | 5% | 1% | The method the office prefers to receive media. | [link](https://ddwiki.reso.org/display/DDW20/OfficePreferredMedia+Field) |
-| `OfficePrimaryAorId` | String |  |  |  |  | The primary association of REALTORS® (AOR) associated with the member. | [link](https://ddwiki.reso.org/display/DDW20/OfficePrimaryAorId+Field) |
-| `OfficePrimaryStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) |  | 0% | The office's primary state or province. | [link](https://ddwiki.reso.org/display/DDW20/OfficePrimaryStateOrProvince+Field) |
-| `OfficeSocialMedia` | Collection |  |  |  |  | A collection of the types of social media fields available for this office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeSocialMedia+Field) |
-| `OfficeStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) |  | 98% | The state or province in which the office is located. | [link](https://ddwiki.reso.org/display/DDW20/OfficeStateOrProvince+Field) |
-| `OfficeStatus` | String List, Single |  | [OfficeStatus](#officestatus) | 75% | 74% | The status of the office's record in the MLS or other organization. | [link](https://ddwiki.reso.org/display/DDW20/OfficeStatus+Field) |
-| `OfficeType` | String List, Single |  | [OfficeType](#officetype) | 60% | 62% | The type of business conducted by the office (e.g., Appraisal, MLS, Mortgage). | [link](https://ddwiki.reso.org/display/DDW20/OfficeType+Field) |
-| `OriginalEntryTimestamp` | Timestamp |  |  | 55% | 62% | The date/time the roster (member or office) record was originally input into the source system. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135429) |
-| `OriginatingSystem` | Resource |  |  |  |  | The originating system of the Office record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135435) |
-| `OriginatingSystemID` | String |  |  | 45% | 64% | The OUID Resource's OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135440) |
-| `OriginatingSystemName` | String |  |  |  | 93% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135447) |
-| `OriginatingSystemOfficeKey` | String |  |  | 75% | 77% | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemOfficeKey+Field) |
-| `OtherPhone` | String |  |  |  | 5% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/OtherPhone+Field) |
-| `SocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) | 5% | 1% | A collection of the types of social media fields available for the office. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135464) |
-| `SourceSystem` | Resource |  |  |  |  | The source system of the Office record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135470) |
-| `SourceSystemID` | String |  |  | 35% | 46% | The OUID Resource's OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135476) |
-| `SourceSystemName` | String |  |  | 40% | 32% | The name of the immediate record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135484) |
-| `SourceSystemOfficeKey` | String |  |  | 40% | 44% | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemOfficeKey+Field) |
-| `SyndicateAgentOption` | String List, Single |  | SyndicateAgentOption | 10% | 1% | A list of options allowing the broker to pass the decision of syndication choice down to the listing agents (i.e., No Agent Choice, Allow Agent Choice, Restrict Agent Choice, etc.). | [link](https://ddwiki.reso.org/display/DDW20/SyndicateAgentOption+Field) |
-| `SyndicateTo` | String List, Multi |  | [SyndicateTo](#syndicateto) | 35% | 5% | The principal broker's choice on where they would like their listings syndicated (i.e., Zillow, Trulia, Homes.com, etc.). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135503) |
-| `VirtualOfficeWebsiteYN` | Boolean |  |  |  |  | Indicates whether or not this is a Virtual Office Website (VOW). | [link](https://ddwiki.reso.org/display/DDW20/VirtualOfficeWebsiteYN+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `BillingOfficeKey` | String |  |  | 0% | The office that will be billed (e.g., corporate headquarters). | [link](https://dd.reso.org/DD2.0/Office/BillingOfficeKey/) |
+| `FranchiseAffiliation` | String |  |  | 5% | The name of the franchise to which the broker/office is contracted. | [link](https://dd.reso.org/DD2.0/Office/FranchiseAffiliation/) |
+| `FranchiseNationalAssociationId` | String |  |  | 1% | The national association ID of the franchise (i.e., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Office/FranchiseNationalAssociationId/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/Office/HistoryTransactional/) |
+| `IDXOfficeParticipationYN` | Boolean |  |  | 70% | Indicates whether or not the office/broker participates in IDX. | [link](https://dd.reso.org/DD2.0/Office/IDXOfficeParticipationYN/) |
+| `MainOffice` | Resource |  |  | 0% | The main office for the Office record. | [link](https://dd.reso.org/DD2.0/Office/MainOffice/) |
+| `MainOfficeKey` | String |  |  | 71% | The OfficeKey of the main office in a firm/company of offices. | [link](https://dd.reso.org/DD2.0/Office/MainOfficeKey/) |
+| `MainOfficeMlsId` | String |  |  | 70% | The OfficeMlsId of the main office in a firm/company of offices. | [link](https://dd.reso.org/DD2.0/Office/MainOfficeMlsId/) |
+| `Media` | Collection |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://dd.reso.org/DD2.0/Office/Media/) |
+| `ModificationTimestamp` | Timestamp |  |  | 99% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Office/ModificationTimestamp/) |
+| `NumberOfBranches` | Number |  |  | 6% | The calculated value for the number of active branches. | [link](https://dd.reso.org/DD2.0/Office/NumberOfBranches/) |
+| `NumberOfNonMemberSalespersons` | Number |  |  |  | The total number of active salespersons that are not a member of the national association. | [link](https://dd.reso.org/DD2.0/Office/NumberOfNonMemberSalespersons/) |
+| `OfficeAOR` | String List, Single |  | AOR | 30% | The office's board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Office/OfficeAOR/) |
+| `OfficeAORMlsId` | String |  |  | 13% | The local, well-known identifier for the office's association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Office/OfficeAORMlsId/) |
+| `OfficeAORkey` | String |  |  | 13% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Office/OfficeAORkey/) |
+| `OfficeAddress1` | String |  |  | 98% | The first address line of the physical address of the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeAddress1/) |
+| `OfficeAddress2` | String |  |  | 85% | The unit/suite number of the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeAddress2/) |
+| `OfficeAlternateId` | String |  |  | 1% | An alternate ID with no specific use. | [link](https://dd.reso.org/DD2.0/Office/OfficeAlternateId/) |
+| `OfficeAssociationComments` | String |  |  | 6% | Notes relating to the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeAssociationComments/) |
+| `OfficeBio` | String |  |  | 7% | A text field containing biography information for the office record. | [link](https://dd.reso.org/DD2.0/Office/OfficeBio/) |
+| `OfficeBranchType` | String List, Single |  | [OfficeBranchType](#officebranchtype) | 11% | The level of the office in a hierarchy (i.e., Main, Branch, Stand-Alone, etc.). | [link](https://dd.reso.org/DD2.0/Office/OfficeBranchType/) |
+| `OfficeBroker` | Resource |  |  |  | The broker for the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeBroker/) |
+| `OfficeBrokerKey` | String |  |  | 65% | The MemberKey of the responsible/owning broker. | [link](https://dd.reso.org/DD2.0/Office/OfficeBrokerKey/) |
+| `OfficeBrokerMlsId` | String |  |  | 64% | The MemberMlsId of the broker of record for the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeBrokerMlsId/) |
+| `OfficeBrokerNationalAssociationId` | String |  |  |  | The national association ID of the broker (i.e., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Office/OfficeBrokerNationalAssociationId/) |
+| `OfficeCity` | String |  |  | 98% | The city of the physical address of the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeCity/) |
+| `OfficeCorporateLicense` | String |  |  | 72% | An independent license number is issued when an office/firm is a corporation. | [link](https://dd.reso.org/DD2.0/Office/OfficeCorporateLicense/) |
+| `OfficeCountry` | String List, Single |  | [Country](#country) | 3% | The country of the physical address of the office (ISO country code). | [link](https://dd.reso.org/DD2.0/Office/OfficeCountry/) |
+| `OfficeCountyOrParish` | String List, Single |  | CountyOrParish | 8% | The county or parish in which the offices is located. | [link](https://dd.reso.org/DD2.0/Office/OfficeCountyOrParish/) |
+| `OfficeEmail` | String |  |  | 98% | The contact email address of the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeEmail/) |
+| `OfficeFax` | String |  |  | 92% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Office/OfficeFax/) |
+| `OfficeKey` | String |  |  | 99% | A system-unique identifier for the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeKey/) |
+| `OfficeMailAddress1` | String |  |  | 17% | The street number, direction, name and suffix of the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeMailAddress1/) |
+| `OfficeMailAddress2` | String |  |  | 6% | The unit/suite number of the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeMailAddress2/) |
+| `OfficeMailCareOf` | String |  |  | 11% | The care of (c/o) for the office's mailing address. | [link](https://dd.reso.org/DD2.0/Office/OfficeMailCareOf/) |
+| `OfficeMailCity` | String |  |  | 17% | The office's city for the mailing address. | [link](https://dd.reso.org/DD2.0/Office/OfficeMailCity/) |
+| `OfficeMailCountry` | String List, Single |  | [Country](#country) | 1% | The office's country code for the mailing address. | [link](https://dd.reso.org/DD2.0/Office/OfficeMailCountry/) |
+| `OfficeMailCountyOrParish` | String List, Single |  | CountyOrParish | 1% | The office's county of the mailing address. | [link](https://dd.reso.org/DD2.0/Office/OfficeMailCountyOrParish/) |
+| `OfficeMailPostalCode` | String |  |  | 17% | The postal code of the office's mailing address. | [link](https://dd.reso.org/DD2.0/Office/OfficeMailPostalCode/) |
+| `OfficeMailPostalCodePlus4` | String |  |  | 12% | The four-digit extension of the U.S. | [link](https://dd.reso.org/DD2.0/Office/OfficeMailPostalCodePlus4/) |
+| `OfficeMailStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 17% | The office's state or province of the mailing address. | [link](https://dd.reso.org/DD2.0/Office/OfficeMailStateOrProvince/) |
+| `OfficeManager` | Resource |  |  |  | The office manager for the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeManager/) |
+| `OfficeManagerKey` | String |  |  | 14% | The lead office manager for the given office. | [link](https://dd.reso.org/DD2.0/Office/OfficeManagerKey/) |
+| `OfficeManagerMlsId` | String |  |  | 17% | The lead office manager for the given office. | [link](https://dd.reso.org/DD2.0/Office/OfficeManagerMlsId/) |
+| `OfficeMlsId` | String |  |  | 97% | The local, well-known identifier for the office as assigned by the MLS. | [link](https://dd.reso.org/DD2.0/Office/OfficeMlsId/) |
+| `OfficeName` | String |  |  | 100% | The legal or DBA name of the office. | [link](https://dd.reso.org/DD2.0/Office/OfficeName/) |
+| `OfficeNationalAssociationId` | String |  |  | 81% | The national association ID of the office (e.g., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Office/OfficeNationalAssociationId/) |
+| `OfficeNationalAssociationIdInsertDate` | Date |  |  |  | The date the office record was initially created in the national association's database (e.g., the date the record was added to NRDS in the U.S.). | [link](https://dd.reso.org/DD2.0/Office/OfficeNationalAssociationIdInsertDate/) |
+| `OfficePhone` | String |  |  | 98% | The main contact phone number of the office. | [link](https://dd.reso.org/DD2.0/Office/OfficePhone/) |
+| `OfficePhoneExt` | String |  |  | 29% | The extension of the given phone number (if applicable). | [link](https://dd.reso.org/DD2.0/Office/OfficePhoneExt/) |
+| `OfficePostalCode` | String |  |  | 98% | The postal code of the office. | [link](https://dd.reso.org/DD2.0/Office/OfficePostalCode/) |
+| `OfficePostalCodePlus4` | String |  |  | 43% | The four-digit extension of the U.S. | [link](https://dd.reso.org/DD2.0/Office/OfficePostalCodePlus4/) |
+| `OfficePreferredMedia` | String List, Single |  | [PreferredMedia](#preferredmedia) | 0% | The method the office prefers to receive media. | [link](https://dd.reso.org/DD2.0/Office/OfficePreferredMedia/) |
+| `OfficePrimaryAorId` | String |  |  |  | The primary association of REALTORS® (AOR) associated with the member. | [link](https://dd.reso.org/DD2.0/Office/OfficePrimaryAorId/) |
+| `OfficePrimaryStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 0% | The office's primary state or province. | [link](https://dd.reso.org/DD2.0/Office/OfficePrimaryStateOrProvince/) |
+| `OfficeSocialMedia` | Collection |  |  |  | A collection of the types of social media fields available for this office. | [link](https://dd.reso.org/DD2.0/Office/OfficeSocialMedia/) |
+| `OfficeStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 98% | The state or province in which the office is located. | [link](https://dd.reso.org/DD2.0/Office/OfficeStateOrProvince/) |
+| `OfficeStatus` | String List, Single |  | [OfficeStatus](#officestatus) | 88% | The status of the office's record in the MLS or other organization. | [link](https://dd.reso.org/DD2.0/Office/OfficeStatus/) |
+| `OfficeType` | String List, Single |  | [OfficeType](#officetype) | 76% | The type of business conducted by the office (e.g., Appraisal, MLS, Mortgage). | [link](https://dd.reso.org/DD2.0/Office/OfficeType/) |
+| `OriginalEntryTimestamp` | Timestamp |  |  | 73% | The date/time the roster (member or office) record was originally input into the source system. | [link](https://dd.reso.org/DD2.0/Office/OriginalEntryTimestamp/) |
+| `OriginatingSystem` | Resource |  |  |  | The originating system of the Office record. | [link](https://dd.reso.org/DD2.0/Office/OriginatingSystem/) |
+| `OriginatingSystemID` | String |  |  | 70% | The OUID Resource's OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Office/OriginatingSystemID/) |
+| `OriginatingSystemName` | String |  |  | 93% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Office/OriginatingSystemName/) |
+| `OriginatingSystemOfficeKey` | String |  |  | 89% | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Office/OriginatingSystemOfficeKey/) |
+| `OtherPhone` | String |  |  | 5% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Office/OtherPhone/) |
+| `SocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) | 1% | A collection of the types of social media fields available for the office. | [link](https://dd.reso.org/DD2.0/Office/SocialMediaType/) |
+| `SourceSystem` | Resource |  |  |  | The source system of the Office record. | [link](https://dd.reso.org/DD2.0/Office/SourceSystem/) |
+| `SourceSystemID` | String |  |  | 59% | The OUID Resource's OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Office/SourceSystemID/) |
+| `SourceSystemName` | String |  |  | 40% | The name of the immediate record provider. | [link](https://dd.reso.org/DD2.0/Office/SourceSystemName/) |
+| `SourceSystemOfficeKey` | String |  |  | 58% | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/Office/SourceSystemOfficeKey/) |
+| `SyndicateAgentOption` | String List, Single |  | SyndicateAgentOption | 1% | A list of options allowing the broker to pass the decision of syndication choice down to the listing agents (i.e., No Agent Choice, Allow Agent Choice, Restrict Agent Choice, etc.). | [link](https://dd.reso.org/DD2.0/Office/SyndicateAgentOption/) |
+| `SyndicateTo` | String List, Multi |  | [SyndicateTo](#syndicateto) | 10% | The principal broker's choice on where they would like their listings syndicated (i.e., Zillow, Trulia, Homes.com, etc.). | [link](https://dd.reso.org/DD2.0/Office/SyndicateTo/) |
+| `VirtualOfficeWebsiteYN` | Boolean |  |  |  | Indicates whether or not this is a Virtual Office Website (VOW). | [link](https://dd.reso.org/DD2.0/Office/VirtualOfficeWebsiteYN/) |
 
 ## Field details
 
@@ -92,76 +94,85 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>BillingOfficeKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>FranchiseAffiliation</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Afiliación de Franquicia
   - **French-Canadian Name:** Franchise/affiliation
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>FranchiseNationalAssociationId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2020
-  - **Revision Date:** JAN 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>HistoryTransactional</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 1/20/2020
+  - **Revision Date:** 1/20/2020
+  - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>IDXOfficeParticipationYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Participación en IDX SN
   - **French-Canadian Name:** Participation du bureau au système IDX O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MainOffice</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 20 2020
-  - **Revision Date:** JAN 20 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/20/2020
+  - **Revision Date:** 1/20/2020
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>MainOfficeKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Despacho Principal
   - **French-Canadian Name:** Clé du bureau principal
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MainOfficeMlsId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Despacho Enlistado
   - **French-Canadian Name:** ID MLS du bureau principal
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Media</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 20 2020
-  - **Revision Date:** JAN 20 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/20/2020
+  - **Revision Date:** 1/20/2020
   - **Added in Version:** 1.7.0
 
 </details>
@@ -169,19 +180,28 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ModificationTimestamp</code></summary>
 
   - **BEDES:** Date Status = "Modified"Date = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
   - **French-Canadian Name:** Heure et date de la modification
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>NumberOfBranches</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>NumberOfNonMemberSalespersons</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
@@ -189,141 +209,160 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>OfficeAOR</code></summary>
 
   - **BEDES:** Contact Label = "Association of Realtors"Company Name = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Despacho de AOR
   - **French-Canadian Name:** Chambre/association du bureau
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeAORMlsId</code></summary>
 
   - **BEDES:** Contact Label = "Association of Realtors"Identifier = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Despacho de AOR
   - **French-Canadian Name:** ID MLS de la chambre/association du bureau
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeAORkey</code></summary>
 
   - **BEDES:** Contact Label = "Association of Realtors"Subaddress Type = "Key"Identifier = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Despacho de AOR
   - **French-Canadian Name:** Clé de la chambre/association du bureau
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeAddress1</code></summary>
 
   - **BEDES:** Address Line 1 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de Despacho1
   - **French-Canadian Name:** Adresse du bureau 1
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeAddress2</code></summary>
 
   - **BEDES:** Address Line 2 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de Despacho2
   - **French-Canadian Name:** Adresse du bureau 2
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeAlternateId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeAssociationComments</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios de Asociación de Despacho
   - **French-Canadian Name:** Remarques de l’association sur le bureau
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeBio</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 18 2023
-  - **Revision Date:** APR 18 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/18/2023
+  - **Revision Date:** 4/18/2023
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>OfficeBranchType</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Tipo de Sucursal
+  - **French-Canadian Name:** Type de bureau
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>OfficeBroker</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 20 2020
-  - **Revision Date:** JAN 20 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/20/2020
+  - **Revision Date:** 1/20/2020
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OfficeBrokerKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Corredor de Despacho
   - **French-Canadian Name:** Clé du dirigeant du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeBrokerMlsId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Corredor de Despacho
   - **French-Canadian Name:** ID MLS du dirigeant du bureau
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>OfficeBrokerNationalAssociationId</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 10/11/2024
+  - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeCity</code></summary>
 
   - **BEDES:** City = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ciudad de Despacho
   - **French-Canadian Name:** Ville du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeCorporateLicense</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia Corporativa de Despacho
   - **French-Canadian Name:** Licence de société du bureau
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeCountry</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
@@ -331,173 +370,193 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>OfficeCountyOrParish</code></summary>
 
   - **BEDES:** County = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Condado o Distrito de Despacho
   - **French-Canadian Name:** Comté ou paroisse du bureau
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeEmail</code></summary>
 
   - **BEDES:** Email Address = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Despacho
   - **French-Canadian Name:** Adresse courriel du bureau
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeFax</code></summary>
 
   - **BEDES:** Telephone Number Label = "Fax"Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax de Despacho
   - **French-Canadian Name:** Numéro de télécopieur du bureau
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeKey</code></summary>
 
   - **BEDES:** Subaddress Type = "Key"Contact ID = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Despacho
   - **French-Canadian Name:** Clé du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeMailAddress1</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 8/5/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeMailAddress2</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 8/5/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeMailCareOf</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeMailCity</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 8/5/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeMailCountry</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 10/11/2024
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>OfficeMailCountyOrParish</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeMailPostalCode</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeMailPostalCodePlus4</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeMailStateOrProvince</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeManager</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 20 2020
-  - **Revision Date:** JAN 20 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/20/2020
+  - **Revision Date:** 1/20/2020
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OfficeManagerKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Gerente de Despacho
   - **French-Canadian Name:** Clé du gestionnaire de bureau
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeManagerMlsId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Gerente de Despacho
   - **French-Canadian Name:** ID MLS du gestionnaire de bureau
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeMlsId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Despacho Enlistado
   - **French-Canadian Name:** ID MLS du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>OfficeName</code></summary>
+
+  - **BEDES:** Company Name = [value]
+  - **Status:** Active
+  - **Spanish Name:** Nombre de Despacho
+  - **French-Canadian Name:** Nom du bureau
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeNationalAssociationId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Asociación Nacional de Despacho
   - **French-Canadian Name:** ID de l’association nationale du bureau
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeNationalAssociationIdInsertDate</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
@@ -505,223 +564,254 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>OfficePhone</code></summary>
 
   - **BEDES:** Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Despacho
   - **French-Canadian Name:** Numéro de téléphone du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficePhoneExt</code></summary>
 
   - **BEDES:** Telephone Extension = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión Telefónica de Despacho
   - **French-Canadian Name:** Poste téléphonique du bureau
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficePostalCode</code></summary>
 
   - **BEDES:** ZIP Code = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal de Despacho
   - **French-Canadian Name:** Code postal du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficePostalCodePlus4</code></summary>
 
   - **BEDES:** ZIP Plus 4 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal Más 4 de Despacho
   - **French-Canadian Name:** Code postal du bureau +4
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficePreferredMedia</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficePrimaryAorId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficePrimaryStateOrProvince</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>OfficeSocialMedia</code></summary>
+
+  - **Status:** Active
+  - **French-Canadian Name:** Médias sociaux du bureau
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>OfficeStateOrProvince</code></summary>
+
+  - **BEDES:** State = [value]
+  - **Status:** Active
+  - **Spanish Name:** Estado o Provincia de Despacho
+  - **French-Canadian Name:** État ou province du bureau
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeStatus</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Despacho
   - **French-Canadian Name:** Statut du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Despacho
   - **French-Canadian Name:** Type de bureau
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OriginalEntryTimestamp</code></summary>
 
   - **BEDES:** Date Status = "Created"Date = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Entrada Original
   - **French-Canadian Name:** Date et heure de l’entrée originale
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OriginatingSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 20 2020
-  - **Revision Date:** JAN 20 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/20/2020
+  - **Revision Date:** 1/20/2020
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OriginatingSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Sistema de Origen
   - **French-Canadian Name:** ID du système d’origine
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>OriginatingSystemName</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Nombre de Sistema de Origen
+  - **French-Canadian Name:** Nom du système d’origine
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OriginatingSystemOfficeKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Despacho de Sistema de Origen
   - **French-Canadian Name:** Clé du système d’origine du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OtherPhone</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SocialMediaType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Redes Sociales
   - **French-Canadian Name:** Type de médias sociaux
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** APR 11 2022
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>SourceSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 20 2020
-  - **Revision Date:** JAN 20 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/20/2020
+  - **Revision Date:** 1/20/2020
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>SourceSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Sistema Fuente
   - **French-Canadian Name:** ID du système source
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Sistema Fuente
   - **French-Canadian Name:** Nom du système source
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemOfficeKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Despacho Sistema Fuente
   - **French-Canadian Name:** Clé du système source du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SyndicateAgentOption</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Opción de Redifusión Agente
   - **French-Canadian Name:** Délégation du lieu d’affichage au courtier/agent
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>SyndicateTo</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Redifundir a
   - **French-Canadian Name:** Afficher sur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/27/2026
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>VirtualOfficeWebsiteYN</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
@@ -729,6 +819,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### Country
+
+246 values · used by 12 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Country/)
 
 | Value | Definition |
 |---|---|
@@ -981,6 +1073,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### OfficeBranchType
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OfficeBranchType/)
+
 | Value | Definition |
 |---|---|
 | `Branch` | This office is a branch office. |
@@ -989,12 +1083,16 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### OfficeStatus
 
+2 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OfficeStatus/)
+
 | Value | Definition |
 |---|---|
 | `Active` | The member office's account is active. |
 | `Inactive` | The member office's account is not active. |
 
 ### OfficeType
+
+11 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OfficeType/)
 
 | Value | Definition |
 |---|---|
@@ -1012,6 +1110,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### PreferredMedia
 
+3 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PreferredMedia/)
+
 | Value | Definition |
 |---|---|
 | `Email` | Send media via email. |
@@ -1019,6 +1119,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Mail` | Send media via postal mail. |
 
 ### SocialMediaType
+
+17 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SocialMediaType/)
 
 | Value | Definition |
 |---|---|
@@ -1041,6 +1143,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `YouTube` | Information pertaining to the YouTube account of the member/office/contact. |
 
 ### StateOrProvince
+
+65 values · used by 19 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StateOrProvince/)
 
 | Value | Definition |
 |---|---|
@@ -1111,6 +1215,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `YT` | The Canadian territory in which the listing is located is Yukon. |
 
 ### SyndicateTo
+
+4 values · used by 3 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SyndicateTo/)
 
 | Value | Definition |
 |---|---|

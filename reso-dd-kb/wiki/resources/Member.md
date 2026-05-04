@@ -1,6 +1,8 @@
 # Member
 
-The Member resource describes a person who is a member of the MLS — most commonly a real estate agent or broker. Members are referenced from Property via ListAgentKey / CoListAgentKey, and are responsible for creating, updating, or being assigned to listings.
+Roster of agents, brokers, appraisers, assistants, affiliates and other MLS/association members.
+
+**RESO DD 2.0** — 87 fields · last revised 7/25/2019 · [dd.reso.org](https://dd.reso.org/DD2.0/Member/)
 
 **Adoption** — weighted Org%: **46%** across 73 measured fields (median 43%, avg 46%).
 
@@ -10,95 +12,95 @@ The Member resource describes a person who is a member of the MLS — most commo
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135079) |
-| `JobTitle` | String |  |  |  | 5% | The title or position of the member within their organization. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116488) |
-| `LastLoginTimestamp` | Timestamp |  |  | 15% | 2% | The date/time the member last logged into the source or other system. | [link](https://ddwiki.reso.org/display/DDW20/LastLoginTimestamp+Field) |
-| `Media` | Collection |  |  | 10% | 7% | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135096) |
-| `MemberAOR` | String List, Single |  | AOR | 45% | 21% | The member's primary board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/MemberAOR+Field) |
-| `MemberAORMlsId` | String |  |  | 25% | 12% | The local, well-known identifier for the member's association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/MemberAORMlsId+Field) |
-| `MemberAORkey` | String |  |  | 10% | 11% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/MemberAORkey+Field) |
-| `MemberAddress1` | String |  |  | 75% | 75% | The street number, direction, name and suffix of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberAddress1+Field) |
-| `MemberAddress2` | String |  |  | 65% | 66% | The unit/suite number of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberAddress2+Field) |
-| `MemberAlternateId` | String |  |  |  | 3% | This is an alternate ID with no specific use. | [link](https://ddwiki.reso.org/display/DDW20/MemberAlternateId+Field) |
-| `MemberAssociationComments` | String |  |  | 15% | 3% | The association's notes regarding the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberAssociationComments+Field) |
-| `MemberBillingPreference` | String List, Single |  | [BillingPreference](#billingpreference) |  |  | The member's preferred method of billing. | [link](https://ddwiki.reso.org/display/DDW20/MemberBillingPreference+Field) |
-| `MemberBio` | String |  |  |  | 11% | A text field containing biography information for the member record. | [link](https://ddwiki.reso.org/display/DDW20/MemberBio+Field) |
-| `MemberCarrierRoute` | String |  |  | 15% | 1% | The group of addresses to which the U.S. | [link](https://ddwiki.reso.org/display/DDW20/MemberCarrierRoute+Field) |
-| `MemberCity` | String |  |  | 75% | 78% | The city of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberCity+Field) |
-| `MemberCommitteeCount` | Number |  |  |  |  | The number of current/active committees in which the member belongs. | [link](https://ddwiki.reso.org/display/DDW20/MemberCommitteeCount+Field) |
-| `MemberCountry` | String List, Single |  | [Country](#country) | 45% | 29% | The country abbreviation in a postal address. | [link](https://ddwiki.reso.org/display/DDW20/MemberCountry+Field) |
-| `MemberCountyOrParish` | String List, Single |  | CountyOrParish | 30% | 2% | The county or parish in which the member is addressed. | [link](https://ddwiki.reso.org/display/DDW20/MemberCountyOrParish+Field) |
-| `MemberDesignation` | String List, Multi |  | [MemberDesignation](#memberdesignation) |  | 49% | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® and each affiliated group upon completion of … | [link](https://ddwiki.reso.org/display/DDW20/MemberDesignation+Field) |
-| `MemberDirectPhone` | String |  |  | 40% | 19% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/MemberDirectPhone+Field) |
-| `MemberEmail` | String |  |  | 80% | 80% | The email address of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberEmail+Field) |
-| `MemberFax` | String |  |  | 65% | 56% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/MemberFax+Field) |
-| `MemberFirstName` | String |  |  | 80% | 81% | The first name of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberFirstName+Field) |
-| `MemberFullName` | String |  |  | 70% | 77% | The full name of the member - first middle last suffix. | [link](https://ddwiki.reso.org/display/DDW20/MemberFullName+Field) |
-| `MemberHomePhone` | String |  |  | 45% | 40% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/MemberHomePhone+Field) |
-| `MemberIsAssistantTo` | String |  |  |  | 3% | The MemberMlsId of the agent/broker that this member assists. | [link](https://ddwiki.reso.org/display/DDW20/MemberIsAssistantTo+Field) |
-| `MemberKey` | String |  |  | 70% | 80% | A system-unique identifier for the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberKey+Field) |
-| `MemberLanguages` | String List, Multi |  | [Languages](#languages) | 45% | 37% | The languages the member speaks. | [link](https://ddwiki.reso.org/display/DDW20/MemberLanguages+Field) |
-| `MemberLastName` | String |  |  | 80% | 81% | The last name of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberLastName+Field) |
-| `MemberLoginId` | String |  |  | 45% | 44% | The ID used to log on to the MLS system. | [link](https://ddwiki.reso.org/display/DDW20/MemberLoginId+Field) |
-| `MemberMailOptOutYN` | Boolean |  |  |  |  | Indicates whether or not the member has opted out of receiving solicitation via mail. | [link](https://ddwiki.reso.org/display/DDW20/MemberMailOptOutYN+Field) |
-| `MemberMiddleName` | String |  |  | 60% | 57% | The middle name of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberMiddleName+Field) |
-| `MemberMlsAccessYN` | Boolean |  |  |  | 21% | Indicates whether or not the member has access to the MLS system. | [link](https://ddwiki.reso.org/display/DDW20/MemberMlsAccessYN+Field) |
-| `MemberMlsId` | String |  |  | 75% | 79% | The local, well-known identifier for the member as assigned by the MLS. | [link](https://ddwiki.reso.org/display/DDW20/MemberMlsId+Field) |
-| `MemberMlsSecurityClass` | String List, Single |  | MemberMlsSecurityClass | 25% | 38% | The MLS security group or class given to the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberMlsSecurityClass+Field) |
-| `MemberMobilePhone` | String |  |  | 65% | 74% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/MemberMobilePhone+Field) |
-| `MemberNamePrefix` | String |  |  |  | 15% | The prefix to the member name (e.g., Dr., Mr., Ms.). | [link](https://ddwiki.reso.org/display/DDW20/MemberNamePrefix+Field) |
-| `MemberNameSuffix` | String |  |  | 35% | 9% | The suffix to the member surname (e.g., Esq., Jr., III). | [link](https://ddwiki.reso.org/display/DDW20/MemberNameSuffix+Field) |
-| `MemberNationalAssociationEntryDate` | Date |  |  |  | 1% | The date that the member's record was entered with the National Association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/MemberNationalAssociationEntryDate+Field) |
-| `MemberNationalAssociationId` | String |  |  | 60% | 72% | The national association ID of the member (e.g., in the U.S., this is the NRDS number). | [link](https://ddwiki.reso.org/display/DDW20/MemberNationalAssociationId+Field) |
-| `MemberNickname` | String |  |  | 30% | 9% | An alternate name used by the member, usually as a substitute for the first name. | [link](https://ddwiki.reso.org/display/DDW20/MemberNickname+Field) |
-| `MemberOfficePhone` | String |  |  | 65% | 53% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/MemberOfficePhone+Field) |
-| `MemberOfficePhoneExt` | String |  |  | 40% | 36% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/MemberOfficePhoneExt+Field) |
-| `MemberOtherPhone` | Collection |  |  | 1% | 1% | A collection of the types of other phone fields available for this member. | [link](https://ddwiki.reso.org/display/DDW20/MemberOtherPhone+Field) |
-| `MemberOtherPhoneType` | String List, Single |  | [MemberOtherPhoneType](#memberotherphonetype) | 10% | 1% | The type of "other" phone (e.g., Preferred; Office, Mobile; Direct; Home; Fax; Voicemail; 1, 2, 3; First, Second, Third; etc.). | [link](https://ddwiki.reso.org/display/DDW20/MemberOtherPhoneType+Field) |
-| `MemberPager` | String |  |  | 35% | 17% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/MemberPager+Field) |
-| `MemberPassword` | String |  |  | 20% | 1% | A password that the member wishes to share with other systems. | [link](https://ddwiki.reso.org/display/DDW20/MemberPassword+Field) |
-| `MemberPhoneTTYTDD` | String |  |  | 1% | 1% | TTY/TDD stands for Teletypewriter/Telecommunications Device for the Deaf. | [link](https://ddwiki.reso.org/display/DDW20/MemberPhoneTTYTDD+Field) |
-| `MemberPostalCode` | String |  |  | 75% | 77% | The postal code of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberPostalCode+Field) |
-| `MemberPostalCodePlus4` | String |  |  | 50% | 30% | The four-digit extension of the U.S. | [link](https://ddwiki.reso.org/display/DDW20/MemberPostalCodePlus4+Field) |
-| `MemberPreferredMail` | String List, Single |  | [PreferredMail](#preferredmail) |  |  | The preferred mailing address for the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberPreferredMail+Field) |
-| `MemberPreferredMedia` | String List, Single |  | [PreferredMedia](#preferredmedia) |  |  | The method the member prefers to receive media by (e.g., Email, Mail, Fax). | [link](https://ddwiki.reso.org/display/DDW20/MemberPreferredMedia+Field) |
-| `MemberPreferredPhone` | String |  |  | 70% | 70% | The phone number that the member prefers to be contacted at. | [link](https://ddwiki.reso.org/display/DDW20/MemberPreferredPhone+Field) |
-| `MemberPreferredPhoneExt` | String |  |  | 40% | 29% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/MemberPreferredPhoneExt+Field) |
-| `MemberPreferredPublication` | String List, Single |  | [PreferredPublication](#preferredpublication) |  |  | Indicates where the member would like to receive any publications from the association. | [link](https://ddwiki.reso.org/display/DDW20/MemberPreferredPublication+Field) |
-| `MemberPrimaryAorId` | String |  |  |  | 1% | The primary association of REALTORS® (AOR) associated with the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberPrimaryAorId+Field) |
-| `MemberSocialMedia` | Collection |  |  |  |  | A collection of the types of social media fields available for this member. | [link](https://ddwiki.reso.org/display/DDW20/MemberSocialMedia+Field) |
-| `MemberStateLicense` | String |  |  | 70% | 76% | The license of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberStateLicense+Field) |
-| `MemberStateLicenseExpirationDate` | Date |  |  |  | 0% | The expiration date for the member's license. | [link](https://ddwiki.reso.org/display/DDW20/MemberStateLicenseExpirationDate+Field) |
-| `MemberStateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) | 45% | 9% | The state in which the member is licensed. | [link](https://ddwiki.reso.org/display/DDW20/MemberStateLicenseState+Field) |
-| `MemberStateLicenseType` | String |  |  | 10% | 1% | The license type of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberStateLicenseType+Field) |
-| `MemberStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 75% | 78% | The state or province in which the member is addressed. | [link](https://ddwiki.reso.org/display/DDW20/MemberStateOrProvince+Field) |
-| `MemberStatus` | String List, Single |  | [MemberStatus](#memberstatus) | 70% | 78% | The status of the member's record in the MLS or other organization. | [link](https://ddwiki.reso.org/display/DDW20/MemberStatus+Field) |
-| `MemberTollFreePhone` | String |  |  | 25% | 21% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/MemberTollFreePhone+Field) |
-| `MemberTransferDate` | Date |  |  |  | 3% | The date that the member transferred from one member office to another | [link](https://ddwiki.reso.org/display/DDW20/MemberTransferDate+Field) |
-| `MemberType` | String List, Single |  | [MemberType](#membertype) | 65% | 73% | The type of member. | [link](https://ddwiki.reso.org/display/DDW20/MemberType+Field) |
-| `MemberVoiceMail` | String |  |  | 25% | 2% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/MemberVoiceMail+Field) |
-| `MemberVoiceMailExt` | String |  |  | 15% | 1% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/MemberVoiceMailExt+Field) |
-| `MemberVotingPrecinct` | String |  |  |  |  | The voting precinct of the member. | [link](https://ddwiki.reso.org/display/DDW20/MemberVotingPrecinct+Field) |
-| `ModificationTimestamp` | Timestamp |  |  |  | 98% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135490) |
-| `Office` | Resource |  |  |  |  | The Office resource describes a brokerage office. | [link](https://ddwiki.reso.org/display/DDW20/Office+Field) |
-| `OfficeKey` | String |  |  | 65% | 59% | A system-unique identifier for the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeKey+Field) |
-| `OfficeMlsId` | String |  |  | 60% | 77% | The local, well-known identifier for the office as assigned by the MLS. | [link](https://ddwiki.reso.org/display/DDW20/OfficeMlsId+Field) |
-| `OfficeName` | String |  |  | 50% | 56% | The legal or DBA name of the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficeName+Field) |
-| `OfficeNationalAssociationId` | String |  |  |  | 1% | The national association ID of the office (e.g., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/OfficeNationalAssociationId+Field) |
-| `OriginalEntryTimestamp` | Timestamp |  |  | 50% | 61% | The date/time the roster (member or office) record was originally input into the source system. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135525) |
-| `OriginatingSystem` | Resource |  |  |  |  | The originating system of the Member record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135531) |
-| `OriginatingSystemID` | String |  |  | 45% | 63% | The OUID Resource's OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135536) |
-| `OriginatingSystemMemberKey` | String |  |  | 65% | 76% | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemMemberKey+Field) |
-| `OriginatingSystemName` | String |  |  | 60% | 76% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135548) |
-| `SocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) | 10% | 2% | A list of types of sites, blogs and social media the member URL or ID is referring to (e.g., Website, Blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116963) |
-| `SourceSystem` | Resource |  |  |  |  | The source system of the Member record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135562) |
-| `SourceSystemID` | String |  |  |  | 58% | The OUID Resource's OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135570) |
-| `SourceSystemMemberKey` | String |  |  | 35% | 45% | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemMemberKey+Field) |
-| `SourceSystemName` | String |  |  | 35% | 31% | The name of the immediate record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135581) |
-| `SyndicateTo` | String List, Multi |  | [SyndicateTo](#syndicateto) |  | 2% | When permitted by the broker, the options made by the individual agent on where they would like their listings syndicated (i.e., Zillow, Trulia, Realtor.com, Homes.com, etc.). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135588) |
-| `UniqueLicenseeIdentifier` | String |  |  |  |  | The Unique Licensee Identifier (ULI) represents a single ID for a licensed real estate agent. | [link](https://ddwiki.reso.org/display/DDW20/UniqueLicenseeIdentifier+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/Member/HistoryTransactional/) |
+| `JobTitle` | String |  |  | 5% | The title or position of the member within their organization. | [link](https://dd.reso.org/DD2.0/Member/JobTitle/) |
+| `LastLoginTimestamp` | Timestamp |  |  | 2% | The date/time the member last logged into the source or other system. | [link](https://dd.reso.org/DD2.0/Member/LastLoginTimestamp/) |
+| `Media` | Collection |  |  | 8% | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://dd.reso.org/DD2.0/Member/Media/) |
+| `MemberAOR` | String List, Single |  | AOR | 31% | The member's primary board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Member/MemberAOR/) |
+| `MemberAORMlsId` | String |  |  | 14% | The local, well-known identifier for the member's association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Member/MemberAORMlsId/) |
+| `MemberAORkey` | String |  |  | 13% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Member/MemberAORkey/) |
+| `MemberAddress1` | String |  |  | 91% | The street number, direction, name and suffix of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberAddress1/) |
+| `MemberAddress2` | String |  |  | 83% | The unit/suite number of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberAddress2/) |
+| `MemberAlternateId` | String |  |  | 3% | This is an alternate ID with no specific use. | [link](https://dd.reso.org/DD2.0/Member/MemberAlternateId/) |
+| `MemberAssociationComments` | String |  |  | 11% | The association's notes regarding the member. | [link](https://dd.reso.org/DD2.0/Member/MemberAssociationComments/) |
+| `MemberBillingPreference` | String List, Single |  | [BillingPreference](#billingpreference) |  | The member's preferred method of billing. | [link](https://dd.reso.org/DD2.0/Member/MemberBillingPreference/) |
+| `MemberBio` | String |  |  | 11% | A text field containing biography information for the member record. | [link](https://dd.reso.org/DD2.0/Member/MemberBio/) |
+| `MemberCarrierRoute` | String |  |  | 3% | The group of addresses to which the U.S. | [link](https://dd.reso.org/DD2.0/Member/MemberCarrierRoute/) |
+| `MemberCity` | String |  |  | 94% | The city of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberCity/) |
+| `MemberCommitteeCount` | Number |  |  |  | The number of current/active committees in which the member belongs. | [link](https://dd.reso.org/DD2.0/Member/MemberCommitteeCount/) |
+| `MemberCountry` | String List, Single |  | [Country](#country) | 31% | The country abbreviation in a postal address. | [link](https://dd.reso.org/DD2.0/Member/MemberCountry/) |
+| `MemberCountyOrParish` | String List, Single |  | CountyOrParish | 5% | The county or parish in which the member is addressed. | [link](https://dd.reso.org/DD2.0/Member/MemberCountyOrParish/) |
+| `MemberDesignation` | String List, Multi |  | [MemberDesignation](#memberdesignation) | 49% | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® and each affiliated group upon completion of … | [link](https://dd.reso.org/DD2.0/Member/MemberDesignation/) |
+| `MemberDirectPhone` | String |  |  | 33% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Member/MemberDirectPhone/) |
+| `MemberEmail` | String |  |  | 98% | The email address of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberEmail/) |
+| `MemberFax` | String |  |  | 72% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Member/MemberFax/) |
+| `MemberFirstName` | String |  |  | 99% | The first name of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberFirstName/) |
+| `MemberFullName` | String |  |  | 92% | The full name of the member - first middle last suffix. | [link](https://dd.reso.org/DD2.0/Member/MemberFullName/) |
+| `MemberHomePhone` | String |  |  | 52% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Member/MemberHomePhone/) |
+| `MemberIsAssistantTo` | String |  |  | 3% | The MemberMlsId of the agent/broker that this member assists. | [link](https://dd.reso.org/DD2.0/Member/MemberIsAssistantTo/) |
+| `MemberKey` | String |  |  | 97% | A system-unique identifier for the member. | [link](https://dd.reso.org/DD2.0/Member/MemberKey/) |
+| `MemberLanguages` | String List, Multi |  | [Languages](#languages) | 46% | The languages the member speaks. | [link](https://dd.reso.org/DD2.0/Member/MemberLanguages/) |
+| `MemberLastName` | String |  |  | 98% | The last name of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberLastName/) |
+| `MemberLoginId` | String |  |  | 56% | The ID used to log on to the MLS system. | [link](https://dd.reso.org/DD2.0/Member/MemberLoginId/) |
+| `MemberMailOptOutYN` | Boolean |  |  |  | Indicates whether or not the member has opted out of receiving solicitation via mail. | [link](https://dd.reso.org/DD2.0/Member/MemberMailOptOutYN/) |
+| `MemberMiddleName` | String |  |  | 77% | The middle name of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberMiddleName/) |
+| `MemberMlsAccessYN` | Boolean |  |  | 21% | Indicates whether or not the member has access to the MLS system. | [link](https://dd.reso.org/DD2.0/Member/MemberMlsAccessYN/) |
+| `MemberMlsId` | String |  |  | 96% | The local, well-known identifier for the member as assigned by the MLS. | [link](https://dd.reso.org/DD2.0/Member/MemberMlsId/) |
+| `MemberMlsSecurityClass` | String List, Single |  | MemberMlsSecurityClass | 47% | The MLS security group or class given to the member. | [link](https://dd.reso.org/DD2.0/Member/MemberMlsSecurityClass/) |
+| `MemberMobilePhone` | String |  |  | 88% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Member/MemberMobilePhone/) |
+| `MemberNamePrefix` | String |  |  | 15% | The prefix to the member name (e.g., Dr., Mr., Ms.). | [link](https://dd.reso.org/DD2.0/Member/MemberNamePrefix/) |
+| `MemberNameSuffix` | String |  |  | 20% | The suffix to the member surname (e.g., Esq., Jr., III). | [link](https://dd.reso.org/DD2.0/Member/MemberNameSuffix/) |
+| `MemberNationalAssociationEntryDate` | Date |  |  | 1% | The date that the member's record was entered with the National Association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Member/MemberNationalAssociationEntryDate/) |
+| `MemberNationalAssociationId` | String |  |  | 91% | The national association ID of the member (e.g., in the U.S., this is the NRDS number). | [link](https://dd.reso.org/DD2.0/Member/MemberNationalAssociationId/) |
+| `MemberNickname` | String |  |  | 21% | An alternate name used by the member, usually as a substitute for the first name. | [link](https://dd.reso.org/DD2.0/Member/MemberNickname/) |
+| `MemberOfficePhone` | String |  |  | 68% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Member/MemberOfficePhone/) |
+| `MemberOfficePhoneExt` | String |  |  | 45% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Member/MemberOfficePhoneExt/) |
+| `MemberOtherPhone` | Collection |  |  | 0% | A collection of the types of other phone fields available for this member. | [link](https://dd.reso.org/DD2.0/Member/MemberOtherPhone/) |
+| `MemberOtherPhoneType` | String List, Single |  | [MemberOtherPhoneType](#memberotherphonetype) | 1% | The type of "other" phone (e.g., Preferred; Office, Mobile; Direct; Home; Fax; Voicemail; 1, 2, 3; First, Second, Third; etc.). | [link](https://dd.reso.org/DD2.0/Member/MemberOtherPhoneType/) |
+| `MemberPager` | String |  |  | 24% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Member/MemberPager/) |
+| `MemberPassword` | String |  |  | 2% | A password that the member wishes to share with other systems. | [link](https://dd.reso.org/DD2.0/Member/MemberPassword/) |
+| `MemberPhoneTTYTDD` | String |  |  |  | TTY/TDD stands for Teletypewriter/Telecommunications Device for the Deaf. | [link](https://dd.reso.org/DD2.0/Member/MemberPhoneTTYTDD/) |
+| `MemberPostalCode` | String |  |  | 94% | The postal code of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberPostalCode/) |
+| `MemberPostalCodePlus4` | String |  |  | 43% | The four-digit extension of the U.S. | [link](https://dd.reso.org/DD2.0/Member/MemberPostalCodePlus4/) |
+| `MemberPreferredMail` | String List, Single |  | [PreferredMail](#preferredmail) |  | The preferred mailing address for the member. | [link](https://dd.reso.org/DD2.0/Member/MemberPreferredMail/) |
+| `MemberPreferredMedia` | String List, Single |  | [PreferredMedia](#preferredmedia) |  | The method the member prefers to receive media by (e.g., Email, Mail, Fax). | [link](https://dd.reso.org/DD2.0/Member/MemberPreferredMedia/) |
+| `MemberPreferredPhone` | String |  |  | 85% | The phone number that the member prefers to be contacted at. | [link](https://dd.reso.org/DD2.0/Member/MemberPreferredPhone/) |
+| `MemberPreferredPhoneExt` | String |  |  | 38% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Member/MemberPreferredPhoneExt/) |
+| `MemberPreferredPublication` | String List, Single |  | [PreferredPublication](#preferredpublication) |  | Indicates where the member would like to receive any publications from the association. | [link](https://dd.reso.org/DD2.0/Member/MemberPreferredPublication/) |
+| `MemberPrimaryAorId` | String |  |  | 1% | The primary association of REALTORS® (AOR) associated with the member. | [link](https://dd.reso.org/DD2.0/Member/MemberPrimaryAorId/) |
+| `MemberSocialMedia` | Collection |  |  |  | A collection of the types of social media fields available for this member. | [link](https://dd.reso.org/DD2.0/Member/MemberSocialMedia/) |
+| `MemberStateLicense` | String |  |  | 92% | The license of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberStateLicense/) |
+| `MemberStateLicenseExpirationDate` | Date |  |  | 0% | The expiration date for the member's license. | [link](https://dd.reso.org/DD2.0/Member/MemberStateLicenseExpirationDate/) |
+| `MemberStateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) | 16% | The state in which the member is licensed. | [link](https://dd.reso.org/DD2.0/Member/MemberStateLicenseState/) |
+| `MemberStateLicenseType` | String |  |  | 3% | The license type of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberStateLicenseType/) |
+| `MemberStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 95% | The state or province in which the member is addressed. | [link](https://dd.reso.org/DD2.0/Member/MemberStateOrProvince/) |
+| `MemberStatus` | String List, Single |  | [MemberStatus](#memberstatus) | 93% | The status of the member's record in the MLS or other organization. | [link](https://dd.reso.org/DD2.0/Member/MemberStatus/) |
+| `MemberTollFreePhone` | String |  |  | 24% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Member/MemberTollFreePhone/) |
+| `MemberTransferDate` | Date |  |  | 3% | The date that the member transferred from one member office to another | [link](https://dd.reso.org/DD2.0/Member/MemberTransferDate/) |
+| `MemberType` | String List, Single |  | [MemberType](#membertype) | 88% | The type of member. | [link](https://dd.reso.org/DD2.0/Member/MemberType/) |
+| `MemberVoiceMail` | String |  |  | 3% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Member/MemberVoiceMail/) |
+| `MemberVoiceMailExt` | String |  |  | 1% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Member/MemberVoiceMailExt/) |
+| `MemberVotingPrecinct` | String |  |  |  | The voting precinct of the member. | [link](https://dd.reso.org/DD2.0/Member/MemberVotingPrecinct/) |
+| `ModificationTimestamp` | Timestamp |  |  | 98% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Member/ModificationTimestamp/) |
+| `Office` | Resource |  |  |  | The Office resource describes a brokerage office. | [link](https://dd.reso.org/DD2.0/Member/Office/) |
+| `OfficeKey` | String |  |  | 76% | A system-unique identifier for the office. | [link](https://dd.reso.org/DD2.0/Member/OfficeKey/) |
+| `OfficeMlsId` | String |  |  | 94% | The local, well-known identifier for the office as assigned by the MLS. | [link](https://dd.reso.org/DD2.0/Member/OfficeMlsId/) |
+| `OfficeName` | String |  |  | 73% | The legal or DBA name of the office. | [link](https://dd.reso.org/DD2.0/Member/OfficeName/) |
+| `OfficeNationalAssociationId` | String |  |  | 1% | The national association ID of the office (e.g., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Member/OfficeNationalAssociationId/) |
+| `OriginalEntryTimestamp` | Timestamp |  |  | 74% | The date/time the roster (member or office) record was originally input into the source system. | [link](https://dd.reso.org/DD2.0/Member/OriginalEntryTimestamp/) |
+| `OriginatingSystem` | Resource |  |  |  | The originating system of the Member record. | [link](https://dd.reso.org/DD2.0/Member/OriginatingSystem/) |
+| `OriginatingSystemID` | String |  |  | 72% | The OUID Resource's OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Member/OriginatingSystemID/) |
+| `OriginatingSystemMemberKey` | String |  |  | 87% | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Member/OriginatingSystemMemberKey/) |
+| `OriginatingSystemName` | String |  |  | 92% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Member/OriginatingSystemName/) |
+| `SocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) | 2% | A list of types of sites, blogs and social media the member URL or ID is referring to (e.g., Website, Blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://dd.reso.org/DD2.0/Member/SocialMediaType/) |
+| `SourceSystem` | Resource |  |  |  | The source system of the Member record. | [link](https://dd.reso.org/DD2.0/Member/SourceSystem/) |
+| `SourceSystemID` | String |  |  | 58% | The OUID Resource's OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Member/SourceSystemID/) |
+| `SourceSystemMemberKey` | String |  |  | 57% | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/Member/SourceSystemMemberKey/) |
+| `SourceSystemName` | String |  |  | 40% | The name of the immediate record provider. | [link](https://dd.reso.org/DD2.0/Member/SourceSystemName/) |
+| `SyndicateTo` | String List, Multi |  | [SyndicateTo](#syndicateto) | 2% | When permitted by the broker, the options made by the individual agent on where they would like their listings syndicated (i.e., Zillow, Trulia, Realtor.com, Homes.com, etc.). | [link](https://dd.reso.org/DD2.0/Member/SyndicateTo/) |
+| `UniqueLicenseeIdentifier` | String |  |  |  | The Unique Licensee Identifier (ULI) represents a single ID for a licensed real estate agent. | [link](https://dd.reso.org/DD2.0/Member/UniqueLicenseeIdentifier/) |
 
 ## Field details
 
@@ -106,28 +108,38 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 11 2020
-  - **Revision Date:** JAN 11 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/11/2020
+  - **Revision Date:** 1/11/2020
   - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>JobTitle</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Cargo
+  - **French-Canadian Name:** Titre de poste
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LastLoginTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Último Ingreso
   - **French-Canadian Name:** Heure et date de la dernière session
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Media</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 12 2020
-  - **Revision Date:** JAN 12 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/12/2020
+  - **Revision Date:** 1/12/2020
   - **Added in Version:** 1.7.0
 
 </details>
@@ -135,103 +147,121 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>MemberAOR</code></summary>
 
   - **BEDES:** Contact Label = "Association of Realtors" Company Name = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Miembro de AOR
   - **French-Canadian Name:** Chambre/association du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberAORMlsId</code></summary>
 
   - **BEDES:** Contact Label = "Association of Realtors" Identifier = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Miembro de AOR
   - **French-Canadian Name:** ID MLS de la chambre/association du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberAORkey</code></summary>
 
   - **BEDES:** Contact Label = "Association of Realtors" Subaddress Type = "Key" Identifier = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Miembro de AOR
   - **French-Canadian Name:** Clé de la chambre/association du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberAddress1</code></summary>
 
   - **BEDES:** Address Line 1 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de Miembro 1
   - **French-Canadian Name:** Adresse du membre 1
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberAddress2</code></summary>
 
   - **BEDES:** Address Line 2 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de Miembro 2
   - **French-Canadian Name:** Adresse du membre 2
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberAlternateId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberAssociationComments</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios de Asociación de Miembro
   - **French-Canadian Name:** Remarques de l’association sur le membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>MemberBillingPreference</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/4/2023
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>MemberBio</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 4/18/2023
+  - **Revision Date:** 4/18/2023
+  - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberCarrierRoute</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ruta Transportista de Miembro
   - **French-Canadian Name:** Itinéraire de transport du membre
-  - **Status Change Date:** JAN 17 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 1/17/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberCity</code></summary>
 
   - **BEDES:** City = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ciudad de Miembro
   - **French-Canadian Name:** Ville du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberCommitteeCount</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -239,311 +269,370 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>MemberCountry</code></summary>
 
   - **BEDES:** Country Name = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** País de Miembro
   - **French-Canadian Name:** Pays du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberCountyOrParish</code></summary>
 
   - **BEDES:** County = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Condado o Distrito de Miembro
   - **French-Canadian Name:** Comté ou paroisse du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>MemberDesignation</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Denominación de Miembro
+  - **French-Canadian Name:** Titre professionnel du membre
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>MemberDirectPhone</code></summary>
 
   - **BEDES:** Telephone Number Label = "Direct" Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Directo de Miembro
   - **French-Canadian Name:** Numéro de téléphone du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberEmail</code></summary>
 
   - **BEDES:** Email Address = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Miembro
   - **French-Canadian Name:** Courriel du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberFax</code></summary>
 
   - **BEDES:** Telephone Number Label = "Fax" Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax de Miembro
   - **French-Canadian Name:** Numéro de télécopieur du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberFirstName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Miembro
   - **French-Canadian Name:** Prénom du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberFullName</code></summary>
 
   - **BEDES:** Full Name = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Completo de Miembro
   - **French-Canadian Name:** Nom au complet du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberHomePhone</code></summary>
 
   - **BEDES:** Telephone Number Label = "Home" Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Casa de Miembro
   - **French-Canadian Name:** Numéro de téléphone du domicile du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>MemberIsAssistantTo</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** El Miembro Asiste a
+  - **French-Canadian Name:** Le membre est l’adjoint de
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>MemberKey</code></summary>
 
   - **BEDES:** Subaddress Type = "Key" Identifier = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Miembro
   - **French-Canadian Name:** Clé du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JAN 09 2022
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 1/9/2022
 
 </details>
 
 <details><summary><code>MemberLanguages</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Idiomas de Miembro
   - **French-Canadian Name:** Langues du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberLastName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Apellido de Miembro
   - **French-Canadian Name:** Nom de famille du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberLoginId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Inicio de Miembro
   - **French-Canadian Name:** ID de connexion du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberMailOptOutYN</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberMiddleName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Segundo Nombre de Miembro
   - **French-Canadian Name:** Deuxième prénom du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>MemberMlsAccessYN</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Acceso a MLS de Miembro SN
+  - **French-Canadian Name:** Accès du membre au MLS O/N
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberMlsId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Miembro
   - **French-Canadian Name:** ID MLS du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberMlsSecurityClass</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clase de Seguridad de MLS de Miembro
   - **French-Canadian Name:** Classe de sécurité MLS du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberMobilePhone</code></summary>
 
   - **BEDES:** Telephone Number Label = "Mobile" Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Móvil de Miembro
   - **French-Canadian Name:** Numéro de cellulaire du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>MemberNamePrefix</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Prefijo Nombre de Miembro
+  - **French-Canadian Name:** Titre de civilité du membre
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberNameSuffix</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sufijo Nombre de Miembro
   - **French-Canadian Name:** Suffixe du nom du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>MemberNationalAssociationEntryDate</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberNationalAssociationId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Asociación Nacional de Miembro
   - **French-Canadian Name:** ID de l’association nationale du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberNickname</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Apodo de Miembro
   - **French-Canadian Name:** Surnom du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberOfficePhone</code></summary>
 
   - **BEDES:** Telephone Number Label = "Work" Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Despacho de Miembro
   - **French-Canadian Name:** Numéro de téléphone du bureau du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberOfficePhoneExt</code></summary>
 
   - **BEDES:** Telephone Number Label = "Work" Telephone Extension = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Teléfono de Despacho de Miembro
   - **French-Canadian Name:** Poste téléphonique du bureau du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberOtherPhone</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **French-Canadian Name:** Autre numéro de téléphone du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>MemberOtherPhoneType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro Tipo de Teléfono de Miembro
   - **French-Canadian Name:** Type de l’autre numéro de téléphone du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** APR 11 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>MemberPager</code></summary>
 
   - **BEDES:** Telephone Number Label = "Pager" Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buscapersonas de Miembro
   - **French-Canadian Name:** Téléavertisseur du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberPassword</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Contraseña de Miembro
   - **French-Canadian Name:** Mot de passe du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberPhoneTTYTDD</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono TTYTDD de Miembro
   - **French-Canadian Name:** Numéro de l’ATME/ATS du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberPostalCode</code></summary>
 
   - **BEDES:** ZIP Code = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal de Miembro
   - **French-Canadian Name:** Code postal du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberPostalCodePlus4</code></summary>
 
   - **BEDES:** ZIP Plus 4 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal Más 4 de Miembro
   - **French-Canadian Name:** Code postal du membre +4
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberPreferredMail</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>MemberPreferredMedia</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -551,59 +640,69 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>MemberPreferredPhone</code></summary>
 
   - **BEDES:** Priority = "Primary" Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Preferido de Miembro
   - **French-Canadian Name:** Numéro de téléphone préféré du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberPreferredPhoneExt</code></summary>
 
   - **BEDES:** Priority = "Primary" Telephone Extension = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Teléfono Preferido de Miembro
   - **French-Canadian Name:** Poste téléphonique du numéro préféré du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberPreferredPublication</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberPrimaryAorId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>MemberSocialMedia</code></summary>
+
+  - **Status:** Active
+  - **French-Canadian Name:** Médias sociaux du membre
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>MemberStateLicense</code></summary>
 
   - **BEDES:** Credential = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia Estatal de Miembro
   - **French-Canadian Name:** Permis du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberStateLicenseExpirationDate</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -611,19 +710,19 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>MemberStateLicenseState</code></summary>
 
   - **BEDES:** Credential State = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Licencia Estatal de Miembro
   - **French-Canadian Name:** État ou province de délivrance du permis du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberStateLicenseType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -631,126 +730,137 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>MemberStateOrProvince</code></summary>
 
   - **BEDES:** State = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado o Provincia de Miembro
   - **French-Canadian Name:** État ou province du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberStatus</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Miembro
   - **French-Canadian Name:** Statut du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberTollFreePhone</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Gratuito de Miembro
   - **French-Canadian Name:** Numéro de téléphone sans frais du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberTransferDate</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Miembro
   - **French-Canadian Name:** Type de membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberVoiceMail</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buzón de Voz de Miembro
   - **French-Canadian Name:** Boîte vocale du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberVoiceMailExt</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Buzón de Voz de Miembro
   - **French-Canadian Name:** Poste téléphonique de la boîte vocale du membre
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MemberVotingPrecinct</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>ModificationTimestamp</code></summary>
+
+  - **BEDES:** Date Status = "Modified" Date = [value]
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo de Modificación
+  - **French-Canadian Name:** Heure et date de la modification
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Office</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2020
-  - **Revision Date:** JAN 06 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2020
+  - **Revision Date:** 1/6/2020
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OfficeKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Despacho
   - **French-Canadian Name:** Clé du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeMlsId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Despacho Enlistado
   - **French-Canadian Name:** ID MLS du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Despacho
   - **French-Canadian Name:** Nom du bureau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OfficeNationalAssociationId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2020
-  - **Revision Date:** JAN 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 1/17/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -758,100 +868,122 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>OriginalEntryTimestamp</code></summary>
 
   - **BEDES:** Date Status = "Created"Date = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Entrada Original
   - **French-Canadian Name:** Date et heure de l’entrée originale
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OriginatingSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 07 2020
-  - **Revision Date:** JAN 07 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/7/2020
+  - **Revision Date:** 1/7/2020
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OriginatingSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Sistema de Origen
   - **French-Canadian Name:** ID du système d’origine
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OriginatingSystemMemberKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Miembro Sistema de Origen
   - **French-Canadian Name:** Clé du système d’origine du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OriginatingSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Sistema de Origen
   - **French-Canadian Name:** Nom du système d’origine
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>SocialMediaType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Redes Sociales
   - **French-Canadian Name:** Type de médias sociaux
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** APR 11 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>SourceSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 08 2020
-  - **Revision Date:** JAN 08 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/8/2020
+  - **Revision Date:** 1/8/2020
   - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>SourceSystemID</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** ID Sistema Fuente
+  - **French-Canadian Name:** ID du système source
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemMemberKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Miembro Sistema Fuente
   - **French-Canadian Name:** Clé du système source du membre
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Sistema Fuente
   - **French-Canadian Name:** Nom du système source
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>SyndicateTo</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Redifundir a
+  - **French-Canadian Name:** Afficher sur
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/27/2026
+  - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>UniqueLicenseeIdentifier</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** OCT 24 2020
-  - **Revision Date:** OCT 24 2020
+  - **Status:** Active
+  - **Status Change Date:** 10/24/2020
+  - **Revision Date:** 10/24/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -860,6 +992,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### BillingPreference
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/BillingPreference/)
+
 | Value | Definition |
 |---|---|
 | `Email` | Send billing to the member's email address. |
@@ -867,6 +1001,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Mail` | Send billing to the member via postal mail. |
 
 ### Country
+
+246 values · used by 12 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Country/)
 
 | Value | Definition |
 |---|---|
@@ -1119,6 +1255,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Languages
 
+190 values · used by 3 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Languages/)
+
 | Value | Definition |
 |---|---|
 | `Abkhazian` | The language spoken by the member/individual is Abkhazian. |
@@ -1314,6 +1452,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### MemberDesignation
 
+27 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/MemberDesignation/)
+
 | Value | Definition |
 |---|---|
 | `Accredited Buyer's Representative / ABR` | The Accredited Buyer’s Representative (ABR®) designation is designed for real estate buyer agents who focus on working directly with buyer-clients. |
@@ -1346,6 +1486,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### MemberOtherPhoneType
 
+14 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/MemberOtherPhoneType/)
+
 | Value | Definition |
 |---|---|
 | `Direct` | This direct number of the member. |
@@ -1365,12 +1507,16 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### MemberStatus
 
+2 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/MemberStatus/)
+
 | Value | Definition |
 |---|---|
 | `Active` | The member's account is active. |
 | `Inactive` | the member's account is not active. |
 
 ### MemberType
+
+19 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/MemberType/)
 
 | Value | Definition |
 |---|---|
@@ -1396,6 +1542,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### PreferredMail
 
+4 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PreferredMail/)
+
 | Value | Definition |
 |---|---|
 | `Home Address` | Send mail to the home address. |
@@ -1405,6 +1553,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### PreferredMedia
 
+3 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PreferredMedia/)
+
 | Value | Definition |
 |---|---|
 | `Email` | Send media via email. |
@@ -1412,6 +1562,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Mail` | Send media via postal mail. |
 
 ### PreferredPublication
+
+5 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PreferredPublication/)
 
 | Value | Definition |
 |---|---|
@@ -1422,6 +1574,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Office Street Address` | Send publications to the office street address. |
 
 ### SocialMediaType
+
+17 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SocialMediaType/)
 
 | Value | Definition |
 |---|---|
@@ -1444,6 +1598,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `YouTube` | Information pertaining to the YouTube account of the member/office/contact. |
 
 ### StateOrProvince
+
+65 values · used by 19 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StateOrProvince/)
 
 | Value | Definition |
 |---|---|
@@ -1514,6 +1670,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `YT` | The Canadian territory in which the listing is located is Yukon. |
 
 ### SyndicateTo
+
+4 values · used by 3 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SyndicateTo/)
 
 | Value | Definition |
 |---|---|

@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
-"""Scrape DDwiki for per-field structured metadata + usage stats.
+"""Scrape dd.reso.org per-Field pages -> raw/field_metadata.csv.
 
-For every row in raw/fields.csv we GET the field's DDwiki page
-(WikiPageUrl column already in fields.csv) and parse the structured
-key/value block + the Usage footer ("XX% of Systems (n/N)" /
-"XX% of Organizations (n/N)") into one row of
-raw/field_metadata.csv.
+Source: https://dd.reso.org/DD2.0/<Resource>/<Field>/
 
-Output columns (locked by reso-dd-kb plan):
+For every row in raw/fields.csv we GET the field's dd.reso.org page and
+parse the two structured KV tables under '## Details' plus the '## Usage'
+adoption block.
+
+Output columns (rewritten from dd.reso.org; the old DDwiki SysPct family
+is gone because dd.reso.org no longer publishes a per-system breakdown):
+
     Resource, Field, StandardName, DisplayName, Group, DataType,
-    MaxLength, MaxPrecision, Synonyms, FieldStatus, BEDES, RecordID,
-    LookupStatus, Lookup, PropertyTypes, Payloads, SpanishName,
-    FrenchCanadianName, StatusChangeDate, RevisionDate,
-    AddedInVersion, SysPct, SysAdopted, SysTotal, OrgPct,
-    OrgAdopted, OrgTotal, WikiURL, LastModified, FetchedAt
+    MaxLength, MaxPrecision, Synonyms, FieldStatus, BEDES, Lookup,
+    LookupStatus, PropertyTypes, Payloads, SpanishName,
+    FrenchCanadianName, StatusChangeDate, RevisionDate, AddedInVersion,
+    SourceResource, OrgPct, OrgAdopted, OrgTotal, SourceUrl, FetchedAt
 
 Politeness:
   * 5 concurrent connections max (ThreadPoolExecutor)
@@ -21,8 +22,7 @@ Politeness:
   * If-Modified-Since header from previous FetchedAt when the row exists
   * Exponential backoff on 429 / 503
 
-Usage:
-    python3 reso-dd-kb/scripts/fetch_field_metadata.py
+Run: python3 reso-dd-kb/scripts/fetch_field_metadata.py
 """
 from __future__ import annotations
 
@@ -32,8 +32,9 @@ import re
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from email.utils import formatdate, parsedate_to_datetime
+from email.utils import formatdate
 from pathlib import Path
+from urllib.parse import quote
 
 import requests
 from bs4 import BeautifulSoup
@@ -43,6 +44,8 @@ RAW = ROOT / "raw"
 FIELDS_CSV = RAW / "fields.csv"
 OUT_CSV = RAW / "field_metadata.csv"
 
+SOURCE = "dd.reso.org/DD2.0"
+URL_TMPL = "https://dd.reso.org/DD2.0/{resource}/{field}/"
 UA = "matrix-platform-kb/1.0 (+https://github.com/sharpsir-group/matrix-platform-kb)"
 WORKERS = 5
 GAP_MS = 100
@@ -51,43 +54,50 @@ MAX_RETRIES = 4
 
 COLS = [
     "Resource", "Field", "StandardName", "DisplayName", "Group", "DataType",
-    "MaxLength", "MaxPrecision", "Synonyms", "FieldStatus", "BEDES", "RecordID",
-    "LookupStatus", "Lookup", "PropertyTypes", "Payloads", "SpanishName",
+    "MaxLength", "MaxPrecision", "Synonyms", "FieldStatus", "BEDES", "Lookup",
+    "LookupStatus", "PropertyTypes", "Payloads", "SpanishName",
     "FrenchCanadianName", "StatusChangeDate", "RevisionDate", "AddedInVersion",
-    "SysPct", "SysAdopted", "SysTotal", "OrgPct", "OrgAdopted", "OrgTotal",
-    "WikiURL", "LastModified", "FetchedAt",
+    "SourceResource", "OrgPct", "OrgAdopted", "OrgTotal", "SourceUrl", "FetchedAt",
 ]
 
-# canonical -> (display labels we accept on DDwiki)
-LABELS = {
-    "DisplayName": ["Display Name"],
-    "Group": ["Group"],
-    "DataType": ["Data Type"],
-    "MaxLength": ["Suggested Maximum Length"],
-    "MaxPrecision": ["Suggested Maximum Precision"],
-    "Synonyms": ["Synonyms(s)", "Synonyms"],
-    "FieldStatus": ["Field (Element) Status"],
-    "BEDES": ["BEDES"],
-    "RecordID": ["Record ID"],
-    "LookupStatus": ["Lookup Status"],
-    "Lookup": ["Lookup"],
-    "PropertyTypes": ["Property Types"],
-    "Payloads": ["Payloads"],
-    "SpanishName": ["Spanish Name"],
-    "FrenchCanadianName": ["French-Canadian Name"],
-    "StatusChangeDate": ["Status Change Date"],
-    "RevisionDate": ["Revision Date"],
-    "AddedInVersion": ["Added in Version"],
-}
-
-H2_LABELS = {
-    "StandardName": ["Standard Name"],
+# dd.reso.org left-cell label -> output column.
+# Both Detail tables on a field page render under the same key/value shape;
+# we walk every <tr> across every <table> on the page and bucket by label.
+LABEL_MAP: dict[str, str] = {
+    "standard name": "StandardName",
+    "display name": "DisplayName",
+    "group": "Group",
+    "simple data type": "DataType",
+    "max length suggested": "MaxLength",
+    "max precision suggested": "MaxPrecision",
+    "synonyms": "Synonyms",
+    "status": "FieldStatus",
+    "bedes": "BEDES",
+    "lookup status": "LookupStatus",
+    "lookup": "Lookup",
+    "property types": "PropertyTypes",
+    "payloads": "Payloads",
+    "spanish name": "SpanishName",
+    "french-canadian name": "FrenchCanadianName",
+    "status change date": "StatusChangeDate",
+    "revised date": "RevisionDate",
+    "added in version": "AddedInVersion",
+    "source resource": "SourceResource",
 }
 
 USAGE_RE = re.compile(
-    r"(\d+)\s*%\s*of\s*(Systems|Organizations)\s*\((\d+)\s*/\s*(\d+)\)",
-    re.IGNORECASE,
+    r"Adoption\s+(\d+)\s*%\s+(\d+)\s+of\s+(\d+)\s+Organizations?",
+    re.I,
 )
+
+DASH_TOKENS = {"--", "—", "-", "N/A", "n/a", ""}
+
+
+def normalize(v: str) -> str:
+    s = (v or "").strip()
+    if s in DASH_TOKENS:
+        return ""
+    return re.sub(r"\s+", " ", s)
 
 
 def load_fields() -> list[dict]:
@@ -102,67 +112,6 @@ def load_existing() -> dict[tuple[str, str], dict]:
         return {(r["Resource"], r["Field"]): r for r in csv.DictReader(f)}
 
 
-def parse_kv_strong(soup: BeautifulSoup) -> dict[str, str]:
-    """Pull `<strong>Key: </strong>Value` and the H2 Standard Name block."""
-    out: dict[str, str] = {}
-    seen: dict[str, str] = {}
-
-    for strong in soup.select("strong"):
-        label = (strong.get_text() or "").strip().rstrip(":").strip()
-        if not label:
-            continue
-        parent = strong.parent
-        if parent is None:
-            continue
-        text = parent.get_text(" ", strip=True)
-        if ":" in text:
-            value = text.split(":", 1)[1].strip()
-        else:
-            value = text.replace(label, "", 1).strip()
-        seen.setdefault(label, value)
-
-    for canon, aliases in LABELS.items():
-        for alias in aliases:
-            if alias in seen:
-                out[canon] = seen[alias]
-                break
-
-    for canon, aliases in H2_LABELS.items():
-        for alias in aliases:
-            for h2 in soup.select("h2"):
-                t = h2.get_text(" ", strip=True)
-                if t.startswith(alias):
-                    out[canon] = t.split(":", 1)[-1].strip() if ":" in t else t.replace(alias, "").strip()
-                    break
-            if canon in out:
-                break
-
-    return out
-
-
-def parse_usage(soup: BeautifulSoup) -> dict[str, str]:
-    out = {"SysPct": "", "SysAdopted": "", "SysTotal": "",
-           "OrgPct": "", "OrgAdopted": "", "OrgTotal": ""}
-    text = soup.get_text(" ", strip=True)
-    for m in USAGE_RE.finditer(text):
-        pct, kind, n, total = m.group(1), m.group(2).lower(), m.group(3), m.group(4)
-        if kind.startswith("system"):
-            out["SysPct"], out["SysAdopted"], out["SysTotal"] = pct, n, total
-        elif kind.startswith("organi"):
-            out["OrgPct"], out["OrgAdopted"], out["OrgTotal"] = pct, n, total
-    return out
-
-
-def normalize_dashes(v: str) -> str:
-    """DDwiki uses '--' for empty / not-applicable; normalize to ''."""
-    if v is None:
-        return ""
-    s = v.strip()
-    if s in ("--", "—", "-", "N/A", "n/a"):
-        return ""
-    return s
-
-
 def http_get(session: requests.Session, url: str, prev_fetched_at: str | None) -> requests.Response | None:
     headers: dict[str, str] = {}
     if prev_fetched_at:
@@ -171,9 +120,8 @@ def http_get(session: requests.Session, url: str, prev_fetched_at: str | None) -
             headers["If-Modified-Since"] = formatdate(d.timestamp(), usegmt=True)
         except Exception:
             pass
-
     delay = 1.0
-    for attempt in range(MAX_RETRIES):
+    for _ in range(MAX_RETRIES):
         try:
             r = session.get(url, headers=headers, timeout=TIMEOUT)
             if r.status_code in (429, 503):
@@ -187,20 +135,28 @@ def http_get(session: requests.Session, url: str, prev_fetched_at: str | None) -
     return None
 
 
-def parse_last_modified(html: str, headers: dict) -> str:
-    h = headers.get("Last-Modified") or ""
-    if h:
-        try:
-            return parsedate_to_datetime(h).date().isoformat()
-        except Exception:
-            pass
-    m = re.search(r"last modified on\s*<a[^>]*>([^<]+)</a>", html, re.I)
-    if m:
-        try:
-            return dt.datetime.strptime(m.group(1).strip(), "%b %d, %Y").date().isoformat()
-        except Exception:
-            return m.group(1).strip()
-    return ""
+def parse_kv(soup: BeautifulSoup) -> dict[str, str]:
+    """Walk every <tr> across all <table>s, bucket by left-cell label."""
+    out: dict[str, str] = {}
+    for table in soup.find_all("table"):
+        for tr in table.find_all("tr"):
+            cells = tr.find_all(["th", "td"])
+            if len(cells) < 2:
+                continue
+            label = cells[0].get_text(" ", strip=True).lower()
+            value = cells[1].get_text(" ", strip=True)
+            col = LABEL_MAP.get(label)
+            if col and col not in out:
+                out[col] = value
+    return out
+
+
+def parse_usage(soup: BeautifulSoup) -> tuple[str, str, str]:
+    text = soup.get_text(" ", strip=True)
+    m = USAGE_RE.search(text)
+    if not m:
+        return "", "", ""
+    return m.group(1), m.group(2), m.group(3)
 
 
 def fetch_one(session: requests.Session,
@@ -208,42 +164,37 @@ def fetch_one(session: requests.Session,
               existing: dict[tuple[str, str], dict]) -> dict:
     resource = row.get("ResourceName", "")
     field = row.get("StandardName", "")
-    url = (row.get("WikiPageUrl") or "").strip()
+    url = URL_TMPL.format(resource=quote(resource, safe=""),
+                          field=quote(field, safe=""))
     out = {c: "" for c in COLS}
     out["Resource"] = resource
     out["Field"] = field
-    out["WikiURL"] = url
-
-    if not url:
-        return out
+    out["StandardName"] = field
+    out["SourceUrl"] = url
 
     prev = existing.get((resource, field), {})
     r = http_get(session, url, prev.get("FetchedAt"))
 
     if r is None:
-        if prev:
-            return prev
-        return out
-
+        return prev or out
     if r.status_code == 304 and prev:
+        prev = dict(prev)
         prev["FetchedAt"] = dt.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
         return prev
-
     if r.status_code != 200:
-        if prev:
-            return prev
-        return out
+        if r.status_code != 404:
+            print(f"  WARN {resource}.{field}: HTTP {r.status_code}", file=sys.stderr)
+        return prev or out
 
     soup = BeautifulSoup(r.text, "html.parser")
-
-    kv = parse_kv_strong(soup)
-    for k, v in kv.items():
-        out[k] = normalize_dashes(v)
+    kv = parse_kv(soup)
+    for col, val in kv.items():
+        out[col] = normalize(val)
     if not out["StandardName"]:
         out["StandardName"] = field
 
-    out.update(parse_usage(soup))
-    out["LastModified"] = parse_last_modified(r.text, r.headers)
+    pct, n, total = parse_usage(soup)
+    out["OrgPct"], out["OrgAdopted"], out["OrgTotal"] = pct, n, total
     out["FetchedAt"] = dt.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
     return out
 
@@ -261,20 +212,23 @@ def main() -> int:
 
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
         futures = {}
-        for i, row in enumerate(rows):
-            futures[ex.submit(fetch_one, session, row, existing)] = (i, row)
+        for row in rows:
+            futures[ex.submit(fetch_one, session, row, existing)] = row
             time.sleep(GAP_MS / 1000.0 / WORKERS)
         done = 0
         for fut in as_completed(futures):
-            i, row = futures[fut]
+            row = futures[fut]
             try:
                 out_rows.append(fut.result())
             except Exception as e:
-                print(f"  err {row.get('StandardName')}: {e}", flush=True)
+                print(f"  err {row.get('StandardName')}: {e}", file=sys.stderr)
                 out_rows.append({"Resource": row.get("ResourceName", ""),
                                  "Field": row.get("StandardName", ""),
-                                 "WikiURL": row.get("WikiPageUrl", ""),
-                                 **{c: "" for c in COLS if c not in ("Resource", "Field", "WikiURL")}})
+                                 "StandardName": row.get("StandardName", ""),
+                                 "SourceUrl": URL_TMPL.format(
+                                     resource=quote(row.get("ResourceName", ""), safe=""),
+                                     field=quote(row.get("StandardName", ""), safe="")),
+                                 **{c: "" for c in COLS if c not in ("Resource", "Field", "StandardName", "SourceUrl")}})
             done += 1
             if done % 50 == 0 or done == len(rows):
                 elapsed = time.time() - started
@@ -289,7 +243,6 @@ def main() -> int:
         w.writeheader()
         for r in out_rows:
             w.writerow({c: r.get(c, "") for c in COLS})
-
     print(f"wrote {len(out_rows)} rows -> {OUT_CSV}", flush=True)
     return 0
 

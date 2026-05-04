@@ -1,6 +1,8 @@
 # MemberStateLicense
 
-_RESO Data Dictionary 2.0 resource — 10 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/MemberStateLicense+Resource) for the canonical page._
+Supports members that hold multiple state licenses.
+
+**RESO DD 2.0** — 10 fields · last revised 6/17/2021 · [dd.reso.org](https://dd.reso.org/DD2.0/MemberStateLicense/)
 
 ## Groups
 
@@ -8,18 +10,18 @@ _RESO Data Dictionary 2.0 resource — 10 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135942) |
-| `Member` | Resource |  |  |  |  | The Member resource describes a person who is a member of the MLS — most commonly a real estate agent or broker. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135948) |
-| `MemberKey` | String |  |  |  |  | A system-unique identifier for the member. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135953) |
-| `MemberMlsId` | String |  |  |  |  | The local, well-known identifier for the member as assigned by the MLS. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135959) |
-| `MemberStateLicense` | String |  |  |  |  | The license of the Member. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135965) |
-| `MemberStateLicenseExpirationDate` | Date |  |  |  |  | The expiration date for the member's license. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135970) |
-| `MemberStateLicenseKey` | String |  |  |  |  | A unique identifier for this record from the immediate source. | [link](https://ddwiki.reso.org/display/DDW20/MemberStateLicenseKey+Field) |
-| `MemberStateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) |  |  | The state in which the member is licensed. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135983) |
-| `MemberStateLicenseType` | String List, Single |  | [MemberStateLicenseType](#memberstatelicensetype) |  |  | The license type of the member. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135989) |
-| `ModificationTimestamp` | Timestamp |  |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135995) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/MemberStateLicense/HistoryTransactional/) |
+| `Member` | Resource |  |  |  | The Member resource describes a person who is a member of the MLS — most commonly a real estate agent or broker. | [link](https://dd.reso.org/DD2.0/MemberStateLicense/Member/) |
+| `MemberKey` | String |  |  |  | A system-unique identifier for the member. | [link](https://dd.reso.org/DD2.0/MemberStateLicense/MemberKey/) |
+| `MemberMlsId` | String |  |  |  | The local, well-known identifier for the member as assigned by the MLS. | [link](https://dd.reso.org/DD2.0/MemberStateLicense/MemberMlsId/) |
+| `MemberStateLicense` | String |  |  |  | The license of the Member. | [link](https://dd.reso.org/DD2.0/MemberStateLicense/MemberStateLicense/) |
+| `MemberStateLicenseExpirationDate` | Date |  |  |  | The expiration date for the member's license. | [link](https://dd.reso.org/DD2.0/MemberStateLicense/MemberStateLicenseExpirationDate/) |
+| `MemberStateLicenseKey` | String |  |  |  | A unique identifier for this record from the immediate source. | [link](https://dd.reso.org/DD2.0/MemberStateLicense/MemberStateLicenseKey/) |
+| `MemberStateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) |  | The state in which the member is licensed. | [link](https://dd.reso.org/DD2.0/MemberStateLicense/MemberStateLicenseState/) |
+| `MemberStateLicenseType` | String List, Single |  | [MemberStateLicenseType](#memberstatelicensetype) |  | The license type of the member. | [link](https://dd.reso.org/DD2.0/MemberStateLicense/MemberStateLicenseType/) |
+| `ModificationTimestamp` | Timestamp |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/MemberStateLicense/ModificationTimestamp/) |
 
 ## Field details
 
@@ -27,89 +29,100 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>Member</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Miembro
   - **French-Canadian Name:** Clé du membre
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>MemberMlsId</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** ID de MLS de Miembro
+  - **French-Canadian Name:** ID MLS du membre
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberStateLicense</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia Estatal de Miembro
   - **French-Canadian Name:** Permis du membre
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberStateLicenseExpirationDate</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** OCT 27 2020
+  - **Status:** Active
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 10/27/2020
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberStateLicenseKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** OCT 27 2020
+  - **Status:** Active
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 10/27/2020
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberStateLicenseState</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Licencia Estatal de Miembro
   - **French-Canadian Name:** État ou province de délivrance du permis du membre
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MemberStateLicenseType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** OCT 27 2020
+  - **Status:** Active
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 10/27/2020
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
   - **French-Canadian Name:** Heure et date de la modification
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 2.0.0
 
 </details>
@@ -118,6 +131,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### MemberStateLicenseType
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/MemberStateLicenseType/)
+
 | Value | Definition |
 |---|---|
 | `Appraiser` | The member state license type is appraiser. |
@@ -125,6 +140,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Salesperson` | The member state license type is salesperson. |
 
 ### StateOrProvince
+
+65 values · used by 19 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StateOrProvince/)
 
 | Value | Definition |
 |---|---|

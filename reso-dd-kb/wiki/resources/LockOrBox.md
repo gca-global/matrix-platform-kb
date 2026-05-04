@@ -1,6 +1,8 @@
 # LockOrBox
 
-_RESO Data Dictionary 2.0 resource — 44 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/LockOrBox+Resource) for the canonical page._
+Lockbox, smart lock and showing agent information.
+
+**RESO DD 2.0** — 44 fields · last revised 7/25/2019 · [dd.reso.org](https://dd.reso.org/DD2.0/LockOrBox/)
 
 ## Groups
 
@@ -8,52 +10,52 @@ _RESO Data Dictionary 2.0 resource — 44 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135893) |
-| `KeyOrCredentialId` | String |  |  |  |  | The local, well-known identifier for a given lockbox/smartlock system key or credential. | [link](https://ddwiki.reso.org/display/DDW20/KeyOrCredentialId+Field) |
-| `ListAgentFullName` | String |  |  |  |  | The full name of the listing agent of record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135905) |
-| `ListingAddress1` | String |  |  |  |  | The street number, direction, name and suffix of the property where the lockbox/smartlock is located. | [link](https://ddwiki.reso.org/display/DDW20/ListingAddress1+Field) |
-| `ListingAddress2` | String |  |  |  |  | The unit/suite number of the property where the lockbox/smartlock is located. | [link](https://ddwiki.reso.org/display/DDW20/ListingAddress2+Field) |
-| `ListingCity` | String |  |  |  |  | The city of the property where the lockbox/smartlock is located. | [link](https://ddwiki.reso.org/display/DDW20/ListingCity+Field) |
-| `ListingCountry` | String List, Single |  | [Country](#country) |  |  | The country of the property where the lockbox/smartlock is located. | [link](https://ddwiki.reso.org/display/DDW20/ListingCountry+Field) |
-| `ListingId` | String |  |  |  |  | The well-known identifier for the listing, also known as the MLS number. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135933) |
-| `ListingKey` | String |  |  |  |  | A system-unique identifier for the listing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135939) |
-| `ListingLatitude` | Number |  |  |  |  | The latitude of the property where the lockbox/smartlock is located. | [link](https://ddwiki.reso.org/display/DDW20/ListingLatitude+Field) |
-| `ListingLongitude` | Number |  |  |  |  | The longitude of the property where the lockbox/smartlock is located. | [link](https://ddwiki.reso.org/display/DDW20/ListingLongitude+Field) |
-| `ListingPostalCode` | String |  |  |  |  | The postal code of the property where the lockbox/smartlock is located. | [link](https://ddwiki.reso.org/display/DDW20/ListingPostalCode+Field) |
-| `ListingPostalCodePlus4` | String |  |  |  |  | The four-digit U.S. | [link](https://ddwiki.reso.org/display/DDW20/ListingPostalCodePlus4+Field) |
-| `ListingStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) |  |  | The state or province of the property where the lockbox/smartlock is located. | [link](https://ddwiki.reso.org/display/DDW20/ListingStateOrProvince+Field) |
-| `ListingTimeZone` | String |  | [IanaTimeZoneValues](#ianatimezonevalues) |  |  | The standard name of the time zone of the property where the lockbox/smartlock is located, as provided by the IANA tz database. | [link](https://ddwiki.reso.org/display/DDW20/ListingTimeZone+Field) |
-| `LockOrBoxAccessTimestamp` | Timestamp |  |  |  |  | The transactional timestamp automatically recorded by the lockbox/smartlock system representing the date/time the lockbox or lock was last accessed. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxAccessTimestamp+Field) |
-| `LockOrBoxAccessType` | String List, Multi |  | [LockOrBoxAccessType](#lockorboxaccesstype) |  |  | The method of access for the lockbox or smartlock. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxAccessType+Field) |
-| `LockOrBoxId` | String |  |  |  |  | The local, well-known identifier for a given lockbox/smartlock system. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxId+Field) |
-| `LockOrBoxInstalledTimestamp` | Timestamp |  |  |  |  | The transactional timestamp automatically recorded by the lockbox/smartlock system representing the date/time the lockbox or lock was last installed at a property. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxInstalledTimestamp+Field) |
-| `LockOrBoxKey` | String |  |  |  |  | A unique identifier for this record from the immediate source. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxKey+Field) |
-| `LockOrBoxOriginatingSystemId` | String |  |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxOriginatingSystemID+Field) |
-| `LockOrBoxOriginatingSystemKey` | String |  |  |  |  | The name of the originating record provider. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxOriginatingSystemKey+Field) |
-| `LockOrBoxOriginatingSystemName` | String |  |  |  |  | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxOriginatingSystemName+Field) |
-| `LockOrBoxSourceSystemId` | String |  |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxSourceSystemID+Field) |
-| `LockOrBoxSourceSystemKey` | String |  |  |  |  | The name of the immediate record provider. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxSourceSystemKey+Field) |
-| `LockOrBoxSourceSystemName` | String |  |  |  |  | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/display/DDW20/LockOrBoxSourceSystemName+Field) |
-| `ModificationTimestamp` | Timestamp |  |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=12361004) |
-| `Notes` | String |  |  |  |  | Notes or feedback about the property or showing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136043) |
-| `OriginatingSystem` | Resource |  |  |  |  | The originating system of the LockOrBox record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136049) |
-| `ShowingAgent` | Resource |  |  |  |  | The office contact for showings of the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAgent+Field) |
-| `ShowingAgentAOR` | String List, Single |  | AOR |  |  | The showing contact's board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAgentAOR+Field) |
-| `ShowingAgentEmail` | String |  |  |  |  | The email address of the contact for showings of the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAgentEmail+Field) |
-| `ShowingAgentFirstName` | String |  |  |  |  | The first name of the contact for showings of the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAgentFirstName+Field) |
-| `ShowingAgentFullName` | String |  |  |  |  | The first, middle and last name of the contact for showings of the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAgentFullName+Field) |
-| `ShowingAgentId` | String |  |  |  |  | The local, well-known lockbox/smartlock system identifier of the showing contact. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAgentId+Field) |
-| `ShowingAgentLastName` | String |  |  |  |  | The last name of the contact for showings of the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAgentLastName+Field) |
-| `ShowingAgentMlsId` | String |  |  |  |  | The MemberMlsId of the agent who is showing the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAgentMlsId+Field) |
-| `ShowingAgentPhone` | String |  |  |  |  | The North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ShowingAgentPhone+Field) |
-| `ShowingAgentPhoneExt` | String |  |  |  |  | The phone number extension of the contact for showings of the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAgentPhoneExt+Field) |
-| `ShowingOffice` | Resource |  |  |  |  | The agent contact for showings of the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingOffice+Field) |
-| `ShowingOfficeId` | String |  |  |  |  | The local, well-known lockbox/smartlock system identifier of the showing office. | [link](https://ddwiki.reso.org/display/DDW20/ShowingOfficeId+Field) |
-| `ShowingOfficeName` | String |  |  |  |  | The legal name of the brokerage/company showing the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingOfficeName+Field) |
-| `ShowingOfficePhone` | String |  |  |  |  | The North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ShowingOfficePhone+Field) |
-| `SourceSystem` | Resource |  |  |  |  | The source system of the LockOrBox record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136140) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/LockOrBox/HistoryTransactional/) |
+| `KeyOrCredentialId` | String |  |  |  | The local, well-known identifier for a given lockbox/smartlock system key or credential. | [link](https://dd.reso.org/DD2.0/LockOrBox/KeyOrCredentialId/) |
+| `ListAgentFullName` | String |  |  |  | The full name of the listing agent of record. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListAgentFullName/) |
+| `ListingAddress1` | String |  |  |  | The street number, direction, name and suffix of the property where the lockbox/smartlock is located. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingAddress1/) |
+| `ListingAddress2` | String |  |  |  | The unit/suite number of the property where the lockbox/smartlock is located. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingAddress2/) |
+| `ListingCity` | String |  |  |  | The city of the property where the lockbox/smartlock is located. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingCity/) |
+| `ListingCountry` | String List, Single |  | [Country](#country) |  | The country of the property where the lockbox/smartlock is located. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingCountry/) |
+| `ListingId` | String |  |  |  | The well-known identifier for the listing, also known as the MLS number. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingId/) |
+| `ListingKey` | String |  |  |  | A system-unique identifier for the listing. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingKey/) |
+| `ListingLatitude` | Number |  |  |  | The latitude of the property where the lockbox/smartlock is located. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingLatitude/) |
+| `ListingLongitude` | Number |  |  |  | The longitude of the property where the lockbox/smartlock is located. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingLongitude/) |
+| `ListingPostalCode` | String |  |  |  | The postal code of the property where the lockbox/smartlock is located. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingPostalCode/) |
+| `ListingPostalCodePlus4` | String |  |  |  | The four-digit U.S. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingPostalCodePlus4/) |
+| `ListingStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) |  | The state or province of the property where the lockbox/smartlock is located. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingStateOrProvince/) |
+| `ListingTimeZone` | String List, Single |  | [IanaTimeZoneValues](#ianatimezonevalues) |  | The standard name of the time zone of the property where the lockbox/smartlock is located, as provided by the IANA tz database. | [link](https://dd.reso.org/DD2.0/LockOrBox/ListingTimeZone/) |
+| `LockOrBoxAccessTimestamp` | Timestamp |  |  |  | The transactional timestamp automatically recorded by the lockbox/smartlock system representing the date/time the lockbox or lock was last accessed. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxAccessTimestamp/) |
+| `LockOrBoxAccessType` | String List, Multi |  | [LockOrBoxAccessType](#lockorboxaccesstype) |  | The method of access for the lockbox or smartlock. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxAccessType/) |
+| `LockOrBoxId` | String |  |  |  | The local, well-known identifier for a given lockbox/smartlock system. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxId/) |
+| `LockOrBoxInstalledTimestamp` | Timestamp |  |  |  | The transactional timestamp automatically recorded by the lockbox/smartlock system representing the date/time the lockbox or lock was last installed at a property. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxInstalledTimestamp/) |
+| `LockOrBoxKey` | String |  |  |  | A unique identifier for this record from the immediate source. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxKey/) |
+| `LockOrBoxOriginatingSystemId` | String |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxOriginatingSystemId/) |
+| `LockOrBoxOriginatingSystemKey` | String |  |  |  | The name of the originating record provider. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxOriginatingSystemKey/) |
+| `LockOrBoxOriginatingSystemName` | String |  |  |  | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxOriginatingSystemName/) |
+| `LockOrBoxSourceSystemId` | String |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxSourceSystemId/) |
+| `LockOrBoxSourceSystemKey` | String |  |  |  | The name of the immediate record provider. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxSourceSystemKey/) |
+| `LockOrBoxSourceSystemName` | String |  |  |  | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/LockOrBox/LockOrBoxSourceSystemName/) |
+| `ModificationTimestamp` | Timestamp |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/LockOrBox/ModificationTimestamp/) |
+| `Notes` | String |  |  |  | Notes or feedback about the property or showing. | [link](https://dd.reso.org/DD2.0/LockOrBox/Notes/) |
+| `OriginatingSystem` | Resource |  |  |  | The originating system of the LockOrBox record. | [link](https://dd.reso.org/DD2.0/LockOrBox/OriginatingSystem/) |
+| `ShowingAgent` | Resource |  |  |  | The office contact for showings of the property. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingAgent/) |
+| `ShowingAgentAOR` | String List, Single |  | AOR |  | The showing contact's board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingAgentAOR/) |
+| `ShowingAgentEmail` | String |  |  |  | The email address of the contact for showings of the property. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingAgentEmail/) |
+| `ShowingAgentFirstName` | String |  |  |  | The first name of the contact for showings of the property. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingAgentFirstName/) |
+| `ShowingAgentFullName` | String |  |  |  | The first, middle and last name of the contact for showings of the property. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingAgentFullName/) |
+| `ShowingAgentId` | String |  |  |  | The local, well-known lockbox/smartlock system identifier of the showing contact. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingAgentId/) |
+| `ShowingAgentLastName` | String |  |  |  | The last name of the contact for showings of the property. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingAgentLastName/) |
+| `ShowingAgentMlsId` | String |  |  |  | The MemberMlsId of the agent who is showing the property. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingAgentMlsId/) |
+| `ShowingAgentPhone` | String |  |  |  | The North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingAgentPhone/) |
+| `ShowingAgentPhoneExt` | String |  |  |  | The phone number extension of the contact for showings of the property. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingAgentPhoneExt/) |
+| `ShowingOffice` | Resource |  |  |  | The agent contact for showings of the property. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingOffice/) |
+| `ShowingOfficeId` | String |  |  |  | The local, well-known lockbox/smartlock system identifier of the showing office. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingOfficeId/) |
+| `ShowingOfficeName` | String |  |  |  | The legal name of the brokerage/company showing the property. | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingOfficeName/) |
+| `ShowingOfficePhone` | String |  |  |  | The North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/LockOrBox/ShowingOfficePhone/) |
+| `SourceSystem` | Resource |  |  |  | The source system of the LockOrBox record. | [link](https://dd.reso.org/DD2.0/LockOrBox/SourceSystem/) |
 
 ## Field details
 
@@ -61,342 +63,398 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>KeyOrCredentialId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListAgentFullName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>ListingAddress1</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingAddress2</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingCity</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingCountry</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingLatitude</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingLongitude</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingPostalCode</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingPostalCodePlus4</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>ListingStateOrProvince</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingTimeZone</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LockOrBoxAccessTimestamp</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LockOrBoxAccessType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>LockOrBoxId</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LockOrBoxInstalledTimestamp</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LockOrBoxKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LockOrBoxOriginatingSystemId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LockOrBoxOriginatingSystemKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LockOrBoxOriginatingSystemName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LockOrBoxSourceSystemId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LockOrBoxSourceSystemKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LockOrBoxSourceSystemName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>ModificationTimestamp</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo de Modificación
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>Notes</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OriginatingSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>ShowingAgent</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAgentAOR</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAgentEmail</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAgentFirstName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAgentFullName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAgentId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAgentLastName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAgentMlsId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>ShowingAgentPhone</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAgentPhoneExt</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingOffice</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingOfficeId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingOfficeName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingOfficePhone</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SourceSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
@@ -404,6 +462,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### Country
+
+246 values · used by 12 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Country/)
 
 | Value | Definition |
 |---|---|
@@ -655,6 +715,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `ZW` | Zimbabwe is the country in which the individual, entity or property is located. |
 
 ### IanaTimeZoneValues
+
+482 values · used by 3 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/IanaTimeZoneValues/)
 
 | Value | Definition |
 |---|---|
@@ -1042,6 +1104,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### LockOrBoxAccessType
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LockOrBoxAccessType/)
+
 | Value | Definition |
 |---|---|
 | `App` | The lockbox/smartlock can be unlocked with a mobile application. |
@@ -1049,6 +1113,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Code` | The lockbox/smartlock can be unlocked with an access code. |
 
 ### StateOrProvince
+
+65 values · used by 19 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StateOrProvince/)
 
 | Value | Definition |
 |---|---|

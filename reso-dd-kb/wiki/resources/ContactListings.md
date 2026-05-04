@@ -1,6 +1,8 @@
 # ContactListings
 
-_RESO Data Dictionary 2.0 resource — 22 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/ContactListings+Resource) for the canonical page._
+Maintains the relationship between contacts and members around listings in consumer portals.
+
+**RESO DD 2.0** — 22 fields · last revised 9/26/2017 · [dd.reso.org](https://dd.reso.org/DD2.0/ContactListings/)
 
 ## Groups
 
@@ -8,30 +10,30 @@ _RESO Data Dictionary 2.0 resource — 22 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `AgentNotesUnreadYN` | Boolean |  |  |  |  | Indicates whether or not agent notes have gone unread. | [link](https://ddwiki.reso.org/display/DDW20/AgentNotesUnreadYN+Field) |
-| `ClassName` | String List, Single |  | [ClassName](#classname) |  |  | The name of the class where the listing record is located. | [link](https://ddwiki.reso.org/display/DDW20/ClassName+Field) |
-| `Contact` | Resource |  |  |  |  | The contact for the ContactListings record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116188) |
-| `ContactKey` | String |  |  |  |  | A system-unique identifier for the contact. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135229) |
-| `ContactListingPreference` | String List, Single |  | [ContactListingPreference](#contactlistingpreference) |  |  | The contact's preference selection on the given listing (i.e., Favorite, Possibility or Discard). | [link](https://ddwiki.reso.org/display/DDW20/ContactListingPreference+Field) |
-| `ContactListingsKey` | String |  |  |  |  | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/ContactListingsKey+Field) |
-| `ContactLoginId` | String |  |  |  |  | The foreign key referring to the Contacts Resource's local, well-known identifier for the contact. | [link](https://ddwiki.reso.org/display/DDW20/ContactLoginId+Field) |
-| `ContactNotesUnreadYN` | Boolean |  |  |  |  | A flag indicating whether or not the contact's notes are unread. | [link](https://ddwiki.reso.org/display/DDW20/ContactNotesUnreadYN+Field) |
-| `DirectEmailYN` | Boolean |  |  |  |  | A flag indicating whether or not this is a direct email. | [link](https://ddwiki.reso.org/display/DDW20/DirectEmailYN+Field) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135265) |
-| `LastAgentNoteTimestamp` | Timestamp |  |  |  |  | The date/time the member last added or updated a ListingNote. | [link](https://ddwiki.reso.org/display/DDW20/LastAgentNoteTimestamp+Field) |
-| `LastContactNoteTimestamp` | Timestamp |  |  |  |  | The date/time the contact last added or updated a ListingNote. | [link](https://ddwiki.reso.org/display/DDW20/LastContactNoteTimestamp+Field) |
-| `Listing` | Resource |  |  |  |  | The listing for the ContactListings record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116249) |
-| `ListingId` | String |  |  |  |  | The well-known identifier for the listing, also known as the MLS number. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135288) |
-| `ListingKey` | String |  |  |  |  | A system-unique identifier for the listing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135294) |
-| `ListingModificationTimestamp` | Timestamp |  |  |  |  | The last time the listing was updated. | [link](https://ddwiki.reso.org/display/DDW20/ListingModificationTimestamp+Field) |
-| `ListingNotes` | Collection |  |  |  |  | The notes input by the member and/or contact in reference to the given listing. | [link](https://ddwiki.reso.org/display/DDW20/ListingNotes+Field) |
-| `ListingSentTimestamp` | Timestamp |  |  |  |  | The date/time the listing was sent to the contact. | [link](https://ddwiki.reso.org/display/DDW20/ListingSentTimestamp+Field) |
-| `ListingViewedYN` | Boolean |  |  |  |  | Indicates whether or not a listing has been viewed. | [link](https://ddwiki.reso.org/display/DDW20/ListingViewedYN+Field) |
-| `ModificationTimestamp` | Timestamp |  |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135324) |
-| `PortalLastVisitedTimestamp` | Timestamp |  |  |  |  | The date/time the listing was last viewed by the contact. | [link](https://ddwiki.reso.org/display/DDW20/PortalLastVisitedTimestamp+Field) |
-| `ResourceName` | String List, Single |  | [ResourceName](#resourcename) |  |  | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://ddwiki.reso.org/display/DDW20/ResourceName+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `AgentNotesUnreadYN` | Boolean |  |  |  | Indicates whether or not agent notes have gone unread. | [link](https://dd.reso.org/DD2.0/ContactListings/AgentNotesUnreadYN/) |
+| `ClassName` | String List, Single |  | [ClassName](#classname) |  | The name of the class where the listing record is located. | [link](https://dd.reso.org/DD2.0/ContactListings/ClassName/) |
+| `Contact` | Resource |  |  |  | The contact for the ContactListings record. | [link](https://dd.reso.org/DD2.0/ContactListings/Contact/) |
+| `ContactKey` | String |  |  |  | A system-unique identifier for the contact. | [link](https://dd.reso.org/DD2.0/ContactListings/ContactKey/) |
+| `ContactListingPreference` | String List, Single |  | [ContactListingPreference](#contactlistingpreference) |  | The contact's preference selection on the given listing (i.e., Favorite, Possibility or Discard). | [link](https://dd.reso.org/DD2.0/ContactListings/ContactListingPreference/) |
+| `ContactListingsKey` | String |  |  |  | A system unique identifier. | [link](https://dd.reso.org/DD2.0/ContactListings/ContactListingsKey/) |
+| `ContactLoginId` | String |  |  |  | The foreign key referring to the Contacts Resource's local, well-known identifier for the contact. | [link](https://dd.reso.org/DD2.0/ContactListings/ContactLoginId/) |
+| `ContactNotesUnreadYN` | Boolean |  |  |  | A flag indicating whether or not the contact's notes are unread. | [link](https://dd.reso.org/DD2.0/ContactListings/ContactNotesUnreadYN/) |
+| `DirectEmailYN` | Boolean |  |  |  | A flag indicating whether or not this is a direct email. | [link](https://dd.reso.org/DD2.0/ContactListings/DirectEmailYN/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/ContactListings/HistoryTransactional/) |
+| `LastAgentNoteTimestamp` | Timestamp |  |  |  | The date/time the member last added or updated a ListingNote. | [link](https://dd.reso.org/DD2.0/ContactListings/LastAgentNoteTimestamp/) |
+| `LastContactNoteTimestamp` | Timestamp |  |  |  | The date/time the contact last added or updated a ListingNote. | [link](https://dd.reso.org/DD2.0/ContactListings/LastContactNoteTimestamp/) |
+| `Listing` | Resource |  |  |  | The listing for the ContactListings record. | [link](https://dd.reso.org/DD2.0/ContactListings/Listing/) |
+| `ListingId` | String |  |  |  | The well-known identifier for the listing, also known as the MLS number. | [link](https://dd.reso.org/DD2.0/ContactListings/ListingId/) |
+| `ListingKey` | String |  |  |  | A system-unique identifier for the listing. | [link](https://dd.reso.org/DD2.0/ContactListings/ListingKey/) |
+| `ListingModificationTimestamp` | Timestamp |  |  |  | The last time the listing was updated. | [link](https://dd.reso.org/DD2.0/ContactListings/ListingModificationTimestamp/) |
+| `ListingNotes` | Collection |  |  |  | The notes input by the member and/or contact in reference to the given listing. | [link](https://dd.reso.org/DD2.0/ContactListings/ListingNotes/) |
+| `ListingSentTimestamp` | Timestamp |  |  |  | The date/time the listing was sent to the contact. | [link](https://dd.reso.org/DD2.0/ContactListings/ListingSentTimestamp/) |
+| `ListingViewedYN` | Boolean |  |  |  | Indicates whether or not a listing has been viewed. | [link](https://dd.reso.org/DD2.0/ContactListings/ListingViewedYN/) |
+| `ModificationTimestamp` | Timestamp |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/ContactListings/ModificationTimestamp/) |
+| `PortalLastVisitedTimestamp` | Timestamp |  |  |  | The date/time the listing was last viewed by the contact. | [link](https://dd.reso.org/DD2.0/ContactListings/PortalLastVisitedTimestamp/) |
+| `ResourceName` | String List, Single |  | [ResourceName](#resourcename) |  | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://dd.reso.org/DD2.0/ContactListings/ResourceName/) |
 
 ## Field details
 
@@ -39,177 +41,216 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>AgentNotesUnreadYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Notas de Agente sin Leer SN
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ClassName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Clase
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** SEP 26 2017
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 9/26/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>Contact</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ContactKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Contacto
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 09 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/9/2022
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ContactListingPreference</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Preferencia de Contacto de Listado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>ContactListingsKey</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/3/2017
+  - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ContactLoginId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Ingreso de Contacto
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ContactNotesUnreadYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Notas de Contacto No Leídas SN
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>DirectEmailYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email Directo SN
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>LastAgentNoteTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de TiempoÚltima Nota del Agente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>LastContactNoteTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de TiempoÚltima Nota de Contrato
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>Listing</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ListingId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Listado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ListingKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Listado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 09 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/9/2022
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>ListingModificationTimestamp</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo Modificación de Listado
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>ListingNotes</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Notas de Listado
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ListingSentTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Listado Enviado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** AUG 28 2019
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 8/28/2019
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ListingViewedYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Listado Visto SN
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>ModificationTimestamp</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo de Modificación
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>PortalLastVisitedTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Última Visita al Portal
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ResourceName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Recurso
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** SEP 26 2017
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 9/26/2017
   - **Added in Version:** 1.6.0
 
 </details>
@@ -217,6 +258,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### ClassName
+
+17 values · used by 8 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ClassName/)
 
 | Value | Definition |
 |---|---|
@@ -240,6 +283,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ContactListingPreference
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ContactListingPreference/)
+
 | Value | Definition |
 |---|---|
 | `Discard` | The contact has flagged to discard the given listing. |
@@ -247,6 +292,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Possibility` | The contact has flagged the given listing as a possibility. |
 
 ### ResourceName
+
+5 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ResourceName/)
 
 | Value | Definition |
 |---|---|

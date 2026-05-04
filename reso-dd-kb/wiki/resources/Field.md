@@ -1,6 +1,8 @@
 # Field
 
-_RESO Data Dictionary 2.0 resource — 4 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/Field+Resource) for the canonical page._
+Metadata about available fields on a given server in a predictable and user-friendly format.
+
+**RESO DD 2.0** — 4 fields · last revised 12/8/2021 · [dd.reso.org](https://dd.reso.org/DD2.0/Field/)
 
 **Adoption** — weighted Org%: **2%** across 4 measured fields (median 2%, avg 2%).
 
@@ -10,12 +12,12 @@ _RESO Data Dictionary 2.0 resource — 4 fields. See [DDwiki](https://ddwiki.res
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `FieldKey` | String |  |  | 5% | 1% | The key used to uniquely identify the field. | [link](https://ddwiki.reso.org/display/DDW20/FieldKey+Field) |
-| `FieldName` | String |  |  | 5% | 1% | The name of the field that was changed in the resource record. | [link](https://ddwiki.reso.org/display/DDW20/FieldName+Field) |
-| `ModificationTimestamp` | Timestamp |  |  | 5% | 1% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135927) |
-| `ResourceName` | String |  |  |  | 2% | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135936) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `FieldKey` | String |  |  | 2% | The key used to uniquely identify the field. | [link](https://dd.reso.org/DD2.0/Field/FieldKey/) |
+| `FieldName` | String |  |  | 2% | The name of the field that was changed in the resource record. | [link](https://dd.reso.org/DD2.0/Field/FieldName/) |
+| `ModificationTimestamp` | Timestamp |  |  | 2% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Field/ModificationTimestamp/) |
+| `ResourceName` | String |  |  | 2% | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://dd.reso.org/DD2.0/Field/ResourceName/) |
 
 ## Field details
 
@@ -23,27 +25,36 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>FieldKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 08 2021
-  - **Revision Date:** DEC 08 2021
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 12/8/2021
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>FieldName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 08 2021
-  - **Revision Date:** DEC 08 2021
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 12/8/2021
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 08 2021
-  - **Revision Date:** DEC 08 2021
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 12/8/2021
+  - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>ResourceName</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 12/8/2021
   - **Added in Version:** 1.7.0
 
 </details>

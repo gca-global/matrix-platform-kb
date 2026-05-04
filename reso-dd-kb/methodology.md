@@ -20,7 +20,7 @@ concepts cover ~95% of "how do I model X in RESO?" questions.
   the standard form.
 - **Atlas-custom fields** (e.g. `LifecycleState`) are flagged with
   `source = atlas_custom` in `raw/field_descriptions.csv` and have no
-  DDwiki URL. They exist only inside Atlas to power UI / ETL logic.
+  upstream URL. They exist only inside Atlas to power UI / ETL logic.
 
 ## 2. Keys + relationships
 
@@ -54,7 +54,7 @@ Every lookup field carries:
   or **open** (jurisdictions may extend).
 
 Do not invent values. If you need a value RESO does not have, file a
-DDwiki Change Proposal first; in the interim, store the value in the
+RESO Change Proposal first; in the interim, store the value in the
 nearest `*Remarks` field.
 
 ## 4. Lifecycle (Property only)
@@ -72,30 +72,34 @@ operational state:
 facing chip filter on the Atlas listings index. Always cite as
 "Atlas-custom" when surfacing it.
 
-## 5. Reading Sys% / Org%
+## 5. Reading Org%
 
-Every Field row in `wiki/resources/<Resource>.md` carries two adoption
-percentages from RESO certification stats:
+Every Field row in `wiki/resources/<Resource>.md` carries one adoption
+percentage from RESO certification stats:
 
 | Column | Meaning | Source |
 |---|---|---|
-| `Sys%` | % of certified MLS systems that emit this field at least once | DDwiki page footer "Usage — XX% of Systems (n/N)" |
-| `Org%` | % of organizations that emit this field at least once | DDwiki page footer "Usage — XX% of Organizations (n/N)" |
+| `Org%` | % of organizations that emit this field at least once | dd.reso.org page "Usage — Adoption XX% n of N Organizations" |
 
-Read them as **adoption pressure**, not data quality. Sys% > 50% means
-"most US MLS systems publish this field at least once" — a strong
-signal that it is a safe canonical to depend on. Sys% < 10% means
-"nearly nobody publishes this" — usually a niche or new field.
+Read it as **adoption pressure**, not data quality. `Org% > 50%` means
+"most certified organizations publish this field at least once" — a
+strong signal that it is a safe canonical to depend on. `Org% < 10%`
+means "nearly nobody publishes this" — usually a niche or new field.
 
-`n/N` lives in `raw/field_metadata.csv` (e.g. `(13/20)`, `(148/480)`).
-We carry the percentages in the Resource pages because that is the
+`n / N` lives in `raw/field_metadata.csv` (`OrgAdopted` / `OrgTotal`).
+We carry the percentage in the Resource pages because that is the
 question the agent gets asked; the absolute counts stay in the raw
 CSV for forensic answers.
 
+> Historical note: ddwiki.reso.org used to also publish a `Sys%`
+> (per-System) breakdown. RESO retired ddwiki and migrated to
+> dd.reso.org, which only exposes per-Organization adoption. Older
+> commits in this KB still reference `Sys%`; current files do not.
+
 ## TL;DR for the LLM
 
-1. Read this page to remember naming, keys, lookups, lifecycle, Sys%/Org%.
+1. Read this page to remember naming, keys, lookups, lifecycle, Org%.
 2. Open `wiki/resources/<Resource>.md`.
 3. Find the field row in the Fields table.
-4. Cite using the DDwiki URL in the right-most column when prose context is needed.
+4. Cite using the dd.reso.org URL in the right-most `Source` column when prose context is needed.
 5. Never invent a field or a lookup value.

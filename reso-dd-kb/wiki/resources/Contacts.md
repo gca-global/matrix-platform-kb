@@ -1,6 +1,8 @@
 # Contacts
 
-The Contacts resource holds people in an MLS user's personal address book — buyers, sellers, prospects, lenders, vendors. Contacts contain PII (name, email, phone) and are NOT publicly broadcast; access is restricted to the owning Member.
+Information on client and other contacts of the member.
+
+**RESO DD 2.0** — 91 fields · last revised 9/24/2015 · [dd.reso.org](https://dd.reso.org/DD2.0/Contacts/)
 
 **Adoption** — weighted Org%: **0%** across 2 measured fields (median 0%, avg 0%).
 
@@ -10,99 +12,99 @@ The Contacts resource holds people in an MLS user's personal address book — bu
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `Anniversary` | Date |  |  |  |  | The month, day and year of the contact's wedding anniversary. | [link](https://ddwiki.reso.org/display/DDW20/Anniversary+Field) |
-| `AssistantEmail` | String |  |  |  |  | The email address of the contact's assistant. | [link](https://ddwiki.reso.org/display/DDW20/AssistantEmail+Field) |
-| `AssistantName` | String |  |  |  |  | The name of the contact's assistant. | [link](https://ddwiki.reso.org/display/DDW20/AssistantName+Field) |
-| `AssistantPhone` | String |  |  |  |  | The phone number of the contact's assistant. | [link](https://ddwiki.reso.org/display/DDW20/AssistantPhone+Field) |
-| `AssistantPhoneExt` | String |  |  |  |  | The phone number extension of the contact's assistant. | [link](https://ddwiki.reso.org/display/DDW20/AssistantPhoneExt+Field) |
-| `Birthdate` | Date |  |  | 1% | 1% | The month, day and year of the contact's birthday. | [link](https://ddwiki.reso.org/display/DDW20/Birthdate+Field) |
-| `BusinessFax` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BusinessFax+Field) |
-| `Children` | String |  |  |  |  | A list of the names of the contact's children in a comma-separated list. | [link](https://ddwiki.reso.org/display/DDW20/Children+Field) |
-| `Company` | String |  |  | 1% | 1% | The contact's company or employer. | [link](https://ddwiki.reso.org/display/DDW20/Company+Field) |
-| `ContactKey` | String |  |  | 1% | 1% | A system-unique identifier for the contact. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116255) |
-| `ContactLoginId` | String |  |  |  |  | The local, well-known identifier for the contact. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2116259) |
-| `ContactPassword` | String |  |  |  |  | A client password that the member wishes to share with other systems. | [link](https://ddwiki.reso.org/display/DDW20/ContactPassword+Field) |
-| `ContactStatus` | String List, Single |  | [ContactStatus](#contactstatus) | 1% | 1% | The status of the contact (i.e., Active, Inactive, On Vacation, Deleted, etc.). | [link](https://ddwiki.reso.org/display/DDW20/ContactStatus+Field) |
-| `ContactType` | String List, Multi |  | [ContactType](#contacttype) | 1% | 1% | The type of contact. | [link](https://ddwiki.reso.org/display/DDW20/ContactType+Field) |
-| `ContactsOtherPhone` | Collection |  |  |  |  | A collection of the types of other phone fields available for Contacts. | [link](https://ddwiki.reso.org/display/DDW20/ContactsOtherPhone+Field) |
-| `ContactsSocialMedia` | Collection |  |  |  |  | A collection of the types of social media fields available for Contacts. | [link](https://ddwiki.reso.org/display/DDW20/ContactsSocialMedia+Field) |
-| `Department` | String |  |  |  |  | The department in which the contact works. | [link](https://ddwiki.reso.org/display/DDW20/Department+Field) |
-| `DirectPhone` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/DirectPhone+Field) |
-| `Email` | String |  |  | 1% | 1% | The email address of the contact. | [link](https://ddwiki.reso.org/display/DDW20/Email+Field) |
-| `Email2` | String |  |  | 1% | 1% | The secondary email address of the contact. | [link](https://ddwiki.reso.org/display/DDW20/Email2+Field) |
-| `Email3` | String |  |  |  |  | The tertiary email address of the contact. | [link](https://ddwiki.reso.org/display/DDW20/Email3+Field) |
-| `FirstName` | String |  |  | 1% | 1% | The first or given name of the contact. | [link](https://ddwiki.reso.org/display/DDW20/FirstName+Field) |
-| `FullName` | String |  |  | 1% | 1% | The full name of the contact - first middle last suffix. | [link](https://ddwiki.reso.org/display/DDW20/FullName+Field) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135221) |
-| `HomeAddress1` | String |  |  | 1% | 1% | The street number, direction, name and suffix of the contact's home. | [link](https://ddwiki.reso.org/display/DDW20/HomeAddress1+Field) |
-| `HomeAddress2` | String |  |  |  |  | The unit/suite number of the contact's home. | [link](https://ddwiki.reso.org/display/DDW20/HomeAddress2+Field) |
-| `HomeCarrierRoute` | String |  |  |  |  | The group of addresses to which the U.S. | [link](https://ddwiki.reso.org/display/DDW20/HomeCarrierRoute+Field) |
-| `HomeCity` | String |  |  | 1% | 1% | The city of the contact's home. | [link](https://ddwiki.reso.org/display/DDW20/HomeCity+Field) |
-| `HomeCountry` | String List, Single |  | [Country](#country) |  |  | The country abbreviation in a postal address. | [link](https://ddwiki.reso.org/display/DDW20/HomeCountry+Field) |
-| `HomeCountyOrParish` | String List, Single |  | CountyOrParish |  |  | The county or parish in which the contact's home is addressed. | [link](https://ddwiki.reso.org/display/DDW20/HomeCountyOrParish+Field) |
-| `HomeFax` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/HomeFax+Field) |
-| `HomePhone` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/HomePhone+Field) |
-| `HomePostalCode` | String |  |  |  |  | The postal code of the contact's home. | [link](https://ddwiki.reso.org/display/DDW20/HomePostalCode+Field) |
-| `HomePostalCodePlus4` | String |  |  |  |  | The four-digit extension of the U.S. | [link](https://ddwiki.reso.org/display/DDW20/HomePostalCodePlus4+Field) |
-| `HomeStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 1% | 1% | The state or province in which the contact's home is addressed. | [link](https://ddwiki.reso.org/display/DDW20/HomeStateOrProvince+Field) |
-| `JobTitle` | String |  |  | 1% | 1% | The title or position of the contact within their organization. | [link](https://ddwiki.reso.org/display/DDW20/JobTitle+Field) |
-| `Language` | String List, Multi |  | [Languages](#languages) |  |  | The languages spoken by the contact. | [link](https://ddwiki.reso.org/display/DDW20/Language+Field) |
-| `LastName` | String |  |  |  |  | The last or surname of the contact. | [link](https://ddwiki.reso.org/display/DDW20/LastName+Field) |
-| `LeadSource` | String |  |  | 1% | 1% | The source or person that provided the contact. | [link](https://ddwiki.reso.org/display/DDW20/LeadSource+Field) |
-| `Media` | Collection |  |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135316) |
-| `MiddleName` | String |  |  | 1% | 1% | The middle name of the contact. | [link](https://ddwiki.reso.org/display/DDW20/MiddleName+Field) |
-| `MobilePhone` | String |  |  |  |  | The mobile phone number of the contact. | [link](https://ddwiki.reso.org/display/DDW20/MobilePhone+Field) |
-| `ModificationTimestamp` | Timestamp |  |  |  | 0% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135334) |
-| `NamePrefix` | String |  |  | 1% | 1% | The prefix to the name (e.g., Dr., Mr., Ms.). | [link](https://ddwiki.reso.org/display/DDW20/NamePrefix+Field) |
-| `NameSuffix` | String |  |  | 1% | 1% | The suffix to the surname (e.g., Esq., Jr., III). | [link](https://ddwiki.reso.org/display/DDW20/NameSuffix+Field) |
-| `Nickname` | String |  |  | 1% | 1% | An alternate name used by the contact, usually as a substitute for the first name. | [link](https://ddwiki.reso.org/display/DDW20/Nickname+Field) |
-| `Notes` | String |  |  | 1% | 1% | The recorded notes about the client. | [link](https://ddwiki.reso.org/display/DDW20/Notes+Field) |
-| `OfficePhone` | String |  |  | 1% | 1% | The main contact phone number of the office. | [link](https://ddwiki.reso.org/display/DDW20/OfficePhone+Field) |
-| `OfficePhoneExt` | String |  |  |  |  | The extension of the given phone number (if applicable). | [link](https://ddwiki.reso.org/display/DDW20/OfficePhoneExt+Field) |
-| `OriginalEntryTimestamp` | Timestamp |  |  |  |  | The date/time the contact record was originally input into the source system. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135378) |
-| `OriginatingSystem` | Resource |  |  |  |  | The originating system of the contact's record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135383) |
-| `OriginatingSystemContactKey` | String |  |  | 1% | 1% | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemContactKey+Field) |
-| `OriginatingSystemID` | String |  |  | 1% | 1% | The OUID Resource's OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135396) |
-| `OriginatingSystemName` | String |  |  |  |  | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135402) |
-| `OtherAddress1` | String |  |  |  |  | The other street number, direction, name and suffix of the contact. | [link](https://ddwiki.reso.org/display/DDW20/OtherAddress1+Field) |
-| `OtherAddress2` | String |  |  |  |  | The other unit/suite number of the contact. | [link](https://ddwiki.reso.org/display/DDW20/OtherAddress2+Field) |
-| `OtherCarrierRoute` | String |  |  |  |  | The group of addresses to which the U.S. | [link](https://ddwiki.reso.org/display/DDW20/OtherCarrierRoute+Field) |
-| `OtherCity` | String |  |  |  |  | The other city of the contact. | [link](https://ddwiki.reso.org/display/DDW20/OtherCity+Field) |
-| `OtherCountry` | String List, Single |  | [Country](#country) |  |  | The other country abbreviation in a postal address. | [link](https://ddwiki.reso.org/display/DDW20/OtherCountry+Field) |
-| `OtherCountyOrParish` | String List, Single |  | CountyOrParish |  |  | The other county or parish in which the contact is addressed. | [link](https://ddwiki.reso.org/display/DDW20/OtherCountyOrParish+Field) |
-| `OtherPhoneType` | String List, Single |  | [OtherPhoneType](#otherphonetype) |  |  | The type of "other" phone that does not already exist in the given phone fields or if a second of any type of phone field is needed (i.e., HomePhone2, BrothersPhone, etc.). | [link](https://ddwiki.reso.org/display/DDW20/OtherPhoneType+Field) |
-| `OtherPostalCode` | String |  |  |  |  | The other postal code of the contact. | [link](https://ddwiki.reso.org/display/DDW20/OtherPostalCode+Field) |
-| `OtherPostalCodePlus4` | String |  |  |  |  | The other four-digit extension of the U.S. | [link](https://ddwiki.reso.org/display/DDW20/OtherPostalCodePlus4+Field) |
-| `OtherStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) |  |  | The other state or province in which the contact is addressed. | [link](https://ddwiki.reso.org/display/DDW20/OtherStateOrProvince+Field) |
-| `OwnerMember` | Resource |  |  |  |  | The member who owns the contact's record. | [link](https://ddwiki.reso.org/display/DDW20/OwnerMember+Field) |
-| `OwnerMemberID` | String |  |  | 1% | 1% | The local, well-known identifier for the member in charge of the contact. | [link](https://ddwiki.reso.org/display/DDW20/OwnerMemberID+Field) |
-| `OwnerMemberKey` | String |  |  |  |  | A system-unique identifier for the member that owns the contact record (References Member.MemberKey). | [link](https://ddwiki.reso.org/display/DDW20/OwnerMemberKey+Field) |
-| `Pager` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/Pager+Field) |
-| `PhoneTTYTDD` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/PhoneTTYTDD+Field) |
-| `PreferredAddress` | String List, Single |  | [PreferredAddress](#preferredaddress) |  |  | A list of the address options (i.e., Home, Work and Other) used to determine the address preferred by the client. | [link](https://ddwiki.reso.org/display/DDW20/PreferredAddress+Field) |
-| `PreferredPhone` | String List, Single |  | [PreferredPhone](#preferredphone) |  |  | The phone number that the contact prefers to be contacted at. | [link](https://ddwiki.reso.org/display/DDW20/PreferredPhone+Field) |
-| `ReferredBy` | String |  |  |  |  | The name of the person who referred the contact. | [link](https://ddwiki.reso.org/display/DDW20/ReferredBy+Field) |
-| `ReverseProspectingEnabledYN` | Boolean |  |  |  |  | Reverse prospecting, a system that allows listing agents to see the agent/member whose client has a search criteria that found the agent's listing, has been enabled for the given client's saved search… | [link](https://ddwiki.reso.org/display/DDW20/ReverseProspectingEnabledYN+Field) |
-| `SocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) |  |  | A list of types of sites or social media that the contact Uniform Resource Locator (URL) or ID is referring to (e.g., website, blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135521) |
-| `SourceSystem` | Resource |  |  |  |  | The source system of the contact's record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135527) |
-| `SourceSystemContactKey` | String |  |  |  |  | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemContactKey+Field) |
-| `SourceSystemID` | String |  |  |  |  | The OUID Resource's OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135539) |
-| `SourceSystemName` | String |  |  |  |  | The name of the immediate record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135545) |
-| `SpousePartnerName` | String |  |  |  |  | The contact's spouse or partner. | [link](https://ddwiki.reso.org/display/DDW20/SpousePartnerName+Field) |
-| `TollFreePhone` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TollFreePhone+Field) |
-| `VoiceMail` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/VoiceMail+Field) |
-| `VoiceMailExt` | String |  |  |  |  | The extension of the given phone number (if applicable). | [link](https://ddwiki.reso.org/display/DDW20/VoiceMailExt+Field) |
-| `WorkAddress1` | String |  |  |  |  | The street number, direction, name and suffix of the contact's work. | [link](https://ddwiki.reso.org/display/DDW20/WorkAddress1+Field) |
-| `WorkAddress2` | String |  |  |  |  | The unit/suite number of the contact's work. | [link](https://ddwiki.reso.org/display/DDW20/WorkAddress2+Field) |
-| `WorkCarrierRoute` | String |  |  |  |  | The group of addresses to which the U.S. | [link](https://ddwiki.reso.org/display/DDW20/WorkCarrierRoute+Field) |
-| `WorkCity` | String |  |  |  |  | The city of the contact's work. | [link](https://ddwiki.reso.org/display/DDW20/WorkCity+Field) |
-| `WorkCountry` | String List, Single |  | [Country](#country) |  |  | The country abbreviation in a postal address. | [link](https://ddwiki.reso.org/display/DDW20/WorkCountry+Field) |
-| `WorkCountyOrParish` | String List, Single |  | CountyOrParish |  |  | The county or parish in which the contact's work is addressed. | [link](https://ddwiki.reso.org/display/DDW20/WorkCountyOrParish+Field) |
-| `WorkPostalCode` | String |  |  |  |  | The postal code of the contact's work. | [link](https://ddwiki.reso.org/display/DDW20/WorkPostalCode+Field) |
-| `WorkPostalCodePlus4` | String |  |  |  |  | The four-digit extension of a U.S. | [link](https://ddwiki.reso.org/display/DDW20/WorkPostalCodePlus4+Field) |
-| `WorkStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) |  |  | The state or province in which the contact's work is addressed. | [link](https://ddwiki.reso.org/display/DDW20/WorkStateOrProvince+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `Anniversary` | Date |  |  |  | The month, day and year of the contact's wedding anniversary. | [link](https://dd.reso.org/DD2.0/Contacts/Anniversary/) |
+| `AssistantEmail` | String |  |  |  | The email address of the contact's assistant. | [link](https://dd.reso.org/DD2.0/Contacts/AssistantEmail/) |
+| `AssistantName` | String |  |  |  | The name of the contact's assistant. | [link](https://dd.reso.org/DD2.0/Contacts/AssistantName/) |
+| `AssistantPhone` | String |  |  |  | The phone number of the contact's assistant. | [link](https://dd.reso.org/DD2.0/Contacts/AssistantPhone/) |
+| `AssistantPhoneExt` | String |  |  |  | The phone number extension of the contact's assistant. | [link](https://dd.reso.org/DD2.0/Contacts/AssistantPhoneExt/) |
+| `Birthdate` | Date |  |  |  | The month, day and year of the contact's birthday. | [link](https://dd.reso.org/DD2.0/Contacts/Birthdate/) |
+| `BusinessFax` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Contacts/BusinessFax/) |
+| `Children` | String |  |  |  | A list of the names of the contact's children in a comma-separated list. | [link](https://dd.reso.org/DD2.0/Contacts/Children/) |
+| `Company` | String |  |  |  | The contact's company or employer. | [link](https://dd.reso.org/DD2.0/Contacts/Company/) |
+| `ContactKey` | String |  |  | 0% | A system-unique identifier for the contact. | [link](https://dd.reso.org/DD2.0/Contacts/ContactKey/) |
+| `ContactLoginId` | String |  |  |  | The local, well-known identifier for the contact. | [link](https://dd.reso.org/DD2.0/Contacts/ContactLoginId/) |
+| `ContactPassword` | String |  |  |  | A client password that the member wishes to share with other systems. | [link](https://dd.reso.org/DD2.0/Contacts/ContactPassword/) |
+| `ContactStatus` | String List, Single |  | [ContactStatus](#contactstatus) |  | The status of the contact (i.e., Active, Inactive, On Vacation, Deleted, etc.). | [link](https://dd.reso.org/DD2.0/Contacts/ContactStatus/) |
+| `ContactType` | String List, Multi |  | [ContactType](#contacttype) |  | The type of contact. | [link](https://dd.reso.org/DD2.0/Contacts/ContactType/) |
+| `ContactsOtherPhone` | Collection |  |  |  | A collection of the types of other phone fields available for Contacts. | [link](https://dd.reso.org/DD2.0/Contacts/ContactsOtherPhone/) |
+| `ContactsSocialMedia` | Collection |  |  |  | A collection of the types of social media fields available for Contacts. | [link](https://dd.reso.org/DD2.0/Contacts/ContactsSocialMedia/) |
+| `Department` | String |  |  |  | The department in which the contact works. | [link](https://dd.reso.org/DD2.0/Contacts/Department/) |
+| `DirectPhone` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Contacts/DirectPhone/) |
+| `Email` | String |  |  |  | The email address of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/Email/) |
+| `Email2` | String |  |  |  | The secondary email address of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/Email2/) |
+| `Email3` | String |  |  |  | The tertiary email address of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/Email3/) |
+| `FirstName` | String |  |  |  | The first or given name of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/FirstName/) |
+| `FullName` | String |  |  |  | The full name of the contact - first middle last suffix. | [link](https://dd.reso.org/DD2.0/Contacts/FullName/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/Contacts/HistoryTransactional/) |
+| `HomeAddress1` | String |  |  |  | The street number, direction, name and suffix of the contact's home. | [link](https://dd.reso.org/DD2.0/Contacts/HomeAddress1/) |
+| `HomeAddress2` | String |  |  |  | The unit/suite number of the contact's home. | [link](https://dd.reso.org/DD2.0/Contacts/HomeAddress2/) |
+| `HomeCarrierRoute` | String |  |  |  | The group of addresses to which the U.S. | [link](https://dd.reso.org/DD2.0/Contacts/HomeCarrierRoute/) |
+| `HomeCity` | String |  |  |  | The city of the contact's home. | [link](https://dd.reso.org/DD2.0/Contacts/HomeCity/) |
+| `HomeCountry` | String List, Single |  | [Country](#country) |  | The country abbreviation in a postal address. | [link](https://dd.reso.org/DD2.0/Contacts/HomeCountry/) |
+| `HomeCountyOrParish` | String List, Single |  | CountyOrParish |  | The county or parish in which the contact's home is addressed. | [link](https://dd.reso.org/DD2.0/Contacts/HomeCountyOrParish/) |
+| `HomeFax` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Contacts/HomeFax/) |
+| `HomePhone` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Contacts/HomePhone/) |
+| `HomePostalCode` | String |  |  |  | The postal code of the contact's home. | [link](https://dd.reso.org/DD2.0/Contacts/HomePostalCode/) |
+| `HomePostalCodePlus4` | String |  |  |  | The four-digit extension of the U.S. | [link](https://dd.reso.org/DD2.0/Contacts/HomePostalCodePlus4/) |
+| `HomeStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) |  | The state or province in which the contact's home is addressed. | [link](https://dd.reso.org/DD2.0/Contacts/HomeStateOrProvince/) |
+| `JobTitle` | String |  |  |  | The title or position of the contact within their organization. | [link](https://dd.reso.org/DD2.0/Contacts/JobTitle/) |
+| `Language` | String List, Multi |  | [Languages](#languages) |  | The languages spoken by the contact. | [link](https://dd.reso.org/DD2.0/Contacts/Language/) |
+| `LastName` | String |  |  |  | The last or surname of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/LastName/) |
+| `LeadSource` | String |  |  |  | The source or person that provided the contact. | [link](https://dd.reso.org/DD2.0/Contacts/LeadSource/) |
+| `Media` | Collection |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://dd.reso.org/DD2.0/Contacts/Media/) |
+| `MiddleName` | String |  |  |  | The middle name of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/MiddleName/) |
+| `MobilePhone` | String |  |  |  | The mobile phone number of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/MobilePhone/) |
+| `ModificationTimestamp` | Timestamp |  |  | 0% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Contacts/ModificationTimestamp/) |
+| `NamePrefix` | String |  |  |  | The prefix to the name (e.g., Dr., Mr., Ms.). | [link](https://dd.reso.org/DD2.0/Contacts/NamePrefix/) |
+| `NameSuffix` | String |  |  |  | The suffix to the surname (e.g., Esq., Jr., III). | [link](https://dd.reso.org/DD2.0/Contacts/NameSuffix/) |
+| `Nickname` | String |  |  |  | An alternate name used by the contact, usually as a substitute for the first name. | [link](https://dd.reso.org/DD2.0/Contacts/Nickname/) |
+| `Notes` | String |  |  |  | The recorded notes about the client. | [link](https://dd.reso.org/DD2.0/Contacts/Notes/) |
+| `OfficePhone` | String |  |  |  | The main contact phone number of the office. | [link](https://dd.reso.org/DD2.0/Contacts/OfficePhone/) |
+| `OfficePhoneExt` | String |  |  |  | The extension of the given phone number (if applicable). | [link](https://dd.reso.org/DD2.0/Contacts/OfficePhoneExt/) |
+| `OriginalEntryTimestamp` | Timestamp |  |  |  | The date/time the contact record was originally input into the source system. | [link](https://dd.reso.org/DD2.0/Contacts/OriginalEntryTimestamp/) |
+| `OriginatingSystem` | Resource |  |  |  | The originating system of the contact's record. | [link](https://dd.reso.org/DD2.0/Contacts/OriginatingSystem/) |
+| `OriginatingSystemContactKey` | String |  |  |  | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Contacts/OriginatingSystemContactKey/) |
+| `OriginatingSystemID` | String |  |  |  | The OUID Resource's OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Contacts/OriginatingSystemID/) |
+| `OriginatingSystemName` | String |  |  |  | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Contacts/OriginatingSystemName/) |
+| `OtherAddress1` | String |  |  |  | The other street number, direction, name and suffix of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/OtherAddress1/) |
+| `OtherAddress2` | String |  |  |  | The other unit/suite number of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/OtherAddress2/) |
+| `OtherCarrierRoute` | String |  |  |  | The group of addresses to which the U.S. | [link](https://dd.reso.org/DD2.0/Contacts/OtherCarrierRoute/) |
+| `OtherCity` | String |  |  |  | The other city of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/OtherCity/) |
+| `OtherCountry` | String List, Single |  | [Country](#country) |  | The other country abbreviation in a postal address. | [link](https://dd.reso.org/DD2.0/Contacts/OtherCountry/) |
+| `OtherCountyOrParish` | String List, Single |  | CountyOrParish |  | The other county or parish in which the contact is addressed. | [link](https://dd.reso.org/DD2.0/Contacts/OtherCountyOrParish/) |
+| `OtherPhoneType` | String List, Single |  | [OtherPhoneType](#otherphonetype) |  | The type of "other" phone that does not already exist in the given phone fields or if a second of any type of phone field is needed (i.e., HomePhone2, BrothersPhone, etc.). | [link](https://dd.reso.org/DD2.0/Contacts/OtherPhoneType/) |
+| `OtherPostalCode` | String |  |  |  | The other postal code of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/OtherPostalCode/) |
+| `OtherPostalCodePlus4` | String |  |  |  | The other four-digit extension of the U.S. | [link](https://dd.reso.org/DD2.0/Contacts/OtherPostalCodePlus4/) |
+| `OtherStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) |  | The other state or province in which the contact is addressed. | [link](https://dd.reso.org/DD2.0/Contacts/OtherStateOrProvince/) |
+| `OwnerMember` | Resource |  |  |  | The member who owns the contact's record. | [link](https://dd.reso.org/DD2.0/Contacts/OwnerMember/) |
+| `OwnerMemberID` | String |  |  |  | The local, well-known identifier for the member in charge of the contact. | [link](https://dd.reso.org/DD2.0/Contacts/OwnerMemberID/) |
+| `OwnerMemberKey` | String |  |  |  | A system-unique identifier for the member that owns the contact record (References Member.MemberKey). | [link](https://dd.reso.org/DD2.0/Contacts/OwnerMemberKey/) |
+| `Pager` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Contacts/Pager/) |
+| `PhoneTTYTDD` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Contacts/PhoneTTYTDD/) |
+| `PreferredAddress` | String List, Single |  | [PreferredAddress](#preferredaddress) |  | A list of the address options (i.e., Home, Work and Other) used to determine the address preferred by the client. | [link](https://dd.reso.org/DD2.0/Contacts/PreferredAddress/) |
+| `PreferredPhone` | String List, Single |  | [PreferredPhone](#preferredphone) |  | The phone number that the contact prefers to be contacted at. | [link](https://dd.reso.org/DD2.0/Contacts/PreferredPhone/) |
+| `ReferredBy` | String |  |  |  | The name of the person who referred the contact. | [link](https://dd.reso.org/DD2.0/Contacts/ReferredBy/) |
+| `ReverseProspectingEnabledYN` | Boolean |  |  |  | Reverse prospecting, a system that allows listing agents to see the agent/member whose client has a search criteria that found the agent's listing, has been enabled for the given client's saved search… | [link](https://dd.reso.org/DD2.0/Contacts/ReverseProspectingEnabledYN/) |
+| `SocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) |  | A list of types of sites or social media that the contact Uniform Resource Locator (URL) or ID is referring to (e.g., website, blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://dd.reso.org/DD2.0/Contacts/SocialMediaType/) |
+| `SourceSystem` | Resource |  |  |  | The source system of the contact's record. | [link](https://dd.reso.org/DD2.0/Contacts/SourceSystem/) |
+| `SourceSystemContactKey` | String |  |  |  | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/Contacts/SourceSystemContactKey/) |
+| `SourceSystemID` | String |  |  |  | The OUID Resource's OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Contacts/SourceSystemID/) |
+| `SourceSystemName` | String |  |  |  | The name of the immediate record provider. | [link](https://dd.reso.org/DD2.0/Contacts/SourceSystemName/) |
+| `SpousePartnerName` | String |  |  |  | The contact's spouse or partner. | [link](https://dd.reso.org/DD2.0/Contacts/SpousePartnerName/) |
+| `TollFreePhone` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Contacts/TollFreePhone/) |
+| `VoiceMail` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Contacts/VoiceMail/) |
+| `VoiceMailExt` | String |  |  |  | The extension of the given phone number (if applicable). | [link](https://dd.reso.org/DD2.0/Contacts/VoiceMailExt/) |
+| `WorkAddress1` | String |  |  |  | The street number, direction, name and suffix of the contact's work. | [link](https://dd.reso.org/DD2.0/Contacts/WorkAddress1/) |
+| `WorkAddress2` | String |  |  |  | The unit/suite number of the contact's work. | [link](https://dd.reso.org/DD2.0/Contacts/WorkAddress2/) |
+| `WorkCarrierRoute` | String |  |  |  | The group of addresses to which the U.S. | [link](https://dd.reso.org/DD2.0/Contacts/WorkCarrierRoute/) |
+| `WorkCity` | String |  |  |  | The city of the contact's work. | [link](https://dd.reso.org/DD2.0/Contacts/WorkCity/) |
+| `WorkCountry` | String List, Single |  | [Country](#country) |  | The country abbreviation in a postal address. | [link](https://dd.reso.org/DD2.0/Contacts/WorkCountry/) |
+| `WorkCountyOrParish` | String List, Single |  | CountyOrParish |  | The county or parish in which the contact's work is addressed. | [link](https://dd.reso.org/DD2.0/Contacts/WorkCountyOrParish/) |
+| `WorkPostalCode` | String |  |  |  | The postal code of the contact's work. | [link](https://dd.reso.org/DD2.0/Contacts/WorkPostalCode/) |
+| `WorkPostalCodePlus4` | String |  |  |  | The four-digit extension of a U.S. | [link](https://dd.reso.org/DD2.0/Contacts/WorkPostalCodePlus4/) |
+| `WorkStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) |  | The state or province in which the contact's work is addressed. | [link](https://dd.reso.org/DD2.0/Contacts/WorkStateOrProvince/) |
 
 ## Field details
 
@@ -110,730 +112,866 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>Anniversary</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Aniversario
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>AssistantEmail</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Asistente
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>AssistantName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Asistente
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>AssistantPhone</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Asistente
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>AssistantPhoneExt</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Teléfono de Asistente
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 17 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/17/2016
 
 </details>
 
 <details><summary><code>Birthdate</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fecha de Nacimiento
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** NOV 09 2016
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 11/9/2016
+
+</details>
+
+<details><summary><code>BusinessFax</code></summary>
+
+  - **BEDES:** Contact Label = "Business"Telephone Number Label = "Fax"Telephone Number = [value]
+  - **Status:** Active
+  - **Spanish Name:** Fax de Negocio
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>Children</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Hijos
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>Company</code></summary>
 
   - **BEDES:** Company Name = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Compañía
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>ContactKey</code></summary>
 
   - **BEDES:** Subaddress Type = "Key"Contact ID = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Contacto
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>ContactLoginId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Ingreso de Contacto
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
+
+</details>
+
+<details><summary><code>ContactPassword</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Contraseña de Contacto
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>ContactStatus</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Contacto
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 02 2018
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>ContactType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Contacto
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2016
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2016
 
 </details>
 
 <details><summary><code>ContactsOtherPhone</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ContactsSocialMedia</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>Department</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Departamento
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
+
+</details>
+
+<details><summary><code>DirectPhone</code></summary>
+
+  - **BEDES:** Telephone Number Label = "Direct"Telephone Number = [value]
+  - **Status:** Active
+  - **Spanish Name:** Teléfono Directo
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>Email</code></summary>
 
   - **BEDES:** Priority = "Primary"Email Address = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>Email2</code></summary>
 
   - **BEDES:** Priority = "Secondary"Email Address = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email 2
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>Email3</code></summary>
 
   - **BEDES:** Priority = "Tertiary"Email Address = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email 3
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>FirstName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JAN 23 2019
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 1/23/2019
 
 </details>
 
 <details><summary><code>FullName</code></summary>
 
   - **BEDES:** Full Name = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Completo
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JAN 23 2019
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 1/23/2019
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
 
 </details>
 
 <details><summary><code>HomeAddress1</code></summary>
 
   - **BEDES:** Address Label = "Home"Address Line 1 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de Hogar 1
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>HomeAddress2</code></summary>
 
   - **BEDES:** Address Label = "Home"Address Line 2 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de Hogar 2
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>HomeCarrierRoute</code></summary>
 
   - **BEDES:** Address Label = "Home"Street Name Post Type = "Route"ZIP Plus 4 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ruta Transportista Hogar
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>HomeCity</code></summary>
 
   - **BEDES:** Address Label = "Home"City = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ciudad Hogar
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>HomeCountry</code></summary>
 
   - **BEDES:** Address Label = "Home"Country Name = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** País Hogar
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 11 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/11/2016
+
+</details>
+
+<details><summary><code>HomeCountyOrParish</code></summary>
+
+  - **BEDES:** Address Label = "Home"County = [value]
+  - **Status:** Active
+  - **Spanish Name:** Condado o Distrito Hogar
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>HomeFax</code></summary>
 
   - **BEDES:** Address Label = "Home"Telephone Number Label = "Fax"Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax Hogar
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>HomePhone</code></summary>
 
   - **BEDES:** Address Label = "Home"Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Hogar
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
+
+</details>
+
+<details><summary><code>HomePostalCode</code></summary>
+
+  - **BEDES:** Address Label = "Home"ZIP Code = [value]
+  - **Status:** Active
+  - **Spanish Name:** Código Postal Hogar
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>HomePostalCodePlus4</code></summary>
 
   - **BEDES:** Address Label = "Home"ZIP Plus 4 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal Más 4 Hogar
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>HomeStateOrProvince</code></summary>
 
   - **BEDES:** Address Label = "Home"State = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado o Provincia Hogar
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** AUG 12 2015
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 8/12/2015
 
 </details>
 
 <details><summary><code>JobTitle</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Cargo
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JAN 23 2019
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 1/23/2019
 
 </details>
 
 <details><summary><code>Language</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Idioma
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 15 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/15/2016
+
+</details>
+
+<details><summary><code>LastName</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Apellido
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 1/23/2019
 
 </details>
 
 <details><summary><code>LeadSource</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Cliente Potencial
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** AUG 23 2016
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 8/23/2016
   - **Added in Version:** 1.6
 
 </details>
 
 <details><summary><code>Media</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
 
 </details>
 
 <details><summary><code>MiddleName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Segundo Nombre
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JAN 23 2019
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 1/23/2019
 
 </details>
 
 <details><summary><code>MobilePhone</code></summary>
 
   - **BEDES:** Telephone Number Label = "Mobile" Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Móvil
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 09 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/9/2018
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
   - **BEDES:** Date Status = "Modified"Date = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** SEP 24 2015
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 9/24/2015
 
 </details>
 
 <details><summary><code>NamePrefix</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Prefijo Nombre
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>NameSuffix</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sufijo Nombre
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>Nickname</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Apodo
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JAN 23 2019
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 1/23/2019
 
 </details>
 
 <details><summary><code>Notes</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Notas
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** FEB 21 2013
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 2/21/2013
 
 </details>
 
 <details><summary><code>OfficePhone</code></summary>
 
   - **BEDES:** Telephone Number = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Despacho
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>OfficePhoneExt</code></summary>
 
   - **BEDES:** Telephone Extension = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión Telefónica de Despacho
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 17 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/17/2016
+
+</details>
+
+<details><summary><code>OriginalEntryTimestamp</code></summary>
+
+  - **BEDES:** Date Status = "Created"Date = [value]
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo Entrada Original
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 9/24/2015
 
 </details>
 
 <details><summary><code>OriginatingSystem</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
 
 </details>
 
 <details><summary><code>OriginatingSystemContactKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Contacto Sistema de Origen
-  - **Status Change Date:** FEB 18 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 2/18/2016
+  - **Revision Date:** 2/18/2016
 
 </details>
 
 <details><summary><code>OriginatingSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Sistema de Origen
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
   - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>OriginatingSystemName</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Nombre de Sistema de Origen
+  - **Status Change Date:** 2/18/2016
+  - **Revision Date:** 2/18/2016
 
 </details>
 
 <details><summary><code>OtherAddress1</code></summary>
 
   - **BEDES:** Address Label = "Other"Address Line 1 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otra Dirección1
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>OtherAddress2</code></summary>
 
   - **BEDES:** Address Label = "Other"Address Line 2 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otra Dirección2
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
+
+</details>
+
+<details><summary><code>OtherCarrierRoute</code></summary>
+
+  - **BEDES:** Address Label = "Other"Street Name Post Type = "Route"ZIP Plus 4 = [value]
+  - **Status:** Active
+  - **Spanish Name:** Otra Ruta Transportista
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>OtherCity</code></summary>
 
   - **BEDES:** Address Label = "Other"City = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otra Ciudad
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>OtherCountry</code></summary>
 
   - **BEDES:** Address Label = "Other"Country Name = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro País
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 11 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/11/2016
 
 </details>
 
 <details><summary><code>OtherCountyOrParish</code></summary>
 
   - **BEDES:** Address Label = "Other"County = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro Condado o Distrito
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** AUG 09 2013
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 8/9/2013
 
 </details>
 
 <details><summary><code>OtherPhoneType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro Tipo de Teléfono
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** APR 11 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>OtherPostalCode</code></summary>
 
   - **BEDES:** Address Label = "Other"ZIP Code = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro Código Postal
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>OtherPostalCodePlus4</code></summary>
 
   - **BEDES:** Address Label = "Other"ZIP Plus 4 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro Código Postal Más4
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>OtherStateOrProvince</code></summary>
 
   - **BEDES:** Address Label = "Other"State = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro Estado o Provincia
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** AUG 12 2015
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 8/12/2015
 
 </details>
 
 <details><summary><code>OwnerMember</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
 
 </details>
 
 <details><summary><code>OwnerMemberID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Miembro Propietario
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 17 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/17/2017
 
 </details>
 
 <details><summary><code>OwnerMemberKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Miembro Propietario
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 17 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/17/2017
+
+</details>
+
+<details><summary><code>Pager</code></summary>
+
+  - **BEDES:** Telephone Number Label = "Pager"Telephone Number = [value]
+  - **Status:** Active
+  - **Spanish Name:** Buscapersonas
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
+
+</details>
+
+<details><summary><code>PhoneTTYTDD</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Teléfono TTYTDD
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 11/30/2018
 
 </details>
 
 <details><summary><code>PreferredAddress</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección Preferida
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 02 2018
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>PreferredPhone</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Preferido
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 02 2018
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>ReferredBy</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Referido por
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** OCT 18 2014
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 10/18/2014
 
 </details>
 
 <details><summary><code>ReverseProspectingEnabledYN</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 30 2019
-  - **Revision Date:** APR 30 2019
+  - **Status:** Active
+  - **Status Change Date:** 4/30/2019
+  - **Revision Date:** 4/30/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SocialMediaType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Redes Sociales
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** APR 11 2022
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>SourceSystem</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
 
 </details>
 
 <details><summary><code>SourceSystemContactKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Contacto Sistema Fuente
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Sistema Fuente
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Sistema Fuente
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
   - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>SpousePartnerName</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Nombre de Cónyuge o Pareja
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>TollFreePhone</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Gratuito
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>VoiceMail</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buzón de Voz
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>VoiceMailExt</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Buzón de Voz
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 17 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/17/2016
 
 </details>
 
 <details><summary><code>WorkAddress1</code></summary>
 
   - **BEDES:** Address Label = "Work"Address Line 1 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de Lugar de Trabajo 1
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>WorkAddress2</code></summary>
 
   - **BEDES:** Address Label = "Work"Address Line 2 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de Lugar de Trabajo 2
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>WorkCarrierRoute</code></summary>
 
   - **BEDES:** Address Label = "Work"Street Name Post Type = "Route"ZIP Plus 4 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ruta Transportista Lugar de Trabajo
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>WorkCity</code></summary>
 
   - **BEDES:** Address Label = "Work"City = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ciudad de Lugar de Trabajo
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>WorkCountry</code></summary>
 
   - **BEDES:** Address Label = "Work"Country Name = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** País de Lugar de Trabajo
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 11 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/11/2016
 
 </details>
 
 <details><summary><code>WorkCountyOrParish</code></summary>
 
   - **BEDES:** Address Label = "Work"County = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Condado o Distrito de Lugar de Trabajo
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** AUG 09 2013
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 8/9/2013
+
+</details>
+
+<details><summary><code>WorkPostalCode</code></summary>
+
+  - **BEDES:** Address Label = "Work"ZIP Code = [value]
+  - **Status:** Active
+  - **Spanish Name:** Código Postal de Lugar de Trabajo
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>WorkPostalCodePlus4</code></summary>
 
   - **BEDES:** Address Label = "Work"ZIP Plus 4 = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal Más 4 de Lugar de Trabajo
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** DEC 12 2012
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 12/12/2012
 
 </details>
 
 <details><summary><code>WorkStateOrProvince</code></summary>
 
   - **BEDES:** Address Label = "Work"State = [value]
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado o Provincia de Hogar
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** AUG 12 2015
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 8/12/2015
 
 </details>
 
 ## Lookups
 
 ### ContactStatus
+
+4 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ContactStatus/)
 
 | Value | Definition |
 |---|---|
@@ -843,6 +981,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `On Vacation` | The contact is on vacation. |
 
 ### ContactType
+
+22 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ContactType/)
 
 | Value | Definition |
 |---|---|
@@ -870,6 +1010,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Title Representative` | The contact supports the title and escrow obligations of the transaction. |
 
 ### Country
+
+246 values · used by 12 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Country/)
 
 | Value | Definition |
 |---|---|
@@ -1122,6 +1264,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Languages
 
+190 values · used by 3 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Languages/)
+
 | Value | Definition |
 |---|---|
 | `Abkhazian` | The language spoken by the member/individual is Abkhazian. |
@@ -1317,6 +1461,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### OtherPhoneType
 
+14 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OtherPhoneType/)
+
 | Value | Definition |
 |---|---|
 | `Direct` | This is the contact's direct number. |
@@ -1336,6 +1482,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### PreferredAddress
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PreferredAddress/)
+
 | Value | Definition |
 |---|---|
 | `Home` | The contact prefers the use of their home address. |
@@ -1343,6 +1491,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Work` | The contact prefers the use of their work address. |
 
 ### PreferredPhone
+
+7 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PreferredPhone/)
 
 | Value | Definition |
 |---|---|
@@ -1355,6 +1505,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Voicemail` | The contact prefers the use of their voicemail phone. |
 
 ### SocialMediaType
+
+17 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SocialMediaType/)
 
 | Value | Definition |
 |---|---|
@@ -1377,6 +1529,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `YouTube` | Information pertaining to the YouTube account of the member/office/contact. |
 
 ### StateOrProvince
+
+65 values · used by 19 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StateOrProvince/)
 
 | Value | Definition |
 |---|---|

@@ -1,6 +1,8 @@
 # PropertyPowerStorage
 
-_RESO Data Dictionary 2.0 resource — 6 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/PropertyPowerStorage+Resource) for the canonical page._
+Different means of storing power on a property.
+
+**RESO DD 2.0** — 6 fields · last revised 1/19/2023 · [dd.reso.org](https://dd.reso.org/DD2.0/PropertyPowerStorage/)
 
 ## Groups
 
@@ -8,14 +10,14 @@ _RESO Data Dictionary 2.0 resource — 6 fields. See [DDwiki](https://ddwiki.res
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `DateOfInstallation` | Date |  |  |  |  | The date the power storage system was installed. | [link](https://ddwiki.reso.org/display/DDW20/DateOfInstallation+Field) |
-| `InformationSource` | String |  |  |  |  | The provider of the information about the power storage system. | [link](https://ddwiki.reso.org/display/DDW20/InformationSource+Field) |
-| `ModificationTimestamp` | Timestamp |  |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=12361226) |
-| `NameplateCapacity` | Number |  |  |  |  | The kWh the battery is theoretically able to store. | [link](https://ddwiki.reso.org/display/DDW20/NameplateCapacity+Field) |
-| `PowerStorageKey` | String |  |  |  |  | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/PowerStorageKey+Field) |
-| `PowerStorageType` | String List, Single |  | [PowerStorageType](#powerstoragetype) |  |  | The type of battery. | [link](https://ddwiki.reso.org/display/DDW20/PowerStorageType+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `DateOfInstallation` | Date |  |  |  | The date the power storage system was installed. | [link](https://dd.reso.org/DD2.0/PropertyPowerStorage/DateOfInstallation/) |
+| `InformationSource` | String |  |  |  | The provider of the information about the power storage system. | [link](https://dd.reso.org/DD2.0/PropertyPowerStorage/InformationSource/) |
+| `ModificationTimestamp` | Timestamp |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/PropertyPowerStorage/ModificationTimestamp/) |
+| `NameplateCapacity` | Number |  |  |  | The kWh the battery is theoretically able to store. | [link](https://dd.reso.org/DD2.0/PropertyPowerStorage/NameplateCapacity/) |
+| `PowerStorageKey` | String |  |  |  | A system unique identifier. | [link](https://dd.reso.org/DD2.0/PropertyPowerStorage/PowerStorageKey/) |
+| `PowerStorageType` | String List, Single |  | [PowerStorageType](#powerstoragetype) |  | The type of battery. | [link](https://dd.reso.org/DD2.0/PropertyPowerStorage/PowerStorageType/) |
 
 ## Field details
 
@@ -23,36 +25,54 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>DateOfInstallation</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 19 2023
-  - **Revision Date:** JAN 19 2023
+  - **Status:** Active
+  - **Status Change Date:** 1/19/2023
+  - **Revision Date:** 1/19/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>InformationSource</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 19 2023
-  - **Revision Date:** JAN 19 2023
+  - **Status:** Active
+  - **Status Change Date:** 1/19/2023
+  - **Revision Date:** 1/19/2023
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>ModificationTimestamp</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 1/19/2023
+  - **Revision Date:** 1/19/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>NameplateCapacity</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 19 2023
-  - **Revision Date:** JAN 19 2023
+  - **Status:** Active
+  - **Status Change Date:** 1/19/2023
+  - **Revision Date:** 1/19/2023
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>PowerStorageKey</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 1/19/2023
+  - **Revision Date:** 1/19/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>PowerStorageType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 19 2023
-  - **Revision Date:** JAN 19 2023
+  - **Status:** Active
+  - **Status Change Date:** 1/19/2023
+  - **Revision Date:** 1/19/2023
   - **Added in Version:** 2.0.0
 
 </details>
@@ -60,6 +80,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### PowerStorageType
+
+5 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PowerStorageType/)
 
 | Value | Definition |
 |---|---|

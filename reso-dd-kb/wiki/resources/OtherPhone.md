@@ -1,6 +1,8 @@
 # OtherPhone
 
-_RESO Data Dictionary 2.0 resource — 10 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/OtherPhone+Resource) for the canonical page._
+Additional phone numbers for contacts or members, with type information.
+
+**RESO DD 2.0** — 10 fields · last revised 4/4/2023 · [dd.reso.org](https://dd.reso.org/DD2.0/OtherPhone/)
 
 **Adoption** — weighted Org%: **0%** across 8 measured fields (median 0%, avg 0%).
 
@@ -10,18 +12,18 @@ _RESO Data Dictionary 2.0 resource — 10 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `ClassName` | String List, Single |  | [ClassName](#classname) |  |  | Name of the class to which the record is referencing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135730) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135736) |
-| `ModificationTimestamp` | Timestamp |  |  | 5% | 1% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135742) |
-| `OtherPhoneExt` | String |  |  | 5% | 1% | The extension of the given phone number (if applicable). | [link](https://ddwiki.reso.org/display/DDW20/OtherPhoneExt+Field) |
-| `OtherPhoneKey` | String |  |  | 5% | 1% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/OtherPhoneKey+Field) |
-| `OtherPhoneNumber` | String |  |  | 5% | 1% | The phone option allowing members to convey additional phone numbers other than those already covered by the MemberMobilePhone, MemberFax and other specified fields. | [link](https://ddwiki.reso.org/display/DDW20/OtherPhoneNumber+Field) |
-| `OtherPhoneType` | String List, Single |  | [OtherPhoneType](#otherphonetype) | 5% | 1% | The type of phone record that does not already exist in the given phone fields or if a second of any type of phone field is needed (i.e., HomePhone2, BrothersPhone, etc.). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135763) |
-| `ResourceName` | String List, Single |  | [ResourceName](#resourcename) | 5% | 1% | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135769) |
-| `ResourceRecordID` | String |  |  |  | 0% | The well-known identifier of the related record from the source resource. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135775) |
-| `ResourceRecordKey` | String |  |  | 5% | 1% | The primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey, TeamKey). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135782) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `ClassName` | String List, Single |  | [ClassName](#classname) |  | Name of the class to which the record is referencing. | [link](https://dd.reso.org/DD2.0/OtherPhone/ClassName/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/OtherPhone/HistoryTransactional/) |
+| `ModificationTimestamp` | Timestamp |  |  | 0% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/OtherPhone/ModificationTimestamp/) |
+| `OtherPhoneExt` | String |  |  | 0% | The extension of the given phone number (if applicable). | [link](https://dd.reso.org/DD2.0/OtherPhone/OtherPhoneExt/) |
+| `OtherPhoneKey` | String |  |  | 0% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/OtherPhone/OtherPhoneKey/) |
+| `OtherPhoneNumber` | String |  |  | 0% | The phone option allowing members to convey additional phone numbers other than those already covered by the MemberMobilePhone, MemberFax and other specified fields. | [link](https://dd.reso.org/DD2.0/OtherPhone/OtherPhoneNumber/) |
+| `OtherPhoneType` | String List, Single |  | [OtherPhoneType](#otherphonetype) | 0% | The type of phone record that does not already exist in the given phone fields or if a second of any type of phone field is needed (i.e., HomePhone2, BrothersPhone, etc.). | [link](https://dd.reso.org/DD2.0/OtherPhone/OtherPhoneType/) |
+| `ResourceName` | String List, Single |  | [ResourceName](#resourcename) | 0% | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://dd.reso.org/DD2.0/OtherPhone/ResourceName/) |
+| `ResourceRecordID` | String |  |  | 0% | The well-known identifier of the related record from the source resource. | [link](https://dd.reso.org/DD2.0/OtherPhone/ResourceRecordID/) |
+| `ResourceRecordKey` | String |  |  | 0% | The primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey, TeamKey). | [link](https://dd.reso.org/DD2.0/OtherPhone/ResourceRecordKey/) |
 
 ## Field details
 
@@ -29,27 +31,27 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>ClassName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
@@ -57,18 +59,18 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>OtherPhoneExt</code></summary>
 
   - **BEDES:** Telephone Number Label = "Other"Telephone Extension = [value]
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OtherPhoneKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
@@ -76,45 +78,45 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>OtherPhoneNumber</code></summary>
 
   - **BEDES:** Telephone Number Label = "Other"Telephone Number = [value]
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OtherPhoneType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ResourceName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ResourceRecordID</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ResourceRecordKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
@@ -122,6 +124,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### ClassName
+
+17 values · used by 8 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ClassName/)
 
 | Value | Definition |
 |---|---|
@@ -145,6 +149,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### OtherPhoneType
 
+14 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OtherPhoneType/)
+
 | Value | Definition |
 |---|---|
 | `Direct` | This is the contact's direct number. |
@@ -163,6 +169,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Voicemail` | This is the contact's voicemail. |
 
 ### ResourceName
+
+5 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ResourceName/)
 
 | Value | Definition |
 |---|---|

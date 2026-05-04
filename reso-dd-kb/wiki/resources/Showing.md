@@ -1,6 +1,8 @@
 # Showing
 
-_RESO Data Dictionary 2.0 resource — 44 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/Showing+Resource) for the canonical page._
+Type Usage Agent Group Field Definition Type Usage Agent Originating System AgentOriginatingSystem The originating system of the member associated with the showing. Resource — Agent Originating System ID AgentOriginatingSystemID The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with
+
+**RESO DD 2.0** — 44 fields · last revised 6/16/2022 · [dd.reso.org](https://dd.reso.org/DD2.0/Showing/)
 
 ## Groups
 
@@ -10,52 +12,52 @@ _RESO Data Dictionary 2.0 resource — 44 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `AgentOriginatingSystem` | Resource | Agent |  |  |  | The originating system of the member associated with the showing. | [link](https://ddwiki.reso.org/display/DDW20/AgentOriginatingSystem+Field) |
-| `AgentOriginatingSystemID` | String | Agent |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/display/DDW20/AgentOriginatingSystemID+Field) |
-| `AgentOriginatingSystemName` | String | Agent |  |  |  | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/display/DDW20/AgentOriginatingSystemName+Field) |
-| `AgentSourceSystem` | Resource | Agent |  |  |  | The source system of the member associated with the showing. | [link](https://ddwiki.reso.org/display/DDW20/AgentSourceSystem+Field) |
-| `AgentSourceSystemID` | String | Agent |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/display/DDW20/AgentSourceSystemID+Field) |
-| `AgentSourceSystemName` | String | Agent |  |  |  | The name of the immediate record provider. | [link](https://ddwiki.reso.org/display/DDW20/AgentSourceSystemName+Field) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135609) |
-| `Listing` | Resource | Listing |  |  |  | The listing associated with the showing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135620) |
-| `ListingId` | String | Listing |  |  |  | The well-known identifier for the listing, also known as the MLS number. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135627) |
-| `ListingKey` | String | Listing |  |  |  | A system-unique identifier for the listing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135633) |
-| `ListingOriginatingSystem` | Resource | Listing |  |  |  | The originating system of the Listing record associated with the showing. | [link](https://ddwiki.reso.org/display/DDW20/ListingOriginatingSystem+Field) |
-| `ListingOriginatingSystemID` | String | Listing |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/display/DDW20/ListingOriginatingSystemID+Field) |
-| `ListingOriginatingSystemName` | String | Listing |  |  |  | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/display/DDW20/ListingOriginatingSystemName+Field) |
-| `ListingSourceSystem` | Resource | Listing |  |  |  | The source system of the Listing record associated with the showing. | [link](https://ddwiki.reso.org/display/DDW20/ListingSourceSystem+Field) |
-| `ListingSourceSystemID` | String | Listing |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/display/DDW20/ListingSourceSystemID+Field) |
-| `ListingSourceSystemName` | String | Listing |  |  |  | The name of the immediate record provider. | [link](https://ddwiki.reso.org/display/DDW20/ListingSourceSystemName+Field) |
-| `Media` | Collection |  |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135615) |
-| `ModificationTimestamp` | Timestamp |  |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135621) |
-| `OriginalEntryTimestamp` | Timestamp |  |  |  |  | The transactional timestamp automatically recorded by the system representing the date/time the showing record was entered and made visible to members of the system. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135626) |
-| `OriginatingSystemAgentKey` | String | Agent |  |  |  | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemAgentKey+Field) |
-| `OriginatingSystemListingKey` | String | Listing |  |  |  | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemListingKey+Field) |
-| `OriginatingSystemShowingKey` | String |  |  |  |  | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemShowingKey+Field) |
-| `ShowingAgent` | Resource | Agent |  |  |  | The showing agent. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135640) |
-| `ShowingAgentKey` | String | Agent |  |  |  | A system unique identifier of the member who has scheduled to access the property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135647) |
-| `ShowingAgentMlsID` | String | Agent |  |  |  | The local, well-known identifier for the member who has scheduled to access the property, most commonly representing a buyer. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135653) |
-| `ShowingAllowed` | Boolean |  |  |  |  | The main Y/N field to denote whether showings are allowed to be requested at this time. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAllowed+Field) |
-| `ShowingEndTimestamp` | Timestamp |  |  |  |  | The date and time the showing ends. | [link](https://ddwiki.reso.org/display/DDW20/ShowingEndTimestamp+Field) |
-| `ShowingId` | String |  |  |  |  | The well-known identifier for the Showing record. | [link](https://ddwiki.reso.org/display/DDW20/ShowingId+Field) |
-| `ShowingKey` | String |  |  |  |  | A unique identifier for this record from the immediate source. | [link](https://ddwiki.reso.org/display/DDW20/ShowingKey+Field) |
-| `ShowingOriginatingSystem` | Resource |  |  |  |  | The originating system of the Showing record. | [link](https://ddwiki.reso.org/display/DDW20/ShowingOriginatingSystem+Field) |
-| `ShowingOriginatingSystemID` | String |  |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/display/DDW20/ShowingOriginatingSystemID+Field) |
-| `ShowingOriginatingSystemName` | String |  |  |  |  | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/display/DDW20/ShowingOriginatingSystemName+Field) |
-| `ShowingRequestedTimestamp` | Timestamp |  |  |  |  | The date/time when the showing agent submitted a request to access the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingRequestedTimestamp+Field) |
-| `ShowingSourceSystem` | Resource |  |  |  |  | The source system of the Showing record. | [link](https://ddwiki.reso.org/display/DDW20/ShowingSourceSystem+Field) |
-| `ShowingSourceSystemID` | String |  |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/display/DDW20/ShowingSourceSystemID+Field) |
-| `ShowingSourceSystemName` | String |  |  |  |  | The name of the immediate record provider. | [link](https://ddwiki.reso.org/display/DDW20/ShowingSourceSystemName+Field) |
-| `ShowingStartTimestamp` | Timestamp |  |  |  |  | The date and time the showing begins. | [link](https://ddwiki.reso.org/display/DDW20/ShowingStartTimestamp+Field) |
-| `ShowingStatus` | String List, Single |  | [ShowingStatus](#showingstatus) |  |  | The current state of showing acceptance on the listing. | [link](https://ddwiki.reso.org/display/DDW20/ShowingStatus+Field) |
-| `ShowingTimeZone` | String List, Single |  | [IanaTimeZoneValues](#ianatimezonevalues) |  |  | The standard name of the time zone, as provided by the IANA tz database. | [link](https://ddwiki.reso.org/display/DDW20/ShowingTimeZone+Field) |
-| `ShowingUrl` | String |  |  |  |  | The Uniform Resource Locator (URL) that links to the originating system. | [link](https://ddwiki.reso.org/display/DDW20/ShowingUrl+Field) |
-| `SocialMedia` | Collection |  |  |  |  | The social media associated with the Showing record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135726) |
-| `SourceSystemAgentKey` | String | Agent |  |  |  | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemAgentKey+Field) |
-| `SourceSystemListingKey` | String | Listing |  |  |  | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemListingKey+Field) |
-| `SourceSystemShowingKey` | String |  |  |  |  | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemShowingKey+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `AgentOriginatingSystem` | Resource | Agent |  |  | The originating system of the member associated with the showing. | [link](https://dd.reso.org/DD2.0/Showing/AgentOriginatingSystem/) |
+| `AgentOriginatingSystemID` | String | Agent |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Showing/AgentOriginatingSystemID/) |
+| `AgentOriginatingSystemName` | String | Agent |  |  | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Showing/AgentOriginatingSystemName/) |
+| `AgentSourceSystem` | Resource | Agent |  |  | The source system of the member associated with the showing. | [link](https://dd.reso.org/DD2.0/Showing/AgentSourceSystem/) |
+| `AgentSourceSystemID` | String | Agent |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Showing/AgentSourceSystemID/) |
+| `AgentSourceSystemName` | String | Agent |  |  | The name of the immediate record provider. | [link](https://dd.reso.org/DD2.0/Showing/AgentSourceSystemName/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/Showing/HistoryTransactional/) |
+| `Listing` | Resource | Listing |  |  | The listing associated with the showing. | [link](https://dd.reso.org/DD2.0/Showing/Listing/) |
+| `ListingId` | String | Listing |  |  | The well-known identifier for the listing, also known as the MLS number. | [link](https://dd.reso.org/DD2.0/Showing/ListingId/) |
+| `ListingKey` | String | Listing |  |  | A system-unique identifier for the listing. | [link](https://dd.reso.org/DD2.0/Showing/ListingKey/) |
+| `ListingOriginatingSystem` | Resource | Listing |  |  | The originating system of the Listing record associated with the showing. | [link](https://dd.reso.org/DD2.0/Showing/ListingOriginatingSystem/) |
+| `ListingOriginatingSystemID` | String | Listing |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Showing/ListingOriginatingSystemID/) |
+| `ListingOriginatingSystemName` | String | Listing |  |  | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Showing/ListingOriginatingSystemName/) |
+| `ListingSourceSystem` | Resource | Listing |  |  | The source system of the Listing record associated with the showing. | [link](https://dd.reso.org/DD2.0/Showing/ListingSourceSystem/) |
+| `ListingSourceSystemID` | String | Listing |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Showing/ListingSourceSystemID/) |
+| `ListingSourceSystemName` | String | Listing |  |  | The name of the immediate record provider. | [link](https://dd.reso.org/DD2.0/Showing/ListingSourceSystemName/) |
+| `Media` | Collection |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://dd.reso.org/DD2.0/Showing/Media/) |
+| `ModificationTimestamp` | Timestamp |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Showing/ModificationTimestamp/) |
+| `OriginalEntryTimestamp` | Timestamp |  |  |  | The transactional timestamp automatically recorded by the system representing the date/time the showing record was entered and made visible to members of the system. | [link](https://dd.reso.org/DD2.0/Showing/OriginalEntryTimestamp/) |
+| `OriginatingSystemAgentKey` | String | Agent |  |  | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Showing/OriginatingSystemAgentKey/) |
+| `OriginatingSystemListingKey` | String | Listing |  |  | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Showing/OriginatingSystemListingKey/) |
+| `OriginatingSystemShowingKey` | String |  |  |  | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Showing/OriginatingSystemShowingKey/) |
+| `ShowingAgent` | Resource | Agent |  |  | The showing agent. | [link](https://dd.reso.org/DD2.0/Showing/ShowingAgent/) |
+| `ShowingAgentKey` | String | Agent |  |  | A system unique identifier of the member who has scheduled to access the property. | [link](https://dd.reso.org/DD2.0/Showing/ShowingAgentKey/) |
+| `ShowingAgentMlsID` | String | Agent |  |  | The local, well-known identifier for the member who has scheduled to access the property, most commonly representing a buyer. | [link](https://dd.reso.org/DD2.0/Showing/ShowingAgentMlsID/) |
+| `ShowingAllowed` | Boolean |  |  |  | The main Y/N field to denote whether showings are allowed to be requested at this time. | [link](https://dd.reso.org/DD2.0/Showing/ShowingAllowed/) |
+| `ShowingEndTimestamp` | Timestamp |  |  |  | The date and time the showing ends. | [link](https://dd.reso.org/DD2.0/Showing/ShowingEndTimestamp/) |
+| `ShowingId` | String |  |  |  | The well-known identifier for the Showing record. | [link](https://dd.reso.org/DD2.0/Showing/ShowingId/) |
+| `ShowingKey` | String |  |  |  | A unique identifier for this record from the immediate source. | [link](https://dd.reso.org/DD2.0/Showing/ShowingKey/) |
+| `ShowingOriginatingSystem` | Resource |  |  |  | The originating system of the Showing record. | [link](https://dd.reso.org/DD2.0/Showing/ShowingOriginatingSystem/) |
+| `ShowingOriginatingSystemID` | String |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Showing/ShowingOriginatingSystemID/) |
+| `ShowingOriginatingSystemName` | String |  |  |  | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Showing/ShowingOriginatingSystemName/) |
+| `ShowingRequestedTimestamp` | Timestamp |  |  |  | The date/time when the showing agent submitted a request to access the property. | [link](https://dd.reso.org/DD2.0/Showing/ShowingRequestedTimestamp/) |
+| `ShowingSourceSystem` | Resource |  |  |  | The source system of the Showing record. | [link](https://dd.reso.org/DD2.0/Showing/ShowingSourceSystem/) |
+| `ShowingSourceSystemID` | String |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Showing/ShowingSourceSystemID/) |
+| `ShowingSourceSystemName` | String |  |  |  | The name of the immediate record provider. | [link](https://dd.reso.org/DD2.0/Showing/ShowingSourceSystemName/) |
+| `ShowingStartTimestamp` | Timestamp |  |  |  | The date and time the showing begins. | [link](https://dd.reso.org/DD2.0/Showing/ShowingStartTimestamp/) |
+| `ShowingStatus` | String List, Single |  | [ShowingStatus](#showingstatus) |  | The current state of showing acceptance on the listing. | [link](https://dd.reso.org/DD2.0/Showing/ShowingStatus/) |
+| `ShowingTimeZone` | String List, Single |  | [IanaTimeZoneValues](#ianatimezonevalues) |  | The standard name of the time zone, as provided by the IANA tz database. | [link](https://dd.reso.org/DD2.0/Showing/ShowingTimeZone/) |
+| `ShowingUrl` | String |  |  |  | The Uniform Resource Locator (URL) that links to the originating system. | [link](https://dd.reso.org/DD2.0/Showing/ShowingUrl/) |
+| `SocialMedia` | Collection |  |  |  | The social media associated with the Showing record. | [link](https://dd.reso.org/DD2.0/Showing/SocialMedia/) |
+| `SourceSystemAgentKey` | String | Agent |  |  | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/Showing/SourceSystemAgentKey/) |
+| `SourceSystemListingKey` | String | Listing |  |  | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/Showing/SourceSystemListingKey/) |
+| `SourceSystemShowingKey` | String |  |  |  | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/Showing/SourceSystemShowingKey/) |
 
 ## Field details
 
@@ -63,376 +65,415 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>AgentOriginatingSystem</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>AgentOriginatingSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Agente Sistema de Origen
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>AgentOriginatingSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Agente Sistema de Origen
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>AgentSourceSystem</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>AgentSourceSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Agente Sistema Fuente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>AgentSourceSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Agente Sistema Fuente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>Listing</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ListingId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Listado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ListingKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Listado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 09 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/9/2022
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ListingOriginatingSystem</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ListingOriginatingSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Listado Sistema Fuente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ListingOriginatingSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Listado Sistema Fuente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ListingSourceSystem</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ListingSourceSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Listado Sistema Fuente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>ListingSourceSystemName</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Nombre Listado Sistema Fuente
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>Media</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>ModificationTimestamp</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo de Modificación
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
+  - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>OriginalEntryTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Entrada Original
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>OriginatingSystemAgentKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Agente Sistema de Origen
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>OriginatingSystemListingKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Listado Sistema de Origen
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>OriginatingSystemShowingKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar Clave Sistema de Origen
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingAgent</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ShowingAgentKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar Clave de Agente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingAgentMlsID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar ID de MLS de Agente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingAllowed</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>ShowingEndTimestamp</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo Mostrando Final
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
+  - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar ID
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar Clave
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 09 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/9/2022
   - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>ShowingOriginatingSystem</code></summary>
+
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
+  - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ShowingOriginatingSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar ID de Sistema de Origen
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingOriginatingSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar Nombre de Sistema de Origen
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingRequestedTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar Solicitud de Marca de Tiempo
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingSourceSystem</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ShowingSourceSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar ID Sistema Fuente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingSourceSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar Nombre Sistema Fuente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingStartTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar Inicio de Marca de Tiempo
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ShowingStatus</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingTimeZone</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingUrl</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SocialMedia</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>SourceSystemAgentKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Agente Sistema Fuente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>SourceSystemListingKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Listado Sistema Fuente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>SourceSystemShowingKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar Clave Sistema Fuente
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
@@ -440,6 +481,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### IanaTimeZoneValues
+
+482 values · used by 3 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/IanaTimeZoneValues/)
 
 | Value | Definition |
 |---|---|
@@ -826,6 +869,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Canada/Yukon` | The time zone is identified as the Canada/Yukon time zone from the IANA tz database. |
 
 ### ShowingStatus
+
+4 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ShowingStatus/)
 
 | Value | Definition |
 |---|---|

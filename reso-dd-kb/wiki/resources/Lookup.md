@@ -1,6 +1,8 @@
 # Lookup
 
-_RESO Data Dictionary 2.0 resource — 6 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/Lookup+Resource) for the canonical page._
+Metadata about lookups (enumerations) available on a given server.
+
+**RESO DD 2.0** — 6 fields · last revised 2/2/2022 · [dd.reso.org](https://dd.reso.org/DD2.0/Lookup/)
 
 **Adoption** — weighted Org%: **46%** across 6 measured fields (median 48%, avg 46%).
 
@@ -10,14 +12,14 @@ _RESO Data Dictionary 2.0 resource — 6 fields. See [DDwiki](https://ddwiki.res
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `LegacyODataValue` | String |  |  | 15% | 32% | The name of the resource the field belongs to. | [link](https://ddwiki.reso.org/display/DDW20/LegacyODataValue+Field) |
-| `LookupKey` | String |  |  | 35% | 36% | The key used to uniquely identify the lookup entry. | [link](https://ddwiki.reso.org/display/DDW20/LookupKey+Field) |
-| `LookupName` | String |  |  | 35% | 36% | The name of the enumeration. | [link](https://ddwiki.reso.org/display/DDW20/LookupName+Field) |
-| `LookupValue` | String |  |  |  | 48% | The human-friendly display name the data consumer receives in the payload and uses in queries. | [link](https://ddwiki.reso.org/display/DDW20/LookupValue+Field) |
-| `ModificationTimestamp` | Timestamp |  |  | 35% | 36% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135963) |
-| `StandardLookupValue` | String |  |  | 35% | 36% | The Data Dictionary LookupDisplayName of the enumerated value. | [link](https://ddwiki.reso.org/display/DDW20/StandardLookupValue+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `LegacyODataValue` | String |  |  | 37% | The name of the resource the field belongs to. | [link](https://dd.reso.org/DD2.0/Lookup/LegacyODataValue/) |
+| `LookupKey` | String |  |  | 48% | The key used to uniquely identify the lookup entry. | [link](https://dd.reso.org/DD2.0/Lookup/LookupKey/) |
+| `LookupName` | String |  |  | 48% | The name of the enumeration. | [link](https://dd.reso.org/DD2.0/Lookup/LookupName/) |
+| `LookupValue` | String |  |  | 48% | The human-friendly display name the data consumer receives in the payload and uses in queries. | [link](https://dd.reso.org/DD2.0/Lookup/LookupValue/) |
+| `ModificationTimestamp` | Timestamp |  |  | 48% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Lookup/ModificationTimestamp/) |
+| `StandardLookupValue` | String |  |  | 48% | The Data Dictionary LookupDisplayName of the enumerated value. | [link](https://dd.reso.org/DD2.0/Lookup/StandardLookupValue/) |
 
 ## Field details
 
@@ -25,45 +27,54 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>LegacyODataValue</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 08 2021
-  - **Revision Date:** DEC 08 2021
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 12/8/2021
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>LookupKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 08 2021
-  - **Revision Date:** DEC 08 2021
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 12/8/2021
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>LookupName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 08 2021
-  - **Revision Date:** DEC 08 2021
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 12/8/2021
+  - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>LookupValue</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 12/8/2021
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 08 2021
-  - **Revision Date:** DEC 08 2021
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 12/8/2021
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>StandardLookupValue</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 08 2021
-  - **Revision Date:** FEB 02 2022
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 2/2/2022
   - **Added in Version:** 1.7.0
 
 </details>

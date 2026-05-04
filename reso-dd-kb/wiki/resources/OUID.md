@@ -1,6 +1,8 @@
 # OUID
 
-_RESO Data Dictionary 2.0 resource — 46 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/OUID+Resource) for the canonical page._
+Organization Unique Identifier (UOI), a common ID system for organizations that exchange real estate data.
+
+**RESO DD 2.0** — 46 fields · last revised 9/1/2017 · [dd.reso.org](https://dd.reso.org/DD2.0/OUID/)
 
 **Adoption** — weighted Org%: **0%** across 11 measured fields (median 0%, avg 0%).
 
@@ -10,54 +12,54 @@ _RESO Data Dictionary 2.0 resource — 46 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `ChangedByMember` | Resource |  |  |  |  | The member who made the changes to the OUID record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135665) |
-| `ChangedByMemberID` | String |  |  |  |  | The local, well-know identifier of the member (user) who made the change. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135671) |
-| `ChangedByMemberKey` | String |  |  |  |  | The unique identifier of the member (user) who made the change. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135677) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135683) |
-| `Media` | Collection |  |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135689) |
-| `ModificationTimestamp` | Timestamp |  |  |  | 0% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135695) |
-| `OrganizationAOR` | String List, Single |  | AOR |  |  | The organization's primary local board or association of REALTORS®, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationAOR+Field) |
-| `OrganizationAddress1` | String |  |  | 5% | 1% | The street number, direction, name and suffix of the organization. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationAddress1+Field) |
-| `OrganizationAddress2` | String |  |  |  |  | The unit/suite number of the organization. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationAddress2+Field) |
-| `OrganizationAorOuid` | String |  |  |  |  | The Unique Organization Identifier (UOI) for the organization's association of REALTORS®, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationAorOuid+Field) |
-| `OrganizationAorOuidKey` | String |  |  |  |  | The OrganizationUniqueIdKey of the association of REALTORS® from the system serving the Unique Organization Identifier (UOI) resource. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationAorOuidKey+Field) |
-| `OrganizationCarrierRoute` | String |  |  |  |  | The group of addresses to which the United States Postal Service (USPS) assigns the same code to aid in mail delivery. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationCarrierRoute+Field) |
-| `OrganizationCity` | String |  |  | 5% | 1% | The city of the organization. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationCity+Field) |
-| `OrganizationComments` | String |  |  |  |  | Comments or notes about the organization. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationComments+Field) |
-| `OrganizationContactEmail` | String |  |  |  |  | The email address of the organization contact. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactEmail+Field) |
-| `OrganizationContactFax` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactFax+Field) |
-| `OrganizationContactFirstName` | String |  |  |  |  | The first name of the organization contact. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactFirstName+Field) |
-| `OrganizationContactFullName` | String |  |  |  |  | The first, middle and last name of the organization contact. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactFullName+Field) |
-| `OrganizationContactJobTitle` | String |  |  |  |  | The title or position of the organization contact. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactJobTitle+Field) |
-| `OrganizationContactLastName` | String |  |  |  |  | The last name of the organization contact. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactLastName+Field) |
-| `OrganizationContactMiddleName` | String |  |  |  |  | The middle name of the organization contact. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactMiddleName+Field) |
-| `OrganizationContactNamePrefix` | String |  |  |  |  | Prefix to the name of the organization contact. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactNamePrefix+Field) |
-| `OrganizationContactNameSuffix` | String |  |  |  |  | Suffix to the surname (e.g., Esq., Jr., III) of the organization contact. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactNameSuffix+Field) |
-| `OrganizationContactPhone` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactPhone+Field) |
-| `OrganizationContactPhoneExt` | String |  |  |  |  | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationContactPhoneExt+Field) |
-| `OrganizationCountry` | String List, Single |  | [Country](#country) | 5% | 1% | The country abbreviation in a postal address. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationCountry+Field) |
-| `OrganizationCountyOrParish` | String List, Single |  | CountyOrParish |  |  | The county or parish in which the organization is addressed. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationCountyOrParish+Field) |
-| `OrganizationMemberCount` | Number |  |  |  |  | The total number of active members in the organization, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationMemberCount+Field) |
-| `OrganizationMlsCode` | String |  |  |  |  | If the organization is an MLS, it is likely that it already has an ID or code based on its name or an abbreviation. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationMlsCode+Field) |
-| `OrganizationMlsVendorName` | String |  |  |  |  | If the organization uses an MLS system, this is the textual name of the vendor. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationMlsVendorName+Field) |
-| `OrganizationMlsVendorOuid` | String |  |  |  |  | If the organization uses an MLS system, this is that vendor's Unique Organization Identifier (UOI). | [link](https://ddwiki.reso.org/display/DDW20/OrganizationMlsVendorOuid+Field) |
-| `OrganizationName` | String |  |  | 5% | 1% | The textual name of the organization represented by a given Unique Organization Identifier (UOI) record. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationName+Field) |
-| `OrganizationNationalAssociationId` | String |  |  |  |  | The national association ID of the organization, if applicable (e.g., in the U.S., this is the NRDS number). | [link](https://ddwiki.reso.org/display/DDW20/OrganizationNationalAssociationId+Field) |
-| `OrganizationPostalCode` | String |  |  | 5% | 1% | The postal code of the organization. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationPostalCode+Field) |
-| `OrganizationPostalCodePlus4` | String |  |  |  |  | The four-digit extension of the U.S. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationPostalCodePlus4+Field) |
-| `OrganizationSocialMedia` | Collection |  |  |  |  | A collection of the types of social media fields available for this organization. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationSocialMedia+Field) |
-| `OrganizationSocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) |  |  | A list of types of sites or social media that the organization Uniform Resource Locator (URL) or ID is referring to (e.g., website, blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://ddwiki.reso.org/display/DDW20/OrganizationSocialMediaType+Field) |
-| `OrganizationStateLicense` | String |  |  |  |  | The license of the organization, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationStateLicense+Field) |
-| `OrganizationStateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) |  |  | The state in which the organization is licensed, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationStateLicenseState+Field) |
-| `OrganizationStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 5% | 1% | The state or province in which the organization is addressed. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationStateOrProvince+Field) |
-| `OrganizationStatus` | Boolean |  |  | 5% | 1% | Determines whether or not if the organization is active or inactive. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationStatus+Field) |
-| `OrganizationStatusChangeTimestamp` | Timestamp |  |  |  |  | The date/time of when the organization status was last changed. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationStatusChangeTimestamp+Field) |
-| `OrganizationType` | String List, Single |  | OrganizationType |  |  | The type of organization (i.e., MLS, vendor, association, etc.). | [link](https://ddwiki.reso.org/display/DDW20/OrganizationType+Field) |
-| `OrganizationUniqueId` | String |  |  | 5% | 1% | This is the unique ID assigned to organizations included in the OUID resource. | [link](https://ddwiki.reso.org/display/DDW20/OrganizationUniqueId+Field) |
-| `OrganizationUniqueIdKey` | String |  |  | 5% | 1% | The key field used by the system hosting a table of Unique Organization Identifiers (UOIs). | [link](https://ddwiki.reso.org/display/DDW20/OrganizationUniqueIdKey+Field) |
-| `OriginalEntryTimestamp` | Timestamp |  |  | 5% | 1% | The date/time the organization record was originally input into the source system. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135932) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `ChangedByMember` | Resource |  |  |  | The member who made the changes to the OUID record. | [link](https://dd.reso.org/DD2.0/OUID/ChangedByMember/) |
+| `ChangedByMemberID` | String |  |  |  | The local, well-know identifier of the member (user) who made the change. | [link](https://dd.reso.org/DD2.0/OUID/ChangedByMemberID/) |
+| `ChangedByMemberKey` | String |  |  |  | The unique identifier of the member (user) who made the change. | [link](https://dd.reso.org/DD2.0/OUID/ChangedByMemberKey/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/OUID/HistoryTransactional/) |
+| `Media` | Collection |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://dd.reso.org/DD2.0/OUID/Media/) |
+| `ModificationTimestamp` | Timestamp |  |  | 0% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/OUID/ModificationTimestamp/) |
+| `OrganizationAOR` | String List, Single |  | AOR |  | The organization's primary local board or association of REALTORS®, if applicable. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationAOR/) |
+| `OrganizationAddress1` | String |  |  | 0% | The street number, direction, name and suffix of the organization. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationAddress1/) |
+| `OrganizationAddress2` | String |  |  |  | The unit/suite number of the organization. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationAddress2/) |
+| `OrganizationAorOuid` | String |  |  |  | The Unique Organization Identifier (UOI) for the organization's association of REALTORS®, if applicable. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationAorOuid/) |
+| `OrganizationAorOuidKey` | String |  |  |  | The OrganizationUniqueIdKey of the association of REALTORS® from the system serving the Unique Organization Identifier (UOI) resource. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationAorOuidKey/) |
+| `OrganizationCarrierRoute` | String |  |  |  | The group of addresses to which the United States Postal Service (USPS) assigns the same code to aid in mail delivery. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationCarrierRoute/) |
+| `OrganizationCity` | String |  |  | 0% | The city of the organization. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationCity/) |
+| `OrganizationComments` | String |  |  |  | Comments or notes about the organization. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationComments/) |
+| `OrganizationContactEmail` | String |  |  |  | The email address of the organization contact. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactEmail/) |
+| `OrganizationContactFax` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactFax/) |
+| `OrganizationContactFirstName` | String |  |  |  | The first name of the organization contact. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactFirstName/) |
+| `OrganizationContactFullName` | String |  |  |  | The first, middle and last name of the organization contact. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactFullName/) |
+| `OrganizationContactJobTitle` | String |  |  |  | The title or position of the organization contact. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactJobTitle/) |
+| `OrganizationContactLastName` | String |  |  |  | The last name of the organization contact. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactLastName/) |
+| `OrganizationContactMiddleName` | String |  |  |  | The middle name of the organization contact. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactMiddleName/) |
+| `OrganizationContactNamePrefix` | String |  |  |  | Prefix to the name of the organization contact. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactNamePrefix/) |
+| `OrganizationContactNameSuffix` | String |  |  |  | Suffix to the surname (e.g., Esq., Jr., III) of the organization contact. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactNameSuffix/) |
+| `OrganizationContactPhone` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactPhone/) |
+| `OrganizationContactPhoneExt` | String |  |  |  | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationContactPhoneExt/) |
+| `OrganizationCountry` | String List, Single |  | [Country](#country) | 0% | The country abbreviation in a postal address. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationCountry/) |
+| `OrganizationCountyOrParish` | String List, Single |  | CountyOrParish |  | The county or parish in which the organization is addressed. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationCountyOrParish/) |
+| `OrganizationMemberCount` | Number |  |  |  | The total number of active members in the organization, if applicable. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationMemberCount/) |
+| `OrganizationMlsCode` | String |  |  |  | If the organization is an MLS, it is likely that it already has an ID or code based on its name or an abbreviation. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationMlsCode/) |
+| `OrganizationMlsVendorName` | String |  |  |  | If the organization uses an MLS system, this is the textual name of the vendor. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationMlsVendorName/) |
+| `OrganizationMlsVendorOuid` | String |  |  |  | If the organization uses an MLS system, this is that vendor's Unique Organization Identifier (UOI). | [link](https://dd.reso.org/DD2.0/OUID/OrganizationMlsVendorOuid/) |
+| `OrganizationName` | String |  |  | 0% | The textual name of the organization represented by a given Unique Organization Identifier (UOI) record. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationName/) |
+| `OrganizationNationalAssociationId` | String |  |  |  | The national association ID of the organization, if applicable (e.g., in the U.S., this is the NRDS number). | [link](https://dd.reso.org/DD2.0/OUID/OrganizationNationalAssociationId/) |
+| `OrganizationPostalCode` | String |  |  | 0% | The postal code of the organization. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationPostalCode/) |
+| `OrganizationPostalCodePlus4` | String |  |  |  | The four-digit extension of the U.S. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationPostalCodePlus4/) |
+| `OrganizationSocialMedia` | Collection |  |  |  | A collection of the types of social media fields available for this organization. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationSocialMedia/) |
+| `OrganizationSocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) |  | A list of types of sites or social media that the organization Uniform Resource Locator (URL) or ID is referring to (e.g., website, blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://dd.reso.org/DD2.0/OUID/OrganizationSocialMediaType/) |
+| `OrganizationStateLicense` | String |  |  |  | The license of the organization, if applicable. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationStateLicense/) |
+| `OrganizationStateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) |  | The state in which the organization is licensed, if applicable. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationStateLicenseState/) |
+| `OrganizationStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 0% | The state or province in which the organization is addressed. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationStateOrProvince/) |
+| `OrganizationStatus` | Boolean |  |  | 0% | Determines whether or not if the organization is active or inactive. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationStatus/) |
+| `OrganizationStatusChangeTimestamp` | Timestamp |  |  |  | The date/time of when the organization status was last changed. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationStatusChangeTimestamp/) |
+| `OrganizationType` | String List, Single |  | OrganizationType |  | The type of organization (i.e., MLS, vendor, association, etc.). | [link](https://dd.reso.org/DD2.0/OUID/OrganizationType/) |
+| `OrganizationUniqueId` | String |  |  | 0% | This is the unique ID assigned to organizations included in the OUID resource. | [link](https://dd.reso.org/DD2.0/OUID/OrganizationUniqueId/) |
+| `OrganizationUniqueIdKey` | String |  |  | 0% | The key field used by the system hosting a table of Unique Organization Identifiers (UOIs). | [link](https://dd.reso.org/DD2.0/OUID/OrganizationUniqueIdKey/) |
+| `OriginalEntryTimestamp` | Timestamp |  |  | 0% | The date/time the organization record was originally input into the source system. | [link](https://dd.reso.org/DD2.0/OUID/OriginalEntryTimestamp/) |
 
 ## Field details
 
@@ -65,404 +67,453 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>ChangedByMember</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ChangedByMemberID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Cambiado por ID de Miembro
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 17 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/17/2017
+  - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>ChangedByMemberKey</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Cambiado por Clave de Miembro
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/17/2017
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>Media</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>ModificationTimestamp</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo de Modificación
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
+  - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationAOR</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Organización AOR
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationAddress1</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de la Organización1
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationAddress2</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de la Organización2
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationAorOuid</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ouid de Organización Aor
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationAorOuidKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ouid de Clave de Organización Aor
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationCarrierRoute</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ruta Transportista Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationCity</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ciudad de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationComments</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationContactEmail</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Contacto de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationContactFax</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax de Contacto de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationContactFirstName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Contacto de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
+  - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>OrganizationContactFullName</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Nombre Completo de Contacto de Organización
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationContactJobTitle</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Cargo de Contacto de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationContactLastName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Apellido de Contacto de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationContactMiddleName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Segundo Nombre de Contacto de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationContactNamePrefix</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Prefijo de Nombre de Contacto de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationContactNameSuffix</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sufijo de Nombre de Contacto de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationContactPhone</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Contacto de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationContactPhoneExt</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Teléfono de Contacto de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationCountry</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** País de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationCountyOrParish</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Condado o Distrito de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationMemberCount</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Conteo de Miembros de Organización
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 17 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/17/2017
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationMlsCode</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código MLS de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationMlsVendorName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Proveedor MLS de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationMlsVendorOuid</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ouid de Proveedor MLS de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationNationalAssociationId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Asociación Nacional de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationPostalCode</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationPostalCodePlus4</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal Más 4 de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>OrganizationSocialMedia</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
+  - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OrganizationSocialMediaType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Redes Sociales de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** APR 11 2022
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 3/27/2026
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationStateLicense</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia Estatal de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
+  - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>OrganizationStateLicenseState</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Estado de Licencia Estatal de Organización
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationStateOrProvince</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado o Provincia de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationStatus</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** SEP 01 2017
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 9/1/2017
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationStatusChangeTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Cambio en Estado de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationUniqueId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Única de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OrganizationUniqueIdKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de ID Única de Organización
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OriginalEntryTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Entrada Original
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JAN 21 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/21/2016
   - **Added in Version:** 1.5.0
 
 </details>
@@ -470,6 +521,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### Country
+
+246 values · used by 12 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Country/)
 
 | Value | Definition |
 |---|---|
@@ -722,6 +775,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### SocialMediaType
 
+17 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SocialMediaType/)
+
 | Value | Definition |
 |---|---|
 | `Blog` | Information pertaining to the blog of the member/office/contact. |
@@ -743,6 +798,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `YouTube` | Information pertaining to the YouTube account of the member/office/contact. |
 
 ### StateOrProvince
+
+65 values · used by 19 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StateOrProvince/)
 
 | Value | Definition |
 |---|---|

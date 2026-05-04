@@ -1,6 +1,8 @@
 # Association
 
-_RESO Data Dictionary 2.0 resource — 45 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/Association+Resource) for the canonical page._
+Fields pertaining to the local real estate trade association.
+
+**RESO DD 2.0** — 45 fields · last revised 8/5/2024 · [dd.reso.org](https://dd.reso.org/DD2.0/Association/)
 
 **Adoption** — weighted Org%: **0%** across 8 measured fields (median 0%, avg 0%).
 
@@ -10,53 +12,53 @@ _RESO Data Dictionary 2.0 resource — 45 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `AssociationAddress1` | String | Association |  |  |  | The street number, direction, name and suffix of the association. | [link](https://ddwiki.reso.org/display/DDW20/AssociationAddress1+Field) |
-| `AssociationAddress2` | String | Association |  |  |  | The unit/suite number of the association. | [link](https://ddwiki.reso.org/display/DDW20/AssociationAddress2+Field) |
-| `AssociationCareOf` | String | Association |  |  |  | The care of (c/o) information for the association's street address. | [link](https://ddwiki.reso.org/display/DDW20/AssociationCareOf+Field) |
-| `AssociationCharterDate` | Date | Association |  |  |  | The charter date for the association. | [link](https://ddwiki.reso.org/display/DDW20/AssociationCharterDate+Field) |
-| `AssociationCity` | String | Association |  |  |  | The city where the association is located. | [link](https://ddwiki.reso.org/display/DDW20/AssociationCity+Field) |
-| `AssociationCountry` | String List, Single | Association | [Country](#country) |  |  | The association's country code for the street address. | [link](https://ddwiki.reso.org/display/DDW20/AssociationCountry+Field) |
-| `AssociationCountyOrParish` | String List, Single | Association | CountyOrParish |  |  | The association's county of the street address. | [link](https://ddwiki.reso.org/display/DDW20/AssociationCountyOrParish+Field) |
-| `AssociationFax` | String | Association |  |  |  | The North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/AssociationFax+Field) |
-| `AssociationKey` | String | Association |  | 5% | 1% | The unique identifier for the association record. | [link](https://ddwiki.reso.org/display/DDW20/AssociationKey+Field) |
-| `AssociationMailAddress1` | String | Association |  |  |  | The street number, direction, name and suffix of the association's mailing address. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMailAddress1+Field) |
-| `AssociationMailAddress2` | String | Association |  |  |  | The unit/suite number of the association's mailing address. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMailAddress2+Field) |
-| `AssociationMailCareOf` | String | Association |  |  |  | The care of (c/o) information for the association's mailing address. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMailCareOf+Field) |
-| `AssociationMailCity` | String | Association |  |  |  | The city in which the association's mail is received. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMailCity+Field) |
-| `AssociationMailCountry` | String List, Single | Association | [Country](#country) |  |  | The country code for the association's mailing address. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMailCountry+Field) |
-| `AssociationMailCountyOrParish` | String List, Single | Association | CountyOrParish |  |  | The county in which the association's mailing address is located. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMailCountyOrParish+Field) |
-| `AssociationMailPostalCode` | String | Association |  |  |  | The postal code in which the association's mail is received. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMailPostalCode+Field) |
-| `AssociationMailPostalCodePlus4` | String | Association |  |  |  | The four-digit extension of the U.S. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMailPostalCodePlus4+Field) |
-| `AssociationMailStateOfProvince` | String List, Single | Association | [StateOrProvince](#stateorprovince) |  |  | The state or province in which the association's mail is received. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMailStateOfProvince+Field) |
-| `AssociationMember` | Resource | Association |  |  |  | The member of the association. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMember+Field) |
-| `AssociationMlsId` | String | Association |  |  |  | The local, well-known identifier for the association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/AssociationMlsId+Field) |
-| `AssociationName` | String | Association |  | 5% | 1% | The name of the association. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135954) |
-| `AssociationNationalAssociationId` | String | Association |  |  |  | The national association ID of the association as known by the National Association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/AssociationNationalAssociationId+Field) |
-| `AssociationPhone` | String | Association |  |  |  | The North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135967) |
-| `AssociationPostalCode` | String | Association |  |  |  | The postal code of the association. | [link](https://ddwiki.reso.org/display/DDW20/AssociationPostalCode+Field) |
-| `AssociationPostalCodePlus4` | String | Association |  |  |  | The four-digit extension of the U.S. | [link](https://ddwiki.reso.org/display/DDW20/AssociationPostalCodePlus4+Field) |
-| `AssociationSocialMedia` | Collection | Association |  |  |  | A collection of the types of social media fields available for the association, including the type of system and other details pertinent to social media. | [link](https://ddwiki.reso.org/display/DDW20/AssociationSocialMedia+Field) |
-| `AssociationStateOrProvince` | String List, Single | Association | [StateOrProvince](#stateorprovince) |  |  | The state or province in which the association is addressed. | [link](https://ddwiki.reso.org/display/DDW20/AssociationStateOrProvince+Field) |
-| `AssociationStatus` | String List, Single | Association | [AssociationStatus](#associationstatus) |  |  | The status of the association (i.e., Active, Inactive). | [link](https://ddwiki.reso.org/display/DDW20/AssociationStatus+Field) |
-| `AssociationType` | String List, Single | Association | [AssociationType](#associationtype) |  |  | The type of association (MLS, Local, Not Applicable, etc.). | [link](https://ddwiki.reso.org/display/DDW20/AssociationType+Field) |
-| `ExecutiveOfficerMemberKey` | String | Association |  |  |  | The executive officer's member key. | [link](https://ddwiki.reso.org/display/DDW20/ExecutiveOfficerMemberKey+Field) |
-| `ExecutiveOfficerMemberMlsId` | String | Association |  |  |  | The local, well-known identifier for the executive officer. | [link](https://ddwiki.reso.org/display/DDW20/ExecutiveOfficerMemberMlsId+Field) |
-| `HistoryTransactional` | Collection | Association |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136020) |
-| `ModificationTimestamp` | Timestamp | Association |  | 5% | 1% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136029) |
-| `MultipleListingServiceId` | String | Association |  |  |  | The ID of the Multiple Listing Service (MLS) used by the association. | [link](https://ddwiki.reso.org/display/DDW20/MultipleListingServiceId+Field) |
-| `OriginalEntryTimestamp` | Timestamp | Association |  | 5% | 1% | Date/time the record was originally input into the source system. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136040) |
-| `OriginatingSystem` | Resource | Association |  |  |  | The originating system of the Association record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136046) |
-| `OriginatingSystemAssociationKey` | String | Association |  | 5% | 1% | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemAssociationKey+Field) |
-| `OriginatingSystemId` | String | Association |  |  | 0% | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136061) |
-| `OriginatingSystemName` | String | Association |  |  | 0% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136067) |
-| `SocialMediaType` | String List, Single | Association | [SocialMediaType](#socialmediatype) |  |  | A list of types of websites or social media the association Uniform Resource Locator (URL) or ID is referring to (e.g., Website, Blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://ddwiki.reso.org/display/DDW20/SocialMediaType+Field) |
-| `SocialMediaUrlOrId` | String | Association |  |  |  | The website URL or ID of social media site or account of the Association. | [link](https://ddwiki.reso.org/display/DDW20/SocialMediaUrlOrId+Field) |
-| `SourceSystem` | Resource | Association |  |  |  | The source system of the Association record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136085) |
-| `SourceSystemAssociationKey` | String | Association |  | 5% | 1% | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemAssociationKey+Field) |
-| `SourceSystemId` | String | Association |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136100) |
-| `SourceSystemName` | String | Association |  |  |  | The name of the immediate record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136107) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `AssociationAddress1` | String | Association |  |  | The street number, direction, name and suffix of the association. | [link](https://dd.reso.org/DD2.0/Association/AssociationAddress1/) |
+| `AssociationAddress2` | String | Association |  |  | The unit/suite number of the association. | [link](https://dd.reso.org/DD2.0/Association/AssociationAddress2/) |
+| `AssociationCareOf` | String | Association |  |  | The care of (c/o) information for the association's street address. | [link](https://dd.reso.org/DD2.0/Association/AssociationCareOf/) |
+| `AssociationCharterDate` | Date | Association |  |  | The charter date for the association. | [link](https://dd.reso.org/DD2.0/Association/AssociationCharterDate/) |
+| `AssociationCity` | String | Association |  |  | The city where the association is located. | [link](https://dd.reso.org/DD2.0/Association/AssociationCity/) |
+| `AssociationCountry` | String List, Single | Association | [Country](#country) |  | The association's country code for the street address. | [link](https://dd.reso.org/DD2.0/Association/AssociationCountry/) |
+| `AssociationCountyOrParish` | String List, Single | Association | CountyOrParish |  | The association's county of the street address. | [link](https://dd.reso.org/DD2.0/Association/AssociationCountyOrParish/) |
+| `AssociationFax` | String | Association |  |  | The North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Association/AssociationFax/) |
+| `AssociationKey` | String | Association |  | 0% | The unique identifier for the association record. | [link](https://dd.reso.org/DD2.0/Association/AssociationKey/) |
+| `AssociationMailAddress1` | String | Association |  |  | The street number, direction, name and suffix of the association's mailing address. | [link](https://dd.reso.org/DD2.0/Association/AssociationMailAddress1/) |
+| `AssociationMailAddress2` | String | Association |  |  | The unit/suite number of the association's mailing address. | [link](https://dd.reso.org/DD2.0/Association/AssociationMailAddress2/) |
+| `AssociationMailCareOf` | String | Association |  |  | The care of (c/o) information for the association's mailing address. | [link](https://dd.reso.org/DD2.0/Association/AssociationMailCareOf/) |
+| `AssociationMailCity` | String | Association |  |  | The city in which the association's mail is received. | [link](https://dd.reso.org/DD2.0/Association/AssociationMailCity/) |
+| `AssociationMailCountry` | String List, Single | Association | [Country](#country) |  | The country code for the association's mailing address. | [link](https://dd.reso.org/DD2.0/Association/AssociationMailCountry/) |
+| `AssociationMailCountyOrParish` | String List, Single | Association | CountyOrParish |  | The county in which the association's mailing address is located. | [link](https://dd.reso.org/DD2.0/Association/AssociationMailCountyOrParish/) |
+| `AssociationMailPostalCode` | String | Association |  |  | The postal code in which the association's mail is received. | [link](https://dd.reso.org/DD2.0/Association/AssociationMailPostalCode/) |
+| `AssociationMailPostalCodePlus4` | String | Association |  |  | The four-digit extension of the U.S. | [link](https://dd.reso.org/DD2.0/Association/AssociationMailPostalCodePlus4/) |
+| `AssociationMailStateOfProvince` | String List, Single | Association | [StateOrProvince](#stateorprovince) |  | The state or province in which the association's mail is received. | [link](https://dd.reso.org/DD2.0/Association/AssociationMailStateOfProvince/) |
+| `AssociationMember` | Resource | Association |  |  | The member of the association. | [link](https://dd.reso.org/DD2.0/Association/AssociationMember/) |
+| `AssociationMlsId` | String | Association |  |  | The local, well-known identifier for the association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Association/AssociationMlsId/) |
+| `AssociationName` | String | Association |  | 0% | The name of the association. | [link](https://dd.reso.org/DD2.0/Association/AssociationName/) |
+| `AssociationNationalAssociationId` | String | Association |  |  | The national association ID of the association as known by the National Association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Association/AssociationNationalAssociationId/) |
+| `AssociationPhone` | String | Association |  |  | The North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Association/AssociationPhone/) |
+| `AssociationPostalCode` | String | Association |  |  | The postal code of the association. | [link](https://dd.reso.org/DD2.0/Association/AssociationPostalCode/) |
+| `AssociationPostalCodePlus4` | String | Association |  |  | The four-digit extension of the U.S. | [link](https://dd.reso.org/DD2.0/Association/AssociationPostalCodePlus4/) |
+| `AssociationSocialMedia` | Collection | Association |  |  | A collection of the types of social media fields available for the association, including the type of system and other details pertinent to social media. | [link](https://dd.reso.org/DD2.0/Association/AssociationSocialMedia/) |
+| `AssociationStateOrProvince` | String List, Single | Association | [StateOrProvince](#stateorprovince) |  | The state or province in which the association is addressed. | [link](https://dd.reso.org/DD2.0/Association/AssociationStateOrProvince/) |
+| `AssociationStatus` | String List, Single | Association | [AssociationStatus](#associationstatus) |  | The status of the association (i.e., Active, Inactive). | [link](https://dd.reso.org/DD2.0/Association/AssociationStatus/) |
+| `AssociationType` | String List, Single | Association | [AssociationType](#associationtype) |  | The type of association (MLS, Local, Not Applicable, etc.). | [link](https://dd.reso.org/DD2.0/Association/AssociationType/) |
+| `ExecutiveOfficerMemberKey` | String | Association |  |  | The executive officer's member key. | [link](https://dd.reso.org/DD2.0/Association/ExecutiveOfficerMemberKey/) |
+| `ExecutiveOfficerMemberMlsId` | String | Association |  |  | The local, well-known identifier for the executive officer. | [link](https://dd.reso.org/DD2.0/Association/ExecutiveOfficerMemberMlsId/) |
+| `HistoryTransactional` | Collection | Association |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/Association/HistoryTransactional/) |
+| `ModificationTimestamp` | Timestamp | Association |  | 0% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Association/ModificationTimestamp/) |
+| `MultipleListingServiceId` | String | Association |  |  | The ID of the Multiple Listing Service (MLS) used by the association. | [link](https://dd.reso.org/DD2.0/Association/MultipleListingServiceId/) |
+| `OriginalEntryTimestamp` | Timestamp | Association |  | 0% | Date/time the record was originally input into the source system. | [link](https://dd.reso.org/DD2.0/Association/OriginalEntryTimestamp/) |
+| `OriginatingSystem` | Resource | Association |  |  | The originating system of the Association record. | [link](https://dd.reso.org/DD2.0/Association/OriginatingSystem/) |
+| `OriginatingSystemAssociationKey` | String | Association |  | 0% | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Association/OriginatingSystemAssociationKey/) |
+| `OriginatingSystemId` | String | Association |  | 0% | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Association/OriginatingSystemId/) |
+| `OriginatingSystemName` | String | Association |  | 0% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Association/OriginatingSystemName/) |
+| `SocialMediaType` | String List, Single | Association | [SocialMediaType](#socialmediatype) |  | A list of types of websites or social media the association Uniform Resource Locator (URL) or ID is referring to (e.g., Website, Blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://dd.reso.org/DD2.0/Association/SocialMediaType/) |
+| `SocialMediaUrlOrId` | String | Association |  |  | The website URL or ID of social media site or account of the Association. | [link](https://dd.reso.org/DD2.0/Association/SocialMediaUrlOrId/) |
+| `SourceSystem` | Resource | Association |  |  | The source system of the Association record. | [link](https://dd.reso.org/DD2.0/Association/SourceSystem/) |
+| `SourceSystemAssociationKey` | String | Association |  | 0% | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/Association/SourceSystemAssociationKey/) |
+| `SourceSystemId` | String | Association |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Association/SourceSystemId/) |
+| `SourceSystemName` | String | Association |  |  | The name of the immediate record provider. | [link](https://dd.reso.org/DD2.0/Association/SourceSystemName/) |
 
 ## Field details
 
@@ -64,360 +66,405 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>AssociationAddress1</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationAddress2</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>AssociationCareOf</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationCharterDate</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationCity</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationCountry</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationCountyOrParish</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 8/5/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationFax</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationMailAddress1</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationMailAddress2</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationMailCareOf</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationMailCity</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationMailCountry</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationMailCountyOrParish</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 8/5/2024
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationMailPostalCode</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationMailPostalCodePlus4</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>AssociationMailStateOfProvince</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationMember</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationMlsId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationNationalAssociationId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationPhone</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>AssociationPostalCode</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>AssociationPostalCodePlus4</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationSocialMedia</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationStateOrProvince</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationStatus</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>AssociationType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ExecutiveOfficerMemberKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ExecutiveOfficerMemberMlsId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>MultipleListingServiceId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OriginalEntryTimestamp</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>OriginatingSystem</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OriginatingSystemAssociationKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OriginatingSystemId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OriginatingSystemName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SocialMediaType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** APR 11 2022
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 4/11/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SocialMediaUrlOrId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SourceSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SourceSystemAssociationKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SourceSystemId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>SourceSystemName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUL 25 2019
-  - **Revision Date:** JUL 25 2019
+  - **Status:** Active
+  - **Status Change Date:** 7/25/2019
+  - **Revision Date:** 7/25/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -426,12 +473,16 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### AssociationStatus
 
+2 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/AssociationStatus/)
+
 | Value | Definition |
 |---|---|
 | `Active` | The association record is active. |
 | `Inactive` | The association record is inactive. |
 
 ### AssociationType
+
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/AssociationType/)
 
 | Value | Definition |
 |---|---|
@@ -440,6 +491,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Not Applicable` | The type of association is not relative to the record. |
 
 ### Country
+
+246 values · used by 12 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Country/)
 
 | Value | Definition |
 |---|---|
@@ -692,6 +745,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### SocialMediaType
 
+17 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SocialMediaType/)
+
 | Value | Definition |
 |---|---|
 | `Blog` | Information pertaining to the blog of the member/office/contact. |
@@ -713,6 +768,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `YouTube` | Information pertaining to the YouTube account of the member/office/contact. |
 
 ### StateOrProvince
+
+65 values · used by 19 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StateOrProvince/)
 
 | Value | Definition |
 |---|---|

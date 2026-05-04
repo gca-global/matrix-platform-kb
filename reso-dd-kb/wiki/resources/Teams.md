@@ -1,6 +1,8 @@
 # Teams
 
-_RESO Data Dictionary 2.0 resource — 45 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/Teams+Resource) for the canonical page._
+Name and other information about teams of members who work together.
+
+**RESO DD 2.0** — 45 fields · last revised 9/24/2015 · [dd.reso.org](https://dd.reso.org/DD2.0/Teams/)
 
 **Adoption** — weighted Org%: **0%** across 18 measured fields (median 0%, avg 0%).
 
@@ -10,53 +12,53 @@ _RESO Data Dictionary 2.0 resource — 45 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135628) |
-| `Media` | Collection |  |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135635) |
-| `ModificationTimestamp` | Timestamp |  |  | 5% | 1% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135641) |
-| `OriginalEntryTimestamp` | Timestamp |  |  | 5% | 1% | The date/time the roster (team or office) record was originally input into the source system. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135646) |
-| `OriginatingSystem` | Resource |  |  |  |  | The originating system of the Teams record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135652) |
-| `OriginatingSystemID` | String |  |  | 1% | 1% | The RESO Unique Organization Identifier's (UOI) OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135659) |
-| `OriginatingSystemKey` | String |  |  | 5% | 1% | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135664) |
-| `OriginatingSystemName` | String |  |  | 5% | 1% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135670) |
-| `SocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) | 1% | 1% | A list of types of sites or social media that the team Uniform Resource Locator (URL) or ID is referring to (e.g., website, blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135674) |
-| `SourceSystem` | Resource |  |  |  |  | The source system of the Teams record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135679) |
-| `SourceSystemID` | String |  |  |  | 0% | The RESO Unique Organization Identifier's (UOI) OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135685) |
-| `SourceSystemKey` | String |  |  | 1% | 1% | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135691) |
-| `SourceSystemName` | String |  |  | 1% | 1% | The name of the team record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135697) |
-| `TeamAddress1` | String |  |  | 5% | 1% | The street number, direction, name and suffix of the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamAddress1+Field) |
-| `TeamAddress2` | String |  |  | 5% | 1% | The unit/suite number of the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamAddress2+Field) |
-| `TeamCarrierRoute` | String |  |  | 1% | 1% | The group of addresses to which the U.S. | [link](https://ddwiki.reso.org/display/DDW20/TeamCarrierRoute+Field) |
-| `TeamCity` | String |  |  | 5% | 1% | The city of the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamCity+Field) |
-| `TeamCountry` | String List, Single |  | [Country](#country) |  |  | The country abbreviation in a postal address. | [link](https://ddwiki.reso.org/display/DDW20/TeamCountry+Field) |
-| `TeamCountyOrParish` | String List, Single |  | CountyOrParish | 1% | 1% | The county or parish in which the team is addressed. | [link](https://ddwiki.reso.org/display/DDW20/TeamCountyOrParish+Field) |
-| `TeamDescription` | String |  |  | 1% | 1% | A description or marketing information about the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamDescription+Field) |
-| `TeamDirectPhone` | String |  |  | 5% | 1% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamDirectPhone+Field) |
-| `TeamEmail` | String |  |  | 5% | 1% | The email address of the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamEmail+Field) |
-| `TeamFax` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamFax+Field) |
-| `TeamKey` | String |  |  | 5% | 1% | A system unique identifier. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2117293) |
-| `TeamLead` | Resource |  |  |  |  | The team lead for the given team. | [link](https://ddwiki.reso.org/display/DDW20/TeamLead+Field) |
-| `TeamLeadKey` | String |  |  | 1% | 1% | The unique system identifier of the team's lead member. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadKey+Field) |
-| `TeamLeadLoginId` | String |  |  | 5% | 1% | The ID used to log on to the MLS system. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadLoginId+Field) |
-| `TeamLeadMlsId` | String |  |  | 5% | 1% | The local, well-known identifier for the team lead. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadMlsId+Field) |
-| `TeamLeadNationalAssociationId` | String |  |  |  |  | The national association ID of the team lead (i.e., NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadNationalAssociationId+Field) |
-| `TeamLeadStateLicense` | String |  |  | 5% | 1% | The license of the team lead. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadStateLicense+Field) |
-| `TeamLeadStateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) | 1% | 1% | The state in which the team lead is licensed. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadStateLicenseState+Field) |
-| `TeamMobilePhone` | String |  |  | 5% | 1% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamMobilePhone+Field) |
-| `TeamName` | String |  |  | 5% | 1% | The name under which the team operates. | [link](https://ddwiki.reso.org/display/DDW20/TeamName+Field) |
-| `TeamOfficePhone` | String |  |  | 5% | 1% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamOfficePhone+Field) |
-| `TeamOfficePhoneExt` | String |  |  | 5% | 1% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/TeamOfficePhoneExt+Field) |
-| `TeamPostalCode` | String |  |  | 5% | 1% | The postal code of the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamPostalCode+Field) |
-| `TeamPostalCodePlus4` | String |  |  | 5% | 1% | The four-digit extension of the U.S. | [link](https://ddwiki.reso.org/display/DDW20/TeamPostalCodePlus4+Field) |
-| `TeamPreferredPhone` | String |  |  | 5% | 1% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamPreferredPhone+Field) |
-| `TeamPreferredPhoneExt` | String |  |  | 5% | 1% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/TeamPreferredPhoneExt+Field) |
-| `TeamStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 1% | 1% | The state or province in which the team is addressed. | [link](https://ddwiki.reso.org/display/DDW20/TeamStateOrProvince+Field) |
-| `TeamStatus` | String List, Single |  | [TeamStatus](#teamstatus) | 5% | 1% | Determines whether the account is active, inactive or under disciplinary action. | [link](https://ddwiki.reso.org/display/DDW20/TeamStatus+Field) |
-| `TeamTollFreePhone` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamTollFreePhone+Field) |
-| `TeamVoiceMail` | String |  |  | 1% | 1% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamVoiceMail+Field) |
-| `TeamVoiceMailExt` | String |  |  | 1% | 1% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/TeamVoiceMailExt+Field) |
-| `TeamsSocialMedia` | Collection |  |  |  |  | A collection of the types of social media fields available for this team. | [link](https://ddwiki.reso.org/display/DDW20/TeamsSocialMedia+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/Teams/HistoryTransactional/) |
+| `Media` | Collection |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://dd.reso.org/DD2.0/Teams/Media/) |
+| `ModificationTimestamp` | Timestamp |  |  | 1% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Teams/ModificationTimestamp/) |
+| `OriginalEntryTimestamp` | Timestamp |  |  | 0% | The date/time the roster (team or office) record was originally input into the source system. | [link](https://dd.reso.org/DD2.0/Teams/OriginalEntryTimestamp/) |
+| `OriginatingSystem` | Resource |  |  |  | The originating system of the Teams record. | [link](https://dd.reso.org/DD2.0/Teams/OriginatingSystem/) |
+| `OriginatingSystemID` | String |  |  |  | The RESO Unique Organization Identifier's (UOI) OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Teams/OriginatingSystemID/) |
+| `OriginatingSystemKey` | String |  |  | 0% | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Teams/OriginatingSystemKey/) |
+| `OriginatingSystemName` | String |  |  | 0% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Teams/OriginatingSystemName/) |
+| `SocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) |  | A list of types of sites or social media that the team Uniform Resource Locator (URL) or ID is referring to (e.g., website, blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://dd.reso.org/DD2.0/Teams/SocialMediaType/) |
+| `SourceSystem` | Resource |  |  |  | The source system of the Teams record. | [link](https://dd.reso.org/DD2.0/Teams/SourceSystem/) |
+| `SourceSystemID` | String |  |  | 0% | The RESO Unique Organization Identifier's (UOI) OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Teams/SourceSystemID/) |
+| `SourceSystemKey` | String |  |  |  | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/Teams/SourceSystemKey/) |
+| `SourceSystemName` | String |  |  |  | The name of the team record provider. | [link](https://dd.reso.org/DD2.0/Teams/SourceSystemName/) |
+| `TeamAddress1` | String |  |  | 0% | The street number, direction, name and suffix of the team. | [link](https://dd.reso.org/DD2.0/Teams/TeamAddress1/) |
+| `TeamAddress2` | String |  |  | 0% | The unit/suite number of the team. | [link](https://dd.reso.org/DD2.0/Teams/TeamAddress2/) |
+| `TeamCarrierRoute` | String |  |  |  | The group of addresses to which the U.S. | [link](https://dd.reso.org/DD2.0/Teams/TeamCarrierRoute/) |
+| `TeamCity` | String |  |  | 0% | The city of the team. | [link](https://dd.reso.org/DD2.0/Teams/TeamCity/) |
+| `TeamCountry` | String List, Single |  | [Country](#country) |  | The country abbreviation in a postal address. | [link](https://dd.reso.org/DD2.0/Teams/TeamCountry/) |
+| `TeamCountyOrParish` | String List, Single |  | CountyOrParish |  | The county or parish in which the team is addressed. | [link](https://dd.reso.org/DD2.0/Teams/TeamCountyOrParish/) |
+| `TeamDescription` | String |  |  |  | A description or marketing information about the team. | [link](https://dd.reso.org/DD2.0/Teams/TeamDescription/) |
+| `TeamDirectPhone` | String |  |  | 0% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Teams/TeamDirectPhone/) |
+| `TeamEmail` | String |  |  | 0% | The email address of the team. | [link](https://dd.reso.org/DD2.0/Teams/TeamEmail/) |
+| `TeamFax` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Teams/TeamFax/) |
+| `TeamKey` | String |  |  | 1% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Teams/TeamKey/) |
+| `TeamLead` | Resource |  |  |  | The team lead for the given team. | [link](https://dd.reso.org/DD2.0/Teams/TeamLead/) |
+| `TeamLeadKey` | String |  |  |  | The unique system identifier of the team's lead member. | [link](https://dd.reso.org/DD2.0/Teams/TeamLeadKey/) |
+| `TeamLeadLoginId` | String |  |  | 0% | The ID used to log on to the MLS system. | [link](https://dd.reso.org/DD2.0/Teams/TeamLeadLoginId/) |
+| `TeamLeadMlsId` | String |  |  | 0% | The local, well-known identifier for the team lead. | [link](https://dd.reso.org/DD2.0/Teams/TeamLeadMlsId/) |
+| `TeamLeadNationalAssociationId` | String |  |  |  | The national association ID of the team lead (i.e., NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Teams/TeamLeadNationalAssociationId/) |
+| `TeamLeadStateLicense` | String |  |  |  | The license of the team lead. | [link](https://dd.reso.org/DD2.0/Teams/TeamLeadStateLicense/) |
+| `TeamLeadStateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) |  | The state in which the team lead is licensed. | [link](https://dd.reso.org/DD2.0/Teams/TeamLeadStateLicenseState/) |
+| `TeamMobilePhone` | String |  |  | 0% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Teams/TeamMobilePhone/) |
+| `TeamName` | String |  |  | 0% | The name under which the team operates. | [link](https://dd.reso.org/DD2.0/Teams/TeamName/) |
+| `TeamOfficePhone` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Teams/TeamOfficePhone/) |
+| `TeamOfficePhoneExt` | String |  |  |  | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Teams/TeamOfficePhoneExt/) |
+| `TeamPostalCode` | String |  |  | 0% | The postal code of the team. | [link](https://dd.reso.org/DD2.0/Teams/TeamPostalCode/) |
+| `TeamPostalCodePlus4` | String |  |  |  | The four-digit extension of the U.S. | [link](https://dd.reso.org/DD2.0/Teams/TeamPostalCodePlus4/) |
+| `TeamPreferredPhone` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Teams/TeamPreferredPhone/) |
+| `TeamPreferredPhoneExt` | String |  |  |  | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Teams/TeamPreferredPhoneExt/) |
+| `TeamStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 0% | The state or province in which the team is addressed. | [link](https://dd.reso.org/DD2.0/Teams/TeamStateOrProvince/) |
+| `TeamStatus` | String List, Single |  | [TeamStatus](#teamstatus) | 0% | Determines whether the account is active, inactive or under disciplinary action. | [link](https://dd.reso.org/DD2.0/Teams/TeamStatus/) |
+| `TeamTollFreePhone` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Teams/TeamTollFreePhone/) |
+| `TeamVoiceMail` | String |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Teams/TeamVoiceMail/) |
+| `TeamVoiceMailExt` | String |  |  |  | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Teams/TeamVoiceMailExt/) |
+| `TeamsSocialMedia` | Collection |  |  |  | A collection of the types of social media fields available for this team. | [link](https://dd.reso.org/DD2.0/Teams/TeamsSocialMedia/) |
 
 ## Field details
 
@@ -64,394 +66,444 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>Media</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** SEP 24 2015
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 9/24/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>OriginalEntryTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Entrada Original
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** SEP 24 2015
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 9/24/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>OriginatingSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OriginatingSystemID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Sistema de Origen
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>OriginatingSystemKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Sistema de Origen
-  - **Status Change Date:** FEB 18 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 2/18/2016
+  - **Revision Date:** 2/18/2016
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>OriginatingSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Sistema de Origen
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SocialMediaType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Redes Sociales
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/27/2026
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>SourceSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>SourceSystemID</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** ID Sistema Fuente
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
+  - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave Sistema Fuente
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>SourceSystemName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Sistema Fuente
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** FEB 18 2016
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 2/18/2016
   - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>TeamAddress1</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de Equipo 1
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamAddress2</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección de Equipo 2
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamCarrierRoute</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ruta Transportista de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamCity</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ciudad de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
+  - **Added in Version:** 1.4.0
+
+</details>
+
+<details><summary><code>TeamCountry</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** País de Equipo
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 1/11/2016
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamCountyOrParish</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Condado o Distrito de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamDescription</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Descripción de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamDirectPhone</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Directo de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamEmail</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
+  - **Added in Version:** 1.4.0
+
+</details>
+
+<details><summary><code>TeamFax</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Fax de Equipo
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamLead</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>TeamLeadKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave Jefe de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamLeadLoginId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Ingreso Jefe de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamLeadMlsId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS Jefe de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
+  - **Added in Version:** 1.4.0
+
+</details>
+
+<details><summary><code>TeamLeadNationalAssociationId</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** ID de Asociación Nacional Jefe de Equipo
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 4/16/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamLeadStateLicense</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia Estatal Jefe de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamLeadStateLicenseState</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Licencia Estatal Jefe de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamMobilePhone</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Móvil de Equipo
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 09 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/9/2018
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamName</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamOfficePhone</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Despacho de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamOfficePhoneExt</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión Telefónica de Despacho de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamPostalCode</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamPostalCodePlus4</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal Más4 de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamPreferredPhone</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Preferido de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamPreferredPhoneExt</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Teléfono Preferido de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamStateOrProvince</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado o Provincia de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** AUG 12 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 8/12/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamStatus</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
+  - **Added in Version:** 1.4.0
+
+</details>
+
+<details><summary><code>TeamTollFreePhone</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Teléfono Gratuito de Equipo
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamVoiceMail</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buzón de Voz de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamVoiceMailExt</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Buzón de Voz de Equipo
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** MAR 18 2015
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 3/18/2015
   - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>TeamsSocialMedia</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
@@ -459,6 +511,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### Country
+
+246 values · used by 12 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Country/)
 
 | Value | Definition |
 |---|---|
@@ -711,6 +765,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### SocialMediaType
 
+17 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SocialMediaType/)
+
 | Value | Definition |
 |---|---|
 | `Blog` | Information pertaining to the blog of the member/office/contact. |
@@ -732,6 +788,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `YouTube` | Information pertaining to the YouTube account of the member/office/contact. |
 
 ### StateOrProvince
+
+65 values · used by 19 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StateOrProvince/)
 
 | Value | Definition |
 |---|---|
@@ -802,6 +860,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `YT` | The Canadian territory in which the listing is located is Yukon. |
 
 ### TeamStatus
+
+2 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/TeamStatus/)
 
 | Value | Definition |
 |---|---|

@@ -1,6 +1,8 @@
 # Prospecting
 
-_RESO Data Dictionary 2.0 resource — 31 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/Prospecting+Resource) for the canonical page._
+Automatic email connecting Contacts and SavedSearch resources to send results matching saved search criteria.
+
+**RESO DD 2.0** — 31 fields · last revised 5/2/2017 · [dd.reso.org](https://dd.reso.org/DD2.0/Prospecting/)
 
 **Adoption** — weighted Org%: **0%** across 2 measured fields (median 0%, avg 0%).
 
@@ -10,39 +12,39 @@ _RESO Data Dictionary 2.0 resource — 31 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `ActiveYN` | Boolean |  |  |  |  | If set to True, the given automated email is active. | [link](https://ddwiki.reso.org/display/DDW20/ActiveYN+Field) |
-| `BccEmailList` | String |  |  |  |  | A comma-separated list of email addresses that are the blind carbon copy (Bcc) address that the automated emails are being sent to. | [link](https://ddwiki.reso.org/display/DDW20/BccEmailList+Field) |
-| `BccMeYN` | Boolean |  |  |  |  | When set to True, the automated mail is also sent as a blind carbon copy (Bcc) to the member who created the automated email. | [link](https://ddwiki.reso.org/display/DDW20/BccMeYN+Field) |
-| `CcEmailList` | String |  |  |  |  | A comma-separated list of email addresses that are the carbon copy (Cc) address that the automated emails are being sent to. | [link](https://ddwiki.reso.org/display/DDW20/CcEmailList+Field) |
-| `ClientActivatedYN` | Boolean |  |  |  |  | If set to True, the client has clicked through to accept automatic emails. | [link](https://ddwiki.reso.org/display/DDW20/ClientActivatedYN+Field) |
-| `ConciergeNotificationsYN` | Boolean |  |  |  |  | If set to True, notifications are to be sent to the member when the auto email is in Concierge mode. | [link](https://ddwiki.reso.org/display/DDW20/ConciergeNotificationsYN+Field) |
-| `ConciergeYN` | Boolean |  |  |  |  | When set to True, the automated mail is in Concierge mode and is to be approved by the member before being sent to the client. | [link](https://ddwiki.reso.org/display/DDW20/ConciergeYN+Field) |
-| `Contact` | Resource |  |  |  |  | The prospecting Contact record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135505) |
-| `ContactKey` | String |  |  |  |  | A system-unique identifier for the contact. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135511) |
-| `DailySchedule` | String List, Multi |  | [DailySchedule](#dailyschedule) |  |  | When Daily is selected as the ScheduleType, a list of days of the week and AM or PM options. | [link](https://ddwiki.reso.org/display/DDW20/DailySchedule+Field) |
-| `DisplayTemplateID` | String |  |  |  |  | The system ID of the display that has been related or set as the default to this saved search. | [link](https://ddwiki.reso.org/display/DDW20/DisplayTemplateID+Field) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135528) |
-| `Language` | String List, Single |  | [Languages](#languages) |  |  | The language that will be used in the given automated email. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135535) |
-| `LastNewChangedTimestamp` | Timestamp |  |  |  |  | The timestamp of when the prospector last found new or modified listings for an automated email. | [link](https://ddwiki.reso.org/display/DDW20/LastNewChangedTimestamp+Field) |
-| `LastViewedTimestamp` | Timestamp |  |  |  |  | A timestamp of when the automated email was last viewed by the client in the portal. | [link](https://ddwiki.reso.org/display/DDW20/LastViewedTimestamp+Field) |
-| `Media` | Collection |  |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135552) |
-| `MessageNew` | String |  |  |  |  | The body of the automated email message when the first email is sent for the prospecting campaign. | [link](https://ddwiki.reso.org/display/DDW20/MessageNew+Field) |
-| `MessageRevise` | String |  |  |  |  | The body of the automated email message to be used when the criteria or settings of an automated email has been modified. | [link](https://ddwiki.reso.org/display/DDW20/MessageRevise+Field) |
-| `MessageUpdate` | String |  |  |  |  | The body of the automated email message for subsequent email messages after the first email is sent. | [link](https://ddwiki.reso.org/display/DDW20/MessageUpdate+Field) |
-| `ModificationTimestamp` | Timestamp |  |  |  | 0% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135576) |
-| `NextSendTimestamp` | Timestamp |  |  |  |  | A timestamp of when the automated email is schedule to next send. | [link](https://ddwiki.reso.org/display/DDW20/NextSendTimestamp+Field) |
-| `OwnerMember` | Resource |  |  |  |  | The member who owns the Prospecting record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135586) |
-| `OwnerMemberID` | String |  |  |  |  | The local, well-known identifier for the member owning the contact. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135593) |
-| `OwnerMemberKey` | String |  |  |  |  | A system-unique identifier for the member that owns the contact record (References Member.MemberKey). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135599) |
-| `ProspectingKey` | String |  |  |  | 0% | A unique identifier for this record from the immediate source. | [link](https://ddwiki.reso.org/display/DDW20/ProspectingKey+Field) |
-| `ReasonActiveOrDisabled` | String List, Single |  | [ReasonActiveOrDisabled](#reasonactiveordisabled) |  |  | A list of reasons the automated email was set to inactive or set back to active (e.g., Agent Disabled, Over Limit, No Listings Found, Reactivated, Client Disabled). | [link](https://ddwiki.reso.org/display/DDW20/ReasonActiveOrDisabled+Field) |
-| `SavedSearch` | Resource |  |  |  |  | The saved search associated with the Prospecting record. | [link](https://ddwiki.reso.org/display/DDW20/SavedSearch+Field) |
-| `SavedSearchKey` | String |  |  |  |  | This is the foreign key relating to the SavedSearch Resource. | [link](https://ddwiki.reso.org/display/DDW20/SavedSearchKey+Field) |
-| `ScheduleType` | String List, Single |  | [ScheduleType](#scheduletype) |  |  | A selection of the type of schedule that the automated email will be sent (i.e., Daily, Monthly or ASAP). | [link](https://ddwiki.reso.org/display/DDW20/ScheduleType+Field) |
-| `Subject` | String |  |  |  |  | The subject line of the automated email being sent. | [link](https://ddwiki.reso.org/display/DDW20/Subject+Field) |
-| `ToEmailList` | String |  |  |  |  | A comma-separated list of email addresses that are the "To" address the automated emails are being sent to. | [link](https://ddwiki.reso.org/display/DDW20/ToEmailList+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `ActiveYN` | Boolean |  |  |  | If set to True, the given automated email is active. | [link](https://dd.reso.org/DD2.0/Prospecting/ActiveYN/) |
+| `BccEmailList` | String |  |  |  | A comma-separated list of email addresses that are the blind carbon copy (Bcc) address that the automated emails are being sent to. | [link](https://dd.reso.org/DD2.0/Prospecting/BccEmailList/) |
+| `BccMeYN` | Boolean |  |  |  | When set to True, the automated mail is also sent as a blind carbon copy (Bcc) to the member who created the automated email. | [link](https://dd.reso.org/DD2.0/Prospecting/BccMeYN/) |
+| `CcEmailList` | String |  |  |  | A comma-separated list of email addresses that are the carbon copy (Cc) address that the automated emails are being sent to. | [link](https://dd.reso.org/DD2.0/Prospecting/CcEmailList/) |
+| `ClientActivatedYN` | Boolean |  |  |  | If set to True, the client has clicked through to accept automatic emails. | [link](https://dd.reso.org/DD2.0/Prospecting/ClientActivatedYN/) |
+| `ConciergeNotificationsYN` | Boolean |  |  |  | If set to True, notifications are to be sent to the member when the auto email is in Concierge mode. | [link](https://dd.reso.org/DD2.0/Prospecting/ConciergeNotificationsYN/) |
+| `ConciergeYN` | Boolean |  |  |  | When set to True, the automated mail is in Concierge mode and is to be approved by the member before being sent to the client. | [link](https://dd.reso.org/DD2.0/Prospecting/ConciergeYN/) |
+| `Contact` | Resource |  |  |  | The prospecting Contact record. | [link](https://dd.reso.org/DD2.0/Prospecting/Contact/) |
+| `ContactKey` | String |  |  |  | A system-unique identifier for the contact. | [link](https://dd.reso.org/DD2.0/Prospecting/ContactKey/) |
+| `DailySchedule` | String List, Multi |  | [DailySchedule](#dailyschedule) |  | When Daily is selected as the ScheduleType, a list of days of the week and AM or PM options. | [link](https://dd.reso.org/DD2.0/Prospecting/DailySchedule/) |
+| `DisplayTemplateID` | String |  |  |  | The system ID of the display that has been related or set as the default to this saved search. | [link](https://dd.reso.org/DD2.0/Prospecting/DisplayTemplateID/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/Prospecting/HistoryTransactional/) |
+| `Language` | String List, Single |  | [Languages](#languages) |  | The language that will be used in the given automated email. | [link](https://dd.reso.org/DD2.0/Prospecting/Language/) |
+| `LastNewChangedTimestamp` | Timestamp |  |  |  | The timestamp of when the prospector last found new or modified listings for an automated email. | [link](https://dd.reso.org/DD2.0/Prospecting/LastNewChangedTimestamp/) |
+| `LastViewedTimestamp` | Timestamp |  |  |  | A timestamp of when the automated email was last viewed by the client in the portal. | [link](https://dd.reso.org/DD2.0/Prospecting/LastViewedTimestamp/) |
+| `Media` | Collection |  |  |  | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://dd.reso.org/DD2.0/Prospecting/Media/) |
+| `MessageNew` | String |  |  |  | The body of the automated email message when the first email is sent for the prospecting campaign. | [link](https://dd.reso.org/DD2.0/Prospecting/MessageNew/) |
+| `MessageRevise` | String |  |  |  | The body of the automated email message to be used when the criteria or settings of an automated email has been modified. | [link](https://dd.reso.org/DD2.0/Prospecting/MessageRevise/) |
+| `MessageUpdate` | String |  |  |  | The body of the automated email message for subsequent email messages after the first email is sent. | [link](https://dd.reso.org/DD2.0/Prospecting/MessageUpdate/) |
+| `ModificationTimestamp` | Timestamp |  |  | 0% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Prospecting/ModificationTimestamp/) |
+| `NextSendTimestamp` | Timestamp |  |  |  | A timestamp of when the automated email is schedule to next send. | [link](https://dd.reso.org/DD2.0/Prospecting/NextSendTimestamp/) |
+| `OwnerMember` | Resource |  |  |  | The member who owns the Prospecting record. | [link](https://dd.reso.org/DD2.0/Prospecting/OwnerMember/) |
+| `OwnerMemberID` | String |  |  |  | The local, well-known identifier for the member owning the contact. | [link](https://dd.reso.org/DD2.0/Prospecting/OwnerMemberID/) |
+| `OwnerMemberKey` | String |  |  |  | A system-unique identifier for the member that owns the contact record (References Member.MemberKey). | [link](https://dd.reso.org/DD2.0/Prospecting/OwnerMemberKey/) |
+| `ProspectingKey` | String |  |  | 0% | A unique identifier for this record from the immediate source. | [link](https://dd.reso.org/DD2.0/Prospecting/ProspectingKey/) |
+| `ReasonActiveOrDisabled` | String List, Single |  | [ReasonActiveOrDisabled](#reasonactiveordisabled) |  | A list of reasons the automated email was set to inactive or set back to active (e.g., Agent Disabled, Over Limit, No Listings Found, Reactivated, Client Disabled). | [link](https://dd.reso.org/DD2.0/Prospecting/ReasonActiveOrDisabled/) |
+| `SavedSearch` | Resource |  |  |  | The saved search associated with the Prospecting record. | [link](https://dd.reso.org/DD2.0/Prospecting/SavedSearch/) |
+| `SavedSearchKey` | String |  |  |  | This is the foreign key relating to the SavedSearch Resource. | [link](https://dd.reso.org/DD2.0/Prospecting/SavedSearchKey/) |
+| `ScheduleType` | String List, Single |  | [ScheduleType](#scheduletype) |  | A selection of the type of schedule that the automated email will be sent (i.e., Daily, Monthly or ASAP). | [link](https://dd.reso.org/DD2.0/Prospecting/ScheduleType/) |
+| `Subject` | String |  |  |  | The subject line of the automated email being sent. | [link](https://dd.reso.org/DD2.0/Prospecting/Subject/) |
+| `ToEmailList` | String |  |  |  | A comma-separated list of email addresses that are the "To" address the automated emails are being sent to. | [link](https://dd.reso.org/DD2.0/Prospecting/ToEmailList/) |
 
 ## Field details
 
@@ -50,264 +52,300 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>ActiveYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Activo SN
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>BccEmailList</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Lista de Correo Electrónico CCO
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>BccMeYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** CCO Yo SN
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>CcEmailList</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Copiar Lista de Correo
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ClientActivatedYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Activado por Cliente SN
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 09 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/9/2022
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ConciergeNotificationsYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Notificaciones de Conserjería SN
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ConciergeYN</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Conserjería SN
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>Contact</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>ContactKey</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Clave de Contacto
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/9/2022
+  - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>DailySchedule</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Horario Diario
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>DisplayTemplateID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Mostrar ID de Plantilla
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>HistoryTransactional</code></summary>
+
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
+  - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>Language</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Idioma
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>LastNewChangedTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Último Cambio Nuevo
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>LastViewedTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de TiempoÚltima Vez Visto
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>Media</code></summary>
+
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
+  - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>MessageNew</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nuevo Mensaje
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>MessageRevise</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Revisar Mensaje
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>MessageUpdate</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Actualización Mensaje
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>NextSendTimestamp</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo Próximo Envío
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>OwnerMember</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OwnerMemberID</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Miembro Propietario
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>OwnerMemberKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Miembro Propietario
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ProspectingKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Prospección
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 09 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/9/2022
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ReasonActiveOrDisabled</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Modo Activo o Desactivado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>SavedSearch</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>SavedSearchKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Búsqueda Guardada
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 09 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/9/2022
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ScheduleType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Horario
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>Subject</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Asunto
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ToEmailList</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Lista de Envíos por Correo Electrónico
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 02 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/2/2017
   - **Added in Version:** 1.6.0
 
 </details>
@@ -315,6 +353,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### DailySchedule
+
+15 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/DailySchedule/)
 
 | Value | Definition |
 |---|---|
@@ -335,6 +375,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Wednesday PM` | The prospect automated email will be sent every Wednesday evening. |
 
 ### Languages
+
+190 values · used by 3 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Languages/)
 
 | Value | Definition |
 |---|---|
@@ -531,6 +573,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ReasonActiveOrDisabled
 
+16 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ReasonActiveOrDisabled/)
+
 | Value | Definition |
 |---|---|
 | `Agent Disabled` | The agent has disabled this auto email. |
@@ -551,6 +595,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Welcome Email Ignored Warning` | The initial automated email has not been viewed by the client/recipient but is still active. |
 
 ### ScheduleType
+
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ScheduleType/)
 
 | Value | Definition |
 |---|---|

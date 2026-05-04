@@ -1,6 +1,8 @@
 # Queue
 
-_RESO Data Dictionary 2.0 resource — 16 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/Queue+Resource) for the canonical page._
+Events that have occurred with records in other resources.
+
+**RESO DD 2.0** — 16 fields · last revised 5/12/2018 · [dd.reso.org](https://dd.reso.org/DD2.0/Queue/)
 
 ## Groups
 
@@ -8,24 +10,24 @@ _RESO Data Dictionary 2.0 resource — 16 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `ClassName` | String List, Single |  | [ClassName](#classname) |  |  | Name of the class that this queue record is referencing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135514) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135520) |
-| `ModificationTimestamp` | Timestamp |  |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135526) |
-| `OriginatingSystem` | Resource |  |  |  |  | The originating system of the Queue record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135532) |
-| `OriginatingSystemID` | String |  |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135538) |
-| `OriginatingSystemName` | String |  |  |  |  | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135544) |
-| `OriginatingSystemQueueKey` | String |  |  |  |  | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemQueueKey+Field) |
-| `QueueTransactionKey` | String |  |  |  |  | A unique identifier for this record from the immediate source. | [link](https://ddwiki.reso.org/display/DDW20/QueueTransactionKey+Field) |
-| `QueueTransactionType` | String List, Single |  | [QueueTransactionType](#queuetransactiontype) |  |  | The type of change that the queue transaction record is representing (e.g., Add, Change, Delete). | [link](https://ddwiki.reso.org/display/DDW20/QueueTransactionType+Field) |
-| `ResourceName` | String List, Single |  | [ResourceName](#resourcename) |  |  | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135568) |
-| `ResourceRecordID` | String |  |  |  |  | The well-known identifier of the related record from the source resource. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135573) |
-| `ResourceRecordKey` | String |  |  |  |  | The primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135579) |
-| `SourceSystem` | Resource |  |  |  |  | The source system of the Queue record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135585) |
-| `SourceSystemID` | String |  |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135591) |
-| `SourceSystemName` | String |  |  |  |  | The name of the queue record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135597) |
-| `SourceSystemQueueKey` | String |  |  |  |  | The system key, a unique record identifier, from the source system, which is the system from which the record was directly received. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemQueueKey+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `ClassName` | String List, Single |  | [ClassName](#classname) |  | Name of the class that this queue record is referencing. | [link](https://dd.reso.org/DD2.0/Queue/ClassName/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/Queue/HistoryTransactional/) |
+| `ModificationTimestamp` | Timestamp |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Queue/ModificationTimestamp/) |
+| `OriginatingSystem` | Resource |  |  |  | The originating system of the Queue record. | [link](https://dd.reso.org/DD2.0/Queue/OriginatingSystem/) |
+| `OriginatingSystemID` | String |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Queue/OriginatingSystemID/) |
+| `OriginatingSystemName` | String |  |  |  | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Queue/OriginatingSystemName/) |
+| `OriginatingSystemQueueKey` | String |  |  |  | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Queue/OriginatingSystemQueueKey/) |
+| `QueueTransactionKey` | String |  |  |  | A unique identifier for this record from the immediate source. | [link](https://dd.reso.org/DD2.0/Queue/QueueTransactionKey/) |
+| `QueueTransactionType` | String List, Single |  | [QueueTransactionType](#queuetransactiontype) |  | The type of change that the queue transaction record is representing (e.g., Add, Change, Delete). | [link](https://dd.reso.org/DD2.0/Queue/QueueTransactionType/) |
+| `ResourceName` | String List, Single |  | [ResourceName](#resourcename) |  | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://dd.reso.org/DD2.0/Queue/ResourceName/) |
+| `ResourceRecordID` | String |  |  |  | The well-known identifier of the related record from the source resource. | [link](https://dd.reso.org/DD2.0/Queue/ResourceRecordID/) |
+| `ResourceRecordKey` | String |  |  |  | The primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey). | [link](https://dd.reso.org/DD2.0/Queue/ResourceRecordKey/) |
+| `SourceSystem` | Resource |  |  |  | The source system of the Queue record. | [link](https://dd.reso.org/DD2.0/Queue/SourceSystem/) |
+| `SourceSystemID` | String |  |  |  | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Queue/SourceSystemID/) |
+| `SourceSystemName` | String |  |  |  | The name of the queue record provider. | [link](https://dd.reso.org/DD2.0/Queue/SourceSystemName/) |
+| `SourceSystemQueueKey` | String |  |  |  | The system key, a unique record identifier, from the source system, which is the system from which the record was directly received. | [link](https://dd.reso.org/DD2.0/Queue/SourceSystemQueueKey/) |
 
 ## Field details
 
@@ -33,124 +35,141 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>ClassName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
+  - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>OriginatingSystem</code></summary>
+
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OriginatingSystemID</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OriginatingSystemName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
+  - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>OriginatingSystemQueueKey</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>QueueTransactionKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>QueueTransactionType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ResourceName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ResourceRecordID</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ResourceRecordKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>SourceSystem</code></summary>
 
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>SourceSystemID</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>SourceSystemName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>SourceSystemQueueKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** MAY 12 2018
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 5/12/2018
   - **Added in Version:** 1.7.0
 
 </details>
@@ -158,6 +177,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### ClassName
+
+17 values · used by 8 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ClassName/)
 
 | Value | Definition |
 |---|---|
@@ -181,6 +202,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### QueueTransactionType
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/QueueTransactionType/)
+
 | Value | Definition |
 |---|---|
 | `Add` | The resource record being referenced by the queue does not yet exist in the target and is an addition. |
@@ -188,6 +211,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Delete` | The resource record being referenced by the queue exists in the target and is to be removed. |
 
 ### ResourceName
+
+5 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ResourceName/)
 
 | Value | Definition |
 |---|---|

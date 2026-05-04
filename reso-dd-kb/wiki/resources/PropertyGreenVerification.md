@@ -1,6 +1,8 @@
 # PropertyGreenVerification
 
-_RESO Data Dictionary 2.0 resource — 15 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/PropertyGreenVerification+Resource) for the canonical page._
+Multiple performance ratings applied to a property listing.
+
+**RESO DD 2.0** — 15 fields · last revised 5/24/2017 · [dd.reso.org](https://dd.reso.org/DD2.0/PropertyGreenVerification/)
 
 **Adoption** — weighted Org%: **1%** across 13 measured fields (median 1%, avg 1%).
 
@@ -10,23 +12,23 @@ _RESO Data Dictionary 2.0 resource — 15 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `GreenBuildingVerificationKey` | String |  |  | 20% | 1% | A unique identifier for this record. | [link](https://ddwiki.reso.org/display/DDW20/GreenBuildingVerificationKey+Field) |
-| `GreenBuildingVerificationType` | String List, Single |  | [GreenBuildingVerificationType](#greenbuildingverificationtype) | 20% | 1% | The name of the verification or certification awarded to a new or pre-existing residential or commercial structure (e.g., LEED, ENERGY STAR, ICC-700). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135745) |
-| `GreenVerificationBody` | String |  |  | 5% | 1% | The name of the body or group providing the verification/certification/rating named in the GreenBuildingVerificationType field. | [link](https://ddwiki.reso.org/display/DDW20/GreenVerificationBody+Field) |
-| `GreenVerificationMetric` | Number |  |  | 15% | 1% | A final score indicating the performance of energy efficiency design and measures in the home as tested by a third-party rater. | [link](https://ddwiki.reso.org/display/DDW20/GreenVerificationMetric+Field) |
-| `GreenVerificationRating` | String |  |  | 10% | 1% | Many verifications or certifications have a rating system that provides an indication of the structure's level of energy efficiency. | [link](https://ddwiki.reso.org/display/DDW20/GreenVerificationRating+Field) |
-| `GreenVerificationSource` | String List, Single |  | [GreenVerificationSource](#greenverificationsource) |  | 1% | The source of the green data. | [link](https://ddwiki.reso.org/display/DDW20/GreenVerificationSource+Field) |
-| `GreenVerificationStatus` | String List, Single |  | [GreenVerificationStatus](#greenverificationstatus) | 10% | 1% | Many verification programs include a multistep process that may begin with plans and specs, involve testing and/or submission of building specifications along the way, and include a final verification step. | [link](https://ddwiki.reso.org/display/DDW20/GreenVerificationStatus+Field) |
-| `GreenVerificationURL` | String |  |  | 10% | 1% | Provides a link to the specific property’s high-performance rating or scoring details directly from and hosted by the sponsoring body of the program. | [link](https://ddwiki.reso.org/display/DDW20/GreenVerificationURL+Field) |
-| `GreenVerificationVersion` | String |  |  | 10% | 1% | The version of the green certification or verification that was awarded. | [link](https://ddwiki.reso.org/display/DDW20/GreenVerificationVersion+Field) |
-| `GreenVerificationYear` | Number |  |  | 10% | 1% | The year the green certification or verification was awarded. | [link](https://ddwiki.reso.org/display/DDW20/GreenVerificationYear+Field) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135803) |
-| `Listing` | Resource |  |  |  |  | The listing associated with the PropertyGreenVerification record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135809) |
-| `ListingId` | String |  |  | 5% | 1% | The well-known identifier for the listing, also known as the MLS number. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135815) |
-| `ListingKey` | String |  |  | 20% | 1% | A system-unique identifier for the listing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135821) |
-| `ModificationTimestamp` | Timestamp |  |  | 20% | 1% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135827) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `GreenBuildingVerificationKey` | String |  |  | 2% | A unique identifier for this record. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/GreenBuildingVerificationKey/) |
+| `GreenBuildingVerificationType` | String List, Single |  | [GreenBuildingVerificationType](#greenbuildingverificationtype) | 2% | The name of the verification or certification awarded to a new or pre-existing residential or commercial structure (e.g., LEED, ENERGY STAR, ICC-700). | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/GreenBuildingVerificationType/) |
+| `GreenVerificationBody` | String |  |  | 1% | The name of the body or group providing the verification/certification/rating named in the GreenBuildingVerificationType field. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/GreenVerificationBody/) |
+| `GreenVerificationMetric` | Number |  |  | 1% | A final score indicating the performance of energy efficiency design and measures in the home as tested by a third-party rater. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/GreenVerificationMetric/) |
+| `GreenVerificationRating` | String |  |  | 1% | Many verifications or certifications have a rating system that provides an indication of the structure's level of energy efficiency. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/GreenVerificationRating/) |
+| `GreenVerificationSource` | String List, Single |  | [GreenVerificationSource](#greenverificationsource) | 1% | The source of the green data. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/GreenVerificationSource/) |
+| `GreenVerificationStatus` | String List, Single |  | [GreenVerificationStatus](#greenverificationstatus) | 1% | Many verification programs include a multistep process that may begin with plans and specs, involve testing and/or submission of building specifications along the way, and include a final verification step. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/GreenVerificationStatus/) |
+| `GreenVerificationURL` | String |  |  | 1% | Provides a link to the specific property’s high-performance rating or scoring details directly from and hosted by the sponsoring body of the program. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/GreenVerificationURL/) |
+| `GreenVerificationVersion` | String |  |  | 1% | The version of the green certification or verification that was awarded. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/GreenVerificationVersion/) |
+| `GreenVerificationYear` | Number |  |  | 1% | The year the green certification or verification was awarded. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/GreenVerificationYear/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/HistoryTransactional/) |
+| `Listing` | Resource |  |  |  | The listing associated with the PropertyGreenVerification record. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/Listing/) |
+| `ListingId` | String |  |  | 1% | The well-known identifier for the listing, also known as the MLS number. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/ListingId/) |
+| `ListingKey` | String |  |  | 2% | A system-unique identifier for the listing. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/ListingKey/) |
+| `ModificationTimestamp` | Timestamp |  |  | 2% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/PropertyGreenVerification/ModificationTimestamp/) |
 
 ## Field details
 
@@ -34,129 +36,148 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>GreenBuildingVerificationKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Verificación de Edificio Verde
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JAN 09 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/9/2022
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>GreenBuildingVerificationType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Verificación de Edificio Verde
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** APR 11 2022
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 4/11/2022
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>GreenVerificationBody</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estructura de Verificación Verde
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>GreenVerificationMetric</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Métrica de Verificación Verde
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>GreenVerificationRating</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clasificación de Verificación Verde
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>GreenVerificationSource</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Fuente de Verificación Verde
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>GreenVerificationStatus</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Verificación Verde
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>GreenVerificationURL</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** URL de Verificación Verde
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>GreenVerificationVersion</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Versión de Verificación Verde
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>GreenVerificationYear</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Año de Verificación Verde
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
+  - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>Listing</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ListingId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Listado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ListingKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Listado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
@@ -164,6 +185,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### GreenBuildingVerificationType
+
+18 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/GreenBuildingVerificationType/)
 
 | Value | Definition |
 |---|---|
@@ -188,6 +211,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### GreenVerificationSource
 
+10 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/GreenVerificationSource/)
+
 | Value | Definition |
 |---|---|
 | `Administrator` | An administrator such as a utility, governmental entity, etc. |
@@ -202,6 +227,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `See Remarks` | See remarks for information about the source of data, such as photovoltaic characteristics or a verified score, certification, label, etc. |
 
 ### GreenVerificationStatus
+
+2 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/GreenVerificationStatus/)
 
 | Value | Definition |
 |---|---|

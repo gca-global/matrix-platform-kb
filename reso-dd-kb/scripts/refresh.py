@@ -5,7 +5,9 @@ Idempotent rebuild step of the RESO DD LLM KB. Inputs in raw/:
     fields.csv               (parsed from RESO_Data_Dictionary_2.0.xlsx)
     lookups.csv              (parsed from RESO_Data_Dictionary_2.0.xlsx)
     field_descriptions.csv   (dumped from public.reso_field_descriptions)
-    field_metadata.csv       (scraped via fetch_field_metadata.py)
+    field_metadata.csv       (scraped via fetch_field_metadata.py from dd.reso.org)
+    resource_metadata.csv    (scraped via fetch_resource_metadata.py)
+    lookup_metadata.csv      (scraped via fetch_lookup_metadata.py)
     field_usage.csv          (RESO certification stats, fallback Org%)
     resource_usage.csv       (per-resource adoption summary)
 
@@ -13,7 +15,9 @@ Output: wiki/resources/<Resource>.md (one file per RESO Resource).
 
 The page anatomy follows AGENTS.md:
     Overview line  ->  Groups section  ->  Fields table
-    (Field | Type | Group | Lookup | Sys% | Org% | DDwiki)  ->  Lookups section.
+    (Field | Type | Group | Lookup | Org% | Description | Source)  ->  Lookups section.
+
+Source links go to dd.reso.org (DDwiki was retired in favour of dd.reso.org).
 
 Run: `python3 reso-dd-kb/scripts/refresh.py`
 """
@@ -69,7 +73,10 @@ def load_all():
     metadata = {(r["Resource"], r["Field"]): r for r in load_csv(RAW / "field_metadata.csv")}
     usage = {(r["Resource"], r["Field"]): r for r in load_csv(RAW / "field_usage.csv")}
     resource_usage = {r["Resource"]: r for r in load_csv(RAW / "resource_usage.csv")}
-    return fields, lookups, descriptions, metadata, usage, resource_usage
+    resource_metadata = {r["Resource"]: r for r in load_csv(RAW / "resource_metadata.csv")}
+    lookup_metadata = {r["LookupName"]: r for r in load_csv(RAW / "lookup_metadata.csv")}
+    return (fields, lookups, descriptions, metadata, usage, resource_usage,
+            resource_metadata, lookup_metadata)
 
 
 def lookups_for(lookup_name: str, lookups: list[dict]) -> list[dict]:
@@ -86,18 +93,36 @@ def render_resource(
     metadata: dict,
     usage: dict,
     resource_usage: dict,
+    resource_metadata: dict,
+    lookup_metadata: dict,
 ) -> str:
     out: list[str] = []
     out.append(f"# {resource}")
     out.append("")
 
-    overview = descriptions.get(resource, {}).get("description", "")
+    res_meta = resource_metadata.get(resource, {})
+    overview = first_nonempty(
+        res_meta.get("Definition"),
+        descriptions.get(resource, {}).get("description"),
+    )
     if overview:
         out.append(overview)
     else:
         out.append(f"_RESO Data Dictionary 2.0 resource — {len(rows)} fields. See "
-                   f"[DDwiki]({_resource_wiki_url(resource)}) for the canonical page._")
+                   f"[dd.reso.org]({_resource_source_url(resource)}) for the canonical page._")
     out.append("")
+
+    if res_meta.get("FieldCount") or res_meta.get("LastRevised"):
+        bits = []
+        fc = res_meta.get("FieldCount") or ""
+        lr = res_meta.get("LastRevised") or ""
+        if fc:
+            bits.append(f"{fc} fields")
+        if lr:
+            bits.append(f"last revised {lr}")
+        bits.append(f"[dd.reso.org]({_resource_source_url(resource)})")
+        out.append("**RESO DD 2.0** — " + " · ".join(bits))
+        out.append("")
 
     ru = resource_usage.get(resource)
     if ru:
@@ -122,25 +147,26 @@ def render_resource(
 
     out.append("## Fields")
     out.append("")
-    out.append("| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |")
-    out.append("|---|---|---|---|---|---|---|---|")
+    out.append("| Field | Type | Group | Lookup | Org% | Description | Source |")
+    out.append("|---|---|---|---|---|---|---|")
 
     for r in sorted(rows, key=lambda x: x.get("StandardName", "")):
         field = r.get("StandardName", "")
         meta = metadata.get((resource, field), {})
         usg = usage.get((resource, field), {})
         desc = descriptions.get(field, {}).get("description", "")
-        wiki = r.get("WikiPageUrl", "")
+        source_url = first_nonempty(
+            meta.get("SourceUrl"),
+            _field_source_url(resource, field),
+        )
 
-        sys_pct = first_nonempty(meta.get("SysPct"), usg.get("SysPct"))
         org_pct = first_nonempty(meta.get("OrgPct"), usg.get("OrgPct"))
-        sys_pct = f"{sys_pct}%" if sys_pct else ""
         org_pct = f"{org_pct}%" if org_pct else ""
 
         lookup_name = first_nonempty(r.get("LookupName"), meta.get("Lookup"))
         lookup_md = f"[{lookup_name}](#{_anchor(lookup_name)})" if lookup_name and lookups_for(lookup_name, lookups) else (lookup_name or "")
 
-        wiki_md = f"[link]({wiki})" if wiki else ""
+        source_md = f"[link]({source_url})" if source_url else ""
 
         out.append(
             "| "
@@ -149,10 +175,9 @@ def render_resource(
                 md_escape(first_nonempty(meta.get("DataType"), r.get("SimpleDataType"))),
                 md_escape(first_nonempty(meta.get("Group"), r.get("Groups"))),
                 lookup_md,
-                sys_pct,
                 org_pct,
                 md_escape(first_sentence(desc) or first_sentence(r.get("Definition", ""))),
-                wiki_md,
+                source_md,
             ])
             + " |"
         )
@@ -203,6 +228,17 @@ def render_resource(
         for name in rendered_lookups:
             out.append(f"### {name}")
             out.append("")
+            lk_meta = lookup_metadata.get(name, {})
+            if lk_meta.get("ValueCount") or lk_meta.get("UsedByCount") or lk_meta.get("SourceUrl"):
+                bits = []
+                if lk_meta.get("ValueCount"):
+                    bits.append(f"{lk_meta['ValueCount']} values")
+                if lk_meta.get("UsedByCount"):
+                    bits.append(f"used by {lk_meta['UsedByCount']} field(s)")
+                if lk_meta.get("SourceUrl"):
+                    bits.append(f"[dd.reso.org]({lk_meta['SourceUrl']})")
+                out.append(" · ".join(bits))
+                out.append("")
             out.append("| Value | Definition |")
             out.append("|---|---|")
             for lr in lookups_for(name, lookups):
@@ -222,12 +258,17 @@ def _anchor(name: str) -> str:
     return name.lower()
 
 
-def _resource_wiki_url(resource: str) -> str:
-    return f"https://ddwiki.reso.org/display/DDW20/{resource}+Resource"
+def _resource_source_url(resource: str) -> str:
+    return f"https://dd.reso.org/DD2.0/{resource}/"
+
+
+def _field_source_url(resource: str, field: str) -> str:
+    return f"https://dd.reso.org/DD2.0/{resource}/{field}/"
 
 
 def main() -> int:
-    fields, lookups, descriptions, metadata, usage, resource_usage = load_all()
+    (fields, lookups, descriptions, metadata, usage, resource_usage,
+     resource_metadata, lookup_metadata) = load_all()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     by_resource: dict[str, list[dict]] = defaultdict(list)
@@ -235,7 +276,8 @@ def main() -> int:
         by_resource[r["ResourceName"]].append(r)
 
     for resource, rows in sorted(by_resource.items()):
-        md = render_resource(resource, rows, lookups, descriptions, metadata, usage, resource_usage)
+        md = render_resource(resource, rows, lookups, descriptions, metadata,
+                             usage, resource_usage, resource_metadata, lookup_metadata)
         out_path = OUT_DIR / f"{resource}.md"
         out_path.write_text(md, encoding="utf-8")
         print(f"  wrote {out_path.relative_to(ROOT)}  ({len(rows)} fields)")

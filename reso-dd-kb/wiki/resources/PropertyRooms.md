@@ -1,6 +1,8 @@
 # PropertyRooms
 
-The PropertyRooms resource describes individual rooms within a Property: type (Bedroom/Bathroom/Kitchen/...), level (Basement/First/Second/...), dimensions, area, and room features. One Property has many PropertyRooms rows linked via ListingKey.
+Detailed information about separate rooms in a property.
+
+**RESO DD 2.0** — 19 fields · last revised 8/18/2023 · [dd.reso.org](https://dd.reso.org/DD2.0/PropertyRooms/)
 
 **Adoption** — weighted Org%: **19%** across 16 measured fields (median 24%, avg 19%).
 
@@ -10,27 +12,27 @@ The PropertyRooms resource describes individual rooms within a Property: type (B
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `BedroomClosetType` | String List, Single |  | [ClosetType](#closettype) |  |  | A list of possible closet types for a bedroom. | [link](https://ddwiki.reso.org/display/DDW20/BedroomClosetType+Field) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135786) |
-| `Listing` | Resource |  |  |  |  | The listing associated with the PropertyRooms record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135792) |
-| `ListingId` | String |  |  | 10% | 13% | The well-known identifier for the listing, also known as the MLS number. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135798) |
-| `ListingKey` | String |  |  |  | 24% | A system-unique identifier for the listing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135802) |
-| `ModificationTimestamp` | Timestamp |  |  | 20% | 14% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135807) |
-| `RoomArea` | Number |  |  |  | 8% | The numeric area of the room. | [link](https://ddwiki.reso.org/display/DDW20/RoomArea+Field) |
-| `RoomAreaSource` | String List, Single |  | [AreaSource](#areasource) | 1% | 1% | The source of the measurement of the given room's area. | [link](https://ddwiki.reso.org/display/DDW20/RoomAreaSource+Field) |
-| `RoomAreaUnits` | String List, Single |  | [AreaUnits](#areaunits) | 10% | 1% | The unit of measurement used for the value in the RoomArea field (e.g., Square Feet, Square Meters). | [link](https://ddwiki.reso.org/display/DDW20/RoomAreaUnits+Field) |
-| `RoomDescription` | String |  |  | 15% | 7% | Free-text description of the room. | [link](https://ddwiki.reso.org/display/DDW20/RoomDescription+Field) |
-| `RoomDimensions` | String |  |  | 15% | 10% | The room's dimensions as a free-text string (typically formatted '<length>x<width>'). | [link](https://ddwiki.reso.org/display/DDW20/RoomDimensions+Field) |
-| `RoomFeatures` | String List, Multi |  | [InteriorOrRoomFeatures](#interiororroomfeatures) | 15% | 6% | A multi-value lookup of features present in the room: Ceiling Fan \| Walk-in Closet \| En-suite Bathroom \| Hardwood Floor \| Tile Floor \| Built-in Shelving \| ... | [link](https://ddwiki.reso.org/display/DDW20/RoomFeatures+Field) |
-| `RoomKey` | String |  |  |  | 36% | The unique identifier for a room within the originating system. | [link](https://ddwiki.reso.org/display/DDW20/RoomKey+Field) |
-| `RoomLength` | Number |  |  | 20% | 8% | The numeric length of the room. | [link](https://ddwiki.reso.org/display/DDW20/RoomLength+Field) |
-| `RoomLengthWidthSource` | String List, Single |  | [RoomLengthWidthSource](#roomlengthwidthsource) | 1% | 1% | The source of the measurement of the given units length and width. | [link](https://ddwiki.reso.org/display/DDW20/RoomLengthWidthSource+Field) |
-| `RoomLengthWidthUnits` | String List, Single |  | [LinearUnits](#linearunits) | 15% | 1% | The unit of measurement used for the value of RoomLength and RoomWidth fields (e.g., Feet, Meters). | [link](https://ddwiki.reso.org/display/DDW20/RoomLengthWidthUnits+Field) |
-| `RoomLevel` | String List, Single |  | [RoomLevel](#roomlevel) | 15% | 12% | A single-value lookup describing which floor or level the room is on: Basement \| First \| Second \| Third \| Lower \| Upper \| Main \| Loft \| ... | [link](https://ddwiki.reso.org/display/DDW20/RoomLevel+Field) |
-| `RoomType` | String List, Single |  | [RoomType](#roomtype) | 20% | 14% | A single-value lookup describing the type of room: Bedroom \| Bathroom \| Kitchen \| LivingRoom \| DiningRoom \| Office \| Laundry \| Bonus \| ... | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135880) |
-| `RoomWidth` | Number |  |  |  | 26% | The numeric width of the room. | [link](https://ddwiki.reso.org/display/DDW20/RoomWidth+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `BedroomClosetType` | String List, Single |  | [ClosetType](#closettype) |  | A list of possible closet types for a bedroom. | [link](https://dd.reso.org/DD2.0/PropertyRooms/BedroomClosetType/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/PropertyRooms/HistoryTransactional/) |
+| `Listing` | Resource |  |  |  | The listing associated with the PropertyRooms record. | [link](https://dd.reso.org/DD2.0/PropertyRooms/Listing/) |
+| `ListingId` | String |  |  | 22% | The well-known identifier for the listing, also known as the MLS number. | [link](https://dd.reso.org/DD2.0/PropertyRooms/ListingId/) |
+| `ListingKey` | String |  |  | 24% | A system-unique identifier for the listing. | [link](https://dd.reso.org/DD2.0/PropertyRooms/ListingKey/) |
+| `ModificationTimestamp` | Timestamp |  |  | 23% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/PropertyRooms/ModificationTimestamp/) |
+| `RoomArea` | Number |  |  | 8% | The numeric area of the room. | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomArea/) |
+| `RoomAreaSource` | String List, Single |  | [AreaSource](#areasource) | 1% | The source of the measurement of the given room's area. | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomAreaSource/) |
+| `RoomAreaUnits` | String List, Single |  | [AreaUnits](#areaunits) | 4% | The unit of measurement used for the value in the RoomArea field (e.g., Square Feet, Square Meters). | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomAreaUnits/) |
+| `RoomDescription` | String |  |  | 26% | Free-text description of the room. | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomDescription/) |
+| `RoomDimensions` | String |  |  | 26% | The room's dimensions as a free-text string (typically formatted '<length>x<width>'). | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomDimensions/) |
+| `RoomFeatures` | String List, Multi |  | [InteriorOrRoomFeatures](#interiororroomfeatures) | 16% | A multi-value lookup of features present in the room: Ceiling Fan \| Walk-in Closet \| En-suite Bathroom \| Hardwood Floor \| Tile Floor \| Built-in Shelving \| ... | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomFeatures/) |
+| `RoomKey` | String |  |  | 36% | The unique identifier for a room within the originating system. | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomKey/) |
+| `RoomLength` | Number |  |  | 26% | The numeric length of the room. | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomLength/) |
+| `RoomLengthWidthSource` | String List, Single |  | [RoomLengthWidthSource](#roomlengthwidthsource) | 1% | The source of the measurement of the given units length and width. | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomLengthWidthSource/) |
+| `RoomLengthWidthUnits` | String List, Single |  | [LinearUnits](#linearunits) | 2% | The unit of measurement used for the value of RoomLength and RoomWidth fields (e.g., Feet, Meters). | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomLengthWidthUnits/) |
+| `RoomLevel` | String List, Single |  | [RoomLevel](#roomlevel) | 33% | A single-value lookup describing which floor or level the room is on: Basement \| First \| Second \| Third \| Lower \| Upper \| Main \| Loft \| ... | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomLevel/) |
+| `RoomType` | String List, Single |  | [RoomType](#roomtype) | 36% | A single-value lookup describing the type of room: Bedroom \| Bathroom \| Kitchen \| LivingRoom \| DiningRoom \| Office \| Laundry \| Bonus \| ... | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomType/) |
+| `RoomWidth` | Number |  |  | 26% | The numeric width of the room. | [link](https://dd.reso.org/DD2.0/PropertyRooms/RoomWidth/) |
 
 ## Field details
 
@@ -38,147 +40,187 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>BedroomClosetType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** AUG 17 2023
-  - **Revision Date:** AUG 18 2023
+  - **Status:** Active
+  - **Status Change Date:** 8/17/2023
+  - **Revision Date:** 8/18/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>Listing</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ListingId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Listado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>ListingKey</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Clave de Listado
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/1/2022
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>RoomArea</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Área de Habitación
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>RoomAreaSource</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Área de Habitación
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>RoomAreaUnits</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades de Área de Habitación
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>RoomDescription</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Descripción de Habitación
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>RoomDimensions</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dimensiones de Habitación
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>RoomFeatures</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Habitación
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 01 2018
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/1/2018
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>RoomKey</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Clave de Habitación
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 1/9/2022
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>RoomLength</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Longitud de Habitación
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>RoomLengthWidthSource</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente De Longitud Anchura De Habitación
-  - **Status Change Date:** APR 08 2022
-  - **Revision Date:** APR 08 2022
+  - **Status Change Date:** 4/8/2022
+  - **Revision Date:** 4/8/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>RoomLengthWidthUnits</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades de Longitud Anchura de Habitación
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>RoomLevel</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nivel De Habitación
-  - **Status Change Date:** APR 08 2022
-  - **Revision Date:** APR 08 2022
+  - **Status Change Date:** 4/8/2022
+  - **Revision Date:** 4/8/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>RoomType</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Habitación
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>RoomWidth</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Anchura de Habitación
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
@@ -186,6 +228,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### AreaSource
+
+9 values · used by 8 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/AreaSource/)
 
 | Value | Definition |
 |---|---|
@@ -201,12 +245,16 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### AreaUnits
 
+2 values · used by 9 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/AreaUnits/)
+
 | Value | Definition |
 |---|---|
 | `Square Feet` | The value reported in the related Area field is in square feet. |
 | `Square Meters` | The value reported in the related Area field is in square meters. |
 
 ### ClosetType
+
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ClosetType/)
 
 | Value | Definition |
 |---|---|
@@ -215,6 +263,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Walk-in Closet` | The bedroom has a walk-in closet. |
 
 ### InteriorOrRoomFeatures
+
+53 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/InteriorOrRoomFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -274,12 +324,16 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### LinearUnits
 
+2 values · used by 15 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LinearUnits/)
+
 | Value | Definition |
 |---|---|
 | `Feet` | The elevation of the property is measured in feet. |
 | `Meters` | The elevation of the property is measured in meters. |
 
 ### RoomLengthWidthSource
+
+11 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/RoomLengthWidthSource/)
 
 | Value | Definition |
 |---|---|
@@ -297,6 +351,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### RoomLevel
 
+7 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/RoomLevel/)
+
 | Value | Definition |
 |---|---|
 | `Basement` | The given room is located on the basement level. |
@@ -308,6 +364,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Upper` | The given room is located on an upper level. |
 
 ### RoomType
+
+33 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/RoomType/)
 
 | Value | Definition |
 |---|---|

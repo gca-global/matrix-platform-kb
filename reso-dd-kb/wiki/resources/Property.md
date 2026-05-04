@@ -1,6 +1,8 @@
 # Property
 
-The Property resource describes the real estate parcel for sale or lease. It contains the bulk of the listing data: identity, status, pricing, structure, location, and the agents/offices marketing it. Atlas exposes Property as the canonical listing record on which all other resources hang.
+Fields commonly used in a Multiple Listing Service (MLS) listing.
+
+**RESO DD 2.0** — 652 fields · last revised 9/10/2019 · [dd.reso.org](https://dd.reso.org/DD2.0/Property/)
 
 **Adoption** — weighted Org%: **39%** across 624 measured fields (median 32%, avg 39%).
 
@@ -52,660 +54,660 @@ The Property resource describes the real estate parcel for sale or lease. It con
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `AboveGradeFinishedArea` | Number | Structure |  | 55% | 24% | The finished area within the structure that is at or above the surface of the ground. | [link](https://ddwiki.reso.org/display/DDW20/AboveGradeFinishedArea+Field) |
-| `AboveGradeFinishedAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 50% | 6% | The source of the measurements. | [link](https://ddwiki.reso.org/display/DDW20/AboveGradeFinishedAreaSource+Field) |
-| `AboveGradeFinishedAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 35% | 10% | A pick list of the unit of measurement for the area (e.g., Square Feet, Square Meters). | [link](https://ddwiki.reso.org/display/DDW20/AboveGradeFinishedAreaUnits+Field) |
-| `AboveGradeUnfinishedArea` | Number | Structure |  | 5% | 1% | The unfinished area within the structure that is at or above the surface of the ground. | [link](https://ddwiki.reso.org/display/DDW20/AboveGradeUnfinishedArea+Field) |
-| `AboveGradeUnfinishedAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 5% | 1% | The source of the measurements of the unfinished area above grade. | [link](https://ddwiki.reso.org/display/DDW20/AboveGradeUnfinishedAreaSource+Field) |
-| `AboveGradeUnfinishedAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 5% | 1% | A pick list of the unit of measurement for the unfinished area above grade (e.g., Square Feet, Square Meters). | [link](https://ddwiki.reso.org/display/DDW20/AboveGradeUnfinishedAreaUnits+Field) |
-| `AccessCode` | String | Listing , Showing |  | 30% | 5% | The code to gain access through the secured gate for a property located behind an unmanned security gate such as in a gated community. | [link](https://ddwiki.reso.org/display/DDW20/AccessCode+Field) |
-| `AccessibilityFeatures` | String List, Multi | Structure | [AccessibilityFeatures](#accessibilityfeatures) | 85% | 73% | A list or description of the accessibility features included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/AccessibilityFeatures+Field) |
-| `ActivationDate` | Date | Listing , Dates |  | 10% | 9% | Indicates when the listing agent intends to change the property to the Active status. | [link](https://ddwiki.reso.org/display/DDW20/ActivationDate+Field) |
-| `AdditionalParcelsDescription` | String | Tax |  | 50% | 14% | If additional parcels are included in the sale, a list of those parcel's IDs separated by commas. | [link](https://ddwiki.reso.org/display/DDW20/AdditionalParcelsDescription+Field) |
-| `AdditionalParcelsYN` | Boolean | Tax |  | 60% | 14% | Indicates whether or not more than one parcel or lot is included in the sale. | [link](https://ddwiki.reso.org/display/DDW20/AdditionalParcelsYN+Field) |
-| `AnchorsCoTenants` | String | Characteristics |  | 30% | 4% | The main or most notable tenants as well as other tenants of the shopping center or mall in which the commercial property is located. | [link](https://ddwiki.reso.org/display/DDW20/AnchorsCoTenants+Field) |
-| `Appliances` | String List, Multi | Equipment | [Appliances](#appliances) | 90% | 87% | A list of the appliances that will be included in the sale/lease of the property. | [link](https://ddwiki.reso.org/display/DDW20/Appliances+Field) |
-| `ArchitecturalStyle` | String List, Multi | Structure | [ArchitecturalStyle](#architecturalstyle) |  | 90% | A list describing the style of the structure (e.g., Victorian, Ranch, Craftsman). | [link](https://ddwiki.reso.org/display/DDW20/ArchitecturalStyle+Field) |
-| `AssociationAmenities` | String List, Multi | HOA | [AssociationAmenities](#associationamenities) |  | 56% | The amenities provided by the homeowner association, mobile park or complex (e.g., pool, clubhouse). | [link](https://ddwiki.reso.org/display/DDW20/AssociationAmenities+Field) |
-| `AssociationFee` | Number | HOA |  | 90% | 74% | A fee paid by the homeowner to the homeowner association that is used for upkeep of common areas, the neighborhood or other association-related benefits. | [link](https://ddwiki.reso.org/display/DDW20/AssociationFee+Field) |
-| `AssociationFee2` | Number | HOA |  | 50% | 13% | A fee paid by the homeowner to the second of two homeowner associations that is used for upkeep of common areas, the neighborhood or other association-related benefits. | [link](https://ddwiki.reso.org/display/DDW20/AssociationFee2+Field) |
-| `AssociationFee2Frequency` | String List, Single | HOA | [FeeFrequency](#feefrequency) |  | 18% | The frequency the association fee is paid (e.g., weekly, monthly, annually, bimonthly, one time). | [link](https://ddwiki.reso.org/display/DDW20/AssociationFee2Frequency+Field) |
-| `AssociationFeeFrequency` | String List, Single | HOA | [FeeFrequency](#feefrequency) | 85% | 57% | The frequency the association fee is paid (e.g., weekly, monthly, annually, bimonthly, one time). | [link](https://ddwiki.reso.org/display/DDW20/AssociationFeeFrequency+Field) |
-| `AssociationFeeIncludes` | String List, Multi | HOA | [AssociationFeeIncludes](#associationfeeincludes) | 80% | 58% | The services included with the association fee (e.g., landscaping, trash, water). | [link](https://ddwiki.reso.org/display/DDW20/AssociationFeeIncludes+Field) |
-| `AssociationName` | String | HOA |  | 75% | 18% | The name of the homeowner association. | [link](https://ddwiki.reso.org/display/DDW20/AssociationName+Field) |
-| `AssociationName2` | String | HOA |  | 30% | 5% | The name of the second of two homeowner associations. | [link](https://ddwiki.reso.org/display/DDW20/AssociationName2+Field) |
-| `AssociationPhone` | String | HOA |  | 60% | 16% | The phone number of the homeowner association. | [link](https://ddwiki.reso.org/display/DDW20/AssociationPhone+Field) |
-| `AssociationPhone2` | String | HOA |  | 25% | 3% | The phone number of the second of two homeowner associations. | [link](https://ddwiki.reso.org/display/DDW20/AssociationPhone2+Field) |
-| `AssociationYN` | Boolean | HOA |  | 70% | 62% | Indicates whether there is a homeowner association. | [link](https://ddwiki.reso.org/display/DDW20/AssociationYN+Field) |
-| `AttachedGarageYN` | Boolean | Structure |  | 70% | 65% | A flag indicating whether or not the garage is attached to the dwelling. | [link](https://ddwiki.reso.org/display/DDW20/AttachedGarageYN+Field) |
-| `AttributionContact` | String | Listing , AgentOffice , ListOffice |  | 5% | 10% | A text field to convey a specific contact phone number or email address for the listing firm. | [link](https://ddwiki.reso.org/display/DDW20/AttributionContact+Field) |
-| `AvailabilityDate` | Date | Listing , Closing |  | 65% | 40% | The date the property will be available for possession/occupation. | [link](https://ddwiki.reso.org/display/DDW20/AvailabilityDate+Field) |
-| `AvailableLeaseType` | String List, Multi | Characteristics | [ExistingLeaseType](#existingleasetype) |  | 3% | Information about the available types of lease for the property (i.e., Net, NNN, NN, Gross, Absolute Net, Escalation Clause, Ground Lease, etc.). | [link](https://ddwiki.reso.org/display/DDW20/AvailableLeaseType+Field) |
-| `BackOnMarketDate` | Date | Listing , Dates |  | 5% | 1% | The date a listing, which had previously gone off market, went back to being on market. | [link](https://ddwiki.reso.org/display/DDW20/BackOnMarketDate+Field) |
-| `Basement` | String List, Multi | Structure | [Basement](#basement) | 80% | 70% | A list of information and features about the basement (i.e., None/Slab, Finished, Partially Finished, Crawl Space, Dirt, Outside Entrance, Radon Mitigation). | [link](https://ddwiki.reso.org/display/DDW20/Basement+Field) |
-| `BasementYN` | Boolean | Structure |  | 45% | 15% | Indicates whether or not the property has a basement. | [link](https://ddwiki.reso.org/display/DDW20/BasementYN+Field) |
-| `BathroomsFull` | Number | Structure |  | 100% | 89% | A room containing all four of the four elements constituting a bath: toilet, sink, bathtub, shower head (in tub or stall). | [link](https://ddwiki.reso.org/display/DDW20/BathroomsFull+Field) |
-| `BathroomsHalf` | Number | Structure |  | 95% | 85% | A room containing two of the four elements constituting a bath: toilet, sink, bathtub, shower head (in a tub or stall). | [link](https://ddwiki.reso.org/display/DDW20/BathroomsHalf+Field) |
-| `BathroomsOneQuarter` | Number | Structure |  |  | 10% | A room containing one of the four elements constituting a bath: toilet, sink, bathtub, shower head (in tub or stall). | [link](https://ddwiki.reso.org/display/DDW20/BathroomsOneQuarter+Field) |
-| `BathroomsPartial` | Number | Structure |  | 50% | 6% | The number of partial bathrooms in the property being sold/leased. | [link](https://ddwiki.reso.org/display/DDW20/BathroomsPartial+Field) |
-| `BathroomsThreeQuarter` | Number | Structure |  | 65% | 23% | A room containing three of the four elements constituting a bath: toilet, sink, bathtub, shower head (in a tub or stall). | [link](https://ddwiki.reso.org/display/DDW20/BathroomsThreeQuarter+Field) |
-| `BathroomsTotalInteger` | Number | Structure |  | 85% | 82% | The total number of bathrooms in the property as an integer (full bathrooms; halves counted in BathroomsHalf). | [link](https://ddwiki.reso.org/display/DDW20/BathroomsTotalInteger+Field) |
-| `BedroomsPossible` | Number | Structure |  | 30% | 5% | The sum of BedroomsTotal plus other rooms that may be used as a bedroom but are not defined as a bedroom per local policy. | [link](https://ddwiki.reso.org/display/DDW20/BedroomsPossible+Field) |
-| `BedroomsTotal` | Number | Structure |  | 100% | 98% | The total number of bedrooms in the property. | [link](https://ddwiki.reso.org/display/DDW20/BedroomsTotal+Field) |
-| `BelowGradeFinishedArea` | Number | Structure |  | 50% | 31% | The finished area within the structure that is below ground. | [link](https://ddwiki.reso.org/display/DDW20/BelowGradeFinishedArea+Field) |
-| `BelowGradeFinishedAreaSource` | String List, Single | Structure | [AreaSource](#areasource) |  | 8% | The source of the measurements. | [link](https://ddwiki.reso.org/display/DDW20/BelowGradeFinishedAreaSource+Field) |
-| `BelowGradeFinishedAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 40% | 12% | A pick list of the unit of measurement for the area (e.g., Square Feet, Square Meters). | [link](https://ddwiki.reso.org/display/DDW20/BelowGradeFinishedAreaUnits+Field) |
-| `BelowGradeUnfinishedArea` | Number | Structure |  | 5% | 1% | The unfinished area within the structure that is below ground. | [link](https://ddwiki.reso.org/display/DDW20/BelowGradeUnfinishedArea+Field) |
-| `BelowGradeUnfinishedAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 5% | 1% | The source of the measurements of the unfinished area below grade. | [link](https://ddwiki.reso.org/display/DDW20/BelowGradeUnfinishedAreaSource+Field) |
-| `BelowGradeUnfinishedAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 5% | 1% | A pick list of the unit of measurement for the unfinished area below grade (e.g., Square Feet, Square Meters). | [link](https://ddwiki.reso.org/display/DDW20/BelowGradeUnfinishedAreaUnits+Field) |
-| `BodyType` | String List, Multi | Structure | [BodyType](#bodytype) | 50% | 44% | The type of mobile home. | [link](https://ddwiki.reso.org/display/DDW20/BodyType+Field) |
-| `BuilderModel` | String | Structure |  | 40% | 9% | The model name or model number of the builder's plan for the property (project / development name). | [link](https://ddwiki.reso.org/display/DDW20/BuilderModel+Field) |
-| `BuilderName` | String | Structure |  |  | 35% | The name of the builder of the property (developer / seller company for new builds). | [link](https://ddwiki.reso.org/display/DDW20/BuilderName+Field) |
-| `BuildingAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 55% | 34% | The source of the measurements. | [link](https://ddwiki.reso.org/display/DDW20/BuildingAreaSource+Field) |
-| `BuildingAreaTotal` | Number | Structure |  | 90% | 86% | The total area of the structure, including both finished and unfinished areas. | [link](https://ddwiki.reso.org/display/DDW20/BuildingAreaTotal+Field) |
-| `BuildingAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) |  | 40% | A pick list of the unit of measurement for the area (e.g., Square Feet, Square Meters). | [link](https://ddwiki.reso.org/display/DDW20/BuildingAreaUnits+Field) |
-| `BuildingFeatures` | String List, Multi | Structure | BuildingFeatures | 65% | 63% | The features or amenities of the building or business park. | [link](https://ddwiki.reso.org/display/DDW20/BuildingFeatures+Field) |
-| `BuildingName` | String | Structure |  |  | 26% | The name of the building or business park. | [link](https://ddwiki.reso.org/display/DDW20/BuildingName+Field) |
-| `BusinessName` | String | Business |  | 65% | 31% | The name of the business being sold. | [link](https://ddwiki.reso.org/display/DDW20/BusinessName+Field) |
-| `BusinessType` | String List, Multi | Business | [BusinessType](#businesstype) | 75% | 67% | The type of business being sold (e.g., Retail, Wholesale, Grocery, Food & Bev). | [link](https://ddwiki.reso.org/display/DDW20/BusinessType+Field) |
-| `BuyerAgent` | Resource | Listing , AgentOffice , BuyerAgent |  |  |  | The buyer's agent involved in the transaction. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgent+Field) |
-| `BuyerAgentAOR` | String List, Single | Listing , AgentOffice , BuyerAgent | AOR | 35% | 12% | The buyer agent's board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentAOR+Field) |
-| `BuyerAgentDesignation` | String List, Multi | Listing , AgentOffice , BuyerAgent | [BuyerAgentDesignation](#buyeragentdesignation) | 25% | 47% | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® (NAR) and each affiliated group upon completi… | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentDesignation+Field) |
-| `BuyerAgentDirectPhone` | String | Listing , AgentOffice , BuyerAgent |  | 40% | 53% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentDirectPhone+Field) |
-| `BuyerAgentEmail` | String | Listing , AgentOffice , BuyerAgent |  | 60% | 67% | The email address of the buyer's agent. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentEmail+Field) |
-| `BuyerAgentFax` | String | Listing , AgentOffice , BuyerAgent |  | 50% | 50% | The North American 10-digit fax numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentFax+Field) |
-| `BuyerAgentFirstName` | String | Listing , AgentOffice , BuyerAgent |  | 70% | 79% | The first name of the buyer's agent. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentFirstName+Field) |
-| `BuyerAgentFullName` | String | Listing , AgentOffice , BuyerAgent |  | 65% | 84% | The first, middle and last name of the buyer's agent. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentFullName+Field) |
-| `BuyerAgentHomePhone` | String | Listing , AgentOffice , BuyerAgent |  | 30% | 28% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentHomePhone+Field) |
-| `BuyerAgentKey` | String | Listing , AgentOffice , BuyerAgent |  | 70% | 69% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentKey+Field) |
-| `BuyerAgentLastName` | String | Listing , AgentOffice , BuyerAgent |  | 70% | 79% | The last name of the buyer's agent. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentLastName+Field) |
-| `BuyerAgentMiddleName` | String | Listing , AgentOffice , BuyerAgent |  | 40% | 46% | The middle name of the buyer's agent. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentMiddleName+Field) |
-| `BuyerAgentMlsId` | String | Listing,AgentOffice,BuyerAgent |  |  | 88% | The local, well-known identifier. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentMlsId+Field) |
-| `BuyerAgentMobilePhone` | String | Listing , AgentOffice , BuyerAgent |  | 35% | 54% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentMobilePhone+Field) |
-| `BuyerAgentNamePrefix` | String | Listing , AgentOffice , BuyerAgent |  | 5% | 1% | The prefix to the name (e.g., Dr., Mr., Ms.). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentNamePrefix+Field) |
-| `BuyerAgentNameSuffix` | String | Listing , AgentOffice , BuyerAgent |  | 10% | 1% | The suffix to the name (e.g., Esq., Jr., III). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentNameSuffix+Field) |
-| `BuyerAgentNationalAssociationId` | String | Listing , AgentOffice , BuyerAgent |  |  | 1% | The national association ID of the buyer's agent (e.g., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentNationalAssociationId+Field) |
-| `BuyerAgentOfficePhone` | String | Listing,AgentOffice,BuyerAgent |  |  | 61% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentOfficePhone+Field) |
-| `BuyerAgentOfficePhoneExt` | String | Listing , AgentOffice , BuyerAgent |  | 25% | 29% | The extension of the given phone number (if applicable). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentOfficePhoneExt+Field) |
-| `BuyerAgentPager` | String | Listing , AgentOffice , BuyerAgent |  | 20% | 16% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentPager+Field) |
-| `BuyerAgentPreferredPhone` | String | Listing , AgentOffice , BuyerAgent |  | 45% | 57% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentPreferredPhone+Field) |
-| `BuyerAgentPreferredPhoneExt` | String | Listing , AgentOffice , BuyerAgent |  | 25% | 25% | The extension of the given phone number (if applicable). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentPreferredPhoneExt+Field) |
-| `BuyerAgentStateLicense` | String | Listing , AgentOffice , BuyerAgent |  | 55% | 41% | The license of the buyer agent. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentStateLicense+Field) |
-| `BuyerAgentTollFreePhone` | String | Listing,AgentOffice,BuyerAgent |  |  | 25% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentTollFreePhone+Field) |
-| `BuyerAgentURL` | String | Listing , AgentOffice , BuyerAgent |  | 50% | 64% | The website Uniform Resource Identifier (URI) of the buyers agent. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentURL+Field) |
-| `BuyerAgentVoiceMail` | String | Listing , AgentOffice , BuyerAgent |  | 10% | 12% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentVoiceMail+Field) |
-| `BuyerAgentVoiceMailExt` | String | Listing , AgentOffice , BuyerAgent |  | 5% | 2% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/BuyerAgentVoiceMailExt+Field) |
-| `BuyerBrokerageCompensation` | String | Listing , Compensation |  | 10% | 1% | The total compensation to be paid to the buyer's brokerage for this sale, expressed as either a percentage or a constant currency amount. | [link](https://ddwiki.reso.org/display/DDW20/BuyerBrokerageCompensation+Field) |
-| `BuyerBrokerageCompensationType` | String List, Single | Listing , Compensation | [CompensationType](#compensationtype) | 10% | 1% | A list of types to clarify the value entered in the BuyerBrokerageCompensation field. | [link](https://ddwiki.reso.org/display/DDW20/BuyerBrokerageCompensationType+Field) |
-| `BuyerFinancing` | String List, Multi | Listing , Closing | [BuyerFinancing](#buyerfinancing) | 70% | 52% | A list of options that describe the type of financing used. | [link](https://ddwiki.reso.org/display/DDW20/BuyerFinancing+Field) |
-| `BuyerOffice` | Resource | Listing , AgentOffice , BuyerAgent |  |  |  | The buyer agent's office. | [link](https://ddwiki.reso.org/display/DDW20/BuyerOffice+Field) |
-| `BuyerOfficeAOR` | String List, Single | Listing , AgentOffice , BuyerOffice | AOR | 35% | 15% | The buyer's office's board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/BuyerOfficeAOR+Field) |
-| `BuyerOfficeEmail` | String | Listing , AgentOffice , BuyerOffice |  | 50% | 79% | The email address of the buyer's office. | [link](https://ddwiki.reso.org/display/DDW20/BuyerOfficeEmail+Field) |
-| `BuyerOfficeFax` | String | Listing , AgentOffice , BuyerOffice |  | 40% | 62% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerOfficeFax+Field) |
-| `BuyerOfficeKey` | String | Listing , AgentOffice , BuyerOffice |  | 70% | 83% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/BuyerOfficeKey+Field) |
-| `BuyerOfficeMlsId` | String | Listing,AgentOffice,BuyerOffice |  |  | 91% | The local, well-known identifier. | [link](https://ddwiki.reso.org/display/DDW20/BuyerOfficeMlsId+Field) |
-| `BuyerOfficeName` | String | Listing , AgentOffice , BuyerOffice |  | 70% | 89% | The legal name of the brokerage representing the buyer. | [link](https://ddwiki.reso.org/display/DDW20/BuyerOfficeName+Field) |
-| `BuyerOfficeNationalAssociationId` | String | Listing,AgentOffice,BuyerOffice |  |  | 1% | The national association ID of the buyer's office (e.g., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/BuyerOfficeNationalAssociationId+Field) |
-| `BuyerOfficePhone` | String | Listing , AgentOffice , BuyerOffice |  | 55% | 80% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/BuyerOfficePhone+Field) |
-| `BuyerOfficePhoneExt` | String | Listing , AgentOffice , BuyerOffice |  | 20% | 13% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/BuyerOfficePhoneExt+Field) |
-| `BuyerOfficeURL` | String | Listing , AgentOffice , BuyerOffice |  | 50% | 60% | The website Uniform Resource Identifier (URI) for the buyers office. | [link](https://ddwiki.reso.org/display/DDW20/BuyerOfficeURL+Field) |
-| `BuyerTeam` | Resource | Listing , AgentOffice , BuyerTeam |  |  |  | Two or more agents working on the buyer agent's team. | [link](https://ddwiki.reso.org/display/DDW20/BuyerTeam+Field) |
-| `BuyerTeamKey` | String | Listing , AgentOffice , Team |  | 15% | 1% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/BuyerTeamKey+Field) |
-| `BuyerTeamName` | String | Listing , AgentOffice , Team |  | 30% | 4% | The name of the team representing the buyer. | [link](https://ddwiki.reso.org/display/DDW20/BuyerTeamName+Field) |
-| `CableTvExpense` | Number | Financial |  | 20% | 1% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/CableTvExpense+Field) |
-| `CancellationDate` | Date | Listing,Dates |  |  | 23% | The date that the listing contract between the seller and listing agent was canceled. | [link](https://ddwiki.reso.org/display/DDW20/CancellationDate+Field) |
-| `CapRate` | Number | Financial |  | 55% | 20% | The equivalent to the return on investment you would receive if you pay cash for a property. | [link](https://ddwiki.reso.org/display/DDW20/CapRate+Field) |
-| `CarportSpaces` | Number | Structure |  | 70% | 34% | The number of carport spaces included in the sale. | [link](https://ddwiki.reso.org/display/DDW20/CarportSpaces+Field) |
-| `CarportYN` | Boolean | Structure |  | 60% | 56% | A flag indicating that the listing has a carport. | [link](https://ddwiki.reso.org/display/DDW20/CarportYN+Field) |
-| `CarrierRoute` | String | Location , Address |  | 10% | 1% | The group of addresses to which the U.S. | [link](https://ddwiki.reso.org/display/DDW20/CarrierRoute+Field) |
-| `City` | String List, Single | Location , Address | City | 90% | 98% | The city in which the property is located. | [link](https://ddwiki.reso.org/display/DDW20/City+Field) |
-| `CityRegion` | String | Location , Area |  | 25% | 4% | A subsection or area of a defined city (e.g., SOHO in New York, NY; Ironbound in Newark, NJ; Inside the Beltway). | [link](https://ddwiki.reso.org/display/DDW20/CityRegion+Field) |
-| `CloseDate` | Date | Listing , Dates |  | 90% | 84% | With for-sale listings, this is the date the purchase agreement was fulfilled. | [link](https://ddwiki.reso.org/display/DDW20/CloseDate+Field) |
-| `ClosePrice` | Number | Listing , Price |  | 90% | 90% | The amount of money paid by the purchaser to the seller for the property under the agreement. | [link](https://ddwiki.reso.org/display/DDW20/ClosePrice+Field) |
-| `CoBuyerAgent` | Resource | Listing , AgentOffice , CoBuyerAgent |  |  |  | The co-buyer's agent involved in the transaction. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgent+Field) |
-| `CoBuyerAgentAOR` | String List, Single | Listing , AgentOffice , CoBuyerAgent | AOR | 30% | 8% | The co-buyer agent's board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentAOR+Field) |
-| `CoBuyerAgentDesignation` | String List, Multi | Listing , AgentOffice , CoBuyerAgent | [CoBuyerAgentDesignation](#cobuyeragentdesignation) | 25% | 46% | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® (NAR) and each affiliated group upon completi… | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentDesignation+Field) |
-| `CoBuyerAgentDirectPhone` | String | Listing,AgentOffice,CoBuyerAgent |  |  | 44% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentDirectPhone+Field) |
-| `CoBuyerAgentEmail` | String | Listing , AgentOffice , CoBuyerAgent |  | 50% | 58% | The email address of the buyer's co-agent. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentEmail+Field) |
-| `CoBuyerAgentFax` | String | Listing , AgentOffice , CoBuyerAgent |  | 40% | 33% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentFax+Field) |
-| `CoBuyerAgentFirstName` | String | Listing , AgentOffice , CoBuyerAgent |  | 60% | 56% | The first name of the buyer's co-agent. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentFirstName+Field) |
-| `CoBuyerAgentFullName` | String | Listing , AgentOffice , CoBuyerAgent |  | 50% | 58% | The first, middle and last name of the buyer's co-agent. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentFullName+Field) |
-| `CoBuyerAgentHomePhone` | String | Listing,AgentOffice,CoBuyerAgent |  |  | 24% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentHomePhone+Field) |
-| `CoBuyerAgentKey` | String | Listing,AgentOffice,CoBuyerAgent |  |  | 63% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentKey+Field) |
-| `CoBuyerAgentLastName` | String | Listing,AgentOffice,CoBuyerAgent |  |  | 69% | The last name of the buyer's co-agent. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentLastName+Field) |
-| `CoBuyerAgentMiddleName` | String | Listing , AgentOffice , CoBuyerAgent |  | 30% | 34% | The middle name of the buyer's co-agent. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentMiddleName+Field) |
-| `CoBuyerAgentMlsId` | String | Listing , AgentOffice , CoBuyerAgent |  | 60% | 60% | The local, well-known identifier. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentMlsId+Field) |
-| `CoBuyerAgentMobilePhone` | String | Listing , AgentOffice , CoBuyerAgent |  | 30% | 37% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentMobilePhone+Field) |
-| `CoBuyerAgentNamePrefix` | String | Listing , AgentOffice , CoBuyerAgent |  | 5% | 1% | The prefix to the name (e.g., Dr., Mr., Ms.). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentNamePrefix+Field) |
-| `CoBuyerAgentNameSuffix` | String | Listing , AgentOffice , CoBuyerAgent |  | 15% | 1% | The suffix to the name (e.g., Esq., Jr., III). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentNameSuffix+Field) |
-| `CoBuyerAgentNationalAssociationId` | String | Listing , AgentOffice , CoBuyerAgent |  |  | 0% | The national association ID of the co-buyer's agent (e.g., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentNationalAssociationId+Field) |
-| `CoBuyerAgentOfficePhone` | String | Listing , AgentOffice , CoBuyerAgent |  | 30% | 39% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentOfficePhone+Field) |
-| `CoBuyerAgentOfficePhoneExt` | String | Listing , AgentOffice , CoBuyerAgent |  | 10% | 21% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentOfficePhoneExt+Field) |
-| `CoBuyerAgentPager` | String | Listing , AgentOffice , CoBuyerAgent |  | 20% | 7% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentPager+Field) |
-| `CoBuyerAgentPreferredPhone` | String | Listing , AgentOffice , CoBuyerAgent |  | 40% | 50% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentPreferredPhone+Field) |
-| `CoBuyerAgentPreferredPhoneExt` | String | Listing , AgentOffice , CoBuyerAgent |  | 10% | 14% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentPreferredPhoneExt+Field) |
-| `CoBuyerAgentStateLicense` | String | Listing , AgentOffice , CoBuyerAgent |  | 35% | 38% | The license of the co-buyers' agent. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentStateLicense+Field) |
-| `CoBuyerAgentTollFreePhone` | String | Listing , AgentOffice , CoBuyerAgent |  | 10% | 13% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentTollFreePhone+Field) |
-| `CoBuyerAgentURL` | String | Listing , AgentOffice , CoBuyerAgent |  | 40% | 50% | The website Uniform Resource Identifier (URI) of the co-buyers agent. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentURL+Field) |
-| `CoBuyerAgentVoiceMail` | String | Listing , AgentOffice , CoBuyerAgent |  | 10% | 9% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentVoiceMail+Field) |
-| `CoBuyerAgentVoiceMailExt` | String | Listing , AgentOffice , CoBuyerAgent |  | 5% | 1% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerAgentVoiceMailExt+Field) |
-| `CoBuyerOffice` | Resource | Listing , AgentOffice , CoBuyerOffice |  |  |  | The co-buyer agent's office. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOffice+Field) |
-| `CoBuyerOfficeAOR` | String List, Single | Listing , AgentOffice , CoBuyerOffice | AOR | 25% | 11% | The co-buyer's office's board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOfficeAOR+Field) |
-| `CoBuyerOfficeEmail` | String | Listing , AgentOffice , CoBuyerOffice |  | 40% | 50% | The email address of the buyer's co-office. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOfficeEmail+Field) |
-| `CoBuyerOfficeFax` | String | Listing,AgentOffice,CoBuyerOffice |  |  | 46% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOfficeFax+Field) |
-| `CoBuyerOfficeKey` | String | Listing , AgentOffice , CoBuyerOffice |  | 55% | 46% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOfficeKey+Field) |
-| `CoBuyerOfficeMlsId` | String | Listing , AgentOffice , CoBuyerOffice |  | 50% | 58% | The local, well-known identifier. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOfficeMlsId+Field) |
-| `CoBuyerOfficeName` | String | Listing,AgentOffice,CoBuyerOffice |  |  | 74% | The legal name of the brokerage co-representing the buyer. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOfficeName+Field) |
-| `CoBuyerOfficeNationalAssociationId` | String | Listing , AgentOffice , CoBuyerOffice |  |  | 0% | The national association ID of the co-buyer's office (e.g., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOfficeNationalAssociationId+Field) |
-| `CoBuyerOfficePhone` | String | Listing , AgentOffice , CoBuyerOffice |  | 40% | 52% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOfficePhone+Field) |
-| `CoBuyerOfficePhoneExt` | String | Listing , AgentOffice , CoBuyerOffice |  | 15% | 4% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOfficePhoneExt+Field) |
-| `CoBuyerOfficeURL` | String | Listing , AgentOffice , CoBuyerOffice |  | 40% | 46% | The website Uniform Resource Identifier (URI) for the co-buyer's office. | [link](https://ddwiki.reso.org/display/DDW20/CoBuyerOfficeURL+Field) |
-| `CoListAgent` | Resource | Listing , AgentOffice , CoListAgent |  |  |  | The co-listing agent involved in the transaction. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgent+Field) |
-| `CoListAgentAOR` | String List, Single | Listing,AgentOffice,CoListAgent | AOR |  | 24% | The Co-listing Agent's board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentAOR+Field) |
-| `CoListAgentDesignation` | String List, Multi | Listing , AgentOffice , CoListAgent | [CoListAgentDesignation](#colistagentdesignation) | 25% | 47% | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® and each affiliated group upon completion of … | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentDesignation+Field) |
-| `CoListAgentDirectPhone` | String | Listing , AgentOffice , CoListAgent |  | 40% | 54% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentDirectPhone+Field) |
-| `CoListAgentEmail` | String | Listing , AgentOffice , CoListAgent |  | 65% | 66% | The email address of the co-listing agent. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentEmail+Field) |
-| `CoListAgentFax` | String | Listing , AgentOffice , CoListAgent |  | 55% | 49% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentFax+Field) |
-| `CoListAgentFirstName` | String | Listing , AgentOffice , CoListAgent |  | 70% | 76% | The first name of the co-listing agent. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentFirstName+Field) |
-| `CoListAgentFullName` | String | Listing , AgentOffice , CoListAgent |  | 65% | 80% | The first, middle and last name of the co-listing agent. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentFullName+Field) |
-| `CoListAgentHomePhone` | String | Listing , AgentOffice , CoListAgent |  | 35% | 27% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentHomePhone+Field) |
-| `CoListAgentKey` | String | Listing , AgentOffice , CoListAgent |  | 70% | 71% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentKey+Field) |
-| `CoListAgentLastName` | String | Listing , AgentOffice , CoListAgent |  | 70% | 76% | The last name of the co-listing agent. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentLastName+Field) |
-| `CoListAgentMiddleName` | String | Listing,AgentOffice,CoListAgent |  |  | 62% | The middle name of the co-listing agent. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentMiddleName+Field) |
-| `CoListAgentMlsId` | String | Listing , AgentOffice , CoListAgent |  | 65% | 83% | The local, well-known identifier. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentMlsId+Field) |
-| `CoListAgentMobilePhone` | String | Listing , AgentOffice , CoListAgent |  | 35% | 55% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentMobilePhone+Field) |
-| `CoListAgentNamePrefix` | String | Listing , AgentOffice , CoListAgent |  | 5% | 1% | The prefix to the name (e.g., Dr., Mr., Ms.). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentNamePrefix+Field) |
-| `CoListAgentNameSuffix` | String | Listing,AgentOffice,CoListAgent |  |  | 1% | The suffix to the name (e.g., Esq., Jr., III). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentNameSuffix+Field) |
-| `CoListAgentNationalAssociationId` | String | Listing , AgentOffice , CoListAgent |  |  | 20% | The national association ID of the co-listing agent (e.g., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentNationalAssociationId+Field) |
-| `CoListAgentOfficePhone` | String | Listing , AgentOffice , CoListAgent |  | 50% | 62% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentOfficePhone+Field) |
-| `CoListAgentOfficePhoneExt` | String | Listing , AgentOffice , CoListAgent |  | 25% | 26% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentOfficePhoneExt+Field) |
-| `CoListAgentPager` | String | Listing,AgentOffice,CoListAgent |  |  | 15% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentPager+Field) |
-| `CoListAgentPreferredPhone` | String | Listing,AgentOffice,CoListAgent |  |  | 73% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentPreferredPhone+Field) |
-| `CoListAgentPreferredPhoneExt` | String | Listing , AgentOffice , CoListAgent |  | 15% | 19% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentPreferredPhoneExt+Field) |
-| `CoListAgentStateLicense` | String | Listing , AgentOffice , CoListAgent |  | 35% | 44% | The license of the co-listing agent. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentStateLicense+Field) |
-| `CoListAgentTollFreePhone` | String | Listing , AgentOffice , CoListAgent |  | 20% | 17% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentTollFreePhone+Field) |
-| `CoListAgentURL` | String | Listing , AgentOffice , CoListAgent |  | 55% | 60% | The website Uniform Resource Identifier (URI) of the co-listing agent. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentURL+Field) |
-| `CoListAgentVoiceMail` | String | Listing , AgentOffice , CoListAgent |  | 15% | 7% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentVoiceMail+Field) |
-| `CoListAgentVoiceMailExt` | String | Listing , AgentOffice , CoListAgent |  | 10% | 1% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/CoListAgentVoiceMailExt+Field) |
-| `CoListOffice` | Resource | Listing , AgentOffice , CoListOffice |  |  |  | The co-listing agent's office. | [link](https://ddwiki.reso.org/display/DDW20/CoListOffice+Field) |
-| `CoListOfficeAOR` | String List, Single | Listing , AgentOffice , CoListOffice | AOR | 40% | 17% | The co-listing office's board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/CoListOfficeAOR+Field) |
-| `CoListOfficeEmail` | String | Listing , AgentOffice , CoListOffice |  | 55% | 61% | The email address of the co-listing office. | [link](https://ddwiki.reso.org/display/DDW20/CoListOfficeEmail+Field) |
-| `CoListOfficeFax` | String | Listing , AgentOffice , CoListOffice |  | 40% | 42% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListOfficeFax+Field) |
-| `CoListOfficeKey` | String | Listing,AgentOffice,CoListOffice |  |  | 73% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/CoListOfficeKey+Field) |
-| `CoListOfficeMlsId` | String | Listing , AgentOffice , CoListOffice |  | 65% | 69% | The local, well-known identifier. | [link](https://ddwiki.reso.org/display/DDW20/CoListOfficeMlsId+Field) |
-| `CoListOfficeName` | String | Listing , AgentOffice , CoListOffice |  | 75% | 68% | The legal name of the brokerage co-representing the seller. | [link](https://ddwiki.reso.org/display/DDW20/CoListOfficeName+Field) |
-| `CoListOfficeNationalAssociationId` | String | Listing , AgentOffice , CoListOffice |  |  | 1% | The national association ID of the co-listing office (e.g., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/CoListOfficeNationalAssociationId+Field) |
-| `CoListOfficePhone` | String | Listing,AgentOffice,CoListOffice |  |  | 78% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/CoListOfficePhone+Field) |
-| `CoListOfficePhoneExt` | String | Listing , AgentOffice , CoListOffice |  | 25% | 6% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/CoListOfficePhoneExt+Field) |
-| `CoListOfficeURL` | String | Listing , AgentOffice , CoListOffice |  | 50% | 54% | The website Uniform Resource Identifier (URI) for the co-listing office. | [link](https://ddwiki.reso.org/display/DDW20/CoListOfficeURL+Field) |
-| `CommonInterest` | String List, Single | Listing , Contract | [CommonInterest](#commoninterest) | 25% | 5% | A type of ownership in a property that is composed of an individual lot or unit and a share of the ownership or use of common areas. | [link](https://ddwiki.reso.org/display/DDW20/CommonInterest+Field) |
-| `CommonWalls` | String List, Multi | Structure | [CommonWalls](#commonwalls) | 65% | 35% | A multi-select list with options like 1 Common Wall, 2 Common Walls, No Common Walls, No One Above, No One Below. | [link](https://ddwiki.reso.org/display/DDW20/CommonWalls+Field) |
-| `CommunityFeatures` | String List, Multi | Characteristics | [CommunityFeatures](#communityfeatures) | 70% | 65% | A list of features related to or available within the community. | [link](https://ddwiki.reso.org/display/DDW20/CommunityFeatures+Field) |
-| `CompSaleYN` | Boolean | Listing |  |  | 3% | Indicates whether or not this sale was entered for comparative purposes. | [link](https://ddwiki.reso.org/display/DDW20/CompSaleYN+Field) |
-| `CompensationComments` | String | Listing , Compensation |  | 1% | 1% | A textual description of the compensation involved in the transaction. | [link](https://ddwiki.reso.org/display/DDW20/CompensationComments+Field) |
-| `Concessions` | String List, Single | Listing , Closing | [Concessions](#concessions) | 50% | 28% | Indicates whether or not there are concessions included in the sales agreement (i.e., Yes, No or Call Listing Agent). | [link](https://ddwiki.reso.org/display/DDW20/Concessions+Field) |
-| `ConcessionsAmount` | Number | Listing , Closing |  | 45% | 27% | The dollar amount of the concessions. | [link](https://ddwiki.reso.org/display/DDW20/ConcessionsAmount+Field) |
-| `ConcessionsComments` | String | Listing , Closing |  | 45% | 33% | The comments describing the concessions made by the buyer or the seller. | [link](https://ddwiki.reso.org/display/DDW20/ConcessionsComments+Field) |
-| `ConstructionMaterials` | String List, Multi | Structure | [ConstructionMaterials](#constructionmaterials) | 85% | 87% | A list of the materials that were used in the construction of the property. | [link](https://ddwiki.reso.org/display/DDW20/ConstructionMaterials+Field) |
-| `ContinentRegion` | String | Location , Area |  | 5% | 1% | A subsection or area of a continent (e.g., Southern Europe, Scandinavia). | [link](https://ddwiki.reso.org/display/DDW20/ContinentRegion+Field) |
-| `Contingency` | String | Listing , Closing |  | 50% | 32% | A list of contingencies that must be satisfied in order to complete the transaction. | [link](https://ddwiki.reso.org/display/DDW20/Contingency+Field) |
-| `ContingentDate` | Date | Listing , Dates |  | 75% | 22% | The date an offer was made with a contingency. | [link](https://ddwiki.reso.org/display/DDW20/ContingentDate+Field) |
-| `ContractStatusChangeDate` | Date | Listing , Dates |  | 65% | 72% | The date of the listing's contractual status change. | [link](https://ddwiki.reso.org/display/DDW20/ContractStatusChangeDate+Field) |
-| `Cooling` | String List, Multi | Structure | [Cooling](#cooling) |  | 90% | A list describing the cooling or air conditioning features of the property. | [link](https://ddwiki.reso.org/display/DDW20/Cooling+Field) |
-| `CoolingYN` | Boolean | Structure |  | 70% | 69% | Indicates whether or not the property has some form of cooling or air conditioning. | [link](https://ddwiki.reso.org/display/DDW20/CoolingYN+Field) |
-| `CopyrightNotice` | String | Listing |  | 10% | 1% | A notice of the legal rights of the owner of the information or data. | [link](https://ddwiki.reso.org/display/DDW20/CopyrightNotice+Field) |
-| `Country` | String List, Single | Location , Address | [Country](#country) | 80% | 54% | The country in which the property is located, as an ISO country code. | [link](https://ddwiki.reso.org/display/DDW20/Country+Field) |
-| `CountryRegion` | String | Location,Area |  |  | 1% | A subsection or area of a defined country (e.g., Napa Valley in the U.S., the Amalfi Coast in Italy). | [link](https://ddwiki.reso.org/display/DDW20/CountryRegion+Field) |
-| `CountyOrParish` | String List, Single | Location , Address | CountyOrParish | 90% | 94% | The county, parish or other regional authority. | [link](https://ddwiki.reso.org/display/DDW20/CountyOrParish+Field) |
-| `CoveredSpaces` | Number | Structure |  | 55% | 35% | The total number of garage and carport spaces. | [link](https://ddwiki.reso.org/display/DDW20/CoveredSpaces+Field) |
-| `CropsIncludedYN` | Boolean | Farming |  | 45% | 6% | Indicates whether or not crops are included in the sale of the property. | [link](https://ddwiki.reso.org/display/DDW20/CropsIncludedYN+Field) |
-| `CrossStreet` | String | Location , GIS |  | 65% | 19% | The nearest cross streets to the property. | [link](https://ddwiki.reso.org/display/DDW20/CrossStreet+Field) |
-| `CultivatedArea` | Number | Farming |  | 55% | 17% | The measurement or percentage of the property that has been cultivated. | [link](https://ddwiki.reso.org/display/DDW20/CultivatedArea+Field) |
-| `CumulativeDaysOnMarket` | Number | Listing , Dates |  | 65% | 41% | The cumulative number of days the property is on market, as defined by the MLS business rules. | [link](https://ddwiki.reso.org/display/DDW20/CumulativeDaysOnMarket+Field) |
-| `CurrentFinancing` | String List, Multi | Listing , Contract | [CurrentFinancing](#currentfinancing) | 40% | 36% | A list of options that describe the type of financing that the seller currently has in place for the property being sold (i.e., Cash, FHA Loan, etc.). | [link](https://ddwiki.reso.org/display/DDW20/CurrentFinancing+Field) |
-| `CurrentUse` | String List, Multi | Characteristics | [CurrentOrPossibleUse](#currentorpossibleuse) | 80% | 64% | A list of the type(s) of current use of the property. | [link](https://ddwiki.reso.org/display/DDW20/CurrentUse+Field) |
-| `DOH1` | String | Structure |  | 45% | 5% | The Department of Housing decal number for the mobile or manufactured home. | [link](https://ddwiki.reso.org/display/DDW20/DOH1+Field) |
-| `DOH2` | String | Structure |  |  | 4% | The Department of Housing decal number for the mobile or manufactured home. | [link](https://ddwiki.reso.org/display/DDW20/DOH2+Field) |
-| `DOH3` | String | Structure |  | 30% | 2% | The Department of Housing decal number for the mobile or manufactured home. | [link](https://ddwiki.reso.org/display/DDW20/DOH3+Field) |
-| `DaysInMls` | Number | Listing , Dates |  |  |  | The number of days the listing was on market within the MLS system. | [link](https://ddwiki.reso.org/display/DDW20/DaysInMls+Field) |
-| `DaysOnMarket` | Number | Listing , Dates |  | 75% | 90% | The number of days the listing is on market, as defined by the MLS business rules. | [link](https://ddwiki.reso.org/display/DDW20/DaysOnMarket+Field) |
-| `DaysOnSite` | Number | Listing,Dates |  |  |  | The number of days the listing appeared on the given site, typically a public portal. | [link](https://ddwiki.reso.org/display/DDW20/DaysOnSite+Field) |
-| `DevelopmentStatus` | String List, Multi | Characteristics | [DevelopmentStatus](#developmentstatus) | 60% | 35% | The development phase of the property. | [link](https://ddwiki.reso.org/display/DDW20/DevelopmentStatus+Field) |
-| `DirectionFaces` | String List, Single | Structure | [DirectionFaces](#directionfaces) | 60% | 14% | The compass direction that the main entrance to the building faces (e.g., North, South, East, West, Northeast, Southwest). | [link](https://ddwiki.reso.org/display/DDW20/DirectionFaces+Field) |
-| `Directions` | String | Location , GIS |  | 95% | 91% | Driving directions to the property. | [link](https://ddwiki.reso.org/display/DDW20/Directions+Field) |
-| `Disclaimer` | String | Listing |  |  | 8% | Text that serves as the negation or limitation of the rights under a warranty given by a seller to a buyer. | [link](https://ddwiki.reso.org/display/DDW20/Disclaimer+Field) |
-| `Disclosures` | String List, Multi | Listing , Contract | Disclosures | 60% | 55% | Legal or pertinent information that should be disclosed to potential buyer's agents. | [link](https://ddwiki.reso.org/display/DDW20/Disclosures+Field) |
-| `DistanceToBusComments` | String | Location |  | 30% | 2% | A textual description of the distance to local bus stops. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToBusComments+Field) |
-| `DistanceToBusNumeric` | Number | Location |  | 10% | 1% | The numeric distance from the property to the nearest bus stop. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToBusNumeric+Field) |
-| `DistanceToBusUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 10% | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToBusUnits+Field) |
-| `DistanceToElectricComments` | String | Utilities |  |  | 8% | Provides details about the property's access to serviceable electrical utility and the distance to it. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToElectricComments+Field) |
-| `DistanceToElectricNumeric` | Number | Utilities |  | 10% | 1% | The numeric distance from the property to the electrical utility. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToElectricNumeric+Field) |
-| `DistanceToElectricUnits` | String List, Single | Utilities | [LinearUnits](#linearunits) | 10% | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToElectricUnits+Field) |
-| `DistanceToFreewayComments` | String | Location |  | 25% | 2% | A textual description of the distance to freeways. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToFreewayComments+Field) |
-| `DistanceToFreewayNumeric` | Number | Location |  |  | 2% | The numeric distance from the property to the nearest freeway. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToFreewayNumeric+Field) |
-| `DistanceToFreewayUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 10% | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToFreewayUnits+Field) |
-| `DistanceToGasComments` | String | Utilities |  | 25% | 3% | Provides details about the property's access to serviceable natural gas utility and the distance to it. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToGasComments+Field) |
-| `DistanceToGasNumeric` | Number | Utilities |  | 10% | 1% | The numeric distance from the property to the gas utility. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToGasNumeric+Field) |
-| `DistanceToGasUnits` | String List, Single | Utilities | [LinearUnits](#linearunits) | 10% | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToGasUnits+Field) |
-| `DistanceToPhoneServiceComments` | String | Utilities |  | 25% | 3% | Provides details about the property's access to phone service and the distance to it. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToPhoneServiceComments+Field) |
-| `DistanceToPhoneServiceNumeric` | Number | Utilities |  | 5% | 1% | The numeric distance from the property to the phone utility. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToPhoneServiceNumeric+Field) |
-| `DistanceToPhoneServiceUnits` | String List, Single | Utilities | [LinearUnits](#linearunits) | 5% | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToPhoneServiceUnits+Field) |
-| `DistanceToPlaceofWorshipComments` | String | Location |  |  | 1% | A textual description of the distance to local places of worship. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToPlaceofWorshipComments+Field) |
-| `DistanceToPlaceofWorshipNumeric` | Number | Location |  | 10% | 1% | The numeric distance from the property to the nearest place of worship. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToPlaceofWorshipNumeric+Field) |
-| `DistanceToPlaceofWorshipUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 10% | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToPlaceofWorshipUnits+Field) |
-| `DistanceToSchoolBusComments` | String | Location |  | 20% | 1% | Distance from the property to the nearest school bus pickup point. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToSchoolBusComments+Field) |
-| `DistanceToSchoolBusNumeric` | Number | Location |  | 10% | 1% | The numeric distance from the property to the nearest school bus pickup point. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToSchoolBusNumeric+Field) |
-| `DistanceToSchoolBusUnits` | String List, Single | Location | [LinearUnits](#linearunits) |  | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToSchoolBusUnits+Field) |
-| `DistanceToSchoolsComments` | String | Location |  | 25% | 1% | A textual description of the distance to local schools. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToSchoolsComments+Field) |
-| `DistanceToSchoolsNumeric` | Number | Location |  | 15% | 1% | The numeric distance from the property to the nearest school. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToSchoolsNumeric+Field) |
-| `DistanceToSchoolsUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 15% | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToSchoolsUnits+Field) |
-| `DistanceToSewerComments` | String | Utilities |  | 25% | 4% | Provides details about the property's access to sewer or septic service and the distance to it. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToSewerComments+Field) |
-| `DistanceToSewerNumeric` | Number | Utilities |  | 15% | 1% | The numeric distance from the property to the sewer utility. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToSewerNumeric+Field) |
-| `DistanceToSewerUnits` | String List, Single | Utilities | [LinearUnits](#linearunits) |  | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToSewerUnits+Field) |
-| `DistanceToShoppingComments` | String | Location |  |  | 3% | A description of the distance to primary shopping sources, such as groceries, gasoline, clothing or department stores. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToShoppingComments+Field) |
-| `DistanceToShoppingNumeric` | Number | Location |  | 10% | 1% | The numeric distance from the property to the nearest shopping. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToShoppingNumeric+Field) |
-| `DistanceToShoppingUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 10% | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToShoppingUnits+Field) |
-| `DistanceToStreetComments` | String | Location |  | 20% | 1% | Provides details about the property's access to a maintained road or street adjacent to the lot, conditions of access and distance to a maintained road. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToStreetComments+Field) |
-| `DistanceToStreetNumeric` | Number | Location |  | 10% | 1% | The numeric distance from the property to the street. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToStreetNumeric+Field) |
-| `DistanceToStreetUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 5% | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToStreetUnits+Field) |
-| `DistanceToWaterComments` | String | Utilities |  | 25% | 4% | Provides details about the property's access to serviceable water utility and the distance to it. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToWaterComments+Field) |
-| `DistanceToWaterNumeric` | Number | Utilities |  | 20% | 1% | The numeric distance from the property to the water utility. | [link](https://ddwiki.reso.org/display/DDW20/DistanceToWaterNumeric+Field) |
-| `DistanceToWaterUnits` | String List, Single | Utilities | [LinearUnits](#linearunits) | 10% | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://ddwiki.reso.org/display/DDW20/DistanceToWaterUnits+Field) |
-| `DocumentStatus` | String List, Single | Listing , Media | [DocumentStatus](#documentstatus) |  |  | The statuses a document could be in during a transaction. | [link](https://ddwiki.reso.org/display/DDW20/DocumentStatus+Field) |
-| `DocumentsAvailable` | String List, Multi | Listing , Media | DocumentsAvailable | 65% | 73% | A list of the documents available for the property. | [link](https://ddwiki.reso.org/display/DDW20/DocumentsAvailable+Field) |
-| `DocumentsChangeTimestamp` | Timestamp | Listing , Media |  | 50% | 65% | The system-generated timestamp of when the last update or change to the documents for this listing was made. | [link](https://ddwiki.reso.org/display/DDW20/DocumentsChangeTimestamp+Field) |
-| `DocumentsCount` | Number | Listing , Media |  | 65% | 72% | The total number of documents or supplements included with the listing. | [link](https://ddwiki.reso.org/display/DDW20/DocumentsCount+Field) |
-| `DoorFeatures` | String List, Multi | Structure | [DoorFeatures](#doorfeatures) | 60% | 56% | A list of features or description of the doors included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/DoorFeatures+Field) |
-| `DualOrVariableRateCommissionYN` | Boolean | Listing , Compensation |  |  | 1% | A commission arrangement in which the seller agrees to pay a specified commission to the listing broker if the property is sold through the efforts of a cooperating broker. | [link](https://ddwiki.reso.org/display/DDW20/DualOrVariableRateCommissionYN+Field) |
-| `Electric` | String List, Multi | Utilities | [Electric](#electric) | 60% | 65% | A list of electric-service related features of the property (e.g., 110 Volt, 3 Phase, 220 Volt, RV Hookup). | [link](https://ddwiki.reso.org/display/DDW20/Electric+Field) |
-| `ElectricExpense` | Number | Financial |  | 45% | 16% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/ElectricExpense+Field) |
-| `ElectricOnPropertyYN` | Boolean | Utilities |  |  | 33% | Indicates whether or not the property currently has electrical utility available on the property. | [link](https://ddwiki.reso.org/display/DDW20/ElectricOnPropertyYN+Field) |
-| `ElementarySchool` | String List, Single | Location , School | ElementarySchool | 75% | 47% | The name of the primary school having a catchment area that includes the associated property. | [link](https://ddwiki.reso.org/display/DDW20/ElementarySchool+Field) |
-| `ElementarySchoolDistrict` | String List, Single | Location , School | ElementarySchoolDistrict | 50% | 25% | The name of the elementary school district having a catchment area that includes the associated property. | [link](https://ddwiki.reso.org/display/DDW20/ElementarySchoolDistrict+Field) |
-| `Elevation` | Number | Location , GIS |  | 45% | 4% | The elevation of the property in relation to sea level. | [link](https://ddwiki.reso.org/display/DDW20/Elevation+Field) |
-| `ElevationUnits` | String List, Single | Location , GIS | [LinearUnits](#linearunits) | 35% | 2% | A pick list of the unit of measurement used in the Elevation field (i.e., Feet, Meters). | [link](https://ddwiki.reso.org/display/DDW20/ElevationUnits+Field) |
-| `EntryLevel` | Number | Structure |  |  | 24% | A numeric field that describes the level within the structure, single-family residence (SFR) or a unit in a building, where the main entry to the dwelling is located. | [link](https://ddwiki.reso.org/display/DDW20/EntryLevel+Field) |
-| `EntryLocation` | String | Structure |  | 50% | 11% | A description of the main entry way to the property (e.g., elevator, ground level w/ steps, ground level w/o steps, top level). | [link](https://ddwiki.reso.org/display/DDW20/EntryLocation+Field) |
-| `Exclusions` | String | Listing,Contract |  |  | 32% | Elements of the property that will not be included in the sale (e.g., chandeliers removed prior to close). | [link](https://ddwiki.reso.org/display/DDW20/Exclusions+Field) |
-| `ExistingLeaseType` | String List, Multi | Financial | [ExistingLeaseType](#existingleasetype) | 60% | 46% | Information about the status of the existing lease on the property (i.e., Net, NNN, NN, Gross, Absolute Net, Escalation Clause, Ground Lease). | [link](https://ddwiki.reso.org/display/DDW20/ExistingLeaseType+Field) |
-| `ExpirationDate` | Date | Listing , Dates |  | 80% | 59% | The date when the listing agreement will expire. | [link](https://ddwiki.reso.org/display/DDW20/ExpirationDate+Field) |
-| `ExteriorFeatures` | String List, Multi | Structure | [ExteriorFeatures](#exteriorfeatures) | 85% | 84% | A list of features or a description of the exterior of the property included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/ExteriorFeatures+Field) |
-| `FarmCreditServiceInclYN` | Boolean | Farming |  | 15% | 1% | Indicates whether or not Farm Credit Service shares are included in the price of the property. | [link](https://ddwiki.reso.org/display/DDW20/FarmCreditServiceInclYN+Field) |
-| `FarmLandAreaSource` | String List, Single | Farming | [AreaSource](#areasource) | 10% | 1% | The source of the measurements. | [link](https://ddwiki.reso.org/display/DDW20/FarmLandAreaSource+Field) |
-| `FarmLandAreaUnits` | String List, Single | Farming | [AreaUnits](#areaunits) | 35% | 12% | A pick list of the unit of measurement for the area (i.e., Square Feet, Square Meters, Acres, etc.). | [link](https://ddwiki.reso.org/display/DDW20/FarmLandAreaUnits+Field) |
-| `Fencing` | String List, Multi | Characteristics | [Fencing](#fencing) | 90% | 74% | A list of types of fencing found at the property being sold. | [link](https://ddwiki.reso.org/display/DDW20/Fencing+Field) |
-| `FhaEligibility` | String List, Single | Listing , Closing | [FhaEligibility](#fhaeligibility) |  |  | The status of the property's FHA eligibility. | [link](https://ddwiki.reso.org/display/DDW20/FhaEligibility+Field) |
-| `FinancialDataSource` | String List, Multi | Financial | [FinancialDataSource](#financialdatasource) | 45% | 26% | The source of the rental information (e.g., Accountant, Owner). | [link](https://ddwiki.reso.org/display/DDW20/FinancialDataSource+Field) |
-| `FireplaceFeatures` | String List, Multi | Structure | [FireplaceFeatures](#fireplacefeatures) | 90% | 79% | A list of features or a description of the fireplace(s) included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/FireplaceFeatures+Field) |
-| `FireplaceYN` | Boolean | Structure |  |  | 78% | Does the property include a fireplace. | [link](https://ddwiki.reso.org/display/DDW20/FireplaceYN+Field) |
-| `FireplacesTotal` | Number | Structure |  | 75% | 39% | Indicates whether or not the property includes a fireplace. | [link](https://ddwiki.reso.org/display/DDW20/FireplacesTotal+Field) |
-| `Flooring` | String List, Multi | Structure | [Flooring](#flooring) | 85% | 82% | A list of the type(s) of flooring found within the property. | [link](https://ddwiki.reso.org/display/DDW20/Flooring+Field) |
-| `FoundationArea` | Number | Structure |  | 35% | 3% | The area or dimensions of the footprint of the structure on the lot. | [link](https://ddwiki.reso.org/display/DDW20/FoundationArea+Field) |
-| `FoundationDetails` | String List, Multi | Structure | [FoundationDetails](#foundationdetails) | 75% | 79% | A list of the type(s) of foundation on which the property sits. | [link](https://ddwiki.reso.org/display/DDW20/FoundationDetails+Field) |
-| `FrontageLength` | String | Characteristics |  | 55% | 28% | A textual description of the length of the frontages selected in the Frontage Type field. | [link](https://ddwiki.reso.org/display/DDW20/FrontageLength+Field) |
-| `FrontageType` | String List, Multi | Characteristics | [FrontageType](#frontagetype) | 65% | 44% | A pick list of types of frontage (i.e., Oceanfront, Lakefront, Golf Course, etc.). | [link](https://ddwiki.reso.org/display/DDW20/FrontageType+Field) |
-| `FuelExpense` | Number | Financial |  | 40% | 11% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/FuelExpense+Field) |
-| `Furnished` | String List, Single | Characteristics | [Furnished](#furnished) | 45% | 37% | The property being leased is furnished, unfurnished or partially furnished. | [link](https://ddwiki.reso.org/display/DDW20/Furnished+Field) |
-| `FurnitureReplacementExpense` | Number | Financial |  | 15% | 1% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/FurnitureReplacementExpense+Field) |
-| `GarageSpaces` | Number | Structure |  | 85% | 77% | The number of spaces in the garage(s). | [link](https://ddwiki.reso.org/display/DDW20/GarageSpaces+Field) |
-| `GarageYN` | Boolean | Structure |  | 70% | 70% | A flag that indicates whether or not the listing has a garage. | [link](https://ddwiki.reso.org/display/DDW20/GarageYN+Field) |
-| `GardenerExpense` | Number | Financial |  |  | 5% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/GardenerExpense+Field) |
-| `GrazingPermitsBlmYN` | Boolean | Farming |  |  | 1% | Indicates whether or not the property owner has grazing permits from the Bureau of Land Management. | [link](https://ddwiki.reso.org/display/DDW20/GrazingPermitsBlmYN+Field) |
-| `GrazingPermitsForestServiceYN` | Boolean | Farming |  | 10% | 1% | Indicates whether or not the property owner has grazing permits from the Forestry Service. | [link](https://ddwiki.reso.org/display/DDW20/GrazingPermitsForestServiceYN+Field) |
-| `GrazingPermitsPrivateYN` | Boolean | Farming |  | 20% | 1% | Indicates whether or not the property owner has private grazing permits. | [link](https://ddwiki.reso.org/display/DDW20/GrazingPermitsPrivateYN+Field) |
-| `GreenBuildingVerification` | Collection | Structure,Performance,GreenVerification |  |  |  | A collection of verifications or certifications awarded to a new or pre-existing residential or commercial structure (e.g., LEED, Energy Star, ICC-700). | [link](https://ddwiki.reso.org/display/DDW20/GreenBuildingVerification+Field) |
-| `GreenBuildingVerificationType` | String List, Multi | Structure , Performance , GreenVerification | [GreenBuildingVerificationType](#greenbuildingverificationtype) | 55% | 11% | The name of the verification or certification awarded to a new or pre-existing residential or commercial structure (e.g., LEED, ENERGY STAR, ICC-700). | [link](https://ddwiki.reso.org/display/DDW20/GreenBuildingVerificationType+Field) |
-| `GreenEnergyEfficient` | String List, Multi | Structure , Performance , GreenMarketing | [GreenEnergyEfficient](#greenenergyefficient) | 60% | 45% | A pick list of general green attributes such as energy efficient doors or appliances without naming specific elements with ratings that may wane over time. | [link](https://ddwiki.reso.org/display/DDW20/GreenEnergyEfficient+Field) |
-| `GreenEnergyGeneration` | String List, Multi | Structure , Performance , GreenMarketing | [GreenEnergyGeneration](#greenenergygeneration) | 70% | 43% | The methods of generating power that are included in the sale or lease. | [link](https://ddwiki.reso.org/display/DDW20/GreenEnergyGeneration+Field) |
-| `GreenIndoorAirQuality` | String List, Multi | Structure,Performance,GreenMarketing | [GreenIndoorAirQuality](#greenindoorairquality) |  | 19% | A pick list of indoor air quality measures without naming specific elements with ratings that may wane over time. | [link](https://ddwiki.reso.org/display/DDW20/GreenIndoorAirQuality+Field) |
-| `GreenLocation` | String List, Multi | Structure , Performance , GreenMarketing | GreenLocation | 25% | 21% | A pick list describing efficiencies involved with the property's location such as walkability or transportation proximity without naming specific elements with ratings that may wane over time. | [link](https://ddwiki.reso.org/display/DDW20/GreenLocation+Field) |
-| `GreenSustainability` | String List, Multi | Structure , Performance , GreenMarketing | [GreenSustainability](#greensustainability) | 50% | 26% | A pick list of sustainable elements used in the construction of the structure without naming specific elements with ratings that may wane over time. | [link](https://ddwiki.reso.org/display/DDW20/GreenSustainability+Field) |
-| `GreenVerificationYN` | Boolean | Structure , Performance , GreenVerification |  | 5% | 1% | A flag indicating that the listing has a Green Verification. | [link](https://ddwiki.reso.org/display/DDW20/GreenVerificationYN+Field) |
-| `GreenWaterConservation` | String List, Multi | Structure , Performance , GreenMarketing | [GreenWaterConservation](#greenwaterconservation) | 60% | 34% | A pick list of general water conserving attributes of the property such as landscaping or reclamation without naming specific elements with ratings that may wane over time. | [link](https://ddwiki.reso.org/display/DDW20/GreenWaterConservation+Field) |
-| `GrossIncome` | Number | Financial |  | 70% | 49% | The actual current income from rent and all other revenue-generating sources. | [link](https://ddwiki.reso.org/display/DDW20/GrossIncome+Field) |
-| `GrossLivingAreaAnsi` | Number | Structure |  |  |  | The total livable area with the structure as measured using American National Standards Institute (ANSI) measurement guidelines. | [link](https://ddwiki.reso.org/display/DDW20/GrossLivingAreaAnsi+Field) |
-| `GrossScheduledIncome` | Number | Financial |  | 60% | 19% | The maximum amount of annual rent collected if the property were 100% occupied all year and all tenants paid their rent. | [link](https://ddwiki.reso.org/display/DDW20/GrossScheduledIncome+Field) |
-| `HabitableResidenceYN` | Boolean | Structure |  | 45% | 10% | Indicates whether or not the property includes a structure that can be lived in. | [link](https://ddwiki.reso.org/display/DDW20/HabitableResidenceYN+Field) |
-| `Heating` | String List, Multi | Structure | [Heating](#heating) | 95% | 90% | A list describing the heating features of the property. | [link](https://ddwiki.reso.org/display/DDW20/Heating+Field) |
-| `HeatingYN` | Boolean | Structure |  | 70% | 70% | Indicates whether or not the property has heating. | [link](https://ddwiki.reso.org/display/DDW20/HeatingYN+Field) |
-| `HighSchool` | String List, Single | Location , School | HighSchool | 70% | 44% | The name of the high school having a catchment area that includes the associated property. | [link](https://ddwiki.reso.org/display/DDW20/HighSchool+Field) |
-| `HighSchoolDistrict` | String List, Single | Location , School | HighSchoolDistrict | 55% | 37% | The name of the high school district having a catchment area that includes the associated property. | [link](https://ddwiki.reso.org/display/DDW20/HighSchoolDistrict+Field) |
-| `HistoryTransactional` | Collection | Listing |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/display/DDW20/HistoryTransactional+Field) |
-| `HomeWarrantyYN` | Boolean | Listing |  | 70% | 35% | Indicates whether or not a home warranty is included in the sale of the property. | [link](https://ddwiki.reso.org/display/DDW20/HomeWarrantyYN+Field) |
-| `HorseAmenities` | String List, Multi | Characteristics | [HorseAmenities](#horseamenities) |  | 40% | A list of horse amenities on the lot or in the community. | [link](https://ddwiki.reso.org/display/DDW20/HorseAmenities+Field) |
-| `HorseYN` | Boolean | Characteristics |  |  | 44% | Indicates whether or not the property allows for the raising of horses. | [link](https://ddwiki.reso.org/display/DDW20/HorseYN+Field) |
-| `HoursDaysOfOperation` | String List, Multi | Business | [HoursDaysOfOperation](#hoursdaysofoperation) | 35% | 24% | A simplified enumerated list of the days and hours of operation of the business being sold (e.g., Open 24 Hours, Open Seven Days). | [link](https://ddwiki.reso.org/display/DDW20/HoursDaysOfOperation+Field) |
-| `HoursDaysOfOperationDescription` | String | Business |  | 15% | 2% | A detailed description of the hours and days the business being sold is open for business. | [link](https://ddwiki.reso.org/display/DDW20/HoursDaysOfOperationDescription+Field) |
-| `Inclusions` | String | Listing,Contract |  |  | 48% | Portable elements of the property that will be included in the sale. | [link](https://ddwiki.reso.org/display/DDW20/Inclusions+Field) |
-| `IncomeIncludes` | String List, Multi | Financial | [IncomeIncludes](#incomeincludes) |  | 9% | A list of income sources included in the GrossScheduledIncome and GrossIncome (e.g., Laundry, Parking, Recreation, Storage). | [link](https://ddwiki.reso.org/display/DDW20/IncomeIncludes+Field) |
-| `InsuranceExpense` | Number | Financial |  | 60% | 32% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/InsuranceExpense+Field) |
-| `InteriorFeatures` | String List, Multi | Structure | [InteriorOrRoomFeatures](#interiororroomfeatures) | 95% | 85% | A list of features or a description of the interior of the property included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/InteriorFeatures+Field) |
-| `InternetAddressDisplayYN` | Boolean | Listing , Marketing |  | 95% | 81% | Indicates whether or not the seller has allowed the listing address to be displayed on Internet sites. | [link](https://ddwiki.reso.org/display/DDW20/InternetAddressDisplayYN+Field) |
-| `InternetAutomatedValuationDisplayYN` | Boolean | Listing , Marketing |  | 80% | 74% | Indicates whether or not the seller allows the listing to be displayed with an automated valuation model (AVM) on Internet sites. | [link](https://ddwiki.reso.org/display/DDW20/InternetAutomatedValuationDisplayYN+Field) |
-| `InternetConsumerCommentYN` | Boolean | Listing , Marketing |  | 80% | 74% | Indicates whether or not the seller allows a comment or blog system to be attached to the listing on Internet sites. | [link](https://ddwiki.reso.org/display/DDW20/InternetConsumerCommentYN+Field) |
-| `InternetEntireListingDisplayYN` | Boolean | Listing , Marketing |  | 85% | 80% | Indicates whether or not the seller has allowed the listing to be displayed on Internet sites. | [link](https://ddwiki.reso.org/display/DDW20/InternetEntireListingDisplayYN+Field) |
-| `IrrigationSource` | String List, Multi | Utilities | IrrigationSource | 50% | 32% | The source which the property receives its water for irrigation. | [link](https://ddwiki.reso.org/display/DDW20/IrrigationSource+Field) |
-| `IrrigationWaterRightsAcres` | Number | Utilities |  | 40% | 4% | The number of acres allowed under the property's water rights. | [link](https://ddwiki.reso.org/display/DDW20/IrrigationWaterRightsAcres+Field) |
-| `IrrigationWaterRightsYN` | Boolean | Utilities |  | 50% | 9% | Indicates whether or not the property includes water rights for irrigation. | [link](https://ddwiki.reso.org/display/DDW20/IrrigationWaterRightsYN+Field) |
-| `LaborInformation` | String List, Multi | Business | [LaborInformation](#laborinformation) | 25% | 22% | Information about labor laws that are applicable to the business being sold (i.e., Union, Non-Union, Employee License Required). | [link](https://ddwiki.reso.org/display/DDW20/LaborInformation+Field) |
-| `LandLeaseAmount` | Number | Characteristics |  | 40% | 11% | When the land is not included in the sale, but is leased, the amount of the lease. | [link](https://ddwiki.reso.org/display/DDW20/LandLeaseAmount+Field) |
-| `LandLeaseAmountFrequency` | String List, Single | Characteristics | [FeeFrequency](#feefrequency) | 30% | 4% | The frequency in which the land lease fee is paid when the land is not included in the sale but is leased. | [link](https://ddwiki.reso.org/display/DDW20/LandLeaseAmountFrequency+Field) |
-| `LandLeaseExpirationDate` | Date | Characteristics |  |  | 5% | The expiration date of the land lease when the land is not included in the sale but is leased. | [link](https://ddwiki.reso.org/display/DDW20/LandLeaseExpirationDate+Field) |
-| `LandLeaseYN` | Boolean | Characteristics |  | 45% | 25% | The land is not included in the sale and a lease exists. | [link](https://ddwiki.reso.org/display/DDW20/LandLeaseYN+Field) |
-| `Latitude` | Number | Location , GIS |  | 90% | 97% | The geographic latitude of the property in decimal degrees. | [link](https://ddwiki.reso.org/display/DDW20/Latitude+Field) |
-| `LaundryFeatures` | String List, Multi | Characteristics | [LaundryFeatures](#laundryfeatures) | 65% | 70% | Add this pick list of features and locations where the laundry is located in the property being sold (i.e., Gas Dryer Hookup, In Kitchen, In Garage, etc.). | [link](https://ddwiki.reso.org/display/DDW20/LaundryFeatures+Field) |
-| `LeasableArea` | Number | Structure |  | 65% | 14% | The area that may be leased within the commercial property. | [link](https://ddwiki.reso.org/display/DDW20/LeasableArea+Field) |
-| `LeasableAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 60% | 8% | A pick list of the unit of measurement for the area (e.g., Square Feet, Square Meters). | [link](https://ddwiki.reso.org/display/DDW20/LeasableAreaUnits+Field) |
-| `LeaseAmount` | Number | Business |  | 55% | 15% | The current lease amount of the property as a single value or a periodic payment per LeaseAmountFrequency. | [link](https://ddwiki.reso.org/display/DDW20/LeaseAmount+Field) |
-| `LeaseAmountFrequency` | String List, Single | Business | [FeeFrequency](#feefrequency) | 50% | 8% | The frequency of the lease amount. | [link](https://ddwiki.reso.org/display/DDW20/LeaseAmountFrequency+Field) |
-| `LeaseAssignableYN` | Boolean | Business |  |  | 6% | Indicates whether or not the lease at the current location of the business can be assigned to another party. | [link](https://ddwiki.reso.org/display/DDW20/LeaseAssignableYN+Field) |
-| `LeaseConsideredYN` | Boolean | Listing |  | 55% | 24% | A flag indicating that the seller would consider leasing the property in addition to a sale. | [link](https://ddwiki.reso.org/display/DDW20/LeaseConsideredYN+Field) |
-| `LeaseExpiration` | Date | Business |  | 50% | 10% | The expiration date of the lease for the current location of the business. | [link](https://ddwiki.reso.org/display/DDW20/LeaseExpiration+Field) |
-| `LeaseRenewalCompensation` | String List, Multi | Listing , Compensation | [LeaseRenewalCompensation](#leaserenewalcompensation) | 45% | 24% | A list of compensations other than the original selling office compensation (i.e., Paid on Renewal, Paid on Tenant Purchase, No Renewal Commission, Call Listing Office, etc.). | [link](https://ddwiki.reso.org/display/DDW20/LeaseRenewalCompensation+Field) |
-| `LeaseRenewalOptionYN` | Boolean | Business |  | 40% | 10% | Indicates whether or not there is an option to renew the lease at the current location of the business. | [link](https://ddwiki.reso.org/display/DDW20/LeaseRenewalOptionYN+Field) |
-| `LeaseTerm` | String List, Single | Characteristics | [LeaseTerm](#leaseterm) | 65% | 43% | A pick list of lengths that represent the length of the lease (e.g., Weekly, Month to Month, 6-Month Lease, 12-Month Lease, 2-Year Lease). | [link](https://ddwiki.reso.org/display/DDW20/LeaseTerm+Field) |
-| `Levels` | String List, Multi | Structure | [Levels](#levels) | 75% | 73% | The number of levels in the property being sold (e.g., One, Two, Three or More, Multi/Split). | [link](https://ddwiki.reso.org/display/DDW20/Levels+Field) |
-| `License1` | String | Structure |  | 40% | 4% | The license number of the mobile or manufactured home, also known as the Department of Housing label/insignia number. | [link](https://ddwiki.reso.org/display/DDW20/License1+Field) |
-| `License2` | String | Structure |  | 25% | 2% | The license number of the mobile or manufactured home, also known as the Department of Housing label/insignia number. | [link](https://ddwiki.reso.org/display/DDW20/License2+Field) |
-| `License3` | String | Structure |  |  | 2% | The license number of the mobile or manufactured home, also known as the Department of Housing label/insignia number. | [link](https://ddwiki.reso.org/display/DDW20/License3+Field) |
-| `LicensesExpense` | Number | Financial |  | 35% | 4% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/LicensesExpense+Field) |
-| `ListAOR` | String List, Single | Listing | AOR | 35% | 22% | The responsible board or association of REALTORS® for this listing. | [link](https://ddwiki.reso.org/display/DDW20/ListAOR+Field) |
-| `ListAgent` | Resource | Listing , AgentOffice , ListAgent |  |  |  | The listing agent involved in the transaction. | [link](https://ddwiki.reso.org/display/DDW20/ListAgent+Field) |
-| `ListAgentAOR` | String List, Single | Listing,AgentOffice,ListAgent | AOR |  | 32% | The listing agent's board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentAOR+Field) |
-| `ListAgentDesignation` | String List, Multi | Listing , AgentOffice , ListAgent | [ListAgentDesignation](#listagentdesignation) | 25% | 48% | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® (NAR) and each affiliated group upon completi… | [link](https://ddwiki.reso.org/display/DDW20/ListAgentDesignation+Field) |
-| `ListAgentDirectPhone` | String | Listing , AgentOffice , ListAgent |  | 45% | 62% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentDirectPhone+Field) |
-| `ListAgentEmail` | String | Listing , AgentOffice , ListAgent |  | 90% | 75% | The email address of the listing agent. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentEmail+Field) |
-| `ListAgentFax` | String | Listing , AgentOffice , ListAgent |  | 60% | 53% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentFax+Field) |
-| `ListAgentFirstName` | String | Listing , AgentOffice , ListAgent |  | 90% | 91% | The first name of the listing agent. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentFirstName+Field) |
-| `ListAgentFullName` | String | Listing , AgentOffice , ListAgent |  | 90% | 95% | The full name of the listing agent of record. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentFullName+Field) |
-| `ListAgentHomePhone` | String | Listing,AgentOffice,ListAgent |  |  | 41% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentHomePhone+Field) |
-| `ListAgentKey` | String | Listing , AgentOffice , ListAgent |  | 90% | 78% | A system-unique identifier for the listing agent. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentKey+Field) |
-| `ListAgentLastName` | String | Listing , AgentOffice , ListAgent |  | 90% | 91% | The last name of the listing agent. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentLastName+Field) |
-| `ListAgentMiddleName` | String | Listing , AgentOffice , ListAgent |  | 55% | 50% | The middle name of the listing agent. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentMiddleName+Field) |
-| `ListAgentMlsId` | String | Listing,AgentOffice,ListAgent |  |  | 96% | The local, well-known identifier for the member. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentMlsId+Field) |
-| `ListAgentMobilePhone` | String | Listing , AgentOffice , ListAgent |  | 45% | 61% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentMobilePhone+Field) |
-| `ListAgentNamePrefix` | String | Listing , AgentOffice , ListAgent |  | 5% | 1% | The prefix to the name (e.g., Dr., Mr., Ms.). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentNamePrefix+Field) |
-| `ListAgentNameSuffix` | String | Listing , AgentOffice , ListAgent |  | 10% | 1% | The suffix to the name (e.g., Esq., Jr., III). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentNameSuffix+Field) |
-| `ListAgentNationalAssociationId` | String | Listing , AgentOffice , ListAgent |  |  | 21% | The national association ID of the listing agent (e.g., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentNationalAssociationId+Field) |
-| `ListAgentOfficePhone` | String | Listing , AgentOffice , ListAgent |  | 70% | 68% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentOfficePhone+Field) |
-| `ListAgentOfficePhoneExt` | String | Listing , AgentOffice , ListAgent |  | 30% | 30% | The extension of the given phone number (if applicable). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentOfficePhoneExt+Field) |
-| `ListAgentPager` | String | Listing , AgentOffice , ListAgent |  | 25% | 19% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentPager+Field) |
-| `ListAgentPreferredPhone` | String | Listing , AgentOffice , ListAgent |  | 70% | 65% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentPreferredPhone+Field) |
-| `ListAgentPreferredPhoneExt` | String | Listing , AgentOffice , ListAgent |  | 40% | 26% | The extension of the given phone number (if applicable). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentPreferredPhoneExt+Field) |
-| `ListAgentStateLicense` | String | Listing , AgentOffice , ListAgent |  | 60% | 48% | The license of the listing agent. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentStateLicense+Field) |
-| `ListAgentTollFreePhone` | String | Listing , AgentOffice , ListAgent |  | 20% | 22% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentTollFreePhone+Field) |
-| `ListAgentURL` | String | Listing,AgentOffice,ListAgent |  |  | 78% | The website Uniform Resource Identifier (URI) of the listing agent. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentURL+Field) |
-| `ListAgentVoiceMail` | String | Listing , AgentOffice , ListAgent |  | 15% | 13% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListAgentVoiceMail+Field) |
-| `ListAgentVoiceMailExt` | String | Listing , AgentOffice , ListAgent |  | 10% | 2% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/ListAgentVoiceMailExt+Field) |
-| `ListOffice` | Resource | Listing , AgentOffice , ListOffice |  |  |  | The listing agent's office. | [link](https://ddwiki.reso.org/display/DDW20/ListOffice+Field) |
-| `ListOfficeAOR` | String List, Single | Listing , AgentOffice , ListOffice | AOR | 40% | 19% | The listing office's board or association of REALTORS®. | [link](https://ddwiki.reso.org/display/DDW20/ListOfficeAOR+Field) |
-| `ListOfficeEmail` | String | Listing , AgentOffice , ListOffice |  | 60% | 86% | The email address of the listing office. | [link](https://ddwiki.reso.org/display/DDW20/ListOfficeEmail+Field) |
-| `ListOfficeFax` | String | Listing , AgentOffice , ListOffice |  | 50% | 66% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListOfficeFax+Field) |
-| `ListOfficeKey` | String | Listing , AgentOffice , ListOffice |  | 85% | 94% | The unique identifier of the brokerage Office responsible for marketing the listing. | [link](https://ddwiki.reso.org/display/DDW20/ListOfficeKey+Field) |
-| `ListOfficeMlsId` | String | Listing , AgentOffice , ListOffice |  | 85% | 96% | The local, well-known identifier. | [link](https://ddwiki.reso.org/display/DDW20/ListOfficeMlsId+Field) |
-| `ListOfficeName` | String | Listing , AgentOffice , ListOffice |  | 95% | 97% | The legal name of the brokerage representing the seller. | [link](https://ddwiki.reso.org/display/DDW20/ListOfficeName+Field) |
-| `ListOfficeNationalAssociationId` | String | Listing , AgentOffice , ListOffice |  |  | 1% | The national association ID of the listing office (e.g., the NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/ListOfficeNationalAssociationId+Field) |
-| `ListOfficePhone` | String | Listing , AgentOffice , ListOffice |  | 80% | 88% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ListOfficePhone+Field) |
-| `ListOfficePhoneExt` | String | Listing , AgentOffice , ListOffice |  | 25% | 15% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/ListOfficePhoneExt+Field) |
-| `ListOfficeURL` | String | Listing , AgentOffice , ListOffice |  | 50% | 65% | The website Uniform Resource Identifier (URI) for the listing office. | [link](https://ddwiki.reso.org/display/DDW20/ListOfficeURL+Field) |
-| `ListPrice` | Number | Listing,Price |  |  | 100% | The current price of the property as listed by the seller. | [link](https://ddwiki.reso.org/display/DDW20/ListPrice+Field) |
-| `ListPriceLow` | Number | Listing , Price |  | 60% | 10% | The lower price used for Value Range Pricing. | [link](https://ddwiki.reso.org/display/DDW20/ListPriceLow+Field) |
-| `ListTeam` | Resource | Listing , AgentOffice , ListTeam |  |  |  | Two or more agents working on the listing agent's team. | [link](https://ddwiki.reso.org/display/DDW20/ListTeam+Field) |
-| `ListTeamKey` | String | Listing , AgentOffice , Team |  | 15% | 2% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/ListTeamKey+Field) |
-| `ListTeamName` | String | Listing , AgentOffice , Team |  | 30% | 7% | The name of the team representing the seller. | [link](https://ddwiki.reso.org/display/DDW20/ListTeamName+Field) |
-| `ListingAgreement` | String List, Single | Listing | [ListingAgreement](#listingagreement) | 70% | 51% | The type of contractual relationship between the listing agent and the seller. | [link](https://ddwiki.reso.org/display/DDW20/ListingAgreement+Field) |
-| `ListingContractDate` | Date | Listing , Dates |  | 100% | 97% | The effective date of the agreement between the seller and the seller's broker. | [link](https://ddwiki.reso.org/display/DDW20/ListingContractDate+Field) |
-| `ListingId` | String | Listing |  | 100% | 99% | The well-known identifier for the listing, also known as the MLS number. | [link](https://ddwiki.reso.org/display/DDW20/ListingId+Field) |
-| `ListingKey` | String | Listing |  |  | 98% | A system-unique identifier for the listing. | [link](https://ddwiki.reso.org/display/DDW20/ListingKey+Field) |
-| `ListingService` | String List, Single | Listing | [ListingService](#listingservice) | 60% | 28% | The level of service the listing broker is providing to the seller. | [link](https://ddwiki.reso.org/display/DDW20/ListingService+Field) |
-| `ListingTerms` | String List, Multi | Listing,Contract | [ListingTerms](#listingterms) |  | 78% | Terms of the listing such as Lien Release, Subject to Court Approval or Owner Will Carry. | [link](https://ddwiki.reso.org/display/DDW20/ListingTerms+Field) |
-| `ListingURL` | String | Listing |  | 5% | 1% | Provides a link to the specific listing on a brokerage website, agent website or other public-facing source. | [link](https://ddwiki.reso.org/display/DDW20/ListingURL+Field) |
-| `ListingURLDescription` | String List, Single | Listing | [ListingURLDescription](#listingurldescription) |  |  | A pick list of options showing where the listing URL resides (i.e., Brokerage Website, Agent Website, etc.). | [link](https://ddwiki.reso.org/display/DDW20/ListingURLDescription+Field) |
-| `LivingArea` | Number | Structure |  |  | 78% | The total interior living area of the property, measured in LivingAreaUnits (typically SquareMeters or SquareFeet). | [link](https://ddwiki.reso.org/display/DDW20/LivingArea+Field) |
-| `LivingAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 65% | 40% | The source of the measurements. | [link](https://ddwiki.reso.org/display/DDW20/LivingAreaSource+Field) |
-| `LivingAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 80% | 51% | A pick list of the unit of measurement for the area (e.g., Square Feet, Square Meters). | [link](https://ddwiki.reso.org/display/DDW20/LivingAreaUnits+Field) |
-| `LockBoxLocation` | String | Listing,Showing |  |  | 22% | A field describing the location of the lockbox. | [link](https://ddwiki.reso.org/display/DDW20/LockBoxLocation+Field) |
-| `LockBoxSerialNumber` | String | Listing , Showing |  | 40% | 15% | The serial number of the lockbox placed on the property. | [link](https://ddwiki.reso.org/display/DDW20/LockBoxSerialNumber+Field) |
-| `LockBoxType` | String List, Multi | Listing , Showing | [LockBoxType](#lockboxtype) | 55% | 46% | A field describing the type of lockbox. | [link](https://ddwiki.reso.org/display/DDW20/LockBoxType+Field) |
-| `Longitude` | Number | Location , GIS |  | 90% | 97% | The geographic longitude of the property in decimal degrees. | [link](https://ddwiki.reso.org/display/DDW20/Longitude+Field) |
-| `LotDimensionsSource` | String List, Single | Characteristics | [LotDimensionsSource](#lotdimensionssource) | 30% | 3% | The source of the measurements. | [link](https://ddwiki.reso.org/display/DDW20/LotDimensionsSource+Field) |
-| `LotFeatures` | String List, Multi | Characteristics | [LotFeatures](#lotfeatures) |  | 84% | A list of features or a description of the lot included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/LotFeatures+Field) |
-| `LotSizeAcres` | Number | Characteristics |  | 90% | 88% | The total acres of the lot. | [link](https://ddwiki.reso.org/display/DDW20/LotSizeAcres+Field) |
-| `LotSizeArea` | Number | Characteristics |  | 95% | 86% | The total area of the lot. | [link](https://ddwiki.reso.org/display/DDW20/LotSizeArea+Field) |
-| `LotSizeDimensions` | String | Characteristics |  | 85% | 80% | The dimensions of the lot minimally represented as length and width (i.e. | [link](https://ddwiki.reso.org/display/DDW20/LotSizeDimensions+Field) |
-| `LotSizeSource` | String List, Single | Characteristics | [LotSizeSource](#lotsizesource) | 45% | 16% | The source of the measurements. | [link](https://ddwiki.reso.org/display/DDW20/LotSizeSource+Field) |
-| `LotSizeSquareFeet` | Number | Characteristics |  | 75% | 82% | The size of the lot in square feet (in CDL we honor LotSizeUnits and accept SquareMeters too). | [link](https://ddwiki.reso.org/display/DDW20/LotSizeSquareFeet+Field) |
-| `LotSizeUnits` | String List, Single | Characteristics | [LotSizeUnits](#lotsizeunits) |  | 88% | The unit of measurement for LotSizeArea (RESO AreaUnits lookup): SquareMeters, SquareFeet, Acres, Hectares, etc. | [link](https://ddwiki.reso.org/display/DDW20/LotSizeUnits+Field) |
-| `MLSAreaMajor` | String List, Single | Location , Area | MLSAreaMajor | 80% | 79% | The major marketing area name, as defined by the MLS or other nongovernmental organization. | [link](https://ddwiki.reso.org/display/DDW20/MLSAreaMajor+Field) |
-| `MLSAreaMinor` | String List, Single | Location , Area | MLSAreaMinor | 50% | 32% | The minor/submarketing area name, as defined by the MLS or other nongovernmental organization. | [link](https://ddwiki.reso.org/display/DDW20/MLSAreaMinor+Field) |
-| `MainLevelBathrooms` | Number | Structure |  | 40% | 12% | The number of bathrooms located on the main or entry level of the property. | [link](https://ddwiki.reso.org/display/DDW20/MainLevelBathrooms+Field) |
-| `MainLevelBedrooms` | Number | Structure |  | 45% | 16% | The number of bedrooms located on the main or entry level of the property. | [link](https://ddwiki.reso.org/display/DDW20/MainLevelBedrooms+Field) |
-| `MaintenanceExpense` | Number | Financial |  | 60% | 28% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/MaintenanceExpense+Field) |
-| `MajorChangeTimestamp` | Timestamp | Listing , Dates |  | 40% | 66% | The timestamp of the last major change on the listing (see also MajorChangeType). | [link](https://ddwiki.reso.org/display/DDW20/MajorChangeTimestamp+Field) |
-| `MajorChangeType` | String List, Single | Listing , Dates | [ChangeType](#changetype) | 35% | 47% | A description of the last major change on the listing (i.e., Price Reduction, Back on Market). | [link](https://ddwiki.reso.org/display/DDW20/MajorChangeType+Field) |
-| `Make` | String | Structure |  | 50% | 12% | The make of the mobile or manufactured home. | [link](https://ddwiki.reso.org/display/DDW20/Make+Field) |
-| `ManagerExpense` | Number | Financial |  |  | 15% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/ManagerExpense+Field) |
-| `MapCoordinate` | String | Location , GIS |  | 25% | 4% | A map coordinate for the property, as determined by local custom. | [link](https://ddwiki.reso.org/display/DDW20/MapCoordinate+Field) |
-| `MapCoordinateSource` | String | Location , GIS |  | 30% | 2% | The name of the map or map book publisher. | [link](https://ddwiki.reso.org/display/DDW20/MapCoordinateSource+Field) |
-| `MapURL` | String | Location , GIS |  | 10% | 1% | A Uniform Resource Identifier (URI) to a map of the property. | [link](https://ddwiki.reso.org/display/DDW20/MapURL+Field) |
-| `Media` | Collection | Listing , Media |  | 35% | 32% | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://ddwiki.reso.org/display/DDW20/Media+Field) |
-| `MiddleOrJuniorSchool` | String List, Single | Location , School | MiddleOrJuniorSchool | 75% | 40% | The name of the junior or middle school having a catchment area that includes the associated property. | [link](https://ddwiki.reso.org/display/DDW20/MiddleOrJuniorSchool+Field) |
-| `MiddleOrJuniorSchoolDistrict` | String List, Single | Location , School | MiddleOrJuniorSchoolDistrict | 45% | 19% | The name of the junior or middle school district having a catchment area that includes the associated property. | [link](https://ddwiki.reso.org/display/DDW20/MiddleOrJuniorSchoolDistrict+Field) |
-| `MlsStatus` | String List, Single | Listing | MlsStatus |  | 97% | A local or regional status that is well known by business users. | [link](https://ddwiki.reso.org/display/DDW20/MlsStatus+Field) |
-| `MobileDimUnits` | String List, Single | Structure | [LinearUnits](#linearunits) | 25% | 2% | A pick list of the unit of linear measurement (e.g., Feet, Meters, Yards, Kilometers, Miles). | [link](https://ddwiki.reso.org/display/DDW20/MobileDimUnits+Field) |
-| `MobileHomeRemainsYN` | Boolean | Characteristics |  | 30% | 1% | Indicates whether or not the mobile home is to remain and be included in the sale of the property. | [link](https://ddwiki.reso.org/display/DDW20/MobileHomeRemainsYN+Field) |
-| `MobileLength` | Number | Structure |  | 50% | 7% | The length of the mobile/manufactured home. | [link](https://ddwiki.reso.org/display/DDW20/MobileLength+Field) |
-| `MobileWidth` | Number | Structure |  | 50% | 7% | The width of the mobile/manufactured home. | [link](https://ddwiki.reso.org/display/DDW20/MobileWidth+Field) |
-| `Model` | String | Structure |  |  | 21% | The model of the mobile or manufactured home. | [link](https://ddwiki.reso.org/display/DDW20/Model+Field) |
-| `ModificationTimestamp` | Timestamp | Listing , Dates |  | 100% | 99% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/display/DDW20/ModificationTimestamp+Field) |
-| `NetOperatingIncome` | Number | Financial |  | 75% | 49% | The net operating income is the revenue from a property after operating expenses have been deducted but before deducting income taxes and financing expenses (interest and principal payments). | [link](https://ddwiki.reso.org/display/DDW20/NetOperatingIncome+Field) |
-| `NewConstructionYN` | Boolean | Structure |  | 80% | 59% | A flag indicating that the property has never been previously occupied. | [link](https://ddwiki.reso.org/display/DDW20/NewConstructionYN+Field) |
-| `NewTaxesExpense` | Number | Financial |  |  | 14% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/NewTaxesExpense+Field) |
-| `NumberOfBuildings` | Number | Characteristics |  |  | 44% | The total number of separate buildings included in the income property. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfBuildings+Field) |
-| `NumberOfFullTimeEmployees` | Number | Business |  | 30% | 8% | The current number of individuals employed by the business on a full-time basis. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfFullTimeEmployees+Field) |
-| `NumberOfLots` | Number | Characteristics |  | 50% | 11% | The total number of lots on the property or included in the sale. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfLots+Field) |
-| `NumberOfPads` | Number | Characteristics |  | 20% | 2% | The number of pads or spaces in the mobile home park. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfPads+Field) |
-| `NumberOfPartTimeEmployees` | Number | Business |  | 25% | 5% | The current number of individuals employed by the business on a part-time basis. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfPartTimeEmployees+Field) |
-| `NumberOfSeparateElectricMeters` | Number | Utilities |  | 35% | 7% | The total number of separate electric meters on the property. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfSeparateElectricMeters+Field) |
-| `NumberOfSeparateGasMeters` | Number | Utilities |  | 40% | 5% | The total number of separate gas meters on the property. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfSeparateGasMeters+Field) |
-| `NumberOfSeparateWaterMeters` | Number | Utilities |  | 40% | 6% | The total number of separate water meters on the property. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfSeparateWaterMeters+Field) |
-| `NumberOfUnitsInCommunity` | Number | Characteristics |  | 50% | 13% | The total number of units in the building, complex or community. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfUnitsInCommunity+Field) |
-| `NumberOfUnitsLeased` | Number | Financial |  | 55% | 10% | The total number of units currently under a lease agreement. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfUnitsLeased+Field) |
-| `NumberOfUnitsMoMo` | Number | Financial |  | 20% | 1% | The total number of units leasable month to month. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfUnitsMoMo+Field) |
-| `NumberOfUnitsTotal` | Number | Characteristics |  | 85% | 67% | Total number of units included in the income property, occupied or unoccupied. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfUnitsTotal+Field) |
-| `NumberOfUnitsVacant` | Number | Financial |  | 35% | 4% | The number of units currently vacant. | [link](https://ddwiki.reso.org/display/DDW20/NumberOfUnitsVacant+Field) |
-| `OccupantName` | String | OccupantOwner |  | 45% | 22% | The full name of the current occupant of the Property. | [link](https://ddwiki.reso.org/display/DDW20/OccupantName+Field) |
-| `OccupantPhone` | String | OccupantOwner |  | 40% | 13% | The current occupant's contact phone number. | [link](https://ddwiki.reso.org/display/DDW20/OccupantPhone+Field) |
-| `OccupantType` | String List, Single | OccupantOwner | [OccupantType](#occupanttype) | 50% | 47% | A single-value lookup describing who currently occupies the Property: Owner \| Tenant \| Vacant. | [link](https://ddwiki.reso.org/display/DDW20/OccupantType+Field) |
-| `OffMarketDate` | Date | Listing , Dates |  | 75% | 81% | The date the listing was taken off market. | [link](https://ddwiki.reso.org/display/DDW20/OffMarketDate+Field) |
-| `OffMarketTimestamp` | Timestamp | Listing,Dates |  |  | 32% | The transactional timestamp automatically recorded by the MLS system representing the most recent date/time the listing's status was set to an off-market status (not Active or Backup) | [link](https://ddwiki.reso.org/display/DDW20/OffMarketTimestamp+Field) |
-| `OnMarketDate` | Date | Listing , Dates |  | 80% | 69% | The date the listing was placed on market. | [link](https://ddwiki.reso.org/display/DDW20/OnMarketDate+Field) |
-| `OnMarketTimestamp` | Timestamp | Listing,Dates |  |  | 8% | The transactional timestamp automatically recorded by the MLS system representing the most recent date/time the listing's status was set to Active or Backup. | [link](https://ddwiki.reso.org/display/DDW20/OnMarketTimestamp+Field) |
-| `OpenHouse` | Collection | Listing |  |  |  | The OpenHouse resource describes a scheduled event during which a Property is open for public or broker viewing. | [link](https://ddwiki.reso.org/display/DDW20/OpenHouse+Field) |
-| `OpenHouseModificationTimestamp` | Timestamp | Listing |  |  |  | A system-generated timestamp of when the last update or change to the open house information for this listing was made. | [link](https://ddwiki.reso.org/display/DDW20/OpenHouseModificationTimestamp+Field) |
-| `OpenParkingSpaces` | Number | Structure |  | 55% | 12% | The number of open or uncovered parking spaces included in the sale. | [link](https://ddwiki.reso.org/display/DDW20/OpenParkingSpaces+Field) |
-| `OpenParkingYN` | Boolean | Structure |  | 55% | 31% | A flag indicating that any parking spaces associated with the property are not covered by a roof. | [link](https://ddwiki.reso.org/display/DDW20/OpenParkingYN+Field) |
-| `OperatingExpense` | Number | Financial |  | 65% | 41% | The costs associated with the operation and maintenance of an income-producing property. | [link](https://ddwiki.reso.org/display/DDW20/OperatingExpense+Field) |
-| `OperatingExpenseIncludes` | String List, Multi | Financial | [OperatingExpenseIncludes](#operatingexpenseincludes) | 50% | 31% | When individual expense fields are not used and only a total is entered, this lists the expenses that are included in the OperatingExpense field. | [link](https://ddwiki.reso.org/display/DDW20/OperatingExpenseIncludes+Field) |
-| `OriginalEntryTimestamp` | Timestamp | Listing , Dates |  | 85% | 79% | The transactional timestamp automatically recorded by the MLS system representing the date/time the listing was entered and made visible to members of the MLS. | [link](https://ddwiki.reso.org/display/DDW20/OriginalEntryTimestamp+Field) |
-| `OriginalListPrice` | Number | Listing , Price |  | 85% | 91% | The original listing price of the property as it was first listed. | [link](https://ddwiki.reso.org/display/DDW20/OriginalListPrice+Field) |
-| `OriginatingSystem` | Resource | Listing |  |  |  | The originating system of the Property record. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystem+Field) |
-| `OriginatingSystemID` | String | Listing |  | 60% | 80% | The OUID Resource's OrganizationUniqueId of the originating record provider. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemID+Field) |
-| `OriginatingSystemKey` | String | Listing |  | 85% | 95% | The system key, a unique record identifier, from the originating system. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemKey+Field) |
-| `OriginatingSystemName` | String | Listing |  | 75% | 94% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://ddwiki.reso.org/display/DDW20/OriginatingSystemName+Field) |
-| `OtherEquipment` | String List, Multi | Equipment | [OtherEquipment](#otherequipment) | 70% | 69% | A list of other equipment that will be included in the sale of the property. | [link](https://ddwiki.reso.org/display/DDW20/OtherEquipment+Field) |
-| `OtherExpense` | Number | Financial |  | 50% | 21% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/OtherExpense+Field) |
-| `OtherParking` | String | Structure |  | 45% | 11% | Other types of parking available to, or part of, the property. | [link](https://ddwiki.reso.org/display/DDW20/OtherParking+Field) |
-| `OtherStructures` | String List, Multi | Structure | [OtherStructures](#otherstructures) |  | 77% | A list of structures other than the main dwelling (e.g., Guest House, Barn, Shed). | [link](https://ddwiki.reso.org/display/DDW20/OtherStructures+Field) |
-| `OwnerName` | String | OccupantOwner |  | 65% | 73% | The full legal name of the Property owner. | [link](https://ddwiki.reso.org/display/DDW20/OwnerName+Field) |
-| `OwnerPays` | String List, Multi | Financial | [OwnerPays](#ownerpays) | 60% | 55% | A list of expenses for the property paid for by the owner as opposed to the tenant (e.g., Water, Trash, Electric). | [link](https://ddwiki.reso.org/display/DDW20/OwnerPays+Field) |
-| `OwnerPhone` | String | OccupantOwner |  | 55% | 39% | The Property owner's contact phone number. | [link](https://ddwiki.reso.org/display/DDW20/OwnerPhone+Field) |
-| `Ownership` | String | Listing,Contract |  |  | 25% | Free-text description of the legal ownership type of the Property: Sole Owner, Trust, Corporation, LLC, Joint Tenancy, etc. | [link](https://ddwiki.reso.org/display/DDW20/Ownership+Field) |
-| `OwnershipType` | String List, Single | Business | [OwnershipType](#ownershiptype) | 50% | 14% | The current type of ownership of the business being sold (e.g., Corporation, LLC, Sole Proprietor, Partnership). | [link](https://ddwiki.reso.org/display/DDW20/OwnershipType+Field) |
-| `ParcelNumber` | String | Tax |  | 95% | 81% | A number used to uniquely identify a parcel or lot. | [link](https://ddwiki.reso.org/display/DDW20/ParcelNumber+Field) |
-| `ParkManagerName` | String | Characteristics |  | 40% | 4% | The name of the manager of the mobile home park. | [link](https://ddwiki.reso.org/display/DDW20/ParkManagerName+Field) |
-| `ParkManagerPhone` | String | Characteristics |  | 40% | 4% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/ParkManagerPhone+Field) |
-| `ParkName` | String | Characteristics |  |  | 13% | The name of the mobile home park or corporate/commercial park. | [link](https://ddwiki.reso.org/display/DDW20/ParkName+Field) |
-| `ParkingFeatures` | String List, Multi | Structure | [ParkingFeatures](#parkingfeatures) | 95% | 84% | A list of features about or a description of the parking included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/ParkingFeatures+Field) |
-| `ParkingTotal` | Number | Structure |  | 85% | 58% | The total number of parking spaces included in the sale. | [link](https://ddwiki.reso.org/display/DDW20/ParkingTotal+Field) |
-| `PastureArea` | Number | Farming |  | 60% | 16% | A measurement or percentage of the property that has been allocated as pasture or grazing area. | [link](https://ddwiki.reso.org/display/DDW20/PastureArea+Field) |
-| `PatioAndPorchFeatures` | String List, Multi | Structure | [PatioAndPorchFeatures](#patioandporchfeatures) | 80% | 72% | A list of features about or a description of the patio or porch included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/PatioAndPorchFeatures+Field) |
-| `PendingTimestamp` | Timestamp | Listing , Dates |  | 55% | 62% | The transactional timestamp automatically recorded by the MLS system representing the most recent date/time the listing's status was set to Pending. | [link](https://ddwiki.reso.org/display/DDW20/PendingTimestamp+Field) |
-| `PestControlExpense` | Number | Financial |  | 25% | 2% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/PestControlExpense+Field) |
-| `PetsAllowed` | String List, Multi | Characteristics | [PetsAllowed](#petsallowed) | 70% | 63% | Indicates whether or not pets are allowed at the property being leased, usually as a list of yes, no and more detailed restrictions/allowances. | [link](https://ddwiki.reso.org/display/DDW20/PetsAllowed+Field) |
-| `PhotosChangeTimestamp` | Timestamp | Listing , Media |  | 80% | 81% | A system-generated timestamp of when the last update or change to the photos for this listing was made. | [link](https://ddwiki.reso.org/display/DDW20/PhotosChangeTimestamp+Field) |
-| `PhotosCount` | Number | Listing , Media |  | 95% | 98% | The total number of pictures or photos included with the listing. | [link](https://ddwiki.reso.org/display/DDW20/PhotosCount+Field) |
-| `PoolExpense` | Number | Financial |  | 25% | 1% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/PoolExpense+Field) |
-| `PoolFeatures` | String List, Multi | Characteristics | [PoolFeatures](#poolfeatures) |  | 79% | A list of features about or a description of a pool included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/PoolFeatures+Field) |
-| `PoolPrivateYN` | Boolean | Characteristics |  | 75% | 31% | The property has a privately owned pool that is included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/PoolPrivateYN+Field) |
-| `Possession` | String List, Multi | Listing , Closing | [Possession](#possession) | 70% | 74% | A list defining when possession will occur (i.e., COE, COE+1, etc.). | [link](https://ddwiki.reso.org/display/DDW20/Possession+Field) |
-| `PossibleUse` | String List, Multi | Characteristics | [CurrentOrPossibleUse](#currentorpossibleuse) | 55% | 52% | A list of the type(s) of possible or best uses of the property. | [link](https://ddwiki.reso.org/display/DDW20/PossibleUse+Field) |
-| `PostalCity` | String List, Single | Location , Address | PostalCity | 60% | 18% | The official city per the U.S. | [link](https://ddwiki.reso.org/display/DDW20/PostalCity+Field) |
-| `PostalCode` | String | Location , Address |  | 100% | 98% | The postal code in which the property is located. | [link](https://ddwiki.reso.org/display/DDW20/PostalCode+Field) |
-| `PostalCodePlus4` | String | Location , Address |  | 60% | 57% | The last four digits of a nine-digit U.S. | [link](https://ddwiki.reso.org/display/DDW20/PostalCodePlus4+Field) |
-| `PowerProduction` | Collection | Utilities |  | 1% | 1% | A collection of the types of power production system(s) available on the property. | [link](https://ddwiki.reso.org/display/DDW20/PowerProduction+Field) |
-| `PowerProductionType` | String List, Multi | Utilities | [PowerProductionType](#powerproductiontype) | 30% | 5% | A list of the types of power production systems available on the property. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionType+Field) |
-| `PowerProductionYN` | Boolean | Utilities |  |  | 0% | A flag indicating that the listing has a Power Production system. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionYN+Field) |
-| `PreviousListPrice` | Number | Listing , Price |  | 55% | 51% | The most recent previous list price of the listing. | [link](https://ddwiki.reso.org/display/DDW20/PreviousListPrice+Field) |
-| `PriceChangeTimestamp` | Timestamp | Listing , Dates |  | 80% | 75% | The transactional timestamp automatically recorded by the MLS system representing the date/time the listing's price was last changed. | [link](https://ddwiki.reso.org/display/DDW20/PriceChangeTimestamp+Field) |
-| `PrivateOfficeRemarks` | String | Listing , Remarks |  | 35% | 15% | A Remarks field that is only visible to members of the same offices as the listing agent. | [link](https://ddwiki.reso.org/display/DDW20/PrivateOfficeRemarks+Field) |
-| `PrivateRemarks` | String | Listing , Remarks |  | 80% | 87% | Remarks that may contain security or proprietary information and should be restricted from public view. | [link](https://ddwiki.reso.org/display/DDW20/PrivateRemarks+Field) |
-| `ProfessionalManagementExpense` | Number | Financial |  | 55% | 14% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/ProfessionalManagementExpense+Field) |
-| `PropertyAttachedYN` | Boolean | Structure |  | 80% | 31% | Indicates whether or not the primary structure is attached to another structure that is not included in the sale (i.e., one unit of a duplex). | [link](https://ddwiki.reso.org/display/DDW20/PropertyAttachedYN+Field) |
-| `PropertyCondition` | String List, Multi | Structure | [PropertyCondition](#propertycondition) |  | 63% | A list of property conditions describing the state of the property. | [link](https://ddwiki.reso.org/display/DDW20/PropertyCondition+Field) |
-| `PropertySubType` | String List, Single |  | [PropertySubType](#propertysubtype) | 95% | 95% | A more specific classification of the property within PropertyType (e.g. | [link](https://ddwiki.reso.org/display/DDW20/PropertySubType+Field) |
-| `PropertyTimeZoneName` | String List, Single | Listing , Dates | [IanaTimeZoneValues](#ianatimezonevalues) |  | 1% | The standard name of the property time zone, as provided by the IANA tz database. | [link](https://ddwiki.reso.org/display/DDW20/PropertyTimeZoneName+Field) |
-| `PropertyTimeZoneObservesDstYN` | Boolean | Listing , Dates |  |  |  | Indicates whether the property is in a time zone that observes Daylight Savings Time (DST). | [link](https://ddwiki.reso.org/display/DDW20/PropertyTimeZoneObservesDstYN+Field) |
-| `PropertyTimeZoneStandardOffset` | Number | Listing , Dates |  |  |  | The time zone offset is the difference, in minutes, between Coordinated Universal Time (UTC) and local time. | [link](https://ddwiki.reso.org/display/DDW20/PropertyTimeZoneStandardOffset+Field) |
-| `PropertyType` | String List, Single |  | [PropertyType](#propertytype) |  | 99% | The high-level classification of the property: Residential, ResidentialIncome, ResidentialLease, CommercialSale, CommercialLease, Land, ManufacturedInPark, BusinessOpportunity, Farm. | [link](https://ddwiki.reso.org/display/DDW20/PropertyType+Field) |
-| `PublicRemarks` | String | Listing , Remarks |  | 100% | 98% | The publicly visible marketing description of the property, intended for consumer-facing portals and the IDX feed. | [link](https://ddwiki.reso.org/display/DDW20/PublicRemarks+Field) |
-| `PublicSurveyRange` | String | Tax |  | 40% | 8% | The range identified by the Public Land Survey System (PLSS). | [link](https://ddwiki.reso.org/display/DDW20/PublicSurveyRange+Field) |
-| `PublicSurveySection` | String | Tax |  | 40% | 10% | The section identified by the Public Land Survey System (PLSS). | [link](https://ddwiki.reso.org/display/DDW20/PublicSurveySection+Field) |
-| `PublicSurveyTownship` | String | Tax |  | 40% | 7% | The township identified by the Public Land Survey System (PLSS). | [link](https://ddwiki.reso.org/display/DDW20/PublicSurveyTownship+Field) |
-| `PurchaseContractDate` | Date | Listing , Dates |  | 75% | 82% | With for-sale listings, this represents the date an offer was accepted and the listing was no longer on market. | [link](https://ddwiki.reso.org/display/DDW20/PurchaseContractDate+Field) |
-| `RVParkingDimensions` | String | Structure |  | 35% | 2% | The dimensions of the RV parking area minimally represented as length and width (i.e., 25' x 18') or a measurement of all sides of the polygon representing the usable RV parking space (i.e., 33' x 15'… | [link](https://ddwiki.reso.org/display/DDW20/RVParkingDimensions+Field) |
-| `RangeArea` | Number | Farming |  | 30% | 2% | The measurement or percentage of the property that has been allocated as range. | [link](https://ddwiki.reso.org/display/DDW20/RangeArea+Field) |
-| `RentControlYN` | Boolean | Financial |  |  | 4% | Indicates whether or not the property is in a rent-control area. | [link](https://ddwiki.reso.org/display/DDW20/RentControlYN+Field) |
-| `RentIncludes` | String List, Multi | Financial | [RentIncludes](#rentincludes) |  | 39% | A list of services or items that the tenant is not responsible to pay. | [link](https://ddwiki.reso.org/display/DDW20/RentIncludes+Field) |
-| `RoadFrontageType` | String List, Multi | Characteristics | [RoadFrontageType](#roadfrontagetype) | 60% | 71% | A pick list of types of road frontage (i.e., County, Freeway, Interstate, None). | [link](https://ddwiki.reso.org/display/DDW20/RoadFrontageType+Field) |
-| `RoadResponsibility` | String List, Multi | Characteristics | [RoadResponsibility](#roadresponsibility) | 55% | 42% | The person or entity responsible for road maintenance (e.g., City, County, Private). | [link](https://ddwiki.reso.org/display/DDW20/RoadResponsibility+Field) |
-| `RoadSurfaceType` | String List, Multi | Characteristics | [RoadSurfaceType](#roadsurfacetype) | 60% | 73% | A pick list of types of road surfaces in use to access the property. | [link](https://ddwiki.reso.org/display/DDW20/RoadSurfaceType+Field) |
-| `Roof` | String List, Multi | Structure | [Roof](#roof) | 85% | 88% | A list describing the roof style type (e.g., Spanish Tile, Composite, Shake). | [link](https://ddwiki.reso.org/display/DDW20/Roof+Field) |
-| `RoomType` | String List, Multi | Structure , Rooms | [RoomType](#roomtype) | 30% | 4% | A single-value lookup describing the type of room: Bedroom \| Bathroom \| Kitchen \| LivingRoom \| DiningRoom \| Office \| Laundry \| Bonus \| ... | [link](https://ddwiki.reso.org/display/DDW20/RoomType+Field) |
-| `Rooms` | Collection | Structure , Rooms |  | 10% | 1% | A collection of types of rooms and details/features about the given room. | [link](https://ddwiki.reso.org/display/DDW20/Rooms+Field) |
-| `RoomsTotal` | Number | Structure , Rooms |  | 70% | 59% | The number of rooms in a dwelling. | [link](https://ddwiki.reso.org/display/DDW20/RoomsTotal+Field) |
-| `SeatingCapacity` | Number | Business |  | 35% | 5% | The seating capacity of the business being sold. | [link](https://ddwiki.reso.org/display/DDW20/SeatingCapacity+Field) |
-| `SecurityFeatures` | String List, Multi | Equipment | [SecurityFeatures](#securityfeatures) |  | 74% | A list describing the security features included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/SecurityFeatures+Field) |
-| `SeniorCommunityYN` | Boolean | Characteristics |  |  | 34% | Indicates whether or not a community is a senior community. | [link](https://ddwiki.reso.org/display/DDW20/SeniorCommunityYN+Field) |
-| `SerialU` | String | Structure |  | 45% | 12% | The serial number of the mobile or manufactured home. | [link](https://ddwiki.reso.org/display/DDW20/SerialU+Field) |
-| `SerialX` | String | Structure |  | 30% | 4% | The serial number of the mobile or manufactured home. | [link](https://ddwiki.reso.org/display/DDW20/SerialX+Field) |
-| `SerialXX` | String | Structure |  | 30% | 3% | The serial number of the mobile or manufactured home. | [link](https://ddwiki.reso.org/display/DDW20/SerialXX+Field) |
-| `Sewer` | String List, Multi | Utilities | [Sewer](#sewer) | 95% | 86% | A list describing the sewer or septic features of a property. | [link](https://ddwiki.reso.org/display/DDW20/Sewer+Field) |
-| `ShowingAdvanceNotice` | Number | Listing , Showing |  | 25% | 10% | The hours of advance notice required to schedule a showing. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAdvanceNotice+Field) |
-| `ShowingAttendedYN` | Boolean | Listing , Showing |  | 30% | 14% | Indicates whether or not this home requires an attended showing (i.e., Yes = licensed agent representing the seller must be present during showing). | [link](https://ddwiki.reso.org/display/DDW20/ShowingAttendedYN+Field) |
-| `ShowingConsiderations` | String List, Multi | Listing , Showing | [ShowingConsiderations](#showingconsiderations) |  | 9% | A pick list of conditions that may require caution or further consideration, such as bringing someone with you, when showing the property (i.e., Electricity Not On, Inconsistent Cell Service, No Exter… | [link](https://ddwiki.reso.org/display/DDW20/ShowingConsiderations+Field) |
-| `ShowingContactName` | String | Listing , Showing |  | 55% | 8% | The name of the contact for the showing of the listed property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingContactName+Field) |
-| `ShowingContactPhone` | String | Listing , Showing |  | 60% | 19% | A telephone number that should be called to arrange showing the property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingContactPhone+Field) |
-| `ShowingContactPhoneExt` | String | Listing , Showing |  | 20% | 2% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/ShowingContactPhoneExt+Field) |
-| `ShowingContactType` | String List, Multi | Listing , Showing | [ShowingContactType](#showingcontacttype) | 40% | 28% | The type of contact for the showing (i.e., Agent, Broker, Seller). | [link](https://ddwiki.reso.org/display/DDW20/ShowingContactType+Field) |
-| `ShowingDays` | String List, Multi | Listing , Showing | ShowingDays | 15% | 21% | The days of the week that the property is available for showing (i.e., Sundays, Mondays, Tuesdays, Wednesdays, Thursdays, Fridays, Saturdays). | [link](https://ddwiki.reso.org/display/DDW20/ShowingDays+Field) |
-| `ShowingEndTime` | Timestamp | Listing,Showing |  |  | 1% | From the days selected in the ShowingDays field, the end time that the property is available for showing. | [link](https://ddwiki.reso.org/display/DDW20/ShowingEndTime+Field) |
-| `ShowingInstructions` | String | Listing , Showing |  | 60% | 81% | Remarks that detail the seller's instructions for showing the subject property. | [link](https://ddwiki.reso.org/display/DDW20/ShowingInstructions+Field) |
-| `ShowingRequirements` | String List, Multi | Listing , Showing | [ShowingRequirements](#showingrequirements) | 55% | 29% | A pick list of types of notice required to see the home (i.e., Appointment Required, Courtesy Call Only, Go Direct, etc.). | [link](https://ddwiki.reso.org/display/DDW20/ShowingRequirements+Field) |
-| `ShowingServiceName` | String List, Single | Listing , Showing | [ShowingServiceName](#showingservicename) |  | 1% | The name of the showing service used to request showings on the listing. | [link](https://ddwiki.reso.org/display/DDW20/ShowingServiceName+Field) |
-| `ShowingStartTime` | Timestamp | Listing,Showing |  |  | 1% | From the days selected in the ShowingDays field, the start time that the property is available for showing. | [link](https://ddwiki.reso.org/display/DDW20/ShowingStartTime+Field) |
-| `SignOnPropertyYN` | Boolean | Listing , Marketing |  | 45% | 27% | Indicates whether or not there a sign on the property. | [link](https://ddwiki.reso.org/display/DDW20/SignOnPropertyYN+Field) |
-| `SimpleDaysOnMarket` | Number | Listing , Dates |  |  | 0% | A simplified version of days on market (DOM) where the calculation is a simple start and end, such as the difference between the listing input or contract date and the date of sale. | [link](https://ddwiki.reso.org/display/DDW20/SimpleDaysOnMarket+Field) |
-| `Skirt` | String List, Multi | Structure | [Skirt](#skirt) | 45% | 26% | A list of types of mobile home skirting. | [link](https://ddwiki.reso.org/display/DDW20/Skirt+Field) |
-| `SocialMedia` | Collection | Listing |  |  |  | A collection of social media items related to the Property record. | [link](https://ddwiki.reso.org/display/DDW20/SocialMedia+Field) |
-| `SourceSystem` | Resource | Listing |  |  |  | The source system of the Property record. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystem+Field) |
-| `SourceSystemID` | String | Listing |  | 40% | 47% | The OUID Resource's OrganizationUniqueId of the source record provider. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemID+Field) |
-| `SourceSystemKey` | String | Listing |  | 70% | 73% | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemKey+Field) |
-| `SourceSystemName` | String | Listing |  | 40% | 31% | The name of the immediate record provider. | [link](https://ddwiki.reso.org/display/DDW20/SourceSystemName+Field) |
-| `SpaFeatures` | String List, Multi | Characteristics | [SpaFeatures](#spafeatures) | 55% | 61% | A list of features or a description of the spa included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/SpaFeatures+Field) |
-| `SpaYN` | Boolean | Characteristics |  | 65% | 44% | Indicates whether or not the property has a spa. | [link](https://ddwiki.reso.org/display/DDW20/SpaYN+Field) |
-| `SpecialLicenses` | String List, Multi | Business | [SpecialLicenses](#speciallicenses) |  | 13% | Special licenses required/used by the business being sold (e.g., Beer/Wine, Class H, Professional, Gambling, None). | [link](https://ddwiki.reso.org/display/DDW20/SpecialLicenses+Field) |
-| `SpecialListingConditions` | String List, Multi | Listing , Contract | [SpecialListingConditions](#speciallistingconditions) | 85% | 74% | A list of options that describe the type of sale (e.g., Standard, REO, Short Sale, Probate, Auction, NOD) at the time of listing. | [link](https://ddwiki.reso.org/display/DDW20/SpecialListingConditions+Field) |
-| `StandardStatus` | String List, Single | Listing | [StandardStatus](#standardstatus) |  | 94% | The MLS-defined statuses normalized into a common set. | [link](https://ddwiki.reso.org/display/DDW20/StandardStatus+Field) |
-| `StartShowingDate` | Date | Listing,Showing |  |  | 6% | The date the listing agent/broker expects to start showing the property. | [link](https://ddwiki.reso.org/display/DDW20/StartShowingDate+Field) |
-| `StateOrProvince` | String List, Single | Location , Address | [StateOrProvince](#stateorprovince) | 100% | 98% | The state or province in which the property is located. | [link](https://ddwiki.reso.org/display/DDW20/StateOrProvince+Field) |
-| `StateRegion` | String | Location , Area |  | 20% | 1% | A subsection or area of a defined state or province (e.g., Florida Keys, Hudson Valley in New York, Silicon Valley in California). | [link](https://ddwiki.reso.org/display/DDW20/StateRegion+Field) |
-| `StatusChangeTimestamp` | Timestamp | Listing , Dates |  | 70% | 54% | The transactional timestamp automatically recorded by the MLS system representing the date/time the listing's status was last changed. | [link](https://ddwiki.reso.org/display/DDW20/StatusChangeTimestamp+Field) |
-| `Stories` | Number | Structure |  | 70% | 56% | The number of floors in the property being sold. | [link](https://ddwiki.reso.org/display/DDW20/Stories+Field) |
-| `StoriesTotal` | Number | Structure |  | 75% | 20% | The total number of floors in the building. | [link](https://ddwiki.reso.org/display/DDW20/StoriesTotal+Field) |
-| `StreetAdditionalInfo` | String | Location,Address |  |  | 23% | Information other than a prefix or suffix for the street portion of a postal address. | [link](https://ddwiki.reso.org/display/DDW20/StreetAdditionalInfo+Field) |
-| `StreetDirPrefix` | String List, Single | Location , Address | [StreetDirection](#streetdirection) | 85% | 83% | The direction indicator that precedes the listed property's street name. | [link](https://ddwiki.reso.org/display/DDW20/StreetDirPrefix+Field) |
-| `StreetDirSuffix` | String List, Single | Location , Address | [StreetDirection](#streetdirection) | 70% | 37% | The direction indicator that follows a listed property's street address. | [link](https://ddwiki.reso.org/display/DDW20/StreetDirSuffix+Field) |
-| `StreetName` | String | Location , Address |  | 95% | 98% | The street name portion of a listed property's street address. | [link](https://ddwiki.reso.org/display/DDW20/StreetName+Field) |
-| `StreetNumber` | String | Location , Address |  | 95% | 95% | The street number portion of a listed property's street address. | [link](https://ddwiki.reso.org/display/DDW20/StreetNumber+Field) |
-| `StreetNumberNumeric` | Number | Location , Address |  | 60% | 72% | The integer portion of the street number. | [link](https://ddwiki.reso.org/display/DDW20/StreetNumberNumeric+Field) |
-| `StreetSuffix` | String List, Single | Location , Address | StreetSuffix | 60% | 55% | The suffix portion of a listed property's street address. | [link](https://ddwiki.reso.org/display/DDW20/StreetSuffix+Field) |
-| `StreetSuffixModifier` | String | Location , Address |  | 40% | 6% | Allows for the entry of a unique street suffix that was not found in the Street Suffix pick list or to extend or prefix the suffix. | [link](https://ddwiki.reso.org/display/DDW20/StreetSuffixModifier+Field) |
-| `StructureType` | String List, Multi | Structure | [StructureType](#structuretype) | 65% | 61% | The type of structure that the property completely or partially encompasses. | [link](https://ddwiki.reso.org/display/DDW20/StructureType+Field) |
-| `SubAgencyCompensation` | String | Listing , Compensation |  | 55% | 35% | The total commission to be paid to the subagency, expressed as either a percentage or a constant currency amount. | [link](https://ddwiki.reso.org/display/DDW20/SubAgencyCompensation+Field) |
-| `SubAgencyCompensationType` | String List, Single | Listing , Compensation | [CompensationType](#compensationtype) | 50% | 22% | A list of types to clarify the value entered in the SubAgencyCompensation field. | [link](https://ddwiki.reso.org/display/DDW20/SubAgencyCompensationType+Field) |
-| `SubdivisionName` | String | Location , Area |  | 85% | 84% | A neighborhood, community, complex or builder tract. | [link](https://ddwiki.reso.org/display/DDW20/SubdivisionName+Field) |
-| `SuppliesExpense` | Number | Financial |  | 30% | 4% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/SuppliesExpense+Field) |
-| `SyndicateTo` | String List, Multi | Listing , Marketing | [SyndicateTo](#syndicateto) | 40% | 29% | When permitted by the broker, the options made by the agent on behalf of the seller, where they would like their listings syndicated (e.g., Zillow, Trulia, Realtor.com, Homes.com). | [link](https://ddwiki.reso.org/display/DDW20/SyndicateTo+Field) |
-| `SyndicationRemarks` | String | Listing , Remarks |  | 60% | 9% | For MLSs that host a separate "Public Remarks" for syndication purposes, this field should be defaulted to contain public remarks. | [link](https://ddwiki.reso.org/display/DDW20/SyndicationRemarks+Field) |
-| `TaxAnnualAmount` | Number | Tax |  | 85% | 82% | The annual property tax amount as of the last assessment made by the taxing authority. | [link](https://ddwiki.reso.org/display/DDW20/TaxAnnualAmount+Field) |
-| `TaxAnnualAmountPerLivingAreaUnit` | Number | Tax |  |  |  | The annual property tax amount as of the last assessment made by the taxing authority divided by the property’s living area. | [link](https://ddwiki.reso.org/display/DDW20/TaxAnnualAmountPerLivingAreaUnit+Field) |
-| `TaxAnnualAmountPerSquareFoot` | Number | Tax |  |  |  | The annual property tax amount as of the last assessment made by the taxing authority divided by the property’s living area square footage. | [link](https://ddwiki.reso.org/display/DDW20/TaxAnnualAmountPerSquareFoot+Field) |
-| `TaxAssessedValue` | Number | Tax |  | 55% | 23% | The property value as of the last assessment made by the taxing authority. | [link](https://ddwiki.reso.org/display/DDW20/TaxAssessedValue+Field) |
-| `TaxBlock` | String | Tax |  | 65% | 19% | A type of legal description for land in developed areas where streets or other rights-of-ways delineate large parcels of land referred to as divided into lots on which homes or other types of developments are built. | [link](https://ddwiki.reso.org/display/DDW20/TaxBlock+Field) |
-| `TaxBookNumber` | String | Tax |  | 40% | 9% | Some systems of parcel identification incorporate a method that utilizes a county identifier, a tax book number, a tax map number and a parcel identification number. | [link](https://ddwiki.reso.org/display/DDW20/TaxBookNumber+Field) |
-| `TaxLegalDescription` | String | Tax |  |  | 63% | A type of legal description for land in developed areas where streets or other rights-of-ways delineate large parcels of land referred to as divided into lots on which homes or other types of developments are built. | [link](https://ddwiki.reso.org/display/DDW20/TaxLegalDescription+Field) |
-| `TaxLot` | String | Tax |  | 65% | 26% | A type of legal description for land in developed areas where streets or other rights-of-ways delineate large parcels of land referred to as divided into lots on which homes or other types of developments are built. | [link](https://ddwiki.reso.org/display/DDW20/TaxLot+Field) |
-| `TaxMapNumber` | String | Tax |  |  | 14% | Some systems of parcel identification incorporate a method that utilizes a county identifier, a tax book number, a tax map number and a parcel identification number. | [link](https://ddwiki.reso.org/display/DDW20/TaxMapNumber+Field) |
-| `TaxOtherAnnualAssessmentAmount` | Number | Tax |  | 60% | 10% | Any other annual taxes, not including the tax reported in the TaxAmount field, as of the last assessment made by the taxing authority. | [link](https://ddwiki.reso.org/display/DDW20/TaxOtherAnnualAssessmentAmount+Field) |
-| `TaxParcelLetter` | String | Tax |  | 25% | 2% | Some systems of parcel identification incorporate a method that utilizes a county identifier, a tax book number, a tax map number and a parcel identification number. | [link](https://ddwiki.reso.org/display/DDW20/TaxParcelLetter+Field) |
-| `TaxStatusCurrent` | String List, Multi | Tax | [TaxStatusCurrent](#taxstatuscurrent) | 20% | 21% | The current tax status of the mobile home in cases where the land or space is included in the sale. | [link](https://ddwiki.reso.org/display/DDW20/TaxStatusCurrent+Field) |
-| `TaxTract` | String | Tax |  | 35% | 5% | A type of legal description for land in developed areas where streets or other rights-of-ways delineate large parcels of land referred to as divided into lots on which homes or other types of developments are built. | [link](https://ddwiki.reso.org/display/DDW20/TaxTract+Field) |
-| `TaxYear` | Number | Tax |  | 75% | 56% | The year in which the last assessment of the property value/tax was made. | [link](https://ddwiki.reso.org/display/DDW20/TaxYear+Field) |
-| `TenantPays` | String List, Multi | Financial | [TenantPays](#tenantpays) | 60% | 61% | A list of services or items that the tenant is responsible to pay. | [link](https://ddwiki.reso.org/display/DDW20/TenantPays+Field) |
-| `Topography` | String | Characteristics |  | 65% | 50% | The state of the surface of the land included with the property (i.e., flat, rolling, etc.). | [link](https://ddwiki.reso.org/display/DDW20/Topography+Field) |
-| `TotalActualRent` | Number | Financial |  | 55% | 29% | Total actual rent currently being collected from tenants of the income property. | [link](https://ddwiki.reso.org/display/DDW20/TotalActualRent+Field) |
-| `Township` | String | Location , Address |  | 45% | 14% | A subdivision of the county. | [link](https://ddwiki.reso.org/display/DDW20/Township+Field) |
-| `TransactionBrokerCompensation` | String | Listing , Compensation |  | 50% | 26% | The total commission to be paid to the transaction facilitator, expressed as either a percentage or a constant currency amount. | [link](https://ddwiki.reso.org/display/DDW20/TransactionBrokerCompensation+Field) |
-| `TransactionBrokerCompensationType` | String List, Single | Listing,Compensation | [CompensationType](#compensationtype) |  | 19% | A list of types to clarify the value entered in the TransactionBrokerCompensation field. | [link](https://ddwiki.reso.org/display/DDW20/TransactionBrokerCompensationType+Field) |
-| `TrashExpense` | Number | Financial |  |  | 17% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/TrashExpense+Field) |
-| `UnitNumber` | String | Location , Address |  | 100% | 66% | A text field containing the unit number or portion of a larger building or complex that should appear following the street suffix or, if it exists, the street suffix direction in the street address (e… | [link](https://ddwiki.reso.org/display/DDW20/UnitNumber+Field) |
-| `UnitTypeType` | String List, Multi | UnitTypes | [UnitTypeType](#unittypetype) | 15% | 1% | A single-value lookup describing the unit type: Apartments \| Studio \| Loft \| Penthouse \| 1 Bedroom \| 2 Bedroom \| 3 Bedroom \| 4 Bedroom Or More \| Efficiency \| Manager's Unit. | [link](https://ddwiki.reso.org/display/DDW20/UnitTypeType+Field) |
-| `UnitTypes` | Collection | UnitTypes |  | 1% | 1% | A collection of types of units included in the income (multifamily) property. | [link](https://ddwiki.reso.org/display/DDW20/UnitTypes+Field) |
-| `UnitsFurnished` | String List, Single | Characteristics | [UnitsFurnished](#unitsfurnished) | 35% | 4% | States whether or not the units are furnished (i.e., All Units, Varies By Unit, None). | [link](https://ddwiki.reso.org/display/DDW20/UnitsFurnished+Field) |
-| `UniversalPropertyId` | String |  |  | 15% | 1% | The RESO Universal Property Identifier (UPI) is a unique identifier for all real property in the U.S. | [link](https://ddwiki.reso.org/display/DDW20/UniversalPropertyId+Field) |
-| `UniversalPropertySubId` | String |  |  | 5% | 1% | A unique identifier for all subsets or shares of real property in the U.S. | [link](https://ddwiki.reso.org/display/DDW20/UniversalPropertySubId+Field) |
-| `UnparsedAddress` | String | Location , Address |  | 95% | 95% | The full street address of the property as a single, unparsed string. | [link](https://ddwiki.reso.org/display/DDW20/UnparsedAddress+Field) |
-| `Utilities` | String List, Multi | Utilities | [Utilities](#utilities) |  | 88% | A list of the utilities for the property being sold/leased. | [link](https://ddwiki.reso.org/display/DDW20/Utilities+Field) |
-| `VacancyAllowance` | Number | Financial |  | 45% | 6% | An estimate of the amount of rent that may be foregone because of unoccupied units. | [link](https://ddwiki.reso.org/display/DDW20/VacancyAllowance+Field) |
-| `VacancyAllowanceRate` | Number | Financial |  | 50% | 10% | An estimate of the percent of rent that may be foregone because of unoccupied units. | [link](https://ddwiki.reso.org/display/DDW20/VacancyAllowanceRate+Field) |
-| `Vegetation` | String List, Multi | Farming | [Vegetation](#vegetation) | 50% | 45% | A list of the type(s) of residential vegetation on the property (not farm crops). | [link](https://ddwiki.reso.org/display/DDW20/Vegetation+Field) |
-| `VideosChangeTimestamp` | Timestamp | Listing , Media |  | 20% | 34% | A system-generated timestamp of when the last update or change to the videos for this listing was made. | [link](https://ddwiki.reso.org/display/DDW20/VideosChangeTimestamp+Field) |
-| `VideosCount` | Number | Listing , Media |  | 30% | 36% | The total number of videos or virtual tours included with the listing. | [link](https://ddwiki.reso.org/display/DDW20/VideosCount+Field) |
-| `View` | String List, Multi | Characteristics | [View](#view) | 90% | 66% | A view as seen from the listed property. | [link](https://ddwiki.reso.org/display/DDW20/View+Field) |
-| `ViewYN` | Boolean | Characteristics |  | 65% | 43% | The property has a view. | [link](https://ddwiki.reso.org/display/DDW20/ViewYN+Field) |
-| `VirtualTourURLBranded` | String | Listing , Marketing |  | 55% | 56% | A text field that holds the Uniform Resource Locator (URL) for a branded virtual tour of the property. | [link](https://ddwiki.reso.org/display/DDW20/VirtualTourURLBranded+Field) |
-| `VirtualTourURLUnbranded` | String | Listing,Marketing |  |  | 92% | A link to an unbranded virtual tour of the property (does NOT carry brokerage branding). | [link](https://ddwiki.reso.org/display/DDW20/VirtualTourURLUnbranded+Field) |
-| `WalkScore` | Number | Structure,Performance,GreenMarketing |  |  | 3% | A walkability index based on the time to walk from a property to nearby essentials such as grocery stores, schools, churches, etc. | [link](https://ddwiki.reso.org/display/DDW20/WalkScore+Field) |
-| `WaterBodyName` | String | Characteristics |  | 70% | 21% | The name, if known, of the body of water on which the property is located (e.g., lake name, river name, ocean name, sea name, canal name). | [link](https://ddwiki.reso.org/display/DDW20/WaterBodyName+Field) |
-| `WaterSewerExpense` | Number | Financial |  | 55% | 17% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/WaterSewerExpense+Field) |
-| `WaterSource` | String List, Multi | Utilities | [WaterSource](#watersource) | 85% | 85% | A list of the source(s) of water for the property. | [link](https://ddwiki.reso.org/display/DDW20/WaterSource+Field) |
-| `WaterfrontFeatures` | String List, Multi | Characteristics | [WaterfrontFeatures](#waterfrontfeatures) | 75% | 72% | The features of the waterfront on which the property is located. | [link](https://ddwiki.reso.org/display/DDW20/WaterfrontFeatures+Field) |
-| `WaterfrontYN` | Boolean | Characteristics |  |  | 72% | The property is on a waterfront. | [link](https://ddwiki.reso.org/display/DDW20/WaterfrontYN+Field) |
-| `WindowFeatures` | String List, Multi | Structure | [WindowFeatures](#windowfeatures) | 95% | 74% | A list of features or a description of the windows included in the sale/lease. | [link](https://ddwiki.reso.org/display/DDW20/WindowFeatures+Field) |
-| `WithdrawnDate` | Date | Listing , Dates |  | 65% | 58% | The date that the listing was withdrawn from the market. | [link](https://ddwiki.reso.org/display/DDW20/WithdrawnDate+Field) |
-| `WoodedArea` | Number | Farming |  | 60% | 19% | A measurement or percentage of the property that is wooded or forest. | [link](https://ddwiki.reso.org/display/DDW20/WoodedArea+Field) |
-| `WorkmansCompensationExpense` | Number | Financial |  | 15% | 1% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://ddwiki.reso.org/display/DDW20/WorkmansCompensationExpense+Field) |
-| `YearBuilt` | Number | Structure |  | 100% | 98% | The year the property was originally constructed. | [link](https://ddwiki.reso.org/display/DDW20/YearBuilt+Field) |
-| `YearBuiltDetails` | String | Structure |  | 35% | 9% | A description of the details behind the year the structure was built. | [link](https://ddwiki.reso.org/display/DDW20/YearBuiltDetails+Field) |
-| `YearBuiltEffective` | Number | Structure |  | 65% | 10% | The effective year built. | [link](https://ddwiki.reso.org/display/DDW20/YearBuiltEffective+Field) |
-| `YearBuiltSource` | String List, Single | Structure | [YearBuiltSource](#yearbuiltsource) | 50% | 10% | A list of sources of the year built (e.g., Appraiser, Assessor, Builder, Estimated). | [link](https://ddwiki.reso.org/display/DDW20/YearBuiltSource+Field) |
-| `YearEstablished` | Number | Business |  |  | 16% | The year the business being sold was established. | [link](https://ddwiki.reso.org/display/DDW20/YearEstablished+Field) |
-| `YearsCurrentOwner` | Number | Business |  | 35% | 4% | The number of years the current owner has had possession of the business. | [link](https://ddwiki.reso.org/display/DDW20/YearsCurrentOwner+Field) |
-| `Zoning` | String | Tax |  | 75% | 50% | A division of the city or county into areas of different permissible land uses. | [link](https://ddwiki.reso.org/display/DDW20/Zoning+Field) |
-| `ZoningDescription` | String | Tax |  | 65% | 42% | A list of descriptions of the zoning of the property. | [link](https://ddwiki.reso.org/display/DDW20/ZoningDescription+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `AboveGradeFinishedArea` | Number | Structure |  | 34% | The finished area within the structure that is at or above the surface of the ground. | [link](https://dd.reso.org/DD2.0/Property/AboveGradeFinishedArea/) |
+| `AboveGradeFinishedAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 9% | The source of the measurements. | [link](https://dd.reso.org/DD2.0/Property/AboveGradeFinishedAreaSource/) |
+| `AboveGradeFinishedAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 12% | A pick list of the unit of measurement for the area (e.g., Square Feet, Square Meters). | [link](https://dd.reso.org/DD2.0/Property/AboveGradeFinishedAreaUnits/) |
+| `AboveGradeUnfinishedArea` | Number | Structure |  | 4% | The unfinished area within the structure that is at or above the surface of the ground. | [link](https://dd.reso.org/DD2.0/Property/AboveGradeUnfinishedArea/) |
+| `AboveGradeUnfinishedAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 0% | The source of the measurements of the unfinished area above grade. | [link](https://dd.reso.org/DD2.0/Property/AboveGradeUnfinishedAreaSource/) |
+| `AboveGradeUnfinishedAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 1% | A pick list of the unit of measurement for the unfinished area above grade (e.g., Square Feet, Square Meters). | [link](https://dd.reso.org/DD2.0/Property/AboveGradeUnfinishedAreaUnits/) |
+| `AccessCode` | String | Listing, Showing |  | 9% | The code to gain access through the secured gate for a property located behind an unmanned security gate such as in a gated community. | [link](https://dd.reso.org/DD2.0/Property/AccessCode/) |
+| `AccessibilityFeatures` | String List, Multi | Structure | [AccessibilityFeatures](#accessibilityfeatures) | 73% | A list or description of the accessibility features included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/AccessibilityFeatures/) |
+| `ActivationDate` | Date | Listing, Dates |  | 18% | Indicates when the listing agent intends to change the property to the Active status. | [link](https://dd.reso.org/DD2.0/Property/ActivationDate/) |
+| `AdditionalParcelsDescription` | String | Tax |  | 24% | If additional parcels are included in the sale, a list of those parcel's IDs separated by commas. | [link](https://dd.reso.org/DD2.0/Property/AdditionalParcelsDescription/) |
+| `AdditionalParcelsYN` | Boolean | Tax |  | 20% | Indicates whether or not more than one parcel or lot is included in the sale. | [link](https://dd.reso.org/DD2.0/Property/AdditionalParcelsYN/) |
+| `AnchorsCoTenants` | String | Characteristics |  | 5% | The main or most notable tenants as well as other tenants of the shopping center or mall in which the commercial property is located. | [link](https://dd.reso.org/DD2.0/Property/AnchorsCoTenants/) |
+| `Appliances` | String List, Multi | Equipment | [Appliances](#appliances) | 89% | A list of the appliances that will be included in the sale/lease of the property. | [link](https://dd.reso.org/DD2.0/Property/Appliances/) |
+| `ArchitecturalStyle` | String List, Multi | Structure | [ArchitecturalStyle](#architecturalstyle) | 90% | A list describing the style of the structure (e.g., Victorian, Ranch, Craftsman). | [link](https://dd.reso.org/DD2.0/Property/ArchitecturalStyle/) |
+| `AssociationAmenities` | String List, Multi | HOA | [AssociationAmenities](#associationamenities) | 56% | The amenities provided by the homeowner association, mobile park or complex (e.g., pool, clubhouse). | [link](https://dd.reso.org/DD2.0/Property/AssociationAmenities/) |
+| `AssociationFee` | Number | HOA |  | 82% | A fee paid by the homeowner to the homeowner association that is used for upkeep of common areas, the neighborhood or other association-related benefits. | [link](https://dd.reso.org/DD2.0/Property/AssociationFee/) |
+| `AssociationFee2` | Number | HOA |  | 23% | A fee paid by the homeowner to the second of two homeowner associations that is used for upkeep of common areas, the neighborhood or other association-related benefits. | [link](https://dd.reso.org/DD2.0/Property/AssociationFee2/) |
+| `AssociationFee2Frequency` | String List, Single | HOA | [FeeFrequency](#feefrequency) | 18% | The frequency the association fee is paid (e.g., weekly, monthly, annually, bimonthly, one time). | [link](https://dd.reso.org/DD2.0/Property/AssociationFee2Frequency/) |
+| `AssociationFeeFrequency` | String List, Single | HOA | [FeeFrequency](#feefrequency) | 72% | The frequency the association fee is paid (e.g., weekly, monthly, annually, bimonthly, one time). | [link](https://dd.reso.org/DD2.0/Property/AssociationFeeFrequency/) |
+| `AssociationFeeIncludes` | String List, Multi | HOA | [AssociationFeeIncludes](#associationfeeincludes) | 59% | The services included with the association fee (e.g., landscaping, trash, water). | [link](https://dd.reso.org/DD2.0/Property/AssociationFeeIncludes/) |
+| `AssociationName` | String | HOA |  | 30% | The name of the homeowner association. | [link](https://dd.reso.org/DD2.0/Property/AssociationName/) |
+| `AssociationName2` | String | HOA |  | 8% | The name of the second of two homeowner associations. | [link](https://dd.reso.org/DD2.0/Property/AssociationName2/) |
+| `AssociationPhone` | String | HOA |  | 28% | The phone number of the homeowner association. | [link](https://dd.reso.org/DD2.0/Property/AssociationPhone/) |
+| `AssociationPhone2` | String | HOA |  | 5% | The phone number of the second of two homeowner associations. | [link](https://dd.reso.org/DD2.0/Property/AssociationPhone2/) |
+| `AssociationYN` | Boolean | HOA |  | 78% | Indicates whether there is a homeowner association. | [link](https://dd.reso.org/DD2.0/Property/AssociationYN/) |
+| `AttachedGarageYN` | Boolean | Structure |  | 79% | A flag indicating whether or not the garage is attached to the dwelling. | [link](https://dd.reso.org/DD2.0/Property/AttachedGarageYN/) |
+| `AttributionContact` | String | Listing, AgentOffice, ListOffice |  | 37% | A text field to convey a specific contact phone number or email address for the listing firm. | [link](https://dd.reso.org/DD2.0/Property/AttributionContact/) |
+| `AvailabilityDate` | Date | Listing, Closing |  | 57% | The date the property will be available for possession/occupation. | [link](https://dd.reso.org/DD2.0/Property/AvailabilityDate/) |
+| `AvailableLeaseType` | String List, Multi | Characteristics | [ExistingLeaseType](#existingleasetype) | 3% | Information about the available types of lease for the property (i.e., Net, NNN, NN, Gross, Absolute Net, Escalation Clause, Ground Lease, etc.). | [link](https://dd.reso.org/DD2.0/Property/AvailableLeaseType/) |
+| `BackOnMarketDate` | Date | Listing, Dates |  | 8% | The date a listing, which had previously gone off market, went back to being on market. | [link](https://dd.reso.org/DD2.0/Property/BackOnMarketDate/) |
+| `Basement` | String List, Multi | Structure | [Basement](#basement) | 71% | A list of information and features about the basement (i.e., None/Slab, Finished, Partially Finished, Crawl Space, Dirt, Outside Entrance, Radon Mitigation). | [link](https://dd.reso.org/DD2.0/Property/Basement/) |
+| `BasementYN` | Boolean | Structure |  | 33% | Indicates whether or not the property has a basement. | [link](https://dd.reso.org/DD2.0/Property/BasementYN/) |
+| `BathroomsFull` | Number | Structure |  | 94% | A room containing all four of the four elements constituting a bath: toilet, sink, bathtub, shower head (in tub or stall). | [link](https://dd.reso.org/DD2.0/Property/BathroomsFull/) |
+| `BathroomsHalf` | Number | Structure |  | 89% | A room containing two of the four elements constituting a bath: toilet, sink, bathtub, shower head (in a tub or stall). | [link](https://dd.reso.org/DD2.0/Property/BathroomsHalf/) |
+| `BathroomsOneQuarter` | Number | Structure |  | 10% | A room containing one of the four elements constituting a bath: toilet, sink, bathtub, shower head (in tub or stall). | [link](https://dd.reso.org/DD2.0/Property/BathroomsOneQuarter/) |
+| `BathroomsPartial` | Number | Structure |  | 8% | The number of partial bathrooms in the property being sold/leased. | [link](https://dd.reso.org/DD2.0/Property/BathroomsPartial/) |
+| `BathroomsThreeQuarter` | Number | Structure |  | 29% | A room containing three of the four elements constituting a bath: toilet, sink, bathtub, shower head (in a tub or stall). | [link](https://dd.reso.org/DD2.0/Property/BathroomsThreeQuarter/) |
+| `BathroomsTotalInteger` | Number | Structure |  | 93% | The total number of bathrooms in the property as an integer (full bathrooms; halves counted in BathroomsHalf). | [link](https://dd.reso.org/DD2.0/Property/BathroomsTotalInteger/) |
+| `BedroomsPossible` | Number | Structure |  | 8% | The sum of BedroomsTotal plus other rooms that may be used as a bedroom but are not defined as a bedroom per local policy. | [link](https://dd.reso.org/DD2.0/Property/BedroomsPossible/) |
+| `BedroomsTotal` | Number | Structure |  | 100% | The total number of bedrooms in the property. | [link](https://dd.reso.org/DD2.0/Property/BedroomsTotal/) |
+| `BelowGradeFinishedArea` | Number | Structure |  | 44% | The finished area within the structure that is below ground. | [link](https://dd.reso.org/DD2.0/Property/BelowGradeFinishedArea/) |
+| `BelowGradeFinishedAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 8% | The source of the measurements. | [link](https://dd.reso.org/DD2.0/Property/BelowGradeFinishedAreaSource/) |
+| `BelowGradeFinishedAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 15% | A pick list of the unit of measurement for the area (e.g., Square Feet, Square Meters). | [link](https://dd.reso.org/DD2.0/Property/BelowGradeFinishedAreaUnits/) |
+| `BelowGradeUnfinishedArea` | Number | Structure |  | 6% | The unfinished area within the structure that is below ground. | [link](https://dd.reso.org/DD2.0/Property/BelowGradeUnfinishedArea/) |
+| `BelowGradeUnfinishedAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 0% | The source of the measurements of the unfinished area below grade. | [link](https://dd.reso.org/DD2.0/Property/BelowGradeUnfinishedAreaSource/) |
+| `BelowGradeUnfinishedAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 1% | A pick list of the unit of measurement for the unfinished area below grade (e.g., Square Feet, Square Meters). | [link](https://dd.reso.org/DD2.0/Property/BelowGradeUnfinishedAreaUnits/) |
+| `BodyType` | String List, Multi | Structure | [BodyType](#bodytype) | 42% | The type of mobile home. | [link](https://dd.reso.org/DD2.0/Property/BodyType/) |
+| `BuilderModel` | String | Structure |  | 13% | The model name or model number of the builder's plan for the property (project / development name). | [link](https://dd.reso.org/DD2.0/Property/BuilderModel/) |
+| `BuilderName` | String | Structure |  | 35% | The name of the builder of the property (developer / seller company for new builds). | [link](https://dd.reso.org/DD2.0/Property/BuilderName/) |
+| `BuildingAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 47% | The source of the measurements. | [link](https://dd.reso.org/DD2.0/Property/BuildingAreaSource/) |
+| `BuildingAreaTotal` | Number | Structure |  | 88% | The total area of the structure, including both finished and unfinished areas. | [link](https://dd.reso.org/DD2.0/Property/BuildingAreaTotal/) |
+| `BuildingAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 40% | A pick list of the unit of measurement for the area (e.g., Square Feet, Square Meters). | [link](https://dd.reso.org/DD2.0/Property/BuildingAreaUnits/) |
+| `BuildingFeatures` | String List, Multi | Structure | BuildingFeatures | 62% | The features or amenities of the building or business park. | [link](https://dd.reso.org/DD2.0/Property/BuildingFeatures/) |
+| `BuildingName` | String | Structure |  | 26% | The name of the building or business park. | [link](https://dd.reso.org/DD2.0/Property/BuildingName/) |
+| `BusinessName` | String | Business |  | 45% | The name of the business being sold. | [link](https://dd.reso.org/DD2.0/Property/BusinessName/) |
+| `BusinessType` | String List, Multi | Business | [BusinessType](#businesstype) | 67% | The type of business being sold (e.g., Retail, Wholesale, Grocery, Food & Bev). | [link](https://dd.reso.org/DD2.0/Property/BusinessType/) |
+| `BuyerAgent` | Resource | Listing, AgentOffice, BuyerAgent |  |  | The buyer's agent involved in the transaction. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgent/) |
+| `BuyerAgentAOR` | String List, Single | Listing, AgentOffice, BuyerAgent | AOR | 21% | The buyer agent's board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentAOR/) |
+| `BuyerAgentDesignation` | String List, Multi | Listing, AgentOffice, BuyerAgent | [BuyerAgentDesignation](#buyeragentdesignation) | 30% | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® (NAR) and each affiliated group upon completi… | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentDesignation/) |
+| `BuyerAgentDirectPhone` | String | Listing, AgentOffice, BuyerAgent |  | 53% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentDirectPhone/) |
+| `BuyerAgentEmail` | String | Listing, AgentOffice, BuyerAgent |  | 81% | The email address of the buyer's agent. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentEmail/) |
+| `BuyerAgentFax` | String | Listing, AgentOffice, BuyerAgent |  | 43% | The North American 10-digit fax numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentFax/) |
+| `BuyerAgentFirstName` | String | Listing, AgentOffice, BuyerAgent |  | 81% | The first name of the buyer's agent. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentFirstName/) |
+| `BuyerAgentFullName` | String | Listing, AgentOffice, BuyerAgent |  | 81% | The first, middle and last name of the buyer's agent. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentFullName/) |
+| `BuyerAgentHomePhone` | String | Listing, AgentOffice, BuyerAgent |  | 35% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentHomePhone/) |
+| `BuyerAgentKey` | String | Listing, AgentOffice, BuyerAgent |  | 70% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentKey/) |
+| `BuyerAgentLastName` | String | Listing, AgentOffice, BuyerAgent |  | 80% | The last name of the buyer's agent. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentLastName/) |
+| `BuyerAgentMiddleName` | String | Listing, AgentOffice, BuyerAgent |  | 58% | The middle name of the buyer's agent. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentMiddleName/) |
+| `BuyerAgentMlsId` | String | Listing, AgentOffice, BuyerAgent |  | 88% | The local, well-known identifier. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentMlsId/) |
+| `BuyerAgentMobilePhone` | String | Listing, AgentOffice, BuyerAgent |  | 53% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentMobilePhone/) |
+| `BuyerAgentNamePrefix` | String | Listing, AgentOffice, BuyerAgent |  | 0% | The prefix to the name (e.g., Dr., Mr., Ms.). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentNamePrefix/) |
+| `BuyerAgentNameSuffix` | String | Listing, AgentOffice, BuyerAgent |  | 1% | The suffix to the name (e.g., Esq., Jr., III). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentNameSuffix/) |
+| `BuyerAgentNationalAssociationId` | String | Listing, AgentOffice, BuyerAgent |  | 1% | The national association ID of the buyer's agent (e.g., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentNationalAssociationId/) |
+| `BuyerAgentOfficePhone` | String | Listing, AgentOffice, BuyerAgent |  | 61% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentOfficePhone/) |
+| `BuyerAgentOfficePhoneExt` | String | Listing, AgentOffice, BuyerAgent |  | 34% | The extension of the given phone number (if applicable). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentOfficePhoneExt/) |
+| `BuyerAgentPager` | String | Listing, AgentOffice, BuyerAgent |  | 18% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentPager/) |
+| `BuyerAgentPreferredPhone` | String | Listing, AgentOffice, BuyerAgent |  | 72% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentPreferredPhone/) |
+| `BuyerAgentPreferredPhoneExt` | String | Listing, AgentOffice, BuyerAgent |  | 30% | The extension of the given phone number (if applicable). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentPreferredPhoneExt/) |
+| `BuyerAgentStateLicense` | String | Listing, AgentOffice, BuyerAgent |  | 54% | The license of the buyer agent. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentStateLicense/) |
+| `BuyerAgentTollFreePhone` | String | Listing, AgentOffice, BuyerAgent |  | 25% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentTollFreePhone/) |
+| `BuyerAgentURL` | String | Listing, AgentOffice, BuyerAgent |  | 72% | The website Uniform Resource Identifier (URI) of the buyers agent. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentURL/) |
+| `BuyerAgentVoiceMail` | String | Listing, AgentOffice, BuyerAgent |  | 15% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentVoiceMail/) |
+| `BuyerAgentVoiceMailExt` | String | Listing, AgentOffice, BuyerAgent |  | 3% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/BuyerAgentVoiceMailExt/) |
+| `BuyerBrokerageCompensation` | String | Listing, Compensation |  | 5% | The total compensation to be paid to the buyer's brokerage for this sale, expressed as either a percentage or a constant currency amount. | [link](https://dd.reso.org/DD2.0/Property/BuyerBrokerageCompensation/) |
+| `BuyerBrokerageCompensationType` | String List, Single | Listing, Compensation | [CompensationType](#compensationtype) | 3% | A list of types to clarify the value entered in the BuyerBrokerageCompensation field. | [link](https://dd.reso.org/DD2.0/Property/BuyerBrokerageCompensationType/) |
+| `BuyerFinancing` | String List, Multi | Listing, Closing | [BuyerFinancing](#buyerfinancing) | 53% | A list of options that describe the type of financing used. | [link](https://dd.reso.org/DD2.0/Property/BuyerFinancing/) |
+| `BuyerOffice` | Resource | Listing, AgentOffice, BuyerAgent |  |  | The buyer agent's office. | [link](https://dd.reso.org/DD2.0/Property/BuyerOffice/) |
+| `BuyerOfficeAOR` | String List, Single | Listing, AgentOffice, BuyerOffice | AOR | 24% | The buyer's office's board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Property/BuyerOfficeAOR/) |
+| `BuyerOfficeEmail` | String | Listing, AgentOffice, BuyerOffice |  | 79% | The email address of the buyer's office. | [link](https://dd.reso.org/DD2.0/Property/BuyerOfficeEmail/) |
+| `BuyerOfficeFax` | String | Listing, AgentOffice, BuyerOffice |  | 55% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerOfficeFax/) |
+| `BuyerOfficeKey` | String | Listing, AgentOffice, BuyerOffice |  | 84% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Property/BuyerOfficeKey/) |
+| `BuyerOfficeMlsId` | String | Listing, AgentOffice, BuyerOffice |  | 91% | The local, well-known identifier. | [link](https://dd.reso.org/DD2.0/Property/BuyerOfficeMlsId/) |
+| `BuyerOfficeName` | String | Listing, AgentOffice, BuyerOffice |  | 90% | The legal name of the brokerage representing the buyer. | [link](https://dd.reso.org/DD2.0/Property/BuyerOfficeName/) |
+| `BuyerOfficeNationalAssociationId` | String | Listing, AgentOffice, BuyerOffice |  | 1% | The national association ID of the buyer's office (e.g., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Property/BuyerOfficeNationalAssociationId/) |
+| `BuyerOfficePhone` | String | Listing, AgentOffice, BuyerOffice |  | 81% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/BuyerOfficePhone/) |
+| `BuyerOfficePhoneExt` | String | Listing, AgentOffice, BuyerOffice |  | 18% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/BuyerOfficePhoneExt/) |
+| `BuyerOfficeURL` | String | Listing, AgentOffice, BuyerOffice |  | 72% | The website Uniform Resource Identifier (URI) for the buyers office. | [link](https://dd.reso.org/DD2.0/Property/BuyerOfficeURL/) |
+| `BuyerTeam` | Resource | Listing, AgentOffice, BuyerTeam |  |  | Two or more agents working on the buyer agent's team. | [link](https://dd.reso.org/DD2.0/Property/BuyerTeam/) |
+| `BuyerTeamKey` | String | Listing, AgentOffice, Team |  | 3% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Property/BuyerTeamKey/) |
+| `BuyerTeamName` | String | Listing, AgentOffice, Team |  | 6% | The name of the team representing the buyer. | [link](https://dd.reso.org/DD2.0/Property/BuyerTeamName/) |
+| `CableTvExpense` | Number | Financial |  | 4% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/CableTvExpense/) |
+| `CancellationDate` | Date | Listing, Dates |  | 23% | The date that the listing contract between the seller and listing agent was canceled. | [link](https://dd.reso.org/DD2.0/Property/CancellationDate/) |
+| `CapRate` | Number | Financial |  | 32% | The equivalent to the return on investment you would receive if you pay cash for a property. | [link](https://dd.reso.org/DD2.0/Property/CapRate/) |
+| `CarportSpaces` | Number | Structure |  | 48% | The number of carport spaces included in the sale. | [link](https://dd.reso.org/DD2.0/Property/CarportSpaces/) |
+| `CarportYN` | Boolean | Structure |  | 68% | A flag indicating that the listing has a carport. | [link](https://dd.reso.org/DD2.0/Property/CarportYN/) |
+| `CarrierRoute` | String | Location, Address |  | 1% | The group of addresses to which the U.S. | [link](https://dd.reso.org/DD2.0/Property/CarrierRoute/) |
+| `City` | String List, Single | Location, Address | City | 98% | The city in which the property is located. | [link](https://dd.reso.org/DD2.0/Property/City/) |
+| `CityRegion` | String | Location, Area |  | 7% | A subsection or area of a defined city (e.g., SOHO in New York, NY; Ironbound in Newark, NJ; Inside the Beltway). | [link](https://dd.reso.org/DD2.0/Property/CityRegion/) |
+| `CloseDate` | Date | Listing, Dates |  | 87% | With for-sale listings, this is the date the purchase agreement was fulfilled. | [link](https://dd.reso.org/DD2.0/Property/CloseDate/) |
+| `ClosePrice` | Number | Listing, Price |  | 83% | The amount of money paid by the purchaser to the seller for the property under the agreement. | [link](https://dd.reso.org/DD2.0/Property/ClosePrice/) |
+| `CoBuyerAgent` | Resource | Listing, AgentOffice, CoBuyerAgent |  |  | The co-buyer's agent involved in the transaction. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgent/) |
+| `CoBuyerAgentAOR` | String List, Single | Listing, AgentOffice, CoBuyerAgent | AOR | 17% | The co-buyer agent's board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentAOR/) |
+| `CoBuyerAgentDesignation` | String List, Multi | Listing, AgentOffice, CoBuyerAgent | [CoBuyerAgentDesignation](#cobuyeragentdesignation) | 29% | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® (NAR) and each affiliated group upon completi… | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentDesignation/) |
+| `CoBuyerAgentDirectPhone` | String | Listing, AgentOffice, CoBuyerAgent |  | 44% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentDirectPhone/) |
+| `CoBuyerAgentEmail` | String | Listing, AgentOffice, CoBuyerAgent |  | 71% | The email address of the buyer's co-agent. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentEmail/) |
+| `CoBuyerAgentFax` | String | Listing, AgentOffice, CoBuyerAgent |  | 39% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentFax/) |
+| `CoBuyerAgentFirstName` | String | Listing, AgentOffice, CoBuyerAgent |  | 69% | The first name of the buyer's co-agent. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentFirstName/) |
+| `CoBuyerAgentFullName` | String | Listing, AgentOffice, CoBuyerAgent |  | 71% | The first, middle and last name of the buyer's co-agent. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentFullName/) |
+| `CoBuyerAgentHomePhone` | String | Listing, AgentOffice, CoBuyerAgent |  | 24% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentHomePhone/) |
+| `CoBuyerAgentKey` | String | Listing, AgentOffice, CoBuyerAgent |  | 63% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentKey/) |
+| `CoBuyerAgentLastName` | String | Listing, AgentOffice, CoBuyerAgent |  | 69% | The last name of the buyer's co-agent. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentLastName/) |
+| `CoBuyerAgentMiddleName` | String | Listing, AgentOffice, CoBuyerAgent |  | 50% | The middle name of the buyer's co-agent. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentMiddleName/) |
+| `CoBuyerAgentMlsId` | String | Listing, AgentOffice, CoBuyerAgent |  | 74% | The local, well-known identifier. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentMlsId/) |
+| `CoBuyerAgentMobilePhone` | String | Listing, AgentOffice, CoBuyerAgent |  | 49% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentMobilePhone/) |
+| `CoBuyerAgentNamePrefix` | String | Listing, AgentOffice, CoBuyerAgent |  | 0% | The prefix to the name (e.g., Dr., Mr., Ms.). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentNamePrefix/) |
+| `CoBuyerAgentNameSuffix` | String | Listing, AgentOffice, CoBuyerAgent |  | 1% | The suffix to the name (e.g., Esq., Jr., III). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentNameSuffix/) |
+| `CoBuyerAgentNationalAssociationId` | String | Listing, AgentOffice, CoBuyerAgent |  | 0% | The national association ID of the co-buyer's agent (e.g., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentNationalAssociationId/) |
+| `CoBuyerAgentOfficePhone` | String | Listing, AgentOffice, CoBuyerAgent |  | 53% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentOfficePhone/) |
+| `CoBuyerAgentOfficePhoneExt` | String | Listing, AgentOffice, CoBuyerAgent |  | 25% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentOfficePhoneExt/) |
+| `CoBuyerAgentPager` | String | Listing, AgentOffice, CoBuyerAgent |  | 11% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentPager/) |
+| `CoBuyerAgentPreferredPhone` | String | Listing, AgentOffice, CoBuyerAgent |  | 63% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentPreferredPhone/) |
+| `CoBuyerAgentPreferredPhoneExt` | String | Listing, AgentOffice, CoBuyerAgent |  | 18% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentPreferredPhoneExt/) |
+| `CoBuyerAgentStateLicense` | String | Listing, AgentOffice, CoBuyerAgent |  | 51% | The license of the co-buyers' agent. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentStateLicense/) |
+| `CoBuyerAgentTollFreePhone` | String | Listing, AgentOffice, CoBuyerAgent |  | 15% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentTollFreePhone/) |
+| `CoBuyerAgentURL` | String | Listing, AgentOffice, CoBuyerAgent |  | 60% | The website Uniform Resource Identifier (URI) of the co-buyers agent. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentURL/) |
+| `CoBuyerAgentVoiceMail` | String | Listing, AgentOffice, CoBuyerAgent |  | 11% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentVoiceMail/) |
+| `CoBuyerAgentVoiceMailExt` | String | Listing, AgentOffice, CoBuyerAgent |  | 1% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerAgentVoiceMailExt/) |
+| `CoBuyerOffice` | Resource | Listing, AgentOffice, CoBuyerOffice |  |  | The co-buyer agent's office. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOffice/) |
+| `CoBuyerOfficeAOR` | String List, Single | Listing, AgentOffice, CoBuyerOffice | AOR | 16% | The co-buyer's office's board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOfficeAOR/) |
+| `CoBuyerOfficeEmail` | String | Listing, AgentOffice, CoBuyerOffice |  | 64% | The email address of the buyer's co-office. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOfficeEmail/) |
+| `CoBuyerOfficeFax` | String | Listing, AgentOffice, CoBuyerOffice |  | 46% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOfficeFax/) |
+| `CoBuyerOfficeKey` | String | Listing, AgentOffice, CoBuyerOffice |  | 63% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOfficeKey/) |
+| `CoBuyerOfficeMlsId` | String | Listing, AgentOffice, CoBuyerOffice |  | 74% | The local, well-known identifier. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOfficeMlsId/) |
+| `CoBuyerOfficeName` | String | Listing, AgentOffice, CoBuyerOffice |  | 74% | The legal name of the brokerage co-representing the buyer. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOfficeName/) |
+| `CoBuyerOfficeNationalAssociationId` | String | Listing, AgentOffice, CoBuyerOffice |  | 0% | The national association ID of the co-buyer's office (e.g., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOfficeNationalAssociationId/) |
+| `CoBuyerOfficePhone` | String | Listing, AgentOffice, CoBuyerOffice |  | 67% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOfficePhone/) |
+| `CoBuyerOfficePhoneExt` | String | Listing, AgentOffice, CoBuyerOffice |  | 6% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOfficePhoneExt/) |
+| `CoBuyerOfficeURL` | String | Listing, AgentOffice, CoBuyerOffice |  | 58% | The website Uniform Resource Identifier (URI) for the co-buyer's office. | [link](https://dd.reso.org/DD2.0/Property/CoBuyerOfficeURL/) |
+| `CoListAgent` | Resource | Listing, AgentOffice, CoListAgent |  |  | The co-listing agent involved in the transaction. | [link](https://dd.reso.org/DD2.0/Property/CoListAgent/) |
+| `CoListAgentAOR` | String List, Single | Listing, AgentOffice, CoListAgent | AOR | 24% | The Co-listing Agent's board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentAOR/) |
+| `CoListAgentDesignation` | String List, Multi | Listing, AgentOffice, CoListAgent | [CoListAgentDesignation](#colistagentdesignation) | 29% | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® and each affiliated group upon completion of … | [link](https://dd.reso.org/DD2.0/Property/CoListAgentDesignation/) |
+| `CoListAgentDirectPhone` | String | Listing, AgentOffice, CoListAgent |  | 57% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentDirectPhone/) |
+| `CoListAgentEmail` | String | Listing, AgentOffice, CoListAgent |  | 81% | The email address of the co-listing agent. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentEmail/) |
+| `CoListAgentFax` | String | Listing, AgentOffice, CoListAgent |  | 46% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentFax/) |
+| `CoListAgentFirstName` | String | Listing, AgentOffice, CoListAgent |  | 79% | The first name of the co-listing agent. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentFirstName/) |
+| `CoListAgentFullName` | String | Listing, AgentOffice, CoListAgent |  | 80% | The first, middle and last name of the co-listing agent. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentFullName/) |
+| `CoListAgentHomePhone` | String | Listing, AgentOffice, CoListAgent |  | 36% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentHomePhone/) |
+| `CoListAgentKey` | String | Listing, AgentOffice, CoListAgent |  | 75% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentKey/) |
+| `CoListAgentLastName` | String | Listing, AgentOffice, CoListAgent |  | 79% | The last name of the co-listing agent. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentLastName/) |
+| `CoListAgentMiddleName` | String | Listing, AgentOffice, CoListAgent |  | 62% | The middle name of the co-listing agent. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentMiddleName/) |
+| `CoListAgentMlsId` | String | Listing, AgentOffice, CoListAgent |  | 86% | The local, well-known identifier. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentMlsId/) |
+| `CoListAgentMobilePhone` | String | Listing, AgentOffice, CoListAgent |  | 58% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentMobilePhone/) |
+| `CoListAgentNamePrefix` | String | Listing, AgentOffice, CoListAgent |  | 0% | The prefix to the name (e.g., Dr., Mr., Ms.). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentNamePrefix/) |
+| `CoListAgentNameSuffix` | String | Listing, AgentOffice, CoListAgent |  | 1% | The suffix to the name (e.g., Esq., Jr., III). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentNameSuffix/) |
+| `CoListAgentNationalAssociationId` | String | Listing, AgentOffice, CoListAgent |  | 20% | The national association ID of the co-listing agent (e.g., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentNationalAssociationId/) |
+| `CoListAgentOfficePhone` | String | Listing, AgentOffice, CoListAgent |  | 64% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentOfficePhone/) |
+| `CoListAgentOfficePhoneExt` | String | Listing, AgentOffice, CoListAgent |  | 32% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentOfficePhoneExt/) |
+| `CoListAgentPager` | String | Listing, AgentOffice, CoListAgent |  | 15% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentPager/) |
+| `CoListAgentPreferredPhone` | String | Listing, AgentOffice, CoListAgent |  | 73% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentPreferredPhone/) |
+| `CoListAgentPreferredPhoneExt` | String | Listing, AgentOffice, CoListAgent |  | 24% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentPreferredPhoneExt/) |
+| `CoListAgentStateLicense` | String | Listing, AgentOffice, CoListAgent |  | 58% | The license of the co-listing agent. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentStateLicense/) |
+| `CoListAgentTollFreePhone` | String | Listing, AgentOffice, CoListAgent |  | 20% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentTollFreePhone/) |
+| `CoListAgentURL` | String | Listing, AgentOffice, CoListAgent |  | 72% | The website Uniform Resource Identifier (URI) of the co-listing agent. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentURL/) |
+| `CoListAgentVoiceMail` | String | Listing, AgentOffice, CoListAgent |  | 11% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListAgentVoiceMail/) |
+| `CoListAgentVoiceMailExt` | String | Listing, AgentOffice, CoListAgent |  | 1% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/CoListAgentVoiceMailExt/) |
+| `CoListOffice` | Resource | Listing, AgentOffice, CoListOffice |  |  | The co-listing agent's office. | [link](https://dd.reso.org/DD2.0/Property/CoListOffice/) |
+| `CoListOfficeAOR` | String List, Single | Listing, AgentOffice, CoListOffice | AOR | 27% | The co-listing office's board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Property/CoListOfficeAOR/) |
+| `CoListOfficeEmail` | String | Listing, AgentOffice, CoListOffice |  | 75% | The email address of the co-listing office. | [link](https://dd.reso.org/DD2.0/Property/CoListOfficeEmail/) |
+| `CoListOfficeFax` | String | Listing, AgentOffice, CoListOffice |  | 49% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListOfficeFax/) |
+| `CoListOfficeKey` | String | Listing, AgentOffice, CoListOffice |  | 73% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Property/CoListOfficeKey/) |
+| `CoListOfficeMlsId` | String | Listing, AgentOffice, CoListOffice |  | 86% | The local, well-known identifier. | [link](https://dd.reso.org/DD2.0/Property/CoListOfficeMlsId/) |
+| `CoListOfficeName` | String | Listing, AgentOffice, CoListOffice |  | 85% | The legal name of the brokerage co-representing the seller. | [link](https://dd.reso.org/DD2.0/Property/CoListOfficeName/) |
+| `CoListOfficeNationalAssociationId` | String | Listing, AgentOffice, CoListOffice |  | 1% | The national association ID of the co-listing office (e.g., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Property/CoListOfficeNationalAssociationId/) |
+| `CoListOfficePhone` | String | Listing, AgentOffice, CoListOffice |  | 78% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/CoListOfficePhone/) |
+| `CoListOfficePhoneExt` | String | Listing, AgentOffice, CoListOffice |  | 8% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/CoListOfficePhoneExt/) |
+| `CoListOfficeURL` | String | Listing, AgentOffice, CoListOffice |  | 69% | The website Uniform Resource Identifier (URI) for the co-listing office. | [link](https://dd.reso.org/DD2.0/Property/CoListOfficeURL/) |
+| `CommonInterest` | String List, Single | Listing, Contract | [CommonInterest](#commoninterest) | 12% | A type of ownership in a property that is composed of an individual lot or unit and a share of the ownership or use of common areas. | [link](https://dd.reso.org/DD2.0/Property/CommonInterest/) |
+| `CommonWalls` | String List, Multi | Structure | [CommonWalls](#commonwalls) | 25% | A multi-select list with options like 1 Common Wall, 2 Common Walls, No Common Walls, No One Above, No One Below. | [link](https://dd.reso.org/DD2.0/Property/CommonWalls/) |
+| `CommunityFeatures` | String List, Multi | Characteristics | [CommunityFeatures](#communityfeatures) | 63% | A list of features related to or available within the community. | [link](https://dd.reso.org/DD2.0/Property/CommunityFeatures/) |
+| `CompSaleYN` | Boolean | Listing |  | 3% | Indicates whether or not this sale was entered for comparative purposes. | [link](https://dd.reso.org/DD2.0/Property/CompSaleYN/) |
+| `CompensationComments` | String | Listing, Compensation |  | 1% | A textual description of the compensation involved in the transaction. | [link](https://dd.reso.org/DD2.0/Property/CompensationComments/) |
+| `Concessions` | String List, Single | Listing, Closing | [Concessions](#concessions) | 39% | Indicates whether or not there are concessions included in the sales agreement (i.e., Yes, No or Call Listing Agent). | [link](https://dd.reso.org/DD2.0/Property/Concessions/) |
+| `ConcessionsAmount` | Number | Listing, Closing |  | 37% | The dollar amount of the concessions. | [link](https://dd.reso.org/DD2.0/Property/ConcessionsAmount/) |
+| `ConcessionsComments` | String | Listing, Closing |  | 40% | The comments describing the concessions made by the buyer or the seller. | [link](https://dd.reso.org/DD2.0/Property/ConcessionsComments/) |
+| `ConstructionMaterials` | String List, Multi | Structure | [ConstructionMaterials](#constructionmaterials) | 89% | A list of the materials that were used in the construction of the property. | [link](https://dd.reso.org/DD2.0/Property/ConstructionMaterials/) |
+| `ContinentRegion` | String | Location, Area |  | 0% | A subsection or area of a continent (e.g., Southern Europe, Scandinavia). | [link](https://dd.reso.org/DD2.0/Property/ContinentRegion/) |
+| `Contingency` | String | Listing, Closing |  | 43% | A list of contingencies that must be satisfied in order to complete the transaction. | [link](https://dd.reso.org/DD2.0/Property/Contingency/) |
+| `ContingentDate` | Date | Listing, Dates |  | 36% | The date an offer was made with a contingency. | [link](https://dd.reso.org/DD2.0/Property/ContingentDate/) |
+| `ContractStatusChangeDate` | Date | Listing, Dates |  | 72% | The date of the listing's contractual status change. | [link](https://dd.reso.org/DD2.0/Property/ContractStatusChangeDate/) |
+| `Cooling` | String List, Multi | Structure | [Cooling](#cooling) | 90% | A list describing the cooling or air conditioning features of the property. | [link](https://dd.reso.org/DD2.0/Property/Cooling/) |
+| `CoolingYN` | Boolean | Structure |  | 81% | Indicates whether or not the property has some form of cooling or air conditioning. | [link](https://dd.reso.org/DD2.0/Property/CoolingYN/) |
+| `CopyrightNotice` | String | Listing |  | 1% | A notice of the legal rights of the owner of the information or data. | [link](https://dd.reso.org/DD2.0/Property/CopyrightNotice/) |
+| `Country` | String List, Single | Location, Address | [Country](#country) | 41% | The country in which the property is located, as an ISO country code. | [link](https://dd.reso.org/DD2.0/Property/Country/) |
+| `CountryRegion` | String | Location, Area |  | 1% | A subsection or area of a defined country (e.g., Napa Valley in the U.S., the Amalfi Coast in Italy). | [link](https://dd.reso.org/DD2.0/Property/CountryRegion/) |
+| `CountyOrParish` | String List, Single | Location, Address | CountyOrParish | 95% | The county, parish or other regional authority. | [link](https://dd.reso.org/DD2.0/Property/CountyOrParish/) |
+| `CoveredSpaces` | Number | Structure |  | 42% | The total number of garage and carport spaces. | [link](https://dd.reso.org/DD2.0/Property/CoveredSpaces/) |
+| `CropsIncludedYN` | Boolean | Farming |  | 8% | Indicates whether or not crops are included in the sale of the property. | [link](https://dd.reso.org/DD2.0/Property/CropsIncludedYN/) |
+| `CrossStreet` | String | Location, GIS |  | 25% | The nearest cross streets to the property. | [link](https://dd.reso.org/DD2.0/Property/CrossStreet/) |
+| `CultivatedArea` | Number | Farming |  | 22% | The measurement or percentage of the property that has been cultivated. | [link](https://dd.reso.org/DD2.0/Property/CultivatedArea/) |
+| `CumulativeDaysOnMarket` | Number | Listing, Dates |  | 60% | The cumulative number of days the property is on market, as defined by the MLS business rules. | [link](https://dd.reso.org/DD2.0/Property/CumulativeDaysOnMarket/) |
+| `CurrentFinancing` | String List, Multi | Listing, Contract | [CurrentFinancing](#currentfinancing) | 26% | A list of options that describe the type of financing that the seller currently has in place for the property being sold (i.e., Cash, FHA Loan, etc.). | [link](https://dd.reso.org/DD2.0/Property/CurrentFinancing/) |
+| `CurrentUse` | String List, Multi | Characteristics | [CurrentOrPossibleUse](#currentorpossibleuse) | 63% | A list of the type(s) of current use of the property. | [link](https://dd.reso.org/DD2.0/Property/CurrentUse/) |
+| `DOH1` | String | Structure |  | 8% | The Department of Housing decal number for the mobile or manufactured home. | [link](https://dd.reso.org/DD2.0/Property/DOH1/) |
+| `DOH2` | String | Structure |  | 4% | The Department of Housing decal number for the mobile or manufactured home. | [link](https://dd.reso.org/DD2.0/Property/DOH2/) |
+| `DOH3` | String | Structure |  | 3% | The Department of Housing decal number for the mobile or manufactured home. | [link](https://dd.reso.org/DD2.0/Property/DOH3/) |
+| `DaysInMls` | Number | Listing, Dates |  |  | The number of days the listing was on market within the MLS system. | [link](https://dd.reso.org/DD2.0/Property/DaysInMls/) |
+| `DaysOnMarket` | Number | Listing, Dates |  | 94% | The number of days the listing is on market, as defined by the MLS business rules. | [link](https://dd.reso.org/DD2.0/Property/DaysOnMarket/) |
+| `DaysOnSite` | Number | Listing, Dates |  |  | The number of days the listing appeared on the given site, typically a public portal. | [link](https://dd.reso.org/DD2.0/Property/DaysOnSite/) |
+| `DevelopmentStatus` | String List, Multi | Characteristics | [DevelopmentStatus](#developmentstatus) | 28% | The development phase of the property. | [link](https://dd.reso.org/DD2.0/Property/DevelopmentStatus/) |
+| `DirectionFaces` | String List, Single | Structure | [DirectionFaces](#directionfaces) | 24% | The compass direction that the main entrance to the building faces (e.g., North, South, East, West, Northeast, Southwest). | [link](https://dd.reso.org/DD2.0/Property/DirectionFaces/) |
+| `Directions` | String | Location, GIS |  | 95% | Driving directions to the property. | [link](https://dd.reso.org/DD2.0/Property/Directions/) |
+| `Disclaimer` | String | Listing |  | 8% | Text that serves as the negation or limitation of the rights under a warranty given by a seller to a buyer. | [link](https://dd.reso.org/DD2.0/Property/Disclaimer/) |
+| `Disclosures` | String List, Multi | Listing, Contract | Disclosures | 52% | Legal or pertinent information that should be disclosed to potential buyer's agents. | [link](https://dd.reso.org/DD2.0/Property/Disclosures/) |
+| `DistanceToBusComments` | String | Location |  | 3% | A textual description of the distance to local bus stops. | [link](https://dd.reso.org/DD2.0/Property/DistanceToBusComments/) |
+| `DistanceToBusNumeric` | Number | Location |  | 1% | The numeric distance from the property to the nearest bus stop. | [link](https://dd.reso.org/DD2.0/Property/DistanceToBusNumeric/) |
+| `DistanceToBusUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToBusUnits/) |
+| `DistanceToElectricComments` | String | Utilities |  | 8% | Provides details about the property's access to serviceable electrical utility and the distance to it. | [link](https://dd.reso.org/DD2.0/Property/DistanceToElectricComments/) |
+| `DistanceToElectricNumeric` | Number | Utilities |  | 1% | The numeric distance from the property to the electrical utility. | [link](https://dd.reso.org/DD2.0/Property/DistanceToElectricNumeric/) |
+| `DistanceToElectricUnits` | String List, Single | Utilities | [LinearUnits](#linearunits) | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToElectricUnits/) |
+| `DistanceToFreewayComments` | String | Location |  | 2% | A textual description of the distance to freeways. | [link](https://dd.reso.org/DD2.0/Property/DistanceToFreewayComments/) |
+| `DistanceToFreewayNumeric` | Number | Location |  | 2% | The numeric distance from the property to the nearest freeway. | [link](https://dd.reso.org/DD2.0/Property/DistanceToFreewayNumeric/) |
+| `DistanceToFreewayUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToFreewayUnits/) |
+| `DistanceToGasComments` | String | Utilities |  | 5% | Provides details about the property's access to serviceable natural gas utility and the distance to it. | [link](https://dd.reso.org/DD2.0/Property/DistanceToGasComments/) |
+| `DistanceToGasNumeric` | Number | Utilities |  | 1% | The numeric distance from the property to the gas utility. | [link](https://dd.reso.org/DD2.0/Property/DistanceToGasNumeric/) |
+| `DistanceToGasUnits` | String List, Single | Utilities | [LinearUnits](#linearunits) | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToGasUnits/) |
+| `DistanceToPhoneServiceComments` | String | Utilities |  | 5% | Provides details about the property's access to phone service and the distance to it. | [link](https://dd.reso.org/DD2.0/Property/DistanceToPhoneServiceComments/) |
+| `DistanceToPhoneServiceNumeric` | Number | Utilities |  | 0% | The numeric distance from the property to the phone utility. | [link](https://dd.reso.org/DD2.0/Property/DistanceToPhoneServiceNumeric/) |
+| `DistanceToPhoneServiceUnits` | String List, Single | Utilities | [LinearUnits](#linearunits) | 0% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToPhoneServiceUnits/) |
+| `DistanceToPlaceofWorshipComments` | String | Location |  | 1% | A textual description of the distance to local places of worship. | [link](https://dd.reso.org/DD2.0/Property/DistanceToPlaceofWorshipComments/) |
+| `DistanceToPlaceofWorshipNumeric` | Number | Location |  | 1% | The numeric distance from the property to the nearest place of worship. | [link](https://dd.reso.org/DD2.0/Property/DistanceToPlaceofWorshipNumeric/) |
+| `DistanceToPlaceofWorshipUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToPlaceofWorshipUnits/) |
+| `DistanceToSchoolBusComments` | String | Location |  | 1% | Distance from the property to the nearest school bus pickup point. | [link](https://dd.reso.org/DD2.0/Property/DistanceToSchoolBusComments/) |
+| `DistanceToSchoolBusNumeric` | Number | Location |  | 1% | The numeric distance from the property to the nearest school bus pickup point. | [link](https://dd.reso.org/DD2.0/Property/DistanceToSchoolBusNumeric/) |
+| `DistanceToSchoolBusUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToSchoolBusUnits/) |
+| `DistanceToSchoolsComments` | String | Location |  | 2% | A textual description of the distance to local schools. | [link](https://dd.reso.org/DD2.0/Property/DistanceToSchoolsComments/) |
+| `DistanceToSchoolsNumeric` | Number | Location |  | 2% | The numeric distance from the property to the nearest school. | [link](https://dd.reso.org/DD2.0/Property/DistanceToSchoolsNumeric/) |
+| `DistanceToSchoolsUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 2% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToSchoolsUnits/) |
+| `DistanceToSewerComments` | String | Utilities |  | 6% | Provides details about the property's access to sewer or septic service and the distance to it. | [link](https://dd.reso.org/DD2.0/Property/DistanceToSewerComments/) |
+| `DistanceToSewerNumeric` | Number | Utilities |  | 1% | The numeric distance from the property to the sewer utility. | [link](https://dd.reso.org/DD2.0/Property/DistanceToSewerNumeric/) |
+| `DistanceToSewerUnits` | String List, Single | Utilities | [LinearUnits](#linearunits) | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToSewerUnits/) |
+| `DistanceToShoppingComments` | String | Location |  | 3% | A description of the distance to primary shopping sources, such as groceries, gasoline, clothing or department stores. | [link](https://dd.reso.org/DD2.0/Property/DistanceToShoppingComments/) |
+| `DistanceToShoppingNumeric` | Number | Location |  | 1% | The numeric distance from the property to the nearest shopping. | [link](https://dd.reso.org/DD2.0/Property/DistanceToShoppingNumeric/) |
+| `DistanceToShoppingUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToShoppingUnits/) |
+| `DistanceToStreetComments` | String | Location |  | 2% | Provides details about the property's access to a maintained road or street adjacent to the lot, conditions of access and distance to a maintained road. | [link](https://dd.reso.org/DD2.0/Property/DistanceToStreetComments/) |
+| `DistanceToStreetNumeric` | Number | Location |  | 1% | The numeric distance from the property to the street. | [link](https://dd.reso.org/DD2.0/Property/DistanceToStreetNumeric/) |
+| `DistanceToStreetUnits` | String List, Single | Location | [LinearUnits](#linearunits) | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToStreetUnits/) |
+| `DistanceToWaterComments` | String | Utilities |  | 7% | Provides details about the property's access to serviceable water utility and the distance to it. | [link](https://dd.reso.org/DD2.0/Property/DistanceToWaterComments/) |
+| `DistanceToWaterNumeric` | Number | Utilities |  | 1% | The numeric distance from the property to the water utility. | [link](https://dd.reso.org/DD2.0/Property/DistanceToWaterNumeric/) |
+| `DistanceToWaterUnits` | String List, Single | Utilities | [LinearUnits](#linearunits) | 1% | A pick list of the unit linear measurement (i.e., Feet, Meters, Yards, Kilometers, Miles, etc.). | [link](https://dd.reso.org/DD2.0/Property/DistanceToWaterUnits/) |
+| `DocumentStatus` | String List, Single | Listing, Media | [DocumentStatus](#documentstatus) |  | The statuses a document could be in during a transaction. | [link](https://dd.reso.org/DD2.0/Property/DocumentStatus/) |
+| `DocumentsAvailable` | String List, Multi | Listing, Media | DocumentsAvailable | 72% | A list of the documents available for the property. | [link](https://dd.reso.org/DD2.0/Property/DocumentsAvailable/) |
+| `DocumentsChangeTimestamp` | Timestamp | Listing, Media |  | 78% | The system-generated timestamp of when the last update or change to the documents for this listing was made. | [link](https://dd.reso.org/DD2.0/Property/DocumentsChangeTimestamp/) |
+| `DocumentsCount` | Number | Listing, Media |  | 86% | The total number of documents or supplements included with the listing. | [link](https://dd.reso.org/DD2.0/Property/DocumentsCount/) |
+| `DoorFeatures` | String List, Multi | Structure | [DoorFeatures](#doorfeatures) | 51% | A list of features or description of the doors included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/DoorFeatures/) |
+| `DualOrVariableRateCommissionYN` | Boolean | Listing, Compensation |  | 1% | A commission arrangement in which the seller agrees to pay a specified commission to the listing broker if the property is sold through the efforts of a cooperating broker. | [link](https://dd.reso.org/DD2.0/Property/DualOrVariableRateCommissionYN/) |
+| `Electric` | String List, Multi | Utilities | [Electric](#electric) | 66% | A list of electric-service related features of the property (e.g., 110 Volt, 3 Phase, 220 Volt, RV Hookup). | [link](https://dd.reso.org/DD2.0/Property/Electric/) |
+| `ElectricExpense` | Number | Financial |  | 23% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/ElectricExpense/) |
+| `ElectricOnPropertyYN` | Boolean | Utilities |  | 33% | Indicates whether or not the property currently has electrical utility available on the property. | [link](https://dd.reso.org/DD2.0/Property/ElectricOnPropertyYN/) |
+| `ElementarySchool` | String List, Single | Location, School | ElementarySchool | 56% | The name of the primary school having a catchment area that includes the associated property. | [link](https://dd.reso.org/DD2.0/Property/ElementarySchool/) |
+| `ElementarySchoolDistrict` | String List, Single | Location, School | ElementarySchoolDistrict | 28% | The name of the elementary school district having a catchment area that includes the associated property. | [link](https://dd.reso.org/DD2.0/Property/ElementarySchoolDistrict/) |
+| `Elevation` | Number | Location, GIS |  | 8% | The elevation of the property in relation to sea level. | [link](https://dd.reso.org/DD2.0/Property/Elevation/) |
+| `ElevationUnits` | String List, Single | Location, GIS | [LinearUnits](#linearunits) | 3% | A pick list of the unit of measurement used in the Elevation field (i.e., Feet, Meters). | [link](https://dd.reso.org/DD2.0/Property/ElevationUnits/) |
+| `EntryLevel` | Number | Structure |  | 24% | A numeric field that describes the level within the structure, single-family residence (SFR) or a unit in a building, where the main entry to the dwelling is located. | [link](https://dd.reso.org/DD2.0/Property/EntryLevel/) |
+| `EntryLocation` | String | Structure |  | 18% | A description of the main entry way to the property (e.g., elevator, ground level w/ steps, ground level w/o steps, top level). | [link](https://dd.reso.org/DD2.0/Property/EntryLocation/) |
+| `Exclusions` | String | Listing, Contract |  | 32% | Elements of the property that will not be included in the sale (e.g., chandeliers removed prior to close). | [link](https://dd.reso.org/DD2.0/Property/Exclusions/) |
+| `ExistingLeaseType` | String List, Multi | Financial | [ExistingLeaseType](#existingleasetype) | 43% | Information about the status of the existing lease on the property (i.e., Net, NNN, NN, Gross, Absolute Net, Escalation Clause, Ground Lease). | [link](https://dd.reso.org/DD2.0/Property/ExistingLeaseType/) |
+| `ExpirationDate` | Date | Listing, Dates |  | 65% | The date when the listing agreement will expire. | [link](https://dd.reso.org/DD2.0/Property/ExpirationDate/) |
+| `ExteriorFeatures` | String List, Multi | Structure | [ExteriorFeatures](#exteriorfeatures) | 85% | A list of features or a description of the exterior of the property included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/ExteriorFeatures/) |
+| `FarmCreditServiceInclYN` | Boolean | Farming |  | 1% | Indicates whether or not Farm Credit Service shares are included in the price of the property. | [link](https://dd.reso.org/DD2.0/Property/FarmCreditServiceInclYN/) |
+| `FarmLandAreaSource` | String List, Single | Farming | [AreaSource](#areasource) | 1% | The source of the measurements. | [link](https://dd.reso.org/DD2.0/Property/FarmLandAreaSource/) |
+| `FarmLandAreaUnits` | String List, Single | Farming | [AreaUnits](#areaunits) | 11% | A pick list of the unit of measurement for the area (i.e., Square Feet, Square Meters, Acres, etc.). | [link](https://dd.reso.org/DD2.0/Property/FarmLandAreaUnits/) |
+| `Fencing` | String List, Multi | Characteristics | [Fencing](#fencing) | 78% | A list of types of fencing found at the property being sold. | [link](https://dd.reso.org/DD2.0/Property/Fencing/) |
+| `FhaEligibility` | String List, Single | Listing, Closing | [FhaEligibility](#fhaeligibility) |  | The status of the property's FHA eligibility. | [link](https://dd.reso.org/DD2.0/Property/FhaEligibility/) |
+| `FinancialDataSource` | String List, Multi | Financial | [FinancialDataSource](#financialdatasource) | 12% | The source of the rental information (e.g., Accountant, Owner). | [link](https://dd.reso.org/DD2.0/Property/FinancialDataSource/) |
+| `FireplaceFeatures` | String List, Multi | Structure | [FireplaceFeatures](#fireplacefeatures) | 81% | A list of features or a description of the fireplace(s) included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/FireplaceFeatures/) |
+| `FireplaceYN` | Boolean | Structure |  | 78% | Does the property include a fireplace. | [link](https://dd.reso.org/DD2.0/Property/FireplaceYN/) |
+| `FireplacesTotal` | Number | Structure |  | 53% | Indicates whether or not the property includes a fireplace. | [link](https://dd.reso.org/DD2.0/Property/FireplacesTotal/) |
+| `Flooring` | String List, Multi | Structure | [Flooring](#flooring) | 84% | A list of the type(s) of flooring found within the property. | [link](https://dd.reso.org/DD2.0/Property/Flooring/) |
+| `FoundationArea` | Number | Structure |  | 4% | The area or dimensions of the footprint of the structure on the lot. | [link](https://dd.reso.org/DD2.0/Property/FoundationArea/) |
+| `FoundationDetails` | String List, Multi | Structure | [FoundationDetails](#foundationdetails) | 78% | A list of the type(s) of foundation on which the property sits. | [link](https://dd.reso.org/DD2.0/Property/FoundationDetails/) |
+| `FrontageLength` | String | Characteristics |  | 29% | A textual description of the length of the frontages selected in the Frontage Type field. | [link](https://dd.reso.org/DD2.0/Property/FrontageLength/) |
+| `FrontageType` | String List, Multi | Characteristics | [FrontageType](#frontagetype) | 35% | A pick list of types of frontage (i.e., Oceanfront, Lakefront, Golf Course, etc.). | [link](https://dd.reso.org/DD2.0/Property/FrontageType/) |
+| `FuelExpense` | Number | Financial |  | 17% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/FuelExpense/) |
+| `Furnished` | String List, Single | Characteristics | [Furnished](#furnished) | 54% | The property being leased is furnished, unfurnished or partially furnished. | [link](https://dd.reso.org/DD2.0/Property/Furnished/) |
+| `FurnitureReplacementExpense` | Number | Financial |  | 1% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/FurnitureReplacementExpense/) |
+| `GarageSpaces` | Number | Structure |  | 84% | The number of spaces in the garage(s). | [link](https://dd.reso.org/DD2.0/Property/GarageSpaces/) |
+| `GarageYN` | Boolean | Structure |  | 82% | A flag that indicates whether or not the listing has a garage. | [link](https://dd.reso.org/DD2.0/Property/GarageYN/) |
+| `GardenerExpense` | Number | Financial |  | 5% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/GardenerExpense/) |
+| `GrazingPermitsBlmYN` | Boolean | Farming |  | 1% | Indicates whether or not the property owner has grazing permits from the Bureau of Land Management. | [link](https://dd.reso.org/DD2.0/Property/GrazingPermitsBlmYN/) |
+| `GrazingPermitsForestServiceYN` | Boolean | Farming |  | 1% | Indicates whether or not the property owner has grazing permits from the Forestry Service. | [link](https://dd.reso.org/DD2.0/Property/GrazingPermitsForestServiceYN/) |
+| `GrazingPermitsPrivateYN` | Boolean | Farming |  | 2% | Indicates whether or not the property owner has private grazing permits. | [link](https://dd.reso.org/DD2.0/Property/GrazingPermitsPrivateYN/) |
+| `GreenBuildingVerification` | Collection | Structure, Performance, GreenVerification |  |  | A collection of verifications or certifications awarded to a new or pre-existing residential or commercial structure (e.g., LEED, Energy Star, ICC-700). | [link](https://dd.reso.org/DD2.0/Property/GreenBuildingVerification/) |
+| `GreenBuildingVerificationType` | String List, Multi | Structure, Performance, GreenVerification | [GreenBuildingVerificationType](#greenbuildingverificationtype) | 23% | The name of the verification or certification awarded to a new or pre-existing residential or commercial structure (e.g., LEED, ENERGY STAR, ICC-700). | [link](https://dd.reso.org/DD2.0/Property/GreenBuildingVerificationType/) |
+| `GreenEnergyEfficient` | String List, Multi | Structure, Performance, GreenMarketing | [GreenEnergyEfficient](#greenenergyefficient) | 47% | A pick list of general green attributes such as energy efficient doors or appliances without naming specific elements with ratings that may wane over time. | [link](https://dd.reso.org/DD2.0/Property/GreenEnergyEfficient/) |
+| `GreenEnergyGeneration` | String List, Multi | Structure, Performance, GreenMarketing | [GreenEnergyGeneration](#greenenergygeneration) | 39% | The methods of generating power that are included in the sale or lease. | [link](https://dd.reso.org/DD2.0/Property/GreenEnergyGeneration/) |
+| `GreenIndoorAirQuality` | String List, Multi | Structure, Performance, GreenMarketing | [GreenIndoorAirQuality](#greenindoorairquality) | 19% | A pick list of indoor air quality measures without naming specific elements with ratings that may wane over time. | [link](https://dd.reso.org/DD2.0/Property/GreenIndoorAirQuality/) |
+| `GreenLocation` | String List, Multi | Structure, Performance, GreenMarketing | GreenLocation | 3% | A pick list describing efficiencies involved with the property's location such as walkability or transportation proximity without naming specific elements with ratings that may wane over time. | [link](https://dd.reso.org/DD2.0/Property/GreenLocation/) |
+| `GreenSustainability` | String List, Multi | Structure, Performance, GreenMarketing | [GreenSustainability](#greensustainability) | 13% | A pick list of sustainable elements used in the construction of the structure without naming specific elements with ratings that may wane over time. | [link](https://dd.reso.org/DD2.0/Property/GreenSustainability/) |
+| `GreenVerificationYN` | Boolean | Structure, Performance, GreenVerification |  | 1% | A flag indicating that the listing has a Green Verification. | [link](https://dd.reso.org/DD2.0/Property/GreenVerificationYN/) |
+| `GreenWaterConservation` | String List, Multi | Structure, Performance, GreenMarketing | [GreenWaterConservation](#greenwaterconservation) | 28% | A pick list of general water conserving attributes of the property such as landscaping or reclamation without naming specific elements with ratings that may wane over time. | [link](https://dd.reso.org/DD2.0/Property/GreenWaterConservation/) |
+| `GrossIncome` | Number | Financial |  | 65% | The actual current income from rent and all other revenue-generating sources. | [link](https://dd.reso.org/DD2.0/Property/GrossIncome/) |
+| `GrossLivingAreaAnsi` | Number | Structure |  |  | The total livable area with the structure as measured using American National Standards Institute (ANSI) measurement guidelines. | [link](https://dd.reso.org/DD2.0/Property/GrossLivingAreaAnsi/) |
+| `GrossScheduledIncome` | Number | Financial |  | 26% | The maximum amount of annual rent collected if the property were 100% occupied all year and all tenants paid their rent. | [link](https://dd.reso.org/DD2.0/Property/GrossScheduledIncome/) |
+| `HabitableResidenceYN` | Boolean | Structure |  | 12% | Indicates whether or not the property includes a structure that can be lived in. | [link](https://dd.reso.org/DD2.0/Property/HabitableResidenceYN/) |
+| `Heating` | String List, Multi | Structure | [Heating](#heating) | 90% | A list describing the heating features of the property. | [link](https://dd.reso.org/DD2.0/Property/Heating/) |
+| `HeatingYN` | Boolean | Structure |  | 81% | Indicates whether or not the property has heating. | [link](https://dd.reso.org/DD2.0/Property/HeatingYN/) |
+| `HighSchool` | String List, Single | Location, School | HighSchool | 53% | The name of the high school having a catchment area that includes the associated property. | [link](https://dd.reso.org/DD2.0/Property/HighSchool/) |
+| `HighSchoolDistrict` | String List, Single | Location, School | HighSchoolDistrict | 47% | The name of the high school district having a catchment area that includes the associated property. | [link](https://dd.reso.org/DD2.0/Property/HighSchoolDistrict/) |
+| `HistoryTransactional` | Collection | Listing |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/Property/HistoryTransactional/) |
+| `HomeWarrantyYN` | Boolean | Listing |  | 49% | Indicates whether or not a home warranty is included in the sale of the property. | [link](https://dd.reso.org/DD2.0/Property/HomeWarrantyYN/) |
+| `HorseAmenities` | String List, Multi | Characteristics | [HorseAmenities](#horseamenities) | 40% | A list of horse amenities on the lot or in the community. | [link](https://dd.reso.org/DD2.0/Property/HorseAmenities/) |
+| `HorseYN` | Boolean | Characteristics |  | 44% | Indicates whether or not the property allows for the raising of horses. | [link](https://dd.reso.org/DD2.0/Property/HorseYN/) |
+| `HoursDaysOfOperation` | String List, Multi | Business | [HoursDaysOfOperation](#hoursdaysofoperation) | 6% | A simplified enumerated list of the days and hours of operation of the business being sold (e.g., Open 24 Hours, Open Seven Days). | [link](https://dd.reso.org/DD2.0/Property/HoursDaysOfOperation/) |
+| `HoursDaysOfOperationDescription` | String | Business |  | 5% | A detailed description of the hours and days the business being sold is open for business. | [link](https://dd.reso.org/DD2.0/Property/HoursDaysOfOperationDescription/) |
+| `Inclusions` | String | Listing, Contract |  | 48% | Portable elements of the property that will be included in the sale. | [link](https://dd.reso.org/DD2.0/Property/Inclusions/) |
+| `IncomeIncludes` | String List, Multi | Financial | [IncomeIncludes](#incomeincludes) | 9% | A list of income sources included in the GrossScheduledIncome and GrossIncome (e.g., Laundry, Parking, Recreation, Storage). | [link](https://dd.reso.org/DD2.0/Property/IncomeIncludes/) |
+| `InsuranceExpense` | Number | Financial |  | 44% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/InsuranceExpense/) |
+| `InteriorFeatures` | String List, Multi | Structure | [InteriorOrRoomFeatures](#interiororroomfeatures) | 88% | A list of features or a description of the interior of the property included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/InteriorFeatures/) |
+| `InternetAddressDisplayYN` | Boolean | Listing, Marketing |  | 98% | Indicates whether or not the seller has allowed the listing address to be displayed on Internet sites. | [link](https://dd.reso.org/DD2.0/Property/InternetAddressDisplayYN/) |
+| `InternetAutomatedValuationDisplayYN` | Boolean | Listing, Marketing |  | 90% | Indicates whether or not the seller allows the listing to be displayed with an automated valuation model (AVM) on Internet sites. | [link](https://dd.reso.org/DD2.0/Property/InternetAutomatedValuationDisplayYN/) |
+| `InternetConsumerCommentYN` | Boolean | Listing, Marketing |  | 89% | Indicates whether or not the seller allows a comment or blog system to be attached to the listing on Internet sites. | [link](https://dd.reso.org/DD2.0/Property/InternetConsumerCommentYN/) |
+| `InternetEntireListingDisplayYN` | Boolean | Listing, Marketing |  | 96% | Indicates whether or not the seller has allowed the listing to be displayed on Internet sites. | [link](https://dd.reso.org/DD2.0/Property/InternetEntireListingDisplayYN/) |
+| `IrrigationSource` | String List, Multi | Utilities | IrrigationSource | 22% | The source which the property receives its water for irrigation. | [link](https://dd.reso.org/DD2.0/Property/IrrigationSource/) |
+| `IrrigationWaterRightsAcres` | Number | Utilities |  | 5% | The number of acres allowed under the property's water rights. | [link](https://dd.reso.org/DD2.0/Property/IrrigationWaterRightsAcres/) |
+| `IrrigationWaterRightsYN` | Boolean | Utilities |  | 11% | Indicates whether or not the property includes water rights for irrigation. | [link](https://dd.reso.org/DD2.0/Property/IrrigationWaterRightsYN/) |
+| `LaborInformation` | String List, Multi | Business | [LaborInformation](#laborinformation) | 4% | Information about labor laws that are applicable to the business being sold (i.e., Union, Non-Union, Employee License Required). | [link](https://dd.reso.org/DD2.0/Property/LaborInformation/) |
+| `LandLeaseAmount` | Number | Characteristics |  | 17% | When the land is not included in the sale, but is leased, the amount of the lease. | [link](https://dd.reso.org/DD2.0/Property/LandLeaseAmount/) |
+| `LandLeaseAmountFrequency` | String List, Single | Characteristics | [FeeFrequency](#feefrequency) | 7% | The frequency in which the land lease fee is paid when the land is not included in the sale but is leased. | [link](https://dd.reso.org/DD2.0/Property/LandLeaseAmountFrequency/) |
+| `LandLeaseExpirationDate` | Date | Characteristics |  | 5% | The expiration date of the land lease when the land is not included in the sale but is leased. | [link](https://dd.reso.org/DD2.0/Property/LandLeaseExpirationDate/) |
+| `LandLeaseYN` | Boolean | Characteristics |  | 36% | The land is not included in the sale and a lease exists. | [link](https://dd.reso.org/DD2.0/Property/LandLeaseYN/) |
+| `Latitude` | Number | Location, GIS |  | 96% | The geographic latitude of the property in decimal degrees. | [link](https://dd.reso.org/DD2.0/Property/Latitude/) |
+| `LaundryFeatures` | String List, Multi | Characteristics | [LaundryFeatures](#laundryfeatures) | 75% | Add this pick list of features and locations where the laundry is located in the property being sold (i.e., Gas Dryer Hookup, In Kitchen, In Garage, etc.). | [link](https://dd.reso.org/DD2.0/Property/LaundryFeatures/) |
+| `LeasableArea` | Number | Structure |  | 22% | The area that may be leased within the commercial property. | [link](https://dd.reso.org/DD2.0/Property/LeasableArea/) |
+| `LeasableAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 9% | A pick list of the unit of measurement for the area (e.g., Square Feet, Square Meters). | [link](https://dd.reso.org/DD2.0/Property/LeasableAreaUnits/) |
+| `LeaseAmount` | Number | Business |  | 26% | The current lease amount of the property as a single value or a periodic payment per LeaseAmountFrequency. | [link](https://dd.reso.org/DD2.0/Property/LeaseAmount/) |
+| `LeaseAmountFrequency` | String List, Single | Business | [FeeFrequency](#feefrequency) | 15% | The frequency of the lease amount. | [link](https://dd.reso.org/DD2.0/Property/LeaseAmountFrequency/) |
+| `LeaseAssignableYN` | Boolean | Business |  | 6% | Indicates whether or not the lease at the current location of the business can be assigned to another party. | [link](https://dd.reso.org/DD2.0/Property/LeaseAssignableYN/) |
+| `LeaseConsideredYN` | Boolean | Listing |  | 33% | A flag indicating that the seller would consider leasing the property in addition to a sale. | [link](https://dd.reso.org/DD2.0/Property/LeaseConsideredYN/) |
+| `LeaseExpiration` | Date | Business |  | 18% | The expiration date of the lease for the current location of the business. | [link](https://dd.reso.org/DD2.0/Property/LeaseExpiration/) |
+| `LeaseRenewalCompensation` | String List, Multi | Listing, Compensation | [LeaseRenewalCompensation](#leaserenewalcompensation) | 5% | A list of compensations other than the original selling office compensation (i.e., Paid on Renewal, Paid on Tenant Purchase, No Renewal Commission, Call Listing Office, etc.). | [link](https://dd.reso.org/DD2.0/Property/LeaseRenewalCompensation/) |
+| `LeaseRenewalOptionYN` | Boolean | Business |  | 14% | Indicates whether or not there is an option to renew the lease at the current location of the business. | [link](https://dd.reso.org/DD2.0/Property/LeaseRenewalOptionYN/) |
+| `LeaseTerm` | String List, Single | Characteristics | [LeaseTerm](#leaseterm) | 57% | A pick list of lengths that represent the length of the lease (e.g., Weekly, Month to Month, 6-Month Lease, 12-Month Lease, 2-Year Lease). | [link](https://dd.reso.org/DD2.0/Property/LeaseTerm/) |
+| `Levels` | String List, Multi | Structure | [Levels](#levels) | 78% | The number of levels in the property being sold (e.g., One, Two, Three or More, Multi/Split). | [link](https://dd.reso.org/DD2.0/Property/Levels/) |
+| `License1` | String | Structure |  | 7% | The license number of the mobile or manufactured home, also known as the Department of Housing label/insignia number. | [link](https://dd.reso.org/DD2.0/Property/License1/) |
+| `License2` | String | Structure |  | 4% | The license number of the mobile or manufactured home, also known as the Department of Housing label/insignia number. | [link](https://dd.reso.org/DD2.0/Property/License2/) |
+| `License3` | String | Structure |  | 2% | The license number of the mobile or manufactured home, also known as the Department of Housing label/insignia number. | [link](https://dd.reso.org/DD2.0/Property/License3/) |
+| `LicensesExpense` | Number | Financial |  | 6% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/LicensesExpense/) |
+| `ListAOR` | String List, Single | Listing | AOR | 32% | The responsible board or association of REALTORS® for this listing. | [link](https://dd.reso.org/DD2.0/Property/ListAOR/) |
+| `ListAgent` | Resource | Listing, AgentOffice, ListAgent |  |  | The listing agent involved in the transaction. | [link](https://dd.reso.org/DD2.0/Property/ListAgent/) |
+| `ListAgentAOR` | String List, Single | Listing, AgentOffice, ListAgent | AOR | 32% | The listing agent's board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Property/ListAgentAOR/) |
+| `ListAgentDesignation` | String List, Multi | Listing, AgentOffice, ListAgent | [ListAgentDesignation](#listagentdesignation) | 30% | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® (NAR) and each affiliated group upon completi… | [link](https://dd.reso.org/DD2.0/Property/ListAgentDesignation/) |
+| `ListAgentDirectPhone` | String | Listing, AgentOffice, ListAgent |  | 59% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListAgentDirectPhone/) |
+| `ListAgentEmail` | String | Listing, AgentOffice, ListAgent |  | 89% | The email address of the listing agent. | [link](https://dd.reso.org/DD2.0/Property/ListAgentEmail/) |
+| `ListAgentFax` | String | Listing, AgentOffice, ListAgent |  | 47% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListAgentFax/) |
+| `ListAgentFirstName` | String | Listing, AgentOffice, ListAgent |  | 93% | The first name of the listing agent. | [link](https://dd.reso.org/DD2.0/Property/ListAgentFirstName/) |
+| `ListAgentFullName` | String | Listing, AgentOffice, ListAgent |  | 91% | The full name of the listing agent of record. | [link](https://dd.reso.org/DD2.0/Property/ListAgentFullName/) |
+| `ListAgentHomePhone` | String | Listing, AgentOffice, ListAgent |  | 41% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListAgentHomePhone/) |
+| `ListAgentKey` | String | Listing, AgentOffice, ListAgent |  | 78% | A system-unique identifier for the listing agent. | [link](https://dd.reso.org/DD2.0/Property/ListAgentKey/) |
+| `ListAgentLastName` | String | Listing, AgentOffice, ListAgent |  | 93% | The last name of the listing agent. | [link](https://dd.reso.org/DD2.0/Property/ListAgentLastName/) |
+| `ListAgentMiddleName` | String | Listing, AgentOffice, ListAgent |  | 65% | The middle name of the listing agent. | [link](https://dd.reso.org/DD2.0/Property/ListAgentMiddleName/) |
+| `ListAgentMlsId` | String | Listing, AgentOffice, ListAgent |  | 96% | The local, well-known identifier for the member. | [link](https://dd.reso.org/DD2.0/Property/ListAgentMlsId/) |
+| `ListAgentMobilePhone` | String | Listing, AgentOffice, ListAgent |  | 59% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListAgentMobilePhone/) |
+| `ListAgentNamePrefix` | String | Listing, AgentOffice, ListAgent |  | 0% | The prefix to the name (e.g., Dr., Mr., Ms.). | [link](https://dd.reso.org/DD2.0/Property/ListAgentNamePrefix/) |
+| `ListAgentNameSuffix` | String | Listing, AgentOffice, ListAgent |  | 1% | The suffix to the name (e.g., Esq., Jr., III). | [link](https://dd.reso.org/DD2.0/Property/ListAgentNameSuffix/) |
+| `ListAgentNationalAssociationId` | String | Listing, AgentOffice, ListAgent |  | 21% | The national association ID of the listing agent (e.g., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Property/ListAgentNationalAssociationId/) |
+| `ListAgentOfficePhone` | String | Listing, AgentOffice, ListAgent |  | 67% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListAgentOfficePhone/) |
+| `ListAgentOfficePhoneExt` | String | Listing, AgentOffice, ListAgent |  | 36% | The extension of the given phone number (if applicable). | [link](https://dd.reso.org/DD2.0/Property/ListAgentOfficePhoneExt/) |
+| `ListAgentPager` | String | Listing, AgentOffice, ListAgent |  | 19% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListAgentPager/) |
+| `ListAgentPreferredPhone` | String | Listing, AgentOffice, ListAgent |  | 81% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListAgentPreferredPhone/) |
+| `ListAgentPreferredPhoneExt` | String | Listing, AgentOffice, ListAgent |  | 33% | The extension of the given phone number (if applicable). | [link](https://dd.reso.org/DD2.0/Property/ListAgentPreferredPhoneExt/) |
+| `ListAgentStateLicense` | String | Listing, AgentOffice, ListAgent |  | 60% | The license of the listing agent. | [link](https://dd.reso.org/DD2.0/Property/ListAgentStateLicense/) |
+| `ListAgentTollFreePhone` | String | Listing, AgentOffice, ListAgent |  | 25% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListAgentTollFreePhone/) |
+| `ListAgentURL` | String | Listing, AgentOffice, ListAgent |  | 78% | The website Uniform Resource Identifier (URI) of the listing agent. | [link](https://dd.reso.org/DD2.0/Property/ListAgentURL/) |
+| `ListAgentVoiceMail` | String | Listing, AgentOffice, ListAgent |  | 15% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListAgentVoiceMail/) |
+| `ListAgentVoiceMailExt` | String | Listing, AgentOffice, ListAgent |  | 2% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/ListAgentVoiceMailExt/) |
+| `ListOffice` | Resource | Listing, AgentOffice, ListOffice |  |  | The listing agent's office. | [link](https://dd.reso.org/DD2.0/Property/ListOffice/) |
+| `ListOfficeAOR` | String List, Single | Listing, AgentOffice, ListOffice | AOR | 29% | The listing office's board or association of REALTORS®. | [link](https://dd.reso.org/DD2.0/Property/ListOfficeAOR/) |
+| `ListOfficeEmail` | String | Listing, AgentOffice, ListOffice |  | 84% | The email address of the listing office. | [link](https://dd.reso.org/DD2.0/Property/ListOfficeEmail/) |
+| `ListOfficeFax` | String | Listing, AgentOffice, ListOffice |  | 59% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListOfficeFax/) |
+| `ListOfficeKey` | String | Listing, AgentOffice, ListOffice |  | 94% | The unique identifier of the brokerage Office responsible for marketing the listing. | [link](https://dd.reso.org/DD2.0/Property/ListOfficeKey/) |
+| `ListOfficeMlsId` | String | Listing, AgentOffice, ListOffice |  | 97% | The local, well-known identifier. | [link](https://dd.reso.org/DD2.0/Property/ListOfficeMlsId/) |
+| `ListOfficeName` | String | Listing, AgentOffice, ListOffice |  | 97% | The legal name of the brokerage representing the seller. | [link](https://dd.reso.org/DD2.0/Property/ListOfficeName/) |
+| `ListOfficeNationalAssociationId` | String | Listing, AgentOffice, ListOffice |  | 1% | The national association ID of the listing office (e.g., the NRDS number in the U.S.). | [link](https://dd.reso.org/DD2.0/Property/ListOfficeNationalAssociationId/) |
+| `ListOfficePhone` | String | Listing, AgentOffice, ListOffice |  | 88% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ListOfficePhone/) |
+| `ListOfficePhoneExt` | String | Listing, AgentOffice, ListOffice |  | 18% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/ListOfficePhoneExt/) |
+| `ListOfficeURL` | String | Listing, AgentOffice, ListOffice |  | 79% | The website Uniform Resource Identifier (URI) for the listing office. | [link](https://dd.reso.org/DD2.0/Property/ListOfficeURL/) |
+| `ListPrice` | Number | Listing, Price |  | 100% | The current price of the property as listed by the seller. | [link](https://dd.reso.org/DD2.0/Property/ListPrice/) |
+| `ListPriceLow` | Number | Listing, Price |  | 14% | The lower price used for Value Range Pricing. | [link](https://dd.reso.org/DD2.0/Property/ListPriceLow/) |
+| `ListTeam` | Resource | Listing, AgentOffice, ListTeam |  |  | Two or more agents working on the listing agent's team. | [link](https://dd.reso.org/DD2.0/Property/ListTeam/) |
+| `ListTeamKey` | String | Listing, AgentOffice, Team |  | 4% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/Property/ListTeamKey/) |
+| `ListTeamName` | String | Listing, AgentOffice, Team |  | 11% | The name of the team representing the seller. | [link](https://dd.reso.org/DD2.0/Property/ListTeamName/) |
+| `ListingAgreement` | String List, Single | Listing | [ListingAgreement](#listingagreement) | 69% | The type of contractual relationship between the listing agent and the seller. | [link](https://dd.reso.org/DD2.0/Property/ListingAgreement/) |
+| `ListingContractDate` | Date | Listing, Dates |  | 98% | The effective date of the agreement between the seller and the seller's broker. | [link](https://dd.reso.org/DD2.0/Property/ListingContractDate/) |
+| `ListingId` | String | Listing |  | 100% | The well-known identifier for the listing, also known as the MLS number. | [link](https://dd.reso.org/DD2.0/Property/ListingId/) |
+| `ListingKey` | String | Listing |  | 98% | A system-unique identifier for the listing. | [link](https://dd.reso.org/DD2.0/Property/ListingKey/) |
+| `ListingService` | String List, Single | Listing | [ListingService](#listingservice) | 39% | The level of service the listing broker is providing to the seller. | [link](https://dd.reso.org/DD2.0/Property/ListingService/) |
+| `ListingTerms` | String List, Multi | Listing, Contract | [ListingTerms](#listingterms) | 78% | Terms of the listing such as Lien Release, Subject to Court Approval or Owner Will Carry. | [link](https://dd.reso.org/DD2.0/Property/ListingTerms/) |
+| `ListingURL` | String | Listing |  | 3% | Provides a link to the specific listing on a brokerage website, agent website or other public-facing source. | [link](https://dd.reso.org/DD2.0/Property/ListingURL/) |
+| `ListingURLDescription` | String List, Single | Listing | [ListingURLDescription](#listingurldescription) |  | A pick list of options showing where the listing URL resides (i.e., Brokerage Website, Agent Website, etc.). | [link](https://dd.reso.org/DD2.0/Property/ListingURLDescription/) |
+| `LivingArea` | Number | Structure |  | 78% | The total interior living area of the property, measured in LivingAreaUnits (typically SquareMeters or SquareFeet). | [link](https://dd.reso.org/DD2.0/Property/LivingArea/) |
+| `LivingAreaSource` | String List, Single | Structure | [AreaSource](#areasource) | 51% | The source of the measurements. | [link](https://dd.reso.org/DD2.0/Property/LivingAreaSource/) |
+| `LivingAreaUnits` | String List, Single | Structure | [AreaUnits](#areaunits) | 39% | A pick list of the unit of measurement for the area (e.g., Square Feet, Square Meters). | [link](https://dd.reso.org/DD2.0/Property/LivingAreaUnits/) |
+| `LockBoxLocation` | String | Listing, Showing |  | 22% | A field describing the location of the lockbox. | [link](https://dd.reso.org/DD2.0/Property/LockBoxLocation/) |
+| `LockBoxSerialNumber` | String | Listing, Showing |  | 24% | The serial number of the lockbox placed on the property. | [link](https://dd.reso.org/DD2.0/Property/LockBoxSerialNumber/) |
+| `LockBoxType` | String List, Multi | Listing, Showing | [LockBoxType](#lockboxtype) | 39% | A field describing the type of lockbox. | [link](https://dd.reso.org/DD2.0/Property/LockBoxType/) |
+| `Longitude` | Number | Location, GIS |  | 96% | The geographic longitude of the property in decimal degrees. | [link](https://dd.reso.org/DD2.0/Property/Longitude/) |
+| `LotDimensionsSource` | String List, Single | Characteristics | [LotDimensionsSource](#lotdimensionssource) | 6% | The source of the measurements. | [link](https://dd.reso.org/DD2.0/Property/LotDimensionsSource/) |
+| `LotFeatures` | String List, Multi | Characteristics | [LotFeatures](#lotfeatures) | 84% | A list of features or a description of the lot included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/LotFeatures/) |
+| `LotSizeAcres` | Number | Characteristics |  | 97% | The total acres of the lot. | [link](https://dd.reso.org/DD2.0/Property/LotSizeAcres/) |
+| `LotSizeArea` | Number | Characteristics |  | 90% | The total area of the lot. | [link](https://dd.reso.org/DD2.0/Property/LotSizeArea/) |
+| `LotSizeDimensions` | String | Characteristics |  | 82% | The dimensions of the lot minimally represented as length and width (i.e. | [link](https://dd.reso.org/DD2.0/Property/LotSizeDimensions/) |
+| `LotSizeSource` | String List, Single | Characteristics | [LotSizeSource](#lotsizesource) | 24% | The source of the measurements. | [link](https://dd.reso.org/DD2.0/Property/LotSizeSource/) |
+| `LotSizeSquareFeet` | Number | Characteristics |  | 88% | The size of the lot in square feet (in CDL we honor LotSizeUnits and accept SquareMeters too). | [link](https://dd.reso.org/DD2.0/Property/LotSizeSquareFeet/) |
+| `LotSizeUnits` | String List, Single | Characteristics | [LotSizeUnits](#lotsizeunits) | 88% | The unit of measurement for LotSizeArea (RESO AreaUnits lookup): SquareMeters, SquareFeet, Acres, Hectares, etc. | [link](https://dd.reso.org/DD2.0/Property/LotSizeUnits/) |
+| `MLSAreaMajor` | String List, Single | Location, Area | MLSAreaMajor | 76% | The major marketing area name, as defined by the MLS or other nongovernmental organization. | [link](https://dd.reso.org/DD2.0/Property/MLSAreaMajor/) |
+| `MLSAreaMinor` | String List, Single | Location, Area | MLSAreaMinor | 42% | The minor/submarketing area name, as defined by the MLS or other nongovernmental organization. | [link](https://dd.reso.org/DD2.0/Property/MLSAreaMinor/) |
+| `MainLevelBathrooms` | Number | Structure |  | 17% | The number of bathrooms located on the main or entry level of the property. | [link](https://dd.reso.org/DD2.0/Property/MainLevelBathrooms/) |
+| `MainLevelBedrooms` | Number | Structure |  | 21% | The number of bedrooms located on the main or entry level of the property. | [link](https://dd.reso.org/DD2.0/Property/MainLevelBedrooms/) |
+| `MaintenanceExpense` | Number | Financial |  | 36% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/MaintenanceExpense/) |
+| `MajorChangeTimestamp` | Timestamp | Listing, Dates |  | 60% | The timestamp of the last major change on the listing (see also MajorChangeType). | [link](https://dd.reso.org/DD2.0/Property/MajorChangeTimestamp/) |
+| `MajorChangeType` | String List, Single | Listing, Dates | [ChangeType](#changetype) | 59% | A description of the last major change on the listing (i.e., Price Reduction, Back on Market). | [link](https://dd.reso.org/DD2.0/Property/MajorChangeType/) |
+| `Make` | String | Structure |  | 17% | The make of the mobile or manufactured home. | [link](https://dd.reso.org/DD2.0/Property/Make/) |
+| `ManagerExpense` | Number | Financial |  | 15% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/ManagerExpense/) |
+| `MapCoordinate` | String | Location, GIS |  | 7% | A map coordinate for the property, as determined by local custom. | [link](https://dd.reso.org/DD2.0/Property/MapCoordinate/) |
+| `MapCoordinateSource` | String | Location, GIS |  | 4% | The name of the map or map book publisher. | [link](https://dd.reso.org/DD2.0/Property/MapCoordinateSource/) |
+| `MapURL` | String | Location, GIS |  | 0% | A Uniform Resource Identifier (URI) to a map of the property. | [link](https://dd.reso.org/DD2.0/Property/MapURL/) |
+| `Media` | Collection | Listing, Media |  | 31% | The Media resource describes images, videos, virtual tours, documents, and other media items associated with a Property. | [link](https://dd.reso.org/DD2.0/Property/Media/) |
+| `MiddleOrJuniorSchool` | String List, Single | Location, School | MiddleOrJuniorSchool | 52% | The name of the junior or middle school having a catchment area that includes the associated property. | [link](https://dd.reso.org/DD2.0/Property/MiddleOrJuniorSchool/) |
+| `MiddleOrJuniorSchoolDistrict` | String List, Single | Location, School | MiddleOrJuniorSchoolDistrict | 25% | The name of the junior or middle school district having a catchment area that includes the associated property. | [link](https://dd.reso.org/DD2.0/Property/MiddleOrJuniorSchoolDistrict/) |
+| `MlsStatus` | String List, Single | Listing | MlsStatus | 97% | A local or regional status that is well known by business users. | [link](https://dd.reso.org/DD2.0/Property/MlsStatus/) |
+| `MobileDimUnits` | String List, Single | Structure | [LinearUnits](#linearunits) | 2% | A pick list of the unit of linear measurement (e.g., Feet, Meters, Yards, Kilometers, Miles). | [link](https://dd.reso.org/DD2.0/Property/MobileDimUnits/) |
+| `MobileHomeRemainsYN` | Boolean | Characteristics |  | 3% | Indicates whether or not the mobile home is to remain and be included in the sale of the property. | [link](https://dd.reso.org/DD2.0/Property/MobileHomeRemainsYN/) |
+| `MobileLength` | Number | Structure |  | 11% | The length of the mobile/manufactured home. | [link](https://dd.reso.org/DD2.0/Property/MobileLength/) |
+| `MobileWidth` | Number | Structure |  | 11% | The width of the mobile/manufactured home. | [link](https://dd.reso.org/DD2.0/Property/MobileWidth/) |
+| `Model` | String | Structure |  | 21% | The model of the mobile or manufactured home. | [link](https://dd.reso.org/DD2.0/Property/Model/) |
+| `ModificationTimestamp` | Timestamp | Listing, Dates |  | 100% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/Property/ModificationTimestamp/) |
+| `NetOperatingIncome` | Number | Financial |  | 61% | The net operating income is the revenue from a property after operating expenses have been deducted but before deducting income taxes and financing expenses (interest and principal payments). | [link](https://dd.reso.org/DD2.0/Property/NetOperatingIncome/) |
+| `NewConstructionYN` | Boolean | Structure |  | 72% | A flag indicating that the property has never been previously occupied. | [link](https://dd.reso.org/DD2.0/Property/NewConstructionYN/) |
+| `NewTaxesExpense` | Number | Financial |  | 14% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/NewTaxesExpense/) |
+| `NumberOfBuildings` | Number | Characteristics |  | 44% | The total number of separate buildings included in the income property. | [link](https://dd.reso.org/DD2.0/Property/NumberOfBuildings/) |
+| `NumberOfFullTimeEmployees` | Number | Business |  | 10% | The current number of individuals employed by the business on a full-time basis. | [link](https://dd.reso.org/DD2.0/Property/NumberOfFullTimeEmployees/) |
+| `NumberOfLots` | Number | Characteristics |  | 21% | The total number of lots on the property or included in the sale. | [link](https://dd.reso.org/DD2.0/Property/NumberOfLots/) |
+| `NumberOfPads` | Number | Characteristics |  | 4% | The number of pads or spaces in the mobile home park. | [link](https://dd.reso.org/DD2.0/Property/NumberOfPads/) |
+| `NumberOfPartTimeEmployees` | Number | Business |  | 7% | The current number of individuals employed by the business on a part-time basis. | [link](https://dd.reso.org/DD2.0/Property/NumberOfPartTimeEmployees/) |
+| `NumberOfSeparateElectricMeters` | Number | Utilities |  | 14% | The total number of separate electric meters on the property. | [link](https://dd.reso.org/DD2.0/Property/NumberOfSeparateElectricMeters/) |
+| `NumberOfSeparateGasMeters` | Number | Utilities |  | 12% | The total number of separate gas meters on the property. | [link](https://dd.reso.org/DD2.0/Property/NumberOfSeparateGasMeters/) |
+| `NumberOfSeparateWaterMeters` | Number | Utilities |  | 13% | The total number of separate water meters on the property. | [link](https://dd.reso.org/DD2.0/Property/NumberOfSeparateWaterMeters/) |
+| `NumberOfUnitsInCommunity` | Number | Characteristics |  | 21% | The total number of units in the building, complex or community. | [link](https://dd.reso.org/DD2.0/Property/NumberOfUnitsInCommunity/) |
+| `NumberOfUnitsLeased` | Number | Financial |  | 10% | The total number of units currently under a lease agreement. | [link](https://dd.reso.org/DD2.0/Property/NumberOfUnitsLeased/) |
+| `NumberOfUnitsMoMo` | Number | Financial |  | 3% | The total number of units leasable month to month. | [link](https://dd.reso.org/DD2.0/Property/NumberOfUnitsMoMo/) |
+| `NumberOfUnitsTotal` | Number | Characteristics |  | 84% | Total number of units included in the income property, occupied or unoccupied. | [link](https://dd.reso.org/DD2.0/Property/NumberOfUnitsTotal/) |
+| `NumberOfUnitsVacant` | Number | Financial |  | 6% | The number of units currently vacant. | [link](https://dd.reso.org/DD2.0/Property/NumberOfUnitsVacant/) |
+| `OccupantName` | String | OccupantOwner |  | 25% | The full name of the current occupant of the Property. | [link](https://dd.reso.org/DD2.0/Property/OccupantName/) |
+| `OccupantPhone` | String | OccupantOwner |  | 12% | The current occupant's contact phone number. | [link](https://dd.reso.org/DD2.0/Property/OccupantPhone/) |
+| `OccupantType` | String List, Single | OccupantOwner | [OccupantType](#occupanttype) | 62% | A single-value lookup describing who currently occupies the Property: Owner \| Tenant \| Vacant. | [link](https://dd.reso.org/DD2.0/Property/OccupantType/) |
+| `OffMarketDate` | Date | Listing, Dates |  | 83% | The date the listing was taken off market. | [link](https://dd.reso.org/DD2.0/Property/OffMarketDate/) |
+| `OffMarketTimestamp` | Timestamp | Listing, Dates |  | 32% | The transactional timestamp automatically recorded by the MLS system representing the most recent date/time the listing's status was set to an off-market status (not Active or Backup) | [link](https://dd.reso.org/DD2.0/Property/OffMarketTimestamp/) |
+| `OnMarketDate` | Date | Listing, Dates |  | 65% | The date the listing was placed on market. | [link](https://dd.reso.org/DD2.0/Property/OnMarketDate/) |
+| `OnMarketTimestamp` | Timestamp | Listing, Dates |  | 8% | The transactional timestamp automatically recorded by the MLS system representing the most recent date/time the listing's status was set to Active or Backup. | [link](https://dd.reso.org/DD2.0/Property/OnMarketTimestamp/) |
+| `OpenHouse` | Collection | Listing |  |  | The OpenHouse resource describes a scheduled event during which a Property is open for public or broker viewing. | [link](https://dd.reso.org/DD2.0/Property/OpenHouse/) |
+| `OpenHouseModificationTimestamp` | Timestamp | Listing |  |  | A system-generated timestamp of when the last update or change to the open house information for this listing was made. | [link](https://dd.reso.org/DD2.0/Property/OpenHouseModificationTimestamp/) |
+| `OpenParkingSpaces` | Number | Structure |  | 18% | The number of open or uncovered parking spaces included in the sale. | [link](https://dd.reso.org/DD2.0/Property/OpenParkingSpaces/) |
+| `OpenParkingYN` | Boolean | Structure |  | 40% | A flag indicating that any parking spaces associated with the property are not covered by a roof. | [link](https://dd.reso.org/DD2.0/Property/OpenParkingYN/) |
+| `OperatingExpense` | Number | Financial |  | 54% | The costs associated with the operation and maintenance of an income-producing property. | [link](https://dd.reso.org/DD2.0/Property/OperatingExpense/) |
+| `OperatingExpenseIncludes` | String List, Multi | Financial | [OperatingExpenseIncludes](#operatingexpenseincludes) | 22% | When individual expense fields are not used and only a total is entered, this lists the expenses that are included in the OperatingExpense field. | [link](https://dd.reso.org/DD2.0/Property/OperatingExpenseIncludes/) |
+| `OriginalEntryTimestamp` | Timestamp | Listing, Dates |  | 94% | The transactional timestamp automatically recorded by the MLS system representing the date/time the listing was entered and made visible to members of the MLS. | [link](https://dd.reso.org/DD2.0/Property/OriginalEntryTimestamp/) |
+| `OriginalListPrice` | Number | Listing, Price |  | 94% | The original listing price of the property as it was first listed. | [link](https://dd.reso.org/DD2.0/Property/OriginalListPrice/) |
+| `OriginatingSystem` | Resource | Listing |  |  | The originating system of the Property record. | [link](https://dd.reso.org/DD2.0/Property/OriginatingSystem/) |
+| `OriginatingSystemID` | String | Listing |  | 70% | The OUID Resource's OrganizationUniqueId of the originating record provider. | [link](https://dd.reso.org/DD2.0/Property/OriginatingSystemID/) |
+| `OriginatingSystemKey` | String | Listing |  | 90% | The system key, a unique record identifier, from the originating system. | [link](https://dd.reso.org/DD2.0/Property/OriginatingSystemKey/) |
+| `OriginatingSystemName` | String | Listing |  | 95% | The name of the originating record provider, most commonly the name of the MLS. | [link](https://dd.reso.org/DD2.0/Property/OriginatingSystemName/) |
+| `OtherEquipment` | String List, Multi | Equipment | [OtherEquipment](#otherequipment) | 71% | A list of other equipment that will be included in the sale of the property. | [link](https://dd.reso.org/DD2.0/Property/OtherEquipment/) |
+| `OtherExpense` | Number | Financial |  | 28% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/OtherExpense/) |
+| `OtherParking` | String | Structure |  | 16% | Other types of parking available to, or part of, the property. | [link](https://dd.reso.org/DD2.0/Property/OtherParking/) |
+| `OtherStructures` | String List, Multi | Structure | [OtherStructures](#otherstructures) | 77% | A list of structures other than the main dwelling (e.g., Guest House, Barn, Shed). | [link](https://dd.reso.org/DD2.0/Property/OtherStructures/) |
+| `OwnerName` | String | OccupantOwner |  | 77% | The full legal name of the Property owner. | [link](https://dd.reso.org/DD2.0/Property/OwnerName/) |
+| `OwnerPays` | String List, Multi | Financial | [OwnerPays](#ownerpays) | 53% | A list of expenses for the property paid for by the owner as opposed to the tenant (e.g., Water, Trash, Electric). | [link](https://dd.reso.org/DD2.0/Property/OwnerPays/) |
+| `OwnerPhone` | String | OccupantOwner |  | 42% | The Property owner's contact phone number. | [link](https://dd.reso.org/DD2.0/Property/OwnerPhone/) |
+| `Ownership` | String | Listing, Contract |  | 25% | Free-text description of the legal ownership type of the Property: Sole Owner, Trust, Corporation, LLC, Joint Tenancy, etc. | [link](https://dd.reso.org/DD2.0/Property/Ownership/) |
+| `OwnershipType` | String List, Single | Business | [OwnershipType](#ownershiptype) | 22% | The current type of ownership of the business being sold (e.g., Corporation, LLC, Sole Proprietor, Partnership). | [link](https://dd.reso.org/DD2.0/Property/OwnershipType/) |
+| `ParcelNumber` | String | Tax |  | 88% | A number used to uniquely identify a parcel or lot. | [link](https://dd.reso.org/DD2.0/Property/ParcelNumber/) |
+| `ParkManagerName` | String | Characteristics |  | 6% | The name of the manager of the mobile home park. | [link](https://dd.reso.org/DD2.0/Property/ParkManagerName/) |
+| `ParkManagerPhone` | String | Characteristics |  | 6% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://dd.reso.org/DD2.0/Property/ParkManagerPhone/) |
+| `ParkName` | String | Characteristics |  | 13% | The name of the mobile home park or corporate/commercial park. | [link](https://dd.reso.org/DD2.0/Property/ParkName/) |
+| `ParkingFeatures` | String List, Multi | Structure | [ParkingFeatures](#parkingfeatures) | 86% | A list of features about or a description of the parking included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/ParkingFeatures/) |
+| `ParkingTotal` | Number | Structure |  | 72% | The total number of parking spaces included in the sale. | [link](https://dd.reso.org/DD2.0/Property/ParkingTotal/) |
+| `PastureArea` | Number | Farming |  | 19% | A measurement or percentage of the property that has been allocated as pasture or grazing area. | [link](https://dd.reso.org/DD2.0/Property/PastureArea/) |
+| `PatioAndPorchFeatures` | String List, Multi | Structure | [PatioAndPorchFeatures](#patioandporchfeatures) | 76% | A list of features about or a description of the patio or porch included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/PatioAndPorchFeatures/) |
+| `PendingTimestamp` | Timestamp | Listing, Dates |  | 74% | The transactional timestamp automatically recorded by the MLS system representing the most recent date/time the listing's status was set to Pending. | [link](https://dd.reso.org/DD2.0/Property/PendingTimestamp/) |
+| `PestControlExpense` | Number | Financial |  | 3% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/PestControlExpense/) |
+| `PetsAllowed` | String List, Multi | Characteristics | [PetsAllowed](#petsallowed) | 65% | Indicates whether or not pets are allowed at the property being leased, usually as a list of yes, no and more detailed restrictions/allowances. | [link](https://dd.reso.org/DD2.0/Property/PetsAllowed/) |
+| `PhotosChangeTimestamp` | Timestamp | Listing, Media |  | 97% | A system-generated timestamp of when the last update or change to the photos for this listing was made. | [link](https://dd.reso.org/DD2.0/Property/PhotosChangeTimestamp/) |
+| `PhotosCount` | Number | Listing, Media |  | 99% | The total number of pictures or photos included with the listing. | [link](https://dd.reso.org/DD2.0/Property/PhotosCount/) |
+| `PoolExpense` | Number | Financial |  | 1% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/PoolExpense/) |
+| `PoolFeatures` | String List, Multi | Characteristics | [PoolFeatures](#poolfeatures) | 79% | A list of features about or a description of a pool included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/PoolFeatures/) |
+| `PoolPrivateYN` | Boolean | Characteristics |  | 41% | The property has a privately owned pool that is included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/PoolPrivateYN/) |
+| `Possession` | String List, Multi | Listing, Closing | [Possession](#possession) | 74% | A list defining when possession will occur (i.e., COE, COE+1, etc.). | [link](https://dd.reso.org/DD2.0/Property/Possession/) |
+| `PossibleUse` | String List, Multi | Characteristics | [CurrentOrPossibleUse](#currentorpossibleuse) | 49% | A list of the type(s) of possible or best uses of the property. | [link](https://dd.reso.org/DD2.0/Property/PossibleUse/) |
+| `PostalCity` | String List, Single | Location, Address | PostalCity | 29% | The official city per the U.S. | [link](https://dd.reso.org/DD2.0/Property/PostalCity/) |
+| `PostalCode` | String | Location, Address |  | 99% | The postal code in which the property is located. | [link](https://dd.reso.org/DD2.0/Property/PostalCode/) |
+| `PostalCodePlus4` | String | Location, Address |  | 53% | The last four digits of a nine-digit U.S. | [link](https://dd.reso.org/DD2.0/Property/PostalCodePlus4/) |
+| `PowerProduction` | Collection | Utilities |  |  | A collection of the types of power production system(s) available on the property. | [link](https://dd.reso.org/DD2.0/Property/PowerProduction/) |
+| `PowerProductionType` | String List, Multi | Utilities | [PowerProductionType](#powerproductiontype) | 12% | A list of the types of power production systems available on the property. | [link](https://dd.reso.org/DD2.0/Property/PowerProductionType/) |
+| `PowerProductionYN` | Boolean | Utilities |  | 0% | A flag indicating that the listing has a Power Production system. | [link](https://dd.reso.org/DD2.0/Property/PowerProductionYN/) |
+| `PreviousListPrice` | Number | Listing, Price |  | 63% | The most recent previous list price of the listing. | [link](https://dd.reso.org/DD2.0/Property/PreviousListPrice/) |
+| `PriceChangeTimestamp` | Timestamp | Listing, Dates |  | 90% | The transactional timestamp automatically recorded by the MLS system representing the date/time the listing's price was last changed. | [link](https://dd.reso.org/DD2.0/Property/PriceChangeTimestamp/) |
+| `PrivateOfficeRemarks` | String | Listing, Remarks |  | 20% | A Remarks field that is only visible to members of the same offices as the listing agent. | [link](https://dd.reso.org/DD2.0/Property/PrivateOfficeRemarks/) |
+| `PrivateRemarks` | String | Listing, Remarks |  | 90% | Remarks that may contain security or proprietary information and should be restricted from public view. | [link](https://dd.reso.org/DD2.0/Property/PrivateRemarks/) |
+| `ProfessionalManagementExpense` | Number | Financial |  | 18% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/ProfessionalManagementExpense/) |
+| `PropertyAttachedYN` | Boolean | Structure |  | 39% | Indicates whether or not the primary structure is attached to another structure that is not included in the sale (i.e., one unit of a duplex). | [link](https://dd.reso.org/DD2.0/Property/PropertyAttachedYN/) |
+| `PropertyCondition` | String List, Multi | Structure | [PropertyCondition](#propertycondition) | 63% | A list of property conditions describing the state of the property. | [link](https://dd.reso.org/DD2.0/Property/PropertyCondition/) |
+| `PropertySubType` | String List, Single |  | [PropertySubType](#propertysubtype) | 95% | A more specific classification of the property within PropertyType (e.g. | [link](https://dd.reso.org/DD2.0/Property/PropertySubType/) |
+| `PropertyTimeZoneName` | String List, Single | Listing, Dates | [IanaTimeZoneValues](#ianatimezonevalues) | 1% | The standard name of the property time zone, as provided by the IANA tz database. | [link](https://dd.reso.org/DD2.0/Property/PropertyTimeZoneName/) |
+| `PropertyTimeZoneObservesDstYN` | Boolean | Listing, Dates |  |  | Indicates whether the property is in a time zone that observes Daylight Savings Time (DST). | [link](https://dd.reso.org/DD2.0/Property/PropertyTimeZoneObservesDstYN/) |
+| `PropertyTimeZoneStandardOffset` | Number | Listing, Dates |  |  | The time zone offset is the difference, in minutes, between Coordinated Universal Time (UTC) and local time. | [link](https://dd.reso.org/DD2.0/Property/PropertyTimeZoneStandardOffset/) |
+| `PropertyType` | String List, Single |  | [PropertyType](#propertytype) | 99% | The high-level classification of the property: Residential, ResidentialIncome, ResidentialLease, CommercialSale, CommercialLease, Land, ManufacturedInPark, BusinessOpportunity, Farm. | [link](https://dd.reso.org/DD2.0/Property/PropertyType/) |
+| `PublicRemarks` | String | Listing, Remarks |  | 99% | The publicly visible marketing description of the property, intended for consumer-facing portals and the IDX feed. | [link](https://dd.reso.org/DD2.0/Property/PublicRemarks/) |
+| `PublicSurveyRange` | String | Tax |  | 14% | The range identified by the Public Land Survey System (PLSS). | [link](https://dd.reso.org/DD2.0/Property/PublicSurveyRange/) |
+| `PublicSurveySection` | String | Tax |  | 18% | The section identified by the Public Land Survey System (PLSS). | [link](https://dd.reso.org/DD2.0/Property/PublicSurveySection/) |
+| `PublicSurveyTownship` | String | Tax |  | 13% | The township identified by the Public Land Survey System (PLSS). | [link](https://dd.reso.org/DD2.0/Property/PublicSurveyTownship/) |
+| `PurchaseContractDate` | Date | Listing, Dates |  | 84% | With for-sale listings, this represents the date an offer was accepted and the listing was no longer on market. | [link](https://dd.reso.org/DD2.0/Property/PurchaseContractDate/) |
+| `RVParkingDimensions` | String | Structure |  | 3% | The dimensions of the RV parking area minimally represented as length and width (i.e., 25' x 18') or a measurement of all sides of the polygon representing the usable RV parking space (i.e., 33' x 15'… | [link](https://dd.reso.org/DD2.0/Property/RVParkingDimensions/) |
+| `RangeArea` | Number | Farming |  | 3% | The measurement or percentage of the property that has been allocated as range. | [link](https://dd.reso.org/DD2.0/Property/RangeArea/) |
+| `RentControlYN` | Boolean | Financial |  | 4% | Indicates whether or not the property is in a rent-control area. | [link](https://dd.reso.org/DD2.0/Property/RentControlYN/) |
+| `RentIncludes` | String List, Multi | Financial | [RentIncludes](#rentincludes) | 39% | A list of services or items that the tenant is not responsible to pay. | [link](https://dd.reso.org/DD2.0/Property/RentIncludes/) |
+| `RoadFrontageType` | String List, Multi | Characteristics | [RoadFrontageType](#roadfrontagetype) | 72% | A pick list of types of road frontage (i.e., County, Freeway, Interstate, None). | [link](https://dd.reso.org/DD2.0/Property/RoadFrontageType/) |
+| `RoadResponsibility` | String List, Multi | Characteristics | [RoadResponsibility](#roadresponsibility) | 36% | The person or entity responsible for road maintenance (e.g., City, County, Private). | [link](https://dd.reso.org/DD2.0/Property/RoadResponsibility/) |
+| `RoadSurfaceType` | String List, Multi | Characteristics | [RoadSurfaceType](#roadsurfacetype) | 74% | A pick list of types of road surfaces in use to access the property. | [link](https://dd.reso.org/DD2.0/Property/RoadSurfaceType/) |
+| `Roof` | String List, Multi | Structure | [Roof](#roof) | 89% | A list describing the roof style type (e.g., Spanish Tile, Composite, Shake). | [link](https://dd.reso.org/DD2.0/Property/Roof/) |
+| `RoomType` | String List, Multi | Structure, Rooms | [RoomType](#roomtype) | 25% | A single-value lookup describing the type of room: Bedroom \| Bathroom \| Kitchen \| LivingRoom \| DiningRoom \| Office \| Laundry \| Bonus \| ... | [link](https://dd.reso.org/DD2.0/Property/RoomType/) |
+| `Rooms` | Collection | Structure, Rooms |  | 1% | A collection of types of rooms and details/features about the given room. | [link](https://dd.reso.org/DD2.0/Property/Rooms/) |
+| `RoomsTotal` | Number | Structure, Rooms |  | 67% | The number of rooms in a dwelling. | [link](https://dd.reso.org/DD2.0/Property/RoomsTotal/) |
+| `SeatingCapacity` | Number | Business |  | 8% | The seating capacity of the business being sold. | [link](https://dd.reso.org/DD2.0/Property/SeatingCapacity/) |
+| `SecurityFeatures` | String List, Multi | Equipment | [SecurityFeatures](#securityfeatures) | 74% | A list describing the security features included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/SecurityFeatures/) |
+| `SeniorCommunityYN` | Boolean | Characteristics |  | 34% | Indicates whether or not a community is a senior community. | [link](https://dd.reso.org/DD2.0/Property/SeniorCommunityYN/) |
+| `SerialU` | String | Structure |  | 17% | The serial number of the mobile or manufactured home. | [link](https://dd.reso.org/DD2.0/Property/SerialU/) |
+| `SerialX` | String | Structure |  | 6% | The serial number of the mobile or manufactured home. | [link](https://dd.reso.org/DD2.0/Property/SerialX/) |
+| `SerialXX` | String | Structure |  | 4% | The serial number of the mobile or manufactured home. | [link](https://dd.reso.org/DD2.0/Property/SerialXX/) |
+| `Sewer` | String List, Multi | Utilities | [Sewer](#sewer) | 87% | A list describing the sewer or septic features of a property. | [link](https://dd.reso.org/DD2.0/Property/Sewer/) |
+| `ShowingAdvanceNotice` | Number | Listing, Showing |  | 10% | The hours of advance notice required to schedule a showing. | [link](https://dd.reso.org/DD2.0/Property/ShowingAdvanceNotice/) |
+| `ShowingAttendedYN` | Boolean | Listing, Showing |  | 13% | Indicates whether or not this home requires an attended showing (i.e., Yes = licensed agent representing the seller must be present during showing). | [link](https://dd.reso.org/DD2.0/Property/ShowingAttendedYN/) |
+| `ShowingConsiderations` | String List, Multi | Listing, Showing | [ShowingConsiderations](#showingconsiderations) | 9% | A pick list of conditions that may require caution or further consideration, such as bringing someone with you, when showing the property (i.e., Electricity Not On, Inconsistent Cell Service, No Exter… | [link](https://dd.reso.org/DD2.0/Property/ShowingConsiderations/) |
+| `ShowingContactName` | String | Listing, Showing |  | 12% | The name of the contact for the showing of the listed property. | [link](https://dd.reso.org/DD2.0/Property/ShowingContactName/) |
+| `ShowingContactPhone` | String | Listing, Showing |  | 29% | A telephone number that should be called to arrange showing the property. | [link](https://dd.reso.org/DD2.0/Property/ShowingContactPhone/) |
+| `ShowingContactPhoneExt` | String | Listing, Showing |  | 2% | The extension of the given phone number, if applicable. | [link](https://dd.reso.org/DD2.0/Property/ShowingContactPhoneExt/) |
+| `ShowingContactType` | String List, Multi | Listing, Showing | [ShowingContactType](#showingcontacttype) | 14% | The type of contact for the showing (i.e., Agent, Broker, Seller). | [link](https://dd.reso.org/DD2.0/Property/ShowingContactType/) |
+| `ShowingDays` | String List, Multi | Listing, Showing | ShowingDays | 2% | The days of the week that the property is available for showing (i.e., Sundays, Mondays, Tuesdays, Wednesdays, Thursdays, Fridays, Saturdays). | [link](https://dd.reso.org/DD2.0/Property/ShowingDays/) |
+| `ShowingEndTime` | Timestamp | Listing, Showing |  | 1% | From the days selected in the ShowingDays field, the end time that the property is available for showing. | [link](https://dd.reso.org/DD2.0/Property/ShowingEndTime/) |
+| `ShowingInstructions` | String | Listing, Showing |  | 83% | Remarks that detail the seller's instructions for showing the subject property. | [link](https://dd.reso.org/DD2.0/Property/ShowingInstructions/) |
+| `ShowingRequirements` | String List, Multi | Listing, Showing | [ShowingRequirements](#showingrequirements) | 28% | A pick list of types of notice required to see the home (i.e., Appointment Required, Courtesy Call Only, Go Direct, etc.). | [link](https://dd.reso.org/DD2.0/Property/ShowingRequirements/) |
+| `ShowingServiceName` | String List, Single | Listing, Showing | [ShowingServiceName](#showingservicename) | 1% | The name of the showing service used to request showings on the listing. | [link](https://dd.reso.org/DD2.0/Property/ShowingServiceName/) |
+| `ShowingStartTime` | Timestamp | Listing, Showing |  | 1% | From the days selected in the ShowingDays field, the start time that the property is available for showing. | [link](https://dd.reso.org/DD2.0/Property/ShowingStartTime/) |
+| `SignOnPropertyYN` | Boolean | Listing, Marketing |  | 34% | Indicates whether or not there a sign on the property. | [link](https://dd.reso.org/DD2.0/Property/SignOnPropertyYN/) |
+| `SimpleDaysOnMarket` | Number | Listing, Dates |  | 0% | A simplified version of days on market (DOM) where the calculation is a simple start and end, such as the difference between the listing input or contract date and the date of sale. | [link](https://dd.reso.org/DD2.0/Property/SimpleDaysOnMarket/) |
+| `Skirt` | String List, Multi | Structure | [Skirt](#skirt) | 12% | A list of types of mobile home skirting. | [link](https://dd.reso.org/DD2.0/Property/Skirt/) |
+| `SocialMedia` | Collection | Listing |  |  | A collection of social media items related to the Property record. | [link](https://dd.reso.org/DD2.0/Property/SocialMedia/) |
+| `SourceSystem` | Resource | Listing |  |  | The source system of the Property record. | [link](https://dd.reso.org/DD2.0/Property/SourceSystem/) |
+| `SourceSystemID` | String | Listing |  | 58% | The OUID Resource's OrganizationUniqueId of the source record provider. | [link](https://dd.reso.org/DD2.0/Property/SourceSystemID/) |
+| `SourceSystemKey` | String | Listing |  | 83% | The system key, a unique record identifier, from the source system. | [link](https://dd.reso.org/DD2.0/Property/SourceSystemKey/) |
+| `SourceSystemName` | String | Listing |  | 39% | The name of the immediate record provider. | [link](https://dd.reso.org/DD2.0/Property/SourceSystemName/) |
+| `SpaFeatures` | String List, Multi | Characteristics | [SpaFeatures](#spafeatures) | 62% | A list of features or a description of the spa included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/SpaFeatures/) |
+| `SpaYN` | Boolean | Characteristics |  | 53% | Indicates whether or not the property has a spa. | [link](https://dd.reso.org/DD2.0/Property/SpaYN/) |
+| `SpecialLicenses` | String List, Multi | Business | [SpecialLicenses](#speciallicenses) | 13% | Special licenses required/used by the business being sold (e.g., Beer/Wine, Class H, Professional, Gambling, None). | [link](https://dd.reso.org/DD2.0/Property/SpecialLicenses/) |
+| `SpecialListingConditions` | String List, Multi | Listing, Contract | [SpecialListingConditions](#speciallistingconditions) | 74% | A list of options that describe the type of sale (e.g., Standard, REO, Short Sale, Probate, Auction, NOD) at the time of listing. | [link](https://dd.reso.org/DD2.0/Property/SpecialListingConditions/) |
+| `StandardStatus` | String List, Single | Listing | [StandardStatus](#standardstatus) | 94% | The MLS-defined statuses normalized into a common set. | [link](https://dd.reso.org/DD2.0/Property/StandardStatus/) |
+| `StartShowingDate` | Date | Listing, Showing |  | 6% | The date the listing agent/broker expects to start showing the property. | [link](https://dd.reso.org/DD2.0/Property/StartShowingDate/) |
+| `StateOrProvince` | String List, Single | Location, Address | [StateOrProvince](#stateorprovince) | 99% | The state or province in which the property is located. | [link](https://dd.reso.org/DD2.0/Property/StateOrProvince/) |
+| `StateRegion` | String | Location, Area |  | 1% | A subsection or area of a defined state or province (e.g., Florida Keys, Hudson Valley in New York, Silicon Valley in California). | [link](https://dd.reso.org/DD2.0/Property/StateRegion/) |
+| `StatusChangeTimestamp` | Timestamp | Listing, Dates |  | 68% | The transactional timestamp automatically recorded by the MLS system representing the date/time the listing's status was last changed. | [link](https://dd.reso.org/DD2.0/Property/StatusChangeTimestamp/) |
+| `Stories` | Number | Structure |  | 71% | The number of floors in the property being sold. | [link](https://dd.reso.org/DD2.0/Property/Stories/) |
+| `StoriesTotal` | Number | Structure |  | 35% | The total number of floors in the building. | [link](https://dd.reso.org/DD2.0/Property/StoriesTotal/) |
+| `StreetAdditionalInfo` | String | Location, Address |  | 23% | Information other than a prefix or suffix for the street portion of a postal address. | [link](https://dd.reso.org/DD2.0/Property/StreetAdditionalInfo/) |
+| `StreetDirPrefix` | String List, Single | Location, Address | [StreetDirection](#streetdirection) | 88% | The direction indicator that precedes the listed property's street name. | [link](https://dd.reso.org/DD2.0/Property/StreetDirPrefix/) |
+| `StreetDirSuffix` | String List, Single | Location, Address | [StreetDirection](#streetdirection) | 50% | The direction indicator that follows a listed property's street address. | [link](https://dd.reso.org/DD2.0/Property/StreetDirSuffix/) |
+| `StreetName` | String | Location, Address |  | 99% | The street name portion of a listed property's street address. | [link](https://dd.reso.org/DD2.0/Property/StreetName/) |
+| `StreetNumber` | String | Location, Address |  | 99% | The street number portion of a listed property's street address. | [link](https://dd.reso.org/DD2.0/Property/StreetNumber/) |
+| `StreetNumberNumeric` | Number | Location, Address |  | 73% | The integer portion of the street number. | [link](https://dd.reso.org/DD2.0/Property/StreetNumberNumeric/) |
+| `StreetSuffix` | String List, Single | Location, Address | StreetSuffix | 72% | The suffix portion of a listed property's street address. | [link](https://dd.reso.org/DD2.0/Property/StreetSuffix/) |
+| `StreetSuffixModifier` | String | Location, Address |  | 4% | Allows for the entry of a unique street suffix that was not found in the Street Suffix pick list or to extend or prefix the suffix. | [link](https://dd.reso.org/DD2.0/Property/StreetSuffixModifier/) |
+| `StructureType` | String List, Multi | Structure | [StructureType](#structuretype) | 63% | The type of structure that the property completely or partially encompasses. | [link](https://dd.reso.org/DD2.0/Property/StructureType/) |
+| `SubAgencyCompensation` | String | Listing, Compensation |  | 28% | The total commission to be paid to the subagency, expressed as either a percentage or a constant currency amount. | [link](https://dd.reso.org/DD2.0/Property/SubAgencyCompensation/) |
+| `SubAgencyCompensationType` | String List, Single | Listing, Compensation | [CompensationType](#compensationtype) | 23% | A list of types to clarify the value entered in the SubAgencyCompensation field. | [link](https://dd.reso.org/DD2.0/Property/SubAgencyCompensationType/) |
+| `SubdivisionName` | String | Location, Area |  | 90% | A neighborhood, community, complex or builder tract. | [link](https://dd.reso.org/DD2.0/Property/SubdivisionName/) |
+| `SuppliesExpense` | Number | Financial |  | 7% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/SuppliesExpense/) |
+| `SyndicateTo` | String List, Multi | Listing, Marketing | [SyndicateTo](#syndicateto) | 16% | When permitted by the broker, the options made by the agent on behalf of the seller, where they would like their listings syndicated (e.g., Zillow, Trulia, Realtor.com, Homes.com). | [link](https://dd.reso.org/DD2.0/Property/SyndicateTo/) |
+| `SyndicationRemarks` | String | Listing, Remarks |  | 11% | For MLSs that host a separate "Public Remarks" for syndication purposes, this field should be defaulted to contain public remarks. | [link](https://dd.reso.org/DD2.0/Property/SyndicationRemarks/) |
+| `TaxAnnualAmount` | Number | Tax |  | 86% | The annual property tax amount as of the last assessment made by the taxing authority. | [link](https://dd.reso.org/DD2.0/Property/TaxAnnualAmount/) |
+| `TaxAnnualAmountPerLivingAreaUnit` | Number | Tax |  |  | The annual property tax amount as of the last assessment made by the taxing authority divided by the property’s living area. | [link](https://dd.reso.org/DD2.0/Property/TaxAnnualAmountPerLivingAreaUnit/) |
+| `TaxAnnualAmountPerSquareFoot` | Number | Tax |  |  | The annual property tax amount as of the last assessment made by the taxing authority divided by the property’s living area square footage. | [link](https://dd.reso.org/DD2.0/Property/TaxAnnualAmountPerSquareFoot/) |
+| `TaxAssessedValue` | Number | Tax |  | 31% | The property value as of the last assessment made by the taxing authority. | [link](https://dd.reso.org/DD2.0/Property/TaxAssessedValue/) |
+| `TaxBlock` | String | Tax |  | 28% | A type of legal description for land in developed areas where streets or other rights-of-ways delineate large parcels of land referred to as divided into lots on which homes or other types of developments are built. | [link](https://dd.reso.org/DD2.0/Property/TaxBlock/) |
+| `TaxBookNumber` | String | Tax |  | 11% | Some systems of parcel identification incorporate a method that utilizes a county identifier, a tax book number, a tax map number and a parcel identification number. | [link](https://dd.reso.org/DD2.0/Property/TaxBookNumber/) |
+| `TaxLegalDescription` | String | Tax |  | 63% | A type of legal description for land in developed areas where streets or other rights-of-ways delineate large parcels of land referred to as divided into lots on which homes or other types of developments are built. | [link](https://dd.reso.org/DD2.0/Property/TaxLegalDescription/) |
+| `TaxLot` | String | Tax |  | 36% | A type of legal description for land in developed areas where streets or other rights-of-ways delineate large parcels of land referred to as divided into lots on which homes or other types of developments are built. | [link](https://dd.reso.org/DD2.0/Property/TaxLot/) |
+| `TaxMapNumber` | String | Tax |  | 14% | Some systems of parcel identification incorporate a method that utilizes a county identifier, a tax book number, a tax map number and a parcel identification number. | [link](https://dd.reso.org/DD2.0/Property/TaxMapNumber/) |
+| `TaxOtherAnnualAssessmentAmount` | Number | Tax |  | 15% | Any other annual taxes, not including the tax reported in the TaxAmount field, as of the last assessment made by the taxing authority. | [link](https://dd.reso.org/DD2.0/Property/TaxOtherAnnualAssessmentAmount/) |
+| `TaxParcelLetter` | String | Tax |  | 3% | Some systems of parcel identification incorporate a method that utilizes a county identifier, a tax book number, a tax map number and a parcel identification number. | [link](https://dd.reso.org/DD2.0/Property/TaxParcelLetter/) |
+| `TaxStatusCurrent` | String List, Multi | Tax | [TaxStatusCurrent](#taxstatuscurrent) | 3% | The current tax status of the mobile home in cases where the land or space is included in the sale. | [link](https://dd.reso.org/DD2.0/Property/TaxStatusCurrent/) |
+| `TaxTract` | String | Tax |  | 8% | A type of legal description for land in developed areas where streets or other rights-of-ways delineate large parcels of land referred to as divided into lots on which homes or other types of developments are built. | [link](https://dd.reso.org/DD2.0/Property/TaxTract/) |
+| `TaxYear` | Number | Tax |  | 65% | The year in which the last assessment of the property value/tax was made. | [link](https://dd.reso.org/DD2.0/Property/TaxYear/) |
+| `TenantPays` | String List, Multi | Financial | [TenantPays](#tenantpays) | 63% | A list of services or items that the tenant is responsible to pay. | [link](https://dd.reso.org/DD2.0/Property/TenantPays/) |
+| `Topography` | String | Characteristics |  | 55% | The state of the surface of the land included with the property (i.e., flat, rolling, etc.). | [link](https://dd.reso.org/DD2.0/Property/Topography/) |
+| `TotalActualRent` | Number | Financial |  | 36% | Total actual rent currently being collected from tenants of the income property. | [link](https://dd.reso.org/DD2.0/Property/TotalActualRent/) |
+| `Township` | String | Location, Address |  | 23% | A subdivision of the county. | [link](https://dd.reso.org/DD2.0/Property/Township/) |
+| `TransactionBrokerCompensation` | String | Listing, Compensation |  | 23% | The total commission to be paid to the transaction facilitator, expressed as either a percentage or a constant currency amount. | [link](https://dd.reso.org/DD2.0/Property/TransactionBrokerCompensation/) |
+| `TransactionBrokerCompensationType` | String List, Single | Listing, Compensation | [CompensationType](#compensationtype) | 19% | A list of types to clarify the value entered in the TransactionBrokerCompensation field. | [link](https://dd.reso.org/DD2.0/Property/TransactionBrokerCompensationType/) |
+| `TrashExpense` | Number | Financial |  | 17% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/TrashExpense/) |
+| `UnitNumber` | String | Location, Address |  | 79% | A text field containing the unit number or portion of a larger building or complex that should appear following the street suffix or, if it exists, the street suffix direction in the street address (e… | [link](https://dd.reso.org/DD2.0/Property/UnitNumber/) |
+| `UnitTypeType` | String List, Multi | UnitTypes | [UnitTypeType](#unittypetype) | 4% | A single-value lookup describing the unit type: Apartments \| Studio \| Loft \| Penthouse \| 1 Bedroom \| 2 Bedroom \| 3 Bedroom \| 4 Bedroom Or More \| Efficiency \| Manager's Unit. | [link](https://dd.reso.org/DD2.0/Property/UnitTypeType/) |
+| `UnitTypes` | Collection | UnitTypes |  | 0% | A collection of types of units included in the income (multifamily) property. | [link](https://dd.reso.org/DD2.0/Property/UnitTypes/) |
+| `UnitsFurnished` | String List, Single | Characteristics | [UnitsFurnished](#unitsfurnished) | 6% | States whether or not the units are furnished (i.e., All Units, Varies By Unit, None). | [link](https://dd.reso.org/DD2.0/Property/UnitsFurnished/) |
+| `UniversalPropertyId` | String |  |  | 23% | The RESO Universal Property Identifier (UPI) is a unique identifier for all real property in the U.S. | [link](https://dd.reso.org/DD2.0/Property/UniversalPropertyId/) |
+| `UniversalPropertySubId` | String |  |  | 0% | A unique identifier for all subsets or shares of real property in the U.S. | [link](https://dd.reso.org/DD2.0/Property/UniversalPropertySubId/) |
+| `UnparsedAddress` | String | Location, Address |  | 92% | The full street address of the property as a single, unparsed string. | [link](https://dd.reso.org/DD2.0/Property/UnparsedAddress/) |
+| `Utilities` | String List, Multi | Utilities | [Utilities](#utilities) | 88% | A list of the utilities for the property being sold/leased. | [link](https://dd.reso.org/DD2.0/Property/Utilities/) |
+| `VacancyAllowance` | Number | Financial |  | 7% | An estimate of the amount of rent that may be foregone because of unoccupied units. | [link](https://dd.reso.org/DD2.0/Property/VacancyAllowance/) |
+| `VacancyAllowanceRate` | Number | Financial |  | 17% | An estimate of the percent of rent that may be foregone because of unoccupied units. | [link](https://dd.reso.org/DD2.0/Property/VacancyAllowanceRate/) |
+| `Vegetation` | String List, Multi | Farming | [Vegetation](#vegetation) | 35% | A list of the type(s) of residential vegetation on the property (not farm crops). | [link](https://dd.reso.org/DD2.0/Property/Vegetation/) |
+| `VideosChangeTimestamp` | Timestamp | Listing, Media |  | 43% | A system-generated timestamp of when the last update or change to the videos for this listing was made. | [link](https://dd.reso.org/DD2.0/Property/VideosChangeTimestamp/) |
+| `VideosCount` | Number | Listing, Media |  | 44% | The total number of videos or virtual tours included with the listing. | [link](https://dd.reso.org/DD2.0/Property/VideosCount/) |
+| `View` | String List, Multi | Characteristics | [View](#view) | 63% | A view as seen from the listed property. | [link](https://dd.reso.org/DD2.0/Property/View/) |
+| `ViewYN` | Boolean | Characteristics |  | 51% | The property has a view. | [link](https://dd.reso.org/DD2.0/Property/ViewYN/) |
+| `VirtualTourURLBranded` | String | Listing, Marketing |  | 49% | A text field that holds the Uniform Resource Locator (URL) for a branded virtual tour of the property. | [link](https://dd.reso.org/DD2.0/Property/VirtualTourURLBranded/) |
+| `VirtualTourURLUnbranded` | String | Listing, Marketing |  | 92% | A link to an unbranded virtual tour of the property (does NOT carry brokerage branding). | [link](https://dd.reso.org/DD2.0/Property/VirtualTourURLUnbranded/) |
+| `WalkScore` | Number | Structure, Performance, GreenMarketing |  | 3% | A walkability index based on the time to walk from a property to nearby essentials such as grocery stores, schools, churches, etc. | [link](https://dd.reso.org/DD2.0/Property/WalkScore/) |
+| `WaterBodyName` | String | Characteristics |  | 33% | The name, if known, of the body of water on which the property is located (e.g., lake name, river name, ocean name, sea name, canal name). | [link](https://dd.reso.org/DD2.0/Property/WaterBodyName/) |
+| `WaterSewerExpense` | Number | Financial |  | 24% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/WaterSewerExpense/) |
+| `WaterSource` | String List, Multi | Utilities | [WaterSource](#watersource) | 86% | A list of the source(s) of water for the property. | [link](https://dd.reso.org/DD2.0/Property/WaterSource/) |
+| `WaterfrontFeatures` | String List, Multi | Characteristics | [WaterfrontFeatures](#waterfrontfeatures) | 71% | The features of the waterfront on which the property is located. | [link](https://dd.reso.org/DD2.0/Property/WaterfrontFeatures/) |
+| `WaterfrontYN` | Boolean | Characteristics |  | 72% | The property is on a waterfront. | [link](https://dd.reso.org/DD2.0/Property/WaterfrontYN/) |
+| `WindowFeatures` | String List, Multi | Structure | [WindowFeatures](#windowfeatures) | 76% | A list of features or a description of the windows included in the sale/lease. | [link](https://dd.reso.org/DD2.0/Property/WindowFeatures/) |
+| `WithdrawnDate` | Date | Listing, Dates |  | 66% | The date that the listing was withdrawn from the market. | [link](https://dd.reso.org/DD2.0/Property/WithdrawnDate/) |
+| `WoodedArea` | Number | Farming |  | 26% | A measurement or percentage of the property that is wooded or forest. | [link](https://dd.reso.org/DD2.0/Property/WoodedArea/) |
+| `WorkmansCompensationExpense` | Number | Financial |  | 1% | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | [link](https://dd.reso.org/DD2.0/Property/WorkmansCompensationExpense/) |
+| `YearBuilt` | Number | Structure |  | 99% | The year the property was originally constructed. | [link](https://dd.reso.org/DD2.0/Property/YearBuilt/) |
+| `YearBuiltDetails` | String | Structure |  | 16% | A description of the details behind the year the structure was built. | [link](https://dd.reso.org/DD2.0/Property/YearBuiltDetails/) |
+| `YearBuiltEffective` | Number | Structure |  | 18% | The effective year built. | [link](https://dd.reso.org/DD2.0/Property/YearBuiltEffective/) |
+| `YearBuiltSource` | String List, Single | Structure | [YearBuiltSource](#yearbuiltsource) | 17% | A list of sources of the year built (e.g., Appraiser, Assessor, Builder, Estimated). | [link](https://dd.reso.org/DD2.0/Property/YearBuiltSource/) |
+| `YearEstablished` | Number | Business |  | 16% | The year the business being sold was established. | [link](https://dd.reso.org/DD2.0/Property/YearEstablished/) |
+| `YearsCurrentOwner` | Number | Business |  | 7% | The number of years the current owner has had possession of the business. | [link](https://dd.reso.org/DD2.0/Property/YearsCurrentOwner/) |
+| `Zoning` | String | Tax |  | 63% | A division of the city or county into areas of different permissible land uses. | [link](https://dd.reso.org/DD2.0/Property/Zoning/) |
+| `ZoningDescription` | String | Tax |  | 59% | A list of descriptions of the zoning of the property. | [link](https://dd.reso.org/DD2.0/Property/ZoningDescription/) |
 
 ## Field details
 
@@ -715,11 +717,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Location = "Above grade" Finished Status = "Finished" Area = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área Completada por Encima del Piso
   - **French-Canadian Name:** Superficie finie au-dessus du niveau du sol
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -727,31 +729,31 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Origin = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente del Área Completada por Encima del Piso
   - **French-Canadian Name:** Source des mesures de la superficie finie au-dessus du niveau du sol
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AboveGradeFinishedAreaUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades de Área Completada por Encima del Piso
   - **French-Canadian Name:** Unité de mesure de la superficie finie au-dessus du niveau du sol
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>AboveGradeUnfinishedArea</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 21 2019
-  - **Revision Date:** FEB 21 2019
+  - **Status:** Active
+  - **Status Change Date:** 2/21/2019
+  - **Revision Date:** 2/21/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -759,9 +761,9 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>AboveGradeUnfinishedAreaSource</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 21 2019
-  - **Revision Date:** FEB 21 2019
+  - **Status:** Active
+  - **Status Change Date:** 2/21/2019
+  - **Revision Date:** 2/21/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -769,9 +771,9 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>AboveGradeUnfinishedAreaUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 21 2019
-  - **Revision Date:** FEB 21 2019
+  - **Status:** Active
+  - **Status Change Date:** 2/21/2019
+  - **Revision Date:** 2/21/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -779,31 +781,31 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>AccessCode</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código de Acceso
   - **French-Canadian Name:** Code d’accès
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>AccessibilityFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Accesibilidad
   - **French-Canadian Name:** Caractéristiques de l’accessibilité
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>ActivationDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** MAY 21 2020
-  - **Revision Date:** MAY 21 2020
+  - **Status:** Active
+  - **Status Change Date:** 5/21/2020
+  - **Revision Date:** 5/21/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -811,143 +813,176 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>AdditionalParcelsDescription</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Descripción Adicional de Parcelas
   - **French-Canadian Name:** Description des parcelles additionnelles
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AdditionalParcelsYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Parcelas Adicionales SN
   - **French-Canadian Name:** Parcelles additionnelles O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>AnchorsCoTenants</code></summary>
 
   - **Property Types:** COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Co Inquilinos Ancla
   - **French-Canadian Name:** Magasins piliers colocataires
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Appliances</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Electrodomésticos
   - **French-Canadian Name:** Appareils électroménagers
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>ArchitecturalStyle</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Estilo Arquitectónico
+  - **French-Canadian Name:** Style architectural
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
+
+</details>
+
+<details><summary><code>AssociationAmenities</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
+  - **Status:** Active
+  - **Spanish Name:** Servicios de la Asociación
+  - **French-Canadian Name:** Commodités offertes par l’association
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AssociationFee</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tarifa de Asociación
   - **French-Canadian Name:** Frais payés à l’association
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AssociationFee2</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tarifa de Asociación2
-  - **French-Canadian Name:** Frais payés à l’association 2
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Frais payés à l’association 2
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>AssociationFee2Frequency</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
+  - **Status:** Active
+  - **Spanish Name:** Frecuencia de Tarifa de Asociación2
+  - **French-Canadian Name:** Fréquence de paiement des frais à l’association 2
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AssociationFeeFrequency</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Frecuencia de Tarifa de Asociación
   - **French-Canadian Name:** Fréquence de paiement des frais à l’association
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AssociationFeeIncludes</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Inclusiones de Tarifa de Asociación
   - **French-Canadian Name:** Compris dans les frais payés à l’association
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AssociationName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Asociación
   - **French-Canadian Name:** Nom de l’association
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AssociationName2</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Asociación2
-  - **French-Canadian Name:** Nom de l’association 2
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Nom de l’association 2
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AssociationPhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de la Asociación
   - **French-Canadian Name:** Numéro de téléphone de l’association
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AssociationPhone2</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de la Asociación2
-  - **French-Canadian Name:** Numéro de téléphone de l’association 2
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Numéro de téléphone de l’association 2
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>AssociationYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Asociación SN
   - **French-Canadian Name:** Association O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
@@ -955,20 +990,20 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Location = "Garage"If AttachedGarageYN == 'Y' then Vertical Surroundings = "Attached", Else Vertical Surroundings = "Stand-alone"
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Garaje Adjunto SN
   - **French-Canadian Name:** Garage attenant O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>AttributionContact</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 26 2022
-  - **Revision Date:** APR 26 2022
+  - **Status:** Active
+  - **Status Change Date:** 4/26/2022
+  - **Revision Date:** 4/26/2022
   - **Added in Version:** 2.0.0
 
 </details>
@@ -976,20 +1011,30 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>AvailabilityDate</code></summary>
 
   - **Property Types:** RLSE , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fecha de Disponibilidad
   - **French-Canadian Name:** Date de disponibilité
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>AvailableLeaseType</code></summary>
+
+  - **Property Types:** COML
+  - **Status:** Active
+  - **Status Change Date:** 4/22/2020
+  - **Revision Date:** 4/22/2020
+  - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>BackOnMarketDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 21 2019
-  - **Revision Date:** FEB 21 2019
+  - **Status:** Active
+  - **Status Change Date:** 2/21/2019
+  - **Revision Date:** 2/21/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -997,22 +1042,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>Basement</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sótano
   - **French-Canadian Name:** Sous-sol
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BasementYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sótano Si or No
   - **French-Canadian Name:** Sous-sol O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
   - **Added in Version:** 1.7.0
 
 </details>
@@ -1020,33 +1065,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BathroomsFull</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Baños Completos
   - **French-Canadian Name:** Salles de bains complètes
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>BathroomsHalf</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Baños Medios
   - **French-Canadian Name:** Demi-salles de bains
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
+
+</details>
+
+<details><summary><code>BathroomsOneQuarter</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Baños un Cuarto
+  - **French-Canadian Name:** Quarts de salles de bains
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BathroomsPartial</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Baños Parciales
   - **French-Canadian Name:** Salles de bains partielles
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -1054,11 +1110,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BathroomsThreeQuarter</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Baños Tres Cuartos
   - **French-Canadian Name:** Trois-quarts de salles de bains
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -1066,22 +1122,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Spatial Unit Type = "Restroom" Quantity = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Baños Integral Total
   - **French-Canadian Name:** Salles de bains totales
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>BedroomsPossible</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Habitaciones Posibles
   - **French-Canadian Name:** Chambres à coucher possibles
-  - **Status Change Date:** SEP 02 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 9/2/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -1089,11 +1145,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Spatial Unit Type = "Bedroom"Quantity = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Habitaciones Total
   - **French-Canadian Name:** Chambres à coucher totales
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -1101,31 +1157,43 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Location = "Below grade"Finished Status = "Finished"Area = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área Completada por Encima del Piso
   - **French-Canadian Name:** Superficie finie au-dessous du niveau du sol
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>BelowGradeFinishedAreaSource</code></summary>
+
+  - **BEDES:** Origin = [value]
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Fuente del Área Completada por Encima del Piso
+  - **French-Canadian Name:** Source des mesures de la superficie finie au-dessous du niveau du sol
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BelowGradeFinishedAreaUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades de Área Completada por Encima del Piso
   - **French-Canadian Name:** Unité de mesure de la superficie finie au-dessous du niveau du sol
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BelowGradeUnfinishedArea</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 21 2019
-  - **Revision Date:** FEB 21 2019
+  - **Status:** Active
+  - **Status Change Date:** 2/21/2019
+  - **Revision Date:** 2/21/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -1133,9 +1201,9 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BelowGradeUnfinishedAreaSource</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 21 2019
-  - **Revision Date:** FEB 21 2019
+  - **Status:** Active
+  - **Status Change Date:** 2/21/2019
+  - **Revision Date:** 2/21/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -1143,9 +1211,9 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BelowGradeUnfinishedAreaUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 21 2019
-  - **Revision Date:** FEB 21 2019
+  - **Status:** Active
+  - **Status Change Date:** 2/21/2019
+  - **Revision Date:** 2/21/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -1153,11 +1221,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BodyType</code></summary>
 
   - **Property Types:** MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Conjunto
   - **French-Canadian Name:** Type de maison mobile
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -1165,11 +1233,23 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Builder Model = [value]
   - **Property Types:** RESI , RLSE , RINC , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Modelo Constructor
   - **French-Canadian Name:** Modèle du constructeur
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>BuilderName</code></summary>
+
+  - **BEDES:** Contact Label = "Builder"Company Name = [value]
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Nombre Constructor
+  - **French-Canadian Name:** Nom du constructeur
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -1177,11 +1257,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Origin = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Área de Construcción
   - **French-Canadian Name:** Source des mesures de la superficie en construction
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -1189,22 +1269,45 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Interval Measure = "Total"Premises Level = "Building"Area = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área Total de Construcción
   - **French-Canadian Name:** Superficie totale en construction
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>BuildingAreaUnits</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Unidades de Área de Construcción
+  - **French-Canadian Name:** Unité de mesure de la superficie en construction
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuildingFeatures</code></summary>
 
   - **Property Types:** COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Construcción
   - **French-Canadian Name:** Caractéristiques du bâtiment
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>BuildingName</code></summary>
+
+  - **BEDES:** Premises Level = "Building"Identifier Label = "Name"Identifier = [value]
+  - **Property Types:** COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Nombre de Edificio
+  - **French-Canadian Name:** Nom du bâtiment
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -1212,11 +1315,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Business"Company Name = [value]
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Negocio
   - **French-Canadian Name:** Nom de l’entreprise
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -1224,19 +1327,19 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Business" Occupancy Classification = [value]
   - **Property Types:** COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Negocio
   - **French-Canadian Name:** Type d’entreprise
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgent</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 07 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/7/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -1244,261 +1347,294 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BuyerAgentAOR</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Agente Comprandor de AOR
   - **French-Canadian Name:** Chambre/association immobilière du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentDesignation</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Denominación de Agente Comprador
   - **French-Canadian Name:** Titre du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>BuyerAgentDirectPhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Directo de Agente Comprador
   - **French-Canadian Name:** Numéro de téléphone direct du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentEmail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Agente Comprador
   - **French-Canadian Name:** Courriel du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentFax</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax de Agente Comprador
   - **French-Canadian Name:** Numéro de télécopieur du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentFirstName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Agente Comprador
   - **French-Canadian Name:** Prénom du courtier ou agent de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentFullName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Completo de Agente Comprador
   - **French-Canadian Name:** Nom complet du courtier ou agent de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentHomePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Casa de Agente Comprador
   - **French-Canadian Name:** Numéro de téléphone du domicile du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentKey</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Agente Comprador
   - **French-Canadian Name:** Clé du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentLastName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Apellido de Agente Comprador
   - **French-Canadian Name:** Nom de famille du courtier ou agent de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentMiddleName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Segundo Nombre de Agente Comprador
   - **French-Canadian Name:** Deuxième prénom du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>BuyerAgentMlsId</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** ID de MLS de Agente Comprador
+  - **French-Canadian Name:** ID MLS du courtier ou agent de l’acheteur
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentMobilePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Móvil de Agente Comprador
   - **French-Canadian Name:** Numéro de cellulaire du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentNamePrefix</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Prefijo de Agente Comprador
   - **French-Canadian Name:** Titre de civilité du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentNameSuffix</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sufijo de Agente Comprador
   - **French-Canadian Name:** Suffixe du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentNationalAssociationId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2020
-  - **Revision Date:** JAN 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 1/17/2020
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>BuyerAgentOfficePhone</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Teléfono de Despacho de Agente Comprador
+  - **French-Canadian Name:** Numéro de téléphone du bureau du courtier ou agent de l’acheteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentOfficePhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión Telefónica de Agente Comprador
   - **French-Canadian Name:** Poste téléphonique du bureau du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentPager</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buscapersonas de Agente Comprador
   - **French-Canadian Name:** Numéro de pagette du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentPreferredPhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Preferido de Agente Comprador
   - **French-Canadian Name:** Numéro de téléphone préféré du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentPreferredPhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión de Teléfono Preferido de Agente Comprador
   - **French-Canadian Name:** Poste téléphonique préféré du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentStateLicense</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia Estatal de Agente Comprador
   - **French-Canadian Name:** Permis délivré par l’état du courtier ou agent de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>BuyerAgentTollFreePhone</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Teléfono Gratuito de Agente Comprador
+  - **French-Canadian Name:** Numéro de téléphone sans frais du courtier ou agent de l’acheteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentURL</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** URL de Agente Comprador
   - **French-Canadian Name:** URL du site Web du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentVoiceMail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buzón de Voz de Agente Comprador
   - **French-Canadian Name:** Messagerie vocale du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerAgentVoiceMailExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Buzón de Voz de Agente Comprador
   - **French-Canadian Name:** Poste de la messagerie vocale du courtier ou agent de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerBrokerageCompensation</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 20 2020
-  - **Revision Date:** FEB 20 2020
+  - **Status:** Active
+  - **Status Change Date:** 2/20/2020
+  - **Revision Date:** 2/20/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -1506,9 +1642,9 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BuyerBrokerageCompensationType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 20 2020
-  - **Revision Date:** FEB 20 2020
+  - **Status:** Active
+  - **Status Change Date:** 2/20/2020
+  - **Revision Date:** 2/20/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -1516,19 +1652,19 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BuyerFinancing</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Financiamiento de Comprador
   - **French-Canadian Name:** Financement de l’acheteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerOffice</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 08 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/8/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -1536,96 +1672,117 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BuyerOfficeAOR</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Despacho de Comprador de AOR
   - **French-Canadian Name:** Chambre/association immobilière du bureau du courtier ou agent de l’acheteur
-  - **Status Change Date:** APR 20 2012
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 4/20/2012
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerOfficeEmail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Despacho de Comprador
   - **French-Canadian Name:** Courriel du bureau du courtier ou agent de l’acheteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerOfficeFax</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax de Despacho de Comprador
   - **French-Canadian Name:** Numéro de télécopieur du bureau du courtier ou agent de l’acheteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerOfficeKey</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Despacho de Comprador
   - **French-Canadian Name:** Clé du bureau du courtier ou agent de l’acheteur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>BuyerOfficeMlsId</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** ID de MLS de Despacho de Comprador
+  - **French-Canadian Name:** ID MLS du bureau du courtier ou agent de l’acheteur
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerOfficeName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Despacho de Comprador
   - **French-Canadian Name:** Nom du bureau du courtier ou agent de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>BuyerOfficeNationalAssociationId</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 1/17/2020
+  - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>BuyerOfficePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Despacho de Comprador
   - **French-Canadian Name:** Numéro de téléphone du bureau du courtier ou agent de l’acheteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerOfficePhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión de Despacho de Comprador
   - **French-Canadian Name:** Poste téléphonique du bureau du courtier ou agent de l’acheteur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerOfficeURL</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** URL de Despacho de Comprador
   - **French-Canadian Name:** URL du site Web du bureau du courtier ou agent de l’acheteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>BuyerTeam</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 15 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/15/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -1633,11 +1790,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BuyerTeamKey</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Equipo Comprador
   - **French-Canadian Name:** Clé de l’équipe du courtier ou agent de l’acheteur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -1645,11 +1802,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>BuyerTeamName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Equipo Comprador
   - **French-Canadian Name:** Nom de l’équipe du courtier ou agent de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -1657,22 +1814,33 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>CableTvExpense</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto de TV por Cable
   - **French-Canadian Name:** Dépenses en télévision par câble
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CancellationDate</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Fecha de Cancelación
+  - **French-Canadian Name:** Date d’annulation
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CapRate</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tasa Máxima
   - **French-Canadian Name:** Taux de capitalisation
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -1680,33 +1848,33 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Premises Enclosure = "Non enclosed"Spatial Unit Type = "Parking space"Quantity = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Espacios de Garaje
   - **French-Canadian Name:** Abris d’auto
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CarportYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Garaje SN
   - **French-Canadian Name:** Abris d’auto O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CarrierRoute</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ruta Transportista
   - **French-Canadian Name:** Itinéraire de transport
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -1714,22 +1882,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** City = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ciudad
   - **French-Canadian Name:** Ville
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>CityRegion</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ciudad Región
   - **French-Canadian Name:** Quartier de la ville
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -1737,30 +1905,30 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>CloseDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fecha de Cierre
   - **French-Canadian Name:** Date de clôture
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>ClosePrice</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Precio de Cierre
   - **French-Canadian Name:** Prix de clôture
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgent</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 09 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/9/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -1768,130 +1936,174 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>CoBuyerAgentAOR</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Agente Co-Comprandor de AOR
   - **French-Canadian Name:** Chambre/association immobilière du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentDesignation</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Denominación de Agente Co-Comprador
   - **French-Canadian Name:** Titre du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
+
+</details>
+
+<details><summary><code>CoBuyerAgentDirectPhone</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Teléfono Directo de Agente Co-Comprador
+  - **French-Canadian Name:** Numéro de téléphone direct du courtier ou agent associé de l’acheteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentEmail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Agente Co-Comprador
   - **French-Canadian Name:** Courriel du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentFax</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax de Agente Co-Comprador
   - **French-Canadian Name:** Numéro de télécopieur du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentFirstName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Agente Co-Comprador
   - **French-Canadian Name:** Prénom du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentFullName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Completo de Agente Co-Comprador
   - **French-Canadian Name:** Nom complet du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CoBuyerAgentHomePhone</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Teléfono de Casa de Agente Co-Comprador
+  - **French-Canadian Name:** Numéro de téléphone du domicile du courtier ou agent associé de l’acheteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CoBuyerAgentKey</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Clave de Agente Co-Comprador
+  - **French-Canadian Name:** Clé du courtier ou agent associé de l’acheteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CoBuyerAgentLastName</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Apellido de Agente Co-Comprador
+  - **French-Canadian Name:** Nom de famille du courtier ou agent associé de l’acheteur
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentMiddleName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Segundo Nombre de Agente Co-Comprador
   - **French-Canadian Name:** Deuxième prénom du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentMlsId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Agente Co-Comprador
   - **French-Canadian Name:** ID MLS du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentMobilePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Móvil de Agente Co-Comprador
   - **French-Canadian Name:** Numéro de cellulaire du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentNamePrefix</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Prefijo de Agente Co-Comprador
   - **French-Canadian Name:** Titre de civilité du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentNameSuffix</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sufijo de Agente Co-Comprador
   - **French-Canadian Name:** Suffixe du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentNationalAssociationId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2020
-  - **Revision Date:** JAN 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 1/17/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -1899,118 +2111,118 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>CoBuyerAgentOfficePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Despacho de Agente Co-Comprador
   - **French-Canadian Name:** Numéro de téléphone du bureau du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentOfficePhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión Telefónica de Despacho de Agente Co-Comprador
   - **French-Canadian Name:** Poste téléphonique du bureau du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentPager</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buscapersonas de Agente Co-Comprador
   - **French-Canadian Name:** Numéro de pagette du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentPreferredPhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Preferido de Agente Co-Comprador
   - **French-Canadian Name:** Numéro de téléphone préféré du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentPreferredPhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión de Teléfono Preferido de Agente Co-Comprador
   - **French-Canadian Name:** Poste téléphonique préféré du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentStateLicense</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia Estatal de Agente Co-Comprador
   - **French-Canadian Name:** Permis délivré par l’état du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentTollFreePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Gratuito de Agente Co-Comprador
   - **French-Canadian Name:** Numéro de téléphone sans frais du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentURL</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** URL de Agente Co-Comprador
   - **French-Canadian Name:** URL du site Web du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentVoiceMail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buzón de Voz de Agente Co-Comprador
   - **French-Canadian Name:** Messagerie vocale du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerAgentVoiceMailExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Buzón de Voz de Agente Co-Comprador
   - **French-Canadian Name:** Poste de la messagerie vocale du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerOffice</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 10 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/10/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -2018,53 +2230,75 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>CoBuyerOfficeAOR</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Despacho de Co-Comprador de AOR
   - **French-Canadian Name:** Chambre/association immobilière du bureau du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** APR 20 2012
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 4/20/2012
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerOfficeEmail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Despacho de Co-Comprador
   - **French-Canadian Name:** Courriel du bureau du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CoBuyerOfficeFax</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Fax de Despacho de Co-Comprador
+  - **French-Canadian Name:** Numéro de télécopieur du bureau du courtier ou agent associé de l’acheteur
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerOfficeKey</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Despacho de Co-Comprador
   - **French-Canadian Name:** Clé du bureau du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerOfficeMlsId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Despacho de Co-Comprador
   - **French-Canadian Name:** ID MLS du bureau du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CoBuyerOfficeName</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Nombre de Despacho de Co-Comprador
+  - **French-Canadian Name:** Nom du bureau du courtier ou agent associé de l’acheteur
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerOfficeNationalAssociationId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2020
-  - **Revision Date:** JAN 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 1/17/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -2072,183 +2306,216 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>CoBuyerOfficePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Despacho de Co-Comprador
   - **French-Canadian Name:** Numéro de téléphone du bureau du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerOfficePhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión de Despacho de Co-Comprador
   - **French-Canadian Name:** Poste téléphonique du bureau du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoBuyerOfficeURL</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** URL de Despacho de Co-Comprador
   - **French-Canadian Name:** URL du site Web du bureau du courtier ou agent associé de l’acheteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgent</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 11 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/11/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>CoListAgentAOR</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Agente Co-Enlistado de AOR
+  - **French-Canadian Name:** Chambre/association immobilière du courtier ou agent co-inscripteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentDesignation</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Denominación de Agente Co-Enlistado
   - **French-Canadian Name:** Titre du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>CoListAgentDirectPhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Directo de Agente Co-Enlistado
   - **French-Canadian Name:** Numéro de téléphone direct du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentEmail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Agente Co-Enlistado
   - **French-Canadian Name:** Courriel du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentFax</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax de Agente Co-Enlistado
   - **French-Canadian Name:** Numéro de télécopieur du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentFirstName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Agente Co-Enlistado
   - **French-Canadian Name:** Prénom du courtier ou agent co-inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentFullName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Completo de Agente Co-Enlistado
   - **French-Canadian Name:** Nom complet du courtier ou agent co-inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentHomePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Casa de Agente Co-Enlistado
   - **French-Canadian Name:** Numéro de téléphone du domicile du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentKey</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Agente Co-Enlistado
   - **French-Canadian Name:** Clé du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentLastName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Apellido de Agente Co-Enlistado
   - **French-Canadian Name:** Nom de famille du courtier ou agent co-inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CoListAgentMiddleName</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Segundo Nombre de Agente Co-Enlistado
+  - **French-Canadian Name:** Deuxième prénom du courtier ou agent co-inscripteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentMlsId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Agente Co-Enlistado
   - **French-Canadian Name:** ID MLS du courtier ou agent co-inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentMobilePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Móvil de Agente Co-Enlistado
   - **French-Canadian Name:** Numéro de cellulaire du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentNamePrefix</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Prefijo de Agente Co-Enlistado
   - **French-Canadian Name:** Titre de civilité du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CoListAgentNameSuffix</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Sufijo de Agente Co-Enlistado
+  - **French-Canadian Name:** Suffixe du courtier ou agent co-inscripteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentNationalAssociationId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2020
-  - **Revision Date:** JAN 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 1/17/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -2256,96 +2523,118 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>CoListAgentOfficePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Oficina de Agente Co-Enlistado
   - **French-Canadian Name:** Numéro de téléphone du bureau du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentOfficePhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión Telefónica de Agente Co-Enlistado
   - **French-Canadian Name:** Poste téléphonique du bureau du courtier ou agent co-inscripteur
-  - **Status Change Date:** JAN 13 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 1/13/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CoListAgentPager</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Buscapersonas de Agente Co-Enlistado
+  - **French-Canadian Name:** Numéro de pagette du courtier ou agent co-inscripteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CoListAgentPreferredPhone</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Teléfono Preferido de Agente Co-Enlistado
+  - **French-Canadian Name:** Numéro de téléphone préféré du courtier ou agent co-inscripteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentPreferredPhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión de Teléfono Preferido de Agente Co-Enlistado
   - **French-Canadian Name:** Poste téléphonique préféré du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentStateLicense</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia Estatal de Agente Co-Enlistado
   - **French-Canadian Name:** Permis délivré par l’état du courtier ou agent co-inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentTollFreePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Gratuito de Agente Co-Enlistado
   - **French-Canadian Name:** Numéro de téléphone sans frais du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentURL</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** URL de Agente Co-Enlistado
   - **French-Canadian Name:** URL du site Web du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentVoiceMail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buzón de Voz de Agente Co-Enlistado
   - **French-Canadian Name:** Messagerie vocale du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListAgentVoiceMailExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Buzón de Voz de Agente Co-Enlistado
   - **French-Canadian Name:** Poste de la messagerie vocale du courtier ou agent co-inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListOffice</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 12 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/12/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -2353,98 +2642,120 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>CoListOfficeAOR</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Despacho de Co-Enlistado de AOR
   - **French-Canadian Name:** Chambre/association immobilière du bureau co-inscripteur
-  - **Status Change Date:** APR 20 2012
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 4/20/2012
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListOfficeEmail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Despacho de Co-Enlistado
   - **French-Canadian Name:** Courriel du bureau co-inscripteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListOfficeFax</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax de Despacho de Co-Enlistado
   - **French-Canadian Name:** Numéro de télécopieur du bureau co-inscripteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CoListOfficeKey</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Clave de Despacho de Co-Enlistado
+  - **French-Canadian Name:** Clé du bureau co-inscripteur
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListOfficeMlsId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Despacho de Co-Enlistado
   - **French-Canadian Name:** ID MLS du bureau co-inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>CoListOfficeName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Despacho de Co-Enlistado
   - **French-Canadian Name:** Nom du bureau co-inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListOfficeNationalAssociationId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2020
-  - **Revision Date:** JAN 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 1/17/2020
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>CoListOfficePhone</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Teléfono de Despacho de Co-Enlistado
+  - **French-Canadian Name:** Numéro de téléphone du bureau co-inscripteur
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListOfficePhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión Telefónica de Despacho de Co-Enlistado
   - **French-Canadian Name:** Poste téléphonique du bureau co-inscripteur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CoListOfficeURL</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** URL de Despacho de Co-Enlistado
   - **French-Canadian Name:** URL du site Web du bureau co-inscripteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CommonInterest</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Interés Común
   - **French-Canadian Name:** Intérêt commun
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.6.0
 
 </details>
@@ -2452,31 +2763,41 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>CommonWalls</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Paredes Comunales
   - **French-Canadian Name:** Murs mitoyens
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CommunityFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Comunidad
   - **French-Canadian Name:** Caractéristiques de la collectivité
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CompSaleYN</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Status Change Date:** 11/14/2018
+  - **Revision Date:** 11/14/2018
+  - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>CompensationComments</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** AUG 18 2022
-  - **Revision Date:** AUG 18 2022
+  - **Status:** Active
+  - **Status Change Date:** 8/18/2022
+  - **Revision Date:** 8/18/2022
   - **Added in Version:** 2.0.0
 
 </details>
@@ -2484,11 +2805,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>Concessions</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Concesiones
   - **French-Canadian Name:** Concessions
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 8/25/2023
   - **Added in Version:** 1.4.0
 
 </details>
@@ -2496,11 +2817,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ConcessionsAmount</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Monto de Concesiones
   - **French-Canadian Name:** Valeur des concessions
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -2508,11 +2829,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ConcessionsComments</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios de Concesiones
   - **French-Canadian Name:** Commentaires relatifs aux concessions
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -2521,22 +2842,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Material = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Materiales de Concesiones
   - **French-Canadian Name:** Matériaux de construction
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ContinentRegion</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Región Continente
   - **French-Canadian Name:** Région du continent
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2544,33 +2865,45 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>Contingency</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Contingencia
   - **French-Canadian Name:** Conditions
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ContingentDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fecha de Contingencia
   - **French-Canadian Name:** Date associée aux conditions
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ContractStatusChangeDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Cambio de Fecha de Estado de Contrato
   - **French-Canadian Name:** Date du changement de statut contractuel
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>Cooling</code></summary>
+
+  - **BEDES:** Cooling Type = [value]
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Climatización
+  - **French-Canadian Name:** Refroidissement
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -2578,22 +2911,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Conditioning Status = "Cooled" Conditioning Status = "Uncooled"
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Climatización SN
   - **French-Canadian Name:** Appareils de refroidissement O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CopyrightNotice</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Aviso de Derechos de Autor
   - **French-Canadian Name:** Avis de droit d’auteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2602,11 +2935,23 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Country Name = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** País
   - **French-Canadian Name:** Pays
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>CountryRegion</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** País Región
+  - **French-Canadian Name:** Région du pays
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.5.0
 
 </details>
 
@@ -2614,33 +2959,33 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** County = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Condado o Distrito
   - **French-Canadian Name:** Comté ou paroisse
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>CoveredSpaces</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Espacios Cubiertos
   - **French-Canadian Name:** Espaces couverts
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CropsIncludedYN</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Cultivos Incluidos SN
   - **French-Canadian Name:** Cultures incluses O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -2648,44 +2993,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Corner Of = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Calle Transversal
   - **French-Canadian Name:** Rue transversale
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CultivatedArea</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área Cultivada
   - **French-Canadian Name:** Superficie cultivée
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>CumulativeDaysOnMarket</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Días Acumulados en el Mercado
   - **French-Canadian Name:** Jours cumulatifs sur le marché
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>CurrentFinancing</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Financiación Actual
   - **French-Canadian Name:** Financement actuel
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -2693,42 +3038,53 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>CurrentUse</code></summary>
 
   - **Property Types:** LAND
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Uso Actual
   - **French-Canadian Name:** Utilisation actuelle
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>DOH1</code></summary>
 
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** DOH 1
-  - **French-Canadian Name:** Department of Housing 1
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Department of Housing 1
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>DOH2</code></summary>
+
+  - **Property Types:** RESI , RLSE , MOBI
+  - **Status:** Active
+  - **Spanish Name:** DOH 2
+  - **French-Canadian Name:** Department of Housing 2
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DOH3</code></summary>
 
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** DOH 3
-  - **French-Canadian Name:** Department of Housing 3
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Department of Housing 3
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DaysInMls</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** SEP 10 2019
-  - **Revision Date:** SEP 10 2019
+  - **Status:** Active
+  - **Status Change Date:** 9/10/2019
+  - **Revision Date:** 9/10/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -2736,22 +3092,32 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DaysOnMarket</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Días en el Mercado
   - **French-Canadian Name:** Jours sur le marché
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>DaysOnSite</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Status Change Date:** 9/10/2019
+  - **Revision Date:** 9/10/2019
+  - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>DevelopmentStatus</code></summary>
 
   - **Property Types:** LAND
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado de Desarrollo
   - **French-Canadian Name:** Stade de développement
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
@@ -2759,33 +3125,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Location = "Public entrance"Cardinal Orientation = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Orientación de Superficies
   - **French-Canadian Name:** Orientation du bâtiment
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Directions</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Orientaciones
   - **French-Canadian Name:** Directions routières
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>Disclaimer</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Aviso Legal
+  - **French-Canadian Name:** Avis de non-responsabilité
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Disclosures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Divulgaciones
   - **French-Canadian Name:** Informations divulguées
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -2793,22 +3170,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Distance To Public Transportation = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios Distancia a Bus
   - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et l’arrêt d’autobus
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DistanceToBusNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Númerico Distancia a Bus
   - **French-Canadian Name:** Distance entre la propriété et l’arrêt d’autobus
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2816,11 +3193,23 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToBusUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Distancia a Bus
   - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et l’arrêt d’autobus
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>DistanceToElectricComments</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Comentarios Distancia a Electricidad
+  - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et le service public d’électricité
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2828,11 +3217,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToElectricNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Numérico Distancia a Electricidad
   - **French-Canadian Name:** Distance entre la propriété et le service public d’électricité
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2840,11 +3229,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToElectricUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Distancia a Electricidad
   - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et le service public d’électricité
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2852,22 +3241,34 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToFreewayComments</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios Distancia a Autopista
   - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et l’autoroute
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>DistanceToFreewayNumeric</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Numérico Distancia a Autopista
+  - **French-Canadian Name:** Distance entre la propriété et l’autoroute
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>DistanceToFreewayUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Distancia a Autopista
   - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et l’autoroute
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2875,22 +3276,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToGasComments</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios Distancia a Gasolinera
   - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et le service public de gaz naturel
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DistanceToGasNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Númerico Distancia a Gasolinera
   - **French-Canadian Name:** Distance entre la propriété et le service public de gaz naturel
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2898,11 +3299,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToGasUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Distancia a Gasolinera
   - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et le service public de gaz naturel
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2910,22 +3311,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToPhoneServiceComments</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios Distancia a Servicios Telefónicos
   - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et le service public de téléphone
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DistanceToPhoneServiceNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Numérico Distancia a Servicios Telefónicos
   - **French-Canadian Name:** Distance entre la propriété et le service public de téléphone
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2933,23 +3334,34 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToPhoneServiceUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Distancia a Servicios Telefónicos
   - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et le service public de téléphone
-  - **Status Change Date:** JAN 24 2019
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 1/24/2019
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>DistanceToPlaceofWorshipComments</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Comentarios Distancia a Templo Religioso
+  - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et le lieu de culte
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DistanceToPlaceofWorshipNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Numérico Distancia a Templo Religioso
   - **French-Canadian Name:** Distance entre la propriété et le lieu de culte
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2957,11 +3369,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToPlaceofWorshipUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Distancia a Templo Religioso
   - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et le lieu de culte
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2969,22 +3381,34 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToSchoolBusComments</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios Distancia a Bus Escolar
   - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et l’arrêt d’autobus scolaire
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DistanceToSchoolBusNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Númerico Distancia a Bus Escolar
   - **French-Canadian Name:** Distance entre la propriété et l’arrêt d’autobus scolaire
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>DistanceToSchoolBusUnits</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Unidades Distancia a Bus Escolar
+  - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et l’arrêt d’autobus scolaire
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -2992,22 +3416,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToSchoolsComments</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios Distancia a Escuelas
   - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et l’école
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DistanceToSchoolsNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Númerico Distancia a Escuelas
   - **French-Canadian Name:** Distance entre la propriété et l’école
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -3015,11 +3439,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToSchoolsUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Distancia a Escuelas
   - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et l’école
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -3027,34 +3451,57 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToSewerComments</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios Distancia a Alcantarillado
   - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et le service public d’égout
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DistanceToSewerNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Numérico Distancia a Alcantarillado
   - **French-Canadian Name:** Distance entre la propriété et le service public d’égout
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>DistanceToSewerUnits</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Unidades Distancia a Alcantarillado
+  - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et le service public d’égout
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>DistanceToShoppingComments</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Comentarios Distancia a Centro Comercial
+  - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et le centre commercial
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DistanceToShoppingNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Numérico Distancia a Centro Comercial
   - **French-Canadian Name:** Distance entre la propriété et le centre commercial
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -3062,11 +3509,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToShoppingUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Distancia a Centro Comercial
   - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et le centre commercial
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -3074,22 +3521,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToStreetComments</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios Distancia a Calle
   - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et la rue
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DistanceToStreetNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Numérico Distancia a Calle
   - **French-Canadian Name:** Distance entre la propriété et la rue
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -3097,11 +3544,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToStreetUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Distancia a Calle
   - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et la rue
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -3109,22 +3556,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToWaterComments</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentarios Distancia a Agua
   - **French-Canadian Name:** Commentaires relatifs à la distance entre la propriété et le service public d’eau
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DistanceToWaterNumeric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Numérico Distancia a Agua
   - **French-Canadian Name:** Distance entre la propriété et le service public d’eau
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -3132,11 +3579,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DistanceToWaterUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Distancia a Agua
   - **French-Canadian Name:** Unité de mesure de la distance entre la propriété et le service public d’eau
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -3144,8 +3591,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DocumentStatus</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status Change Date:** FEB 24 2022
-  - **Revision Date:** FEB 24 2022
+  - **Status Change Date:** 2/24/2022
+  - **Revision Date:** 2/24/2022
   - **Added in Version:** 2.0.0
 
 </details>
@@ -3153,53 +3600,53 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>DocumentsAvailable</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Documentos Disponibles
   - **French-Canadian Name:** Documents disponibles
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DocumentsChangeTimestamp</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Cambio de Documentos
   - **French-Canadian Name:** Heure et date de la mise à jour des documents
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DocumentsCount</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Conteo de Documentos
   - **French-Canadian Name:** Nombre de documents
-  - **Status Change Date:** APR 20 2012
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 4/20/2012
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DoorFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Puerta
   - **French-Canadian Name:** Caractéristiques des portes
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>DualOrVariableRateCommissionYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 20 2020
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 2/20/2020
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
@@ -3207,44 +3654,55 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>Electric</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Electricidad
   - **French-Canadian Name:** Électricité
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>ElectricExpense</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto Eléctrico
   - **French-Canadian Name:** Dépenses en électricité
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>ElectricOnPropertyYN</code></summary>
+
+  - **Property Types:** LAND , FARM
+  - **Status:** Active
+  - **Spanish Name:** Electricidad en la Propiedad SN
+  - **French-Canadian Name:** Électricité sur la propriété O/N
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ElementarySchool</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Escuela Primaria
   - **French-Canadian Name:** École élémentaire
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ElementarySchoolDistrict</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Distrito de Escuela Primaria
   - **French-Canadian Name:** District de l’école élémentaire
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3252,43 +3710,65 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Elevation = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Elevación
   - **French-Canadian Name:** Élévation
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ElevationUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades de Elevación
   - **French-Canadian Name:** Unité de mesure de l’élévation
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>EntryLevel</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Nivel de Entrada
+  - **French-Canadian Name:** Étage où est située de la porte d’entrée
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>EntryLocation</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ubicación de Entrada
   - **French-Canadian Name:** Emplacement de la porte d’entrée
-  - **Status Change Date:** MAY 21 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 5/21/2013
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>Exclusions</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Exclusiones
+  - **French-Canadian Name:** Exclusions
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ExistingLeaseType</code></summary>
 
   - **Property Types:** RINC , COMS
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **French-Canadian Name:** Type de bail existant
-  - **Status Change Date:** APR 22 2020
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 4/22/2020
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 2.0.0
 
 </details>
@@ -3296,75 +3776,75 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ExpirationDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fecha de Expiración
   - **French-Canadian Name:** Date d’expiration
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ExteriorFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características Externas
   - **French-Canadian Name:** Caractéristiques de l’extérieur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>FarmCreditServiceInclYN</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Servicio de Crédito Agrícola Incluido SN
   - **French-Canadian Name:** Farm Credit Services of America inclus O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>FarmLandAreaSource</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Área de Tierra Agrícola
   - **French-Canadian Name:** Source des mesures de la terre agricole
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>FarmLandAreaUnits</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades de Área de Tierra Agrícola
   - **French-Canadian Name:** Unité de mesure de la terre agricole
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Fencing</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Cercado
   - **French-Canadian Name:** Clôture
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>FhaEligibility</code></summary>
 
   - **Property Types:** RESI , MOBI
-  - **Status:** ACTIVE
-  - **Status Change Date:** NOV 17 2016
-  - **Revision Date:** NOV 17 2016
+  - **Status:** Active
+  - **Status Change Date:** 11/17/2016
+  - **Revision Date:** 11/17/2016
   - **Added in Version:** 2.0.0
 
 </details>
@@ -3372,22 +3852,34 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>FinancialDataSource</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Información Financiera
   - **French-Canadian Name:** Source des données financières
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>FireplaceFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Chimenea
   - **French-Canadian Name:** Caractéristiques du foyer
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>FireplaceYN</code></summary>
+
+  - **BEDES:** Heating Type = "Fireplace"
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Chimenea SN
+  - **French-Canadian Name:** Foyer O/N
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3395,11 +3887,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Heating Type = "Fireplace"Quantity = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Total de Chimeneas
   - **French-Canadian Name:** Foyers totaux
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3407,11 +3899,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Location = "Interior" Opaque Surface = "Floor" Finish = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Piso
   - **French-Canadian Name:** Revêtement de sol
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3419,66 +3911,66 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Floor Area Qualifier = "Footprint"Area = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área de Cimientos
   - **French-Canadian Name:** Dimensions des fondations
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>FoundationDetails</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Detalle de Cimientos
   - **French-Canadian Name:** Type de fondations
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>FrontageLength</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Longitud de Fachada
   - **French-Canadian Name:** Longueur de la façade
-  - **Status Change Date:** APR 20 2012
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 4/20/2012
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>FrontageType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Fachada
   - **French-Canadian Name:** Type de façade
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>FuelExpense</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto de Gasolina
   - **French-Canadian Name:** Dépenses en carburant
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Furnished</code></summary>
 
   - **Property Types:** RLSE
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Amueblado
   - **French-Canadian Name:** Meublé
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -3486,11 +3978,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>FurnitureReplacementExpense</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto de Reemplazo de Muebles
   - **French-Canadian Name:** Dépenses en remplacement de mobilier
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3498,11 +3990,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Location = "Garage"Spatial Unit Type = "Parking space"Quantity = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Espacios de Garaje
   - **French-Canadian Name:** Garages
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3510,55 +4002,88 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Location = "Garage"Quantity = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Garaje SN
   - **French-Canadian Name:** Garage O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>GardenerExpense</code></summary>
+
+  - **Property Types:** RINC
+  - **Status:** Active
+  - **Spanish Name:** Gasto de Jardinero
+  - **French-Canadian Name:** Dépenses en jardinage
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>GrazingPermitsBlmYN</code></summary>
+
+  - **Property Types:** FARM
+  - **Status:** Active
+  - **Spanish Name:** Permisos de Pastoreo BLM SN
+  - **French-Canadian Name:** Permis de pâturage du Bureau of Land Management O/N
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>GrazingPermitsForestServiceYN</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Permisos de Pastoreo Servicio Forestal SN
   - **French-Canadian Name:** Permis de pâturage du Forest Service O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>GrazingPermitsPrivateYN</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Permisos de Pastoreo Privado SN
   - **French-Canadian Name:** Permis de pâturage privé O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>GreenBuildingVerification</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Verificación de Edificio Verde
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
+  - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>GreenBuildingVerificationType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Verificación de Edificio Verde
   - **French-Canadian Name:** Certification environnementale du bâtiment
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>GreenEnergyEfficient</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Energía Verde Eficiente
   - **French-Canadian Name:** Efficacité énergétique verte
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3566,42 +4091,53 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Energy Generation Technology = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Generación de Energía Verde
   - **French-Canadian Name:** Génération d’énergie verte
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>GreenIndoorAirQuality</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Calidad de Aire Interior Verde
+  - **French-Canadian Name:** Mesures environnementales de la qualité de l’air à l’intérieur
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>GreenLocation</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ubicación Verde
   - **French-Canadian Name:** Emplacement vert
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>GreenSustainability</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sostenibilidad Verde
   - **French-Canadian Name:** Durabilité environnementale
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>GreenVerificationYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
-  - **Status Change Date:** SEP 10 2019
-  - **Revision Date:** SEP 10 2019
+  - **Status:** Active
+  - **Status Change Date:** 9/10/2019
+  - **Revision Date:** 9/10/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -3609,31 +4145,31 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>GreenWaterConservation</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Conservación Ecológica de Agua
   - **French-Canadian Name:** Mesures environnementales de conservation des eaux
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>GrossIncome</code></summary>
 
   - **Property Types:** RINC , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ingreso Bruto
   - **French-Canadian Name:** Revenu brut
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>GrossLivingAreaAnsi</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 26 2022
-  - **Revision Date:** APR 26 2022
+  - **Status:** Active
+  - **Status Change Date:** 4/26/2022
+  - **Revision Date:** 4/26/2022
   - **Added in Version:** 2.0.0
 
 </details>
@@ -3641,22 +4177,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>GrossScheduledIncome</code></summary>
 
   - **Property Types:** RINC , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ingreso Bruto Programado
   - **French-Canadian Name:** Revenu brut prévu
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>HabitableResidenceYN</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Residencia Habitable SN
   - **French-Canadian Name:** Résidence habitable O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3664,11 +4200,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Heating Type = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Calefacción
   - **French-Canadian Name:** Chauffage
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3676,41 +4212,41 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Conditioning Status = "Heated"
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Calefacción SN
   - **French-Canadian Name:** Chauffage O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>HighSchool</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Escuela Secundaria
   - **French-Canadian Name:** École secondaire
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>HighSchoolDistrict</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Distrito de Escuela Secundaria
   - **French-Canadian Name:** District de l’école secondaire
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 20 2022
-  - **Revision Date:** JAN 20 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/20/2022
+  - **Revision Date:** 1/20/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -3718,67 +4254,111 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>HomeWarrantyYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Garantía Inmobiliaria SN
   - **French-Canadian Name:** Garantie habitation O/N
-  - **Status Change Date:** AUG 25 2023
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 8/25/2023
+  - **Revision Date:** 8/25/2023
+
+</details>
+
+<details><summary><code>HorseAmenities</code></summary>
+
+  - **Property Types:** RESI , RLSE , LAND
+  - **Status:** Active
+  - **Spanish Name:** Servicios Equinos
+  - **French-Canadian Name:** Commodités pour chevaux
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>HorseYN</code></summary>
+
+  - **Property Types:** RESI , RLSE , LAND
+  - **Status:** Active
+  - **Spanish Name:** Caballo SN
+  - **French-Canadian Name:** Chevaux O/N
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>HoursDaysOfOperation</code></summary>
 
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Horas Días de Operación
   - **French-Canadian Name:** Jours/heures d’exploitation
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>HoursDaysOfOperationDescription</code></summary>
 
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Descripción de Horas Días de Operación
   - **French-Canadian Name:** Détails sur les jours/heures d’exploitation
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
+
+</details>
+
+<details><summary><code>Inclusions</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Inclusiones
+  - **French-Canadian Name:** Inclusions
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>IncomeIncludes</code></summary>
+
+  - **Property Types:** RINC , LAND
+  - **Status:** Active
+  - **Spanish Name:** Inclusiones de Ingreso
+  - **French-Canadian Name:** Compris dans le revenu
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>InsuranceExpense</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto Seguro
   - **French-Canadian Name:** Dépenses en assurance
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>InteriorFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características Internas
   - **French-Canadian Name:** Caractéristiques de l’intérieur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>InternetAddressDisplayYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Visualización de Dirección de Internet SN
   - **French-Canadian Name:** Affichage de l’adresse de l’inscription sur Internet O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
   - **Added in Version:** 1.4.0
 
 </details>
@@ -3786,11 +4366,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>InternetAutomatedValuationDisplayYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Visualización de Valuación Automática de Internet SN
   - **French-Canadian Name:** Affichage de l’évaluation automatisée de l’inscription sur Internet O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
   - **Added in Version:** 1.4.0
 
 </details>
@@ -3798,11 +4378,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>InternetConsumerCommentYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Comentario de Consumidor de Internet SN
   - **French-Canadian Name:** Affichage des commentaires des consommateurs sur l’inscription sur Internet O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
   - **Added in Version:** 1.4.0
 
 </details>
@@ -3810,11 +4390,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>InternetEntireListingDisplayYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Visualización de Listado Completo de Internet SN
   - **French-Canadian Name:** Affichage de l’inscription en entier sur Internet O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
   - **Added in Version:** 1.4.0
 
 </details>
@@ -3822,77 +4402,88 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>IrrigationSource</code></summary>
 
   - **Property Types:** LAND , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Irrigación
   - **French-Canadian Name:** Source d’irrigation
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>IrrigationWaterRightsAcres</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Derechos de Agua de Riego Hectáreas
   - **French-Canadian Name:** Acres pouvant être irrigués en vertu des droits relatifs à l’eau
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>IrrigationWaterRightsYN</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Derechos de Agua de Riego SN
   - **French-Canadian Name:** Droits relatifs à l’eau O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>LaborInformation</code></summary>
 
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Información Laboral
   - **French-Canadian Name:** Information sur les lois sur le travail
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>LandLeaseAmount</code></summary>
 
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Monto de Arrendamiento de Tierra
   - **French-Canadian Name:** Montant du loyer
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LandLeaseAmountFrequency</code></summary>
 
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Frecuencia de Monto de Arrendamiento de Tierra
   - **French-Canadian Name:** Fréquence des paiements du loyer
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>LandLeaseExpirationDate</code></summary>
+
+  - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Fecha de Expiración de Arrendamiento de Tierra
+  - **French-Canadian Name:** Date d’expiration du bail foncier
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LandLeaseYN</code></summary>
 
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Arrendamiento de Tierra SN
   - **French-Canadian Name:** Bail foncier O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3900,11 +4491,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Latitude = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Latitud
   - **French-Canadian Name:** Latitude
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3912,11 +4503,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Laundry Appliance Type = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Lavandería
   - **French-Canadian Name:** Caractéristiques de la buanderie
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -3924,143 +4515,165 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Floor Area Qualifier = "Rentable"Area = [value]
   - **Property Types:** COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área Arrendable
   - **French-Canadian Name:** Superficie locative
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LeasableAreaUnits</code></summary>
 
   - **Property Types:** COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades de Área Arrendable
   - **French-Canadian Name:** Mesures de la superficie locative
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LeaseAmount</code></summary>
 
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Monto de Arrendamiento
   - **French-Canadian Name:** Montant du loyer
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LeaseAmountFrequency</code></summary>
 
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Frecuencia de Monto de Arrendamiento
   - **French-Canadian Name:** Fréquence des paiements du loyer
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>LeaseAssignableYN</code></summary>
+
+  - **Property Types:** BUSO
+  - **Status:** Active
+  - **Spanish Name:** Arrendamiento Asignable SN
+  - **French-Canadian Name:** Bail transférable O/N
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LeaseConsideredYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Arrendamiento Considerado SN
   - **French-Canadian Name:** Location envisagée O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LeaseExpiration</code></summary>
 
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Vencimiento de Arrendamiento
   - **French-Canadian Name:** Date d’expiration du bail
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LeaseRenewalCompensation</code></summary>
 
   - **Property Types:** RLSE
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Compensación por Renovación de Arrendamiento
   - **French-Canadian Name:** Rémunération pour le renouvellement du bail
-  - **Status Change Date:** APR 20 2012
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 4/20/2012
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LeaseRenewalOptionYN</code></summary>
 
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Opción de Renovación de Arrendamiento SN
   - **French-Canadian Name:** Option de renouvellement du bail O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LeaseTerm</code></summary>
 
   - **Property Types:** RLSE
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Plazo de Arrendamiento
   - **French-Canadian Name:** Modalités du bail
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Levels</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Niveles
   - **French-Canadian Name:** Étages
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>License1</code></summary>
 
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia 1
-  - **French-Canadian Name:** Permis 1
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Permis 1
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>License2</code></summary>
 
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia 2
-  - **French-Canadian Name:** Permis 2
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Permis 2
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>License3</code></summary>
+
+  - **Property Types:** RESI , RLSE , MOBI
+  - **Status:** Active
+  - **Spanish Name:** Licencia 3
+  - **French-Canadian Name:** Permis 3
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LicensesExpense</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Costo Licencias
   - **French-Canadian Name:** Dépenses relatives aux permis
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4068,20 +4681,32 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Association of Realtors"Company Name = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Listado de AOR
   - **French-Canadian Name:** Chambre/association immobilière responsable de l’inscription
-  - **Status Change Date:** APR 20 2012
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 4/20/2012
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListAgent</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 13 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/13/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>ListAgentAOR</code></summary>
+
+  - **BEDES:** Contact Label = "Real estate agent" Contact Label = "Association of Realtors" Company Name = [value]
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Agente Enlistado de AOR
+  - **French-Canadian Name:** Chambre/association immobilière du courtier ou agent inscripteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4089,11 +4714,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Credential = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Denominación de Agente Enlistado
   - **French-Canadian Name:** Titre du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
@@ -4101,11 +4726,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Telephone Number Label = "Direct" Telephone Number = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Directo de Agente Enlistado
   - **French-Canadian Name:** Numéro de téléphone direct du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4113,11 +4738,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Email Address = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Agente Enlistado
   - **French-Canadian Name:** Courriel du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 8/25/2023
 
 </details>
 
@@ -4125,22 +4750,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Telephone Number Label = "Fax" Telephone Number = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax de Agente Enlistado
   - **French-Canadian Name:** Numéro de télécopieur du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListAgentFirstName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Agente Enlistado
   - **French-Canadian Name:** Prénom du courtier ou agent inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4148,11 +4773,23 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Full Name = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Completo de Agente Enlistado
   - **French-Canadian Name:** Nom complet du courtier ou agent inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
+
+</details>
+
+<details><summary><code>ListAgentHomePhone</code></summary>
+
+  - **BEDES:** Contact Label = "Real estate agent" Telephone Number Label = "Home" Telephone Number = [value]
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Teléfono de Casa de Agente Enlistado
+  - **French-Canadian Name:** Numéro de téléphone du domicile du courtier ou agent inscripteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4160,33 +4797,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Contact ID = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Agente Enlistado
   - **French-Canadian Name:** Clé du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>ListAgentLastName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Apellido de Agente Enlistado
   - **French-Canadian Name:** Nom de famille du courtier ou agent inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListAgentMiddleName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Segundo Nombre de Agente Enlistado
   - **French-Canadian Name:** Deuxième prénom du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>ListAgentMlsId</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** ID de MLS de Agente Enlistado
+  - **French-Canadian Name:** ID MLS du courtier ou agent inscripteur
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
@@ -4194,42 +4842,42 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Telephone Number Label = "Mobile" Telephone Number = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Móvil de Agente Enlistado
   - **French-Canadian Name:** Numéro de cellulaire du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListAgentNamePrefix</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Prefijo de Agente Enlistado
   - **French-Canadian Name:** Titre de civilité du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListAgentNameSuffix</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sufijo de Agente Enlistado
   - **French-Canadian Name:** Suffixe du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListAgentNationalAssociationId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2020
-  - **Revision Date:** JAN 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 1/17/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -4238,11 +4886,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Telephone Number Label = "Work" Telephone Number = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Oficina de Agente Enlistado
   - **French-Canadian Name:** Numéro de téléphone du bureau du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4250,11 +4898,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Telephone Number Label = "Work" Telephone Extension = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión Telefónica de Agente Enlistado
   - **French-Canadian Name:** Poste téléphonique du bureau du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4262,11 +4910,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Telephone Number Label = "Pager" Telephone Number = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buscapersonas de Agente Enlistado
   - **French-Canadian Name:** Numéro de pagette du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4274,11 +4922,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Priority = "Primary" Telephone Number = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Preferido de Agente Enlistado
   - **French-Canadian Name:** Numéro de téléphone préféré du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4286,11 +4934,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Priority = "Primary" Telephone Extension = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión de Teléfono Preferido de Agente Enlistado
   - **French-Canadian Name:** Poste téléphonique préféré du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4298,52 +4946,64 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Real estate agent" Credential Number = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia Estatal de Agente Enlistado
   - **French-Canadian Name:** Permis délivré par l’état du courtier ou agent inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListAgentTollFreePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Gratuito de Agente Enlistado
   - **French-Canadian Name:** Numéro de téléphone sans frais du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>ListAgentURL</code></summary>
+
+  - **BEDES:** Contact Label = "Real estate agent" Contact URL = [value]
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** URL de Agente Enlistado
+  - **French-Canadian Name:** URL du site Web du courtier ou agent inscripteur
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListAgentVoiceMail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Buzón de Voz de Agente Enlistado
   - **French-Canadian Name:** Messagerie vocale du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListAgentVoiceMailExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext de Buzón de Voz de Agente Enlistado
   - **French-Canadian Name:** Poste de la messagerie vocale du courtier ou agent inscripteur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListOffice</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 14 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/14/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -4351,75 +5011,75 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ListOfficeAOR</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Despacho Enlistado de AOR
   - **French-Canadian Name:** Chambre/association immobilière du bureau inscripteur
-  - **Status Change Date:** APR 20 2012
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 4/20/2012
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListOfficeEmail</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Email de Despacho Enlistado
   - **French-Canadian Name:** Courriel du bureau inscripteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListOfficeFax</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fax de Despacho Enlistado
   - **French-Canadian Name:** Numéro de télécopieur du bureau inscripteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListOfficeKey</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Despacho Enlistado
   - **French-Canadian Name:** Clé du bureau inscripteur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>ListOfficeMlsId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Despacho Enlistado
   - **French-Canadian Name:** ID MLS du bureau inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>ListOfficeName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Despacho Enlistado
   - **French-Canadian Name:** Nom du bureau inscripteur
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListOfficeNationalAssociationId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2020
-  - **Revision Date:** JAN 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2020
+  - **Revision Date:** 1/17/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -4427,52 +5087,63 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ListOfficePhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Despacho Enlistado
   - **French-Canadian Name:** Numéro de téléphone du bureau inscripteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>ListOfficePhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Extensión Telefónica de Despacho Enlistado
   - **French-Canadian Name:** Poste téléphonique du bureau inscripteur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListOfficeURL</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** URL de Despacho Enlistado
   - **French-Canadian Name:** URL du site Web bureau inscripteur
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>ListPrice</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Precio de Venta
+  - **French-Canadian Name:** Prix de l’inscription
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>ListPriceLow</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Precio de Venta Más Bajo
   - **French-Canadian Name:** Prix inférieur de l’inscription
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListTeam</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 16 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/16/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -4480,11 +5151,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ListTeamKey</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Equipo de Ventas
   - **French-Canadian Name:** Clé de l’équipe du vendeur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -4492,11 +5163,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ListTeamName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Equipo de Ventas
   - **French-Canadian Name:** Nom de l’équipe du vendeur
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -4504,22 +5175,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ListingAgreement</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Acuerdo de Venta
   - **French-Canadian Name:** Contrat de courtage
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListingContractDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fecha de Contrato de Venta
   - **French-Canadian Name:** Date du contrat de courtage
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4527,11 +5198,24 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Identifier Label = "Listing"Identifier = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Listado
   - **French-Canadian Name:** ID de l’inscription
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
+  - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>ListingKey</code></summary>
+
+  - **BEDES:** Identifier Label = "Listing"Subaddress Type = "Key"Identifier = [value]
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Clave de Listado
+  - **French-Canadian Name:** Clé de l’inscription
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 1/9/2022
   - **Added in Version:** 1.5.0
 
 </details>
@@ -4539,20 +5223,31 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ListingService</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Servicio de Listado
   - **French-Canadian Name:** Service offert
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>ListingTerms</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Términos de Listado
+  - **French-Canadian Name:** Modalités de l’inscription
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ListingURL</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2019
-  - **Revision Date:** JAN 17 2019
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2019
+  - **Revision Date:** 1/17/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -4560,54 +5255,76 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ListingURLDescription</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2019
-  - **Revision Date:** JAN 17 2019
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2019
+  - **Revision Date:** 1/17/2019
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>LivingArea</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Área Habitable
+  - **French-Canadian Name:** Superficie habitable
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LivingAreaSource</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Área Habitable
   - **French-Canadian Name:** Source des mesures de la superficie habitable
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LivingAreaUnits</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades de Área Habitable
   - **French-Canadian Name:** Unité de mesure de la superficie habitable
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>LockBoxLocation</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Ubicación de Caja de Seguridad
+  - **French-Canadian Name:** Emplacement de la boîte à clés
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LockBoxSerialNumber</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Serie de Caja de Seguridad
   - **French-Canadian Name:** Numéro de série de la boîte à clés
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LockBoxType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Caja de Seguridad
   - **French-Canadian Name:** Type de boîte à clés
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4615,33 +5332,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Longitude = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Longitud
   - **French-Canadian Name:** Longitude
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LotDimensionsSource</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Dimensiones de Lote
   - **French-Canadian Name:** Source des dimensions du terrain
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
+
+</details>
+
+<details><summary><code>LotFeatures</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Características de Lote
+  - **French-Canadian Name:** Caractéristiques du terrain
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LotSizeAcres</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tamaño en Hectáreas de Lote
   - **French-Canadian Name:** Nombre d’acres du terrain
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
@@ -4649,22 +5377,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Spatial Unit Type = "Lot"Area = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área de Tamaño de Lote
   - **French-Canadian Name:** Superficie du terrain
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>LotSizeDimensions</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dimensiones de Tamaño de Lote
   - **French-Canadian Name:** Dimensions du terrain
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4672,11 +5400,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Spatial Unit Type = "Lot"Origin = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Tamaño de Lote
   - **French-Canadian Name:** Source des dimensions du terrain
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 3/27/2026
 
 </details>
 
@@ -4684,33 +5412,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Spatial Unit Type = "Lot"Area = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tamaño de Lote en Pies Cuadrados
   - **French-Canadian Name:** Superficie du terrain en pieds carrés
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>LotSizeUnits</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Unidades de Tamaño de Lote
+  - **French-Canadian Name:** Unité de mesure de la superficie du terrain
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MLSAreaMajor</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área Mayor MLS
   - **French-Canadian Name:** Secteur principal du MLS
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MLSAreaMinor</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área Menor MLS
   - **French-Canadian Name:** Secteur secondaire du MLS
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4718,11 +5457,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Location = "Ground floor"Spatial Unit Type = "Restroom"Quantity = [value]
   - **Property Types:** RESI , RLSE
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Baños Piso Principal
   - **French-Canadian Name:** Salles de bains au rez-de-chaussée
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -4731,11 +5470,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Location = "Ground floor"Spatial Unit Type = "Bedroom"Quantity = [value]
   - **Property Types:** RESI , RLSE
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Habitaciones Piso Principal
   - **French-Canadian Name:** Chambres à coucher au rez-de-chaussée
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -4743,33 +5482,33 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>MaintenanceExpense</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Costo Mantenimiento
   - **French-Canadian Name:** Dépenses en entretien
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MajorChangeTimestamp</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Cambio Principal
   - **French-Canadian Name:** Heure et date de la mise à jour importante
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MajorChangeType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Cambio Principal
   - **French-Canadian Name:** Type de mise à jour importante
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4777,33 +5516,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupancy Classification = "Manufactured home"Make = [value]
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca
   - **French-Canadian Name:** Marque
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>ManagerExpense</code></summary>
+
+  - **Property Types:** RINC
+  - **Status:** Active
+  - **Spanish Name:** Gasto Administración
+  - **French-Canadian Name:** Dépenses en gestion
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MapCoordinate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Coordenadas en Mapa
   - **French-Canadian Name:** Coordonnées cartographiques
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MapCoordinateSource</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Coordenadas en Mapa
   - **French-Canadian Name:** Source des coordonnées cartographiques
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4811,19 +5561,19 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** MapURL = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** URL Mapa
   - **French-Canadian Name:** URL de la carte
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Media</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 21 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/21/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -4831,44 +5581,56 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>MiddleOrJuniorSchool</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Escuela Media o Intermedia
   - **French-Canadian Name:** École intermédiaire
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MiddleOrJuniorSchoolDistrict</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Distrito de Escuela Media o Intermedia
   - **French-Canadian Name:** District de l’école intermédiaire
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>MlsStatus</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Estado de MLS
+  - **French-Canadian Name:** Statut MLS
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
+  - **Added in Version:** 1.5.0
 
 </details>
 
 <details><summary><code>MobileDimUnits</code></summary>
 
   - **Property Types:** MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades de Dimensión Móvil
   - **French-Canadian Name:** Unité de mesure linéaire
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>MobileHomeRemainsYN</code></summary>
 
   - **Property Types:** MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Restos Casa Móvil SN
   - **French-Canadian Name:** Maison mobile incluse O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4876,11 +5638,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupancy Classification = "Manufactured home"Length = [value]
   - **Property Types:** MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Longitud Móvil
   - **French-Canadian Name:** Longueur de la maison mobile
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4888,11 +5650,23 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupancy Classification = "Manufactured home"Width = [value]
   - **Property Types:** MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Anchura Móvil
   - **French-Canadian Name:** Largeur de la maison mobile
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>Model</code></summary>
+
+  - **BEDES:** Occupancy Classification = "Manufactured home"Model Number = [value]
+  - **Property Types:** RESI , RLSE , MOBI
+  - **Status:** Active
+  - **Spanish Name:** Modelo
+  - **French-Canadian Name:** Modèle
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4900,33 +5674,56 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Date Status = "Modified"Date = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
   - **French-Canadian Name:** Heure et date de la modification
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>NetOperatingIncome</code></summary>
 
   - **Property Types:** RINC , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ingreso Operativo Neto
   - **French-Canadian Name:** Résultat net d’exploitation
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>NewConstructionYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nueva Construcción SN
   - **French-Canadian Name:** Nouvelle construction O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>NewTaxesExpense</code></summary>
+
+  - **Property Types:** RINC
+  - **Status:** Active
+  - **Spanish Name:** Gasto Nuevos Impuestos
+  - **French-Canadian Name:** Nouvelles dépenses fiscales
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>NumberOfBuildings</code></summary>
+
+  - **BEDES:** Spatial Unit Type = "Building"Quantity = [value]
+  - **Property Types:** RINC , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Número de Edificios
+  - **French-Canadian Name:** Nombre de bâtiments
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4934,11 +5731,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupant Quantity Type = "Full time equivalent workers"Quantity = [value]
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Empleados Tiempo Completo
   - **French-Canadian Name:** Nombre d’employés à temps plein
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4946,22 +5743,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Spatial Unit Type = "Lot"Quantity = [value]
   - **Property Types:** LAND
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Lotes
   - **French-Canadian Name:** Nombre de lots
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>NumberOfPads</code></summary>
 
   - **Property Types:** MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Apartamentos
   - **French-Canadian Name:** Nombre d’emplacements
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4969,11 +5766,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupant Quantity Type = "Part time workers"Quantity = [value]
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Empleados Tiempo Parcial
   - **French-Canadian Name:** Nombre d’employés à temps partiel
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4981,11 +5778,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Resource = "Electricity"Control Technology = "Meter"Quantity = [value]
   - **Property Types:** RINC , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Medidores Eléctricos Individuales
   - **French-Canadian Name:** Nombre de compteurs électriques séparés
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -4993,11 +5790,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Resource = "Natural gas"Control Technology = "Meter"Quantity = [value]
   - **Property Types:** RINC , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Medidores de Gas Individuales
   - **French-Canadian Name:** Nombre de compteurs de gaz séparés
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5005,11 +5802,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Resource = "Water"Control Technology = "Meter"Quantity = [value]
   - **Property Types:** RINC , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Medidores de Agua Individuales
   - **French-Canadian Name:** Nombre de compteurs d’eau séparés
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5017,11 +5814,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Spatial Unit Type = "Unit"Quantity = [value]
   - **Property Types:** RESI , RLSE
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Unidades en Comunidad
   - **French-Canadian Name:** Nombre d’unités dans la communauté
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5029,22 +5826,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Ownership Status = "Leased"Spatial Unit Type = "Apartment unit"Quantity = [value]
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Unidades Arrendadas
   - **French-Canadian Name:** Nombre d’unités sous contrat de location
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>NumberOfUnitsMoMo</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Unidades Mo Mo
   - **French-Canadian Name:** Nombre d’unités pouvant être louées au mois
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5052,11 +5849,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Spatial Unit Type = "Unit"Quantity = [value]
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Unidades Totales
   - **French-Canadian Name:** Nombre d’unités
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5064,11 +5861,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupied Status = "Vacant"Spatial Unit Type = "Apartment unit"Quantity = [value]
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Unidades Disponibles
   - **French-Canadian Name:** Nombre d’unités inoccupées
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5076,11 +5873,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Occupant"Full Name = [value]
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Ocupante
   - **French-Canadian Name:** Nom de l’occupant
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5088,11 +5885,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Occupant"Telephone Number = [value]
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Ocupante
   - **French-Canadian Name:** Numéro de téléphone de l’occupant
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5100,41 +5897,72 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupied Status = [value]
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Ocupante
   - **French-Canadian Name:** Type d’occupant
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OffMarketDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fecha de Retiro del Mercado
   - **French-Canadian Name:** Date de retrait du marché
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>OffMarketTimestamp</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo Fuera del Mercado
+  - **French-Canadian Name:** Heure et date du retrait du marché
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OnMarketDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fecha de Lanzamiento al Mercado
   - **French-Canadian Name:** Date de l’entrée sur le marché
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>OnMarketTimestamp</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo Lanzamiento al Mercado
+  - **French-Canadian Name:** Heure et date de l’entrée sur le marché
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>OpenHouse</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 1/23/2022
+  - **Revision Date:** 2/10/2022
+  - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>OpenHouseModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** OCT 24 2023
-  - **Revision Date:** OCT 24 2023
+  - **Status:** Active
+  - **Status Change Date:** 10/24/2023
+  - **Revision Date:** 10/24/2023
   - **Added in Version:** 2.0.0
 
 </details>
@@ -5143,44 +5971,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Premises Enclosure = "Open"Spatial Unit Type = "Parking space"Quantity = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Espacios Abiertos de Estacionamiento
   - **French-Canadian Name:** Espaces de stationnement non couverts
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OpenParkingYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estacionamiento Abierto SN
   - **French-Canadian Name:** Stationnement non couvert O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OperatingExpense</code></summary>
 
   - **Property Types:** RINC , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto Operativo
   - **French-Canadian Name:** Dépenses d’exploitation
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OperatingExpenseIncludes</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto Operativo Incluye
   - **French-Canadian Name:** Compris dans les dépenses d’exploitation
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5188,30 +6016,30 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Date Status = "Created"Date = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Entrada Original
   - **French-Canadian Name:** Heure et date de l’entrée originale
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OriginalListPrice</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Precio Original de Listado
   - **French-Canadian Name:** Prix initial de l’inscription
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OriginatingSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -5219,11 +6047,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>OriginatingSystemID</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Sistema de Origen
   - **French-Canadian Name:** ID du système d’origine
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -5231,11 +6059,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>OriginatingSystemKey</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Sistema de Origen
   - **French-Canadian Name:** Clé du système d’origine
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
   - **Added in Version:** 1.4.0
 
 </details>
@@ -5243,11 +6071,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>OriginatingSystemName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Sistema de Origen
   - **French-Canadian Name:** Nom du système d’origine
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
   - **Added in Version:** 1.5.0
 
 </details>
@@ -5255,33 +6083,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>OtherEquipment</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro Equipo
   - **French-Canadian Name:** Autres équipements
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OtherExpense</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro Gasto
   - **French-Canadian Name:** Autres dépenses
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OtherParking</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro Estacionamiento
   - **French-Canadian Name:** Autres espaces de stationnement
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>OtherStructures</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Otras Estructuras
+  - **French-Canadian Name:** Autres structures
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
 
 </details>
 
@@ -5289,22 +6128,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Owner"Full Name = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre del Propietario
   - **French-Canadian Name:** Nom du propriétaire
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>OwnerPays</code></summary>
 
   - **Property Types:** RLSE , RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Pago del Propietario
   - **French-Canadian Name:** Payé par le propriétaire
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5312,11 +6151,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Owner"Telephone Number = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono del Propietario
   - **French-Canadian Name:** Numéro de téléphone du propriétaire
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>Ownership</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Propiedad
+  - **French-Canadian Name:** Propriété
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5324,11 +6174,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Contact Label = "Business"Ownership = [value]
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Propiedad
   - **French-Canadian Name:** Type de propriété
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5336,11 +6186,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Identifier Label = "Assessor parcel number"Identifier = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Parcela
   - **French-Canadian Name:** Numéro de parcelle
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
@@ -5348,11 +6198,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupancy Classification = "Manufactured home"Premises Level = 'Site"Contact Label = "Property manager"Contact Name = [value]
   - **Property Types:** MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Gerente de Parque
   - **French-Canadian Name:** Nom du gestionnaire du parc
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5360,22 +6210,34 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupancy Classification = "Manufactured home"Premises Level = 'Site"Contact Label = "Property manager"Telephone Number = [value]
   - **Property Types:** MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono Gerente de Parque
   - **French-Canadian Name:** Numéro de téléphone du gestionnaire du parc
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>ParkName</code></summary>
+
+  - **BEDES:** Occupancy Classification = "Manufactured home"Premises Level = 'Site"Identifier Label = "Name"Identifier = [value]
+  - **Property Types:** MOBI , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Nombre de Parque
+  - **French-Canadian Name:** Nom du parc
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ParkingFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Estacionamiento
   - **French-Canadian Name:** Caractéristiques du stationnement
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5383,66 +6245,66 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Interval Measure = "Total"Spatial Unit Type = "Parking space"Quantity = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Total de Estacionamiento
   - **French-Canadian Name:** Espaces de stationnement totaux
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PastureArea</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área de Pasto
   - **French-Canadian Name:** Superficie allouée au pâturage
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PatioAndPorchFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Patio Y Porche
   - **French-Canadian Name:** Caractéristiques du patio/de la véranda
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PendingTimestamp</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Pendiente
   - **French-Canadian Name:** Heure et date où le statut En attente a été sélectionné
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PestControlExpense</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto Control de Plagas
   - **French-Canadian Name:** Dépenses relatives à la lutte antiparasitaire
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PetsAllowed</code></summary>
 
   - **Property Types:** RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Se Permiten Mascotas
   - **French-Canadian Name:** Animaux permis
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** APR 04 2023
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 1.4.0
 
 </details>
@@ -5450,33 +6312,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>PhotosChangeTimestamp</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Cambio de Fotografías
   - **French-Canadian Name:** Heure et date de la mise à jour des photos
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>PhotosCount</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Conteo de Fotografías
   - **French-Canadian Name:** Nombre de photos
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PoolExpense</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto de Piscina
   - **French-Canadian Name:** Dépenses relatives à la piscine
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>PoolFeatures</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Características de Piscina
+  - **French-Canadian Name:** Caractéristiques de la piscine
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5484,44 +6357,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Water Feature Type = "Pool"
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Piscina Privada SN
   - **French-Canadian Name:** Piscine privée O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Possession</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Posesión
   - **French-Canadian Name:** Prise de possession
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PossibleUse</code></summary>
 
   - **Property Types:** LAND
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Uso Posible
   - **French-Canadian Name:** Utilisation possible
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>PostalCity</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ciudad Postal
   - **French-Canadian Name:** Ville postale
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5529,11 +6402,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** ZIP Code = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal
   - **French-Canadian Name:** Code postal
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5541,21 +6414,21 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** ZIP Plus 4 = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Código Postal Más 4
   - **French-Canadian Name:** Code postal +4
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>PowerProduction</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Producción de Energía
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
@@ -5563,11 +6436,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>PowerProductionType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Producción de Energía
   - **French-Canadian Name:** Type de système production d’énergie
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 3/27/2026
   - **Added in Version:** 1.5.0
 
 </details>
@@ -5575,9 +6448,9 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>PowerProductionYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 10 2019
-  - **Revision Date:** JAN 10 2019
+  - **Status:** Active
+  - **Status Change Date:** 1/10/2019
+  - **Revision Date:** 1/10/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -5585,55 +6458,55 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>PreviousListPrice</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Precio Anterior de Listado
   - **French-Canadian Name:** Prix antérieur de l’inscription
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PriceChangeTimestamp</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Cambio de Precio
   - **French-Canadian Name:** Heure et date de la mise à jour du prix de l’inscription
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PrivateOfficeRemarks</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Observaciones de Oficina Privada
   - **French-Canadian Name:** Commentaires privés du bureau
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PrivateRemarks</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Observaciones Privadas
   - **French-Canadian Name:** Commentaires privés
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ProfessionalManagementExpense</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Costo de Administración Profesional
   - **French-Canadian Name:** Dépenses en gestion professionnelle
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5641,31 +6514,44 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** If (PropertyAttachedYN == true) Vertical Surroundings = "Attached" Else Vertical Surroundings = "Unknown"
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Propiedad Adjunta SN
   - **French-Canadian Name:** Propriété attenante O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>PropertyCondition</code></summary>
+
+  - **BEDES:** Identifier Label = "Premises"Condition = [value]
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Condición de la Propiedad
+  - **French-Canadian Name:** Condition de la propriété
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.4.0
 
 </details>
 
 <details><summary><code>PropertySubType</code></summary>
 
   - **Property Types:** RESI , RLSE , MOBI , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Subtipo de Propiedad
   - **French-Canadian Name:** Sous-type de propriété
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>PropertyTimeZoneName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
-  - **Status Change Date:** MAR 17 2022
-  - **Revision Date:** MAR 17 2022
+  - **Status:** Active
+  - **Status Change Date:** 3/17/2022
+  - **Revision Date:** 10/11/2024
   - **Added in Version:** 2.0.0
 
 </details>
@@ -5673,9 +6559,9 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>PropertyTimeZoneObservesDstYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
-  - **Status Change Date:** MAR 17 2022
-  - **Revision Date:** MAR 17 2022
+  - **Status:** Active
+  - **Status Change Date:** 3/17/2022
+  - **Revision Date:** 3/17/2022
   - **Added in Version:** 2.0.0
 
 </details>
@@ -5683,120 +6569,153 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>PropertyTimeZoneStandardOffset</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
-  - **Status Change Date:** MAR 17 2022
-  - **Revision Date:** MAR 17 2022
+  - **Status:** Active
+  - **Status Change Date:** 3/17/2022
+  - **Revision Date:** 3/17/2022
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>PropertyType</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Tipo de Propiedad
+  - **French-Canadian Name:** Type de propriété
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PublicRemarks</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Observaciones Públicas
   - **French-Canadian Name:** Commentaires publics
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>PublicSurveyRange</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Rango de Estudio de Terreno
   - **French-Canadian Name:** Rangée selon le Public Land Survey System
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PublicSurveySection</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estudio de Terreno de Sección
   - **French-Canadian Name:** Section selon le Public Land Survey System
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PublicSurveyTownship</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estudio de Terreno de Municipio
   - **French-Canadian Name:** Comté selon le Public Land Survey System
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>PurchaseContractDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fecha de Contrato de Compra
   - **French-Canadian Name:** Date du contrat d’achat
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>RVParkingDimensions</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dimensiones de Estacionamiento de Vehículo Recreativo
   - **French-Canadian Name:** Dimensions de l’espace de stationnement pour VR
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>RangeArea</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Rango de Área
   - **French-Canadian Name:** Superficie de la rangée
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>RentControlYN</code></summary>
+
+  - **Property Types:** RINC , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Control de Alquiler SN
+  - **French-Canadian Name:** Contrôle des loyers O/N
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>RentIncludes</code></summary>
+
+  - **Property Types:** RLSE , MOBI
+  - **Status:** Active
+  - **Spanish Name:** Alquiler Incluye
+  - **French-Canadian Name:** Compris dans le loyer
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>RoadFrontageType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Fachada Vial
   - **French-Canadian Name:** Type de façade de la route
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>RoadResponsibility</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Responsabilidad Vial
   - **French-Canadian Name:** Responsable de l’entretien de la route
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>RoadSurfaceType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Superficie Vial
   - **French-Canadian Name:** Type de surface de la route
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
 
 </details>
 
@@ -5804,11 +6723,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Location = "Roof"Finish = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tejado
   - **French-Canadian Name:** Toiture
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
@@ -5816,21 +6735,21 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Premises Level = "Space" Occupancy Classification = [value]
   - **Property Types:** RESI , RLSE , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Habitación
   - **French-Canadian Name:** Type de pièce
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** APR 11 2022
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>Rooms</code></summary>
 
   - **Property Types:** RESI , RLSE , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Habitaciones
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
@@ -5839,11 +6758,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Spatial Unit Type = "Room" Quantity = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Total Habitaciones
   - **French-Canadian Name:** Pièces totales
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5851,11 +6770,34 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupant Quantity Type = "Capacity"Quantity = [vale]
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Asientos
   - **French-Canadian Name:** Nombre de places
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>SecurityFeatures</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Características de Seguridad
+  - **French-Canadian Name:** Caractéristiques de la sécurité
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>SeniorCommunityYN</code></summary>
+
+  - **BEDES:** If (SeniorCommunityYN == true) Occupant Type = "Independent seniors community" Else Occupant Type = "Unknown"
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Comunidad de Tercera Edad SN
+  - **French-Canadian Name:** Communauté de personnes âgées O/N
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -5863,55 +6805,55 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Occupancy Classification = "Manufactured home"Serial Number = [value]
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Serie U
   - **French-Canadian Name:** Numéro de série U
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>SerialX</code></summary>
 
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Serie X
   - **French-Canadian Name:** Numéro de série X
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>SerialXX</code></summary>
 
   - **Property Types:** RESI , RLSE , MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Serie XX
   - **French-Canadian Name:** Numéro de série XX
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Sewer</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Alcantarillado
   - **French-Canadian Name:** Égout
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>ShowingAdvanceNotice</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Aviso Previo Exhibición
   - **French-Canadian Name:** Préavis relatif à une visite
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.6.0
 
 </details>
@@ -5919,11 +6861,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ShowingAttendedYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Asistencia Exhibición SN
   - **French-Canadian Name:** Visite supervisée O/N
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.6.0
 
 </details>
@@ -5931,9 +6873,9 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ShowingConsiderations</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** AUG 17 2023
-  - **Revision Date:** AUG 18 2023
+  - **Status:** Active
+  - **Status Change Date:** 8/17/2023
+  - **Revision Date:** 8/18/2023
   - **Added in Version:** 2.0.0
 
 </details>
@@ -5941,22 +6883,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ShowingContactName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Contacto Exhibición
   - **French-Canadian Name:** Nom du contact pour la visite
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ShowingContactPhone</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Teléfono de Contacto Exhibición
   - **French-Canadian Name:** Numéro de téléphone du contact pour la visite
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -5964,11 +6906,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ShowingContactPhoneExt</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Ext Telefónica de Contacto Exhibición
   - **French-Canadian Name:** Poste téléphonique du contact pour la visite
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
 
 </details>
@@ -5976,22 +6918,34 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ShowingContactType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Contacto Exhibición
   - **French-Canadian Name:** Type de contact pour la visite
-  - **Status Change Date:** NOV 19 2013
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/19/2013
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ShowingDays</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Días de Exhibición
   - **French-Canadian Name:** Jours de visite
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>ShowingEndTime</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Hora de Finalización de Exhibición
+  - **French-Canadian Name:** Heure de fin de la visite
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.6.0
 
 </details>
@@ -5999,22 +6953,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ShowingInstructions</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Instrucciones de Exhibición
   - **French-Canadian Name:** Instructions relatives à la visite
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ShowingRequirements</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Requisitos de Exhibición
   - **French-Canadian Name:** Exigences relatives à la visite
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.6.0
 
 </details>
@@ -6022,30 +6976,42 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>ShowingServiceName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** AUG 17 2023
-  - **Revision Date:** AUG 18 2023
+  - **Status:** Active
+  - **Status Change Date:** 8/17/2023
+  - **Revision Date:** 8/18/2023
   - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>ShowingStartTime</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Hora de Inicio de Exhibición
+  - **French-Canadian Name:** Heure de début de la visite
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
+  - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>SignOnPropertyYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Propiedad con Letrero SN
   - **French-Canadian Name:** Pancarte sur la propriété O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>SimpleDaysOnMarket</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 10 2019
-  - **Revision Date:** JAN 10 2019
+  - **Status:** Active
+  - **Status Change Date:** 1/10/2019
+  - **Revision Date:** 1/10/2019
   - **Added in Version:** 2.0.0
 
 </details>
@@ -6053,28 +7019,28 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>Skirt</code></summary>
 
   - **Property Types:** MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Rodeo
   - **French-Canadian Name:** Jupe
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>SocialMedia</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 22 2022
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 1/22/2022
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>SourceSystem</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 17 2022
-  - **Revision Date:** FEB 10 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/17/2022
+  - **Revision Date:** 2/10/2022
   - **Added in Version:** 1.7.0
 
 </details>
@@ -6082,11 +7048,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>SourceSystemID</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Sistema Fuente
   - **French-Canadian Name:** ID du système source
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -6094,11 +7060,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>SourceSystemKey</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave Sistema Fuente
   - **French-Canadian Name:** Clé du système source
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
   - **Added in Version:** 1.5.0
 
 </details>
@@ -6106,11 +7072,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>SourceSystemName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre Sistema Fuente
   - **French-Canadian Name:** Nom du système source
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -6118,11 +7084,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>SpaFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Spa
   - **French-Canadian Name:** Caractéristiques du spa
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6130,22 +7096,56 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Water Feature Type = "Hot tub"
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Spa SN
   - **French-Canadian Name:** Spa O/N
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>SpecialLicenses</code></summary>
+
+  - **Property Types:** BUSO
+  - **Status:** Active
+  - **Spanish Name:** Licencias Especiales
+  - **French-Canadian Name:** Permis particulier
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>SpecialListingConditions</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Condiciones Especiales de Listado
   - **French-Canadian Name:** Conditions particulières
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>StandardStatus</code></summary>
+
+  - **BEDES:** Identifier Label = "Listing" Account Status = [value]
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Estado Estándar
+  - **French-Canadian Name:** Statut standard
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
+  - **Added in Version:** 1.5.0
+
+</details>
+
+<details><summary><code>StartShowingDate</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Status Change Date:** 5/21/2020
+  - **Revision Date:** 5/21/2020
+  - **Added in Version:** 2.0.0
 
 </details>
 
@@ -6153,22 +7153,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** State = [state code]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado o Provincia
   - **French-Canadian Name:** État ou province
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>StateRegion</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado Región
   - **French-Canadian Name:** Région de l’état
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -6176,22 +7176,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>StatusChangeTimestamp</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Cambio de Estado
   - **French-Canadian Name:** Heure et date de la mise à jour du statut
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Stories</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Pisos
   - **French-Canadian Name:** Étages
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6199,11 +7199,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Spatial Unit Type = "Building" Spatial Unit Type = "Floor" Quantity = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Total Pisos
   - **French-Canadian Name:** Nombre d’étages
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>StreetAdditionalInfo</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Información Adicional de Calle
+  - **French-Canadian Name:** Autre information sur la rue
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6211,11 +7222,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Street Name Pre Directional = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Prefijo Dirección de Calle
   - **French-Canadian Name:** Point cardinal apposé en préfixe
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6223,11 +7234,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Street Name Post Directional = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sufijo Dirección de Calle
   - **French-Canadian Name:** Point cardinal apposé en suffixe
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6235,22 +7246,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Street Name = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Calle
   - **French-Canadian Name:** Nom de la rue
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>StreetNumber</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Calle
   - **French-Canadian Name:** Numéro de la rue
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
@@ -6258,11 +7269,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Address Number = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Calle en Números
   - **French-Canadian Name:** Numéro de la rue en chiffres
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6270,11 +7281,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Street Name Post Type = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Sufijo de Calle
   - **French-Canadian Name:** Suffixe de la rue
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6282,22 +7293,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Street Name Post Modifier = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Modificador de Sufijo de Calle
   - **French-Canadian Name:** Autres suffixes
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>StructureType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Estructura
   - **French-Canadian Name:** Type de structure
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.5.0
 
 </details>
@@ -6305,55 +7316,55 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>SubAgencyCompensation</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Compensación de Subagencia
   - **French-Canadian Name:** Rémunération de l’agence secondaire
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>SubAgencyCompensationType</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Compensación de Subagencia
   - **French-Canadian Name:** Type de rémunération de l’agence secondaire
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>SubdivisionName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Subdivisión
   - **French-Canadian Name:** Nom de la sous-division
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>SuppliesExpense</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto Suministros
   - **French-Canadian Name:** Dépenses en fournitures
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>SyndicateTo</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Redifundir a
   - **French-Canadian Name:** Afficher sur
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
   - **Added in Version:** 1.4.0
 
 </details>
@@ -6361,11 +7372,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>SyndicationRemarks</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Observaciones de Redifusión
   - **French-Canadian Name:** Commentaires sur l’affichage
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6373,20 +7384,30 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Tax Annual Amount = [value]
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Monto Anual de Impuestos
   - **French-Canadian Name:** Montant annuel des taxes
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>TaxAnnualAmountPerLivingAreaUnit</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 17 2020
-  - **Revision Date:** DEC 17 2020
+  - **Status:** Active
+  - **Status Change Date:** 12/17/2020
+  - **Revision Date:** 12/17/2020
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>TaxAnnualAmountPerSquareFoot</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
+  - **Status:** Active
+  - **Status Change Date:** 12/17/2020
+  - **Revision Date:** 12/17/2020
   - **Added in Version:** 2.0.0
 
 </details>
@@ -6395,11 +7416,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Tax Annual Amount = [value]
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Valor Tasado de Impuestos
   - **French-Canadian Name:** Valeur estimée des taxes
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6407,11 +7428,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Identifier Label = "Tax block"Identifier = [value]
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Bloque de Impuestos
-  - **French-Canadian Name:** Taxes foncières – Bloc
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Taxes foncières - Bloc
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6419,11 +7440,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Identifier Label = "Tax book number"Identifier = [value]
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Libro de Impuestos
-  - **French-Canadian Name:** Taxes foncières – Numéro dans les livres
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Taxes foncières - Numéro dans les livres
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>TaxLegalDescription</code></summary>
+
+  - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Descripción Legal de Impuestos
+  - **French-Canadian Name:** Taxes foncières - Description cadastrale
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6431,11 +7463,23 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Identifier Label = "Tax lot"Identifier = [value]
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Lote de Impuestos
-  - **French-Canadian Name:** Taxes foncières – Lot
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Taxes foncières - Lot
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>TaxMapNumber</code></summary>
+
+  - **BEDES:** Identifier Label = "Tax map number"Identifier = [value]
+  - **Property Types:** RESI , RINC , LAND , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Número de Mapa de Impuestos
+  - **French-Canadian Name:** Taxes foncières - Numéro sur la carte
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6443,11 +7487,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Tax Other Assessment Amount = [value]
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Otro Monto de Evaluación Anual de Impuestos
-  - **French-Canadian Name:** Taxes foncières – Autres évaluations annuelles
-  - **Status Change Date:** JUL 21 2015
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Taxes foncières - Autres évaluations annuelles
+  - **Status Change Date:** 7/21/2015
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6455,11 +7499,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Identifier Label = "Tax parcel letter"Identifier = [value]
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Carta de Parcela de Impuestos
-  - **French-Canadian Name:** Taxes foncières – Lettre de la parcelle
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Taxes foncières - Lettre de la parcelle
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6467,11 +7511,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Tax Status Current = [value]
   - **Property Types:** MOBI
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Estado Actual de Impuestos
-  - **French-Canadian Name:** Taxes foncières – Statut actuel
-  - **Status Change Date:** AUG 08 2017
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Taxes foncières - Statut actuel
+  - **Status Change Date:** 8/8/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
@@ -6479,11 +7523,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Identifier Label = "Tax tract"Identifier = [value]
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tracto Fiscal
-  - **French-Canadian Name:** Taxes foncières – Lotissement
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Taxes foncières - Lotissement
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6491,66 +7535,88 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Tax Year = [value]
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Año Fiscal
-  - **French-Canadian Name:** Taxes foncières – Année
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **French-Canadian Name:** Taxes foncières - Année
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>TenantPays</code></summary>
 
   - **Property Types:** RLSE , RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Arrendatario Paga
   - **French-Canadian Name:** Payé par le locataire
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Topography</code></summary>
 
   - **Property Types:** LAND , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Topografía
   - **French-Canadian Name:** Topographie
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>TotalActualRent</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Alquiler Real Total
   - **French-Canadian Name:** Total actuel des loyers
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Township</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Municipio
   - **French-Canadian Name:** Canton
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>TransactionBrokerCompensation</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Compensación de Corredor de Transacciones
   - **French-Canadian Name:** Rémunération versée au courtier ou agent responsable de la transaction
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>TransactionBrokerCompensationType</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Tipo de Compensación de Corredor de Transacción
+  - **French-Canadian Name:** Type de rémunération versée au courtier ou agent responsable de la transaction
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>TrashExpense</code></summary>
+
+  - **Property Types:** RINC , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Gasto Desechos
+  - **French-Canadian Name:** Dépenses relatives à la collecte des ordures
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6558,32 +7624,32 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Subaddress Type = "Unit"Subaddress Identifier = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Número de Unidad
   - **French-Canadian Name:** Numéro d’unité
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>UnitTypeType</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipo de Unidad
   - **French-Canadian Name:** Type de type d’unité
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** APR 11 2022
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>UnitTypes</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tipos de Unidades
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
@@ -6591,22 +7657,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>UnitsFurnished</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Unidades Amuebladas
   - **French-Canadian Name:** Unités meublées
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>UniversalPropertyId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID Universal de Propiedad
   - **French-Canadian Name:** Identifiant universel de propriété
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.6.0
 
 </details>
@@ -6614,10 +7680,10 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>UniversalPropertySubId</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **French-Canadian Name:** Sous-identifiant universel de propriété
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.7.0
 
 </details>
@@ -6625,188 +7691,233 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 <details><summary><code>UnparsedAddress</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Dirección No Analizada
   - **French-Canadian Name:** Adresse non segmentée
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
+
+</details>
+
+<details><summary><code>Utilities</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
+  - **Status:** Active
+  - **Spanish Name:** Servicios Públicos
+  - **French-Canadian Name:** Services publics
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>VacancyAllowance</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Concesión de Vacantes
   - **French-Canadian Name:** Provision pour unités inoccupées
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>VacancyAllowanceRate</code></summary>
 
   - **Property Types:** COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tasa de Concesión de Vacantes
   - **French-Canadian Name:** Taux de la provision pour unités inoccupées
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Vegetation</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Vegetación
   - **French-Canadian Name:** Végétation
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 3/27/2026
 
 </details>
 
 <details><summary><code>VideosChangeTimestamp</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo Cambio de Videos
   - **French-Canadian Name:** Heure et date de la mise à jour de la vidéo
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>VideosCount</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Conteo de Videos
   - **French-Canadian Name:** Nombre de vidéos
-  - **Status Change Date:** APR 20 2012
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 4/20/2012
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>View</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Vista
   - **French-Canadian Name:** Vue
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ViewYN</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Vista SN
   - **French-Canadian Name:** Vue O/N
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>VirtualTourURLBranded</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Tour Virtual con URL con Marca
   - **French-Canadian Name:** URL de la visite virtuelle avec marque
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 8/25/2023
+
+</details>
+
+<details><summary><code>VirtualTourURLUnbranded</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Tour Virtual con URL sin Marca
+  - **French-Canadian Name:** URL de la visite virtuelle sans marque
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
+
+</details>
+
+<details><summary><code>WalkScore</code></summary>
+
+  - **BEDES:** Walking Score = [value]
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM
+  - **Status:** Active
+  - **Spanish Name:** Puntaje Caminatas
+  - **French-Canadian Name:** Indice WalkScore
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>WaterBodyName</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Nombre de Masa de Agua
   - **French-Canadian Name:** Nom du plan d’eau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>WaterSewerExpense</code></summary>
 
   - **Property Types:** RINC , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gasto Alcantarillado
   - **French-Canadian Name:** Dépenses relatives à l’eau et aux égouts
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>WaterSource</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fuente de Agua
   - **French-Canadian Name:** Source d’eau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>WaterfrontFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Frente Marítimo
   - **French-Canadian Name:** Caractéristiques du bord de l’eau
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 1.4.0
+
+</details>
+
+<details><summary><code>WaterfrontYN</code></summary>
+
+  - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
+  - **Status:** Active
+  - **Spanish Name:** Frente Marítimo SN
+  - **French-Canadian Name:** Bord de l’eau O/N
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>WindowFeatures</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Características de Ventana
   - **French-Canadian Name:** Caractéristiques des fenêtres
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>WithdrawnDate</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , LAND , MOBI , FARM , COMS , COML , BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Fecha de Retiro
   - **French-Canadian Name:** Date de retrait
-  - **Status Change Date:** JUN 21 2016
-  - **Revision Date:** APR 04 2023
+  - **Status Change Date:** 6/21/2016
+  - **Revision Date:** 4/4/2023
 
 </details>
 
 <details><summary><code>WoodedArea</code></summary>
 
   - **Property Types:** FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Área de Bosques
   - **French-Canadian Name:** Zone boisée
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>WorkmansCompensationExpense</code></summary>
 
   - **Property Types:** RINC
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Gastos de Seguro de Compensación del Trabajador
   - **French-Canadian Name:** Dépenses d’indemnisation pour accidents du travail
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6814,22 +7925,22 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Construction Status = "Completed"Construction Status Date = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Año de Construcción
   - **French-Canadian Name:** Année de construction
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** AUG 25 2023
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 8/25/2023
 
 </details>
 
 <details><summary><code>YearBuiltDetails</code></summary>
 
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Detalles de Año de Construcción
   - **French-Canadian Name:** Détails relatifs à l’année de construction
-  - **Status Change Date:** NOV 09 2011
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 11/9/2011
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6837,11 +7948,11 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Action Category = "Major remodel"Implementation Status = "Completed"Implementation Status Date = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Año de Construcción Efectivo
   - **French-Canadian Name:** Année où la structure a été rebâtie ou rénovée
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
@@ -6849,50 +7960,63 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
   - **BEDES:** Origin = [value]
   - **Property Types:** RESI , RLSE , RINC , MOBI , FARM
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Año de Construcción
   - **French-Canadian Name:** Source de l’année de construction
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
+
+</details>
+
+<details><summary><code>YearEstablished</code></summary>
+
+  - **Property Types:** BUSO
+  - **Status:** Active
+  - **Spanish Name:** Año de Establecimiento
+  - **French-Canadian Name:** Année de création de l’entreprise
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>YearsCurrentOwner</code></summary>
 
   - **Property Types:** BUSO
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Años de Posesión Actual
   - **French-Canadian Name:** Nombre d’années en tant que propriétaire
-  - **Status Change Date:** JUL 03 2014
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 7/3/2014
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>Zoning</code></summary>
 
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Zonificación
   - **French-Canadian Name:** Zonage
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 <details><summary><code>ZoningDescription</code></summary>
 
   - **Property Types:** RESI , RINC , LAND , MOBI , FARM , COMS , COML
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Descripción de Zonificación
   - **French-Canadian Name:** Description du zonage
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 6/17/2021
 
 </details>
 
 ## Lookups
 
 ### AccessibilityFeatures
+
+35 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/AccessibilityFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -6933,6 +8057,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Walker-Accessible Stairs` | Treads are minimum 25" deep, with maximum 4" rise and minimum 36" wide. |
 
 ### Appliances
+
+75 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Appliances/)
 
 | Value | Definition |
 |---|---|
@@ -7014,6 +8140,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ArchitecturalStyle
 
+44 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ArchitecturalStyle/)
+
 | Value | Definition |
 |---|---|
 | `A-Frame` | An architectural style that generally features four walls extending up from the foundation and a steeply pitched roof that reaches near the ground, creating an overall shape of the letter “A” or a tri… |
@@ -7063,6 +8191,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### AreaSource
 
+9 values · used by 8 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/AreaSource/)
+
 | Value | Definition |
 |---|---|
 | `Appraiser` | An appraiser provided the measurement of the area. |
@@ -7077,12 +8207,16 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### AreaUnits
 
+2 values · used by 9 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/AreaUnits/)
+
 | Value | Definition |
 |---|---|
 | `Square Feet` | The value reported in the related Area field is in square feet. |
 | `Square Meters` | The value reported in the related Area field is in square meters. |
 
 ### AssociationAmenities
+
+76 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/AssociationAmenities/)
 
 | Value | Definition |
 |---|---|
@@ -7165,6 +8299,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### AssociationFeeIncludes
 
+15 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/AssociationFeeIncludes/)
+
 | Value | Definition |
 |---|---|
 | `Cable TV` | Cable TV is included in the fee paid to the homeowner association. |
@@ -7184,6 +8320,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Water` | Water is included in the fee paid to the association. |
 
 ### Basement
+
+24 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Basement/)
 
 | Value | Definition |
 |---|---|
@@ -7214,6 +8352,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### BodyType
 
+7 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/BodyType/)
+
 | Value | Definition |
 |---|---|
 | `Double Wide` | The body/structure type of the mobile/manufacture home is a double-wide. |
@@ -7225,6 +8365,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Triple Wide` | The body/structure type of the mobile/manufacture home is a triple-wide. |
 
 ### BusinessType
+
+109 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/BusinessType/)
 
 | Value | Definition |
 |---|---|
@@ -7340,6 +8482,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### BuyerAgentDesignation
 
+27 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/BuyerAgentDesignation/)
+
 | Value | Definition |
 |---|---|
 | `Accredited Buyer's Representative / ABR` | The Accredited Buyer’s Representative (ABR®) designation is designed for real estate buyer agents who focus on working directly with buyer-clients. |
@@ -7372,6 +8516,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### BuyerFinancing
 
+13 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/BuyerFinancing/)
+
 | Value | Definition |
 |---|---|
 | `Assumed` | The buyer assumed a current form of financing. |
@@ -7390,6 +8536,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ChangeType
 
+13 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ChangeType/)
+
 | Value | Definition |
 |---|---|
 | `Active` | The change to the listing was a change of status to Active. |
@@ -7407,6 +8555,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Withdrawn` | The change to the listing was a change of status to Withdrawn. |
 
 ### CoBuyerAgentDesignation
+
+27 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/CoBuyerAgentDesignation/)
 
 | Value | Definition |
 |---|---|
@@ -7440,6 +8590,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### CoListAgentDesignation
 
+27 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/CoListAgentDesignation/)
+
 | Value | Definition |
 |---|---|
 | `Accredited Buyer's Representative / ABR` | The Accredited Buyer’s Representative (ABR®) designation is designed for real estate buyer agents who focus on working directly with buyer-clients. |
@@ -7472,6 +8624,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### CommonInterest
 
+6 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/CommonInterest/)
+
 | Value | Definition |
 |---|---|
 | `Community Apartment` | Ownership interest where purchaser receives a partial/fractional interest in the land coupled with the right of exclusive occupancy of an apartment located thereon. |
@@ -7483,6 +8637,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### CommonWalls
 
+6 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/CommonWalls/)
+
 | Value | Definition |
 |---|---|
 | `1 Common Wall` | The dwelling being sold has one common wall with another property that is not part of the sale. |
@@ -7493,6 +8649,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `No One Below` | The property is attached to another dwelling that is not part of the sale, but there is no unit below the one being sold. |
 
 ### CommunityFeatures
+
+21 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/CommunityFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -7520,6 +8678,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### CompensationType
 
+4 values · used by 3 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/CompensationType/)
+
 | Value | Definition |
 |---|---|
 | `$` | The value entered in any of the compensation fields (BuyerBrokerageCompensation, SubAgencyCompensation, TransactionBrokerCompensation) as a dollar amount of the gross compensation. |
@@ -7529,6 +8689,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Concessions
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Concessions/)
+
 | Value | Definition |
 |---|---|
 | `Call Listing Agent` | Call the listing agent for information about concessions made/offered by the seller. |
@@ -7536,6 +8698,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Yes` | There are concessions that are part of the listing/sale. |
 
 ### ConstructionMaterials
+
+54 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ConstructionMaterials/)
 
 | Value | Definition |
 |---|---|
@@ -7596,6 +8760,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Cooling
 
+24 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Cooling/)
+
 | Value | Definition |
 |---|---|
 | `Attic Fan` | The property has an attic fan. |
@@ -7624,6 +8790,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Zoned` | The cooling system has more than one zone. |
 
 ### Country
+
+246 values · used by 12 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Country/)
 
 | Value | Definition |
 |---|---|
@@ -7876,6 +9044,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### CurrentFinancing
 
+15 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/CurrentFinancing/)
+
 | Value | Definition |
 |---|---|
 | `Assumable` | The financing currently in place may be assumed. |
@@ -7895,6 +9065,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `VA` | A loan from an approved provider that follows the guidelines of, and is insured by, the U.S. |
 
 ### CurrentOrPossibleUse
+
+43 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/CurrentOrPossibleUse/)
 
 | Value | Definition |
 |---|---|
@@ -7944,6 +9116,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### DevelopmentStatus
 
+10 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/DevelopmentStatus/)
+
 | Value | Definition |
 |---|---|
 | `Completed` | The development of the land is complete. |
@@ -7959,6 +9133,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### DirectionFaces
 
+8 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/DirectionFaces/)
+
 | Value | Definition |
 |---|---|
 | `East` | The front of the structure faces east. |
@@ -7971,6 +9147,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `West` | The front of the structure faces west. |
 
 ### DocumentStatus
+
+16 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/DocumentStatus/)
 
 | Value | Definition |
 |---|---|
@@ -7993,6 +9171,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### DoorFeatures
 
+5 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/DoorFeatures/)
+
 | Value | Definition |
 |---|---|
 | `ENERGY STAR Qualified Doors` | The property has a qualified ENERGY STAR door or multiple qualified doors. |
@@ -8002,6 +9182,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Storm Door(s)` | The property has one or more storm doors. |
 
 ### Electric
+
+18 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Electric/)
 
 | Value | Definition |
 |---|---|
@@ -8026,6 +9208,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ExistingLeaseType
 
+9 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ExistingLeaseType/)
+
 | Value | Definition |
 |---|---|
 | `Absolute Net` | Also known as a bondable lease, the tenant carries every risk in addition to the costs of an NNN lease. |
@@ -8039,6 +9223,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Oral` | The terms of the lease are agreed upon orally (not in writing) between the lessee and lessor. |
 
 ### ExteriorFeatures
+
+37 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ExteriorFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -8082,6 +9268,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### FeeFrequency
 
+11 values · used by 4 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/FeeFrequency/)
+
 | Value | Definition |
 |---|---|
 | `Annually` | A fee is paid or received once a year. |
@@ -8097,6 +9285,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Weekly` | A fee is paid or received weekly. |
 
 ### Fencing
+
+29 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Fencing/)
 
 | Value | Definition |
 |---|---|
@@ -8132,6 +9322,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### FhaEligibility
 
+5 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/FhaEligibility/)
+
 | Value | Definition |
 |---|---|
 | `Approved` | This listing is eligible for an FHA loan. |
@@ -8142,6 +9334,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### FinancialDataSource
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/FinancialDataSource/)
+
 | Value | Definition |
 |---|---|
 | `Accountant` | The financial data in the listing was provided by an accountant. |
@@ -8149,6 +9343,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Property Manager` | the financial data in the listing was provided by the property manager. |
 
 ### FireplaceFeatures
+
+44 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/FireplaceFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -8199,6 +9395,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Flooring
 
+39 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Flooring/)
+
 | Value | Definition |
 |---|---|
 | `Adobe` | The property includes adobe flooring. |
@@ -8243,6 +9441,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### FoundationDetails
 
+12 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/FoundationDetails/)
+
 | Value | Definition |
 |---|---|
 | `Block` | The foundation of the property is made wholly or partially of block. |
@@ -8260,6 +9460,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### FrontageType
 
+9 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/FrontageType/)
+
 | Value | Definition |
 |---|---|
 | `Bay/Harbor` | The property fronts to a bay or harbor. |
@@ -8274,6 +9476,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Furnished
 
+4 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Furnished/)
+
 | Value | Definition |
 |---|---|
 | `Furnished` | The dwelling being leased is furnished. |
@@ -8282,6 +9486,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Unfurnished` | The dwelling being leased is not furnished. |
 
 ### GreenBuildingVerificationType
+
+18 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/GreenBuildingVerificationType/)
 
 | Value | Definition |
 |---|---|
@@ -8306,6 +9512,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### GreenEnergyEfficient
 
+12 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/GreenEnergyEfficient/)
+
 | Value | Definition |
 |---|---|
 | `Appliances` | For purposes of marketing, the property has appliances that have some green/efficient rating or quality. |
@@ -8323,12 +9531,16 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### GreenEnergyGeneration
 
+2 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/GreenEnergyGeneration/)
+
 | Value | Definition |
 |---|---|
 | `Solar` | A renewable form of onsite power generation. |
 | `Wind` | A renewable form of onsite power generation. |
 
 ### GreenIndoorAirQuality
+
+4 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/GreenIndoorAirQuality/)
 
 | Value | Definition |
 |---|---|
@@ -8338,6 +9550,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Ventilation` | Furnaces, water heaters, woodstoves and other devices that employ combustion-burning fuel are vented to the outside in a manner that meets manufacturer specifications to prevent back drafting. |
 
 ### GreenSustainability
+
+7 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/GreenSustainability/)
 
 | Value | Definition |
 |---|---|
@@ -8351,6 +9565,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### GreenWaterConservation
 
+6 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/GreenWaterConservation/)
+
 | Value | Definition |
 |---|---|
 | `Efficient Hot Water Distribution` | Efficient hot water distribution systems are designed to generate hot water using fewer fuel resources and to get hot water to low-flow faucets and fixtures more quickly. |
@@ -8361,6 +9577,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Water-Smart Landscaping` | Water-smart landscapes are designed to require less water and fertilizer treatments. |
 
 ### Heating
+
+42 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Heating/)
 
 | Value | Definition |
 |---|---|
@@ -8409,6 +9627,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### HorseAmenities
 
+18 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/HorseAmenities/)
+
 | Value | Definition |
 |---|---|
 | `Arena` | The property allows for horses and has an arena. |
@@ -8432,6 +9652,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### HoursDaysOfOperation
 
+9 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/HoursDaysOfOperation/)
+
 | Value | Definition |
 |---|---|
 | `Evenings Only` | The business being sold is open in the evenings only. |
@@ -8445,6 +9667,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Open Sunday` | The business being sold is open on Sundays. |
 
 ### IanaTimeZoneValues
+
+482 values · used by 3 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/IanaTimeZoneValues/)
 
 | Value | Definition |
 |---|---|
@@ -8832,6 +10056,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### IncomeIncludes
 
+6 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/IncomeIncludes/)
+
 | Value | Definition |
 |---|---|
 | `Laundry` | The income amount includes income from laundry facilities. |
@@ -8842,6 +10068,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Storage` | The income amount includes income from charging for general storage. |
 
 ### InteriorOrRoomFeatures
+
+53 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/InteriorOrRoomFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -8901,6 +10129,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### LaborInformation
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LaborInformation/)
+
 | Value | Definition |
 |---|---|
 | `Employee License Required` | Special licensing is required for employees. |
@@ -8908,6 +10138,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Union` | A labor union is established with the given business. |
 
 ### LaundryFeatures
+
+24 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LaundryFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -8938,6 +10170,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### LeaseRenewalCompensation
 
+5 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LeaseRenewalCompensation/)
+
 | Value | Definition |
 |---|---|
 | `Call Listing Agent` | For details about additional selling office compensation for lease renewals, contact the listing agent. |
@@ -8947,6 +10181,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Renewal Commission Paid` | There is additional commission paid if the tenant renews the lease. |
 
 ### LeaseTerm
+
+10 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LeaseTerm/)
 
 | Value | Definition |
 |---|---|
@@ -8963,6 +10199,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Levels
 
+8 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Levels/)
+
 | Value | Definition |
 |---|---|
 | `Bi-Level` | A bi-level home has two staggered levels. |
@@ -8976,12 +10214,16 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### LinearUnits
 
+2 values · used by 15 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LinearUnits/)
+
 | Value | Definition |
 |---|---|
 | `Feet` | The elevation of the property is measured in feet. |
 | `Meters` | The elevation of the property is measured in meters. |
 
 ### ListAgentDesignation
+
+27 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ListAgentDesignation/)
 
 | Value | Definition |
 |---|---|
@@ -9015,6 +10257,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ListingAgreement
 
+7 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ListingAgreement/)
+
 | Value | Definition |
 |---|---|
 | `Exclusive Agency` | A contract giving one brokerage firm, for a specified time, the right to sell/lease the property and also allowing the owner, acting alone, to sell/lease the property without paying commission. |
@@ -9027,6 +10271,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ListingService
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ListingService/)
+
 | Value | Definition |
 |---|---|
 | `Entry Only` | The only service provided by the brokerage is the input of the listing into the MLS system. |
@@ -9034,6 +10280,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Limited Service` | A limited set of services offered by a brokerage |
 
 ### ListingTerms
+
+26 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ListingTerms/)
 
 | Value | Definition |
 |---|---|
@@ -9066,6 +10314,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ListingURLDescription
 
+7 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ListingURLDescription/)
+
 | Value | Definition |
 |---|---|
 | `Agent Website` | A link that directs to the listing on an agent website. |
@@ -9077,6 +10327,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Syndication Website` | A link that directs to the listing on a syndication website. |
 
 ### LockBoxType
+
+8 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LockBoxType/)
 
 | Value | Definition |
 |---|---|
@@ -9090,6 +10342,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Supra` | The lockbox is from Supra and requires a Supra key. |
 
 ### LotDimensionsSource
+
+11 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LotDimensionsSource/)
 
 | Value | Definition |
 |---|---|
@@ -9106,6 +10360,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Survey` | The lot dimensions were provided by a land survey. |
 
 ### LotFeatures
+
+56 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LotFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -9168,6 +10424,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### LotSizeSource
 
+9 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LotSizeSource/)
+
 | Value | Definition |
 |---|---|
 | `Appraiser` | An appraiser provided the measurement of the lot size. |
@@ -9182,6 +10440,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### LotSizeUnits
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/LotSizeUnits/)
+
 | Value | Definition |
 |---|---|
 | `Acres` | The value reported in the Lot Size Area field is in acres. |
@@ -9190,6 +10450,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### OccupantType
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OccupantType/)
+
 | Value | Definition |
 |---|---|
 | `Owner` | The occupant is the owner. |
@@ -9197,6 +10459,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Vacant` | The property is vacant. |
 
 ### OperatingExpenseIncludes
+
+33 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OperatingExpenseIncludes/)
 
 | Value | Definition |
 |---|---|
@@ -9236,6 +10500,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### OtherEquipment
 
+21 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OtherEquipment/)
+
 | Value | Definition |
 |---|---|
 | `Air Purifier` | The property includes an air purifier. |
@@ -9261,6 +10527,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Varies by Unit` | The equipment included with the property varies from unit to unit. |
 
 ### OtherStructures
+
+33 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OtherStructures/)
 
 | Value | Definition |
 |---|---|
@@ -9300,6 +10568,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### OwnerPays
 
+29 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OwnerPays/)
+
 | Value | Definition |
 |---|---|
 | `All Utilities` | The owner/lessor pays for all utilities. |
@@ -9334,6 +10604,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### OwnershipType
 
+4 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OwnershipType/)
+
 | Value | Definition |
 |---|---|
 | `Corporation` | The ownership type of the business being sold is a corporation. |
@@ -9342,6 +10614,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Sole Proprietor` | The ownership type of the business being sold is a sole proprietor. |
 
 ### ParkingFeatures
+
+72 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ParkingFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -9420,6 +10694,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### PatioAndPorchFeatures
 
+16 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PatioAndPorchFeatures/)
+
 | Value | Definition |
 |---|---|
 | `Awning(s)` | The property has one or more awnings. |
@@ -9441,6 +10717,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### PetsAllowed
 
+8 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PetsAllowed/)
+
 | Value | Definition |
 |---|---|
 | `Breed Restrictions` | There are breed restrictions on allowed pets. |
@@ -9453,6 +10731,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Yes` | All pets are allowed. |
 
 ### PoolFeatures
+
+35 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PoolFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -9494,6 +10774,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Possession
 
+12 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Possession/)
+
 | Value | Definition |
 |---|---|
 | `Close Of Escrow` | Possession is passed to the buyer at the close of escrow. |
@@ -9511,12 +10793,16 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### PowerProductionType
 
+2 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PowerProductionType/)
+
 | Value | Definition |
 |---|---|
 | `Photovoltaics` | Solar photovoltaic (PV) devices which generate electricity directly from sunlight via an electronic process that occurs naturally in certain types of material, called semiconductors. |
 | `Wind` | Renewable form of onsite power generation. |
 
 ### PropertyCondition
+
+5 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PropertyCondition/)
 
 | Value | Definition |
 |---|---|
@@ -9527,6 +10813,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Updated/Remodeled` | The property has been remodeled or updated is some fashion. |
 
 ### PropertySubType
+
+31 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PropertySubType/)
 
 | Value | Definition |
 |---|---|
@@ -9564,6 +10852,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### PropertyType
 
+9 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/PropertyType/)
+
 | Value | Definition |
 |---|---|
 | `Business Opportunity` | The property type of the listing is Business Opportunity. |
@@ -9577,6 +10867,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Residential Lease` | The property type of the listing is Residential Lease. |
 
 ### RentIncludes
+
+13 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/RentIncludes/)
 
 | Value | Definition |
 |---|---|
@@ -9596,6 +10888,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### RoadFrontageType
 
+13 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/RoadFrontageType/)
+
 | Value | Definition |
 |---|---|
 | `Alley` | The property fronts to an alley. |
@@ -9614,6 +10908,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### RoadResponsibility
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/RoadResponsibility/)
+
 | Value | Definition |
 |---|---|
 | `Private Maintained Road` | The property's road is privately maintained. |
@@ -9621,6 +10917,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Road Maintenance Agreement` | The property has a road maintenance agreement. |
 
 ### RoadSurfaceType
+
+11 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/RoadSurfaceType/)
 
 | Value | Definition |
 |---|---|
@@ -9637,6 +10935,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Unimproved` | The property's road is unimproved. |
 
 ### Roof
+
+34 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Roof/)
 
 | Value | Definition |
 |---|---|
@@ -9677,6 +10977,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### RoomType
 
+33 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/RoomType/)
+
 | Value | Definition |
 |---|---|
 | `Basement` | A floor of a building below ground level. |
@@ -9715,6 +11017,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### SecurityFeatures
 
+28 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SecurityFeatures/)
+
 | Value | Definition |
 |---|---|
 | `24 Hour Security` | The property has 24-hour security. |
@@ -9748,6 +11052,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Sewer
 
+15 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Sewer/)
+
 | Value | Definition |
 |---|---|
 | `Aerobic Septic` | The property has an aerobic septic. |
@@ -9768,6 +11074,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ShowingConsiderations
 
+14 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ShowingConsiderations/)
+
 | Value | Definition |
 |---|---|
 | `Day Sleeper` | The property has a tenant/occupant who sleeps during the day. |
@@ -9787,6 +11095,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ShowingContactType
 
+4 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ShowingContactType/)
+
 | Value | Definition |
 |---|---|
 | `Agent` | The showing contact is a licensed agent. |
@@ -9795,6 +11105,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Property Manager` | The showing contact is the property manager. |
 
 ### ShowingRequirements
+
+18 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ShowingRequirements/)
 
 | Value | Definition |
 |---|---|
@@ -9819,6 +11131,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ShowingServiceName
 
+10 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ShowingServiceName/)
+
 | Value | Definition |
 |---|---|
 | `Aligned Showings` | Showings for the listing are scheduled through Aligned Showings. |
@@ -9833,6 +11147,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `ShowingTime` | Showings for the listing are scheduled through ShowingTime. |
 
 ### Skirt
+
+19 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Skirt/)
 
 | Value | Definition |
 |---|---|
@@ -9858,6 +11174,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### SpaFeatures
 
+10 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SpaFeatures/)
+
 | Value | Definition |
 |---|---|
 | `Above Ground` | The spa is not built into the ground. |
@@ -9872,6 +11190,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `See Remarks` | See the remarks fields for more information about the spa. |
 
 ### SpecialLicenses
+
+13 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SpecialLicenses/)
 
 | Value | Definition |
 |---|---|
@@ -9891,6 +11211,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### SpecialListingConditions
 
+12 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SpecialListingConditions/)
+
 | Value | Definition |
 |---|---|
 | `Auction` | The listing is an auction. |
@@ -9908,6 +11230,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### StandardStatus
 
+11 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StandardStatus/)
+
 | Value | Definition |
 |---|---|
 | `Active` | The listing is on market and an offer has not been accepted. |
@@ -9923,6 +11247,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Withdrawn` | The listing has been withdrawn from the market, but a contract still exists between the seller and the listing member. |
 
 ### StateOrProvince
+
+65 values · used by 19 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StateOrProvince/)
 
 | Value | Definition |
 |---|---|
@@ -9994,6 +11320,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### StreetDirection
 
+8 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StreetDirection/)
+
 | Value | Definition |
 |---|---|
 | `E` | The street suffix or prefix direction is east. |
@@ -10006,6 +11334,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `W` | The street suffix or prefix direction is west. |
 
 ### StructureType
+
+17 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StructureType/)
 
 | Value | Definition |
 |---|---|
@@ -10029,6 +11359,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### SyndicateTo
 
+4 values · used by 3 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SyndicateTo/)
+
 | Value | Definition |
 |---|---|
 | `Homes.com` | The broker, or member if permitted by the broker, is allowing their listings to be sent to Homes.com. |
@@ -10038,6 +11370,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### TaxStatusCurrent
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/TaxStatusCurrent/)
+
 | Value | Definition |
 |---|---|
 | `Personal` | The tax is based on personal property. |
@@ -10045,6 +11379,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Real` | The tax is based on real property. |
 
 ### TenantPays
+
+29 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/TenantPays/)
 
 | Value | Definition |
 |---|---|
@@ -10080,6 +11416,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### UnitTypeType
 
+10 values · used by 2 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/UnitTypeType/)
+
 | Value | Definition |
 |---|---|
 | `1 Bedroom` | The type of unit has one bedroom. |
@@ -10095,6 +11433,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### UnitsFurnished
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/UnitsFurnished/)
+
 | Value | Definition |
 |---|---|
 | `All Units` | All of the units in the listed income property are furnished. |
@@ -10102,6 +11442,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Varies By Unit` | Some of the units in the listing income property are furnished. |
 
 ### Utilities
+
+23 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Utilities/)
 
 | Value | Definition |
 |---|---|
@@ -10131,6 +11473,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### Vegetation
 
+10 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/Vegetation/)
+
 | Value | Definition |
 |---|---|
 | `Brush` | The lot has brush. |
@@ -10145,6 +11489,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Wooded` | The lot is wooded. |
 
 ### View
+
+38 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/View/)
 
 | Value | Definition |
 |---|---|
@@ -10189,6 +11535,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### WaterSource
 
+9 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/WaterSource/)
+
 | Value | Definition |
 |---|---|
 | `Cistern` | The property's source of water has/includes a cistern. |
@@ -10202,6 +11550,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Well` | The property's source of water has/includes a well. |
 
 ### WaterfrontFeatures
+
+20 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/WaterfrontFeatures/)
 
 | Value | Definition |
 |---|---|
@@ -10228,6 +11578,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### WindowFeatures
 
+21 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/WindowFeatures/)
+
 | Value | Definition |
 |---|---|
 | `Aluminum Frames` | The windows have aluminum frames. |
@@ -10253,6 +11605,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Wood Frames` | The property has wood-framed windows. |
 
 ### YearBuiltSource
+
+8 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/YearBuiltSource/)
 
 | Value | Definition |
 |---|---|

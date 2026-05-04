@@ -1,6 +1,8 @@
 # SocialMedia
 
-_RESO Data Dictionary 2.0 resource — 10 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/SocialMedia+Resource) for the canonical page._
+Social media accounts for members, offices, contacts and other entities.
+
+**RESO DD 2.0** — 10 fields · last revised 3/27/2026 · [dd.reso.org](https://dd.reso.org/DD2.0/SocialMedia/)
 
 **Adoption** — weighted Org%: **4%** across 9 measured fields (median 1%, avg 4%).
 
@@ -10,18 +12,18 @@ _RESO Data Dictionary 2.0 resource — 10 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `ClassName` | String List, Single |  | [ClassName](#classname) | 5% | 1% | Name of the class to which the record is referencing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135822) |
-| `DisplayName` | String |  |  |  | 8% | The display name for the field. | [link](https://ddwiki.reso.org/display/DDW20/DisplayName+Field) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135834) |
-| `ModificationTimestamp` | Timestamp |  |  | 10% | 1% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135840) |
-| `ResourceName` | String List, Single |  | [ResourceName](#resourcename) | 10% | 1% | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135846) |
-| `ResourceRecordID` | String |  |  | 5% | 1% | The well-known identifier of the related record from the source resource. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135853) |
-| `ResourceRecordKey` | String |  |  |  | 1% | The primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey, TeamKey). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135859) |
-| `SocialMediaKey` | String |  |  | 10% | 1% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/SocialMediaKey+Field) |
-| `SocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) | 10% | 1% | A list of types of sites or social media that a member Uniform Resource Locator (URL) or ID is referring to (e.g., Website, Blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135871) |
-| `SocialMediaUrlOrId` | String |  |  |  | 8% | The website URL or ID of the social media site or account of the member. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2117201) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `ClassName` | String List, Single |  | [ClassName](#classname) | 0% | Name of the class to which the record is referencing. | [link](https://dd.reso.org/DD2.0/SocialMedia/ClassName/) |
+| `DisplayName` | String |  |  | 8% | The display name for the field. | [link](https://dd.reso.org/DD2.0/SocialMedia/DisplayName/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/SocialMedia/HistoryTransactional/) |
+| `ModificationTimestamp` | Timestamp |  |  | 1% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/SocialMedia/ModificationTimestamp/) |
+| `ResourceName` | String List, Single |  | [ResourceName](#resourcename) | 1% | The name of the RESO resource the change record is for (Property, Member, Office, etc.). | [link](https://dd.reso.org/DD2.0/SocialMedia/ResourceName/) |
+| `ResourceRecordID` | String |  |  | 1% | The well-known identifier of the related record from the source resource. | [link](https://dd.reso.org/DD2.0/SocialMedia/ResourceRecordID/) |
+| `ResourceRecordKey` | String |  |  | 1% | The primary key of the related record from the source resource (e.g., ListingKey, AgentKey, OfficeKey, TeamKey). | [link](https://dd.reso.org/DD2.0/SocialMedia/ResourceRecordKey/) |
+| `SocialMediaKey` | String |  |  | 8% | A system unique identifier. | [link](https://dd.reso.org/DD2.0/SocialMedia/SocialMediaKey/) |
+| `SocialMediaType` | String List, Single |  | [SocialMediaType](#socialmediatype) | 8% | A list of types of sites or social media that a member Uniform Resource Locator (URL) or ID is referring to (e.g., Website, Blog, Facebook, Twitter, LinkedIn, Instagram). | [link](https://dd.reso.org/DD2.0/SocialMedia/SocialMediaType/) |
+| `SocialMediaUrlOrId` | String |  |  | 8% | The website URL or ID of the social media site or account of the member. | [link](https://dd.reso.org/DD2.0/SocialMedia/SocialMediaUrlOrId/) |
 
 ## Field details
 
@@ -29,63 +31,81 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>ClassName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>DisplayName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 08 2021
-  - **Revision Date:** DEC 08 2021
+  - **Status:** Active
+  - **Status Change Date:** 12/8/2021
+  - **Revision Date:** 12/8/2021
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ResourceName</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ResourceRecordID</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
+  - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>ResourceRecordKey</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>SocialMediaKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 26 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>SocialMediaType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** APR 11 2022
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 3/27/2026
+  - **Added in Version:** 1.7.0
+
+</details>
+
+<details><summary><code>SocialMediaUrlOrId</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/26/2017
   - **Added in Version:** 1.7.0
 
 </details>
@@ -93,6 +113,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### ClassName
+
+17 values · used by 8 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ClassName/)
 
 | Value | Definition |
 |---|---|
@@ -116,6 +138,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ResourceName
 
+5 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ResourceName/)
+
 | Value | Definition |
 |---|---|
 | `Association` | This record is related to another record in the Association Resource. |
@@ -125,6 +149,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Property` | This record is related to another record in the Property Resource. |
 
 ### SocialMediaType
+
+17 values · used by 7 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/SocialMediaType/)
 
 | Value | Definition |
 |---|---|

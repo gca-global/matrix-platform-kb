@@ -1,6 +1,8 @@
 # ShowingAppointment
 
-The ShowingAppointment resource describes a scheduled in-person showing of a Property by a buyer's agent. It captures the appointment time window, the showing agent, the appointment status, and how the appointment was made (Method).
+Fields associated with showing appointments, including method, date, time and more.
+
+**RESO DD 2.0** — 12 fields · last revised 6/16/2022 · [dd.reso.org](https://dd.reso.org/DD2.0/ShowingAppointment/)
 
 ## Groups
 
@@ -8,111 +10,129 @@ The ShowingAppointment resource describes a scheduled in-person showing of a Pro
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `ModificationTimestamp` | Timestamp |  |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136101) |
-| `ShowingAgentKey` | String |  |  |  |  | A system unique identifier of the member who has scheduled to access the property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136106) |
-| `ShowingAgentMlsId` | String |  |  |  |  | The MemberMlsId of the agent who is showing the property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136112) |
-| `ShowingAppointmentDate` | Date |  |  |  |  | The date of the showing appointment. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAppointmentDate+Field) |
-| `ShowingAppointmentEndTime` | Timestamp |  |  |  |  | The end date and time of the showing appointment (ISO 8601). | [link](https://ddwiki.reso.org/display/DDW20/ShowingAppointmentEndTime+Field) |
-| `ShowingAppointmentId` | String |  |  |  |  | A system-unique identifier for the showing appointment. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAppointmentId+Field) |
-| `ShowingAppointmentKey` | String |  |  |  |  | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAppointmentKey+Field) |
-| `ShowingAppointmentMethod` | String List, Multi |  | [ShowingAppointmentMethod](#showingappointmentmethod) |  |  | The way the showing appointment was scheduled or will be conducted. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAppointmentMethod+Field) |
-| `ShowingAppointmentStartTime` | Timestamp |  |  |  |  | The start date and time of the showing appointment (ISO 8601). | [link](https://ddwiki.reso.org/display/DDW20/ShowingAppointmentStartTime+Field) |
-| `ShowingAppointmentStatus` | String List, Single |  | [ShowingAppointmentStatus](#showingappointmentstatus) |  |  | The status of the showing appointment. | [link](https://ddwiki.reso.org/display/DDW20/ShowingAppointmentStatus+Field) |
-| `ShowingId` | String |  |  |  |  | The well-known identifier for the showing record. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136162) |
-| `ShowingKey` | String |  |  |  |  | A unique identifier for this record from the immediate source. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136167) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `ModificationTimestamp` | Timestamp |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ModificationTimestamp/) |
+| `ShowingAgentKey` | String |  |  |  | A system unique identifier of the member who has scheduled to access the property. | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingAgentKey/) |
+| `ShowingAgentMlsId` | String |  |  |  | The MemberMlsId of the agent who is showing the property. | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingAgentMlsId/) |
+| `ShowingAppointmentDate` | Date |  |  |  | The date of the showing appointment. | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingAppointmentDate/) |
+| `ShowingAppointmentEndTime` | Timestamp |  |  |  | The end date and time of the showing appointment (ISO 8601). | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingAppointmentEndTime/) |
+| `ShowingAppointmentId` | String |  |  |  | A system-unique identifier for the showing appointment. | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingAppointmentId/) |
+| `ShowingAppointmentKey` | String |  |  |  | A system unique identifier. | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingAppointmentKey/) |
+| `ShowingAppointmentMethod` | String List, Multi |  | [ShowingAppointmentMethod](#showingappointmentmethod) |  | The way the showing appointment was scheduled or will be conducted. | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingAppointmentMethod/) |
+| `ShowingAppointmentStartTime` | Timestamp |  |  |  | The start date and time of the showing appointment (ISO 8601). | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingAppointmentStartTime/) |
+| `ShowingAppointmentStatus` | String List, Single |  | [ShowingAppointmentStatus](#showingappointmentstatus) |  | The status of the showing appointment. | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingAppointmentStatus/) |
+| `ShowingId` | String |  |  |  | The well-known identifier for the showing record. | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingId/) |
+| `ShowingKey` | String |  |  |  | A unique identifier for this record from the immediate source. | [link](https://dd.reso.org/DD2.0/ShowingAppointment/ShowingKey/) |
 
 ## Field details
 
 Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type applicability, Spanish / French-Canadian display names, change-history dates).
 
+<details><summary><code>ModificationTimestamp</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
+  - **Added in Version:** 2.0.0
+
+</details>
+
 <details><summary><code>ShowingAgentKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>ShowingAgentMlsId</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAppointmentDate</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAppointmentEndTime</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAppointmentId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAppointmentKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAppointmentMethod</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAppointmentStartTime</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingAppointmentStatus</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ShowingKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JUN 16 2022
-  - **Revision Date:** JUN 16 2022
+  - **Status:** Active
+  - **Status Change Date:** 6/16/2022
+  - **Revision Date:** 6/16/2022
   - **Added in Version:** 2.0.0
 
 </details>
@@ -121,6 +141,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### ShowingAppointmentMethod
 
+3 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ShowingAppointmentMethod/)
+
 | Value | Definition |
 |---|---|
 | `In-Person` | An in-person showing appointment is confirmed for this property. |
@@ -128,6 +150,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 | `Virtual` | A virtual showing appointment is confirmed for this property. |
 
 ### ShowingAppointmentStatus
+
+4 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/ShowingAppointmentStatus/)
 
 | Value | Definition |
 |---|---|

@@ -1,6 +1,8 @@
 # ContactListingNotes
 
-_RESO Data Dictionary 2.0 resource — 10 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/ContactListingNotes+Resource) for the canonical page._
+Notes about a given listing from interactions between the contact and member within a consumer portal.
+
+**RESO DD 2.0** — 10 fields · last revised 5/24/2017 · [dd.reso.org](https://dd.reso.org/DD2.0/ContactListingNotes/)
 
 ## Groups
 
@@ -8,18 +10,18 @@ _RESO Data Dictionary 2.0 resource — 10 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `Contact` | Resource |  |  |  |  | The contact associated with the ContactListingNotes record. | [link](https://ddwiki.reso.org/display/DDW20/Contact+Field) |
-| `ContactKey` | String |  |  |  |  | A system-unique identifier for the contact. | [link](https://ddwiki.reso.org/display/DDW20/ContactKey+Field) |
-| `ContactListingNotesKey` | String |  |  |  |  | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/ContactListingNotesKey+Field) |
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135704) |
-| `Listing` | Resource |  |  |  |  | The listing for the ContactListings record. | [link](https://ddwiki.reso.org/display/DDW20/Listing+Field) |
-| `ListingId` | String |  |  |  |  | The well-known identifier for the listing, also known as the MLS number. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135716) |
-| `ListingKey` | String |  |  |  |  | A system-unique identifier for the listing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135722) |
-| `ModificationTimestamp` | Timestamp |  |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135728) |
-| `NoteContents` | String |  |  |  |  | The contents of a note. | [link](https://ddwiki.reso.org/display/DDW20/NoteContents+Field) |
-| `NotedBy` | String List, Single |  | [NotedBy](#notedby) |  |  | The individual who wrote a note (i.e., Agent or Contact). | [link](https://ddwiki.reso.org/display/DDW20/NotedBy+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `Contact` | Resource |  |  |  | The contact associated with the ContactListingNotes record. | [link](https://dd.reso.org/DD2.0/ContactListingNotes/Contact/) |
+| `ContactKey` | String |  |  |  | A system-unique identifier for the contact. | [link](https://dd.reso.org/DD2.0/ContactListingNotes/ContactKey/) |
+| `ContactListingNotesKey` | String |  |  |  | A system unique identifier. | [link](https://dd.reso.org/DD2.0/ContactListingNotes/ContactListingNotesKey/) |
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/ContactListingNotes/HistoryTransactional/) |
+| `Listing` | Resource |  |  |  | The listing for the ContactListings record. | [link](https://dd.reso.org/DD2.0/ContactListingNotes/Listing/) |
+| `ListingId` | String |  |  |  | The well-known identifier for the listing, also known as the MLS number. | [link](https://dd.reso.org/DD2.0/ContactListingNotes/ListingId/) |
+| `ListingKey` | String |  |  |  | A system-unique identifier for the listing. | [link](https://dd.reso.org/DD2.0/ContactListingNotes/ListingKey/) |
+| `ModificationTimestamp` | Timestamp |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/ContactListingNotes/ModificationTimestamp/) |
+| `NoteContents` | String |  |  |  | The contents of a note. | [link](https://dd.reso.org/DD2.0/ContactListingNotes/NoteContents/) |
+| `NotedBy` | String List, Single |  | [NotedBy](#notedby) |  | The individual who wrote a note (i.e., Agent or Contact). | [link](https://dd.reso.org/DD2.0/ContactListingNotes/NotedBy/) |
 
 ## Field details
 
@@ -27,76 +29,96 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>Contact</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** JAN 06 2022
-  - **Revision Date:** JAN 06 2022
+  - **Status:** Active
+  - **Status Change Date:** 1/6/2022
+  - **Revision Date:** 1/6/2022
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>ContactKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Contacto
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>ContactListingNotesKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** DEC 26 2018
-  - **Revision Date:** OCT 03 2017
+  - **Status:** Active
+  - **Status Change Date:** 12/26/2018
+  - **Revision Date:** 10/3/2017
   - **Added in Version:** 1.7.0
 
 </details>
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>Listing</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ListingId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de Listado
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>ListingKey</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Clave de Listado
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
+  - **Added in Version:** 1.6.0
+
+</details>
+
+<details><summary><code>ModificationTimestamp</code></summary>
+
+  - **Status:** Active
+  - **Spanish Name:** Marca de Tiempo de Modificación
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>NoteContents</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Contenido de Notas
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
 
 <details><summary><code>NotedBy</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Registrado por
-  - **Status Change Date:** AUG 09 2017
-  - **Revision Date:** MAY 24 2017
+  - **Status Change Date:** 8/9/2017
+  - **Revision Date:** 5/24/2017
   - **Added in Version:** 1.6.0
 
 </details>
@@ -104,6 +126,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### NotedBy
+
+2 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/NotedBy/)
 
 | Value | Definition |
 |---|---|

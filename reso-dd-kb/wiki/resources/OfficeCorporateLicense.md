@@ -1,6 +1,8 @@
 # OfficeCorporateLicense
 
-_RESO Data Dictionary 2.0 resource — 10 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/OfficeCorporateLicense+Resource) for the canonical page._
+Supports offices that hold multiple state licenses.
+
+**RESO DD 2.0** — 10 fields · last revised 6/17/2021 · [dd.reso.org](https://dd.reso.org/DD2.0/OfficeCorporateLicense/)
 
 ## Groups
 
@@ -8,18 +10,18 @@ _RESO Data Dictionary 2.0 resource — 10 fields. See [DDwiki](https://ddwiki.re
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `HistoryTransactional` | Collection |  |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135977) |
-| `ModificationTimestamp` | Timestamp |  |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135982) |
-| `Office` | Resource |  |  |  |  | The Office resource describes a brokerage office. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135988) |
-| `OfficeCorporateLicense` | String |  |  |  |  | When an office/firm is a corporation, an independent license number is issued. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135994) |
-| `OfficeCorporateLicenseExpirationDate` | Date |  |  |  |  | The expiration date for the office corporation's license. | [link](https://ddwiki.reso.org/display/DDW20/OfficeCorporateLicenseExpirationDate+Field) |
-| `OfficeCorporateLicenseKey` | String |  |  |  |  | A unique identifier for this record from the immediate source. | [link](https://ddwiki.reso.org/display/DDW20/OfficeCorporateLicenseKey+Field) |
-| `OfficeCorporateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) |  |  | The state in which the office corporation is licensed. | [link](https://ddwiki.reso.org/display/DDW20/OfficeCorporateLicenseState+Field) |
-| `OfficeCorporateLicenseType` | String List, Single |  | [OfficeCorporateLicenseType](#officecorporatelicensetype) |  |  | The license type of the office corporation. | [link](https://ddwiki.reso.org/display/DDW20/OfficeCorporateLicenseType+Field) |
-| `OfficeKey` | String |  |  |  |  | A system-unique identifier for the office. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136022) |
-| `OfficeMlsId` | String |  |  |  |  | The local, well-known identifier for the office as assigned by the MLS. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1136027) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `HistoryTransactional` | Collection |  |  |  | The HistoryTransactional resource is the field-level audit log for changes made to other RESO resources. | [link](https://dd.reso.org/DD2.0/OfficeCorporateLicense/HistoryTransactional/) |
+| `ModificationTimestamp` | Timestamp |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/OfficeCorporateLicense/ModificationTimestamp/) |
+| `Office` | Resource |  |  |  | The Office resource describes a brokerage office. | [link](https://dd.reso.org/DD2.0/OfficeCorporateLicense/Office/) |
+| `OfficeCorporateLicense` | String |  |  |  | When an office/firm is a corporation, an independent license number is issued. | [link](https://dd.reso.org/DD2.0/OfficeCorporateLicense/OfficeCorporateLicense/) |
+| `OfficeCorporateLicenseExpirationDate` | Date |  |  |  | The expiration date for the office corporation's license. | [link](https://dd.reso.org/DD2.0/OfficeCorporateLicense/OfficeCorporateLicenseExpirationDate/) |
+| `OfficeCorporateLicenseKey` | String |  |  |  | A unique identifier for this record from the immediate source. | [link](https://dd.reso.org/DD2.0/OfficeCorporateLicense/OfficeCorporateLicenseKey/) |
+| `OfficeCorporateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) |  | The state in which the office corporation is licensed. | [link](https://dd.reso.org/DD2.0/OfficeCorporateLicense/OfficeCorporateLicenseState/) |
+| `OfficeCorporateLicenseType` | String List, Single |  | [OfficeCorporateLicenseType](#officecorporatelicensetype) |  | The license type of the office corporation. | [link](https://dd.reso.org/DD2.0/OfficeCorporateLicense/OfficeCorporateLicenseType/) |
+| `OfficeKey` | String |  |  |  | A system-unique identifier for the office. | [link](https://dd.reso.org/DD2.0/OfficeCorporateLicense/OfficeKey/) |
+| `OfficeMlsId` | String |  |  |  | The local, well-known identifier for the office as assigned by the MLS. | [link](https://dd.reso.org/DD2.0/OfficeCorporateLicense/OfficeMlsId/) |
 
 ## Field details
 
@@ -27,80 +29,98 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>HistoryTransactional</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
   - **French-Canadian Name:** Heure et date de la modification
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>Office</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** APR 04 2023
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 4/4/2023
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeCorporateLicense</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Licencia Corporativa de Despacho
   - **French-Canadian Name:** Licence de société du bureau
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeCorporateLicenseExpirationDate</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** OCT 27 2020
+  - **Status:** Active
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 10/27/2020
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>OfficeCorporateLicenseKey</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 10/27/2020
+  - **Added in Version:** 2.0.0
+
+</details>
+
+<details><summary><code>OfficeCorporateLicenseState</code></summary>
+
+  - **Status:** Active
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 10/27/2020
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeCorporateLicenseType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** APR 04 2023
+  - **Status:** Active
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 4/4/2023
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeKey</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Clave de Despacho
   - **French-Canadian Name:** Clé du bureau
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>OfficeMlsId</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** ID de MLS de Despacho Enlistado
   - **French-Canadian Name:** ID MLS du bureau
-  - **Status Change Date:** OCT 27 2020
-  - **Revision Date:** JUN 17 2021
+  - **Status Change Date:** 10/27/2020
+  - **Revision Date:** 6/17/2021
   - **Added in Version:** 2.0.0
 
 </details>
@@ -109,12 +129,16 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 ### OfficeCorporateLicenseType
 
+2 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/OfficeCorporateLicenseType/)
+
 | Value | Definition |
 |---|---|
 | `Appraiser` | The office corporate license type is appraiser. |
 | `Broker` | The office corporate license type is broker. |
 
 ### StateOrProvince
+
+65 values · used by 19 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/StateOrProvince/)
 
 | Value | Definition |
 |---|---|

@@ -1,6 +1,8 @@
 # TransactionManagement
 
-_RESO Data Dictionary 2.0 resource — 4 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/TransactionManagement+Resource) for the canonical page._
+Tracking different types of transactions such as listing for sale or listing for lease.
+
+**RESO DD 2.0** — 4 fields · last revised 2/24/2022 · [dd.reso.org](https://dd.reso.org/DD2.0/TransactionManagement/)
 
 ## Groups
 
@@ -8,12 +10,12 @@ _RESO Data Dictionary 2.0 resource — 4 fields. See [DDwiki](https://ddwiki.res
 
 ## Fields
 
-| Field | Type | Group | Lookup | Sys% | Org% | Description | DDwiki |
-|---|---|---|---|---|---|---|---|
-| `ModificationTimestamp` | Timestamp |  |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=12361629) |
-| `TransactionId` | String |  |  |  |  | The well-known identifier for the transaction record. | [link](https://ddwiki.reso.org/display/DDW20/TransactionId+Field) |
-| `TransactionKey` | String |  |  |  |  | A unique identifier for this record from the immediate source. | [link](https://ddwiki.reso.org/display/DDW20/TransactionKey+Field) |
-| `TransactionType` | String List, Single |  | [TransactionType](#transactiontype) |  |  | A list of types of transactions (e.g., Listing for Sale, Listing for Lease, Other). | [link](https://ddwiki.reso.org/display/DDW20/TransactionType+Field) |
+| Field | Type | Group | Lookup | Org% | Description | Source |
+|---|---|---|---|---|---|---|
+| `ModificationTimestamp` | Timestamp |  |  |  | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://dd.reso.org/DD2.0/TransactionManagement/ModificationTimestamp/) |
+| `TransactionId` | String |  |  |  | The well-known identifier for the transaction record. | [link](https://dd.reso.org/DD2.0/TransactionManagement/TransactionId/) |
+| `TransactionKey` | String |  |  |  | A unique identifier for this record from the immediate source. | [link](https://dd.reso.org/DD2.0/TransactionManagement/TransactionKey/) |
+| `TransactionType` | String List, Single |  | [TransactionType](#transactiontype) |  | A list of types of transactions (e.g., Listing for Sale, Listing for Lease, Other). | [link](https://dd.reso.org/DD2.0/TransactionManagement/TransactionType/) |
 
 ## Field details
 
@@ -21,37 +23,37 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 
 <details><summary><code>ModificationTimestamp</code></summary>
 
-  - **Status:** ACTIVE
+  - **Status:** Active
   - **Spanish Name:** Marca de Tiempo de Modificación
-  - **Status Change Date:** FEB 24 2022
-  - **Revision Date:** FEB 24 2022
+  - **Status Change Date:** 2/24/2022
+  - **Revision Date:** 2/24/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>TransactionId</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 24 2022
-  - **Revision Date:** FEB 24 2022
+  - **Status:** Active
+  - **Status Change Date:** 2/24/2022
+  - **Revision Date:** 2/24/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>TransactionKey</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 24 2022
-  - **Revision Date:** FEB 24 2022
+  - **Status:** Active
+  - **Status Change Date:** 2/24/2022
+  - **Revision Date:** 2/24/2022
   - **Added in Version:** 2.0.0
 
 </details>
 
 <details><summary><code>TransactionType</code></summary>
 
-  - **Status:** ACTIVE
-  - **Status Change Date:** FEB 24 2022
-  - **Revision Date:** FEB 24 2022
+  - **Status:** Active
+  - **Status Change Date:** 2/24/2022
+  - **Revision Date:** 2/24/2022
   - **Added in Version:** 2.0.0
 
 </details>
@@ -59,6 +61,8 @@ Per-field structured metadata scraped from DDwiki (BEDES mapping, property-type 
 ## Lookups
 
 ### TransactionType
+
+5 values · used by 1 field(s) · [dd.reso.org](https://dd.reso.org/DD2.0/lookups/TransactionType/)
 
 | Value | Definition |
 |---|---|
