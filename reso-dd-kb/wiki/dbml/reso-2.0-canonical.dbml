@@ -1,6 +1,6 @@
 // reso-2.0-canonical.dbml
-// Pure RESO Data Dictionary 2.0 canonical schema
-// 41 Resources, 1745 Fields, 193 Lookups
+// Pure RESO Data Dictionary 2.0 canonical schema (2NF normalized)
+// 41 Resources, 1530 Fields kept (1745 total - 215 satellites dropped), 193 Lookups
 //
 // NO Atlas-specific decisions baked in. This file represents what
 // RESO 2.0 prescribes; Atlas adapts in build_atlas_target_dbml.py.
@@ -12,15 +12,301 @@ Project reso_canonical_dd_2_0 {
   database_type: 'PostgreSQL'
   Note: '''
     Pure RESO Data Dictionary 2.0 canonical schema covering all 41 Resources,
-    1745 Fields, and 193 Lookups (rendered as lookup_<name> ref tables).
+    1530 Fields (1745 total minus 215 satellite fields dropped for 2NF),
+    and 193 Lookups (rendered as lookup_<name> ref tables).
+
+    2NF normalization: satellite fields (scalar columns whose name shares the
+    prefix of a Resource-typed FK on the same host, e.g. Property.ListAgentEmail
+    next to Property.ListAgent -> Member) are removed from the canonical model
+    because their value is functionally dependent on the FK column rather than
+    the host PK. They remain reachable via the FK join (or, in the case of
+    auxiliary IDs / relationship attributes, would belong in a junction table).
+    See the `// 2NF: dropped satellite fields` section below for the full list.
 
     Single-value lookup columns reference the corresponding lookup_<name>.code via DBML
     Refs; multi-value lookup columns stay text and document the lookup in a Note.
 
     No Atlas-specific decisions baked in. Atlas adapts this canonical in
-    build_atlas_target_dbml.py (wiki/atlas/atlas-target.dbml).
+    build_atlas_target_dbml.py (wiki/atlas/atlas-target.dbml), where a chosen
+    subset of satellites may be re-added for query performance.
   '''
 }
+
+// ============================================================
+// 2NF: dropped satellite fields (215 across 16 hosts)
+// ============================================================
+//
+// Reachable via the FK column shown in [brackets]. Re-derive any value
+// from the target resource via that FK in your query layer.
+//
+// ContactListings: drop 3 via ContactListings.Contact -> Contacts [FK column: contact_listings.contact_key]
+//   - ContactListingPreference
+//   - ContactLoginId
+//   - ContactNotesUnreadYN
+// ContactListings: drop 5 via ContactListings.Listing -> Property [FK column: contact_listings.listing_key]
+//   - ListingId
+//   - ListingModificationTimestamp
+//   - ListingNotes
+//   - ListingSentTimestamp
+//   - ListingViewedYN
+// Contacts: drop 1 via Contacts.OwnerMember -> Member [FK column: contacts.owner_member_key]
+//   - OwnerMemberID
+// Contacts: drop 2 via Contacts.OriginatingSystem -> OUID [FK column: contacts.originating_system_id]
+//   - OriginatingSystemContactKey
+//   - OriginatingSystemName
+// Contacts: drop 2 via Contacts.SourceSystem -> OUID [FK column: contacts.source_system_id]
+//   - SourceSystemContactKey
+//   - SourceSystemName
+// InternetTracking: drop 1 via InternetTracking.ActorOriginatingSystem -> OUID [FK column: internet_tracking.actor_originating_system_id]
+//   - ActorOriginatingSystemName
+// InternetTracking: drop 1 via InternetTracking.ActorSourceSystem -> OUID [FK column: internet_tracking.actor_source_system_id]
+//   - ActorSourceSystemName
+// InternetTracking: drop 1 via InternetTracking.EventOriginatingSystem -> OUID [FK column: internet_tracking.event_originating_system_id]
+//   - EventOriginatingSystemName
+// InternetTracking: drop 1 via InternetTracking.EventSourceSystem -> OUID [FK column: internet_tracking.event_source_system_id]
+//   - EventSourceSystemName
+// InternetTracking: drop 1 via InternetTracking.ObjectOriginatingSystem -> OUID [FK column: internet_tracking.object_originating_system_id]
+//   - ObjectOriginatingSystemName
+// InternetTracking: drop 1 via InternetTracking.ObjectSourceSystem -> OUID [FK column: internet_tracking.object_source_system_id]
+//   - ObjectSourceSystemName
+// Member: drop 2 via Member.OriginatingSystem -> OUID [FK column: member.originating_system_id]
+//   - OriginatingSystemMemberKey
+//   - OriginatingSystemName
+// Member: drop 2 via Member.SourceSystem -> OUID [FK column: member.source_system_id]
+//   - SourceSystemMemberKey
+//   - SourceSystemName
+// Member: drop 3 via Member.Office -> Office [FK column: member.office_key]
+//   - OfficeMlsId
+//   - OfficeName
+//   - OfficeNationalAssociationId
+// OUID: drop 1 via OUID.ChangedByMember -> Member [FK column: ouid.changed_by_member_key]
+//   - ChangedByMemberID
+// Office: drop 2 via Office.OfficeBroker -> Member [FK column: office.office_broker_key]
+//   - OfficeBrokerMlsId
+//   - OfficeBrokerNationalAssociationId
+// Office: drop 1 via Office.OfficeManager -> Member [FK column: office.office_manager_key]
+//   - OfficeManagerMlsId
+// Office: drop 2 via Office.OriginatingSystem -> OUID [FK column: office.originating_system_id]
+//   - OriginatingSystemName
+//   - OriginatingSystemOfficeKey
+// Office: drop 2 via Office.SourceSystem -> OUID [FK column: office.source_system_id]
+//   - SourceSystemName
+//   - SourceSystemOfficeKey
+// Office: drop 1 via Office.MainOffice -> Office [FK column: office.main_office_key]
+//   - MainOfficeMlsId
+// Property: drop 25 via Property.BuyerAgent -> Member [FK column: property.buyer_agent_key]
+//   - BuyerAgentAOR
+//   - BuyerAgentDesignation
+//   - BuyerAgentDirectPhone
+//   - BuyerAgentEmail
+//   - BuyerAgentFax
+//   - BuyerAgentFirstName
+//   - BuyerAgentFullName
+//   - BuyerAgentHomePhone
+//   - BuyerAgentLastName
+//   - BuyerAgentMiddleName
+//   - BuyerAgentMlsId
+//   - BuyerAgentMobilePhone
+//   - BuyerAgentNamePrefix
+//   - BuyerAgentNameSuffix
+//   - BuyerAgentNationalAssociationId
+//   - BuyerAgentOfficePhone
+//   - BuyerAgentOfficePhoneExt
+//   - BuyerAgentPager
+//   - BuyerAgentPreferredPhone
+//   - BuyerAgentPreferredPhoneExt
+//   - BuyerAgentStateLicense
+//   - BuyerAgentTollFreePhone
+//   - BuyerAgentURL
+//   - BuyerAgentVoiceMail
+//   - BuyerAgentVoiceMailExt
+// Property: drop 25 via Property.CoBuyerAgent -> Member [FK column: property.co_buyer_agent_key]
+//   - CoBuyerAgentAOR
+//   - CoBuyerAgentDesignation
+//   - CoBuyerAgentDirectPhone
+//   - CoBuyerAgentEmail
+//   - CoBuyerAgentFax
+//   - CoBuyerAgentFirstName
+//   - CoBuyerAgentFullName
+//   - CoBuyerAgentHomePhone
+//   - CoBuyerAgentLastName
+//   - CoBuyerAgentMiddleName
+//   - CoBuyerAgentMlsId
+//   - CoBuyerAgentMobilePhone
+//   - CoBuyerAgentNamePrefix
+//   - CoBuyerAgentNameSuffix
+//   - CoBuyerAgentNationalAssociationId
+//   - CoBuyerAgentOfficePhone
+//   - CoBuyerAgentOfficePhoneExt
+//   - CoBuyerAgentPager
+//   - CoBuyerAgentPreferredPhone
+//   - CoBuyerAgentPreferredPhoneExt
+//   - CoBuyerAgentStateLicense
+//   - CoBuyerAgentTollFreePhone
+//   - CoBuyerAgentURL
+//   - CoBuyerAgentVoiceMail
+//   - CoBuyerAgentVoiceMailExt
+// Property: drop 25 via Property.CoListAgent -> Member [FK column: property.co_list_agent_key]
+//   - CoListAgentAOR
+//   - CoListAgentDesignation
+//   - CoListAgentDirectPhone
+//   - CoListAgentEmail
+//   - CoListAgentFax
+//   - CoListAgentFirstName
+//   - CoListAgentFullName
+//   - CoListAgentHomePhone
+//   - CoListAgentLastName
+//   - CoListAgentMiddleName
+//   - CoListAgentMlsId
+//   - CoListAgentMobilePhone
+//   - CoListAgentNamePrefix
+//   - CoListAgentNameSuffix
+//   - CoListAgentNationalAssociationId
+//   - CoListAgentOfficePhone
+//   - CoListAgentOfficePhoneExt
+//   - CoListAgentPager
+//   - CoListAgentPreferredPhone
+//   - CoListAgentPreferredPhoneExt
+//   - CoListAgentStateLicense
+//   - CoListAgentTollFreePhone
+//   - CoListAgentURL
+//   - CoListAgentVoiceMail
+//   - CoListAgentVoiceMailExt
+// Property: drop 25 via Property.ListAgent -> Member [FK column: property.list_agent_key]
+//   - ListAgentAOR
+//   - ListAgentDesignation
+//   - ListAgentDirectPhone
+//   - ListAgentEmail
+//   - ListAgentFax
+//   - ListAgentFirstName
+//   - ListAgentFullName
+//   - ListAgentHomePhone
+//   - ListAgentLastName
+//   - ListAgentMiddleName
+//   - ListAgentMlsId
+//   - ListAgentMobilePhone
+//   - ListAgentNamePrefix
+//   - ListAgentNameSuffix
+//   - ListAgentNationalAssociationId
+//   - ListAgentOfficePhone
+//   - ListAgentOfficePhoneExt
+//   - ListAgentPager
+//   - ListAgentPreferredPhone
+//   - ListAgentPreferredPhoneExt
+//   - ListAgentStateLicense
+//   - ListAgentTollFreePhone
+//   - ListAgentURL
+//   - ListAgentVoiceMail
+//   - ListAgentVoiceMailExt
+// Property: drop 2 via Property.OriginatingSystem -> OUID [FK column: property.originating_system_id]
+//   - OriginatingSystemKey
+//   - OriginatingSystemName
+// Property: drop 2 via Property.SourceSystem -> OUID [FK column: property.source_system_id]
+//   - SourceSystemKey
+//   - SourceSystemName
+// Property: drop 9 via Property.BuyerOffice -> Office [FK column: property.buyer_office_key]
+//   - BuyerOfficeAOR
+//   - BuyerOfficeEmail
+//   - BuyerOfficeFax
+//   - BuyerOfficeMlsId
+//   - BuyerOfficeName
+//   - BuyerOfficeNationalAssociationId
+//   - BuyerOfficePhone
+//   - BuyerOfficePhoneExt
+//   - BuyerOfficeURL
+// Property: drop 9 via Property.CoBuyerOffice -> Office [FK column: property.co_buyer_office_key]
+//   - CoBuyerOfficeAOR
+//   - CoBuyerOfficeEmail
+//   - CoBuyerOfficeFax
+//   - CoBuyerOfficeMlsId
+//   - CoBuyerOfficeName
+//   - CoBuyerOfficeNationalAssociationId
+//   - CoBuyerOfficePhone
+//   - CoBuyerOfficePhoneExt
+//   - CoBuyerOfficeURL
+// Property: drop 9 via Property.CoListOffice -> Office [FK column: property.co_list_office_key]
+//   - CoListOfficeAOR
+//   - CoListOfficeEmail
+//   - CoListOfficeFax
+//   - CoListOfficeMlsId
+//   - CoListOfficeName
+//   - CoListOfficeNationalAssociationId
+//   - CoListOfficePhone
+//   - CoListOfficePhoneExt
+//   - CoListOfficeURL
+// Property: drop 9 via Property.ListOffice -> Office [FK column: property.list_office_key]
+//   - ListOfficeAOR
+//   - ListOfficeEmail
+//   - ListOfficeFax
+//   - ListOfficeMlsId
+//   - ListOfficeName
+//   - ListOfficeNationalAssociationId
+//   - ListOfficePhone
+//   - ListOfficePhoneExt
+//   - ListOfficeURL
+// Property: drop 1 via Property.BuyerTeam -> Teams [FK column: property.buyer_team_key]
+//   - BuyerTeamName
+// Property: drop 1 via Property.ListTeam -> Teams [FK column: property.list_team_key]
+//   - ListTeamName
+// PropertyGreenVerification: drop 1 via PropertyGreenVerification.Listing -> Property [FK column: property_green_verification.listing_key]
+//   - ListingId
+// PropertyPowerProduction: drop 1 via PropertyPowerProduction.Listing -> Property [FK column: property_power_production.listing_key]
+//   - ListingId
+// PropertyRooms: drop 1 via PropertyRooms.Listing -> Property [FK column: property_rooms.listing_key]
+//   - ListingId
+// PropertyUnitTypes: drop 1 via PropertyUnitTypes.Listing -> Property [FK column: property_unit_types.listing_key]
+//   - ListingId
+// Rules: drop 2 via Rules.OriginatingSystem -> OUID [FK column: rules.originating_system_id]
+//   - OriginatingSystemName
+//   - OriginatingSystemRuleKey
+// Rules: drop 2 via Rules.SourceSystem -> OUID [FK column: rules.source_system_id]
+//   - SourceSystemHistoryKey
+//   - SourceSystemName
+// SavedSearch: drop 1 via SavedSearch.Member -> Member [FK column: saved_search.member_key]
+//   - MemberMlsId
+// SavedSearch: drop 4 via SavedSearch.OriginatingSystem -> OUID [FK column: saved_search.originating_system_id]
+//   - OriginatingSystemKey
+//   - OriginatingSystemMemberKey
+//   - OriginatingSystemMemberName
+//   - OriginatingSystemName
+// SavedSearch: drop 2 via SavedSearch.SourceSystem -> OUID [FK column: saved_search.source_system_id]
+//   - SourceSystemKey
+//   - SourceSystemName
+// Showing: drop 1 via Showing.ShowingAgent -> Member [FK column: showing.showing_agent_key]
+//   - ShowingAgentMlsID
+// Showing: drop 1 via Showing.AgentOriginatingSystem -> OUID [FK column: showing.agent_originating_system_id]
+//   - AgentOriginatingSystemName
+// Showing: drop 1 via Showing.AgentSourceSystem -> OUID [FK column: showing.agent_source_system_id]
+//   - AgentSourceSystemName
+// Showing: drop 1 via Showing.ShowingOriginatingSystem -> OUID [FK column: showing.showing_originating_system_id]
+//   - ShowingOriginatingSystemName
+// Showing: drop 1 via Showing.ShowingSourceSystem -> OUID [FK column: showing.showing_source_system_id]
+//   - ShowingSourceSystemName
+// Showing: drop 3 via Showing.Listing -> Property [FK column: showing.listing_key]
+//   - ListingId
+//   - ListingOriginatingSystemName
+//   - ListingSourceSystemName
+// TeamMembers: drop 2 via TeamMembers.Member -> Member [FK column: team_members.member_key]
+//   - MemberLoginId
+//   - MemberMlsId
+// TeamMembers: drop 2 via TeamMembers.OriginatingSystem -> OUID [FK column: team_members.originating_system_id]
+//   - OriginatingSystemKey
+//   - OriginatingSystemName
+// TeamMembers: drop 2 via TeamMembers.SourceSystem -> OUID [FK column: team_members.source_system_id]
+//   - SourceSystemKey
+//   - SourceSystemName
+// Teams: drop 5 via Teams.TeamLead -> Member [FK column: teams.team_lead_key]
+//   - TeamLeadLoginId
+//   - TeamLeadMlsId
+//   - TeamLeadNationalAssociationId
+//   - TeamLeadStateLicense
+//   - TeamLeadStateLicenseState
+// Teams: drop 2 via Teams.OriginatingSystem -> OUID [FK column: teams.originating_system_id]
+//   - OriginatingSystemKey
+//   - OriginatingSystemName
+// Teams: drop 2 via Teams.SourceSystem -> OUID [FK column: teams.source_system_id]
+//   - SourceSystemKey
+//   - SourceSystemName
 
 // ============================================================
 // Resources (41)
@@ -155,24 +441,17 @@ Table contact_listing_notes {
 }
 
 // ---- ContactListings (RESO 2.0 canonical) ----
+// 2NF: 8 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table contact_listings {
   contact_listings_key varchar(255) [pk, note: 'ContactListingsKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system that the record was just retrieved fro | type=String | max_len=255.0']
   agent_notes_unread_yn boolean [note: 'AgentNotesUnreadYN | Indicates whether or not agent notes have gone unread. If yes, one or more of the agent notes are unread. | type=Boolean']
   class_name varchar [note: 'ClassName | The name of the class where the listing record is located. | type=String List, Single | lookup=ClassName | max_len=50.0']
   contact_key varchar(255) [note: 'ContactKey | The foreign key relating to the Contacts Resource. A unique identifier for this record from the immediate source. This is a string that can include a Uniform Re | type=String | max_len=255.0']
-  contact_listing_preference varchar [note: 'ContactListingPreference | The contact\'s preference selection on the given listing (i.e., Favorite, Possibility or Discard). | type=String List, Single | lookup=ContactListingPreference | max_len=25.0']
-  contact_login_id varchar(25) [note: 'ContactLoginId | The foreign key referring to the Contacts Resource\'s local, well-known identifier for the contact. This value may not be unique, specifically in the case of agg | type=String | max_len=25.0']
-  contact_notes_unread_yn boolean [note: 'ContactNotesUnreadYN | A flag indicating whether or not the contact\'s notes are unread. This flag may be true/false, yes/no or another true, false or unknown indicator. As with all fl | type=Boolean']
   direct_email_yn boolean [note: 'DirectEmailYN | A flag indicating whether or not this is a direct email. If true, the email was a direct email sent to the client by the member. If false, the email was an auto | type=Boolean']
   history_transactional text [note: 'HistoryTransactional | The history of the ContactListings record. | type=Collection']
   last_agent_note_timestamp timestamp [note: 'LastAgentNoteTimestamp | The date/time the member last added or updated a ListingNote. | type=Timestamp | max_len=27.0']
   last_contact_note_timestamp timestamp [note: 'LastContactNoteTimestamp | The date/time the contact last added or updated a ListingNote. | type=Timestamp | max_len=27.0']
-  listing_id varchar(255) [note: 'ListingId | The well-known identifier for the listing. The value may be identical to that of the Listing Key, but the Listing ID is intended to be the value used by a human | type=String | max_len=255.0']
   listing_key varchar(255) [note: 'ListingKey | The foreign key related to the Property Resource\'s unique identifier for this record from the immediate source. This is a string that can include a Uniform Reso | type=String | max_len=255.0']
-  listing_modification_timestamp timestamp [note: 'ListingModificationTimestamp | The last time the listing was updated. This does not refer to the ContactListing record but rather changes to the referenced listing. | type=Timestamp | max_len=27.0']
-  listing_notes text [note: 'ListingNotes | The notes input by the member and/or contact in reference to the given listing. This is a complex data type referencing the separate resource called ContactList | type=Collection']
-  listing_sent_timestamp timestamp [note: 'ListingSentTimestamp | The date/time the listing was sent to the contact. | type=Timestamp | max_len=27.0']
-  listing_viewed_yn boolean [note: 'ListingViewedYN | Indicates whether or not a listing has been viewed. If yes, the client has viewed the listing. This is typically when the client selects a detailed report rathe | type=Boolean']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the ContactListing record was last modified. | type=Timestamp | max_len=27.0']
   portal_last_visited_timestamp timestamp [note: 'PortalLastVisitedTimestamp | The date/time the listing was last viewed by the contact. | type=Timestamp | max_len=27.0']
   resource_name varchar [note: 'ResourceName | The name of the resource where the listing record is located. | type=String List, Single | lookup=ResourceName | max_len=50.0']
@@ -180,6 +459,7 @@ Table contact_listings {
 }
 
 // ---- Contacts (RESO 2.0 canonical) ----
+// 2NF: 5 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table contacts {
   contact_key varchar(255) [pk, note: 'ContactKey | A system unique identifier. Specifically, in aggregation systems, the ContactKey is the system unique identifier from the system that the record was retrieved.  | type=String | max_len=255.0 | adoption org=0% (1/344)']
   anniversary date [note: 'Anniversary | The month, day and year of the contact\'s wedding anniversary. | type=Date | max_len=24.0']
@@ -231,9 +511,7 @@ Table contacts {
   office_phone varchar(16) [note: 'OfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
   office_phone_ext varchar(10) [note: 'OfficePhoneExt | The extension of the given phone number (if applicable). | type=String | max_len=10.0']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The date/time the contact record was originally input into the source system. | type=Timestamp | max_len=27.0']
-  originating_system_contact_key varchar(255) [note: 'OriginatingSystemContactKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The OUID Resource\'s OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative control over the record (e. | type=String | max_len=25.0']
-  originating_system_name varchar(255) [note: 'OriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the contact is originally input by the member. The legal name of | type=String | max_len=255.0']
   other_address1 varchar(50) [note: 'OtherAddress1 | The other street number, direction, name and suffix of the contact. | type=String | max_len=50.0']
   other_address2 varchar(50) [note: 'OtherAddress2 | The other unit/suite number of the contact. | type=String | max_len=50.0']
   other_carrier_route varchar(9) [note: 'OtherCarrierRoute | The group of addresses to which the U.S. Postal Service (USPS) assigns the same code to aid in mail delivery. For the USPS, these codes are 9 digits: 5 numbers  | type=String | max_len=9.0']
@@ -244,7 +522,6 @@ Table contacts {
   other_postal_code varchar(10) [note: 'OtherPostalCode | The other postal code of the contact. | type=String | max_len=10.0']
   other_postal_code_plus4 varchar(4) [note: 'OtherPostalCodePlus4 | The other four-digit extension of the U.S. Zip Code. | type=String | max_len=4.0']
   other_state_or_province varchar [note: 'OtherStateOrProvince | The other state or province in which the contact is addressed. | type=String List, Single | lookup=StateOrProvince | max_len=2.0']
-  owner_member_id varchar(25) [note: 'OwnerMemberID | The local, well-known identifier for the member in charge of the contact. | type=String | max_len=25.0']
   owner_member_key varchar(255) [note: 'OwnerMemberKey | The unique identifier (key) of the member owning the contact. This is a foreign key relating to the Member resource\'s MemberKey. | type=String | max_len=255.0']
   pager varchar(16) [note: 'Pager | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
   phone_ttytdd varchar(16) [note: 'PhoneTTYTDD | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
@@ -253,9 +530,7 @@ Table contacts {
   referred_by varchar(150) [note: 'ReferredBy | The name of the person who referred the contact. | type=String | max_len=150.0']
   reverse_prospecting_enabled_yn boolean [note: 'ReverseProspectingEnabledYN | Reverse prospecting, a system that allows listing agents to see the agent/member whose client has a search criteria that found the agent\'s listing, has been ena | type=Boolean | max_len=1.0']
   social_media_type varchar [note: 'SocialMediaType | A list of types of sites or social media that the contact Uniform Resource Locator (URL) or ID is referring to (e.g., website, blog, Facebook, Twitter, LinkedIn | type=String List, Single | lookup=SocialMediaType | max_len=25.0']
-  source_system_contact_key varchar(255) [note: 'SourceSystemContactKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0']
   source_system_id varchar(25) [note: 'SourceSystemID | The OUID Resource\'s OrganizationUniqueId of the source record provider. The source system is the system from which the record was directly received. In cases wh | type=String | max_len=25.0']
-  source_system_name varchar(255) [note: 'SourceSystemName | The name of the immediate record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0']
   spouse_partner_name varchar(150) [note: 'SpousePartnerName | The contact\'s spouse or partner. | type=String | max_len=150.0']
   toll_free_phone varchar(16) [note: 'TollFreePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
   voice_mail varchar(16) [note: 'VoiceMail | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
@@ -316,6 +591,7 @@ Table history_transactional {
 }
 
 // ---- InternetTracking (RESO 2.0 canonical) ----
+// 2NF: 6 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table internet_tracking {
   event_key varchar(255) [pk, note: 'EventKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0']
   actor_city varchar(50) [note: 'ActorCity | The city location of the actor as recorded by the source. | type=String | max_len=50.0']
@@ -326,14 +602,12 @@ Table internet_tracking {
   actor_latitude numeric [note: 'ActorLatitude | The geographic latitude of some reference point for the location of the actor, specified in degrees and decimal parts. Positive numbers must not include the plu | type=Number | max_len=12.0 | max_prec=8.0']
   actor_longitude numeric [note: 'ActorLongitude | The geographic longitude of some reference point for the location of the actor, specified in degrees and decimal parts. Positive numbers must not include the pl | type=Number | max_len=12.0 | max_prec=8.0']
   actor_originating_system_id varchar(25) [note: 'ActorOriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
-  actor_originating_system_name varchar(255) [note: 'ActorOriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the listing is originally input by the member. The legal name of | type=String | max_len=255.0']
   actor_phone varchar(16) [note: 'ActorPhone | The phone number of the actor in this event. | type=String | max_len=16.0']
   actor_phone_ext varchar(10) [note: 'ActorPhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0']
   actor_postal_code varchar(10) [note: 'ActorPostalCode | The postal code of the actor. | type=String | max_len=10.0']
   actor_postal_code_plus4 varchar(4) [note: 'ActorPostalCodePlus4 | The four-digit extension of the U.S. Zip Code. | type=String | max_len=4.0']
   actor_region varchar(150) [note: 'ActorRegion | A geographical region defined by the source. For this use, the region is not specifically at the city, county, state, country or continent level, and this is ty | type=String | max_len=150.0']
   actor_source_system_id varchar(25) [note: 'ActorSourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  actor_source_system_name varchar(255) [note: 'ActorSourceSystemName | The name of the immediate record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0']
   actor_state_or_province varchar [note: 'ActorStateOrProvince | The state or province location of the actor as recorded by the source. | type=String List, Single | lookup=StateOrProvince | max_len=2.0']
   actor_type varchar [note: 'ActorType | A list of actor types; where the event originated from (e.g., Agent, Bot, Consumer). In implementation, this is typically a required field. | type=String List, Single | lookup=ActorType | max_len=25.0']
   color_depth numeric [note: 'ColorDepth | The color depth of the actor\'s device display. | type=Number | max_len=255.0']
@@ -341,11 +615,9 @@ Table internet_tracking {
   event_description varchar(1024) [note: 'EventDescription | A description of the event being tracked (e.g., "The listing was viewed."). | type=String | max_len=1024.0']
   event_label varchar(50) [note: 'EventLabel | A short description of the event being tracked. | type=String | max_len=50.0']
   event_originating_system_id varchar(25) [note: 'EventOriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
-  event_originating_system_name varchar(255) [note: 'EventOriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the listing is originally input by the member. The legal name of | type=String | max_len=255.0']
   event_reported_timestamp timestamp [note: 'EventReportedTimestamp | Date/time of when the event was recorded. This may differ from the EventTimestamp. | type=Timestamp | max_len=27.0']
   event_source varchar [note: 'EventSource | Conveys the source of the EventType. For example, "Map" is the EventSource of an object that has an impression on a map display. | type=String List, Single | lookup=EventSource | max_len=128.0']
   event_source_system_id varchar(25) [note: 'EventSourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  event_source_system_name varchar(255) [note: 'EventSourceSystemName | The name of the immediate record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0']
   event_target varchar [note: 'EventTarget | A defined target of the event type. | type=String List, Single | lookup=EventTarget | max_len=25.0']
   event_timestamp timestamp [note: 'EventTimestamp | A Coordinated Universal Time (UTC) timestamp of when the event being tracked occurred. In implementation, this is typically a required field. | type=Timestamp | max_len=27.0']
   event_type varchar [note: 'EventType | The type of event being tracked. In implementation, this is typically a required a field. | type=String List, Single | lookup=EventType | max_len=128.0']
@@ -353,9 +625,7 @@ Table internet_tracking {
   object_id_type varchar [note: 'ObjectIdType | A label that better defines the data in the ObjectID field (i.e., ObjectID is an MLS listing ID or ObjectID is a unique ID from the source). | type=String List, Single | lookup=ObjectIdType | max_len=128.0']
   object_key varchar(255) [note: 'ObjectKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0']
   object_originating_system_id varchar(25) [note: 'ObjectOriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
-  object_originating_system_name varchar(255) [note: 'ObjectOriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the listing is originally input by the member. The legal name of | type=String | max_len=255.0']
   object_source_system_id varchar(25) [note: 'ObjectSourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  object_source_system_name varchar(255) [note: 'ObjectSourceSystemName | The name of the immediate record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0']
   object_type varchar [note: 'ObjectType | The type of object being tracked in this event. In implementation, this is typically a required field. | type=String List, Single | lookup=ObjectType | max_len=128.0']
   object_url varchar(8000) [note: 'ObjectURL | The Uniform Resource Locator (URL) of the tracked event. | type=String | max_len=8000.0']
   originating_system_actor_key varchar(255) [note: 'OriginatingSystemActorKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0']
@@ -505,6 +775,7 @@ Table media {
 }
 
 // ---- Member (RESO 2.0 canonical) ----
+// 2NF: 7 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table member {
   member_key varchar(255) [pk, note: 'MemberKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0 | adoption org=97% (333/344)']
   history_transactional text [note: 'HistoryTransactional | The history of the Member record. | type=Collection']
@@ -577,17 +848,10 @@ Table member {
   member_voting_precinct varchar(50) [note: 'MemberVotingPrecinct | The voting precinct of the member. | type=String | max_len=50.0']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the roster (member or office) record was last modified. | type=Timestamp | max_len=27.0 | adoption org=98% (338/344)']
   office_key varchar(255) [note: 'OfficeKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=76% (262/344)']
-  office_mls_id varchar(25) [note: 'OfficeMlsId | The local, well-known identifier. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier from the origin | type=String | max_len=25.0 | adoption org=94% (323/344)']
-  office_name varchar(255) [note: 'OfficeName | The legal name of the brokerage. | type=String | max_len=255.0 | adoption org=73% (250/344)']
-  office_national_association_id varchar(25) [note: 'OfficeNationalAssociationId | The national association ID of the office (i.e., in the U.S., this is the NRDS number). | type=String | max_len=25.0 | adoption org=1% (3/344)']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The date/time the roster (member or office) record was originally input into the source system. | type=Timestamp | max_len=27.0 | adoption org=74% (256/344)']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The OUID Resource\'s OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative control over the record (e. | type=String | max_len=25.0 | adoption org=72% (247/344)']
-  originating_system_member_key varchar(255) [note: 'OriginatingSystemMemberKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0 | adoption org=87% (300/344)']
-  originating_system_name varchar(255) [note: 'OriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the member is originally input by the member. The legal name of  | type=String | max_len=255.0 | adoption org=92% (318/344)']
   social_media_type varchar [note: 'SocialMediaType | A list of types of sites, blogs and social media the member URL or ID is referring to (e.g., Website, Blog, Facebook, Twitter, LinkedIn, Instagram). This list i | type=String List, Single | lookup=SocialMediaType | max_len=25.0 | adoption org=2% (7/344)']
   source_system_id varchar(25) [note: 'SourceSystemID | The OUID Resource\'s OrganizationUniqueId of the source record provider. The source system is the system from which the record was directly received. In cases wh | type=String | max_len=25.0 | adoption org=58% (201/344)']
-  source_system_member_key varchar(255) [note: 'SourceSystemMemberKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0 | adoption org=57% (196/344)']
-  source_system_name varchar(255) [note: 'SourceSystemName | The name of the immediate record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0 | adoption org=40% (136/344)']
   syndicate_to varchar [note: 'SyndicateTo | When permitted by the broker, the options made by the individual agent on where they would like their listings syndicated (i.e., Zillow, Trulia, Realtor.com, Ho | type=String List, Multi | lookup=SyndicateTo (multi) | max_len=1024.0 | adoption org=2% (6/344)']
   unique_licensee_identifier varchar(255) [note: 'UniqueLicenseeIdentifier | The Unique Licensee Identifier (ULI) represents a single ID for a licensed real estate agent. It differs from the National Association of REALTORS® NRDS ID in t | type=String | max_len=255.0']
   Note: 'RESO 2.0 canonical Member resource'
@@ -640,9 +904,9 @@ Table member_state_license {
 }
 
 // ---- OUID (RESO 2.0 canonical) ----
+// 2NF: 1 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table ouid {
   organization_unique_id_key varchar(255) [pk, note: 'OrganizationUniqueIdKey | The key field used by the system hosting a table of Unique Organization Identifiers (UOIs). This key is likely to be unique to each hosting system and is not me | type=String | max_len=255.0 | adoption org=0% (1/344)']
-  changed_by_member_id varchar(25) [note: 'ChangedByMemberID | The local, well-know identifier of the member (user) who made the change. | type=String | max_len=25.0']
   changed_by_member_key varchar(255) [note: 'ChangedByMemberKey | The unique identifier of the member (user) who made the change. This is a foreign key relating to the Member Resource\'s MemberKey. | type=String | max_len=255.0']
   history_transactional text [note: 'HistoryTransactional | The history of the OUID record. | type=Collection']
   media text [note: 'Media | The media associated with the OUID record. | type=Collection']
@@ -690,6 +954,7 @@ Table ouid {
 }
 
 // ---- Office (RESO 2.0 canonical) ----
+// 2NF: 8 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table office {
   office_key varchar(255) [pk, note: 'OfficeKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=99% (340/344)']
   billing_office_key varchar(255) [note: 'BillingOfficeKey | The office that will be billed (e.g., corporate headquarters). | type=String | max_len=255.0 | adoption org=0% (1/344)']
@@ -698,7 +963,6 @@ Table office {
   history_transactional text [note: 'HistoryTransactional | The history of the Office record. | type=Collection']
   idx_office_participation_yn boolean [note: 'IDXOfficeParticipationYN | Indicates whether or not the office/broker participates in IDX. | type=Boolean | adoption org=70% (240/344)']
   main_office_key varchar(255) [note: 'MainOfficeKey | The OfficeKey of the main office in a firm/company of offices. This is a self-referencing foreign key relating to this resource\'s OfficeKey. This key may be the | type=String | max_len=255.0 | adoption org=71% (245/344)']
-  main_office_mls_id varchar(25) [note: 'MainOfficeMlsId | The OfficeMlsId of the main office in a firm/company of offices. | type=String | max_len=25.0 | adoption org=70% (242/344)']
   media text [note: 'Media | The media for the Office record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the roster (member or office) record was last modified. | type=Timestamp | max_len=27.0 | adoption org=99% (342/344)']
   number_of_branches numeric [note: 'NumberOfBranches | The calculated value for the number of active branches. The count for multiple related offices. | type=Number | max_len=3.0 | adoption org=6% (21/344)']
@@ -713,8 +977,6 @@ Table office {
   office_bio varchar(1024) [note: 'OfficeBio | A text field containing biography information for the office record. This may be resume-like information, including experience and qualifications. | type=String | max_len=1024.0 | adoption org=7% (25/344)']
   office_branch_type varchar [note: 'OfficeBranchType | The level of the office in a hierarchy (i.e., Main, Branch, Stand-Alone, etc.). | type=String List, Single | lookup=OfficeBranchType | max_len=50.0 | adoption org=11% (37/344)']
   office_broker_key varchar(255) [note: 'OfficeBrokerKey | The MemberKey of the responsible/owning broker. This is a foreign key relating to the Member resource\'s MemberKey. | type=String | max_len=255.0 | adoption org=65% (224/344)']
-  office_broker_mls_id varchar(25) [note: 'OfficeBrokerMlsId | The MemberMlsId of the responsible/owning broker. | type=String | max_len=25.0 | adoption org=64% (219/344)']
-  office_broker_national_association_id varchar(25) [note: 'OfficeBrokerNationalAssociationId | The national association ID of the broker (i.e., the NRDS number in the U.S.). | type=String | max_len=25.0']
   office_city varchar(50) [note: 'OfficeCity | The city of the office. | type=String | max_len=50.0 | adoption org=98% (338/344)']
   office_corporate_license varchar(50) [note: 'OfficeCorporateLicense | An independent license number is issued when an office/firm is a corporation. | type=String | max_len=50.0 | adoption org=72% (248/344)']
   office_country varchar [note: 'OfficeCountry | The office\'s country code for the street address. | type=String List, Single | lookup=Country | max_len=2.0 | adoption org=3% (11/344)']
@@ -731,7 +993,6 @@ Table office {
   office_mail_postal_code_plus4 varchar(4) [note: 'OfficeMailPostalCodePlus4 | The four-digit extension of the U.S. ZIP Code. | type=String | max_len=4.0 | adoption org=12% (41/344)']
   office_mail_state_or_province varchar [note: 'OfficeMailStateOrProvince | The office\'s state or province of the mailing address. | type=String List, Single | lookup=StateOrProvince | max_len=2.0 | adoption org=17% (59/344)']
   office_manager_key varchar(255) [note: 'OfficeManagerKey | The lead office manager for the given office. This is a foreign key relating to the Member Resource\'s MemberKey. | type=String | max_len=255.0 | adoption org=14% (49/344)']
-  office_manager_mls_id varchar(25) [note: 'OfficeManagerMlsId | The lead office manager for the given office. | type=String | max_len=25.0 | adoption org=17% (57/344)']
   office_mls_id varchar(25) [note: 'OfficeMlsId | The local, well-known identifier. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier from the origin | type=String | max_len=25.0 | adoption org=97% (333/344)']
   office_name varchar(255) [note: 'OfficeName | The legal name of the brokerage. | type=String | max_len=255.0 | adoption org=100% (343/344)']
   office_national_association_id varchar(25) [note: 'OfficeNationalAssociationId | The national association ID of the office (e.g., the NRDS number in the U.S.). | type=String | max_len=25.0 | adoption org=81% (279/344)']
@@ -749,13 +1010,9 @@ Table office {
   office_type varchar [note: 'OfficeType | The type of business conducted by the office (e.g., Appraisal, MLS, Mortgage). | type=String List, Single | lookup=OfficeType | max_len=50.0 | adoption org=76% (262/344)']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The date/time the roster (member or office) record was originally input into the source system. | type=Timestamp | max_len=27.0 | adoption org=73% (251/344)']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The OUID Resource\'s OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative control over the record (e. | type=String | max_len=25.0 | adoption org=70% (240/344)']
-  originating_system_name varchar(255) [note: 'OriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the office is originally input by the member. The legal name of  | type=String | max_len=255.0 | adoption org=93% (320/344)']
-  originating_system_office_key varchar(255) [note: 'OriginatingSystemOfficeKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0 | adoption org=89% (305/344)']
   other_phone varchar(16) [note: 'OtherPhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=5% (17/344)']
   social_media_type varchar [note: 'SocialMediaType | A collection of the types of social media fields available for the office. The collection includes the type of system and other details pertinent to social medi | type=String List, Single | lookup=SocialMediaType | max_len=25.0 | adoption org=1% (4/344)']
   source_system_id varchar(25) [note: 'SourceSystemID | The OUID Resource\'s OrganizationUniqueId of the source record provider. The source system is the system from which the record was directly received. In cases wh | type=String | max_len=25.0 | adoption org=59% (202/344)']
-  source_system_name varchar(255) [note: 'SourceSystemName | The name of the immediate record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0 | adoption org=40% (138/344)']
-  source_system_office_key varchar(255) [note: 'SourceSystemOfficeKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0 | adoption org=58% (198/344)']
   syndicate_agent_option varchar [note: 'SyndicateAgentOption | A list of options allowing the broker to pass the decision of syndication choice down to the listing agents (i.e., No Agent Choice, Allow Agent Choice, Restrict | type=String List, Single | lookup=SyndicateAgentOption | max_len=50.0 | adoption org=1% (2/344)']
   syndicate_to varchar [note: 'SyndicateTo | The principal broker\'s choice on where they would like their listings syndicated (i.e., Zillow, Trulia, Homes.com, etc.). | type=String List, Multi | lookup=SyndicateTo (multi) | max_len=1024.0 | adoption org=10% (33/344)']
   virtual_office_website_yn boolean [note: 'VirtualOfficeWebsiteYN | Indicates whether or not this is a Virtual Office Website (VOW). | type=Boolean']
@@ -850,6 +1107,7 @@ Table other_phone {
 }
 
 // ---- Property (RESO 2.0 canonical) ----
+// 2NF: 142 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table property {
   listing_key varchar(255) [pk, note: 'ListingKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0 | adoption org=98% (337/344)']
   above_grade_finished_area numeric [note: 'AboveGradeFinishedArea | The finished area within the structure that is at or above the surface of the ground. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=34% (118/344)']
@@ -908,47 +1166,12 @@ Table property {
   building_name varchar(50) [note: 'BuildingName | The name of the building or business park. | type=String | max_len=50.0 | adoption org=26% (88/344)']
   business_name varchar(255) [note: 'BusinessName | The name of the business being sold. | type=String | max_len=255.0 | adoption org=45% (155/344)']
   business_type varchar [note: 'BusinessType | The type of business being sold (e.g., Retail, Wholesale, Grocery, Food & Bev). | type=String List, Multi | lookup=BusinessType (multi) | max_len=1024.0 | adoption org=67% (232/344)']
-  buyer_agent_aor varchar [note: 'BuyerAgentAOR | The buyer agent\'s board or association of REALTORS®. | type=String List, Single | lookup=AOR | max_len=50.0 | adoption org=21% (71/344)']
-  buyer_agent_designation varchar [note: 'BuyerAgentDesignation | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® (NAR) | type=String List, Multi | lookup=BuyerAgentDesignation (multi) | max_len=50.0 | adoption org=30% (104/344)']
-  buyer_agent_direct_phone varchar(16) [note: 'BuyerAgentDirectPhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=53% (182/344)']
-  buyer_agent_email varchar(80) [note: 'BuyerAgentEmail | The email address of the buyer\'s agent. | type=String | max_len=80.0 | adoption org=81% (279/344)']
-  buyer_agent_fax varchar(16) [note: 'BuyerAgentFax | The North American 10-digit fax numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard.  | type=String | max_len=16.0 | adoption org=43% (149/344)']
-  buyer_agent_first_name varchar(50) [note: 'BuyerAgentFirstName | The first name of the buyer\'s agent. | type=String | max_len=50.0 | adoption org=81% (277/344)']
-  buyer_agent_full_name varchar(150) [note: 'BuyerAgentFullName | The first, middle and last name of the buyer\'s agent. | type=String | max_len=150.0 | adoption org=81% (280/344)']
-  buyer_agent_home_phone varchar(16) [note: 'BuyerAgentHomePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=35% (119/344)']
   buyer_agent_key varchar(255) [note: 'BuyerAgentKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system in which the record was just retrieved | type=String | max_len=255.0 | adoption org=70% (241/344)']
-  buyer_agent_last_name varchar(50) [note: 'BuyerAgentLastName | The last name of the buyer\'s agent. | type=String | max_len=50.0 | adoption org=80% (276/344)']
-  buyer_agent_middle_name varchar(50) [note: 'BuyerAgentMiddleName | The middle name of the buyer\'s agent. | type=String | max_len=50.0 | adoption org=58% (199/344)']
-  buyer_agent_mls_id varchar(25) [note: 'BuyerAgentMlsId | The local, well-known identifier. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier from the origin | type=String | max_len=25.0 | adoption org=88% (301/344)']
-  buyer_agent_mobile_phone varchar(16) [note: 'BuyerAgentMobilePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=53% (183/344)']
-  buyer_agent_name_prefix varchar(10) [note: 'BuyerAgentNamePrefix | The prefix to the name (e.g., Dr., Mr., Ms.). | type=String | max_len=10.0 | adoption org=0% (1/344)']
-  buyer_agent_name_suffix varchar(10) [note: 'BuyerAgentNameSuffix | The suffix to the name (e.g., Esq., Jr., III). | type=String | max_len=10.0 | adoption org=1% (2/344)']
-  buyer_agent_national_association_id varchar(25) [note: 'BuyerAgentNationalAssociationId | The national association ID of the buyer\'s agent (e.g., the NRDS number in the U.S.). | type=String | max_len=25.0 | adoption org=1% (3/344)']
-  buyer_agent_office_phone varchar(16) [note: 'BuyerAgentOfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=61% (209/344)']
-  buyer_agent_office_phone_ext varchar(10) [note: 'BuyerAgentOfficePhoneExt | The extension of the given phone number (if applicable). | type=String | max_len=10.0 | adoption org=34% (117/344)']
-  buyer_agent_pager varchar(16) [note: 'BuyerAgentPager | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=18% (61/344)']
-  buyer_agent_preferred_phone varchar(16) [note: 'BuyerAgentPreferredPhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=72% (247/344)']
-  buyer_agent_preferred_phone_ext varchar(10) [note: 'BuyerAgentPreferredPhoneExt | The extension of the given phone number (if applicable). | type=String | max_len=10.0 | adoption org=30% (104/344)']
-  buyer_agent_state_license varchar(50) [note: 'BuyerAgentStateLicense | The license of the buyer agent. Multiple licenses should be separated with a comma and space. | type=String | max_len=50.0 | adoption org=54% (185/344)']
-  buyer_agent_toll_free_phone varchar(16) [note: 'BuyerAgentTollFreePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=25% (87/344)']
-  buyer_agent_url varchar(8000) [note: 'BuyerAgentURL | The website Uniform Resource Identifier (URI) of the buyers agent. | type=String | max_len=8000.0 | adoption org=72% (248/344)']
-  buyer_agent_voice_mail varchar(16) [note: 'BuyerAgentVoiceMail | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=15% (50/344)']
-  buyer_agent_voice_mail_ext varchar(10) [note: 'BuyerAgentVoiceMailExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=3% (9/344)']
   buyer_brokerage_compensation varchar(25) [note: 'BuyerBrokerageCompensation | The total compensation to be paid to the buyer\'s brokerage for this sale, expressed as either a percentage or a constant currency amount. | type=String | max_len=25.0 | adoption org=5% (16/344)']
   buyer_brokerage_compensation_type varchar [note: 'BuyerBrokerageCompensationType | A list of types to clarify the value entered in the BuyerBrokerageCompensation field. For example, $, % or some other clarification of the BuyerAgencyCompensati | type=String List, Single | lookup=CompensationType | max_len=25.0 | adoption org=3% (10/344)']
   buyer_financing varchar [note: 'BuyerFinancing | A list of options that describe the type of financing used. This field is used when setting a listing to Closed (i.e., Cash, FHA Loan, etc.). | type=String List, Multi | lookup=BuyerFinancing (multi) | max_len=1024.0 | adoption org=53% (181/344)']
-  buyer_office_aor varchar [note: 'BuyerOfficeAOR | The buyer\'s office\'s board or association of REALTORS®. | type=String List, Single | lookup=AOR | max_len=50.0 | adoption org=24% (81/344)']
-  buyer_office_email varchar(80) [note: 'BuyerOfficeEmail | The email address of the buyer\'s office. | type=String | max_len=80.0 | adoption org=79% (271/344)']
-  buyer_office_fax varchar(16) [note: 'BuyerOfficeFax | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=55% (189/344)']
   buyer_office_key varchar(255) [note: 'BuyerOfficeKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=84% (288/344)']
-  buyer_office_mls_id varchar(25) [note: 'BuyerOfficeMlsId | The local, well-known identifier. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier from the origin | type=String | max_len=25.0 | adoption org=91% (314/344)']
-  buyer_office_name varchar(255) [note: 'BuyerOfficeName | The legal name of the brokerage representing the buyer. | type=String | max_len=255.0 | adoption org=90% (309/344)']
-  buyer_office_national_association_id varchar(25) [note: 'BuyerOfficeNationalAssociationId | The national association ID of the buyer\'s office (e.g., the NRDS number in the U.S.). | type=String | max_len=25.0 | adoption org=1% (3/344)']
-  buyer_office_phone varchar(16) [note: 'BuyerOfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=81% (279/344)']
-  buyer_office_phone_ext varchar(10) [note: 'BuyerOfficePhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=18% (63/344)']
-  buyer_office_url varchar(8000) [note: 'BuyerOfficeURL | The website Uniform Resource Identifier (URI) for the buyers office. | type=String | max_len=8000.0 | adoption org=72% (248/344)']
   buyer_team_key varchar(255) [note: 'BuyerTeamKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=3% (9/344)']
-  buyer_team_name varchar(50) [note: 'BuyerTeamName | The name of the team representing the buyer. | type=String | max_len=50.0 | adoption org=6% (22/344)']
   cable_tv_expense numeric [note: 'CableTvExpense | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=4% (13/344)']
   cancellation_date date [note: 'CancellationDate | The date that the listing contract between the seller and listing agent was canceled. This is the date entered by the agent reflecting when the change occurred  | type=Date | max_len=10.0 | adoption org=23% (78/344)']
   cap_rate numeric [note: 'CapRate | The equivalent to the return on investment you would receive if you pay cash for a property. The ratio between the net operating income produced by an asset and | type=Number | max_len=5.0 | max_prec=2.0 | adoption org=32% (109/344)']
@@ -959,78 +1182,10 @@ Table property {
   city_region varchar(150) [note: 'CityRegion | A subsection or area of a defined city (e.g., SOHO in New York, NY; Ironbound in Newark, NJ; Inside the Beltway). | type=String | max_len=150.0 | adoption org=7% (23/344)']
   close_date date [note: 'CloseDate | With for-sale listings, this is the date the purchase agreement was fulfilled. With lease listings, it is the date the requirements were fulfilled, such as cont | type=Date | max_len=10.0 | adoption org=87% (299/344)']
   close_price numeric [note: 'ClosePrice | The amount of money paid by the purchaser to the seller for the property under the agreement. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=83% (286/344)']
-  co_buyer_agent_aor varchar [note: 'CoBuyerAgentAOR | The co-buyer agent\'s board or association of REALTORS®. | type=String List, Single | lookup=AOR | max_len=50.0 | adoption org=17% (58/344)']
-  co_buyer_agent_designation varchar [note: 'CoBuyerAgentDesignation | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® (NAR) | type=String List, Multi | lookup=CoBuyerAgentDesignation (multi) | max_len=50.0 | adoption org=29% (99/344)']
-  co_buyer_agent_direct_phone varchar(16) [note: 'CoBuyerAgentDirectPhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=44% (150/344)']
-  co_buyer_agent_email varchar(80) [note: 'CoBuyerAgentEmail | The email address of the buyer\'s co-agent. | type=String | max_len=80.0 | adoption org=71% (244/344)']
-  co_buyer_agent_fax varchar(16) [note: 'CoBuyerAgentFax | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=39% (133/344)']
-  co_buyer_agent_first_name varchar(50) [note: 'CoBuyerAgentFirstName | The first name of the buyer\'s co-agent. | type=String | max_len=50.0 | adoption org=69% (239/344)']
-  co_buyer_agent_full_name varchar(150) [note: 'CoBuyerAgentFullName | The first, middle and last name of the buyer\'s co-agent. | type=String | max_len=150.0 | adoption org=71% (245/344)']
-  co_buyer_agent_home_phone varchar(16) [note: 'CoBuyerAgentHomePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=24% (83/344)']
   co_buyer_agent_key varchar(255) [note: 'CoBuyerAgentKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=63% (218/344)']
-  co_buyer_agent_last_name varchar(50) [note: 'CoBuyerAgentLastName | The last name of the buyer\'s co-agent. | type=String | max_len=50.0 | adoption org=69% (239/344)']
-  co_buyer_agent_middle_name varchar(50) [note: 'CoBuyerAgentMiddleName | The middle name of the buyer\'s co-agent. | type=String | max_len=50.0 | adoption org=50% (171/344)']
-  co_buyer_agent_mls_id varchar(25) [note: 'CoBuyerAgentMlsId | The local, well-known identifier. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier from the origin | type=String | max_len=25.0 | adoption org=74% (255/344)']
-  co_buyer_agent_mobile_phone varchar(16) [note: 'CoBuyerAgentMobilePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=49% (169/344)']
-  co_buyer_agent_name_prefix varchar(10) [note: 'CoBuyerAgentNamePrefix | The prefix to the name (e.g., Dr., Mr., Ms.). | type=String | max_len=10.0 | adoption org=0% (1/344)']
-  co_buyer_agent_name_suffix varchar(10) [note: 'CoBuyerAgentNameSuffix | The suffix to the name (e.g., Esq., Jr., III). | type=String | max_len=10.0 | adoption org=1% (3/344)']
-  co_buyer_agent_national_association_id varchar(25) [note: 'CoBuyerAgentNationalAssociationId | The national association ID of the co-buyer\'s agent (e.g., the NRDS number in the U.S.). | type=String | max_len=25.0 | adoption org=0% (1/344)']
-  co_buyer_agent_office_phone varchar(16) [note: 'CoBuyerAgentOfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=53% (181/344)']
-  co_buyer_agent_office_phone_ext varchar(10) [note: 'CoBuyerAgentOfficePhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=25% (87/344)']
-  co_buyer_agent_pager varchar(16) [note: 'CoBuyerAgentPager | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=11% (38/344)']
-  co_buyer_agent_preferred_phone varchar(16) [note: 'CoBuyerAgentPreferredPhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=63% (217/344)']
-  co_buyer_agent_preferred_phone_ext varchar(10) [note: 'CoBuyerAgentPreferredPhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=18% (63/344)']
-  co_buyer_agent_state_license varchar(50) [note: 'CoBuyerAgentStateLicense | The license of the co-buyers\' agent. Multiple licenses should be separated with a comma and space. | type=String | max_len=50.0 | adoption org=51% (174/344)']
-  co_buyer_agent_toll_free_phone varchar(16) [note: 'CoBuyerAgentTollFreePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=15% (50/344)']
-  co_buyer_agent_url varchar(8000) [note: 'CoBuyerAgentURL | The website Uniform Resource Identifier (URI) of the co-buyers agent. | type=String | max_len=8000.0 | adoption org=60% (207/344)']
-  co_buyer_agent_voice_mail varchar(16) [note: 'CoBuyerAgentVoiceMail | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=11% (39/344)']
-  co_buyer_agent_voice_mail_ext varchar(10) [note: 'CoBuyerAgentVoiceMailExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=1% (2/344)']
-  co_buyer_office_aor varchar [note: 'CoBuyerOfficeAOR | The co-buyer\'s office\'s board or association of REALTORS®. | type=String List, Single | lookup=AOR | max_len=50.0 | adoption org=16% (55/344)']
-  co_buyer_office_email varchar(80) [note: 'CoBuyerOfficeEmail | The email address of the buyer\'s co-office. | type=String | max_len=80.0 | adoption org=64% (221/344)']
-  co_buyer_office_fax varchar(16) [note: 'CoBuyerOfficeFax | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=46% (158/344)']
   co_buyer_office_key varchar(255) [note: 'CoBuyerOfficeKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=63% (215/344)']
-  co_buyer_office_mls_id varchar(25) [note: 'CoBuyerOfficeMlsId | The local, well-known identifier. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier from the origin | type=String | max_len=25.0 | adoption org=74% (255/344)']
-  co_buyer_office_name varchar(255) [note: 'CoBuyerOfficeName | The legal name of the brokerage co-representing the buyer. | type=String | max_len=255.0 | adoption org=74% (253/344)']
-  co_buyer_office_national_association_id varchar(25) [note: 'CoBuyerOfficeNationalAssociationId | The national association ID of the co-buyer\'s office (e.g., the NRDS number in the U.S.). | type=String | max_len=25.0 | adoption org=0% (1/344)']
-  co_buyer_office_phone varchar(16) [note: 'CoBuyerOfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=67% (232/344)']
-  co_buyer_office_phone_ext varchar(10) [note: 'CoBuyerOfficePhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=6% (20/344)']
-  co_buyer_office_url varchar(8000) [note: 'CoBuyerOfficeURL | The website Uniform Resource Identifier (URI) for the co-buyer\'s office. | type=String | max_len=8000.0 | adoption org=58% (200/344)']
-  co_list_agent_aor varchar [note: 'CoListAgentAOR | The Co-listing Agent\'s board or association of REALTORS®. | type=String List, Single | lookup=AOR | max_len=50.0 | adoption org=24% (84/344)']
-  co_list_agent_designation varchar [note: 'CoListAgentDesignation | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® and e | type=String List, Multi | lookup=CoListAgentDesignation (multi) | max_len=50.0 | adoption org=29% (101/344)']
-  co_list_agent_direct_phone varchar(16) [note: 'CoListAgentDirectPhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=57% (195/344)']
-  co_list_agent_email varchar(80) [note: 'CoListAgentEmail | The email address of the co-listing agent. | type=String | max_len=80.0 | adoption org=81% (279/344)']
-  co_list_agent_fax varchar(16) [note: 'CoListAgentFax | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=46% (157/344)']
-  co_list_agent_first_name varchar(50) [note: 'CoListAgentFirstName | The first name of the co-listing agent. | type=String | max_len=50.0 | adoption org=79% (273/344)']
-  co_list_agent_full_name varchar(150) [note: 'CoListAgentFullName | The first, middle and last name of the co-listing agent. | type=String | max_len=150.0 | adoption org=80% (275/344)']
-  co_list_agent_home_phone varchar(16) [note: 'CoListAgentHomePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=36% (125/344)']
   co_list_agent_key varchar(255) [note: 'CoListAgentKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=75% (257/344)']
-  co_list_agent_last_name varchar(50) [note: 'CoListAgentLastName | The last name of the co-listing agent. | type=String | max_len=50.0 | adoption org=79% (273/344)']
-  co_list_agent_middle_name varchar(50) [note: 'CoListAgentMiddleName | The middle name of the co-listing agent. | type=String | max_len=50.0 | adoption org=62% (212/344)']
-  co_list_agent_mls_id varchar(25) [note: 'CoListAgentMlsId | The local, well-known identifier. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier from the origin | type=String | max_len=25.0 | adoption org=86% (296/344)']
-  co_list_agent_mobile_phone varchar(16) [note: 'CoListAgentMobilePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=58% (198/344)']
-  co_list_agent_name_prefix varchar(10) [note: 'CoListAgentNamePrefix | The prefix to the name (e.g., Dr., Mr., Ms.). | type=String | max_len=10.0 | adoption org=0% (1/344)']
-  co_list_agent_name_suffix varchar(10) [note: 'CoListAgentNameSuffix | The suffix to the name (e.g., Esq., Jr., III). | type=String | max_len=10.0 | adoption org=1% (3/344)']
-  co_list_agent_national_association_id varchar(25) [note: 'CoListAgentNationalAssociationId | The national association ID of the co-listing agent (e.g., the NRDS number in the U.S.). | type=String | max_len=25.0 | adoption org=20% (70/344)']
-  co_list_agent_office_phone varchar(16) [note: 'CoListAgentOfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=64% (221/344)']
-  co_list_agent_office_phone_ext varchar(10) [note: 'CoListAgentOfficePhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=32% (109/344)']
-  co_list_agent_pager varchar(16) [note: 'CoListAgentPager | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=15% (53/344)']
-  co_list_agent_preferred_phone varchar(16) [note: 'CoListAgentPreferredPhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=73% (252/344)']
-  co_list_agent_preferred_phone_ext varchar(10) [note: 'CoListAgentPreferredPhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=24% (84/344)']
-  co_list_agent_state_license varchar(50) [note: 'CoListAgentStateLicense | The license of the co-listing agent. Multiple licenses should be separated with a comma and space. | type=String | max_len=50.0 | adoption org=58% (199/344)']
-  co_list_agent_toll_free_phone varchar(16) [note: 'CoListAgentTollFreePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=20% (68/344)']
-  co_list_agent_url varchar(8000) [note: 'CoListAgentURL | The website Uniform Resource Identifier (URI) of the co-listing agent. | type=String | max_len=8000.0 | adoption org=72% (247/344)']
-  co_list_agent_voice_mail varchar(16) [note: 'CoListAgentVoiceMail | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=11% (38/344)']
-  co_list_agent_voice_mail_ext varchar(10) [note: 'CoListAgentVoiceMailExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=1% (2/344)']
-  co_list_office_aor varchar [note: 'CoListOfficeAOR | The co-listing office\'s board or association of REALTORS®. | type=String List, Single | lookup=AOR | max_len=50.0 | adoption org=27% (92/344)']
-  co_list_office_email varchar(80) [note: 'CoListOfficeEmail | The email address of the co-listing office. | type=String | max_len=80.0 | adoption org=75% (259/344)']
-  co_list_office_fax varchar(16) [note: 'CoListOfficeFax | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=49% (167/344)']
   co_list_office_key varchar(255) [note: 'CoListOfficeKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=73% (252/344)']
-  co_list_office_mls_id varchar(25) [note: 'CoListOfficeMlsId | The local, well-known identifier. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier from the origin | type=String | max_len=25.0 | adoption org=86% (296/344)']
-  co_list_office_name varchar(255) [note: 'CoListOfficeName | The legal name of the brokerage co-representing the seller. | type=String | max_len=255.0 | adoption org=85% (291/344)']
-  co_list_office_national_association_id varchar(25) [note: 'CoListOfficeNationalAssociationId | The national association ID of the co-listing office (e.g., the NRDS number in the U.S.). | type=String | max_len=25.0 | adoption org=1% (3/344)']
-  co_list_office_phone varchar(16) [note: 'CoListOfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=78% (268/344)']
-  co_list_office_phone_ext varchar(10) [note: 'CoListOfficePhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=8% (27/344)']
-  co_list_office_url varchar(8000) [note: 'CoListOfficeURL | The website Uniform Resource Identifier (URI) for the co-listing office. | type=String | max_len=8000.0 | adoption org=69% (236/344)']
   common_interest varchar [note: 'CommonInterest | A type of ownership in a property that is composed of an individual lot or unit and a share of the ownership or use of common areas. A Common Interest Developme | type=String List, Single | lookup=CommonInterest | max_len=25.0 | adoption org=12% (41/344)']
   common_walls varchar [note: 'CommonWalls | A multi-select list with options like 1 Common Wall, 2 Common Walls, No Common Walls, No One Above, No One Below. Implementation should include rules preventing | type=String List, Multi | lookup=CommonWalls (multi) | max_len=1024.0 | adoption org=25% (86/344)']
   community_features varchar [note: 'CommunityFeatures | A list of features related to or available within the community. | type=String List, Multi | lookup=CommunityFeatures (multi) | max_len=1024.0 | adoption org=63% (218/344)']
@@ -1203,46 +1358,11 @@ Table property {
   license3 varchar(25) [note: 'License3 | The license number of the mobile or manufactured home, also known as the Department of Housing label/insignia number. For two units/sections, use License 1 and  | type=String | max_len=25.0 | adoption org=2% (8/344)']
   licenses_expense numeric [note: 'LicensesExpense | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=6% (22/344)']
   list_aor varchar [note: 'ListAOR | The responsible board or association of REALTORS® for this listing. | type=String List, Single | lookup=AOR | max_len=50.0 | adoption org=32% (110/344)']
-  list_agent_aor varchar [note: 'ListAgentAOR | The listing agent\'s board or association of REALTORS®. | type=String List, Single | lookup=AOR | max_len=50.0 | adoption org=32% (111/344)']
-  list_agent_designation varchar [note: 'ListAgentDesignation | Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of REALTORS® (NAR) | type=String List, Multi | lookup=ListAgentDesignation (multi) | max_len=50.0 | adoption org=30% (103/344)']
-  list_agent_direct_phone varchar(16) [note: 'ListAgentDirectPhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=59% (204/344)']
-  list_agent_email varchar(80) [note: 'ListAgentEmail | The email address of the listing agent. | type=String | max_len=80.0 | adoption org=89% (307/344)']
-  list_agent_fax varchar(16) [note: 'ListAgentFax | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=47% (163/344)']
-  list_agent_first_name varchar(50) [note: 'ListAgentFirstName | The first name of the listing agent. | type=String | max_len=50.0 | adoption org=93% (320/344)']
-  list_agent_full_name varchar(150) [note: 'ListAgentFullName | The first, middle and last name of the listing agent. | type=String | max_len=150.0 | adoption org=91% (312/344)']
-  list_agent_home_phone varchar(16) [note: 'ListAgentHomePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=41% (142/344)']
   list_agent_key varchar(255) [note: 'ListAgentKey | A system unique identifier. Specifically, in aggregation systems, the ListAgentKey is the system unique identifier from the system where the record was retrieve | type=String | max_len=255.0 | adoption org=78% (269/344)']
-  list_agent_last_name varchar(50) [note: 'ListAgentLastName | The last name of the listing agent. | type=String | max_len=50.0 | adoption org=93% (320/344)']
-  list_agent_middle_name varchar(50) [note: 'ListAgentMiddleName | The middle name of the listing agent. | type=String | max_len=50.0 | adoption org=65% (224/344)']
-  list_agent_mls_id varchar(25) [note: 'ListAgentMlsId | The local, well-known identifier for the member. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier  | type=String | max_len=25.0 | adoption org=96% (331/344)']
-  list_agent_mobile_phone varchar(16) [note: 'ListAgentMobilePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=59% (202/344)']
-  list_agent_name_prefix varchar(10) [note: 'ListAgentNamePrefix | The prefix to the name (e.g., Dr., Mr., Ms.). | type=String | max_len=10.0 | adoption org=0% (1/344)']
-  list_agent_name_suffix varchar(10) [note: 'ListAgentNameSuffix | The suffix to the name (e.g., Esq., Jr., III). | type=String | max_len=10.0 | adoption org=1% (2/344)']
-  list_agent_national_association_id varchar(25) [note: 'ListAgentNationalAssociationId | The national association ID of the listing agent (e.g., the NRDS number in the U.S.). | type=String | max_len=25.0 | adoption org=21% (71/344)']
-  list_agent_office_phone varchar(16) [note: 'ListAgentOfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=67% (229/344)']
-  list_agent_office_phone_ext varchar(10) [note: 'ListAgentOfficePhoneExt | The extension of the given phone number (if applicable). | type=String | max_len=10.0 | adoption org=36% (125/344)']
-  list_agent_pager varchar(16) [note: 'ListAgentPager | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=19% (67/344)']
-  list_agent_preferred_phone varchar(16) [note: 'ListAgentPreferredPhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=81% (278/344)']
-  list_agent_preferred_phone_ext varchar(10) [note: 'ListAgentPreferredPhoneExt | The extension of the given phone number (if applicable). | type=String | max_len=10.0 | adoption org=33% (113/344)']
-  list_agent_state_license varchar(50) [note: 'ListAgentStateLicense | The license of the listing agent. Separate multiple licenses with a comma and space. | type=String | max_len=50.0 | adoption org=60% (207/344)']
-  list_agent_toll_free_phone varchar(16) [note: 'ListAgentTollFreePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=25% (87/344)']
-  list_agent_url varchar(8000) [note: 'ListAgentURL | The website Uniform Resource Identifier (URI) of the listing agent. | type=String | max_len=8000.0 | adoption org=78% (270/344)']
-  list_agent_voice_mail varchar(16) [note: 'ListAgentVoiceMail | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=15% (52/344)']
-  list_agent_voice_mail_ext varchar(10) [note: 'ListAgentVoiceMailExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=2% (8/344)']
-  list_office_aor varchar [note: 'ListOfficeAOR | The listing office\'s board or association of REALTORS®. | type=String List, Single | lookup=AOR | max_len=50.0 | adoption org=29% (99/344)']
-  list_office_email varchar(80) [note: 'ListOfficeEmail | The email address of the listing office. | type=String | max_len=80.0 | adoption org=84% (289/344)']
-  list_office_fax varchar(16) [note: 'ListOfficeFax | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=59% (204/344)']
   list_office_key varchar(255) [note: 'ListOfficeKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=94% (324/344)']
-  list_office_mls_id varchar(25) [note: 'ListOfficeMlsId | The local, well-known identifier. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier from the origin | type=String | max_len=25.0 | adoption org=97% (333/344)']
-  list_office_name varchar(255) [note: 'ListOfficeName | The legal name of the brokerage representing the seller. | type=String | max_len=255.0 | adoption org=97% (334/344)']
-  list_office_national_association_id varchar(25) [note: 'ListOfficeNationalAssociationId | The national association ID of the listing office (e.g., the NRDS number in the U.S.). | type=String | max_len=25.0 | adoption org=1% (3/344)']
-  list_office_phone varchar(16) [note: 'ListOfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=88% (303/344)']
-  list_office_phone_ext varchar(10) [note: 'ListOfficePhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=18% (61/344)']
-  list_office_url varchar(8000) [note: 'ListOfficeURL | The website Uniform Resource Identifier (URI) for the listing office. | type=String | max_len=8000.0 | adoption org=79% (273/344)']
   list_price numeric [note: 'ListPrice | The current price of the property as determined by the seller and the seller\'s broker. For auctions, this is the minimum or reserve price. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=100% (344/344)']
   list_price_low numeric [note: 'ListPriceLow | The lower price used for Value Range Pricing. The List Price must be greater than or equal to the ListPriceLow. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=14% (47/344)']
   list_team_key varchar(255) [note: 'ListTeamKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=4% (13/344)']
-  list_team_name varchar(50) [note: 'ListTeamName | The name of the team representing the seller. | type=String | max_len=50.0 | adoption org=11% (38/344)']
   listing_agreement varchar [note: 'ListingAgreement | The nature of the agreement between the seller and the listing agent (e.g., Exclusive Agency, Open Listing). | type=String List, Single | lookup=ListingAgreement | max_len=50.0 | adoption org=69% (236/344)']
   listing_contract_date date [note: 'ListingContractDate | The effective date of the agreement between the seller and the seller\'s broker. This is the date entered by the agent reflecting when the change occurred contra | type=Date | max_len=10.0 | adoption org=98% (336/344)']
   listing_id varchar(255) [note: 'ListingId | The well-known identifier for the listing. The value may be identical to that of the Listing Key, but the Listing ID is intended to be the value used by a human | type=String | max_len=255.0 | adoption org=100% (344/344)']
@@ -1319,8 +1439,6 @@ Table property {
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time the listing was entered and made visible to members of the MLS. | type=Timestamp | max_len=27.0 | adoption org=94% (324/344)']
   original_list_price numeric [note: 'OriginalListPrice | The original price of the property on the initial agreement between the seller and the seller\'s broker. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=94% (323/344)']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The OUID Resource\'s OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative control over the record (e. | type=String | max_len=25.0 | adoption org=70% (242/344)']
-  originating_system_key varchar(255) [note: 'OriginatingSystemKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0 | adoption org=90% (311/344)']
-  originating_system_name varchar(255) [note: 'OriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the listing is originally input by the member. The legal name of | type=String | max_len=255.0 | adoption org=95% (328/344)']
   other_equipment varchar [note: 'OtherEquipment | A list of other equipment that will be included in the sale of the property. | type=String List, Multi | lookup=OtherEquipment (multi) | max_len=1024.0 | adoption org=71% (243/344)']
   other_expense numeric [note: 'OtherExpense | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=28% (97/344)']
   other_parking varchar(1024) [note: 'OtherParking | Other types of parking available to, or part of, the property. | type=String | max_len=1024.0 | adoption org=16% (55/344)']
@@ -1407,8 +1525,6 @@ Table property {
   skirt varchar [note: 'Skirt | A list of types of mobile home skirting. | type=String List, Multi | lookup=Skirt (multi) | max_len=1024.0 | adoption org=12% (42/344)']
   social_media text [note: 'SocialMedia | A collection of social media items related to the Property record. | type=Collection']
   source_system_id varchar(25) [note: 'SourceSystemID | The OUID Resource\'s OrganizationUniqueId of the source record provider. The source system is the system from which the record was directly received. In cases wh | type=String | max_len=25.0 | adoption org=58% (201/344)']
-  source_system_key varchar(255) [note: 'SourceSystemKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0 | adoption org=83% (286/344)']
-  source_system_name varchar(255) [note: 'SourceSystemName | The name of the immediate record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0 | adoption org=39% (135/344)']
   spa_features varchar [note: 'SpaFeatures | A list of features or a description of the spa included in the sale/lease. | type=String List, Multi | lookup=SpaFeatures (multi) | max_len=1024.0 | adoption org=62% (212/344)']
   spa_yn boolean [note: 'SpaYN | Indicates whether or not the property has a spa. | type=Boolean | adoption org=53% (182/344)']
   special_licenses varchar [note: 'SpecialLicenses | Special licenses required/used by the business being sold (e.g., Beer/Wine, Class H, Professional, Gambling, None). | type=String List, Multi | lookup=SpecialLicenses (multi) | max_len=1024.0 | adoption org=13% (46/344)']
@@ -1495,6 +1611,7 @@ Table property {
 }
 
 // ---- PropertyGreenVerification (RESO 2.0 canonical) ----
+// 2NF: 1 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table property_green_verification {
   green_building_verification_key varchar(255) [pk, note: 'GreenBuildingVerificationKey | A unique identifier for this record. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the local key of the system. | type=String | max_len=255.0 | adoption org=2% (7/344)']
   green_building_verification_type varchar [note: 'GreenBuildingVerificationType | The name of the verification or certification awarded to a new or pre-existing residential or commercial structure (e.g., LEED, ENERGY STAR, ICC-700). | type=String List, Single | lookup=GreenBuildingVerificationType | max_len=1024.0 | adoption org=2% (6/344)']
@@ -1507,17 +1624,16 @@ Table property_green_verification {
   green_verification_version varchar(25) [note: 'GreenVerificationVersion | The version of the green certification or verification that was awarded. Some rating programs have a year, a version or possibly both. | type=String | max_len=25.0 | adoption org=1% (2/344)']
   green_verification_year numeric [note: 'GreenVerificationYear | The year the green certification or verification was awarded. | type=Number | max_len=4.0 | adoption org=1% (5/344)']
   history_transactional text [note: 'HistoryTransactional | The history of the PropertyGreenVerification record. | type=Collection']
-  listing_id varchar(255) [note: 'ListingId | This is the foreign ID relating to the property. The well-known identifier for the listing. The value may be identical to that of the listing key, but the listi | type=String | max_len=255.0 | adoption org=1% (5/344)']
   listing_key varchar(255) [note: 'ListingKey | This is the foreign key relating to the property. A unique identifier for this record from the immediate source. This is a string that can include a Uniform Res | type=String | max_len=255.0 | adoption org=2% (7/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the PropertyGreenVerification record was last modified. | type=Timestamp | max_len=27.0 | adoption org=2% (7/344)']
   Note: 'RESO 2.0 canonical PropertyGreenVerification resource'
 }
 
 // ---- PropertyPowerProduction (RESO 2.0 canonical) ----
+// 2NF: 1 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table property_power_production {
   power_production_key varchar(255) [pk, note: 'PowerProductionKey | A unique identifier for this record. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the local key of the system. | type=String | max_len=255.0 | adoption org=1% (4/344)']
   history_transactional text [note: 'HistoryTransactional | The history of the PropertyPowerProduction record. | type=Collection']
-  listing_id varchar(255) [note: 'ListingId | This is the foreign ID relating to the Property Resource; the well-known identifier for the listing. The value may be identical to that of the listing key, but  | type=String | max_len=255.0 | adoption org=1% (5/344)']
   listing_key varchar(255) [note: 'ListingKey | This is the foreign key relating to the Property Resource; the unique identifier for this record from the immediate source. This is a string that can include a  | type=String | max_len=255.0 | adoption org=1% (5/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the PropertyPowerProduction record was last modified. | type=Timestamp | max_len=27.0 | adoption org=1% (5/344)']
   power_production_annual numeric [note: 'PowerProductionAnnual | The most important metric of a renewables system is the amount of power it produces per year. This number can be actual or estimated. Annual production for syst | type=Number | max_len=6.0']
@@ -1541,11 +1657,11 @@ Table property_power_storage {
 }
 
 // ---- PropertyRooms (RESO 2.0 canonical) ----
+// 2NF: 1 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table property_rooms {
   room_key varchar(255) [pk, note: 'RoomKey | A unique identifier for this record. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the local key of the system. | type=String | max_len=255.0 | adoption org=36% (125/344)']
   bedroom_closet_type varchar [note: 'BedroomClosetType | A list of possible closet types for a bedroom. | type=String List, Single | lookup=ClosetType | max_len=25.0']
   history_transactional text [note: 'HistoryTransactional | The history of the PropertyRooms record. | type=Collection']
-  listing_id varchar(255) [note: 'ListingId | This is the foreign ID relating to the Property Resource. The-well known identifier for the listing. The value may be identical to that of the Listing Key, but  | type=String | max_len=255.0 | adoption org=22% (77/344)']
   listing_key varchar(255) [note: 'ListingKey | This is the foreign key relating to the Property resource. A unique identifier for this record from the immediate source. A string that can include URI or other | type=String | max_len=255.0 | adoption org=24% (81/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the PropertyRooms record was last modified. | type=Timestamp | max_len=27.0 | adoption org=23% (79/344)']
   room_area numeric [note: 'RoomArea | The area of the room being described. Use the RoomAreaUnits field to describe the unit of measurement for the value in this field. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=8% (28/344)']
@@ -1564,10 +1680,10 @@ Table property_rooms {
 }
 
 // ---- PropertyUnitTypes (RESO 2.0 canonical) ----
+// 2NF: 1 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table property_unit_types {
   unit_type_key varchar(255) [pk, note: 'UnitTypeKey | A unique identifier for this record. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the local key of the system. | type=String | max_len=255.0 | adoption org=24% (83/344)']
   history_transactional text [note: 'HistoryTransactional | The history of the PropertyUnitTypes record. | type=Collection']
-  listing_id varchar(255) [note: 'ListingId | The foreign ID relating to the Property Resource; the well-known identifier for the listing. The value may be identical to that of the Listing Key, but the List | type=String | max_len=255.0 | adoption org=20% (69/344)']
   listing_key varchar(255) [note: 'ListingKey | The foreign key relating to the Property Resource; a unique identifier for this record from the immediate source; a string that can include a Uniform Resource I | type=String | max_len=255.0 | adoption org=21% (72/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the PropertyUnitTypes record was last modified. | type=Timestamp | max_len=27.0 | adoption org=20% (68/344)']
   unit_type_actual_rent numeric [note: 'UnitTypeActualRent | The actual rent per month being collected for a given type of unit. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=22% (75/344)']
@@ -1637,6 +1753,7 @@ Table queue {
 }
 
 // ---- Rules (RESO 2.0 canonical) ----
+// 2NF: 4 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table rules {
   rule_key varchar(255) [pk, note: 'RuleKey | The primary key of the individual Rule record. | type=String | max_len=255.0']
   class_name varchar [note: 'ClassName | The class or table to which the rule refers (i.e., Residential, Residential Lease, Income, Mobile, etc.). | type=String List, Single | lookup=ClassName | max_len=50.0']
@@ -1646,8 +1763,6 @@ Table rules {
   modification_timestamp timestamp [note: 'ModificationTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time the rule was last modified. | type=Timestamp | max_len=27.0']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time the rule was initially entered. | type=Timestamp | max_len=27.0']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
-  originating_system_name varchar(255) [note: 'OriginatingSystemName | The name of the originating record provider where the rule is originally input, which is the legal name of the company and most commonly the name of the MLS. | type=String | max_len=255.0']
-  originating_system_rule_key varchar(255) [note: 'OriginatingSystemRuleKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0']
   resource_name varchar [note: 'ResourceName | The resource to which the rule refers (e.g., Property, Member, Office, Open House, etc.). | type=String List, Single | lookup=ResourceName | max_len=50.0']
   rule_action varchar(8000) [note: 'RuleAction | The action to be taken when processing the rule. | type=String | max_len=8000.0']
   rule_description varchar(8000) [note: 'RuleDescription | A detailed textual description of the rule. | type=String | max_len=8000.0']
@@ -1661,26 +1776,20 @@ Table rules {
   rule_type varchar [note: 'RuleType | The type of rule (e.g., Validation, Required, Warning, etc.). | type=String List, Single | lookup=RuleType | max_len=50.0']
   rule_version varchar(255) [note: 'RuleVersion | A rule version that uses semantic versioning. See https://semver.org/. | type=String | max_len=255.0']
   rule_warning_text varchar(8000) [note: 'RuleWarningText | Textual information conveyed when a given rule has met a condition that warrants a warning message (e.g., sale price entered differs from listing price by more  | type=String | max_len=8000.0']
-  source_system_history_key varchar(255) [note: 'SourceSystemHistoryKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0']
   source_system_id varchar(25) [note: 'SourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  source_system_name varchar(255) [note: 'SourceSystemName | The name of the rule record provider, that being the system from which the record was directly received and the legal name of the company. | type=String | max_len=255.0']
   Note: 'RESO 2.0 canonical Rules resource'
 }
 
 // ---- SavedSearch (RESO 2.0 canonical) ----
+// 2NF: 7 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table saved_search {
   saved_search_key varchar(255) [pk, note: 'SavedSearchKey | A unique identifier for this record from the immediate source. This may be a number or string that can include a Uniform Resource Identifier (URI) or other form | type=String | max_len=255.0 | adoption org=0% (1/344)']
   class_name varchar [note: 'ClassName | The class or table to which the SearchQuery criteria refers (e.g., Residential, Residential Lease, Residential Income, Commercial Sale). | type=String List, Single | lookup=ClassName | max_len=50.0']
   history_transactional text [note: 'HistoryTransactional | The collection history items related to the  SavedSearch record. | type=Collection']
   member_key varchar(255) [note: 'MemberKey | A system unique identifier. Specifically, in aggregation systems, the MemberKey is the system unique identifier from the system that the record was retrieved. T | type=String | max_len=255.0']
-  member_mls_id varchar(25) [note: 'MemberMlsId | The local, well-known identifier for the member. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier  | type=String | max_len=25.0']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time that the saved search was last modified. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time that the saved search was entered. | type=Timestamp | max_len=27.0']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
-  originating_system_key varchar(255) [note: 'OriginatingSystemKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0']
-  originating_system_member_key varchar(255) [note: 'OriginatingSystemMemberKey | Unique identifier from the originating system, which is commonly a key to that system. In the case where data is passed through more than one system, this is th | type=String | max_len=255.0']
-  originating_system_member_name varchar(255) [note: 'OriginatingSystemMemberName | The name of the originating record provider, most commonly the name of the MLS. The place where the listing is originally input by the member. The legal name of | type=String | max_len=255.0']
-  originating_system_name varchar(255) [note: 'OriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the saved search is originally input. The legal name of the comp | type=String | max_len=255.0']
   resource_name varchar [note: 'ResourceName | The resource to which the SearchQuery criteria refers (e.g., Property, OpenHouse, Agent, Office, Contacts). | type=String List, Single | lookup=ResourceName | max_len=50.0']
   saved_search_description varchar(4000) [note: 'SavedSearchDescription | A textual description of the saved search input by the member who created the saved search. | type=String | max_len=4000.0']
   saved_search_name varchar(255) [note: 'SavedSearchName | The name given to the search by the member inputting the saved search. | type=String | max_len=255.0']
@@ -1691,25 +1800,19 @@ Table saved_search {
   search_query_human_readable varchar(255) [note: 'SearchQueryHumanReadable | A human readable version of the search query that is commonly used for display and may not contain all actual criteria. For actual search criteria, use the Sear | type=String | max_len=255.0']
   search_query_type varchar [note: 'SearchQueryType | A pick list of the type of query language used in the SearchQuery field (e.g., DMQL2, $filter). | type=String List, Single | lookup=SearchQueryType | max_len=50.0']
   source_system_id varchar(25) [note: 'SourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  source_system_key varchar(255) [note: 'SourceSystemKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0']
-  source_system_name varchar(255) [note: 'SourceSystemName | The name of the record provider of the saved search. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0']
   Note: 'RESO 2.0 canonical SavedSearch resource'
 }
 
 // ---- Showing (RESO 2.0 canonical) ----
+// 2NF: 8 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table showing {
   showing_key varchar(255) [pk, note: 'ShowingKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0']
   agent_originating_system_id varchar(25) [note: 'AgentOriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
-  agent_originating_system_name varchar(255) [note: 'AgentOriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the listing is originally input by the member. The legal name of | type=String | max_len=255.0']
   agent_source_system_id varchar(25) [note: 'AgentSourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  agent_source_system_name varchar(255) [note: 'AgentSourceSystemName | The name of the immediate record provider. The system from which the record was directly received. The legal name of the company. In cases where the source syst | type=String | max_len=255.0']
   history_transactional text [note: 'HistoryTransactional | The history of the Showing record. | type=Collection']
-  listing_id varchar(255) [note: 'ListingId | The well-known identifier for the listing being shown. The value may be identical to that of the listing key, but the listing ID is intended to be the value use | type=String | max_len=255.0']
   listing_key varchar(255) [note: 'ListingKey | A unique identifier for this record. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the local key of the system.  | type=String | max_len=255.0']
   listing_originating_system_id varchar(25) [note: 'ListingOriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
-  listing_originating_system_name varchar(255) [note: 'ListingOriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the listing is originally input by the member. The legal name of | type=String | max_len=255.0']
   listing_source_system_id varchar(25) [note: 'ListingSourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  listing_source_system_name varchar(255) [note: 'ListingSourceSystemName | The name of the immediate record provider. The system from which the record was directly received. The legal name of the company. In cases where the source syst | type=String | max_len=255.0']
   media text [note: 'Media | The media associated with the Showing record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The transactional timestamp automatically recorded by the system representing the date/time the Showing record was last modified. | type=Timestamp | max_len=27.0']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The transactional timestamp automatically recorded by the system representing the date/time the showing record was entered and made visible to members of the sy | type=Timestamp | max_len=27.0']
@@ -1717,15 +1820,12 @@ Table showing {
   originating_system_listing_key varchar(255) [note: 'OriginatingSystemListingKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0']
   originating_system_showing_key varchar(255) [note: 'OriginatingSystemShowingKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0']
   showing_agent_key varchar(255) [note: 'ShowingAgentKey | A system unique identifier of the member who has scheduled to access the property. Specifically, in aggregation systems, the ListAgentKey is the system unique i | type=String | max_len=255.0']
-  showing_agent_mls_id varchar(25) [note: 'ShowingAgentMlsID | The local, well-known identifier for the member who has scheduled to access the property, most commonly representing a buyer. This value may not be unique, spec | type=String | max_len=25.0']
   showing_allowed boolean [note: 'ShowingAllowed | The main Y/N field to denote whether showings are allowed to be requested at this time. There may be future showings previously scheduled. | type=Boolean']
   showing_end_timestamp timestamp [note: 'ShowingEndTimestamp | The date and time the showing ends. Where other timestamps are typically stored in Coordinated Universal Time (UTC), showing start and end date/times are typica | type=Timestamp | max_len=27.0']
   showing_id varchar(255) [note: 'ShowingId | The well-known identifier for the Showing record. The value may be identical to that of the ShowingKey, but the ShowingID is intended to be the value used by a  | type=String | max_len=255.0']
   showing_originating_system_id varchar(25) [note: 'ShowingOriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
-  showing_originating_system_name varchar(255) [note: 'ShowingOriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the listing is originally input by the member. The legal name of | type=String | max_len=255.0']
   showing_requested_timestamp timestamp [note: 'ShowingRequestedTimestamp | The date/time when the showing agent submitted a request to access the property. This is a system timestamp normally generated by a showing system, which is com | type=Timestamp | max_len=27.0']
   showing_source_system_id varchar(25) [note: 'ShowingSourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  showing_source_system_name varchar(255) [note: 'ShowingSourceSystemName | The name of the immediate record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0']
   showing_start_timestamp timestamp [note: 'ShowingStartTimestamp | The date and time the showing begins. Where other timestamps are typically stored in Coordinated Universal Time (UTC), showing start and end date/times are typi | type=Timestamp | max_len=27.0']
   showing_status varchar [note: 'ShowingStatus | The current state of showing acceptance on the listing. | type=String List, Single | lookup=ShowingStatus | max_len=50.0']
   showing_time_zone varchar [note: 'ShowingTimeZone | The standard name of the time zone, as provided by the IANA tz database. This denotes the time zone of the property being shown. | type=String List, Single | lookup=IanaTimeZoneValues | max_len=150.0']
@@ -1809,20 +1909,15 @@ Table social_media {
 }
 
 // ---- TeamMembers (RESO 2.0 canonical) ----
+// 2NF: 6 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table team_members {
   team_member_key varchar(255) [pk, note: 'TeamMemberKey | A system unique identifier. Specifically, the local key to the TeamMembers resource. | type=String | max_len=255.0 | adoption org=0% (1/344)']
   history_transactional text [note: 'HistoryTransactional | The history of the TeamMembers record. | type=Collection']
   member_key varchar(255) [note: 'MemberKey | A system unique identifier. Specifically, the foreign key relating to the Member Resource\'s MemberKey. | type=String | max_len=255.0 | adoption org=0% (1/344)']
-  member_login_id varchar(25) [note: 'MemberLoginId | The ID used to log on to the MLS system. | type=String | max_len=25.0 | adoption org=0% (1/344)']
-  member_mls_id varchar(25) [note: 'MemberMlsId | The local, well-known identifier for the member. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier  | type=String | max_len=25.0 | adoption org=0% (1/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the roster (member or office) record was last modified. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | Date/time the roster (member or office) record was originally input into the source system. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
-  originating_system_key varchar(255) [note: 'OriginatingSystemKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0 | adoption org=0% (1/344)']
-  originating_system_name varchar(255) [note: 'OriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the team member is originally input. The legal name of the compa | type=String | max_len=255.0']
   source_system_id varchar(25) [note: 'SourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  source_system_key varchar(255) [note: 'SourceSystemKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0 | adoption org=0% (1/344)']
-  source_system_name varchar(255) [note: 'SourceSystemName | The name of the team member record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0 | adoption org=0% (1/344)']
   team_impersonation_level varchar [note: 'TeamImpersonationLevel | The level of impersonation the member is allowed within the team (i.e., Impersonate (to work as the team), On Behalf (to show the team name but also show the me | type=String List, Single | lookup=TeamImpersonationLevel | max_len=50.0 | adoption org=0% (1/344)']
   team_key varchar(255) [note: 'TeamKey | A system unique identifier. Specifically, a foreign key referencing the Teams Resource\'s primary key. | type=String | max_len=255.0 | adoption org=0% (1/344)']
   team_member_national_association_id varchar(25) [note: 'TeamMemberNationalAssociationId | The national association ID of the member (e.g., in the U.S., this is an M1 or NRDS number). | type=String | max_len=25.0']
@@ -1832,6 +1927,7 @@ Table team_members {
 }
 
 // ---- Teams (RESO 2.0 canonical) ----
+// 2NF: 9 satellite field(s) dropped (reachable via FK joins). See header for full list.
 Table teams {
   team_key varchar(255) [pk, note: 'TeamKey | A system unique identifier. Specifically, in aggregation systems, the TeamKey is the system unique identifier from the system where the record was retrieved. | type=String | max_len=255.0 | adoption org=1% (2/344)']
   history_transactional text [note: 'HistoryTransactional | The history of the Teams record. | type=Collection']
@@ -1839,12 +1935,8 @@ Table teams {
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the roster (team or office) record was last modified. | type=Timestamp | max_len=27.0 | adoption org=1% (2/344)']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The date/time the roster (team or office) record was originally input into the source system. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The RESO Unique Organization Identifier\'s (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative | type=String | max_len=25.0']
-  originating_system_key varchar(255) [note: 'OriginatingSystemKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0 | adoption org=0% (1/344)']
-  originating_system_name varchar(255) [note: 'OriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the team is originally input. The legal name of the company. | type=String | max_len=255.0 | adoption org=0% (1/344)']
   social_media_type varchar [note: 'SocialMediaType | A list of types of sites or social media that the team Uniform Resource Locator (URL) or ID is referring to (e.g., website, blog, Facebook, Twitter, LinkedIn, I | type=String List, Single | lookup=SocialMediaType | max_len=25.0']
   source_system_id varchar(25) [note: 'SourceSystemID | The RESO Unique Organization Identifier\'s (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was di | type=String | max_len=25.0 | adoption org=0% (1/344)']
-  source_system_key varchar(255) [note: 'SourceSystemKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0']
-  source_system_name varchar(255) [note: 'SourceSystemName | The name of the team record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0']
   team_address1 varchar(50) [note: 'TeamAddress1 | The street number, direction, name and suffix of the team. | type=String | max_len=50.0 | adoption org=0% (1/344)']
   team_address2 varchar(50) [note: 'TeamAddress2 | The unit/suite number of the team. | type=String | max_len=50.0 | adoption org=0% (1/344)']
   team_carrier_route varchar(9) [note: 'TeamCarrierRoute | The group of addresses to which the U.S. Postal Service (USPS) assigns the same code to aid in mail delivery. For the USPS, these codes are 9 digits: 5 numbers  | type=String | max_len=9.0']
@@ -1856,11 +1948,6 @@ Table teams {
   team_email varchar(80) [note: 'TeamEmail | The email address of the team. | type=String | max_len=80.0 | adoption org=0% (1/344)']
   team_fax varchar(16) [note: 'TeamFax | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
   team_lead_key varchar(255) [note: 'TeamLeadKey | The unique system identifier of the team\'s lead member. | type=String | max_len=255.0']
-  team_lead_login_id varchar(25) [note: 'TeamLeadLoginId | The ID used to log on to the MLS system. | type=String | max_len=25.0 | adoption org=0% (1/344)']
-  team_lead_mls_id varchar(25) [note: 'TeamLeadMlsId | The local, well-known identifier for the team lead. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifi | type=String | max_len=25.0 | adoption org=0% (1/344)']
-  team_lead_national_association_id varchar(25) [note: 'TeamLeadNationalAssociationId | The national association ID of the team lead (i.e., NRDS number in the U.S.). | type=String | max_len=25.0']
-  team_lead_state_license varchar(50) [note: 'TeamLeadStateLicense | The license of the team lead. Multiple licenses should be separated with a comma and space. | type=String | max_len=50.0']
-  team_lead_state_license_state varchar [note: 'TeamLeadStateLicenseState | The state in which the team lead is licensed. | type=String List, Single | lookup=StateOrProvince | max_len=2.0']
   team_mobile_phone varchar(16) [note: 'TeamMobilePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=0% (1/344)']
   team_name varchar(50) [note: 'TeamName | The name under which the team operates. If a business, this may be a DBA (doing business as). | type=String | max_len=50.0 | adoption org=0% (1/344)']
   team_office_phone varchar(16) [note: 'TeamOfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
@@ -4594,7 +4681,7 @@ Table lookup_year_built_source {
 }
 
 // ============================================================
-// Foreign-key relationships (246)
+// Foreign-key relationships (244)
 // ============================================================
 
 Ref: association.association_country > lookup_country.code // Association.AssociationCountry -> Country
@@ -4614,7 +4701,6 @@ Ref: contact_listing_notes.contact_key > contacts.contact_key // ContactListingN
 Ref: contact_listing_notes.noted_by > lookup_noted_by.code // ContactListingNotes.NotedBy -> NotedBy
 Ref: contact_listings.class_name > lookup_class_name.code // ContactListings.ClassName -> ClassName
 Ref: contact_listings.contact_key > contacts.contact_key // ContactListings.Contact -> Contacts
-Ref: contact_listings.contact_listing_preference > lookup_contact_listing_preference.code // ContactListings.ContactListingPreference -> ContactListingPreference
 Ref: contact_listings.listing_key > property.listing_key // ContactListings.Listing -> Property
 Ref: contact_listings.resource_name > lookup_resource_name.code // ContactListings.ResourceName -> ResourceName
 Ref: contacts.contact_status > lookup_contact_status.code // Contacts.ContactStatus -> ContactStatus
@@ -4839,7 +4925,6 @@ Ref: teams.social_media_type > lookup_social_media_type.code // Teams.SocialMedi
 Ref: teams.source_system_id > ouid.organization_unique_id_key // Teams.SourceSystem -> OUID
 Ref: teams.team_country > lookup_country.code // Teams.TeamCountry -> Country
 Ref: teams.team_lead_key > member.member_key // Teams.TeamLead -> Member
-Ref: teams.team_lead_state_license_state > lookup_state_or_province.code // Teams.TeamLeadStateLicenseState -> StateOrProvince
 Ref: teams.team_state_or_province > lookup_state_or_province.code // Teams.TeamStateOrProvince -> StateOrProvince
 Ref: teams.team_status > lookup_team_status.code // Teams.TeamStatus -> TeamStatus
 Ref: transaction_management.transaction_type > lookup_transaction_type.code // TransactionManagement.TransactionType -> TransactionType

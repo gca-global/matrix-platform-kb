@@ -28,8 +28,8 @@ reso-dd-kb/
     lookup_metadata.csv      # scraped from dd.reso.org per LookupName (UsedBy + counts)
   wiki/
     resources/<Resource>.md          # ONE generated MD per RESO Resource (~41 files)
-    dbml/reso-2.0-canonical.dbml     # generated full RESO 2.0 canonical DBML
-    atlas/atlas-target.dbml          # generated Atlas-adapted DBML (separate script)
+    dbml/reso-2.0-canonical.dbml     # generated full RESO 2.0 canonical DBML (2NF normalized)
+    atlas/atlas-target.dbml          # generated Atlas-adapted DBML (may re-add satellites)
   scripts/
     refresh.py                     # idempotent rebuild of wiki/resources/ from raw/
     fetch_resource_metadata.py     # dd.reso.org -> raw/resource_metadata.csv
@@ -85,6 +85,42 @@ pattern-match without reading prose:
 > Note on `Sys%`: ddwiki used to publish a per-System adoption
 > percentage in addition to per-Organization. dd.reso.org dropped
 > the per-System breakdown, so the KB now exposes `Org%` only.
+
+## Canonical DBML normalization (2NF)
+
+The canonical DBML (`wiki/dbml/reso-2.0-canonical.dbml`) is **2NF
+normalized**. RESO 2.0 ships with hundreds of *satellite fields* —
+scalar columns whose value depends on a Resource-typed FK on the same
+host (e.g. `Property.ListAgentEmail`, `Property.OriginatingSystemName`,
+`ContactListings.ListingId`). They violate 2NF because they are
+functionally dependent on the FK column rather than the host PK.
+
+`scripts/build_reso_canonical_dbml.py` detects them automatically: for
+each Resource-typed FK on host `H` with `TargetResourceKey K`, every
+other non-Resource scalar field on `H` whose name starts with the
+prefix-of-`K` (with the trailing `Key` / `ID` / `Id` stripped) is a
+satellite, except for `H`'s own PK and other FK columns.
+
+Two flavours of satellite are dropped uniformly:
+
+1. **True denormalizations** — the column also exists on the target
+   (`Property.ListAgentEmail` mirrors `Member.MemberEmail`). Reachable
+   via the FK join.
+2. **Auxiliary identifiers / relationship attributes** — the column
+   does not exist on the target and would belong in a junction table
+   in a fully relational model (`Property.OriginatingSystemKey` =
+   "this listing's identifier in the originating system";
+   `ContactListings.ListingViewedYN` is a property of the
+   `(Contact, Listing)` pair, not of `Property` alone).
+
+Both flavours are removed from the canonical model. The full list of
+dropped satellites is reproduced as a comment header at the top of
+`wiki/dbml/reso-2.0-canonical.dbml`. Operational stores (Atlas) may
+re-add a chosen subset for query performance via
+`build_atlas_target_dbml.py`; the wiki resource pages
+(`wiki/resources/*.md`) still document satellites because they are
+part of the RESO 2.0 spec, even though they are not modelled as
+columns in the canonical DBML.
 
 ## Query workflow (read order for any "what does RESO say about X?" question)
 

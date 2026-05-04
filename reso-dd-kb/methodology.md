@@ -72,7 +72,42 @@ operational state:
 facing chip filter on the Atlas listings index. Always cite as
 "Atlas-custom" when surfacing it.
 
-## 5. Reading Org%
+## 5. Satellite fields and 2NF
+
+RESO 2.0 ships hundreds of fields that are *satellites* of a foreign
+key on the same row. The clearest example: `Property` carries
+`ListAgentKey` (FK → `Member.MemberKey`) **and** `ListAgentEmail`,
+`ListAgentFullName`, `ListAgentMlsId`, `ListAgentDirectPhone`, etc. —
+roughly 25 columns whose value depends on `ListAgentKey`, not on
+`Property`'s PK (`ListingKey`). That is a 2NF/3NF violation.
+
+The canonical DBML (`wiki/dbml/reso-2.0-canonical.dbml`) **drops these
+satellites**. Across the 41 RESO Resources, 215 satellite fields are
+removed in favour of the FK alone. The file's header lists every
+dropped field grouped by host + FK. To re-derive a satellite value at
+read time, JOIN through the FK column shown next to the host.
+
+Two flavours exist; both are dropped uniformly:
+
+1. **True denormalizations** — the column also exists on the target
+   resource (`Property.ListAgentEmail` mirrors `Member.MemberEmail`).
+   Reachable via the FK join.
+2. **Auxiliary identifiers / relationship attributes** — the column
+   does not exist on the target and would belong in a junction table
+   in a fully relational model. Examples:
+   `Property.OriginatingSystemKey` ("this listing's identifier in the
+   originating system"), `ContactListings.ListingViewedYN` (a
+   property of the (Contact, Listing) pair, not of `Property`).
+   Currently no junction table is materialised; capture these in your
+   operational store if you need them.
+
+The wiki `Resource` pages still document satellites because they are
+part of the published RESO 2.0 spec. Operational/denormalized stores
+(Atlas) may opt back in to a chosen subset of satellites for query
+performance via `build_atlas_target_dbml.py`. The canonical model
+stays clean.
+
+## 6. Reading Org%
 
 Every Field row in `wiki/resources/<Resource>.md` carries one adoption
 percentage from RESO certification stats:
