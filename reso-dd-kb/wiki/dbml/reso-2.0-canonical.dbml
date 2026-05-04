@@ -279,6 +279,7 @@ Table contacts {
 }
 
 // ---- EntityEvent (RESO 2.0 canonical) ----
+// Polymorphic FK: (resource_name, resource_record_key) -> ANY resource (target table named by resource_name)
 Table entity_event {
   resource_record_key varchar(255) [pk, note: 'ResourceRecordKey | The primary key of the related record or resource, such as ListingKey, OfficeKey or MemberKey, that allows the record to be uniquely identified as an entity so  | type=String | max_len=255.0 | adoption org=0% (1/344)']
   entity_event_sequence numeric [note: 'EntityEventSequence | A unique, system-wide ID that can be used to represent the sequence in which an EntityEvent occurred in a given system. This field serves as a logical timestamp | type=Number | max_len=64.0 | adoption org=0% (1/344)']
@@ -297,6 +298,7 @@ Table field {
 }
 
 // ---- HistoryTransactional (RESO 2.0 canonical) ----
+// Polymorphic FK: (resource_name, resource_record_key) -> ANY resource (target table named by resource_name)
 Table history_transactional {
   history_transactional_key varchar(255) [pk, note: 'HistoryTransactionalKey | A unique identifier for this record from the immediate source. This may be a number or string that can include a Uniform Resource Identifier (URI) or other form | type=String | max_len=255.0 | adoption org=12% (40/344)']
   change_type change_type [note: 'ChangeType | A description of the last major change on the listing (i.e., Price Reduction, Back on Market, etc.). May be used to display on a summary view of listing results | type=String List, Single | lookup=ChangeType | max_len=255.0 | adoption org=12% (40/344)']
@@ -464,6 +466,7 @@ Table lookup {
 
 // ---- Media (RESO 2.0 canonical) ----
 // Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
+// Polymorphic FK: (resource_name, resource_record_key) -> ANY resource (target table named by resource_name)
 Table media {
   media_key varchar(255) [pk, note: 'MediaKey | A unique identifier for this record from the immediate source. This may be a number or a string that can include a Uniform Resource Identifier (URI) or other fo | type=String | max_len=255.0 | adoption org=48% (165/344)']
   changed_by_member_id varchar(25) [note: 'ChangedByMemberID | The ID of the user, agent, member, etc., that uploaded the media this record refers to. | type=String | max_len=25.0 | adoption org=0% (1/344)']
@@ -815,6 +818,7 @@ Table open_house {
 
 // ---- OtherPhone (RESO 2.0 canonical) ----
 // Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
+// Polymorphic FK: (resource_name, resource_record_key) -> ANY resource (target table named by resource_name)
 Table other_phone {
   other_phone_key varchar(255) [pk, note: 'OtherPhoneKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system that the record was just retrieved. Th | type=String | max_len=255.0 | adoption org=0% (1/344)']
   class_name class_name [note: 'ClassName | Name of the class to which the record is referencing. | type=String List, Single | lookup=ClassName | max_len=255.0']
@@ -1449,6 +1453,7 @@ Table prospecting {
 
 // ---- Queue (RESO 2.0 canonical) ----
 // Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
+// Polymorphic FK: (resource_name, resource_record_key) -> ANY resource (target table named by resource_name)
 Table queue {
   queue_transaction_key varchar(255) [pk, note: 'QueueTransactionKey | A unique identifier for this record from the immediate source. This may be a number, or string that can include Uniform Resource Identifier (URI) or other forms | type=String | max_len=255.0']
   class_name class_name [note: 'ClassName | Name of the class that this queue record is referencing. | type=String List, Single | lookup=ClassName | max_len=50.0']
@@ -1607,6 +1612,7 @@ Table showing_request {
 
 // ---- SocialMedia (RESO 2.0 canonical) ----
 // Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
+// Polymorphic FK: (resource_name, resource_record_key) -> ANY resource (target table named by resource_name)
 Table social_media {
   social_media_key varchar(255) [pk, note: 'SocialMediaKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system that the record was just retrieved. Th | type=String | max_len=255.0 | adoption org=8% (28/344)']
   class_name class_name [note: 'ClassName | Name of the class to which the record is referencing. | type=String List, Single | lookup=ClassName | max_len=255.0 | adoption org=0% (1/344)']
@@ -1685,34 +1691,62 @@ Table transaction_management {
 }
 
 // ============================================================
-// Cross-resource FK relationships (71 = 56 primary + 15 extra)
+// Cross-resource FK relationships (121 = 89 primary + 32 extra)
 // Primary: from Resource-typed siblings (pass 1).
 // Extra:   from Definition prose (passes 2-3) and name-shape
 //          heuristics (pass 4) for FK columns with no sibling.
 // Lookup constraints: see reso-2.0-lookups.dbml (enum types).
 // ============================================================
 
+Ref: association.association_member_key > member.member_key // Association.AssociationMember -> Member
+Ref: association.originating_system_key > ouid.organization_unique_id_key // Association.OriginatingSystem -> OUID
+Ref: association.source_system_key > ouid.organization_unique_id_key // Association.SourceSystem -> OUID
 Ref: contact_listing_notes.contact_key > contacts.contact_key // ContactListingNotes.Contact -> Contacts
+Ref: contact_listing_notes.listing_key > property.listing_key // ContactListingNotes.Listing -> Property
 Ref: contact_listings.contact_key > contacts.contact_key // ContactListings.Contact -> Contacts
 Ref: contact_listings.listing_key > property.listing_key // ContactListings.Listing -> Property
 Ref: contacts.originating_system_id > ouid.organization_unique_id_key // Contacts.OriginatingSystem -> OUID
 Ref: contacts.owner_member_key > member.member_key // Contacts.OwnerMember -> Member
 Ref: contacts.source_system_id > ouid.organization_unique_id_key // Contacts.SourceSystem -> OUID
+Ref: history_transactional.changed_by_member_key > member.member_key // HistoryTransactional.ChangedByMember -> Member [alias]
+Ref: history_transactional.originating_system_id > ouid.organization_unique_id_key // HistoryTransactional.OriginatingSystem -> OUID [alias]
+Ref: history_transactional.source_system_id > ouid.organization_unique_id_key // HistoryTransactional.SourceSystem -> OUID [alias]
 Ref: internet_tracking.actor_originating_system_id > ouid.organization_unique_id_key // InternetTracking.ActorOriginatingSystem -> OUID
 Ref: internet_tracking.actor_source_system_id > ouid.organization_unique_id_key // InternetTracking.ActorSourceSystem -> OUID
 Ref: internet_tracking.event_originating_system_id > ouid.organization_unique_id_key // InternetTracking.EventOriginatingSystem -> OUID
 Ref: internet_tracking.event_source_system_id > ouid.organization_unique_id_key // InternetTracking.EventSourceSystem -> OUID
 Ref: internet_tracking.object_originating_system_id > ouid.organization_unique_id_key // InternetTracking.ObjectOriginatingSystem -> OUID
 Ref: internet_tracking.object_source_system_id > ouid.organization_unique_id_key // InternetTracking.ObjectSourceSystem -> OUID
+Ref: lock_or_box.originating_system_key > ouid.organization_unique_id_key // LockOrBox.OriginatingSystem -> OUID
+Ref: lock_or_box.showing_agent_key > member.member_key // LockOrBox.ShowingAgent -> Member
+Ref: lock_or_box.showing_office_key > office.office_key // LockOrBox.ShowingOffice -> Office
+Ref: lock_or_box.source_system_key > ouid.organization_unique_id_key // LockOrBox.SourceSystem -> OUID
+Ref: media.changed_by_member_key > member.member_key // Media.ChangedByMember -> Member
+Ref: media.originating_system_key > ouid.organization_unique_id_key // Media.OriginatingSystem -> OUID
+Ref: media.source_system_key > ouid.organization_unique_id_key // Media.SourceSystem -> OUID
 Ref: member.office_key > office.office_key // Member.Office -> Office
 Ref: member.originating_system_id > ouid.organization_unique_id_key // Member.OriginatingSystem -> OUID
 Ref: member.source_system_id > ouid.organization_unique_id_key // Member.SourceSystem -> OUID
+Ref: member_association.association_key > association.association_key // MemberAssociation.Association -> Association
+Ref: member_association.member_key > member.member_key // MemberAssociation.Member -> Member
+Ref: member_association.originating_system_key > ouid.organization_unique_id_key // MemberAssociation.OriginatingSystem -> OUID
+Ref: member_association.source_system_key > ouid.organization_unique_id_key // MemberAssociation.SourceSystem -> OUID
+Ref: member_state_license.member_key > member.member_key // MemberStateLicense.Member -> Member
 Ref: ouid.changed_by_member_key > member.member_key // OUID.ChangedByMember -> Member
 Ref: office.main_office_key > office.office_key // Office.MainOffice -> Office
 Ref: office.office_broker_key > member.member_key // Office.OfficeBroker -> Member
 Ref: office.office_manager_key > member.member_key // Office.OfficeManager -> Member
 Ref: office.originating_system_id > ouid.organization_unique_id_key // Office.OriginatingSystem -> OUID
 Ref: office.source_system_id > ouid.organization_unique_id_key // Office.SourceSystem -> OUID
+Ref: office_association.association_key > association.association_key // OfficeAssociation.Association -> Association
+Ref: office_association.office_key > office.office_key // OfficeAssociation.Office -> Office
+Ref: office_association.originating_system_key > ouid.organization_unique_id_key // OfficeAssociation.OriginatingSystem -> OUID
+Ref: office_association.source_system_key > ouid.organization_unique_id_key // OfficeAssociation.SourceSystem -> OUID
+Ref: office_corporate_license.office_key > office.office_key // OfficeCorporateLicense.Office -> Office
+Ref: open_house.listing_key > property.listing_key // OpenHouse.Listing -> Property [alias]
+Ref: open_house.originating_system_id > ouid.organization_unique_id_key // OpenHouse.OriginatingSystem -> OUID [alias]
+Ref: open_house.showing_agent_key > member.member_key // OpenHouse.ShowingAgent -> Member [alias]
+Ref: open_house.source_system_id > ouid.organization_unique_id_key // OpenHouse.SourceSystem -> OUID [alias]
 Ref: property.buyer_agent_key > member.member_key // Property.BuyerAgent -> Member
 Ref: property.buyer_office_key > office.office_key // Property.BuyerOffice -> Office
 Ref: property.buyer_team_key > teams.team_key // Property.BuyerTeam -> Teams
@@ -1729,6 +1763,11 @@ Ref: property_green_verification.listing_key > property.listing_key // PropertyG
 Ref: property_power_production.listing_key > property.listing_key // PropertyPowerProduction.Listing -> Property
 Ref: property_rooms.listing_key > property.listing_key // PropertyRooms.Listing -> Property
 Ref: property_unit_types.listing_key > property.listing_key // PropertyUnitTypes.Listing -> Property
+Ref: prospecting.contact_key > contacts.contact_key // Prospecting.Contact -> Contacts [alias]
+Ref: prospecting.owner_member_key > member.member_key // Prospecting.OwnerMember -> Member [alias]
+Ref: prospecting.saved_search_key > saved_search.saved_search_key // Prospecting.SavedSearch -> SavedSearch [alias]
+Ref: queue.originating_system_id > ouid.organization_unique_id_key // Queue.OriginatingSystem -> OUID [alias]
+Ref: queue.source_system_id > ouid.organization_unique_id_key // Queue.SourceSystem -> OUID [alias]
 Ref: rules.originating_system_id > ouid.organization_unique_id_key // Rules.OriginatingSystem -> OUID
 Ref: rules.source_system_id > ouid.organization_unique_id_key // Rules.SourceSystem -> OUID
 Ref: saved_search.member_key > member.member_key // SavedSearch.Member -> Member
@@ -1749,19 +1788,36 @@ Ref: teams.originating_system_id > ouid.organization_unique_id_key // Teams.Orig
 Ref: teams.source_system_id > ouid.organization_unique_id_key // Teams.SourceSystem -> OUID
 Ref: teams.team_lead_key > member.member_key // Teams.TeamLead -> Member
 
-// ---- Extra FKs (15) ----
+// ---- Extra FKs (32) ----
+Ref: association.executive_officer_member_key > member.member_key // Association.ExecutiveOfficerMemberKey -> Member [name-shape]
+Ref: association.originating_system_association_key > association.association_key // Association.OriginatingSystemAssociationKey -> Association [name-shape]
+Ref: association.source_system_association_key > association.association_key // Association.SourceSystemAssociationKey -> Association [name-shape]
+Ref: caravan.originating_system_key > ouid.organization_unique_id_key // Caravan.OriginatingSystemKey -> OUID [name-shape]
+Ref: caravan.source_system_key > ouid.organization_unique_id_key // Caravan.SourceSystemKey -> OUID [name-shape]
 Ref: caravan_stop.caravan_key > caravan.caravan_key // CaravanStop.CaravanKey -> Caravan [name-shape]
+Ref: caravan_stop.originating_system_key > ouid.organization_unique_id_key // CaravanStop.OriginatingSystemKey -> OUID [name-shape]
+Ref: caravan_stop.source_system_key > ouid.organization_unique_id_key // CaravanStop.SourceSystemKey -> OUID [name-shape]
 Ref: history_transactional.field_key > field.field_key // HistoryTransactional.FieldKey -> Field [name-shape]
-Ref: media.changed_by_member_key > member.member_key // Media.ChangedByMemberKey -> Member [prose-foreign-key]
+Ref: lock_or_box.listing_key > property.listing_key // LockOrBox.ListingKey -> Property [name-shape]
+Ref: media.originating_system_media_key > media.media_key // Media.OriginatingSystemMediaKey -> Media [name-shape]
 Ref: media.source_system_id > ouid.organization_unique_id_key // Media.SourceSystemID -> OUID [prose-resources]
-Ref: member_association.association_key > association.association_key // MemberAssociation.AssociationKey -> Association [name-shape]
-Ref: member_association.member_key > member.member_key // MemberAssociation.MemberKey -> Member [name-shape]
-Ref: member_state_license.member_key > member.member_key // MemberStateLicense.MemberKey -> Member [name-shape]
-Ref: office_association.association_key > association.association_key // OfficeAssociation.AssociationKey -> Association [name-shape]
-Ref: office_association.office_key > office.office_key // OfficeAssociation.OfficeKey -> Office [prose-foreign-key]
-Ref: office_corporate_license.office_key > office.office_key // OfficeCorporateLicense.OfficeKey -> Office [prose-foreign-key]
+Ref: media.source_system_media_key > media.media_key // Media.SourceSystemMediaKey -> Media [name-shape]
+Ref: member_association.originating_system_member_key > member.member_key // MemberAssociation.OriginatingSystemMemberKey -> Member [name-shape]
+Ref: member_association.source_system_member_key > member.member_key // MemberAssociation.SourceSystemMemberKey -> Member [name-shape]
+Ref: office_association.originating_system_member_key > member.member_key // OfficeAssociation.OriginatingSystemMemberKey -> Member [name-shape]
+Ref: office_association.source_system_member_key > member.member_key // OfficeAssociation.SourceSystemMemberKey -> Member [name-shape]
+Ref: open_house.originating_system_key > ouid.organization_unique_id_key // OpenHouse.OriginatingSystemKey -> OUID [name-shape]
+Ref: open_house.source_system_key > ouid.organization_unique_id_key // OpenHouse.SourceSystemKey -> OUID [name-shape]
+Ref: queue.originating_system_queue_key > queue.queue_transaction_key // Queue.OriginatingSystemQueueKey -> Queue [name-shape]
+Ref: queue.source_system_queue_key > queue.queue_transaction_key // Queue.SourceSystemQueueKey -> Queue [name-shape]
 Ref: rules.field_key > field.field_key // Rules.FieldKey -> Field [name-shape]
+Ref: showing.originating_system_listing_key > property.listing_key // Showing.OriginatingSystemListingKey -> Property [name-shape]
+Ref: showing.originating_system_showing_key > showing.showing_key // Showing.OriginatingSystemShowingKey -> Showing [name-shape]
+Ref: showing.source_system_listing_key > property.listing_key // Showing.SourceSystemListingKey -> Property [name-shape]
+Ref: showing.source_system_showing_key > showing.showing_key // Showing.SourceSystemShowingKey -> Showing [name-shape]
+Ref: showing_appointment.showing_agent_key > member.member_key // ShowingAppointment.ShowingAgentKey -> Member [name-shape]
 Ref: showing_appointment.showing_key > showing.showing_key // ShowingAppointment.ShowingKey -> Showing [name-shape]
 Ref: showing_availability.showing_key > showing.showing_key // ShowingAvailability.ShowingKey -> Showing [name-shape]
+Ref: showing_request.showing_agent_key > member.member_key // ShowingRequest.ShowingAgentKey -> Member [name-shape]
 Ref: showing_request.showing_key > showing.showing_key // ShowingRequest.ShowingKey -> Showing [name-shape]
 Ref: team_members.team_key > teams.team_key // TeamMembers.TeamKey -> Teams [prose-resources]

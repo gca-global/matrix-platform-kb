@@ -180,6 +180,71 @@ point Ref-ing a column we won't render). They land in a dedicated
 signal so reviewers can verify the heuristic. Full list:
 [`wiki/dbml/extra-fks.md`](wiki/dbml/extra-fks.md).
 
+### Step 3.5 — Resource-name aliases and polymorphic FKs
+
+Two RESO-specific patterns force extensions to the FK passes above:
+
+**Resource-name aliases.** RESO's field naming uses *role aliases* and
+plural/singular variants that don't match a Resource name 1:1. Without
+an alias map, name-shape and Resource-typed-fallback passes miss
+genuine FKs. The map (full list in
+`scripts/build_reso_canonical_dbml.py::RESOURCE_ALIASES`) covers:
+
+- *Pluralisation gaps*: `Contact -> Contacts`, `Team -> Teams`,
+  `Rule -> Rules`.
+- *Semantic synonyms*: `Listing -> Property` (a Listing is a Property
+  record offered for sale/lease).
+- *System-tracking refs*: `OriginatingSystem -> OUID`,
+  `SourceSystem -> OUID` (the Organization Unique Identifier resource
+  holds system rows).
+- *Member roles*: `BuyerAgent`, `CoBuyerAgent`, `ListAgent`,
+  `CoListAgent`, `ShowingAgent`, `OwnerMember`, `ChangedByMember`,
+  `Appointer`, `ExecutiveOfficerMember`, `AssociationMember` all
+  resolve to `Member`.
+- *Office roles*: `BuyerOffice`, `CoBuyerOffice`, `ListOffice`,
+  `CoListOffice` -> `Office`.
+- *Team roles*: `BuyerTeam`, `CoBuyerTeam`, `ListTeam`, `CoListTeam`
+  -> `Teams`.
+
+The alias map also handles *org-prefixed compound keys* like
+`OriginatingSystemMemberKey` or `SourceSystemHistoryKey`: strip the
+recognised prefix (`OriginatingSystem`, `SourceSystem`, `LocalSystem`)
+then alias-resolve the remainder. So `OriginatingSystemMemberKey` ->
+strip `OriginatingSystem` -> `Member` (direct match) -> FK to Member.
+
+The Resource-typed sibling pass (pass 1) also gained a fallback: when
+the raw CSV's `SourceResource` cell is empty (12 cases as of DD 2.0,
+e.g. `OpenHouse.Listing`, `Prospecting.Contact`), the StandardName
+itself is alias-resolved. The resulting Ref is tagged `[alias]` in
+its trailing comment so reviewers can audit the heuristic.
+
+**Polymorphic FKs (`ResourceRecordKey`).** Six resources
+(`EntityEvent`, `HistoryTransactional`, `Media`, `OtherPhone`,
+`Queue`, `SocialMedia`) carry a `ResourceRecordKey` column paired
+with a `ResourceName` column - together they form a polymorphic
+reference: the row's `resource_name` value names the target table,
+and `resource_record_key` matches that table's PK. DBML's `Ref:`
+syntax can't express polymorphism via a single Ref (would need 41
+Refs - one per possible target - which would be misleading). The
+build emits a `// Polymorphic FK: (resource_name, resource_record_key)
+-> ANY resource (target table named by resource_name)` comment on each
+host table so the relationship is documented explicitly.
+
+After these extensions, the canonical DBML carries **121 Refs** across
+**33 of 41 tables**. The remaining 8 orphan tables fall into two
+groups:
+
+- *Polymorphic-only children* whose only FK is `ResourceRecordKey`
+  (e.g. `EntityEvent`, `OtherPhone`, `SocialMedia`).
+- *Self-contained meta / leaf tables* (`Field`, `Lookup`,
+  `PropertyPowerStorage`, `TransactionManagement`,
+  `InternetTrackingSummary`) whose RESO definition holds no FK columns
+  beyond their own PK. `InternetTrackingSummary` carries a `ListingId`
+  column (RESO's human-readable MLS number, distinct from `ListingKey`)
+  which is a *soft* alternate-key reference; the build does not
+  auto-Ref `<X>Id` columns to avoid false positives, since `Id` stems
+  are too generic to disambiguate safely.
+
 ### Step 4 — Type lookup columns and emit enums in a companion file
 
 Lookups split three ways based on how they are used by fields:

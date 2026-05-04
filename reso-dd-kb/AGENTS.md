@@ -130,6 +130,40 @@ signal in the DBML comment for review. They are emitted in their own
 `// ---- Extra FKs ----` footer block to keep the heuristic-derived
 edges visible.
 
+### FK detection: alias map + polymorphic FK comments
+
+Beyond the four FK passes (Resource-typed siblings, prose ×2,
+name-shape `<Word>Key`), the build script applies a `RESOURCE_ALIASES`
+map to bridge RESO's role / synonym / pluralisation gaps:
+
+- `Listing -> Property`, `Contact -> Contacts`, `Team -> Teams`
+- `OriginatingSystem -> OUID`, `SourceSystem -> OUID`
+- Member roles: `BuyerAgent`, `CoBuyerAgent`, `ListAgent`,
+  `CoListAgent`, `ShowingAgent`, `OwnerMember`, `ChangedByMember`, etc.
+- Office roles: `Buyer/CoBuyer/List/CoList Office -> Office`
+- Team roles: `Buyer/CoBuyer/List/CoList Team -> Teams`
+- Org-prefixed compound keys: strip `OriginatingSystem`/`SourceSystem`/
+  `LocalSystem`, then alias-resolve the remainder
+  (e.g. `OriginatingSystemMemberKey -> Member`)
+
+The Resource-typed sibling pass also falls back to alias-resolving the
+StandardName when the raw CSV's `SourceResource` is empty (~12 cases).
+Refs emitted via the alias fallback are tagged `[alias]` in the
+trailing comment.
+
+`ResourceRecordKey` (paired with `ResourceName`) is RESO's
+**polymorphic FK** pattern - it targets ANY resource named by the
+sibling `ResourceName` value. DBML can't express polymorphism via a
+single Ref, so the build emits a `// Polymorphic FK:
+(resource_name, resource_record_key) -> ANY resource` comment on
+each of the 6 host tables that carry it. Six resources are affected:
+`EntityEvent`, `HistoryTransactional`, `Media`, `OtherPhone`, `Queue`,
+`SocialMedia`.
+
+Coverage after all passes + aliases: 121 Refs across 33/41 tables. The
+8 remaining orphans are either polymorphic-only children or
+self-contained meta/leaf tables (see methodology.md Step 3.5).
+
 ### Lookup enums live in a companion DBML file
 
 The 99 RESO 2.0 lookups referenced by `String List, Single` columns are

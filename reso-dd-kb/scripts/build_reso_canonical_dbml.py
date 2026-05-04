@@ -249,18 +249,98 @@ _PROSE_FK_RESOURCES = re.compile(
 )
 
 
+# RESO encodes many FKs via *role aliases* - the column / Resource-typed field
+# carries a semantic role name (e.g. `BuyerAgent`, `OriginatingSystem`,
+# `Listing`, `Contact`) that doesn't equal a Resource name 1:1. This map
+# resolves a stem (StandardName of a Resource-typed field, OR the part
+# before `Key` in a scalar FK column) to its canonical target Resource.
+#
+# Categories:
+#  - RESO-pluralisation gaps: Contact->Contacts, Team->Teams, Rule->Rules
+#  - Semantic synonyms:       Listing->Property
+#  - System-tracking refs:    OriginatingSystem/SourceSystem -> OUID
+#  - Member roles:            *Agent / *Member / Appointer / Showing-/Owner-
+#                             /ChangedBy- / Executive- / AssociationMember
+#  - Office roles:            Buyer/CoBuyer/List/CoList Office
+#  - Team roles:              Buyer/CoBuyer/List/CoList Team
+RESOURCE_ALIASES: Dict[str, str] = {
+    "Contact": "Contacts",
+    "Team": "Teams",
+    "Rule": "Rules",
+    "Listing": "Property",
+    "OriginatingSystem": "OUID",
+    "SourceSystem": "OUID",
+    # Member-role aliases (Resource-typed target = Member)
+    "ShowingAgent": "Member",
+    "OwnerMember": "Member",
+    "ChangedByMember": "Member",
+    "Appointer": "Member",
+    "ExecutiveOfficerMember": "Member",
+    "AssociationMember": "Member",
+    "BuyerAgent": "Member",
+    "CoBuyerAgent": "Member",
+    "ListAgent": "Member",
+    "CoListAgent": "Member",
+    # Office-role aliases
+    "BuyerOffice": "Office",
+    "CoBuyerOffice": "Office",
+    "ListOffice": "Office",
+    "CoListOffice": "Office",
+    # Team-role aliases
+    "BuyerTeam": "Teams",
+    "CoBuyerTeam": "Teams",
+    "ListTeam": "Teams",
+    "CoListTeam": "Teams",
+}
+
+# Org-system prefixes used in compound key column names like
+# `OriginatingSystemMemberKey` or `SourceSystemHistoryKey`. After
+# stripping a recognised prefix, the remaining stem is alias-resolved
+# to find the target Resource.
+_ORG_PREFIXES = ("OriginatingSystem", "SourceSystem", "LocalSystem")
+
+# RESO's polymorphic FK pattern: a `ResourceRecordKey` column paired
+# with a `ResourceName` column points to ANY resource (the row's
+# `ResourceName` value names the table). DBML can't model polymorphism
+# via a single Ref, so these are documented as comments instead.
+_POLYMORPHIC_FK_COL = "ResourceRecordKey"
+
+
+def _resolve_alias(stem: str, resource_names: Set[str]) -> Optional[str]:
+    """Resolve a name stem to a Resource using direct match, alias map,
+    plural folding, and org-prefix stripping. Returns the target
+    Resource name or None."""
+    if not stem:
+        return None
+    if stem in resource_names:
+        return stem
+    if stem in RESOURCE_ALIASES:
+        target = RESOURCE_ALIASES[stem]
+        return target if target in resource_names else None
+    for r in resource_names:
+        if r.endswith("s") and r[:-1] == stem:
+            return r
+    for prefix in _ORG_PREFIXES:
+        if stem.startswith(prefix) and len(stem) > len(prefix):
+            inner = stem[len(prefix):]
+            if inner in resource_names:
+                return inner
+            if inner in RESOURCE_ALIASES:
+                t = RESOURCE_ALIASES[inner]
+                return t if t in resource_names else None
+            for r in resource_names:
+                if r.endswith("s") and r[:-1] == inner:
+                    return r
+    return None
+
+
 def _name_shape_target(field_name: str, resource_names: Set[str]) -> Optional[str]:
-    """`<Word>Key` -> Resource named `<Word>` or its simple plural (Contacts,
-    Teams, Rules, etc.). Returns the canonical Resource name or None."""
+    """`<Word>Key` -> Resource named `<Word>`, its simple plural, or a
+    known role-alias / org-prefixed variant. Returns the canonical
+    Resource name or None."""
     if not field_name.endswith("Key") or len(field_name) <= 3:
         return None
-    prefix = field_name[:-3]
-    if prefix in resource_names:
-        return prefix
-    for r in resource_names:
-        if r.endswith("s") and r[:-1] == prefix:
-            return r
-    return None
+    return _resolve_alias(field_name[:-3], resource_names)
 
 
 def compute_extra_fks(
@@ -291,10 +371,19 @@ def compute_extra_fks(
     covered: Set[Tuple[str, str]] = set()
     for res, fs in by_res.items():
         for f in fs:
-            if (f.get("SimpleDataType") or "").strip() == "Resource":
-                tkey = (f.get("TargetResourceKey") or "").strip()
-                if tkey:
-                    covered.add((res, tkey))
+            if (f.get("SimpleDataType") or "").strip() != "Resource":
+                continue
+            tkey = (f.get("TargetResourceKey") or "").strip()
+            if tkey:
+                covered.add((res, tkey))
+                continue
+            # Mirror build_table's fallback: when TargetResourceKey is
+            # missing, assume the FK column is <StandardName>Key. This
+            # prevents the extra-FK pass from re-emitting a Ref the
+            # alias-resolved pass-1 already emitted.
+            target_alias = _resolve_alias(f["StandardName"], resource_names)
+            if target_alias:
+                covered.add((res, f["StandardName"] + "Key"))
 
     priority = {"prose-foreign-key": 0, "prose-resources": 1, "name-shape": 2}
     best: Dict[Tuple[str, str], Tuple[str, str, str, str, str]] = {}
@@ -428,6 +517,17 @@ def build_table(
             f"// Inverse 1:N (Collection-typed in RESO; FK lives on child): "
             + ", ".join(f"{name} -> {target}" for name, target in inverse_collections)
         )
+    # Polymorphic FK: ResourceRecordKey is paired with ResourceName and can
+    # point to ANY resource. DBML can't model polymorphism via a single Ref;
+    # document it as a comment so the relationship isn't silently lost.
+    poly_present = any(
+        f["StandardName"] == _POLYMORPHIC_FK_COL for f in fields_for_res
+    )
+    if poly_present:
+        lines.append(
+            "// Polymorphic FK: (resource_name, resource_record_key) -> "
+            "ANY resource (target table named by resource_name)"
+        )
     lines.append(f"Table {table_name} {{")
 
     refs: List[str] = []
@@ -450,11 +550,25 @@ def build_table(
 
         # Resource-typed fields render as FK refs only; the scalar key column
         # they point to is materialised by another row in fields.csv (the
-        # `<TargetResourceKey>` field).
+        # `<TargetResourceKey>` field). When SourceResource is empty in the
+        # raw CSV (12 cases), fall back to alias-resolving the StandardName
+        # itself (e.g. OpenHouse.Listing -> Property, Prospecting.Contact
+        # -> Contacts).
         if sdt == "Resource":
             target_resource = (f.get("SourceResource") or "").strip()
             target_key_col = (f.get("TargetResourceKey") or "").strip()
-            if not target_resource or not target_key_col:
+            via_alias = False
+            if not target_resource:
+                resolved = _resolve_alias(f["StandardName"], valid_resources)
+                if resolved:
+                    target_resource = resolved
+                    via_alias = True
+            if not target_key_col:
+                # Default the FK column name to <StandardName>Key when the
+                # raw CSV omits TargetResourceKey - matches RESO's naming
+                # convention for inverse-resolved Resource-typed fields.
+                target_key_col = f["StandardName"] + "Key"
+            if not target_resource:
                 continue
             host_col = to_snake(target_key_col)
             target_table = resource_to_table.get(target_resource)
@@ -462,9 +576,10 @@ def build_table(
             if not target_table or not target_pk:
                 continue
             target_pk_snake = to_snake(target_pk)
+            tag = " [alias]" if via_alias else ""
             refs.append(
                 f"Ref: {table_name}.{host_col} > {target_table}.{target_pk_snake} "
-                f"// {resource}.{f['StandardName']} -> {target_resource}"
+                f"// {resource}.{f['StandardName']} -> {target_resource}{tag}"
             )
             continue
 
