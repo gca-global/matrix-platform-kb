@@ -28,7 +28,8 @@ reso-dd-kb/
     lookup_metadata.csv      # scraped from dd.reso.org per LookupName (UsedBy + counts)
   wiki/
     resources/<Resource>.md          # ONE generated MD per RESO Resource (~41 files)
-    dbml/reso-2.0-canonical.dbml     # generated full RESO 2.0 canonical DBML (2NF normalized)
+    dbml/reso-2.0-canonical.dbml     # generated 41 Resource tables + cross-resource Refs (2NF, slim)
+    dbml/reso-2.0-lookups.dbml       # generated companion: 99 Enum blocks for SV lookups (loadable separately)
     dbml/2nf-satellite-drops.md      # generated companion: every dropped satellite by host+FK+target
     dbml/extra-fks.md                # generated companion: every FK from prose / name-shape passes
     atlas/atlas-target.dbml          # generated Atlas-adapted DBML (may re-add satellites)
@@ -56,7 +57,7 @@ preserved as tombstones; primary links go to dd.reso.org.
 |---|---|---|
 | `raw/` | source of truth | NEVER edit by hand. Replace whole CSVs from upstream sources. |
 | `wiki/resources/` | generated | NEVER edit by hand. Re-run `scripts/refresh.py`. |
-| `wiki/dbml/` | generated | NEVER edit by hand. Re-run `scripts/build_reso_canonical_dbml.py` (emits `reso-2.0-canonical.dbml`, `2nf-satellite-drops.md`, `extra-fks.md`). |
+| `wiki/dbml/` | generated | NEVER edit by hand. Re-run `scripts/build_reso_canonical_dbml.py` (emits `reso-2.0-canonical.dbml`, `reso-2.0-lookups.dbml`, `2nf-satellite-drops.md`, `extra-fks.md`). |
 | `wiki/atlas/` | generated | NEVER edit by hand. Re-run `scripts/build_atlas_target_dbml.py`. |
 | `scripts/` | human + agent | Edit freely; keep idempotent. |
 | `AGENTS.md`, `README.md`, `methodology.md` | human | Edit on policy change. |
@@ -128,6 +129,32 @@ emitting a Ref for a column we've removed) and tagged with their
 signal in the DBML comment for review. They are emitted in their own
 `// ---- Extra FKs ----` footer block to keep the heuristic-derived
 edges visible.
+
+### Lookup enums live in a companion DBML file
+
+The 99 RESO 2.0 lookups referenced by `String List, Single` columns are
+emitted as DBML `Enum` blocks in `wiki/dbml/reso-2.0-lookups.dbml`, NOT
+in the main canonical file. The main DBML types each single-value
+lookup column with the snake_case LookupName (e.g.
+`property.standard_status standard_status`); the enum value set lives
+in the companion. DBML viewers loaded with both files together resolve
+the column type to a real validated enum; viewers loaded with only the
+main file render the type as an opaque custom type (the LookupName
+still serves as documentation).
+
+This split is a size/usability decision: bundling all 193 RESO lookups
+as DBML reference tables inflated the canonical file to ~5,000 lines,
+beyond what `dbdiagram.io` and similar tools render comfortably. The
+split keeps the main schema at ~1,800 lines.
+
+The 94 `String List, Multi` lookups stay `varchar` in the main file
+(DBML's single-column type system can't model array membership) and
+tag their LookupName in the column Note. The 29 *open* lookups
+(LookupName declared by RESO with no closed value list, e.g. `City`,
+`MlsStatus`, `AOR`) likewise stay `varchar` and tag
+`(open: jurisdiction-defined; no closed value list)` in the Note. Both
+groups are listed as comments at the bottom of the lookups DBML for
+discoverability.
 
 ### Collection-typed fields (inverse 1:N)
 

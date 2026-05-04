@@ -180,34 +180,19 @@ point Ref-ing a column we won't render). They land in a dedicated
 signal so reviewers can verify the heuristic. Full list:
 [`wiki/dbml/extra-fks.md`](wiki/dbml/extra-fks.md).
 
-### Step 4 — Emit lookup reference tables and 5th-pass lookup FKs
+### Step 4 — Type lookup columns and emit enums in a companion file
 
-For every distinct `LookupName` in `raw/lookups.csv` we emit one
-`lookup_<snake_name>` table with the canonical RESO LookupName columns:
+Lookups split three ways based on how they are used by fields:
 
-```
-code, legacy_odata_value, definition, bedes, synonyms,
-spanish_value, french_value, status, record_id
-```
-
-Every host column whose `SimpleDataType = "String List, Single"` and
-whose `LookupName` is in our lookup set gets a 5th `Ref:` to
-`lookup_<name>.code`. Multi-value lookups (`String List, Multi`) stay
-`varchar` with an explicit `(multi-value; column stores comma-separated
-codes)` tag in the column Note — DBML's single-column `Ref` can't model
-array membership, so no FK is emitted.
-
-The 193 generated `lookup_*` tables therefore split three ways:
-
-| Bucket | Count | DBML behaviour |
+| Bucket | Count | DBML treatment |
 |---|---:|---|
-| FK-targeted (at least one `String List, Single` user) | 99 | host columns carry a `Ref:` to `lookup_<name>.code` |
-| Documentation-only (only `String List, Multi` users) | 94 | table exists for value-set documentation; no `Ref:` targets it; host column tagged `(multi-value)` in Note |
-| **Total tables emitted** | **193** | one per distinct `LookupName` in `raw/lookups.csv` |
+| Referenced by ≥1 `String List, Single` column | **99** | `Enum <snake_name> { ... values ... }` block in `wiki/dbml/reso-2.0-lookups.dbml`; the host column in the main canonical DBML is typed as `<snake_name>` |
+| Referenced only by `String List, Multi` columns | **94** | NOT enum-able (DBML's single-column type system can't model array membership); host column stays `varchar` and tags `(multi-value; column stores comma-separated codes)` in its Note; LookupName listed at the bottom of the lookups DBML for discoverability |
+| Open lookups (declared by RESO, no closed value list in `raw/lookups.csv`) | **29** | NOT enum-able (no closed value set); host column stays `varchar` and tags `(open: jurisdiction-defined; no closed value list)` in its Note; LookupName listed at the bottom of the lookups DBML |
+| **Distinct LookupNames referenced by fields** | **222** | 99 + 94 + 29 reconciles |
 
-A further **29 `LookupName`s** are *referenced* by columns but **not
-materialised** as tables — these are RESO's *open* enumerations
-(`City`, `PostalCity`, `CountyOrParish`, `MlsStatus`, `MediaStatus`,
+The open lookups cover jurisdiction-defined value sets: `City`,
+`PostalCity`, `CountyOrParish`, `MlsStatus`, `MediaStatus`,
 `OrganizationType`, `AOR`, `ElementarySchool`, `HighSchool`,
 `MiddleOrJuniorSchool`, `*District`, `MLSAreaMajor`, `MLSAreaMinor`,
 `StreetSuffix`, `RuleType`, `SavedSearchType`,
@@ -215,17 +200,44 @@ materialised** as tables — these are RESO's *open* enumerations
 `SyndicateAgentOption`, `ImageSizeDescription`,
 `SearchQueryExceptions`, `BuildingFeatures`, `Disclosures`,
 `DocumentsAvailable`, `GreenLocation`, `IrrigationSource`,
-`ShowingDays`). RESO declares the `LookupName` but ships no closed
-value list because each MLS / jurisdiction defines its own. Columns
-that reference an open lookup carry an explicit `(open:
-jurisdiction-defined; no closed value list)` tag in their Note so the
-absence of a corresponding `lookup_<name>` table is intentional, not a
-generator bug.
+`ShowingDays`. Each MLS / jurisdiction extends them locally.
 
-Total reconciliation: 99 FK-targeted + 94 docs-only + 29 open = 222
-distinct `LookupName`s referenced by RESO 2.0 fields. Zero orphan
-lookup tables (every emitted table has at least one referencing field
-in `raw/fields.csv`).
+#### Why the lookups live in a separate DBML file
+
+DBML enums must be declared at the top level of a DBML file. Bundling
+all 99 enums alongside the 41 Resource tables inflated the canonical
+file to ~5,000 lines / ~488 KB, beyond what `dbdiagram.io` and similar
+tools render comfortably. Splitting them out drops the main file to
+~1,800 lines while preserving full enum value sets in a co-loadable
+companion:
+
+- `reso-2.0-canonical.dbml` — 41 Resource tables + cross-resource Refs.
+  Single-value lookup columns are typed as the snake_case LookupName
+  (e.g. `property.standard_status standard_status`). When this file is
+  loaded standalone in a DBML viewer, the type renders as an opaque
+  custom type — the name itself serves as documentation.
+- `reso-2.0-lookups.dbml` — 99 `Enum <snake_name> { ... }` blocks
+  carrying every RESO standard value (with `legacy=ComingSoon` style
+  Notes for any value whose LegacyODataValue differs from the
+  StandardLookupValue). Multi-word values like `Active Under Contract`
+  are double-quoted per DBML grammar.
+
+DBML viewers loaded with both files (e.g. `dbdiagram.io` "Import file"
+twice into the same diagram) resolve the column type to a real
+validated enum. Atlas's `build_atlas_target_dbml.py` is free to choose
+its own representation (today it inherits the canonical's choice; this
+may change as a separate decision).
+
+#### Why not emit lookup `Ref:` lines
+
+In the previous reference-table design, every single-value lookup
+column emitted `Ref: host.col > lookup_name.code`. With enums, the
+type-system *is* the constraint — no Ref line is needed. The main
+DBML's `Ref:` count drops from 259 to 71 (only cross-resource
+relationships remain), and the noise-to-signal ratio improves.
+
+Zero orphan enums: every enum in the lookups DBML has at least one
+referencing column in `raw/fields.csv`.
 
 ### Step 5 — Skip Collection-typed inverse references
 
@@ -265,19 +277,26 @@ Each column carries a single-line `Note:` with `StandardName`,
 
 ### Step 7 — Output
 
-Three files are written:
+Four files are written by a single invocation of
+`scripts/build_reso_canonical_dbml.py`:
 
-1. `wiki/dbml/reso-2.0-canonical.dbml` - the schema itself
-   (41 Resources, 234 tables, 259 FK Refs, 1476 columns kept
-   = 1745 RESO fields − 215 satellites − 54 Collection inverses).
-2. `wiki/dbml/2nf-satellite-drops.md` - human-readable enumeration of
+1. `wiki/dbml/reso-2.0-canonical.dbml` (~1,800 lines) - the schema
+   itself: 41 Resource tables + 71 cross-resource Refs (Resource-typed
+   siblings + extra FKs from prose / name-shape passes). Single-value
+   lookup columns are typed as the snake_case LookupName.
+2. `wiki/dbml/reso-2.0-lookups.dbml` (~2,200 lines) - the lookup
+   companion: 99 `Enum` blocks with every RESO standard value, plus
+   commented sections listing the 94 multi-only and 29 open lookups
+   that cannot be enums.
+3. `wiki/dbml/2nf-satellite-drops.md` - human-readable enumeration of
    every dropped satellite, grouped by host + FK + target.
-3. `wiki/dbml/extra-fks.md` - human-readable enumeration of every FK
+4. `wiki/dbml/extra-fks.md` - human-readable enumeration of every FK
    discovered by passes 2-4.
 
-The DBML file's own header comment also reproduces both lists so a
-reviewer reading the schema in isolation has the full provenance
-inline.
+The main DBML's header carries the satellite + extras counts and links
+to the companion files; it does NOT re-inline the per-host satellite
+list (that's what `2nf-satellite-drops.md` is for). This keeps the
+schema small enough for any DBML viewer.
 
 ### What this leaves to operational stores
 

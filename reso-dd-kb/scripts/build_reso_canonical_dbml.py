@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
 """Build the pure RESO Data Dictionary 2.0 canonical DBML for ALL 41 Resources.
 
-Output: reso-dd-kb/wiki/dbml/reso-2.0-canonical.dbml
+Outputs:
+    wiki/dbml/reso-2.0-canonical.dbml   - 41 Resource tables + cross-resource Refs
+    wiki/dbml/reso-2.0-lookups.dbml     - 99 Enum blocks for SV lookups (companion)
+    wiki/dbml/2nf-satellite-drops.md    - human-readable satellite drop list
+    wiki/dbml/extra-fks.md              - human-readable extra-FK list
 
-This is the upstream RESO 2.0 truth, with NO Atlas-specific decisions
-baked in. Every canonical RESO field for every Resource is rendered as
-a column; Resource-typed fields are rendered as DBML `Ref:` lines (FK
-relationships); every column carries its RESO Definition + SimpleDataType
-+ LookupName + adoption metrics as a DBML `Note:` annotation.
+The canonical DBML is **2NF normalized** with FKs surfaced from four
+detection passes (Resource-typed siblings, Definition prose x2,
+name-shape). Single-value lookup columns are typed as the snake_case
+LookupName (e.g. `standard_status`). The actual `Enum standard_status
+{ ... values ... }` blocks live in the companion `reso-2.0-lookups.dbml`
+- this split keeps the main schema small enough for any DBML viewer
+while preserving full enum value sets in a co-locatable companion file.
 
-Lookups (enumerations) are materialised as **reference tables** named
-`lookup_<snake_name>`, one per distinct LookupName in `raw/lookups.csv`.
-Each ref table carries the canonical RESO LookupName columns:
-    code, legacy_odata_value, definition, bedes, synonyms,
-    spanish_value, french_value, status, record_id
-Single-value lookup columns (`String List, Single`) get a DBML `Ref:`
-to the corresponding `lookup_<name>.code`; multi-value lookup columns
-(`String List, Multi`) stay `text` and document the lookup in a Note.
+Multi-value lookup columns (`String List, Multi`) stay `varchar`
+because DBML's single-column FK / type system can't model array
+membership; their LookupName is documented in the column Note. Open
+lookups (LookupName declared by RESO but with no closed value list,
+e.g. `City`, `MlsStatus`, `AOR`) are also `varchar` and tagged
+explicitly in the Note.
 
 Inputs:
     raw/fields.csv         (parsed from RESO_Data_Dictionary_2.0.xlsx)
@@ -36,6 +40,7 @@ from typing import Dict, List, Optional, Set, Tuple
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "raw"
 OUT = ROOT / "wiki" / "dbml" / "reso-2.0-canonical.dbml"
+OUT_LOOKUPS = ROOT / "wiki" / "dbml" / "reso-2.0-lookups.dbml"
 OUT_DROPS = ROOT / "wiki" / "dbml" / "2nf-satellite-drops.md"
 OUT_EXTRAS = ROOT / "wiki" / "dbml" / "extra-fks.md"
 
@@ -473,7 +478,21 @@ def build_table(
             continue
         seen_cols.add(col_name)
 
-        col_type = map_dbml_type(sdt, f.get("SugMaxLength") or "")
+        # Single-value lookup columns get the snake_case LookupName as their
+        # type. The actual `Enum <name> { ... }` block lives in the companion
+        # reso-2.0-lookups.dbml. DBML viewers rendering the canonical file
+        # standalone will treat the type as an opaque custom type (the
+        # enum-name still serves as documentation); loaded together with
+        # the lookups file, the type becomes a real validated enum.
+        lookup = (f.get("LookupName") or "").strip()
+        if (
+            lookup
+            and lookup in lookup_names
+            and sdt == "String List, Single"
+        ):
+            col_type = to_snake(lookup)
+        else:
+            col_type = map_dbml_type(sdt, f.get("SugMaxLength") or "")
 
         attrs: List[str] = []
         if pk_field and f["StandardName"] == pk_field:
@@ -483,61 +502,179 @@ def build_table(
         attrs.append(f"note: {field_note(f, meta_row, lookup_names)}")
         lines.append(f"  {col_name} {col_type} [{', '.join(attrs)}]")
 
-        # Lookup FK ref (single-value lookups only; multi-value stays as text).
-        lookup = (f.get("LookupName") or "").strip()
-        if lookup and lookup in lookup_names and sdt == "String List, Single":
-            refs.append(
-                f"Ref: {table_name}.{col_name} > lookup_{to_snake(lookup)}.code "
-                f"// {resource}.{f['StandardName']} -> {lookup}"
-            )
-
     lines.append(f"  Note: 'RESO 2.0 canonical {resource} resource'")
     lines.append("}")
     lines.append("")
     return "\n".join(lines), refs
 
 
-def build_lookup_table(
-    name: str,
-    is_multi_only: bool,
-    n_users: int,
-) -> str:
-    """Render one DBML reference table for a RESO LookupName.
+def _load_lookup_values() -> Dict[str, List[Tuple[str, str]]]:
+    """Return {LookupName: [(StandardLookupValue, LegacyODataValue), ...]}
+    preserving raw/lookups.csv ordering and de-duplicating on the standard
+    code (some lookups have repeated rows for legacy variants)."""
+    out: Dict[str, List[Tuple[str, str]]] = defaultdict(list)
+    seen: Dict[str, Set[str]] = defaultdict(set)
+    with (RAW / "lookups.csv").open(encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            n = (r.get("LookupName") or "").strip()
+            v = (r.get("StandardLookupValue") or "").strip()
+            legacy = (r.get("LegacyODataValue") or "").strip()
+            if not n or not v:
+                continue
+            if v in seen[n]:
+                continue
+            seen[n].add(v)
+            out[n].append((v, legacy))
+    return out
 
-    `is_multi_only` flips the table-level Note to explain why no `Ref:`
-    targets it (multi-value columns store comma-separated codes; DBML's
-    single-column FK can't model array membership). `n_users` is the
-    number of fields that reference this LookupName."""
-    table = f"lookup_{to_snake(name)}"
-    if is_multi_only:
-        note = (
-            f"RESO 2.0 lookup values for {name} - referenced ONLY by "
-            f"String List, Multi columns ({n_users} field(s)), so no DBML "
-            f"Ref targets this table; codes are stored comma-separated in "
-            f"the host column. See raw/lookups.csv for the value list."
-        )
-    else:
-        note = (
-            f"RESO 2.0 lookup values for {name} - referenced by "
-            f"{n_users} field(s). See raw/lookups.csv for the value list."
-        )
-    lines = [
-        f"// ---- {name} (RESO 2.0 lookup) ----",
-        f"Table {table} {{",
-        "  code varchar [pk, note: 'StandardLookupValue']",
-        "  legacy_odata_value varchar [note: 'LegacyODataValue (PascalCase code used by older OData APIs)']",
-        "  definition text",
-        "  bedes text",
-        "  synonyms text",
-        "  spanish_value varchar",
-        "  french_value varchar",
-        "  status varchar [note: 'Active | Revised | Retired']",
-        "  record_id varchar [note: 'RESO LookupId stable identifier']",
-        f"  Note: '{note}'",
-        "}",
-        "",
-    ]
-    return "\n".join(lines)
+
+_DBML_ENUM_VALUE_OK = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+
+
+def _enum_value(code: str) -> str:
+    """DBML enum values that contain spaces, slashes, hyphens, or other
+    non-identifier characters must be wrapped in double quotes. Returns
+    the value as a DBML-safe token."""
+    if _DBML_ENUM_VALUE_OK.match(code):
+        return code
+    # Escape any embedded double-quotes (unlikely in RESO codes but safe).
+    return '"' + code.replace('"', '\\"') + '"'
+
+
+def build_lookups_dbml(
+    fields: List[Dict[str, str]],
+    lookup_names: List[str],
+) -> str:
+    """Render the companion `reso-2.0-lookups.dbml` containing one DBML
+    `Enum` block per single-value-targeted RESO LookupName, plus a
+    documentation block listing the multi-only and open lookups (which
+    cannot be modelled as enums)."""
+    values = _load_lookup_values()
+
+    # Categorise lookups by usage in fields.csv
+    lookup_users: Dict[str, Counter] = defaultdict(Counter)
+    for f in fields:
+        ln = (f.get("LookupName") or "").strip()
+        if not ln:
+            continue
+        sdt = (f.get("SimpleDataType") or "").strip()
+        lookup_users[ln][sdt] += 1
+
+    sv_lookups = sorted(
+        n for n in lookup_names
+        if "String List, Single" in lookup_users.get(n, {})
+    )
+    mv_only_lookups = sorted(
+        n for n in lookup_names
+        if lookup_users.get(n)
+        and "String List, Single" not in lookup_users[n]
+    )
+    open_lookups = sorted(
+        n for n in lookup_users
+        if n not in set(lookup_names)
+    )
+
+    out: List[str] = []
+    out.append("// reso-2.0-lookups.dbml")
+    out.append(
+        f"// {len(sv_lookups)} Enum blocks for RESO DD 2.0 single-value lookups"
+    )
+    out.append("// Companion to wiki/dbml/reso-2.0-canonical.dbml.")
+    out.append("//")
+    out.append("// Generated by reso-dd-kb/scripts/build_reso_canonical_dbml.py")
+    out.append("// Source: raw/lookups.csv + raw/fields.csv")
+    out.append("")
+    out.append("Project reso_canonical_dd_2_0_lookups {")
+    out.append("  database_type: 'PostgreSQL'")
+    out.append("  Note: '''")
+    out.append(
+        f"    Enum value sets for the {len(sv_lookups)} RESO 2.0 lookups that are referenced"
+    )
+    out.append(
+        "    by at least one `String List, Single` column in the canonical schema."
+    )
+    out.append(
+        "    Single-value lookup columns in `reso-2.0-canonical.dbml` are typed as the"
+    )
+    out.append(
+        "    snake_case LookupName (e.g. `standard_status`); DBML viewers that load both"
+    )
+    out.append(
+        "    files together resolve the column type to a real validated enum."
+    )
+    out.append("")
+    out.append(
+        f"    {len(mv_only_lookups)} multi-value-only lookups and {len(open_lookups)} open"
+    )
+    out.append(
+        "    (jurisdiction-defined, no closed value list) lookups are NOT emitted as"
+    )
+    out.append(
+        "    enums - DBML's type system can't model array membership for the former,"
+    )
+    out.append(
+        "    and there is no closed value set to enumerate for the latter. Both groups"
+    )
+    out.append(
+        "    are listed at the bottom of this file as comments for reference."
+    )
+    out.append("  '''")
+    out.append("}")
+    out.append("")
+    out.append("// ============================================================")
+    out.append(f"// Single-value lookup enums ({len(sv_lookups)})")
+    out.append("// ============================================================")
+    out.append("")
+
+    for name in sv_lookups:
+        snake = to_snake(name)
+        vs = values.get(name, [])
+        n_users = sum(lookup_users[name].values())
+        out.append(f"// ---- {name} ({len(vs)} values, {n_users} field user(s)) ----")
+        out.append(f"Enum {snake} {{")
+        for code, legacy in vs:
+            tok = _enum_value(code)
+            note_bits = []
+            if legacy and legacy != code:
+                note_bits.append(f"legacy={legacy}")
+            if note_bits:
+                out.append(f"  {tok} [note: '{' | '.join(note_bits)}']")
+            else:
+                out.append(f"  {tok}")
+        out.append("}")
+        out.append("")
+
+    out.append("// ============================================================")
+    out.append(
+        f"// Multi-value lookups - NOT emitted as enums ({len(mv_only_lookups)})"
+    )
+    out.append("// ============================================================")
+    out.append("// These LookupNames are referenced only by `String List, Multi` columns,")
+    out.append("// which store comma-separated codes. DBML's single-column type system")
+    out.append("// can't model array membership; the host column stays `varchar` and tags")
+    out.append("// the LookupName in its Note. See raw/lookups.csv for value sets.")
+    out.append("//")
+    for n in mv_only_lookups:
+        n_values = len(values.get(n, []))
+        n_users = sum(lookup_users[n].values())
+        out.append(f"//   {n}  ({n_values} values, {n_users} multi-value column user(s))")
+    out.append("")
+
+    out.append("// ============================================================")
+    out.append(
+        f"// Open lookups - NOT emitted as enums ({len(open_lookups)})"
+    )
+    out.append("// ============================================================")
+    out.append("// These LookupNames are declared by RESO but ship no closed value list")
+    out.append("// (jurisdiction-defined: each MLS sets its own values). Columns that")
+    out.append("// reference them stay `varchar` and tag `(open: jurisdiction-defined;")
+    out.append("// no closed value list)` in their Note.")
+    out.append("//")
+    for n in open_lookups:
+        n_users = sum(lookup_users[n].values())
+        out.append(f"//   {n}  ({n_users} field user(s))")
+    out.append("")
+    return "\n".join(out) + "\n"
 
 
 def build_dbml() -> str:
@@ -570,79 +707,49 @@ def build_dbml() -> str:
     out.append("// Pure RESO Data Dictionary 2.0 canonical schema (2NF normalized)")
     out.append(
         f"// {len(resources)} Resources, {n_kept} Fields kept "
-        f"({len(fields)} total - {n_sat} satellites - {n_collection} Collection inverses), "
-        f"{len(lookup_names)} Lookups"
+        f"({len(fields)} total - {n_sat} satellites - {n_collection} Collection inverses)"
     )
-    out.append("//")
-    out.append("// NO Atlas-specific decisions baked in. This file represents what")
-    out.append("// RESO 2.0 prescribes; Atlas adapts in build_atlas_target_dbml.py.")
+    out.append("// Lookup enums live in the companion file `reso-2.0-lookups.dbml`.")
     out.append("//")
     out.append("// Generated by reso-dd-kb/scripts/build_reso_canonical_dbml.py")
     out.append("// Source: dd.reso.org/DD2.0 + raw/fields.csv + raw/lookups.csv + raw/field_metadata.csv")
+    out.append("//")
+    out.append("// Companion files:")
+    out.append("//   - wiki/dbml/reso-2.0-lookups.dbml    99 Enum blocks for SV lookups")
+    out.append(f"//   - wiki/dbml/2nf-satellite-drops.md   {n_sat} dropped satellites by host+FK+target")
+    out.append("//   - wiki/dbml/extra-fks.md             FKs detected via prose / name-shape")
     out.append("")
     out.append("Project reso_canonical_dd_2_0 {")
     out.append("  database_type: 'PostgreSQL'")
     out.append("  Note: '''")
-    out.append(f"    Pure RESO Data Dictionary 2.0 canonical schema covering all {len(resources)} Resources,")
-    out.append(f"    {n_kept} Fields kept ({len(fields)} total minus {n_sat} satellite fields and")
-    out.append(f"    {n_collection} Collection-typed inverse references), and {len(lookup_names)} Lookups.")
+    out.append(f"    Pure RESO Data Dictionary 2.0 canonical schema: {len(resources)} Resources,")
+    out.append(f"    {n_kept} Fields kept (= {len(fields)} total - {n_sat} satellites - {n_collection} Collection inverses).")
     out.append("")
-    out.append("    Three FK detection passes feed the relationship graph:")
-    out.append("      1. Resource-typed siblings  -> emit Ref host.<TargetResourceKey> > target.PK")
-    out.append("      2. Definition prose         -> 'foreign key relating to the X Resource' or")
-    out.append("                                     \"X Resource's YKey\" -> emit Ref")
-    out.append("      3. Name-shape `<Word>Key`   -> Word matches a Resource (or its plural)")
-    out.append("                                     -> emit Ref (lowest priority)")
-    out.append("    Single-value lookup columns get a 4th Ref to lookup_<name>.code.")
+    out.append("    FK detection (4 passes, full algorithm in methodology.md Step 3):")
+    out.append("      1. Resource-typed siblings  -> Ref host.<TargetResourceKey> > target.PK")
+    out.append("      2. Definition prose         -> 'foreign key relating to the X Resource'")
+    out.append("      3. Definition prose         -> \"X Resource's YKey\"")
+    out.append("      4. Name-shape `<Word>Key`   -> Word names a Resource")
+    out.append("    Lookup constraints are expressed as enum types defined in the companion")
+    out.append("    file `reso-2.0-lookups.dbml`; no Ref: lines are emitted for lookups.")
     out.append("")
-    out.append("    2NF normalization: satellite fields (scalar columns whose name shares the")
-    out.append("    prefix of a Resource-typed FK on the same host, e.g. Property.ListAgentEmail")
-    out.append("    next to Property.ListAgent -> Member) are removed from the canonical model")
-    out.append("    because their value is functionally dependent on the FK column rather than")
-    out.append("    the host PK. They remain reachable via the FK join (or, in the case of")
-    out.append("    auxiliary IDs / relationship attributes, would belong in a junction table).")
-    out.append("    See the `// 2NF: dropped satellite fields` section below for the full list.")
+    out.append("    Single-value (String List, Single) lookup columns are typed as the snake_case")
+    out.append("    LookupName (e.g. `standard_status`); the matching `Enum standard_status { ... }`")
+    out.append("    block lives in the companion file. Multi-value (String List, Multi) lookup")
+    out.append("    columns stay `varchar` - DBML's type system can't model array membership -")
+    out.append("    and tag their LookupName in the column Note. Open lookups (LookupName")
+    out.append("    declared by RESO but with no closed value list, e.g. City, MlsStatus, AOR)")
+    out.append("    are also `varchar` and tagged `(open: jurisdiction-defined)` in the Note.")
     out.append("")
-    out.append("    Collection-typed RESO fields (e.g. Property.Media, Property.OpenHouse) are")
-    out.append("    inverse 1:N references - the FK column lives on the child resource, not on")
-    out.append("    the host - so they are NOT rendered as host columns. Each host table has a")
-    out.append("    `// Inverse 1:N` comment listing them so the relationship is documented.")
-    out.append("")
-    out.append("    Lookup tables: one `lookup_<snake_name>` table per distinct LookupName in")
-    out.append("    raw/lookups.csv. Single-value lookup columns (String List, Single) get a DBML")
-    out.append("    Ref to lookup_<name>.code. Multi-value lookup columns (String List, Multi) stay")
-    out.append("    varchar - DBML's single-column FK can't model array membership - and the lookup")
-    out.append("    table for those LookupNames carries a documentation-only Note. Open lookups")
-    out.append("    (LookupName declared by RESO but with no closed value list, e.g. `City`,")
-    out.append("    `CountyOrParish`, `MlsStatus`, `AOR`) are NOT materialised as tables; columns")
-    out.append("    that reference them carry an explicit `(open: jurisdiction-defined)` tag in")
-    out.append("    their Note so the absence of a `lookup_<name>` table is intentional.")
+    out.append(f"    2NF normalization drops {n_sat} satellite fields (full per-host list in")
+    out.append("    `wiki/dbml/2nf-satellite-drops.md`). Collection-typed inverse references")
+    out.append(f"    ({n_collection}) live as `// Inverse 1:N` comments on each host table; the")
+    out.append("    forward FK is emitted on the child resource by the four FK passes.")
     out.append("")
     out.append("    No Atlas-specific decisions baked in. Atlas adapts this canonical in")
-    out.append("    build_atlas_target_dbml.py (wiki/atlas/atlas-target.dbml), where a chosen")
-    out.append("    subset of satellites may be re-added for query performance.")
+    out.append("    build_atlas_target_dbml.py (wiki/atlas/atlas-target.dbml).")
     out.append("  '''")
     out.append("}")
-    out.append("")
-
-    out.append("// ============================================================")
-    out.append(f"// 2NF: dropped satellite fields ({n_sat} across {len(satellites_by_host)} hosts)")
-    out.append("// ============================================================")
-    out.append("//")
-    out.append("// Reachable via the FK column shown in [brackets]. Re-derive any value")
-    out.append("// from the target resource via that FK in your query layer.")
-    out.append("//")
-    by_host_fk: Dict[Tuple[str, str, str, str], List[str]] = defaultdict(list)
-    for host, sat, target, fk, tkey in satellite_report:
-        by_host_fk[(host, target, fk, tkey)].append(sat)
-    for (host, target, fk, tkey) in sorted(by_host_fk):
-        sats = sorted(by_host_fk[(host, target, fk, tkey)])
-        out.append(
-            f"// {host}: drop {len(sats)} via {host}.{fk} -> {target} "
-            f"[FK column: {to_snake(host)}.{to_snake(tkey)}]"
-        )
-        for s in sats:
-            out.append(f"//   - {s}")
     out.append("")
 
     out.append("// ============================================================")
@@ -681,49 +788,16 @@ def build_dbml() -> str:
             f"// {host}.{name} -> {target} [{signal}]"
         )
 
-    # Per-lookup usage stats so each lookup table can declare in its Note
-    # how many fields reference it and whether any of them is a single-
-    # value column (in which case a `Ref:` targets the table). Lookups
-    # used only by `String List, Multi` columns get a clearer Note that
-    # explains why no FK targets them.
-    lookup_users: Dict[str, Counter] = defaultdict(Counter)
-    for f in fields:
-        ln = (f.get("LookupName") or "").strip()
-        if not ln or ln not in lookup_set:
-            continue
-        sdt = (f.get("SimpleDataType") or "").strip()
-        lookup_users[ln][sdt] += 1
-    n_multi_only = sum(
-        1 for n in lookup_names
-        if lookup_users[n]
-        and "String List, Single" not in lookup_users[n]
-    )
-    n_with_fk = len(lookup_names) - n_multi_only
-
     out.append("// ============================================================")
     out.append(
-        f"// Lookup reference tables ({len(lookup_names)} = {n_with_fk} "
-        f"FK-targeted by single-value columns + {n_multi_only} "
-        f"documentation-only for multi-value columns)"
+        f"// Cross-resource FK relationships "
+        f"({len(all_refs) + len(extra_ref_lines)} = {len(all_refs)} primary "
+        f"+ {len(extra_ref_lines)} extra)"
     )
-    out.append("// ============================================================")
-    out.append("")
-    for n in lookup_names:
-        users = lookup_users.get(n, Counter())
-        n_users = sum(users.values())
-        is_multi_only = bool(users) and "String List, Single" not in users
-        out.append(build_lookup_table(n, is_multi_only=is_multi_only, n_users=n_users))
-
-    out.append("// ============================================================")
-    out.append(
-        f"// Foreign-key relationships ({len(all_refs) + len(extra_ref_lines)} "
-        f"= {len(all_refs)} primary + {len(extra_ref_lines)} extra)"
-    )
-    out.append("// Primary: emitted from Resource-typed siblings (pass 1) and")
-    out.append("//          single-value lookup columns (pass 4).")
-    out.append("// Extra:   emitted from Definition prose (passes 2-3) and")
-    out.append("//          name-shape heuristics (pass 4) for FK columns that")
-    out.append("//          have no Resource-typed sibling on the host.")
+    out.append("// Primary: from Resource-typed siblings (pass 1).")
+    out.append("// Extra:   from Definition prose (passes 2-3) and name-shape")
+    out.append("//          heuristics (pass 4) for FK columns with no sibling.")
+    out.append("// Lookup constraints: see reso-2.0-lookups.dbml (enum types).")
     out.append("// ============================================================")
     out.append("")
     for r in all_refs:
@@ -909,6 +983,16 @@ def main() -> None:
     print(
         f"Wrote {OUT_EXTRAS.relative_to(ROOT)} "
         f"({len(extras_md.splitlines())} lines, {len(extras_md)} bytes)"
+    )
+
+    lookup_names = load_lookup_names()
+    lookups_dbml = build_lookups_dbml(fields, lookup_names)
+    OUT_LOOKUPS.write_text(lookups_dbml, encoding="utf-8")
+    n_enums = sum(1 for ln in lookups_dbml.splitlines() if ln.startswith("Enum "))
+    print(
+        f"Wrote {OUT_LOOKUPS.relative_to(ROOT)} "
+        f"({len(lookups_dbml.splitlines())} lines, {len(lookups_dbml)} bytes, "
+        f"{n_enums} enums)"
     )
 
 
