@@ -1691,16 +1691,13 @@ Table transaction_management {
 }
 
 // ============================================================
-// Cross-resource FK relationships (121 = 89 primary + 32 extra)
+// Cross-resource FK relationships (108 = 76 primary + 32 extra)
 // Primary: from Resource-typed siblings (pass 1).
 // Extra:   from Definition prose (passes 2-3) and name-shape
 //          heuristics (pass 4) for FK columns with no sibling.
 // Lookup constraints: see reso-2.0-lookups.dbml (enum types).
 // ============================================================
 
-Ref: association.association_member_key > member.member_key // Association.AssociationMember -> Member
-Ref: association.originating_system_key > ouid.organization_unique_id_key // Association.OriginatingSystem -> OUID
-Ref: association.source_system_key > ouid.organization_unique_id_key // Association.SourceSystem -> OUID
 Ref: contact_listing_notes.contact_key > contacts.contact_key // ContactListingNotes.Contact -> Contacts
 Ref: contact_listing_notes.listing_key > property.listing_key // ContactListingNotes.Listing -> Property
 Ref: contact_listings.contact_key > contacts.contact_key // ContactListings.Contact -> Contacts
@@ -1717,20 +1714,12 @@ Ref: internet_tracking.event_originating_system_id > ouid.organization_unique_id
 Ref: internet_tracking.event_source_system_id > ouid.organization_unique_id_key // InternetTracking.EventSourceSystem -> OUID
 Ref: internet_tracking.object_originating_system_id > ouid.organization_unique_id_key // InternetTracking.ObjectOriginatingSystem -> OUID
 Ref: internet_tracking.object_source_system_id > ouid.organization_unique_id_key // InternetTracking.ObjectSourceSystem -> OUID
-Ref: lock_or_box.originating_system_key > ouid.organization_unique_id_key // LockOrBox.OriginatingSystem -> OUID
-Ref: lock_or_box.showing_agent_key > member.member_key // LockOrBox.ShowingAgent -> Member
-Ref: lock_or_box.showing_office_key > office.office_key // LockOrBox.ShowingOffice -> Office
-Ref: lock_or_box.source_system_key > ouid.organization_unique_id_key // LockOrBox.SourceSystem -> OUID
 Ref: media.changed_by_member_key > member.member_key // Media.ChangedByMember -> Member
-Ref: media.originating_system_key > ouid.organization_unique_id_key // Media.OriginatingSystem -> OUID
-Ref: media.source_system_key > ouid.organization_unique_id_key // Media.SourceSystem -> OUID
 Ref: member.office_key > office.office_key // Member.Office -> Office
 Ref: member.originating_system_id > ouid.organization_unique_id_key // Member.OriginatingSystem -> OUID
 Ref: member.source_system_id > ouid.organization_unique_id_key // Member.SourceSystem -> OUID
 Ref: member_association.association_key > association.association_key // MemberAssociation.Association -> Association
 Ref: member_association.member_key > member.member_key // MemberAssociation.Member -> Member
-Ref: member_association.originating_system_key > ouid.organization_unique_id_key // MemberAssociation.OriginatingSystem -> OUID
-Ref: member_association.source_system_key > ouid.organization_unique_id_key // MemberAssociation.SourceSystem -> OUID
 Ref: member_state_license.member_key > member.member_key // MemberStateLicense.Member -> Member
 Ref: ouid.changed_by_member_key > member.member_key // OUID.ChangedByMember -> Member
 Ref: office.main_office_key > office.office_key // Office.MainOffice -> Office
@@ -1740,8 +1729,6 @@ Ref: office.originating_system_id > ouid.organization_unique_id_key // Office.Or
 Ref: office.source_system_id > ouid.organization_unique_id_key // Office.SourceSystem -> OUID
 Ref: office_association.association_key > association.association_key // OfficeAssociation.Association -> Association
 Ref: office_association.office_key > office.office_key // OfficeAssociation.Office -> Office
-Ref: office_association.originating_system_key > ouid.organization_unique_id_key // OfficeAssociation.OriginatingSystem -> OUID
-Ref: office_association.source_system_key > ouid.organization_unique_id_key // OfficeAssociation.SourceSystem -> OUID
 Ref: office_corporate_license.office_key > office.office_key // OfficeCorporateLicense.Office -> Office
 Ref: open_house.listing_key > property.listing_key // OpenHouse.Listing -> Property [alias]
 Ref: open_house.originating_system_id > ouid.organization_unique_id_key // OpenHouse.OriginatingSystem -> OUID [alias]

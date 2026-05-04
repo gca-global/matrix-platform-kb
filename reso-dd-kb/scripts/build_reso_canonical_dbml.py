@@ -368,6 +368,18 @@ def compute_extra_fks(
     Returns: [(host, field_name, target_resource, target_pk, signal), ...]
     """
     resource_names = set(by_res)
+    # Per-host scalar columns (used to validate alias fallbacks against the
+    # host's actual column set; a fallback that names a non-existent column
+    # is NOT covered, so it stays available for the extra-FK pass to find a
+    # different real column instead).
+    scalar_by_res: Dict[str, Set[str]] = {}
+    for res, fs in by_res.items():
+        scalar_by_res[res] = {
+            f["StandardName"]
+            for f in fs
+            if (f.get("SimpleDataType") or "").strip() not in ("Resource", "Collection")
+        }
+
     covered: Set[Tuple[str, str]] = set()
     for res, fs in by_res.items():
         for f in fs:
@@ -377,13 +389,13 @@ def compute_extra_fks(
             if tkey:
                 covered.add((res, tkey))
                 continue
-            # Mirror build_table's fallback: when TargetResourceKey is
-            # missing, assume the FK column is <StandardName>Key. This
-            # prevents the extra-FK pass from re-emitting a Ref the
-            # alias-resolved pass-1 already emitted.
+            # Mirror build_table's gated fallback: only mark <StandardName>Key
+            # as covered if such a column actually exists on the host AND the
+            # alias resolves to a target Resource.
             target_alias = _resolve_alias(f["StandardName"], resource_names)
-            if target_alias:
-                covered.add((res, f["StandardName"] + "Key"))
+            candidate = f["StandardName"] + "Key"
+            if target_alias and candidate in scalar_by_res.get(res, set()):
+                covered.add((res, candidate))
 
     priority = {"prose-foreign-key": 0, "prose-resources": 1, "name-shape": 2}
     best: Dict[Tuple[str, str], Tuple[str, str, str, str, str]] = {}
@@ -533,6 +545,18 @@ def build_table(
     refs: List[str] = []
     seen_cols: Set[str] = set()
 
+    # Pre-compute the snake_case names of every scalar column that WILL be
+    # rendered on this table (skip Resource/Collection fields - those are
+    # not columns - and skip satellites - those are 2NF-dropped). Used to
+    # validate alias-fallback FK column names against actual host columns
+    # so we never emit a Ref pointing at a phantom column.
+    scalar_cols_snake: Set[str] = {
+        to_snake(g["StandardName"])
+        for g in fields_for_res
+        if (g.get("SimpleDataType") or "").strip() not in ("Resource", "Collection")
+        and g["StandardName"] not in satellite_fields
+    }
+
     fields_sorted = sorted(
         fields_for_res,
         key=lambda f: (0 if f["StandardName"] == pk_field else 1, f["StandardName"]),
@@ -553,7 +577,10 @@ def build_table(
         # `<TargetResourceKey>` field). When SourceResource is empty in the
         # raw CSV (12 cases), fall back to alias-resolving the StandardName
         # itself (e.g. OpenHouse.Listing -> Property, Prospecting.Contact
-        # -> Contacts).
+        # -> Contacts). When TargetResourceKey is also empty, try the
+        # conventional `<StandardName>Key` column name and validate it
+        # against the host's actual columns; if no matching column exists,
+        # SKIP the Ref (do not fabricate phantom FK columns).
         if sdt == "Resource":
             target_resource = (f.get("SourceResource") or "").strip()
             target_key_col = (f.get("TargetResourceKey") or "").strip()
@@ -563,14 +590,22 @@ def build_table(
                 if resolved:
                     target_resource = resolved
                     via_alias = True
-            if not target_key_col:
-                # Default the FK column name to <StandardName>Key when the
-                # raw CSV omits TargetResourceKey - matches RESO's naming
-                # convention for inverse-resolved Resource-typed fields.
-                target_key_col = f["StandardName"] + "Key"
             if not target_resource:
                 continue
+            if not target_key_col:
+                candidate = f["StandardName"] + "Key"
+                if to_snake(candidate) in scalar_cols_snake:
+                    target_key_col = candidate
+                else:
+                    # No host column matches the inferred name; emitting
+                    # the Ref would produce an invalid DBML pointing at a
+                    # non-existent column. Skip silently - the relationship
+                    # is documented by the Resource-typed field's row in
+                    # raw/fields.csv even without a Ref.
+                    continue
             host_col = to_snake(target_key_col)
+            if host_col not in scalar_cols_snake:
+                continue
             target_table = resource_to_table.get(target_resource)
             target_pk = resource_pks.get(target_resource)
             if not target_table or not target_pk:
