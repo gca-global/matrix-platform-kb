@@ -1,6 +1,6 @@
 // reso-2.0-canonical.dbml
 // Pure RESO Data Dictionary 2.0 canonical schema (2NF normalized)
-// 41 Resources, 1530 Fields kept (1745 total - 215 satellites dropped), 193 Lookups
+// 41 Resources, 1476 Fields kept (1745 total - 215 satellites - 54 Collection inverses), 193 Lookups
 //
 // NO Atlas-specific decisions baked in. This file represents what
 // RESO 2.0 prescribes; Atlas adapts in build_atlas_target_dbml.py.
@@ -12,8 +12,16 @@ Project reso_canonical_dd_2_0 {
   database_type: 'PostgreSQL'
   Note: '''
     Pure RESO Data Dictionary 2.0 canonical schema covering all 41 Resources,
-    1530 Fields (1745 total minus 215 satellite fields dropped for 2NF),
-    and 193 Lookups (rendered as lookup_<name> ref tables).
+    1476 Fields kept (1745 total minus 215 satellite fields and
+    54 Collection-typed inverse references), and 193 Lookups.
+
+    Three FK detection passes feed the relationship graph:
+      1. Resource-typed siblings  -> emit Ref host.<TargetResourceKey> > target.PK
+      2. Definition prose         -> 'foreign key relating to the X Resource' or
+                                     "X Resource's YKey" -> emit Ref
+      3. Name-shape `<Word>Key`   -> Word matches a Resource (or its plural)
+                                     -> emit Ref (lowest priority)
+    Single-value lookup columns get a 4th Ref to lookup_<name>.code.
 
     2NF normalization: satellite fields (scalar columns whose name shares the
     prefix of a Resource-typed FK on the same host, e.g. Property.ListAgentEmail
@@ -22,6 +30,11 @@ Project reso_canonical_dd_2_0 {
     the host PK. They remain reachable via the FK join (or, in the case of
     auxiliary IDs / relationship attributes, would belong in a junction table).
     See the `// 2NF: dropped satellite fields` section below for the full list.
+
+    Collection-typed RESO fields (e.g. Property.Media, Property.OpenHouse) are
+    inverse 1:N references - the FK column lives on the child resource, not on
+    the host - so they are NOT rendered as host columns. Each host table has a
+    `// Inverse 1:N` comment listing them so the relationship is documented.
 
     Single-value lookup columns reference the corresponding lookup_<name>.code via DBML
     Refs; multi-value lookup columns stay text and document the lookup in a Note.
@@ -313,6 +326,7 @@ Project reso_canonical_dd_2_0 {
 // ============================================================
 
 // ---- Association (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): AssociationSocialMedia -> SocialMedia, HistoryTransactional -> HistoryTransactional
 Table association {
   association_key varchar(255) [pk, note: 'AssociationKey | The unique identifier for the association record. | type=String | max_len=255.0 | adoption org=0% (1/344)']
   association_address1 varchar(50) [note: 'AssociationAddress1 | The street number, direction, name and suffix of the association. | type=String | max_len=50.0']
@@ -338,13 +352,11 @@ Table association {
   association_phone varchar(16) [note: 'AssociationPhone | The North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard | type=String | max_len=16.0']
   association_postal_code varchar(10) [note: 'AssociationPostalCode | The postal code of the association. | type=String | max_len=10.0']
   association_postal_code_plus4 varchar(4) [note: 'AssociationPostalCodePlus4 | The four-digit extension of the U.S. Zip Code. | type=String | max_len=4.0']
-  association_social_media text [note: 'AssociationSocialMedia | A collection of the types of social media fields available for the association, including the type of system and other details pertinent to social media. | type=Collection']
   association_state_or_province varchar [note: 'AssociationStateOrProvince | The state or province in which the association is addressed. | type=String List, Single | lookup=StateOrProvince | max_len=2.0']
   association_status varchar [note: 'AssociationStatus | The status of the association (i.e., Active, Inactive). | type=String List, Single | lookup=AssociationStatus | max_len=25.0']
   association_type varchar [note: 'AssociationType | The type of association (MLS, Local, Not Applicable, etc.). | type=String List, Single | lookup=AssociationType | max_len=50.0']
   executive_officer_member_key varchar(255) [note: 'ExecutiveOfficerMemberKey | The executive officer\'s member key. | type=String | max_len=255.0']
   executive_officer_member_mls_id varchar(25) [note: 'ExecutiveOfficerMemberMlsId | The local, well-known identifier for the executive officer. This value may not be unique, specifically in the case of aggregation systems, and it should be the  | type=String | max_len=25.0']
-  history_transactional text [note: 'HistoryTransactional | The history of the Association record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the Association record was last modified. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
   multiple_listing_service_id varchar(25) [note: 'MultipleListingServiceId | The ID of the Multiple Listing Service (MLS) used by the association. | type=String | max_len=25.0']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | Date/time the record was originally input into the source system. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
@@ -428,10 +440,10 @@ Table caravan_stop {
 }
 
 // ---- ContactListingNotes (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table contact_listing_notes {
   contact_listing_notes_key varchar(255) [pk, note: 'ContactListingNotesKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system that the record was just retrieved. Th | type=String | max_len=255.0']
   contact_key varchar(255) [note: 'ContactKey | The key of the corresponding contact record. ContactKey and the ListingKey are used as a compound key for this record. | type=String | max_len=255.0']
-  history_transactional text [note: 'HistoryTransactional | The history of the ContactListingNotes record. | type=Collection']
   listing_id varchar(255) [note: 'ListingId | The ID for the corresponding listing record. | type=String | max_len=255.0']
   listing_key varchar(255) [note: 'ListingKey | The key of the corresponding listing record. ContactKey and the ListingKey are used as a compound key for this record. | type=String | max_len=255.0']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time a note was written. | type=Timestamp | max_len=27.0']
@@ -442,13 +454,13 @@ Table contact_listing_notes {
 
 // ---- ContactListings (RESO 2.0 canonical) ----
 // 2NF: 8 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional, ListingNotes -> ContactListingNotes
 Table contact_listings {
   contact_listings_key varchar(255) [pk, note: 'ContactListingsKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system that the record was just retrieved fro | type=String | max_len=255.0']
   agent_notes_unread_yn boolean [note: 'AgentNotesUnreadYN | Indicates whether or not agent notes have gone unread. If yes, one or more of the agent notes are unread. | type=Boolean']
   class_name varchar [note: 'ClassName | The name of the class where the listing record is located. | type=String List, Single | lookup=ClassName | max_len=50.0']
   contact_key varchar(255) [note: 'ContactKey | The foreign key relating to the Contacts Resource. A unique identifier for this record from the immediate source. This is a string that can include a Uniform Re | type=String | max_len=255.0']
   direct_email_yn boolean [note: 'DirectEmailYN | A flag indicating whether or not this is a direct email. If true, the email was a direct email sent to the client by the member. If false, the email was an auto | type=Boolean']
-  history_transactional text [note: 'HistoryTransactional | The history of the ContactListings record. | type=Collection']
   last_agent_note_timestamp timestamp [note: 'LastAgentNoteTimestamp | The date/time the member last added or updated a ListingNote. | type=Timestamp | max_len=27.0']
   last_contact_note_timestamp timestamp [note: 'LastContactNoteTimestamp | The date/time the contact last added or updated a ListingNote. | type=Timestamp | max_len=27.0']
   listing_key varchar(255) [note: 'ListingKey | The foreign key related to the Property Resource\'s unique identifier for this record from the immediate source. This is a string that can include a Uniform Reso | type=String | max_len=255.0']
@@ -460,6 +472,7 @@ Table contact_listings {
 
 // ---- Contacts (RESO 2.0 canonical) ----
 // 2NF: 5 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): ContactsOtherPhone -> OtherPhone, ContactsSocialMedia -> SocialMedia, HistoryTransactional -> HistoryTransactional, Media -> Media
 Table contacts {
   contact_key varchar(255) [pk, note: 'ContactKey | A system unique identifier. Specifically, in aggregation systems, the ContactKey is the system unique identifier from the system that the record was retrieved.  | type=String | max_len=255.0 | adoption org=0% (1/344)']
   anniversary date [note: 'Anniversary | The month, day and year of the contact\'s wedding anniversary. | type=Date | max_len=24.0']
@@ -475,8 +488,6 @@ Table contacts {
   contact_password varchar(25) [note: 'ContactPassword | A client password that the member wishes to share with other systems. Normal security considerations apply and are the responsibility of the entity utilizing th | type=String | max_len=25.0']
   contact_status varchar [note: 'ContactStatus | The status of the contact (i.e., Active, Inactive, On Vacation, Deleted, etc.). | type=String List, Single | lookup=ContactStatus | max_len=25.0']
   contact_type varchar [note: 'ContactType | The type of contact (i.e., Business, Friend, Family, Prospect, Ready to Buy, etc.). | type=String List, Multi | lookup=ContactType (multi) | max_len=255.0']
-  contacts_other_phone text [note: 'ContactsOtherPhone | A collection of the types of other phone fields available for Contacts. The collection includes the type of system and other details pertinent about other phone | type=Collection']
-  contacts_social_media text [note: 'ContactsSocialMedia | A collection of the types of social media fields available for Contacts. The collection includes the type of system and other details relating to social media. | type=Collection']
   department varchar(50) [note: 'Department | The department in which the contact works. | type=String | max_len=50.0']
   direct_phone varchar(16) [note: 'DirectPhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
   email varchar(80) [note: 'Email | The preferred email address of the contact. | type=String | max_len=80.0']
@@ -484,7 +495,6 @@ Table contacts {
   email3 varchar(80) [note: 'Email3 | The tertiary email address of the contact. | type=String | max_len=80.0']
   first_name varchar(50) [note: 'FirstName | The first name of the contact. | type=String | max_len=50.0']
   full_name varchar(150) [note: 'FullName | The first, middle and last name of the contact or an alternate full name. | type=String | max_len=150.0']
-  history_transactional text [note: 'HistoryTransactional | The history of the contact\'s record. | type=Collection']
   home_address1 varchar(50) [note: 'HomeAddress1 | The street number, direction, name and suffix of the contact\'s home. | type=String | max_len=50.0']
   home_address2 varchar(50) [note: 'HomeAddress2 | The unit/suite number of the contact\'s home. | type=String | max_len=50.0']
   home_carrier_route varchar(9) [note: 'HomeCarrierRoute | The group of addresses to which the U.S. Postal Service (USPS) assigns the same code to aid in mail delivery. For the USPS, these codes are nine digits: five nu | type=String | max_len=9.0']
@@ -500,7 +510,6 @@ Table contacts {
   language varchar [note: 'Language | The languages spoken by the contact. | type=String List, Multi | lookup=Languages (multi) | max_len=150.0']
   last_name varchar(50) [note: 'LastName | The last name of the contact. | type=String | max_len=50.0']
   lead_source varchar(150) [note: 'LeadSource | The source or person that provided the contact. | type=String | max_len=150.0']
-  media text [note: 'Media | The media for the contact\'s record. | type=Collection']
   middle_name varchar(50) [note: 'MiddleName | The middle name of the contact. | type=String | max_len=50.0']
   mobile_phone varchar(16) [note: 'MobilePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the Contact record was last modified. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
@@ -676,9 +685,9 @@ Table internet_tracking_summary {
 }
 
 // ---- LockOrBox (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table lock_or_box {
   lock_or_box_key varchar(255) [pk, note: 'LockOrBoxKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0']
-  history_transactional text [note: 'HistoryTransactional | This history for the LockOrBox record. | type=Collection']
   key_or_credential_id varchar(25) [note: 'KeyOrCredentialId | The local, well-known identifier for a given lockbox/smartlock system key or credential. This value may not be unique, specifically in the case of aggregation s | type=String | max_len=25.0']
   list_agent_full_name varchar(150) [note: 'ListAgentFullName | The first, middle and last name of the listing agent. | type=String | max_len=150.0']
   listing_address1 varchar(50) [note: 'ListingAddress1 | The street number, direction, name and suffix of the property where the lockbox/smartlock is located. | type=String | max_len=50.0']
@@ -732,12 +741,12 @@ Table lookup {
 }
 
 // ---- Media (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table media {
   media_key varchar(255) [pk, note: 'MediaKey | A unique identifier for this record from the immediate source. This may be a number or a string that can include a Uniform Resource Identifier (URI) or other fo | type=String | max_len=255.0 | adoption org=48% (165/344)']
   changed_by_member_id varchar(25) [note: 'ChangedByMemberID | The ID of the user, agent, member, etc., that uploaded the media this record refers to. | type=String | max_len=25.0 | adoption org=0% (1/344)']
   changed_by_member_key varchar(255) [note: 'ChangedByMemberKey | The primary key of the member who uploaded the media this record refers to. This is a foreign key relating to the Member Resource\'s MemberKey. | type=String | max_len=255.0 | adoption org=0% (1/344)']
   class_name varchar [note: 'ClassName | The class or table of the listing or other record of the media (e.g., Residential, Lease, Agent, Office, Contact). | type=String List, Single | lookup=ClassName | max_len=50.0 | adoption org=8% (26/344)']
-  history_transactional text [note: 'HistoryTransactional | The history of the Media record. | type=Collection']
   image_height numeric [note: 'ImageHeight | The height of the image expressed in pixels. | type=Number | max_len=8.0 | adoption org=14% (49/344)']
   image_of varchar [note: 'ImageOf | When the media is an image, a list of possible matches such as kitchen, bathroom, front of structure, etc. This field may be used to identify a required image u | type=String List, Single | lookup=ImageOf | max_len=50.0 | adoption org=13% (44/344)']
   image_size_description varchar [note: 'ImageSizeDescription | A text description of the size of the image (i.e., Small, Thumbnail, Medium, Large, X-Large). The largest image must be described as "Largest," and the thumbnai | type=String List, Single | lookup=ImageSizeDescription | max_len=50.0 | adoption org=10% (36/344)']
@@ -776,12 +785,11 @@ Table media {
 
 // ---- Member (RESO 2.0 canonical) ----
 // 2NF: 7 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional, Media -> Media, MemberOtherPhone -> OtherPhone, MemberSocialMedia -> SocialMedia
 Table member {
   member_key varchar(255) [pk, note: 'MemberKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0 | adoption org=97% (333/344)']
-  history_transactional text [note: 'HistoryTransactional | The history of the Member record. | type=Collection']
   job_title varchar(50) [note: 'JobTitle | The title or position of the member within their organization. | type=String | max_len=50.0 | adoption org=5% (18/344)']
   last_login_timestamp timestamp [note: 'LastLoginTimestamp | The date/time the member last logged into the source or other system. | type=Timestamp | max_len=27.0 | adoption org=2% (8/344)']
-  media text [note: 'Media | The media for the Member record. | type=Collection | adoption org=8% (26/344)']
   member_aor varchar [note: 'MemberAOR | The member\'s primary board or association of REALTORS®. | type=String List, Single | lookup=AOR | max_len=50.0 | adoption org=31% (108/344)']
   member_aor_mls_id varchar(25) [note: 'MemberAORMlsId | The local, well-known identifier for the member\'s association of REALTORS®. This value may not be unique, specifically in the case of aggregation systems, and i | type=String | max_len=25.0 | adoption org=14% (49/344)']
   member_ao_rkey varchar(255) [note: 'MemberAORkey | A system unique identifier. Specifically, in aggregation systems, the Member AOR Key is the system unique identifier from the system that the record was retriev | type=String | max_len=255.0 | adoption org=13% (44/344)']
@@ -820,7 +828,6 @@ Table member {
   member_nickname varchar(50) [note: 'MemberNickname | An alternate name used by the member, usually as a substitute for the first name. | type=String | max_len=50.0 | adoption org=21% (73/344)']
   member_office_phone varchar(16) [note: 'MemberOfficePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=68% (234/344)']
   member_office_phone_ext varchar(10) [note: 'MemberOfficePhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=45% (156/344)']
-  member_other_phone text [note: 'MemberOtherPhone | A collection of the types of other phone fields available for this member. The collection includes the type of system and other details pertinent about other ph | type=Collection | adoption org=0% (1/344)']
   member_other_phone_type varchar [note: 'MemberOtherPhoneType | The type of "other" phone (e.g., Preferred; Office, Mobile; Direct; Home; Fax; Voicemail; 1, 2, 3; First, Second, Third; etc.). This is used as a list of option | type=String List, Single | lookup=MemberOtherPhoneType | max_len=25.0 | adoption org=1% (2/344)']
   member_pager varchar(16) [note: 'MemberPager | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0 | adoption org=24% (81/344)']
   member_password varchar(25) [note: 'MemberPassword | A password that the member wishes to share with other systems. Normal security considerations apply and are the responsibility of the entity utilizing this fiel | type=String | max_len=25.0 | adoption org=2% (6/344)']
@@ -833,7 +840,6 @@ Table member {
   member_preferred_phone_ext varchar(10) [note: 'MemberPreferredPhoneExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0 | adoption org=38% (130/344)']
   member_preferred_publication varchar [note: 'MemberPreferredPublication | Indicates where the member would like to receive any publications from the association. | type=String List, Single | lookup=PreferredPublication | max_len=30.0']
   member_primary_aor_id varchar(25) [note: 'MemberPrimaryAorId | The primary association of REALTORS® (AOR) associated with the member. This may be another AOR where the member has their primary membership. | type=String | max_len=25.0 | adoption org=1% (4/344)']
-  member_social_media text [note: 'MemberSocialMedia | A collection of the types of social media fields available for this member. The collection includes the type of system and other details pertinent to social med | type=Collection']
   member_state_license varchar(50) [note: 'MemberStateLicense | The license of the member. Multiple licenses should be separated by a comma and space. | type=String | max_len=50.0 | adoption org=92% (316/344)']
   member_state_license_expiration_date date [note: 'MemberStateLicenseExpirationDate | The expiration date for the member\'s license. | type=Date | max_len=10.0 | adoption org=0% (1/344)']
   member_state_license_state varchar [note: 'MemberStateLicenseState | The state in which the member is licensed. | type=String List, Single | lookup=StateOrProvince | max_len=2.0 | adoption org=16% (54/344)']
@@ -858,12 +864,12 @@ Table member {
 }
 
 // ---- MemberAssociation (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table member_association {
   association_key varchar(255) [note: 'AssociationKey | The unique identifier for the association record. | type=String | max_len=255.0']
   association_mls_id varchar(25) [note: 'AssociationMlsId | The local, well-known identifier for the association of REALTORS®. This value may not be unique, specifically in the case of aggregation systems, and it should  | type=String | max_len=25.0']
   association_national_association_id varchar(25) [note: 'AssociationNationalAssociationId | The national association ID of the association as known by the national association. | type=String | max_len=25.0']
   association_staff_yn boolean [note: 'AssociationStaffYN | Determines whether or not the record is associated with an association employee. | type=Boolean']
-  history_transactional text [note: 'HistoryTransactional | A collection of history items related to the MemberAssociation record. | type=Collection']
   member_association_bill_status varchar [note: 'MemberAssociationBillStatus | The billing status of the member. | type=String List, Single | lookup=MemberAssociationBillStatus | max_len=25.0']
   member_association_bill_status_description varchar(100) [note: 'MemberAssociationBillStatusDescription | The description of the billing status of the member. | type=String | max_len=100.0']
   member_association_dues_paid_date date [note: 'MemberAssociationDuesPaidDate | The last date the member paid dues. | type=Date | max_len=10.0']
@@ -890,9 +896,9 @@ Table member_association {
 }
 
 // ---- MemberStateLicense (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table member_state_license {
   member_state_license_key varchar(255) [pk, note: 'MemberStateLicenseKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0']
-  history_transactional text [note: 'HistoryTransactional | A collection of history items related to the MemberStateLicense record. | type=Collection']
   member_key varchar(255) [note: 'MemberKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0']
   member_mls_id varchar(25) [note: 'MemberMlsId | The local, well-known identifier for the member. This value may not be unique, specifically in the case of aggregation systems, this value should be the identif | type=String | max_len=25.0']
   member_state_license varchar(50) [note: 'MemberStateLicense | The license of the Member. Separate multiple licenses with a comma and space. | type=String | max_len=50.0']
@@ -905,11 +911,10 @@ Table member_state_license {
 
 // ---- OUID (RESO 2.0 canonical) ----
 // 2NF: 1 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional, Media -> Media, OrganizationSocialMedia -> SocialMedia
 Table ouid {
   organization_unique_id_key varchar(255) [pk, note: 'OrganizationUniqueIdKey | The key field used by the system hosting a table of Unique Organization Identifiers (UOIs). This key is likely to be unique to each hosting system and is not me | type=String | max_len=255.0 | adoption org=0% (1/344)']
   changed_by_member_key varchar(255) [note: 'ChangedByMemberKey | The unique identifier of the member (user) who made the change. This is a foreign key relating to the Member Resource\'s MemberKey. | type=String | max_len=255.0']
-  history_transactional text [note: 'HistoryTransactional | The history of the OUID record. | type=Collection']
-  media text [note: 'Media | The media associated with the OUID record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the OUID record was last modified. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
   organization_aor varchar [note: 'OrganizationAOR | The organization\'s primary local board or association of REALTORS®, if applicable. | type=String List, Single | lookup=AOR | max_len=50.0']
   organization_address1 varchar(50) [note: 'OrganizationAddress1 | The street number, direction, name and suffix of the organization. | type=String | max_len=50.0 | adoption org=0% (1/344)']
@@ -940,7 +945,6 @@ Table ouid {
   organization_national_association_id varchar(25) [note: 'OrganizationNationalAssociationId | The national association ID of the organization, if applicable (e.g., in the U.S., this is the NRDS number). | type=String | max_len=25.0']
   organization_postal_code varchar(10) [note: 'OrganizationPostalCode | The postal code of the organization. | type=String | max_len=10.0 | adoption org=0% (1/344)']
   organization_postal_code_plus4 varchar(4) [note: 'OrganizationPostalCodePlus4 | The four-digit extension of the U.S. Zip Code. | type=String | max_len=4.0']
-  organization_social_media text [note: 'OrganizationSocialMedia | A collection of the types of social media fields available for this organization. The collection includes the type of system and other details pertinent about s | type=Collection']
   organization_social_media_type varchar [note: 'OrganizationSocialMediaType | A list of types of sites or social media that the organization Uniform Resource Locator (URL) or ID is referring to (e.g., website, blog, Facebook, Twitter, Lin | type=String List, Single | lookup=SocialMediaType | max_len=25.0']
   organization_state_license varchar(50) [note: 'OrganizationStateLicense | The license of the organization, if applicable. Multiple licenses should be separated with a comma and space. | type=String | max_len=50.0']
   organization_state_license_state varchar [note: 'OrganizationStateLicenseState | The state in which the organization is licensed, if applicable. | type=String List, Single | lookup=StateOrProvince | max_len=2.0']
@@ -955,15 +959,14 @@ Table ouid {
 
 // ---- Office (RESO 2.0 canonical) ----
 // 2NF: 8 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional, Media -> Media, OfficeSocialMedia -> SocialMedia
 Table office {
   office_key varchar(255) [pk, note: 'OfficeKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. T | type=String | max_len=255.0 | adoption org=99% (340/344)']
   billing_office_key varchar(255) [note: 'BillingOfficeKey | The office that will be billed (e.g., corporate headquarters). | type=String | max_len=255.0 | adoption org=0% (1/344)']
   franchise_affiliation varchar(50) [note: 'FranchiseAffiliation | The name of the franchise to which the broker/office is contracted. | type=String | max_len=50.0 | adoption org=5% (17/344)']
   franchise_national_association_id varchar(25) [note: 'FranchiseNationalAssociationId | The national association ID of the franchise (i.e., the NRDS number in the U.S.). | type=String | max_len=25.0 | adoption org=1% (3/344)']
-  history_transactional text [note: 'HistoryTransactional | The history of the Office record. | type=Collection']
   idx_office_participation_yn boolean [note: 'IDXOfficeParticipationYN | Indicates whether or not the office/broker participates in IDX. | type=Boolean | adoption org=70% (240/344)']
   main_office_key varchar(255) [note: 'MainOfficeKey | The OfficeKey of the main office in a firm/company of offices. This is a self-referencing foreign key relating to this resource\'s OfficeKey. This key may be the | type=String | max_len=255.0 | adoption org=71% (245/344)']
-  media text [note: 'Media | The media for the Office record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the roster (member or office) record was last modified. | type=Timestamp | max_len=27.0 | adoption org=99% (342/344)']
   number_of_branches numeric [note: 'NumberOfBranches | The calculated value for the number of active branches. The count for multiple related offices. | type=Number | max_len=3.0 | adoption org=6% (21/344)']
   number_of_non_member_salespersons numeric [note: 'NumberOfNonMemberSalespersons | The total number of active salespersons that are not a member of the national association. | type=Number | max_len=4.0']
@@ -1004,7 +1007,6 @@ Table office {
   office_preferred_media varchar [note: 'OfficePreferredMedia | The method the office prefers to receive media. | type=String List, Single | lookup=PreferredMedia | max_len=25.0 | adoption org=0% (1/344)']
   office_primary_aor_id varchar(25) [note: 'OfficePrimaryAorId | The primary association of REALTORS® (AOR) associated with the member. This may be another AOR where the member has their primary membership. | type=String | max_len=25.0']
   office_primary_state_or_province varchar [note: 'OfficePrimaryStateOrProvince | The office\'s primary state or province. | type=String List, Single | lookup=StateOrProvince | max_len=2.0 | adoption org=0% (1/344)']
-  office_social_media text [note: 'OfficeSocialMedia | A collection of the types of social media fields available for this office. The collection includes the type of system and other details relating to social medi | type=Collection']
   office_state_or_province varchar [note: 'OfficeStateOrProvince | The state or province in which the office is located. | type=String List, Single | lookup=StateOrProvince | max_len=2.0 | adoption org=98% (336/344)']
   office_status varchar [note: 'OfficeStatus | Indicates whether the office is active, inactive or under disciplinary action. | type=String List, Single | lookup=OfficeStatus | max_len=25.0 | adoption org=88% (304/344)']
   office_type varchar [note: 'OfficeType | The type of business conducted by the office (e.g., Appraisal, MLS, Mortgage). | type=String List, Single | lookup=OfficeType | max_len=50.0 | adoption org=76% (262/344)']
@@ -1020,12 +1022,12 @@ Table office {
 }
 
 // ---- OfficeAssociation (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table office_association {
   association_key varchar(255) [note: 'AssociationKey | The unique identifier for the association record. | type=String | max_len=255.0']
   association_mls_id varchar(25) [note: 'AssociationMlsId | The local, well-known identifier for the association of REALTORS®. This value may not be unique, specifically in the case of aggregation systems, and it should  | type=String | max_len=25.0']
   association_national_association_id varchar(25) [note: 'AssociationNationalAssociationId | The national association ID of the association as known by the National Association of REALTORS®. | type=String | max_len=25.0']
   bill_status varchar(25) [note: 'BillStatus | The status of the bill (i.e., Not Billed, Billed, Paid or N, B, P). | type=String | max_len=25.0 | adoption org=5% (18/344)']
-  history_transactional text [note: 'HistoryTransactional | A collection of history items related to the OfficeAssociation record. | type=Collection']
   join_date date [note: 'JoinDate | The date the office joined the association. | type=Date | max_len=10.0 | adoption org=5% (18/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the OfficeAssociation record was last modified. | type=Timestamp | max_len=27.0 | adoption org=5% (18/344)']
   office_association_primary_indicator varchar [note: 'OfficeAssociationPrimaryIndicator | An indicator showing Primary, Secondary or Not Applicable with the association (i.e., P, S, X). | type=String List, Single | lookup=OfficeAssociationPrimaryIndicator | max_len=25.0']
@@ -1044,9 +1046,9 @@ Table office_association {
 }
 
 // ---- OfficeCorporateLicense (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table office_corporate_license {
   office_corporate_license_key varchar(255) [pk, note: 'OfficeCorporateLicenseKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0']
-  history_transactional text [note: 'HistoryTransactional | A collection of history items related to the OfficeCorporateLicense record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the OfficeCorporateLicense record was last modified. | type=Timestamp | max_len=27.0']
   office_corporate_license varchar(50) [note: 'OfficeCorporateLicense | When an office/firm is a corporation, an independent license number is issued. | type=String | max_len=50.0']
   office_corporate_license_expiration_date date [note: 'OfficeCorporateLicenseExpirationDate | The expiration date for the office corporation\'s license. | type=Date | max_len=10.0']
@@ -1058,14 +1060,13 @@ Table office_corporate_license {
 }
 
 // ---- OpenHouse (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional, Media -> Media, SocialMedia -> SocialMedia
 Table open_house {
   open_house_key varchar(255) [pk, note: 'OpenHouseKey | A unique identifier for this record from the immediate source. This may be a number or string that can include a Uniform Resource Identifier (URI) or other form | type=String | max_len=255.0 | adoption org=90% (310/344)']
   appointment_required_yn boolean [note: 'AppointmentRequiredYN | Indicates whether or not the open house requires an appointment. | type=Boolean | adoption org=1% (3/344)']
-  history_transactional text [note: 'HistoryTransactional | The history of the OpenHouse record. | type=Collection']
   listing_id varchar(255) [note: 'ListingId | The well-known identifier for the listing related to this open house. The value may be identical to that of the listing key, but the listing ID is intended to b | type=String | max_len=255.0 | adoption org=65% (222/344)']
   listing_key varchar(255) [note: 'ListingKey | A unique identifier for the listing record related to this open house. This may be a number or string that can include a Uniform Resource Identifier (URI) or ot | type=String | max_len=255.0 | adoption org=89% (306/344)']
   livestream_open_house_url varchar(8000) [note: 'LivestreamOpenHouseURL | A link to an open house livestream event. | type=String | max_len=8000.0 | adoption org=19% (67/344)']
-  media text [note: 'Media | The media related to the OpenHouse record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time the OpenHouse record was last modified. | type=Timestamp | max_len=27.0 | adoption org=76% (262/344)']
   open_house_attended_by varchar [note: 'OpenHouseAttendedBy | States whether or not the open house will be attended by a licensed agent (i.e., Agent, Seller, Unattended). | type=String List, Single | lookup=Attended | max_len=25.0 | adoption org=1% (5/344)']
   open_house_date date [note: 'OpenHouseDate | The date on which the open house will occur. | type=Date | max_len=10.0 | adoption org=79% (271/344)']
@@ -1084,7 +1085,6 @@ Table open_house {
   showing_agent_key varchar(255) [note: 'ShowingAgentKey | A system unique identifier. Specifically, in aggregation systems, the ListAgentKey is the system unique identifier from the system where the record was retrieve | type=String | max_len=255.0 | adoption org=5% (16/344)']
   showing_agent_last_name varchar(50) [note: 'ShowingAgentLastName | The last name of the showing agent. | type=String | max_len=50.0 | adoption org=9% (32/344)']
   showing_agent_mls_id varchar(25) [note: 'ShowingAgentMlsID | The local, well-known identifier for the member. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier  | type=String | max_len=25.0 | adoption org=24% (81/344)']
-  social_media text [note: 'SocialMedia | The social media related to the OpenHouse record. | type=Collection']
   source_system_id varchar(25) [note: 'SourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0 | adoption org=24% (82/344)']
   source_system_key varchar(255) [note: 'SourceSystemKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0 | adoption org=47% (161/344)']
   source_system_name varchar(255) [note: 'SourceSystemName | The name of the open house record provider. The system from which the record was directly received. The legal name of the company. | type=String | max_len=255.0 | adoption org=5% (16/344)']
@@ -1092,10 +1092,10 @@ Table open_house {
 }
 
 // ---- OtherPhone (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table other_phone {
   other_phone_key varchar(255) [pk, note: 'OtherPhoneKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system that the record was just retrieved. Th | type=String | max_len=255.0 | adoption org=0% (1/344)']
   class_name varchar [note: 'ClassName | Name of the class to which the record is referencing. | type=String List, Single | lookup=ClassName | max_len=255.0']
-  history_transactional text [note: 'HistoryTransactional | The history of the OtherPhone record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time the OtherPhone record was last modified. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
   other_phone_ext varchar(10) [note: 'OtherPhoneExt | The extension of the given phone number (if applicable). | type=String | max_len=10.0 | adoption org=0% (1/344)']
   other_phone_number varchar(16) [note: 'OtherPhoneNumber | The phone option allowing members to convey additional phone numbers other than those already covered by the MemberMobilePhone, MemberFax and other specified fi | type=String | max_len=16.0 | adoption org=0% (1/344)']
@@ -1108,6 +1108,7 @@ Table other_phone {
 
 // ---- Property (RESO 2.0 canonical) ----
 // 2NF: 142 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): GreenBuildingVerification -> PropertyGreenVerification, HistoryTransactional -> HistoryTransactional, Media -> Media, OpenHouse -> OpenHouse, PowerProduction -> PropertyPowerProduction, Rooms -> PropertyRooms, SocialMedia -> SocialMedia, UnitTypes -> PropertyUnitTypes
 Table property {
   listing_key varchar(255) [pk, note: 'ListingKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0 | adoption org=98% (337/344)']
   above_grade_finished_area numeric [note: 'AboveGradeFinishedArea | The finished area within the structure that is at or above the surface of the ground. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=34% (118/344)']
@@ -1301,7 +1302,6 @@ Table property {
   grazing_permits_blm_yn boolean [note: 'GrazingPermitsBlmYN | Indicates whether or not the property owner has grazing permits from the Bureau of Land Management. | type=Boolean | adoption org=1% (5/344)']
   grazing_permits_forest_service_yn boolean [note: 'GrazingPermitsForestServiceYN | Indicates whether or not the property owner has grazing permits from the Forestry Service. | type=Boolean | adoption org=1% (2/344)']
   grazing_permits_private_yn boolean [note: 'GrazingPermitsPrivateYN | Indicates whether or not the property owner has private grazing permits. | type=Boolean | adoption org=2% (7/344)']
-  green_building_verification text [note: 'GreenBuildingVerification | A collection of verifications or certifications awarded to a new or pre-existing residential or commercial structure (e.g., LEED, Energy Star, ICC-700). The col | type=Collection']
   green_building_verification_type varchar [note: 'GreenBuildingVerificationType | The name of the verification or certification awarded to a new or pre-existing residential or commercial structure (e.g., LEED, ENERGY STAR, ICC-700). In cases  | type=String List, Multi | lookup=GreenBuildingVerificationType (multi) | max_len=1024.0 | adoption org=23% (79/344)']
   green_energy_efficient varchar [note: 'GreenEnergyEfficient | A pick list of general green attributes such as energy efficient doors or appliances without naming specific elements with ratings that may wane over time. | type=String List, Multi | lookup=GreenEnergyEfficient (multi) | max_len=1024.0 | adoption org=47% (162/344)']
   green_energy_generation varchar [note: 'GreenEnergyGeneration | The methods of generating power that are included in the sale or lease. | type=String List, Multi | lookup=GreenEnergyGeneration (multi) | max_len=1024.0 | adoption org=39% (134/344)']
@@ -1318,7 +1318,6 @@ Table property {
   heating_yn boolean [note: 'HeatingYN | Indicates whether or not the property has heating. | type=Boolean | adoption org=81% (280/344)']
   high_school varchar [note: 'HighSchool | The name of the high school having a catchment area that includes the associated property. | type=String List, Single | lookup=HighSchool | max_len=50.0 | adoption org=53% (184/344)']
   high_school_district varchar [note: 'HighSchoolDistrict | The name of the high school district having a catchment area that includes the associated property. When only one school district is used, this field should be  | type=String List, Single | lookup=HighSchoolDistrict | max_len=50.0 | adoption org=47% (161/344)']
-  history_transactional text [note: 'HistoryTransactional | A collection of historical items related to the property record. | type=Collection']
   home_warranty_yn boolean [note: 'HomeWarrantyYN | Indicates whether or not a home warranty is included in the sale of the property. | type=Boolean | adoption org=49% (168/344)']
   horse_amenities varchar [note: 'HorseAmenities | A list of horse amenities on the lot or in the community. | type=String List, Multi | lookup=HorseAmenities (multi) | max_len=1024.0 | adoption org=40% (137/344)']
   horse_yn boolean [note: 'HorseYN | Indicates whether or not the property allows for the raising of horses. | type=Boolean | adoption org=44% (153/344)']
@@ -1397,7 +1396,6 @@ Table property {
   map_coordinate varchar(25) [note: 'MapCoordinate | A map coordinate for the property, as determined by local custom. This is not necessarily the same as the geographic coordinate but may depend on the coordinate | type=String | max_len=25.0 | adoption org=7% (24/344)']
   map_coordinate_source varchar(25) [note: 'MapCoordinateSource | The name of the map or map book publisher. | type=String | max_len=25.0 | adoption org=4% (15/344)']
   map_url varchar(8000) [note: 'MapURL | A Uniform Resource Identifier (URI) to a map of the property. | type=String | max_len=8000.0 | adoption org=0% (1/344)']
-  media text [note: 'Media | A collection of media items related to the Property record. | type=Collection | adoption org=31% (105/344)']
   middle_or_junior_school varchar [note: 'MiddleOrJuniorSchool | The name of the junior or middle school having a catchment area that includes the associated property. | type=String List, Single | lookup=MiddleOrJuniorSchool | max_len=50.0 | adoption org=52% (180/344)']
   middle_or_junior_school_district varchar [note: 'MiddleOrJuniorSchoolDistrict | The name of the junior or middle school district having a catchment area that includes the associated property. | type=String List, Single | lookup=MiddleOrJuniorSchoolDistrict | max_len=50.0 | adoption org=25% (85/344)']
   mls_status varchar [note: 'MlsStatus | A local or regional status that is well known by business users. Each MlsStatus field must map to a single StandardStatus. Multiple MlsStatus fields may map to  | type=String List, Single | lookup=MlsStatus | max_len=50.0 | adoption org=97% (335/344)']
@@ -1430,7 +1428,6 @@ Table property {
   off_market_timestamp timestamp [note: 'OffMarketTimestamp | The transactional timestamp automatically recorded by the MLS system representing the most recent date/time the listing\'s status was set to an off-market status | type=Timestamp | max_len=27.0 | adoption org=32% (111/344)']
   on_market_date date [note: 'OnMarketDate | The date the listing was placed on market. Where possible, this date is reflective of the date entered by the agent reflecting when the change occurred contract | type=Date | max_len=10.0 | adoption org=65% (222/344)']
   on_market_timestamp timestamp [note: 'OnMarketTimestamp | The transactional timestamp automatically recorded by the MLS system representing the most recent date/time the listing\'s status was set to Active or Backup. Th | type=Timestamp | max_len=27.0 | adoption org=8% (27/344)']
-  open_house text [note: 'OpenHouse | A collection of open house items related to the Property record. | type=Collection']
   open_house_modification_timestamp timestamp [note: 'OpenHouseModificationTimestamp | A system-generated timestamp of when the last update or change to the open house information for this listing was made. | type=Timestamp | max_len=27.0']
   open_parking_spaces numeric [note: 'OpenParkingSpaces | The number of open or uncovered parking spaces included in the sale. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=18% (62/344)']
   open_parking_yn boolean [note: 'OpenParkingYN | A flag indicating that any parking spaces associated with the property are not covered by a roof. | type=Boolean | adoption org=40% (139/344)']
@@ -1469,7 +1466,6 @@ Table property {
   postal_city varchar [note: 'PostalCity | The official city per the U.S. Postal Service (USPS), which may be different from the recorded city. | type=String List, Single | lookup=PostalCity | max_len=50.0 | adoption org=29% (100/344)']
   postal_code varchar(10) [note: 'PostalCode | The postal code portion of a street or mailing address. | type=String | max_len=10.0 | adoption org=99% (341/344)']
   postal_code_plus4 varchar(4) [note: 'PostalCodePlus4 | The last four digits of a nine-digit U.S. ZIP Code. | type=String | max_len=4.0 | adoption org=53% (184/344)']
-  power_production text [note: 'PowerProduction | A collection of the types of power production system(s) available on the property. The collection includes the type of system and other details about the power  | type=Collection']
   power_production_type varchar [note: 'PowerProductionType | A list of the types of power production systems available on the property. The key characteristics of the system are expected to appear as the type in related p | type=String List, Multi | lookup=PowerProductionType (multi) | max_len=1024.0 | adoption org=12% (42/344)']
   power_production_yn boolean [note: 'PowerProductionYN | A flag indicating that the listing has a Power Production system. | type=Boolean | adoption org=0% (1/344)']
   previous_list_price numeric [note: 'PreviousListPrice | The most recent previous list price of the listing. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=63% (217/344)']
@@ -1498,7 +1494,6 @@ Table property {
   road_surface_type varchar [note: 'RoadSurfaceType | A pick list of types of road surfaces in use to access the property. Road surfaces for property access are an important factor in determining property value and | type=String List, Multi | lookup=RoadSurfaceType (multi) | max_len=1024.0 | adoption org=74% (253/344)']
   roof varchar [note: 'Roof | A list describing the roof style type (e.g., Spanish Tile, Composite, Shake). | type=String List, Multi | lookup=Roof (multi) | max_len=1024.0 | adoption org=89% (307/344)']
   room_type varchar [note: 'RoomType | A list of the types used in room repeating elements. The type is a list of possible room types (i.e., bedroom, bathroom, living room, workshop, etc.). Each sele | type=String List, Multi | lookup=RoomType (multi) | max_len=1024.0 | adoption org=25% (85/344)']
-  rooms text [note: 'Rooms | A collection of types of rooms and details/features about the given room. | type=Collection | adoption org=1% (3/344)']
   rooms_total numeric [note: 'RoomsTotal | The number of rooms in a dwelling. | type=Number | max_len=3.0 | adoption org=67% (231/344)']
   seating_capacity numeric [note: 'SeatingCapacity | The seating capacity of the business being sold. | type=Number | max_len=10.0 | adoption org=8% (27/344)']
   security_features varchar [note: 'SecurityFeatures | A list describing the security features included in the sale/lease. | type=String List, Multi | lookup=SecurityFeatures (multi) | max_len=1024.0 | adoption org=74% (254/344)']
@@ -1523,7 +1518,6 @@ Table property {
   sign_on_property_yn boolean [note: 'SignOnPropertyYN | Indicates whether or not there a sign on the property. | type=Boolean | adoption org=34% (117/344)']
   simple_days_on_market numeric [note: 'SimpleDaysOnMarket | A simplified version of days on market (DOM) where the calculation is a simple start and end, such as the difference between the listing input or contract date  | type=Number | max_len=4.0 | adoption org=0% (1/344)']
   skirt varchar [note: 'Skirt | A list of types of mobile home skirting. | type=String List, Multi | lookup=Skirt (multi) | max_len=1024.0 | adoption org=12% (42/344)']
-  social_media text [note: 'SocialMedia | A collection of social media items related to the Property record. | type=Collection']
   source_system_id varchar(25) [note: 'SourceSystemID | The OUID Resource\'s OrganizationUniqueId of the source record provider. The source system is the system from which the record was directly received. In cases wh | type=String | max_len=25.0 | adoption org=58% (201/344)']
   spa_features varchar [note: 'SpaFeatures | A list of features or a description of the spa included in the sale/lease. | type=String List, Multi | lookup=SpaFeatures (multi) | max_len=1024.0 | adoption org=62% (212/344)']
   spa_yn boolean [note: 'SpaYN | Indicates whether or not the property has a spa. | type=Boolean | adoption org=53% (182/344)']
@@ -1574,7 +1568,6 @@ Table property {
   trash_expense numeric [note: 'TrashExpense | The annual expense that is not paid directly by the tenant and is included in the Operating Expense calculations. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=17% (59/344)']
   unit_number varchar(25) [note: 'UnitNumber | A text field containing the unit number or portion of a larger building or complex that should appear following the street suffix or, if it exists, the street s | type=String | max_len=25.0 | adoption org=79% (272/344)']
   unit_type_type varchar [note: 'UnitTypeType | This field is a list of the types used in the Unit Type repeating elements. The type is a list of possible unit types (i.e., 1 Bedroom, 2 Bedroom, 3 Bedroom, St | type=String List, Multi | lookup=UnitTypeType (multi) | max_len=1024.0 | adoption org=4% (14/344)']
-  unit_types text [note: 'UnitTypes | A collection of types of units included in the income (multifamily) property. The collection includes a type, beds, baths and other aspects of the type of unit  | type=Collection | adoption org=0% (1/344)']
   units_furnished varchar [note: 'UnitsFurnished | States whether or not the units are furnished (i.e., All Units, Varies By Unit, None). | type=String List, Single | lookup=UnitsFurnished | max_len=25.0 | adoption org=6% (21/344)']
   universal_property_id varchar(128) [note: 'UniversalPropertyId | The RESO Universal Property Identifier (UPI) is a unique identifier for all real property in the U.S. and Canada. It is based on country and local identificatio | type=String | max_len=128.0 | adoption org=23% (78/344)']
   universal_property_sub_id varchar(128) [note: 'UniversalPropertySubId | A unique identifier for all subsets or shares of real property in the U.S. and Canada. This may include Stock Cooperatives, Community Apartment, Units for Rent, | type=String | max_len=128.0 | adoption org=0% (1/344)']
@@ -1612,6 +1605,7 @@ Table property {
 
 // ---- PropertyGreenVerification (RESO 2.0 canonical) ----
 // 2NF: 1 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table property_green_verification {
   green_building_verification_key varchar(255) [pk, note: 'GreenBuildingVerificationKey | A unique identifier for this record. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the local key of the system. | type=String | max_len=255.0 | adoption org=2% (7/344)']
   green_building_verification_type varchar [note: 'GreenBuildingVerificationType | The name of the verification or certification awarded to a new or pre-existing residential or commercial structure (e.g., LEED, ENERGY STAR, ICC-700). | type=String List, Single | lookup=GreenBuildingVerificationType | max_len=1024.0 | adoption org=2% (6/344)']
@@ -1623,7 +1617,6 @@ Table property_green_verification {
   green_verification_url varchar(8000) [note: 'GreenVerificationURL | Provides a link to the specific property’s high-performance rating or scoring details directly from and hosted by the sponsoring body of the program. It typical | type=String | max_len=8000.0 | adoption org=1% (3/344)']
   green_verification_version varchar(25) [note: 'GreenVerificationVersion | The version of the green certification or verification that was awarded. Some rating programs have a year, a version or possibly both. | type=String | max_len=25.0 | adoption org=1% (2/344)']
   green_verification_year numeric [note: 'GreenVerificationYear | The year the green certification or verification was awarded. | type=Number | max_len=4.0 | adoption org=1% (5/344)']
-  history_transactional text [note: 'HistoryTransactional | The history of the PropertyGreenVerification record. | type=Collection']
   listing_key varchar(255) [note: 'ListingKey | This is the foreign key relating to the property. A unique identifier for this record from the immediate source. This is a string that can include a Uniform Res | type=String | max_len=255.0 | adoption org=2% (7/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the PropertyGreenVerification record was last modified. | type=Timestamp | max_len=27.0 | adoption org=2% (7/344)']
   Note: 'RESO 2.0 canonical PropertyGreenVerification resource'
@@ -1631,9 +1624,9 @@ Table property_green_verification {
 
 // ---- PropertyPowerProduction (RESO 2.0 canonical) ----
 // 2NF: 1 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table property_power_production {
   power_production_key varchar(255) [pk, note: 'PowerProductionKey | A unique identifier for this record. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the local key of the system. | type=String | max_len=255.0 | adoption org=1% (4/344)']
-  history_transactional text [note: 'HistoryTransactional | The history of the PropertyPowerProduction record. | type=Collection']
   listing_key varchar(255) [note: 'ListingKey | This is the foreign key relating to the Property Resource; the unique identifier for this record from the immediate source. This is a string that can include a  | type=String | max_len=255.0 | adoption org=1% (5/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the PropertyPowerProduction record was last modified. | type=Timestamp | max_len=27.0 | adoption org=1% (5/344)']
   power_production_annual numeric [note: 'PowerProductionAnnual | The most important metric of a renewables system is the amount of power it produces per year. This number can be actual or estimated. Annual production for syst | type=Number | max_len=6.0']
@@ -1658,10 +1651,10 @@ Table property_power_storage {
 
 // ---- PropertyRooms (RESO 2.0 canonical) ----
 // 2NF: 1 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table property_rooms {
   room_key varchar(255) [pk, note: 'RoomKey | A unique identifier for this record. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the local key of the system. | type=String | max_len=255.0 | adoption org=36% (125/344)']
   bedroom_closet_type varchar [note: 'BedroomClosetType | A list of possible closet types for a bedroom. | type=String List, Single | lookup=ClosetType | max_len=25.0']
-  history_transactional text [note: 'HistoryTransactional | The history of the PropertyRooms record. | type=Collection']
   listing_key varchar(255) [note: 'ListingKey | This is the foreign key relating to the Property resource. A unique identifier for this record from the immediate source. A string that can include URI or other | type=String | max_len=255.0 | adoption org=24% (81/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the PropertyRooms record was last modified. | type=Timestamp | max_len=27.0 | adoption org=23% (79/344)']
   room_area numeric [note: 'RoomArea | The area of the room being described. Use the RoomAreaUnits field to describe the unit of measurement for the value in this field. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=8% (28/344)']
@@ -1681,9 +1674,9 @@ Table property_rooms {
 
 // ---- PropertyUnitTypes (RESO 2.0 canonical) ----
 // 2NF: 1 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table property_unit_types {
   unit_type_key varchar(255) [pk, note: 'UnitTypeKey | A unique identifier for this record. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the local key of the system. | type=String | max_len=255.0 | adoption org=24% (83/344)']
-  history_transactional text [note: 'HistoryTransactional | The history of the PropertyUnitTypes record. | type=Collection']
   listing_key varchar(255) [note: 'ListingKey | The foreign key relating to the Property Resource; a unique identifier for this record from the immediate source; a string that can include a Uniform Resource I | type=String | max_len=255.0 | adoption org=21% (72/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the PropertyUnitTypes record was last modified. | type=Timestamp | max_len=27.0 | adoption org=20% (68/344)']
   unit_type_actual_rent numeric [note: 'UnitTypeActualRent | The actual rent per month being collected for a given type of unit. | type=Number | max_len=14.0 | max_prec=2.0 | adoption org=22% (75/344)']
@@ -1701,6 +1694,7 @@ Table property_unit_types {
 }
 
 // ---- Prospecting (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional, Media -> Media
 Table prospecting {
   prospecting_key varchar(255) [pk, note: 'ProspectingKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0 | adoption org=0% (1/344)']
   active_yn boolean [note: 'ActiveYN | If set to True, the given automated email is active. False records may be disabled or waiting activation. | type=Boolean']
@@ -1713,11 +1707,9 @@ Table prospecting {
   contact_key varchar(255) [note: 'ContactKey | This is the foreign key relating to the Contacts Resource. A unique identifier for this record from the immediate source. This is a string that can include a Un | type=String | max_len=255.0']
   daily_schedule varchar [note: 'DailySchedule | When Daily is selected as the ScheduleType, a list of days of the week and AM or PM options. | type=String List, Multi | lookup=DailySchedule (multi) | max_len=1024.0']
   display_template_id varchar(25) [note: 'DisplayTemplateID | The system ID of the display that has been related or set as the default to this saved search. | type=String | max_len=25.0']
-  history_transactional text [note: 'HistoryTransactional | The history of the Prospecting record. | type=Collection']
   language varchar [note: 'Language | The language that will be used in the given automated email. | type=String List, Single | lookup=Languages | max_len=25.0']
   last_new_changed_timestamp timestamp [note: 'LastNewChangedTimestamp | The timestamp of when the prospector last found new or modified listings for an automated email. | type=Timestamp | max_len=27.0']
   last_viewed_timestamp timestamp [note: 'LastViewedTimestamp | A timestamp of when the automated email was last viewed by the client in the portal. | type=Timestamp | max_len=27.0']
-  media text [note: 'Media | The media related to the Prospecting record. | type=Collection']
   message_new varchar(4000) [note: 'MessageNew | The body of the automated email message when the first email is sent for the prospecting campaign. | type=String | max_len=4000.0']
   message_revise varchar(4000) [note: 'MessageRevise | The body of the automated email message to be used when the criteria or settings of an automated email has been modified. | type=String | max_len=4000.0']
   message_update varchar(4000) [note: 'MessageUpdate | The body of the automated email message for subsequent email messages after the first email is sent. If a first email option isn\'t used, this field is used for  | type=String | max_len=4000.0']
@@ -1734,10 +1726,10 @@ Table prospecting {
 }
 
 // ---- Queue (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table queue {
   queue_transaction_key varchar(255) [pk, note: 'QueueTransactionKey | A unique identifier for this record from the immediate source. This may be a number, or string that can include Uniform Resource Identifier (URI) or other forms | type=String | max_len=255.0']
   class_name varchar [note: 'ClassName | Name of the class that this queue record is referencing. | type=String List, Single | lookup=ClassName | max_len=50.0']
-  history_transactional text [note: 'HistoryTransactional | The history of the Queue record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | Timestamp of the last major change on the listing (see also MajorChangeType). | type=Timestamp | max_len=27.0']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
   originating_system_name varchar(255) [note: 'OriginatingSystemName | The name of the originating record provider, most commonly the name of the MLS. The place where the queue record was originally generated. The legal name of the | type=String | max_len=255.0']
@@ -1754,12 +1746,12 @@ Table queue {
 
 // ---- Rules (RESO 2.0 canonical) ----
 // 2NF: 4 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table rules {
   rule_key varchar(255) [pk, note: 'RuleKey | The primary key of the individual Rule record. | type=String | max_len=255.0']
   class_name varchar [note: 'ClassName | The class or table to which the rule refers (i.e., Residential, Residential Lease, Income, Mobile, etc.). | type=String List, Single | lookup=ClassName | max_len=50.0']
   field_key varchar(255) [note: 'FieldKey | The unique identifier of the field to which the rule applies. This is a foreign key relating to the field found in the resource per the ResourceName field. | type=String | max_len=255.0']
   field_name varchar(255) [note: 'FieldName | The name of the field to which the rule applies. | type=String | max_len=255.0']
-  history_transactional text [note: 'HistoryTransactional | The history of the Rules record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time the rule was last modified. | type=Timestamp | max_len=27.0']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time the rule was initially entered. | type=Timestamp | max_len=27.0']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
@@ -1782,10 +1774,10 @@ Table rules {
 
 // ---- SavedSearch (RESO 2.0 canonical) ----
 // 2NF: 7 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table saved_search {
   saved_search_key varchar(255) [pk, note: 'SavedSearchKey | A unique identifier for this record from the immediate source. This may be a number or string that can include a Uniform Resource Identifier (URI) or other form | type=String | max_len=255.0 | adoption org=0% (1/344)']
   class_name varchar [note: 'ClassName | The class or table to which the SearchQuery criteria refers (e.g., Residential, Residential Lease, Residential Income, Commercial Sale). | type=String List, Single | lookup=ClassName | max_len=50.0']
-  history_transactional text [note: 'HistoryTransactional | The collection history items related to the  SavedSearch record. | type=Collection']
   member_key varchar(255) [note: 'MemberKey | A system unique identifier. Specifically, in aggregation systems, the MemberKey is the system unique identifier from the system that the record was retrieved. T | type=String | max_len=255.0']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time that the saved search was last modified. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time that the saved search was entered. | type=Timestamp | max_len=27.0']
@@ -1805,15 +1797,14 @@ Table saved_search {
 
 // ---- Showing (RESO 2.0 canonical) ----
 // 2NF: 8 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional, Media -> Media, SocialMedia -> SocialMedia
 Table showing {
   showing_key varchar(255) [pk, note: 'ShowingKey | A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the | type=String | max_len=255.0']
   agent_originating_system_id varchar(25) [note: 'AgentOriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
   agent_source_system_id varchar(25) [note: 'AgentSourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  history_transactional text [note: 'HistoryTransactional | The history of the Showing record. | type=Collection']
   listing_key varchar(255) [note: 'ListingKey | A unique identifier for this record. This is a string that can include a Uniform Resource Identifier (URI) or other forms. This is the local key of the system.  | type=String | max_len=255.0']
   listing_originating_system_id varchar(25) [note: 'ListingOriginatingSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative c | type=String | max_len=25.0']
   listing_source_system_id varchar(25) [note: 'ListingSourceSystemID | The RESO Unique Organization Identifier (UOI) OrganizationUniqueId of the source record provider. The source system is the system from which the record was dire | type=String | max_len=25.0']
-  media text [note: 'Media | The media associated with the Showing record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The transactional timestamp automatically recorded by the system representing the date/time the Showing record was last modified. | type=Timestamp | max_len=27.0']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The transactional timestamp automatically recorded by the system representing the date/time the showing record was entered and made visible to members of the sy | type=Timestamp | max_len=27.0']
   originating_system_agent_key varchar(255) [note: 'OriginatingSystemAgentKey | The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the record (e.g.,  | type=String | max_len=255.0']
@@ -1830,7 +1821,6 @@ Table showing {
   showing_status varchar [note: 'ShowingStatus | The current state of showing acceptance on the listing. | type=String List, Single | lookup=ShowingStatus | max_len=50.0']
   showing_time_zone varchar [note: 'ShowingTimeZone | The standard name of the time zone, as provided by the IANA tz database. This denotes the time zone of the property being shown. | type=String List, Single | lookup=IanaTimeZoneValues | max_len=150.0']
   showing_url varchar(255) [note: 'ShowingUrl | The Uniform Resource Locator (URL) that links to the originating system. | type=String | max_len=255.0']
-  social_media text [note: 'SocialMedia | The social media associated with the Showing record. | type=Collection']
   source_system_agent_key varchar(255) [note: 'SourceSystemAgentKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0']
   source_system_listing_key varchar(255) [note: 'SourceSystemListingKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0']
   source_system_showing_key varchar(255) [note: 'SourceSystemShowingKey | The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In cases where  | type=String | max_len=255.0']
@@ -1894,11 +1884,11 @@ Table showing_request {
 }
 
 // ---- SocialMedia (RESO 2.0 canonical) ----
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table social_media {
   social_media_key varchar(255) [pk, note: 'SocialMediaKey | A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system that the record was just retrieved. Th | type=String | max_len=255.0 | adoption org=8% (28/344)']
   class_name varchar [note: 'ClassName | Name of the class to which the record is referencing. | type=String List, Single | lookup=ClassName | max_len=255.0 | adoption org=0% (1/344)']
   display_name varchar [note: 'DisplayName | The display name for the field. SHOULD be provided in all cases where the use of display names is needed, even if the display name is the same as the underlying | type=String | adoption org=8% (26/344)']
-  history_transactional text [note: 'HistoryTransactional | The history of the SocialMedia record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The transactional timestamp automatically recorded by the MLS system representing the date/time the SocialMedia record was last modified. | type=Timestamp | max_len=27.0 | adoption org=1% (2/344)']
   resource_name varchar [note: 'ResourceName | The resource or table of the listing or other record that the media relates to (i.e., Property, Member, Office, etc.). | type=String List, Single | lookup=ResourceName | max_len=50.0 | adoption org=1% (2/344)']
   resource_record_id varchar(255) [note: 'ResourceRecordID | The well-known identifier of the related record from the source resource. The value may be identical to that of the Listing Key, but the Listing ID is intended  | type=String | max_len=255.0 | adoption org=1% (2/344)']
@@ -1910,9 +1900,9 @@ Table social_media {
 
 // ---- TeamMembers (RESO 2.0 canonical) ----
 // 2NF: 6 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional
 Table team_members {
   team_member_key varchar(255) [pk, note: 'TeamMemberKey | A system unique identifier. Specifically, the local key to the TeamMembers resource. | type=String | max_len=255.0 | adoption org=0% (1/344)']
-  history_transactional text [note: 'HistoryTransactional | The history of the TeamMembers record. | type=Collection']
   member_key varchar(255) [note: 'MemberKey | A system unique identifier. Specifically, the foreign key relating to the Member Resource\'s MemberKey. | type=String | max_len=255.0 | adoption org=0% (1/344)']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the roster (member or office) record was last modified. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | Date/time the roster (member or office) record was originally input into the source system. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
@@ -1928,10 +1918,9 @@ Table team_members {
 
 // ---- Teams (RESO 2.0 canonical) ----
 // 2NF: 9 satellite field(s) dropped (reachable via FK joins). See header for full list.
+// Inverse 1:N (Collection-typed in RESO; FK lives on child): HistoryTransactional -> HistoryTransactional, Media -> Media, TeamsSocialMedia -> SocialMedia
 Table teams {
   team_key varchar(255) [pk, note: 'TeamKey | A system unique identifier. Specifically, in aggregation systems, the TeamKey is the system unique identifier from the system where the record was retrieved. | type=String | max_len=255.0 | adoption org=1% (2/344)']
-  history_transactional text [note: 'HistoryTransactional | The history of the Teams record. | type=Collection']
-  media text [note: 'Media | The media associated with the Teams record. | type=Collection']
   modification_timestamp timestamp [note: 'ModificationTimestamp | The date/time the roster (team or office) record was last modified. | type=Timestamp | max_len=27.0 | adoption org=1% (2/344)']
   original_entry_timestamp timestamp [note: 'OriginalEntryTimestamp | The date/time the roster (team or office) record was originally input into the source system. | type=Timestamp | max_len=27.0 | adoption org=0% (1/344)']
   originating_system_id varchar(25) [note: 'OriginatingSystemID | The RESO Unique Organization Identifier\'s (UOI) OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative | type=String | max_len=25.0']
@@ -1961,7 +1950,6 @@ Table teams {
   team_toll_free_phone varchar(16) [note: 'TeamTollFreePhone | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
   team_voice_mail varchar(16) [note: 'TeamVoiceMail | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. In | type=String | max_len=16.0']
   team_voice_mail_ext varchar(10) [note: 'TeamVoiceMailExt | The extension of the given phone number, if applicable. | type=String | max_len=10.0']
-  teams_social_media text [note: 'TeamsSocialMedia | A collection of the types of social media fields available for this team. The collection includes the type of system and other details pertinent about social me | type=Collection']
   Note: 'RESO 2.0 canonical Teams resource'
 }
 
@@ -4681,7 +4669,12 @@ Table lookup_year_built_source {
 }
 
 // ============================================================
-// Foreign-key relationships (244)
+// Foreign-key relationships (259 = 244 primary + 15 extra)
+// Primary: emitted from Resource-typed siblings (pass 1) and
+//          single-value lookup columns (pass 4).
+// Extra:   emitted from Definition prose (passes 2-3) and
+//          name-shape heuristics (pass 4) for FK columns that
+//          have no Resource-typed sibling on the host.
 // ============================================================
 
 Ref: association.association_country > lookup_country.code // Association.AssociationCountry -> Country
@@ -4928,3 +4921,20 @@ Ref: teams.team_lead_key > member.member_key // Teams.TeamLead -> Member
 Ref: teams.team_state_or_province > lookup_state_or_province.code // Teams.TeamStateOrProvince -> StateOrProvince
 Ref: teams.team_status > lookup_team_status.code // Teams.TeamStatus -> TeamStatus
 Ref: transaction_management.transaction_type > lookup_transaction_type.code // TransactionManagement.TransactionType -> TransactionType
+
+// ---- Extra FKs (15) ----
+Ref: caravan_stop.caravan_key > caravan.caravan_key // CaravanStop.CaravanKey -> Caravan [name-shape]
+Ref: history_transactional.field_key > field.field_key // HistoryTransactional.FieldKey -> Field [name-shape]
+Ref: media.changed_by_member_key > member.member_key // Media.ChangedByMemberKey -> Member [prose-foreign-key]
+Ref: media.source_system_id > ouid.organization_unique_id_key // Media.SourceSystemID -> OUID [prose-resources]
+Ref: member_association.association_key > association.association_key // MemberAssociation.AssociationKey -> Association [name-shape]
+Ref: member_association.member_key > member.member_key // MemberAssociation.MemberKey -> Member [name-shape]
+Ref: member_state_license.member_key > member.member_key // MemberStateLicense.MemberKey -> Member [name-shape]
+Ref: office_association.association_key > association.association_key // OfficeAssociation.AssociationKey -> Association [name-shape]
+Ref: office_association.office_key > office.office_key // OfficeAssociation.OfficeKey -> Office [prose-foreign-key]
+Ref: office_corporate_license.office_key > office.office_key // OfficeCorporateLicense.OfficeKey -> Office [prose-foreign-key]
+Ref: rules.field_key > field.field_key // Rules.FieldKey -> Field [name-shape]
+Ref: showing_appointment.showing_key > showing.showing_key // ShowingAppointment.ShowingKey -> Showing [name-shape]
+Ref: showing_availability.showing_key > showing.showing_key // ShowingAvailability.ShowingKey -> Showing [name-shape]
+Ref: showing_request.showing_key > showing.showing_key // ShowingRequest.ShowingKey -> Showing [name-shape]
+Ref: team_members.team_key > teams.team_key // TeamMembers.TeamKey -> Teams [prose-resources]

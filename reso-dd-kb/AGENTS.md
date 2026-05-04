@@ -86,20 +86,69 @@ pattern-match without reading prose:
 > percentage in addition to per-Organization. dd.reso.org dropped
 > the per-System breakdown, so the KB now exposes `Org%` only.
 
-## Canonical DBML normalization (2NF)
+## Canonical DBML: FK detection + 2NF normalization
 
 The canonical DBML (`wiki/dbml/reso-2.0-canonical.dbml`) is **2NF
-normalized**. RESO 2.0 ships with hundreds of *satellite fields* —
-scalar columns whose value depends on a Resource-typed FK on the same
-host (e.g. `Property.ListAgentEmail`, `Property.OriginatingSystemName`,
+normalized** with FK relationships discovered from four orthogonal
+signals.
+
+### FK detection (four passes)
+
+`scripts/build_reso_canonical_dbml.py` walks `raw/fields.csv` four
+times, each pass emitting DBML `Ref:` lines:
+
+1. **Resource-typed siblings** — `SimpleDataType = Resource` rows
+   carry `SourceResource` + `TargetResourceKey`. Emit
+   `Ref: host.<TargetResourceKey> > target.PK`. Most FKs come from
+   here (e.g. `Property.ListAgent` -> `Member`).
+2. **Definition prose `foreign key relating to`** — Some `*Key`
+   fields lack a Resource-typed sibling but their Definition says
+   *"This is a foreign key relating to the Member Resource"*. Emit
+   the Ref to the named target (e.g. `Media.ChangedByMemberKey` ->
+   `Member`).
+3. **Definition prose `<Resource>'s <field>`** — Variant phrasing
+   where the prose names the target Resource and column inline (e.g.
+   `Media.SourceSystemID` Definition mentions *"OUID Resource's
+   OrganizationUniqueId"*). Lower priority than pass 2.
+4. **Name-shape `<Word>Key`** — Field name ending in `Key` whose
+   prefix is a known Resource name (or its singular form for plurals
+   like `Contacts`/`Teams`/`Rules`). Lowest priority; only fires when
+   no prose was found (e.g. `MemberAssociation.AssociationKey` ->
+   `Association`, `ShowingAppointment.ShowingKey` -> `Showing`).
+
+Single-value lookup columns (`String List, Single`) get a 5th Ref to
+the corresponding `lookup_<name>.code` reference table.
+
+Pass 2-4 results are filtered against the satellite drop set (no point
+emitting a Ref for a column we've removed) and tagged with their
+signal in the DBML comment for review. They are emitted in their own
+`// ---- Extra FKs ----` footer block to keep the heuristic-derived
+edges visible.
+
+### Collection-typed fields (inverse 1:N)
+
+`SimpleDataType = Collection` rows (e.g. `Property.Media`,
+`Property.OpenHouse`, `Property.Rooms`) are inverse references — the
+FK column lives on the **child** resource, not on the host. They are
+**not** rendered as host columns. Each host table emits a
+`// Inverse 1:N (Collection-typed in RESO; FK lives on child)` comment
+listing them so the relationship is documented; the forward FK from
+the child back to the host is emitted by passes 1-4 on the child
+resource.
+
+### 2NF: satellite-field drops
+
+RESO 2.0 ships with hundreds of *satellite fields* — scalar columns
+whose value depends on a Resource-typed FK on the same host
+(e.g. `Property.ListAgentEmail`, `Property.OriginatingSystemName`,
 `ContactListings.ListingId`). They violate 2NF because they are
 functionally dependent on the FK column rather than the host PK.
 
-`scripts/build_reso_canonical_dbml.py` detects them automatically: for
-each Resource-typed FK on host `H` with `TargetResourceKey K`, every
-other non-Resource scalar field on `H` whose name starts with the
-prefix-of-`K` (with the trailing `Key` / `ID` / `Id` stripped) is a
-satellite, except for `H`'s own PK and other FK columns.
+The detector: for each Resource-typed FK on host `H` with
+`TargetResourceKey K`, every other non-Resource scalar field on `H`
+whose name starts with the prefix-of-`K` (with the trailing
+`Key` / `ID` / `Id` stripped) is a satellite, except for `H`'s own PK
+and other FK columns.
 
 Two flavours of satellite are dropped uniformly:
 

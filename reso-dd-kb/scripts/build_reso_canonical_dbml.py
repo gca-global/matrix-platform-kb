@@ -37,14 +37,16 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "raw"
 OUT = ROOT / "wiki" / "dbml" / "reso-2.0-canonical.dbml"
 
-# RESO SimpleDataType -> DBML column type
+# RESO SimpleDataType -> DBML column type. `Resource` and `Collection` are
+# intentionally absent: Resource fields render as forward FK Refs (-> 2NF),
+# Collection fields render as inverse 1:N comments (the FK lives on the
+# child resource, not on the host).
 TYPE_MAP = {
     "String": "varchar",
     "Number": "numeric",
     "Boolean": "boolean",
     "Date": "date",
     "Timestamp": "timestamp",
-    "Collection": "text",
 }
 
 # PK overrides for resources where `<Resource>Key` does not exist or
@@ -228,6 +230,136 @@ def compute_satellites(
     return satellites, report
 
 
+# Definition-prose patterns RESO uses to call out implicit FKs.
+_PROSE_FK_RELATING = re.compile(
+    r"(?:foreign key (?:relating|related) to|relates to|relating to|references?)"
+    r"\s+(?:the\s+)?(\w+)\s+[Rr]esource",
+    re.IGNORECASE,
+)
+_PROSE_FK_RESOURCES = re.compile(
+    r"(\w+)\s+[Rr]esource['\u2019]s\s+(\w+)",
+    re.IGNORECASE,
+)
+
+
+def _name_shape_target(field_name: str, resource_names: Set[str]) -> Optional[str]:
+    """`<Word>Key` -> Resource named `<Word>` or its simple plural (Contacts,
+    Teams, Rules, etc.). Returns the canonical Resource name or None."""
+    if not field_name.endswith("Key") or len(field_name) <= 3:
+        return None
+    prefix = field_name[:-3]
+    if prefix in resource_names:
+        return prefix
+    for r in resource_names:
+        if r.endswith("s") and r[:-1] == prefix:
+            return r
+    return None
+
+
+def compute_extra_fks(
+    by_res: Dict[str, List[Dict[str, str]]],
+    resource_pks: Dict[str, Optional[str]],
+    satellites_by_host: Dict[str, Set[str]],
+) -> List[Tuple[str, str, str, str, str]]:
+    """Detect FK columns that are NOT already a TargetResourceKey of an
+    existing Resource-typed sibling on the same host.
+
+    Three signals, in priority order:
+      1. `prose-foreign-key`  - Definition contains "foreign key relating
+         to the <X> Resource".
+      2. `prose-resources`    - Definition contains "<X> Resource's <Y>".
+      3. `name-shape`         - field name `<Word>Key` where `<Word>`
+         names a Resource (or its singular form for plural Resources).
+
+    Filters:
+      - Skip the host's own PK (it's a key, not a FK).
+      - Skip fields already covered (they're a TargetResourceKey of a
+        Resource-typed sibling - the existing FK pass handles them).
+      - Skip fields dropped as satellites (no point Ref-ing a column we
+        won't render).
+
+    Returns: [(host, field_name, target_resource, target_pk, signal), ...]
+    """
+    resource_names = set(by_res)
+    covered: Set[Tuple[str, str]] = set()
+    for res, fs in by_res.items():
+        for f in fs:
+            if (f.get("SimpleDataType") or "").strip() == "Resource":
+                tkey = (f.get("TargetResourceKey") or "").strip()
+                if tkey:
+                    covered.add((res, tkey))
+
+    priority = {"prose-foreign-key": 0, "prose-resources": 1, "name-shape": 2}
+    best: Dict[Tuple[str, str], Tuple[str, str, str, str, str]] = {}
+
+    for res in sorted(by_res):
+        host_satellites = satellites_by_host.get(res, set())
+        for f in by_res[res]:
+            sdt = (f.get("SimpleDataType") or "").strip()
+            if sdt in ("Resource", "Collection"):
+                continue
+            name = f["StandardName"]
+            if not name.endswith(("Key", "ID", "Id")):
+                continue
+            if (res, name) in covered:
+                continue
+            if resource_pks.get(res) == name:
+                continue
+            if name in host_satellites:
+                continue
+
+            defn = (f.get("Definition") or "").strip()
+            target: Optional[str] = None
+            signal: Optional[str] = None
+
+            m = _PROSE_FK_RELATING.search(defn)
+            if m and m.group(1) in resource_names:
+                target, signal = m.group(1), "prose-foreign-key"
+            if not target:
+                m = _PROSE_FK_RESOURCES.search(defn)
+                if m and m.group(1) in resource_names:
+                    target, signal = m.group(1), "prose-resources"
+            if not target:
+                cand = _name_shape_target(name, resource_names)
+                if cand:
+                    target, signal = cand, "name-shape"
+
+            if not target:
+                continue
+            tpk = resource_pks.get(target)
+            if not tpk:
+                continue
+
+            row = (res, name, target, tpk, signal)
+            key = (res, name)
+            if key not in best or priority[signal] < priority[best[key][-1]]:
+                best[key] = row
+
+    return sorted(best.values())
+
+
+def collection_inverse_targets(
+    fields_for_res: List[Dict[str, str]],
+    resource_names: Set[str],
+) -> List[Tuple[str, str]]:
+    """For each Collection-typed field on the host, resolve the child
+    Resource it inverse-references. Returns [(field_name, child_resource), ...]
+    skipping any that cannot be resolved."""
+    out: List[Tuple[str, str]] = []
+    for f in fields_for_res:
+        if (f.get("SimpleDataType") or "").strip() != "Collection":
+            continue
+        target = (f.get("SourceResource") or "").strip()
+        if not target:
+            # Fall back to StandardName matching a known Resource
+            cand = f["StandardName"]
+            if cand in resource_names:
+                target = cand
+        if target and target in resource_names:
+            out.append((f["StandardName"], target))
+    return out
+
+
 def field_note(f: Dict[str, str], meta: Dict[str, str]) -> str:
     parts = [f["StandardName"]]
     defn = (f.get("Definition") or "").strip().replace("\n", " ")
@@ -263,6 +395,7 @@ def build_table(
     resource_to_table: Dict[str, str],
     resource_pks: Dict[str, Optional[str]],
     satellite_fields: Set[str],
+    inverse_collections: List[Tuple[str, str]],
 ) -> Tuple[str, List[str]]:
     """Render one Table block + collect Refs (FK lines)."""
     lines: List[str] = []
@@ -271,6 +404,11 @@ def build_table(
         lines.append(
             f"// 2NF: {len(satellite_fields)} satellite field(s) dropped "
             f"(reachable via FK joins). See header for full list."
+        )
+    if inverse_collections:
+        lines.append(
+            f"// Inverse 1:N (Collection-typed in RESO; FK lives on child): "
+            + ", ".join(f"{name} -> {target}" for name, target in inverse_collections)
         )
     lines.append(f"Table {table_name} {{")
 
@@ -284,6 +422,13 @@ def build_table(
 
     for f in fields_sorted:
         sdt = (f.get("SimpleDataType") or "").strip()
+
+        # Collection-typed fields are inverse 1:N relationships in RESO -
+        # the FK lives on the child resource, not on the host. Don't emit
+        # a column; the per-host inverse list is summarised in the table
+        # header comment above.
+        if sdt == "Collection":
+            continue
 
         # Resource-typed fields render as FK refs only; the scalar key column
         # they point to is materialised by another row in fields.csv (the
@@ -375,12 +520,24 @@ def build_dbml() -> str:
 
     satellites_by_host, satellite_report = compute_satellites(by_res, resource_pks)
     n_sat = sum(len(s) for s in satellites_by_host.values())
-    n_kept = len(fields) - n_sat
+    n_collection = sum(
+        1 for f in fields if (f.get("SimpleDataType") or "").strip() == "Collection"
+    )
+    n_kept = len(fields) - n_sat - n_collection
+    extra_fks = compute_extra_fks(by_res, resource_pks, satellites_by_host)
+    inverse_by_host: Dict[str, List[Tuple[str, str]]] = {
+        r: collection_inverse_targets(by_res[r], set(resources)) for r in resources
+    }
+    n_inverse = sum(len(v) for v in inverse_by_host.values())
 
     out: List[str] = []
     out.append("// reso-2.0-canonical.dbml")
     out.append("// Pure RESO Data Dictionary 2.0 canonical schema (2NF normalized)")
-    out.append(f"// {len(resources)} Resources, {n_kept} Fields kept ({len(fields)} total - {n_sat} satellites dropped), {len(lookup_names)} Lookups")
+    out.append(
+        f"// {len(resources)} Resources, {n_kept} Fields kept "
+        f"({len(fields)} total - {n_sat} satellites - {n_collection} Collection inverses), "
+        f"{len(lookup_names)} Lookups"
+    )
     out.append("//")
     out.append("// NO Atlas-specific decisions baked in. This file represents what")
     out.append("// RESO 2.0 prescribes; Atlas adapts in build_atlas_target_dbml.py.")
@@ -392,8 +549,16 @@ def build_dbml() -> str:
     out.append("  database_type: 'PostgreSQL'")
     out.append("  Note: '''")
     out.append(f"    Pure RESO Data Dictionary 2.0 canonical schema covering all {len(resources)} Resources,")
-    out.append(f"    {n_kept} Fields ({len(fields)} total minus {n_sat} satellite fields dropped for 2NF),")
-    out.append(f"    and {len(lookup_names)} Lookups (rendered as lookup_<name> ref tables).")
+    out.append(f"    {n_kept} Fields kept ({len(fields)} total minus {n_sat} satellite fields and")
+    out.append(f"    {n_collection} Collection-typed inverse references), and {len(lookup_names)} Lookups.")
+    out.append("")
+    out.append("    Three FK detection passes feed the relationship graph:")
+    out.append("      1. Resource-typed siblings  -> emit Ref host.<TargetResourceKey> > target.PK")
+    out.append("      2. Definition prose         -> 'foreign key relating to the X Resource' or")
+    out.append("                                     \"X Resource's YKey\" -> emit Ref")
+    out.append("      3. Name-shape `<Word>Key`   -> Word matches a Resource (or its plural)")
+    out.append("                                     -> emit Ref (lowest priority)")
+    out.append("    Single-value lookup columns get a 4th Ref to lookup_<name>.code.")
     out.append("")
     out.append("    2NF normalization: satellite fields (scalar columns whose name shares the")
     out.append("    prefix of a Resource-typed FK on the same host, e.g. Property.ListAgentEmail")
@@ -402,6 +567,11 @@ def build_dbml() -> str:
     out.append("    the host PK. They remain reachable via the FK join (or, in the case of")
     out.append("    auxiliary IDs / relationship attributes, would belong in a junction table).")
     out.append("    See the `// 2NF: dropped satellite fields` section below for the full list.")
+    out.append("")
+    out.append("    Collection-typed RESO fields (e.g. Property.Media, Property.OpenHouse) are")
+    out.append("    inverse 1:N references - the FK column lives on the child resource, not on")
+    out.append("    the host - so they are NOT rendered as host columns. Each host table has a")
+    out.append("    `// Inverse 1:N` comment listing them so the relationship is documented.")
     out.append("")
     out.append("    Single-value lookup columns reference the corresponding lookup_<name>.code via DBML")
     out.append("    Refs; multi-value lookup columns stay text and document the lookup in a Note.")
@@ -452,9 +622,22 @@ def build_dbml() -> str:
             resource_to_table=resource_to_table,
             resource_pks=resource_pks,
             satellite_fields=satellites_by_host.get(res, set()),
+            inverse_collections=inverse_by_host.get(res, []),
         )
         out.append(block)
         all_refs.extend(refs)
+
+    # Extra FK Refs detected via prose / name-shape (signals beyond the
+    # Resource-typed sibling pass). Tagged with the signal in the comment
+    # so reviewers can verify the heuristic.
+    extra_ref_lines: List[str] = []
+    for host, name, target, tpk, signal in extra_fks:
+        host_table = resource_to_table[host]
+        target_table = resource_to_table[target]
+        extra_ref_lines.append(
+            f"Ref: {host_table}.{to_snake(name)} > {target_table}.{to_snake(tpk)} "
+            f"// {host}.{name} -> {target} [{signal}]"
+        )
 
     out.append("// ============================================================")
     out.append(f"// Lookup reference tables ({len(lookup_names)})")
@@ -464,11 +647,24 @@ def build_dbml() -> str:
         out.append(build_lookup_table(n))
 
     out.append("// ============================================================")
-    out.append(f"// Foreign-key relationships ({len(all_refs)})")
+    out.append(
+        f"// Foreign-key relationships ({len(all_refs) + len(extra_ref_lines)} "
+        f"= {len(all_refs)} primary + {len(extra_ref_lines)} extra)"
+    )
+    out.append("// Primary: emitted from Resource-typed siblings (pass 1) and")
+    out.append("//          single-value lookup columns (pass 4).")
+    out.append("// Extra:   emitted from Definition prose (passes 2-3) and")
+    out.append("//          name-shape heuristics (pass 4) for FK columns that")
+    out.append("//          have no Resource-typed sibling on the host.")
     out.append("// ============================================================")
     out.append("")
     for r in all_refs:
         out.append(r)
+    if extra_ref_lines:
+        out.append("")
+        out.append(f"// ---- Extra FKs ({len(extra_ref_lines)}) ----")
+        for r in extra_ref_lines:
+            out.append(r)
 
     return "\n".join(out) + "\n"
 

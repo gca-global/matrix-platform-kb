@@ -72,7 +72,7 @@ operational state:
 facing chip filter on the Atlas listings index. Always cite as
 "Atlas-custom" when surfacing it.
 
-## 5. Satellite fields and 2NF
+## 5. Satellite fields, 2NF, and FK detection
 
 RESO 2.0 ships hundreds of fields that are *satellites* of a foreign
 key on the same row. The clearest example: `Property` carries
@@ -87,7 +87,7 @@ removed in favour of the FK alone. The file's header lists every
 dropped field grouped by host + FK. To re-derive a satellite value at
 read time, JOIN through the FK column shown next to the host.
 
-Two flavours exist; both are dropped uniformly:
+Two flavours of satellite exist; both are dropped uniformly:
 
 1. **True denormalizations** — the column also exists on the target
    resource (`Property.ListAgentEmail` mirrors `Member.MemberEmail`).
@@ -101,11 +101,39 @@ Two flavours exist; both are dropped uniformly:
    Currently no junction table is materialised; capture these in your
    operational store if you need them.
 
-The wiki `Resource` pages still document satellites because they are
-part of the published RESO 2.0 spec. Operational/denormalized stores
-(Atlas) may opt back in to a chosen subset of satellites for query
-performance via `build_atlas_target_dbml.py`. The canonical model
-stays clean.
+### FK signals beyond Resource-typed siblings
+
+Most FKs come from `SimpleDataType = Resource` rows in
+`raw/fields.csv` (e.g. `Property.ListAgent` carries `SourceResource =
+Member` + `TargetResourceKey = ListAgentKey`). But ~15 FKs lurk in two
+other places:
+
+- **Definition prose** like *"This is a foreign key relating to the
+  Member Resource's MemberKey"* on plain scalar `*Key` fields
+  (e.g. `Media.ChangedByMemberKey`, `OfficeAssociation.OfficeKey`).
+- **Name-shape `<Word>Key`** where `<Word>` is itself a Resource name
+  (or its singular form for `Contacts`/`Teams`/`Rules`)
+  (e.g. `MemberAssociation.AssociationKey`, `ShowingAppointment.ShowingKey`).
+
+The build script picks both up and emits the corresponding DBML `Ref:`
+in a separate `// ---- Extra FKs ----` footer block, tagged with the
+detection signal so reviewers can verify the heuristic.
+
+### Collection-typed fields are inverse references, not columns
+
+`SimpleDataType = Collection` rows (`Property.Media`,
+`Property.OpenHouse`, `Property.Rooms`, `Contacts.ContactsSocialMedia`,
+…) are *inverse* 1:N relationships — the FK column lives on the child
+resource, not on the host. They are **not** rendered as host columns
+in the canonical DBML. Each host table emits an `// Inverse 1:N`
+comment listing them so the relationship is documented; the forward FK
+from child to host is emitted by the FK detection passes on the child.
+
+The wiki Resource pages still document satellites and Collection
+fields because they are part of the published RESO 2.0 spec.
+Operational/denormalized stores (Atlas) may opt back in to a chosen
+subset of satellites for query performance via
+`build_atlas_target_dbml.py`. The canonical model stays clean.
 
 ## 6. Reading Org%
 
