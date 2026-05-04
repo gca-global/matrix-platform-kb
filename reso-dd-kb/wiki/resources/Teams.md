@@ -33,18 +33,18 @@ _RESO Data Dictionary 2.0 resource — 45 fields. See [DDwiki](https://ddwiki.re
 | `TeamCountyOrParish` | String List, Single |  | CountyOrParish | 1% | 1% | The county or parish in which the team is addressed. | [link](https://ddwiki.reso.org/display/DDW20/TeamCountyOrParish+Field) |
 | `TeamDescription` | String |  |  | 1% | 1% | A description or marketing information about the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamDescription+Field) |
 | `TeamDirectPhone` | String |  |  | 5% | 1% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamDirectPhone+Field) |
-| `TeamEmail` | String |  |  | 5% | 1% | The contact email address of the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamEmail+Field) |
+| `TeamEmail` | String |  |  | 5% | 1% | The email address of the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamEmail+Field) |
 | `TeamFax` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamFax+Field) |
-| `TeamKey` | String |  |  | 5% | 1% | A system-unique identifier for the team. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2117293) |
+| `TeamKey` | String |  |  | 5% | 1% | A system unique identifier. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=2117293) |
 | `TeamLead` | Resource |  |  |  |  | The team lead for the given team. | [link](https://ddwiki.reso.org/display/DDW20/TeamLead+Field) |
 | `TeamLeadKey` | String |  |  | 1% | 1% | The unique system identifier of the team's lead member. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadKey+Field) |
 | `TeamLeadLoginId` | String |  |  | 5% | 1% | The ID used to log on to the MLS system. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadLoginId+Field) |
-| `TeamLeadMlsId` | String |  |  | 5% | 1% | The MemberMlsId of the lead member of the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadMlsId+Field) |
+| `TeamLeadMlsId` | String |  |  | 5% | 1% | The local, well-known identifier for the team lead. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadMlsId+Field) |
 | `TeamLeadNationalAssociationId` | String |  |  |  |  | The national association ID of the team lead (i.e., NRDS number in the U.S.). | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadNationalAssociationId+Field) |
 | `TeamLeadStateLicense` | String |  |  | 5% | 1% | The license of the team lead. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadStateLicense+Field) |
 | `TeamLeadStateLicenseState` | String List, Single |  | [StateOrProvince](#stateorprovince) | 1% | 1% | The state in which the team lead is licensed. | [link](https://ddwiki.reso.org/display/DDW20/TeamLeadStateLicenseState+Field) |
 | `TeamMobilePhone` | String |  |  | 5% | 1% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamMobilePhone+Field) |
-| `TeamName` | String |  |  | 5% | 1% | The name of the team as established by the team's leader and members. | [link](https://ddwiki.reso.org/display/DDW20/TeamName+Field) |
+| `TeamName` | String |  |  | 5% | 1% | The name under which the team operates. | [link](https://ddwiki.reso.org/display/DDW20/TeamName+Field) |
 | `TeamOfficePhone` | String |  |  | 5% | 1% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamOfficePhone+Field) |
 | `TeamOfficePhoneExt` | String |  |  | 5% | 1% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/TeamOfficePhoneExt+Field) |
 | `TeamPostalCode` | String |  |  | 5% | 1% | The postal code of the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamPostalCode+Field) |
@@ -52,7 +52,7 @@ _RESO Data Dictionary 2.0 resource — 45 fields. See [DDwiki](https://ddwiki.re
 | `TeamPreferredPhone` | String |  |  | 5% | 1% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamPreferredPhone+Field) |
 | `TeamPreferredPhoneExt` | String |  |  | 5% | 1% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/TeamPreferredPhoneExt+Field) |
 | `TeamStateOrProvince` | String List, Single |  | [StateOrProvince](#stateorprovince) | 1% | 1% | The state or province in which the team is addressed. | [link](https://ddwiki.reso.org/display/DDW20/TeamStateOrProvince+Field) |
-| `TeamStatus` | String List, Single |  | [TeamStatus](#teamstatus) | 5% | 1% | The status of the team's record in the MLS or other organization. | [link](https://ddwiki.reso.org/display/DDW20/TeamStatus+Field) |
+| `TeamStatus` | String List, Single |  | [TeamStatus](#teamstatus) | 5% | 1% | Determines whether the account is active, inactive or under disciplinary action. | [link](https://ddwiki.reso.org/display/DDW20/TeamStatus+Field) |
 | `TeamTollFreePhone` | String |  |  |  |  | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamTollFreePhone+Field) |
 | `TeamVoiceMail` | String |  |  | 1% | 1% | North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). | [link](https://ddwiki.reso.org/display/DDW20/TeamVoiceMail+Field) |
 | `TeamVoiceMailExt` | String |  |  | 1% | 1% | The extension of the given phone number, if applicable. | [link](https://ddwiki.reso.org/display/DDW20/TeamVoiceMailExt+Field) |

@@ -1,6 +1,6 @@
 # PropertyPowerProduction
 
-The PropertyPowerProduction resource describes on-site renewable energy production installations attached to a Property (solar photovoltaics, wind, ...). Each row carries the system type, ownership (Owned/Leased/...), nameplate capacity (kW), annual production (kWh), and install year.
+_RESO Data Dictionary 2.0 resource — 12 fields. See [DDwiki](https://ddwiki.reso.org/display/DDW20/PropertyPowerProduction+Resource) for the canonical page._
 
 **Adoption** — weighted Org%: **1%** across 6 measured fields (median 1%, avg 1%).
 
@@ -17,13 +17,13 @@ The PropertyPowerProduction resource describes on-site renewable energy producti
 | `ListingId` | String |  |  |  | 1% | The well-known identifier for the listing, also known as the MLS number. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135759) |
 | `ListingKey` | String |  |  |  | 1% | A system-unique identifier for the listing. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135766) |
 | `ModificationTimestamp` | Timestamp |  |  |  | 1% | The date and time the listing was last modified, formatted as ISO 8601. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135773) |
-| `PowerProductionAnnual` | Number |  |  |  |  | The annual energy production of the installation in kWh. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionAnnual+Field) |
-| `PowerProductionAnnualStatus` | String List, Single |  | [PowerProductionAnnualStatus](#powerproductionannualstatus) |  |  | A single-value lookup describing the source of PowerProductionAnnual: Estimated \| Actual \| Other. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionAnnualStatus+Field) |
-| `PowerProductionKey` | String |  |  |  | 1% | The unique identifier for a power-production installation within the originating system. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionKey+Field) |
-| `PowerProductionOwnership` | String List, Single |  | [PowerProductionOwnership](#powerproductionownership) |  | 1% | A single-value lookup describing the ownership model: Owned \| Leased \| LeasedAssumable \| Other. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionOwnership+Field) |
-| `PowerProductionSize` | Number |  |  |  |  | The nameplate capacity of the installation (typically kW). | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionSize+Field) |
-| `PowerProductionType` | String List, Single |  | [PowerProductionType](#powerproductiontype) |  | 1% | A single-value lookup describing the energy source: Photovoltaics \| Wind. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135810) |
-| `PowerProductionYearInstall` | Number |  |  |  |  | The four-digit year the system was installed. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionYearInstall+Field) |
+| `PowerProductionAnnual` | Number |  |  |  |  | The most important metric of a renewables system is the amount of power it produces per year. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionAnnual+Field) |
+| `PowerProductionAnnualStatus` | String List, Single |  | [PowerProductionAnnualStatus](#powerproductionannualstatus) |  |  | The most important metric of a renewables system is the amount of power it produces per year. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionAnnualStatus+Field) |
+| `PowerProductionKey` | String |  |  |  | 1% | A unique identifier for this record. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionKey+Field) |
+| `PowerProductionOwnership` | String List, Single |  | [PowerProductionOwnership](#powerproductionownership) |  | 1% | The ownership of the power production system (e.g., Seller Owned or Third-Party Owned). | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionOwnership+Field) |
+| `PowerProductionSize` | Number |  |  |  |  | The "capacity" of a renewables system. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionSize+Field) |
+| `PowerProductionType` | String List, Single |  | [PowerProductionType](#powerproductiontype) |  | 1% | A list of the type of power production systems available on the property. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135810) |
+| `PowerProductionYearInstall` | Number |  |  |  |  | The year a renewables system was installed. | [link](https://ddwiki.reso.org/display/DDW20/PowerProductionYearInstall+Field) |
 
 ## Field details
 

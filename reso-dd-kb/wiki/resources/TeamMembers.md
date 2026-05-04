@@ -28,7 +28,7 @@ _RESO Data Dictionary 2.0 resource — 21 fields. See [DDwiki](https://ddwiki.re
 | `SourceSystemKey` | String |  |  | 5% | 1% | The system key, a unique record identifier, from the source system. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135733) |
 | `SourceSystemName` | String |  |  | 5% | 1% | The name of the team member record provider. | [link](https://ddwiki.reso.org/pages/viewpage.action?pageId=1135738) |
 | `TeamImpersonationLevel` | String List, Single |  | TeamImpersonationLevel |  | 0% | The level of impersonation the member is allowed within the team (i.e., Impersonate (to work as the team), On Behalf (to show the team name but also show the member's info), None (don't allow this mem… | [link](https://ddwiki.reso.org/display/DDW20/TeamImpersonationLevel+Field) |
-| `TeamKey` | String |  |  | 5% | 1% | A system-unique identifier for the team. | [link](https://ddwiki.reso.org/display/DDW20/TeamKey+Field) |
+| `TeamKey` | String |  |  | 5% | 1% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/TeamKey+Field) |
 | `TeamMemberKey` | String |  |  | 5% | 1% | A system unique identifier. | [link](https://ddwiki.reso.org/display/DDW20/TeamMemberKey+Field) |
 | `TeamMemberNationalAssociationId` | String |  |  | 1% | 1% | The national association ID of the member (e.g., in the U.S., this is an M1 or NRDS number). | [link](https://ddwiki.reso.org/display/DDW20/TeamMemberNationalAssociationId+Field) |
 | `TeamMemberStateLicense` | String |  |  | 1% | 1% | The license of the member. | [link](https://ddwiki.reso.org/display/DDW20/TeamMemberStateLicense+Field) |
