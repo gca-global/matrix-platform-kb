@@ -72,68 +72,192 @@ operational state:
 facing chip filter on the Atlas listings index. Always cite as
 "Atlas-custom" when surfacing it.
 
-## 5. Satellite fields, 2NF, and FK detection
+## 5. Canonical DBML: how it was cooked
 
-RESO 2.0 ships hundreds of fields that are *satellites* of a foreign
-key on the same row. The clearest example: `Property` carries
-`ListAgentKey` (FK → `Member.MemberKey`) **and** `ListAgentEmail`,
-`ListAgentFullName`, `ListAgentMlsId`, `ListAgentDirectPhone`, etc. —
-roughly 25 columns whose value depends on `ListAgentKey`, not on
-`Property`'s PK (`ListingKey`). That is a 2NF/3NF violation.
+The canonical DBML (`wiki/dbml/reso-2.0-canonical.dbml`) is **2NF
+normalized**. It is generated end-to-end by
+[`scripts/build_reso_canonical_dbml.py`](scripts/build_reso_canonical_dbml.py)
+from `raw/fields.csv`, `raw/lookups.csv`, and
+`raw/field_metadata.csv`. This section explains every transformation
+the script applies, in the order it runs them.
 
-The canonical DBML (`wiki/dbml/reso-2.0-canonical.dbml`) **drops these
-satellites**. Across the 41 RESO Resources, 215 satellite fields are
-removed in favour of the FK alone. The file's header lists every
-dropped field grouped by host + FK. To re-derive a satellite value at
-read time, JOIN through the FK column shown next to the host.
+### Inputs
 
-Two flavours of satellite exist; both are dropped uniformly:
+| File | Source | Used for |
+|---|---|---|
+| `raw/fields.csv` | parsed from `RESO_Data_Dictionary_2.0.xlsx` (`Fields` sheet) | every column, FK, lookup link |
+| `raw/lookups.csv` | parsed from `RESO_Data_Dictionary_2.0.xlsx` (`Lookups` sheet) | distinct `LookupName` set -> one ref table per lookup |
+| `raw/field_metadata.csv` | scraped from `dd.reso.org/DD2.0/<Resource>/<Field>/` | `Org%` adoption + structured KV in column Notes |
+
+The xlsx is the upstream RESO truth. `dd.reso.org` adds adoption
+metrics RESO publishes on the live site but not in the spec file.
+
+### Step 1 — Group fields by Resource and derive each PK
+
+`load_fields()` reads `fields.csv` and groups rows by `ResourceName`.
+For every Resource we derive the primary key:
+
+- **`PK_OVERRIDES`** (16 entries) covers Resources where the canonical
+  PK is not `<Resource>Key` — e.g. `Property` -> `ListingKey`,
+  `Contacts` -> `ContactKey`, `OUID` -> `OrganizationUniqueIdKey`,
+  `PropertyRooms` -> `RoomKey`, `Teams` -> `TeamKey`.
+- Otherwise: the field named `<Resource>Key` is the PK
+  (e.g. `Member.MemberKey`).
+
+These PKs become the `[pk]` columns in DBML and the FK targets for
+every relationship downstream.
+
+### Step 2 — Detect satellite fields (2NF normalization)
+
+`compute_satellites(by_res, resource_pks)` walks each host resource
+`H` and every Resource-typed field `F` on `H` (rows where
+`SimpleDataType = "Resource"`). For each `F` we know:
+
+- `target = SourceResource` (e.g. `Member`)
+- `tkey = TargetResourceKey` (e.g. `ListAgentKey`)
+
+We compute the **satellite prefix** = `tkey` with the trailing
+`Key` / `ID` / `Id` stripped (e.g. `ListAgent`, `OriginatingSystem`).
+A field `g` on `H` is a satellite of `F` iff:
+
+- `g.SimpleDataType` is **not** `Resource` (forward FKs handled below);
+- `g.StandardName` starts with the satellite prefix, with an uppercase
+  letter immediately after (word boundary so `Contact` doesn't match
+  `ContactListingsKey`);
+- `g.StandardName` is **not** the host's own PK;
+- `g.StandardName` is **not** another FK column on `H` (i.e. not the
+  `TargetResourceKey` of some other Resource-typed sibling).
+
+A column matched by multiple FKs is dropped once. The result: 215
+satellites across 16 hosts. They split into two flavours, both dropped
+uniformly:
 
 1. **True denormalizations** — the column also exists on the target
-   resource (`Property.ListAgentEmail` mirrors `Member.MemberEmail`).
-   Reachable via the FK join.
+   (`Property.ListAgentEmail` mirrors `Member.MemberEmail`). Reachable
+   via the FK join.
 2. **Auxiliary identifiers / relationship attributes** — the column
    does not exist on the target and would belong in a junction table
-   in a fully relational model. Examples:
-   `Property.OriginatingSystemKey` ("this listing's identifier in the
-   originating system"), `ContactListings.ListingViewedYN` (a
-   property of the (Contact, Listing) pair, not of `Property`).
-   Currently no junction table is materialised; capture these in your
-   operational store if you need them.
+   in a fully relational model
+   (`Property.OriginatingSystemKey`,
+   `ContactListings.ListingViewedYN`).
 
-### FK signals beyond Resource-typed siblings
+Full per-host list of every drop:
+[`wiki/dbml/2nf-satellite-drops.md`](wiki/dbml/2nf-satellite-drops.md).
+The same list is reproduced as a comment header inside the canonical
+DBML.
 
-Most FKs come from `SimpleDataType = Resource` rows in
-`raw/fields.csv` (e.g. `Property.ListAgent` carries `SourceResource =
-Member` + `TargetResourceKey = ListAgentKey`). But ~15 FKs lurk in two
-other places:
+### Step 3 — Detect foreign keys (four passes)
 
-- **Definition prose** like *"This is a foreign key relating to the
-  Member Resource's MemberKey"* on plain scalar `*Key` fields
-  (e.g. `Media.ChangedByMemberKey`, `OfficeAssociation.OfficeKey`).
-- **Name-shape `<Word>Key`** where `<Word>` is itself a Resource name
-  (or its singular form for `Contacts`/`Teams`/`Rules`)
-  (e.g. `MemberAssociation.AssociationKey`, `ShowingAppointment.ShowingKey`).
+For every host `H`, the script emits DBML `Ref:` lines from four
+orthogonal signals.
 
-The build script picks both up and emits the corresponding DBML `Ref:`
-in a separate `// ---- Extra FKs ----` footer block, tagged with the
-detection signal so reviewers can verify the heuristic.
+**Pass 1 — Resource-typed siblings (primary signal).** For each row
+on `H` with `SimpleDataType = "Resource"`, emit
+`Ref: H.<TargetResourceKey> > <SourceResource>.<PK>`. The scalar FK
+column itself (`ListAgentKey` etc.) is materialised by another row in
+`fields.csv`; this pass only emits the relationship edge.
 
-### Collection-typed fields are inverse references, not columns
+**Pass 2 — Definition prose, "foreign key relating to ...".** Some
+`*Key` fields lack a Resource-typed sibling but their Definition text
+says `"This is a foreign key relating to the Member Resource"`. The
+regex
+`r"(?:foreign key (?:relating|related) to|relates to|relating to|references?)\s+(?:the\s+)?(\w+)\s+[Rr]esource"`
+captures the target Resource name. Emit a Ref to `<Target>.<PK>`.
 
-`SimpleDataType = Collection` rows (`Property.Media`,
-`Property.OpenHouse`, `Property.Rooms`, `Contacts.ContactsSocialMedia`,
-…) are *inverse* 1:N relationships — the FK column lives on the child
-resource, not on the host. They are **not** rendered as host columns
-in the canonical DBML. Each host table emits an `// Inverse 1:N`
-comment listing them so the relationship is documented; the forward FK
-from child to host is emitted by the FK detection passes on the child.
+**Pass 3 — Definition prose, `<Resource>'s <field>`.** Variant
+phrasing where the Definition names the target inline (e.g. "the OUID
+Resource's OrganizationUniqueId"). Lower priority than pass 2.
 
-The wiki Resource pages still document satellites and Collection
-fields because they are part of the published RESO 2.0 spec.
+**Pass 4 — Name-shape `<Word>Key`.** Field name ends in `Key` and the
+prefix is itself a known Resource (or its singular form for plural
+Resources like `Contacts` -> `Contact`, `Teams` -> `Team`,
+`Rules` -> `Rule`). Lowest priority; only fires when no prose was
+found.
+
+Passes 2-4 are filtered against the satellite drop set from step 2 (no
+point Ref-ing a column we won't render). They land in a dedicated
+`// ---- Extra FKs ----` footer block, each tagged with the detection
+signal so reviewers can verify the heuristic. Full list:
+[`wiki/dbml/extra-fks.md`](wiki/dbml/extra-fks.md).
+
+### Step 4 — Emit lookup reference tables and 5th-pass lookup FKs
+
+For every distinct `LookupName` in `raw/lookups.csv` we emit one
+`lookup_<snake_name>` table with the canonical RESO LookupName columns:
+
+```
+code, legacy_odata_value, definition, bedes, synonyms,
+spanish_value, french_value, status, record_id
+```
+
+Every host column whose `SimpleDataType = "String List, Single"` and
+whose `LookupName` is in our lookup set gets a 5th `Ref:` to
+`lookup_<name>.code`. Multi-value lookups (`String List, Multi`) stay
+`varchar` with a `lookup=<Name> (multi)` Note (DBML's single-column
+`Ref` doesn't model array membership).
+
+### Step 5 — Skip Collection-typed inverse references
+
+`SimpleDataType = "Collection"` rows (`Property.Media`,
+`Property.OpenHouse`, `Property.Rooms`, ...) are inverse 1:N
+relationships — the FK column lives on the child resource, not on the
+host. They are **not** rendered as host columns. Each host table
+emits an `// Inverse 1:N (Collection-typed in RESO; FK lives on
+child)` comment listing them so the relationship is documented; the
+forward FK from child to host is emitted by passes 1-4 on the child.
+54 Collection rows handled this way.
+
+`collection_inverse_targets()` resolves each Collection field's child
+target via `SourceResource` first (set on 48/54 rows) and falls back
+to matching `StandardName` against known Resource names for the
+remaining 6 (`OpenHouse.HistoryTransactional` -> `HistoryTransactional`
+resource, etc.). Zero unresolved.
+
+### Step 6 — Render columns and per-column Notes
+
+Non-satellite, non-Collection scalar fields are rendered as DBML
+columns. The DBML type comes from `TYPE_MAP`:
+
+| RESO `SimpleDataType` | DBML type |
+|---|---|
+| `String` | `varchar(<SugMaxLength>)` |
+| `String List, Single` / `String List, Multi` | `varchar` |
+| `Number` | `numeric` |
+| `Boolean` | `boolean` |
+| `Date` | `date` |
+| `Timestamp` | `timestamp` |
+
+Each column carries a single-line `Note:` with `StandardName`,
+`Definition` (truncated to 160 chars), `type=<SimpleDataType>`,
+`lookup=<Name>` if applicable, length / precision constraints, and
+`adoption org=<Org%> (n/N)` from `field_metadata.csv`.
+
+### Step 7 — Output
+
+Three files are written:
+
+1. `wiki/dbml/reso-2.0-canonical.dbml` - the schema itself
+   (41 Resources, 234 tables, 259 FK Refs, 1476 columns kept
+   = 1745 RESO fields − 215 satellites − 54 Collection inverses).
+2. `wiki/dbml/2nf-satellite-drops.md` - human-readable enumeration of
+   every dropped satellite, grouped by host + FK + target.
+3. `wiki/dbml/extra-fks.md` - human-readable enumeration of every FK
+   discovered by passes 2-4.
+
+The DBML file's own header comment also reproduces both lists so a
+reviewer reading the schema in isolation has the full provenance
+inline.
+
+### What this leaves to operational stores
+
+The wiki Resource pages (`wiki/resources/*.md`) still document
+satellites and Collection fields because they are part of the
+published RESO 2.0 spec — useful when an LLM is asked "what does RESO
+say about Property.ListAgentEmail?".
 Operational/denormalized stores (Atlas) may opt back in to a chosen
 subset of satellites for query performance via
-`build_atlas_target_dbml.py`. The canonical model stays clean.
+[`scripts/build_atlas_target_dbml.py`](scripts/build_atlas_target_dbml.py).
+The canonical model stays clean.
 
 ## 6. Reading Org%
 

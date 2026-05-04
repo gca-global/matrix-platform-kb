@@ -29,6 +29,8 @@ reso-dd-kb/
   wiki/
     resources/<Resource>.md          # ONE generated MD per RESO Resource (~41 files)
     dbml/reso-2.0-canonical.dbml     # generated full RESO 2.0 canonical DBML (2NF normalized)
+    dbml/2nf-satellite-drops.md      # generated companion: every dropped satellite by host+FK+target
+    dbml/extra-fks.md                # generated companion: every FK from prose / name-shape passes
     atlas/atlas-target.dbml          # generated Atlas-adapted DBML (may re-add satellites)
   scripts/
     refresh.py                     # idempotent rebuild of wiki/resources/ from raw/
@@ -54,6 +56,8 @@ preserved as tombstones; primary links go to dd.reso.org.
 |---|---|---|
 | `raw/` | source of truth | NEVER edit by hand. Replace whole CSVs from upstream sources. |
 | `wiki/resources/` | generated | NEVER edit by hand. Re-run `scripts/refresh.py`. |
+| `wiki/dbml/` | generated | NEVER edit by hand. Re-run `scripts/build_reso_canonical_dbml.py` (emits `reso-2.0-canonical.dbml`, `2nf-satellite-drops.md`, `extra-fks.md`). |
+| `wiki/atlas/` | generated | NEVER edit by hand. Re-run `scripts/build_atlas_target_dbml.py`. |
 | `scripts/` | human + agent | Edit freely; keep idempotent. |
 | `AGENTS.md`, `README.md`, `methodology.md` | human | Edit on policy change. |
 
