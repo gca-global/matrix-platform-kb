@@ -31,6 +31,7 @@ For new-app auth issues (401/400/403), see `docs/platform/new-app-auth-troublesh
 |---------|-------------|
 | `docs/data-models/reso-dd-kb/` | `docs/data-models/reso-dd-kb/AGENTS.md` — phase boundaries, file ownership, mirror politeness, determinism, verification gates |
 | `docs/data-models/source-mappings/` | `docs/data-models/source-mappings/AGENTS.md` — phase boundaries, file ownership, hard-fail join gates, determinism |
+| `docs/data-models/canonical-processes/` | `docs/data-models/canonical-processes/AGENTS.md` — phase boundaries, citation contract, mermaid contract, 5 hard-fail gates |
 
 ## Knowledge Base Structure
 
@@ -46,6 +47,7 @@ docs/                                   ← KB knowledge layer (system of record
 │   ├── dash-data-model.md             ← Dash/Anywhere.com practical field reference
 │   ├── reso-dd-kb/                    ← CANONICAL RESO DD 2.0 — start at USAGE.md
 │   ├── source-mappings/               ← Dash/Qobrix/SIR -> RESO mapping pipeline
+│   ├── canonical-processes/           ← RESO-aligned MLS process catalogue (state machines + transitions)
 │   ├── cdl-schema.md                  ← Common Data Layer (cross-app data, MLS Sync, lifecycle)
 │   ├── etl-pipeline.md                ← Bronze/Silver/Gold ETL
 │   ├── property-field-mapping.md      ← Dash ↔ RESO ↔ Qobrix ↔ SIR
@@ -78,6 +80,8 @@ scripts/
 | Canonical RESO DBML / per-resource reference | `docs/data-models/reso-dd-kb/wiki/dbml/canonical.dbml`, `docs/data-models/reso-dd-kb/wiki/agent-docs/resources/<snake>.md` |
 | Map a Dash / Qobrix / SIR field to RESO | `docs/data-models/source-mappings/USAGE.md` |
 | When editing source-mappings (local rules) | `docs/data-models/source-mappings/AGENTS.md` |
+| Look up canonical RESO-aligned MLS process | `docs/data-models/canonical-processes/USAGE.md` |
+| When editing canonical-processes (local rules) | `docs/data-models/canonical-processes/AGENTS.md` |
 | Dash fields, field mapping, x_sm_* extensions | `docs/data-models/dash-data-model.md`, `docs/data-models/property-field-mapping.md`, `docs/data-models/platform-extensions.md` |
 | CDL schema / ETL pipeline / RESO Web API | `docs/data-models/cdl-schema.md`, `docs/data-models/etl-pipeline.md`, `docs/data-models/reso-web-api.md` |
 | Auth, roles, permissions, RLS | `docs/platform/security-model.md` |

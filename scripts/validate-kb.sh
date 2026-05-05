@@ -270,6 +270,60 @@ fi
 echo ""
 
 # ---------------------------------------------------------------
+# Check 7: canonical-processes generated artifacts fresher than inputs
+# ---------------------------------------------------------------
+echo "--- Check 7: canonical-processes freshness ---"
+
+CP="$DOCS_DIR/data-models/canonical-processes"
+CP_CITATIONS="$CP/raw/citations.csv"
+CP_COVERAGE="$CP/raw/coverage.csv"
+CP_INDEX="$CP/wiki/agent-docs/_index.md"
+CP_SM="$CP/wiki/agent-docs/state_machines.md"
+
+if [ -d "$CP" ] && [ -d "$CP/processes" ]; then
+    process_count=$(find "$CP/processes" -maxdepth 1 -name '*.md' | wc -l | tr -d ' ')
+
+    if [ "$process_count" -lt 10 ]; then
+        warn "canonical-processes: only $process_count process file(s) under processes/; canonical baseline expects 10"
+    fi
+
+    # Validate-citations output freshness vs hand-edited processes.
+    if [ -f "$CP_CITATIONS" ]; then
+        for proc in "$CP"/processes/*.md; do
+            [ -f "$proc" ] || continue
+            if [ "$proc" -nt "$CP_CITATIONS" ]; then
+                warn "canonical-processes: $(basename "$proc") newer than raw/citations.csv - re-run scripts/01_validate_citations.py"
+            fi
+        done
+    else
+        warn "canonical-processes: raw/citations.csv missing - run scripts/01_validate_citations.py"
+    fi
+
+    # Emit output freshness vs citations (and processes).
+    for out in "$CP_INDEX" "$CP_SM" "$CP_COVERAGE"; do
+        if [ ! -f "$out" ]; then
+            warn "canonical-processes: $(basename "$out") missing - run scripts/02_emit_index.py"
+            continue
+        fi
+        if [ -f "$CP_CITATIONS" ] && [ "$CP_CITATIONS" -nt "$out" ]; then
+            warn "canonical-processes: raw/citations.csv newer than $(basename "$out") - re-run scripts/02_emit_index.py"
+        fi
+        for proc in "$CP"/processes/*.md; do
+            [ -f "$proc" ] || continue
+            if [ "$proc" -nt "$out" ]; then
+                warn "canonical-processes: $(basename "$proc") newer than $(basename "$out") - re-run scripts/02_emit_index.py"
+                break
+            fi
+        done
+    done
+
+    ok "canonical-processes present ($process_count process file(s); citations + emit outputs checked for freshness)"
+else
+    warn "canonical-processes expected at $CP but key files missing (processes/ dir)"
+fi
+echo ""
+
+# ---------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------
 echo "=== Validation Summary ==="
