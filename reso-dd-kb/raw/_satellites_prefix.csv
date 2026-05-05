@@ -1,18 +1,5 @@
 host_resource,host_field,fk_stem,target_resource,candidate_satellite,suffix_after_stem,candidate_simple_type
 CaravanStop,CaravanKey,Caravan,Caravan,CaravanStopKey,StopKey,String
-CaravanStop,StopKey,Stop,CaravanStop,StopAttendedBy,AttendedBy,"String List, Single"
-CaravanStop,StopKey,Stop,CaravanStop,StopClassName,ClassName,"String List, Single"
-CaravanStop,StopKey,Stop,CaravanStop,StopDate,Date,Date
-CaravanStop,StopKey,Stop,CaravanStop,StopEndTime,EndTime,Timestamp
-CaravanStop,StopKey,Stop,CaravanStop,StopId,Id,String
-CaravanStop,StopKey,Stop,CaravanStop,StopOrder,Order,Number
-CaravanStop,StopKey,Stop,CaravanStop,StopRefreshments,Refreshments,String
-CaravanStop,StopKey,Stop,CaravanStop,StopRemarks,Remarks,String
-CaravanStop,StopKey,Stop,CaravanStop,StopResourceName,ResourceName,"String List, Single"
-CaravanStop,StopKey,Stop,CaravanStop,StopShowingAgentFirstName,ShowingAgentFirstName,String
-CaravanStop,StopKey,Stop,CaravanStop,StopShowingAgentLastName,ShowingAgentLastName,String
-CaravanStop,StopKey,Stop,CaravanStop,StopShowingAgentMlsId,ShowingAgentMlsId,String
-CaravanStop,StopKey,Stop,CaravanStop,StopStartTime,StartTime,Timestamp
 CaravanStop,StopShowingAgentKey,StopShowingAgent,Member,StopShowingAgentFirstName,FirstName,String
 CaravanStop,StopShowingAgentKey,StopShowingAgent,Member,StopShowingAgentLastName,LastName,String
 CaravanStop,StopShowingAgentKey,StopShowingAgent,Member,StopShowingAgentMlsId,MlsId,String

@@ -152,6 +152,19 @@ P5 = re.compile(
     r"(?P<via>[A-Z][A-Za-z]+)\s+(?i:field)",
 )
 
+# Pattern 5b: any of the polymorphic prose markers used by RESO when a
+# *Key column may point to several different resources. We do not
+# capture the target list (the prose enumerates them informally); we
+# just record the marker so the merge step can demote the row from a
+# concrete FK to a polymorphic comment.
+P5b_MARKERS = [
+    re.compile(r"(?i)might\s+also\s+be\s+(?:a\s+)?(?:another\s+)?(?:custom|local)"),
+    re.compile(r"(?i)(?:may|might)\s+also\s+be\s+another\s+resource"),
+    re.compile(r"(?i)or\s+(?:a\s+|another\s+)?custom(?:/local)?\s+(?:resource|record)"),
+    re.compile(r"(?i)or\s+(?:a\s+)?local\s+resource"),
+    re.compile(r"(?i)custom/local\s+resource"),
+]
+
 # Pattern 6: bare "<Target> Resource's <Column>" not inside a 'foreign
 # key' clause. Captured separately and only applied when the host
 # field is *Key / *Id (i.e. likely an FK-bearing column).
@@ -272,6 +285,24 @@ def main() -> int:
                         "notes": f"medium;polymorphic_via_{m.group('via')}",
                     }
                 )
+
+            # P5b: polymorphic marker. Emit only one row per field
+            # regardless of how many marker phrases match.
+            for marker in P5b_MARKERS:
+                m = marker.search(text)
+                if m:
+                    out_rows.append(
+                        {
+                            "host_resource": host,
+                            "host_field": field,
+                            "pattern_id": "P5b",
+                            "target_resource": "",
+                            "target_field": "",
+                            "matched": m.group(0),
+                            "notes": "polymorphic_marker",
+                        }
+                    )
+                    break
 
             # P3b and P7 - both add a row for an FK whose Definition
             # named the target resource via 'primary key of/for X

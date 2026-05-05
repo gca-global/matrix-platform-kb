@@ -1,18 +1,5 @@
 host_resource,host_field,fk_stem,candidate_satellite,candidate_simple_type,target_resource,target_field,name_match_score,name_match_kind,jaccard,type_match,lookup_match,signals_fired,recommendation,notes
 CaravanStop,CaravanKey,Caravan,CaravanStopKey,String,Caravan,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopAttendedBy,"String List, Single",CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopClassName,"String List, Single",CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopDate,Date,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopEndTime,Timestamp,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopId,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopOrder,Number,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopRefreshments,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopRemarks,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopResourceName,"String List, Single",CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopShowingAgentFirstName,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopShowingAgentLastName,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopShowingAgentMlsId,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
-CaravanStop,StopKey,Stop,StopStartTime,Timestamp,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
 CaravanStop,StopShowingAgentKey,StopShowingAgent,StopShowingAgentFirstName,String,Member,MemberFirstName,1.00,target_prefix,0.500,1.0,1,A|B|D,review,borderline_jaccard
 CaravanStop,StopShowingAgentKey,StopShowingAgent,StopShowingAgentLastName,String,Member,MemberLastName,1.00,target_prefix,0.500,1.0,1,A|B|D,review,borderline_jaccard
 CaravanStop,StopShowingAgentKey,StopShowingAgent,StopShowingAgentMlsId,String,Member,MemberMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7

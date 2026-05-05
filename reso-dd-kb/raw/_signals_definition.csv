@@ -1,6 +1,10 @@
 host_resource,host_field,pattern_id,target_resource,target_field,matched,notes
 CaravanStop,CaravanKey,P3b,Caravan,,foreign key referencing the primary key of the Caravan Resource,medium;column_is_pk_of_target
+CaravanStop,StopClassName,P5b,,,might also be another custom,polymorphic_marker
+CaravanStop,StopId,P5b,,,might also be another custom,polymorphic_marker
 CaravanStop,StopKey,P3,CaravanStop,,foreign key to the CaravanStop Resource,medium;column_inferred
+CaravanStop,StopKey,P5b,,,might also be another custom,polymorphic_marker
+CaravanStop,StopResourceName,P5b,,,might also be another custom,polymorphic_marker
 CaravanStop,StopShowingAgentKey,P2,Member,MemberKey,foreign key relating to the MemberKey of the Member Resource,strong
 ContactListings,ContactKey,P3,Contacts,,foreign key relating to the Contacts Resource,medium;column_inferred
 Contacts,OriginatingSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word

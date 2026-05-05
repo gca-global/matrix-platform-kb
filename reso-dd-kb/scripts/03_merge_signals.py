@@ -72,6 +72,9 @@ VALID_CONFIDENCE = {"high", "medium", "low"}
 STRONG_PROSE_PATTERNS = {"P1", "P2", "P4", "P6"}
 # Medium prose patterns name target only or are polymorphic.
 MEDIUM_PROSE_PATTERNS = {"P3", "P3b", "P7", "P5"}
+# P5b is a polymorphic marker (not an FK on its own; it demotes any
+# other FK we found for the same field to a polymorphic comment).
+POLY_MARKER_PATTERN = "P5b"
 
 
 def must_exist(path: Path) -> None:
@@ -114,6 +117,7 @@ def main() -> int:
             "prose_strong": [],   # list of (target_res, target_col, pattern, matched)
             "prose_medium": [],   # list of (target_res, target_col, pattern, matched)
             "prose_poly": [],     # list of (matched,)
+            "poly_marker": [],    # list of (matched,) - P5b
             "type": [],           # list of (kind, target_res)
             "name": [],           # list of (target_res, target_col, match_kind, stem)
         }
@@ -129,6 +133,8 @@ def main() -> int:
             bucket["prose_strong"].append((target, col, pid, r["matched"]))
         elif pid == "P5":
             bucket["prose_poly"].append((r["matched"],))
+        elif pid == POLY_MARKER_PATTERN:
+            bucket["poly_marker"].append((r["matched"],))
         elif pid in MEDIUM_PROSE_PATTERNS:
             bucket["prose_medium"].append((target, col, pid, r["matched"]))
 
@@ -154,6 +160,43 @@ def main() -> int:
     for (host, field), b in sorted(grouped.items()):
         host_field_row = host_field_index.get((host, field))
         host_field_type = host_field_row["SimpleDataType"] if host_field_row else ""
+
+        # If the field is flagged as polymorphic by P5b, demote every
+        # concrete FK we found for it to a single polymorphic comment.
+        # (We still want the comment for reviewers; we just don't want
+        # to emit a wrong-looking concrete Ref in the DBML.)
+        if b["poly_marker"]:
+            for (matched,) in b["poly_marker"]:
+                out_rows.append(
+                    {
+                        "host_resource": host,
+                        "host_field": field,
+                        "host_field_type": host_field_type,
+                        "target_resource": "",
+                        "target_field": "",
+                        "fk_kind": "prose",
+                        "confidence": "medium",
+                        "evidence": f'prose:P5b:"{matched}"',
+                        "notes": "polymorphic",
+                    }
+                )
+            # Skip the per-target emission for this field; we still
+            # process polymorphic P5 hits below for record-keeping.
+            for (matched,) in b["prose_poly"]:
+                out_rows.append(
+                    {
+                        "host_resource": host,
+                        "host_field": field,
+                        "host_field_type": host_field_type,
+                        "target_resource": "",
+                        "target_field": "",
+                        "fk_kind": "prose",
+                        "confidence": "medium",
+                        "evidence": f'prose:P5:"{matched}"',
+                        "notes": "polymorphic",
+                    }
+                )
+            continue
 
         # Bucket by target_resource. Collect every signal contributing
         # to that target.
@@ -272,15 +315,34 @@ def main() -> int:
             # is validated against the target resource's actual
             # field set; if the candidate doesn't exist as a real
             # field on target, fall through. Final fallback is "".
+            #
+            # Special case (highest priority): if the host_field is a
+            # *Key/*Id column and a column with the same name exists
+            # on the target resource, prefer it. RESO often expresses
+            # FKs as same-named columns (PropertyXxx.ListingKey ->
+            # Property.ListingKey, MemberAssociation.AssociationKey ->
+            # Association.AssociationKey, etc.). When the prose says
+            # "X Resource's <SomeOtherKey>" but the host column shares
+            # a name with a column on X, the same-named column is the
+            # actual join column - the prose is naming a co-FK.
             target_field = ""
             seen_candidates: list[tuple[str, str]] = []
+            host_is_keyish = bool(field.endswith("Key") or field.endswith("Id") or field.endswith("ID"))
+            # Skip the same-name rule for self-FKs: the host column
+            # exists on the target trivially (same table) so we'd
+            # produce a Ref pointing at itself instead of at the
+            # actual PK (e.g. Office.MainOfficeKey -> Office.OfficeKey,
+            # not Office.MainOfficeKey -> Office.MainOfficeKey).
+            if host_is_keyish and tgt != host and target_field_exists(tgt, field):
+                target_field = field
             # Strong prose first (verbatim from the page).
-            for cand, src in t["target_field_candidates"]:
-                if src == "prose_strong" and target_field_exists(tgt, cand):
-                    target_field = cand
-                    break
-                if src == "prose_strong":
-                    seen_candidates.append((cand, "prose_strong:not_in_schema"))
+            if not target_field:
+                for cand, src in t["target_field_candidates"]:
+                    if src == "prose_strong" and target_field_exists(tgt, cand):
+                        target_field = cand
+                        break
+                    if src == "prose_strong":
+                        seen_candidates.append((cand, "prose_strong:not_in_schema"))
             # Name-signal PK column second (validated).
             if not target_field:
                 for cand, src in t["target_field_candidates"]:

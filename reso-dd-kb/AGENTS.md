@@ -41,6 +41,8 @@ upstream).
 | `raw/_satellites_definition.csv` | `scripts/04c_definition_similarity.py` | No. Re-run 04c. |
 | `raw/_satellites_type.csv` | `scripts/04d_type_match.py` | No. Re-run 04d. |
 | `raw/satellites.csv` | `scripts/04_merge_satellites.py` | No. Re-run 04. |
+| `wiki/dbml/canonical.dbml` | `scripts/05_emit_dbml.py` | No. Re-run 05. |
+| `wiki/dbml/lookups.dbml` | `scripts/05_emit_dbml.py` | No. Re-run 05. |
 | `scripts/**` | humans + LLM agents (with review) | Yes. |
 | `README.md`, `AGENTS.md`, `methodology.md` | humans + LLM agents (with review) | Yes. |
 
@@ -128,9 +130,35 @@ re-running `04*.py`; do not hand-edit.
 See `methodology.md` -> "Methodology - Phase 2.5" for the four
 signals, scoring, and spot-check results.
 
-## What this directory does NOT contain (yet)
+## Phase 3 outputs (now present)
 
-- No `wiki/dbml/*.dbml` (Phase 3 output).
+The following files were added in Phase 3 (DBML build). They are
+derived from Phase 1 + Phase 2 + Phase 2.5 outputs and rebuilt by
+re-running `05_emit_dbml.py`; do not hand-edit.
+
+- `wiki/dbml/canonical.dbml` - one `Table` per resource (snake_case),
+  columns in original page order, PK marker on the chosen key, lookup
+  columns typed as Enum references when the lookup is single-value
+  with a closed value list. Includes inline `// REVIEW:` comments for
+  rows the Phase-2.5 audit flagged for human inspection. Ends with a
+  block of `Ref:` lines (one per high/medium-confidence FK from
+  `relationships.csv`) and `// polymorphic FK` comments.
+- `wiki/dbml/lookups.dbml` - one `Enum` block per single-value
+  lookup with values from `lookup_values.csv`. Multi-value-only and
+  open lookups are listed as comments at the bottom (their host
+  columns stay `varchar` in `canonical.dbml`).
+
+The generator's only schema decision NOT carried in a CSV is the
+`PK_OVERRIDES` table (9 resources whose PK is not the obvious
+`<Resource>Key` shape - each with an explanatory comment in the
+script).
+
+See `methodology.md` -> "Methodology - Phase 3" for the type-mapping
+table, FK / column-drop / review policies, and the regression diff
+against the previous iteration.
+
+## What this directory does NOT contain
+
 - No alias map of any kind. The `RESOURCE_ALIASES` map from the
   previous iteration is intentionally not carried over - role
   aliases (`ListAgent -> Member`, `OriginatingSystem -> OUID`,

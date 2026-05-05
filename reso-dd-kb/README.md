@@ -3,10 +3,11 @@
 Knowledge base for the **RESO Data Dictionary 2.0**, built from a verifiable
 local mirror of [`dd.reso.org/DD2.0/`](https://dd.reso.org/DD2.0/).
 
-This directory is being rebuilt from scratch in three phases.
-**Phase 1 (mirror + structured extraction), Phase 2 (FK correlation
-analysis) and Phase 2.5 (satellite / 2NF audit) are complete.**
-Phase 3 (DBML generation) will be added by a subsequent commit.
+This directory is being rebuilt from scratch in three phases. **All
+three phases (Phase 1: mirror + structured extraction, Phase 2: FK
+correlation, Phase 2.5: satellite / 2NF audit, Phase 3: DBML
+generation) are complete.** The canonical model lives in
+`wiki/dbml/canonical.dbml` and `wiki/dbml/lookups.dbml`.
 
 ## Why a rebuild
 
@@ -48,6 +49,13 @@ scripts/
   04c_definition_similarity.py       # Phase 2.5: Jaccard on prose
   04d_type_match.py                  # Phase 2.5: type + lookup match
   04_merge_satellites.py             # Phase 2.5: merge -> satellites.csv
+
+  05_emit_dbml.py                    # Phase 3: CSVs -> wiki/dbml/*.dbml
+
+wiki/
+  dbml/
+    canonical.dbml       # 41 tables + Refs (high+medium FKs only)
+    lookups.dbml         # 99 Enum blocks for SV lookups (+ MV/open notes)
 
 raw/                     # structured extraction
   # Phase 1 outputs
@@ -94,16 +102,21 @@ python3 scripts/04d_type_match.py
 python3 scripts/04_merge_satellites.py
 # 04_merge_satellites.py runs verification gates and prints a
 # recommendation histogram.
+
+# Phase 3: DBML emission (cheap; <1s).
+python3 scripts/05_emit_dbml.py
+# Writes wiki/dbml/canonical.dbml and wiki/dbml/lookups.dbml.
+# Six hard-fail verification gates run inside the script.
 ```
 
-## Phase plan (this README will be updated as each phase lands)
+## Phase plan
 
 | Phase | Scope | Status |
 |---|---|---|
 | 1 | Mirror `dd.reso.org/DD2.0` + structured extraction | done |
 | 2 | FK correlation analysis from Definition prose + type + name -> `raw/relationships.csv` | done |
 | 2.5 | Satellite / duplicate detection (2NF audit) -> `raw/satellites.csv` | done |
-| 3 | DBML build consuming `raw/relationships.csv` + reviewed `raw/satellites.csv` | not started |
+| 3 | DBML build consuming `raw/relationships.csv` + `raw/satellites.csv` -> `wiki/dbml/*.dbml` | done |
 
 See [`methodology.md`](methodology.md) for the per-phase methodology
 and [`AGENTS.md`](AGENTS.md) for the rules an LLM agent must follow
