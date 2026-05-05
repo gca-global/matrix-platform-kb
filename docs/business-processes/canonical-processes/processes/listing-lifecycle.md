@@ -146,6 +146,115 @@ Project-specific extensions (e.g. `Pending Continue To Show`,
 project flavour under
 [`docs/business-processes/`](../../index.md).
 
+## Orthogonal state: `Property.DevelopmentStatus` (land / new-construction)
+
+For new-construction, off-plan, and bare-land listings, RESO carries
+a SECOND state machine on the same `Property` row, orthogonal to
+`StandardStatus`. `DevelopmentStatus` is a multi-value open lookup
+with 10 published values describing how built-out the parcel is.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Proposed: project announced,<br/>parcel not yet acquired
+    Proposed --> RawLand: parcel acquired,<br/>untouched
+    RawLand --> RoughGrade: clearing / grading complete
+    RoughGrade --> SitePlanFiled: site plan submitted to authority
+    SitePlanFiled --> SitePlanApproved: authority approved
+    SitePlanApproved --> FinishedLots: subdivision lots ready
+    SitePlanApproved --> UnderConstruction: vertical build started
+    FinishedLots --> UnderConstruction: per-lot build started
+    UnderConstruction --> Completed: certificate of occupancy
+    Completed --> [*]
+    [*] --> Other: bespoke / not-yet-classified
+    [*] --> SeeRemarks: explanatory text in PublicRemarks
+```
+
+`DevelopmentStatus` lookup values:
+`Proposed`, `Raw Land`, `Rough Grade`, `Site Plan Filed`,
+`Site Plan Approved`, `Finished Lot(s)`, `Under Construction`,
+`Completed`, `Other`, `See Remarks`.
+
+Notes:
+
+- `DevelopmentStatus` is multi-value: a single `Property` MAY carry
+  more than one value (e.g. `Site Plan Approved`, `Finished Lot(s)`
+  while phased subdivisions are in different sub-states).
+- Applies primarily to the `LAND` property class but the field is
+  open to other classes when relevant.
+- `DevelopmentStatus` is independent from `StandardStatus`: a parcel
+  can be `StandardStatus = Active` while `DevelopmentStatus = Raw
+  Land` (selling pre-build) or `StandardStatus = Pending` while
+  `DevelopmentStatus = Under Construction` (buyer locked in
+  mid-build).
+- Any `DevelopmentStatus` change emits a `HistoryTransactional` row
+  with `FieldName = DevelopmentStatus`.
+
+## Orthogonal state: `Property.DocumentStatus` (per-document workflow)
+
+`DocumentStatus` is an open lookup with 16 published values tracking
+the listing's paperwork state - signed agreements, disclosures,
+inspections, contracts. The canonical baseline treats this as a
+PER-DOCUMENT state machine: each document attached to the listing
+(via `Media` with `MediaCategory = Document` or via project-specific
+storage) carries its own `DocumentStatus`.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Required: agent / template marks doc required
+    [*] --> Optional: doc is optional for this listing
+    Required --> Missing: deadline passed,<br/>no document submitted
+    Required --> Submitted: party submitted document
+    Optional --> Submitted: party submitted document
+    Missing --> Submitted: late submission
+    Submitted --> Received: counterparty acknowledged receipt
+    Received --> Delivered: routed to next signer / counterparty
+    Delivered --> Accepted: counterparty accepted
+    Delivered --> Countered: counterparty proposed changes
+    Delivered --> Rejected: counterparty refused
+    Countered --> Submitted: revised version submitted
+    Accepted --> Signed: signature(s) captured
+    Signed --> InEscrow: held by escrow / closing agent
+    Signed --> Finalized: fully executed,<br/>no more edits
+    InEscrow --> Finalized: escrow released
+    Finalized --> Published: publicly visible
+    Finalized --> Archived: deal closed,<br/>retention only
+    Published --> Archived: deal closed,<br/>retention only
+    Rejected --> [*]
+    Archived --> [*]
+    [*] --> Changed: revised version superseding<br/>a previously submitted doc
+    Changed --> Submitted: revised version flows back in
+    [*] --> Deleted: mistakenly added,<br/>removed
+    Deleted --> [*]
+```
+
+`DocumentStatus` lookup values:
+`Required`, `Optional`, `Missing`, `Submitted`, `Received`,
+`Delivered`, `Accepted`, `Countered`, `Rejected`, `Signed`,
+`In Escrow`, `Finalized`, `Published`, `Archived`, `Changed`,
+`Deleted`.
+
+Notes:
+
+- `DocumentStatus` is single-value: each document carries exactly
+  one current state.
+- The field is published on `Property` (RESO carries the document
+  state inline, then references the `Media` payload). When a
+  listing has multiple documents, the canonical baseline stores
+  per-document state on individual `Media` rows (a `Media` row
+  whose `MediaCategory = Document` MAY carry a project-specific
+  `x_sm_doc_status` mirroring this field) and aggregates the
+  worst case to `Property.DocumentStatus`.
+- `DocumentStatus` is independent from `StandardStatus` and
+  `DevelopmentStatus`: a listing in `StandardStatus = Active` may
+  have `DocumentStatus = Missing` (listing-agreement still
+  outstanding) and a listing in `StandardStatus = Pending` MUST
+  have `DocumentStatus IN (Signed, In Escrow, Finalized)` for the
+  pending status to be defensible.
+- Any `DocumentStatus` change emits a `HistoryTransactional` row
+  with `FieldName = DocumentStatus`.
+- `Deleted` and `Changed` are bookkeeping states for revisions;
+  they MUST NOT be used as terminal states for live listings.
+
 ## Decision points
 
 | Decision | Inputs | Outputs |
@@ -256,4 +365,32 @@ LookupValue: ChangeType.Canceled
 LookupValue: ChangeType.Expired
 LookupValue: ChangeType.Back On Market
 LookupValue: ChangeType.Price Change
+Field: Property.DevelopmentStatus
+Field: Property.DocumentStatus
+LookupValue: DevelopmentStatus.Proposed
+LookupValue: DevelopmentStatus.Raw Land
+LookupValue: DevelopmentStatus.Rough Grade
+LookupValue: DevelopmentStatus.Site Plan Filed
+LookupValue: DevelopmentStatus.Site Plan Approved
+LookupValue: DevelopmentStatus.Finished Lot(s)
+LookupValue: DevelopmentStatus.Under Construction
+LookupValue: DevelopmentStatus.Completed
+LookupValue: DevelopmentStatus.Other
+LookupValue: DevelopmentStatus.See Remarks
+LookupValue: DocumentStatus.Required
+LookupValue: DocumentStatus.Optional
+LookupValue: DocumentStatus.Missing
+LookupValue: DocumentStatus.Submitted
+LookupValue: DocumentStatus.Received
+LookupValue: DocumentStatus.Delivered
+LookupValue: DocumentStatus.Accepted
+LookupValue: DocumentStatus.Countered
+LookupValue: DocumentStatus.Rejected
+LookupValue: DocumentStatus.Signed
+LookupValue: DocumentStatus.In Escrow
+LookupValue: DocumentStatus.Finalized
+LookupValue: DocumentStatus.Published
+LookupValue: DocumentStatus.Archived
+LookupValue: DocumentStatus.Changed
+LookupValue: DocumentStatus.Deleted
 -->

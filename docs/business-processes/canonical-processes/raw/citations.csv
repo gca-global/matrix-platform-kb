@@ -168,65 +168,93 @@ lead-contact-lifecycle.md,Resource,ContactListings,271
 lead-contact-lifecycle.md,Resource,Contacts,268
 lead-contact-lifecycle.md,Resource,Prospecting,270
 lead-contact-lifecycle.md,Resource,SavedSearch,269
-listing-lifecycle.md,Field,HistoryTransactional.ChangeType,234
-listing-lifecycle.md,Field,HistoryTransactional.ChangedByMemberKey,235
-listing-lifecycle.md,Field,HistoryTransactional.FieldName,231
-listing-lifecycle.md,Field,HistoryTransactional.NewValue,233
-listing-lifecycle.md,Field,HistoryTransactional.PreviousValue,232
-listing-lifecycle.md,Field,HistoryTransactional.ResourceName,229
-listing-lifecycle.md,Field,HistoryTransactional.ResourceRecordKey,230
-listing-lifecycle.md,Field,Property.CancellationDate,218
-listing-lifecycle.md,Field,Property.CloseDate,212
-listing-lifecycle.md,Field,Property.CoListAgentKey,226
-listing-lifecycle.md,Field,Property.ContractStatusChangeDate,215
-listing-lifecycle.md,Field,Property.ExpirationDate,219
-listing-lifecycle.md,Field,Property.ListAgentKey,224
-listing-lifecycle.md,Field,Property.ListOfficeKey,225
-listing-lifecycle.md,Field,Property.ListPrice,206
-listing-lifecycle.md,Field,Property.ListingAgreement,227
-listing-lifecycle.md,Field,Property.ListingContractDate,209
-listing-lifecycle.md,Field,Property.ListingId,202
-listing-lifecycle.md,Field,Property.ListingKey,203
-listing-lifecycle.md,Field,Property.MajorChangeTimestamp,221
-listing-lifecycle.md,Field,Property.MajorChangeType,220
-listing-lifecycle.md,Field,Property.Media,228
-listing-lifecycle.md,Field,Property.MlsStatus,205
-listing-lifecycle.md,Field,Property.ModificationTimestamp,223
-listing-lifecycle.md,Field,Property.OffMarketDate,211
-listing-lifecycle.md,Field,Property.OnMarketDate,210
-listing-lifecycle.md,Field,Property.OriginalListPrice,207
-listing-lifecycle.md,Field,Property.PendingTimestamp,213
-listing-lifecycle.md,Field,Property.PreviousListPrice,208
-listing-lifecycle.md,Field,Property.PriceChangeTimestamp,222
-listing-lifecycle.md,Field,Property.PurchaseContractDate,214
-listing-lifecycle.md,Field,Property.StandardStatus,204
-listing-lifecycle.md,Field,Property.StatusChangeTimestamp,216
-listing-lifecycle.md,Field,Property.WithdrawnDate,217
-listing-lifecycle.md,LookupValue,ChangeType.Active,248
-listing-lifecycle.md,LookupValue,ChangeType.Active Under Contract,251
-listing-lifecycle.md,LookupValue,ChangeType.Back On Market,257
-listing-lifecycle.md,LookupValue,ChangeType.Canceled,255
-listing-lifecycle.md,LookupValue,ChangeType.Closed,252
-listing-lifecycle.md,LookupValue,ChangeType.Coming Soon,249
-listing-lifecycle.md,LookupValue,ChangeType.Expired,256
-listing-lifecycle.md,LookupValue,ChangeType.Hold,253
-listing-lifecycle.md,LookupValue,ChangeType.New Listing,247
-listing-lifecycle.md,LookupValue,ChangeType.Pending,250
-listing-lifecycle.md,LookupValue,ChangeType.Price Change,258
-listing-lifecycle.md,LookupValue,ChangeType.Withdrawn,254
-listing-lifecycle.md,LookupValue,StandardStatus.Active,238
-listing-lifecycle.md,LookupValue,StandardStatus.Active Under Contract,239
-listing-lifecycle.md,LookupValue,StandardStatus.Canceled,244
-listing-lifecycle.md,LookupValue,StandardStatus.Closed,241
-listing-lifecycle.md,LookupValue,StandardStatus.Coming Soon,237
-listing-lifecycle.md,LookupValue,StandardStatus.Delete,246
-listing-lifecycle.md,LookupValue,StandardStatus.Expired,245
-listing-lifecycle.md,LookupValue,StandardStatus.Hold,242
-listing-lifecycle.md,LookupValue,StandardStatus.Incomplete,236
-listing-lifecycle.md,LookupValue,StandardStatus.Pending,240
-listing-lifecycle.md,LookupValue,StandardStatus.Withdrawn,243
-listing-lifecycle.md,Resource,HistoryTransactional,201
-listing-lifecycle.md,Resource,Property,200
+listing-lifecycle.md,Field,HistoryTransactional.ChangeType,343
+listing-lifecycle.md,Field,HistoryTransactional.ChangedByMemberKey,344
+listing-lifecycle.md,Field,HistoryTransactional.FieldName,340
+listing-lifecycle.md,Field,HistoryTransactional.NewValue,342
+listing-lifecycle.md,Field,HistoryTransactional.PreviousValue,341
+listing-lifecycle.md,Field,HistoryTransactional.ResourceName,338
+listing-lifecycle.md,Field,HistoryTransactional.ResourceRecordKey,339
+listing-lifecycle.md,Field,Property.CancellationDate,327
+listing-lifecycle.md,Field,Property.CloseDate,321
+listing-lifecycle.md,Field,Property.CoListAgentKey,335
+listing-lifecycle.md,Field,Property.ContractStatusChangeDate,324
+listing-lifecycle.md,Field,Property.DevelopmentStatus,368
+listing-lifecycle.md,Field,Property.DocumentStatus,369
+listing-lifecycle.md,Field,Property.ExpirationDate,328
+listing-lifecycle.md,Field,Property.ListAgentKey,333
+listing-lifecycle.md,Field,Property.ListOfficeKey,334
+listing-lifecycle.md,Field,Property.ListPrice,315
+listing-lifecycle.md,Field,Property.ListingAgreement,336
+listing-lifecycle.md,Field,Property.ListingContractDate,318
+listing-lifecycle.md,Field,Property.ListingId,311
+listing-lifecycle.md,Field,Property.ListingKey,312
+listing-lifecycle.md,Field,Property.MajorChangeTimestamp,330
+listing-lifecycle.md,Field,Property.MajorChangeType,329
+listing-lifecycle.md,Field,Property.Media,337
+listing-lifecycle.md,Field,Property.MlsStatus,314
+listing-lifecycle.md,Field,Property.ModificationTimestamp,332
+listing-lifecycle.md,Field,Property.OffMarketDate,320
+listing-lifecycle.md,Field,Property.OnMarketDate,319
+listing-lifecycle.md,Field,Property.OriginalListPrice,316
+listing-lifecycle.md,Field,Property.PendingTimestamp,322
+listing-lifecycle.md,Field,Property.PreviousListPrice,317
+listing-lifecycle.md,Field,Property.PriceChangeTimestamp,331
+listing-lifecycle.md,Field,Property.PurchaseContractDate,323
+listing-lifecycle.md,Field,Property.StandardStatus,313
+listing-lifecycle.md,Field,Property.StatusChangeTimestamp,325
+listing-lifecycle.md,Field,Property.WithdrawnDate,326
+listing-lifecycle.md,LookupValue,ChangeType.Active,357
+listing-lifecycle.md,LookupValue,ChangeType.Active Under Contract,360
+listing-lifecycle.md,LookupValue,ChangeType.Back On Market,366
+listing-lifecycle.md,LookupValue,ChangeType.Canceled,364
+listing-lifecycle.md,LookupValue,ChangeType.Closed,361
+listing-lifecycle.md,LookupValue,ChangeType.Coming Soon,358
+listing-lifecycle.md,LookupValue,ChangeType.Expired,365
+listing-lifecycle.md,LookupValue,ChangeType.Hold,362
+listing-lifecycle.md,LookupValue,ChangeType.New Listing,356
+listing-lifecycle.md,LookupValue,ChangeType.Pending,359
+listing-lifecycle.md,LookupValue,ChangeType.Price Change,367
+listing-lifecycle.md,LookupValue,ChangeType.Withdrawn,363
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Completed,377
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Finished Lot(s),375
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Other,378
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Proposed,370
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Raw Land,371
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Rough Grade,372
+listing-lifecycle.md,LookupValue,DevelopmentStatus.See Remarks,379
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Site Plan Approved,374
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Site Plan Filed,373
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Under Construction,376
+listing-lifecycle.md,LookupValue,DocumentStatus.Accepted,386
+listing-lifecycle.md,LookupValue,DocumentStatus.Archived,393
+listing-lifecycle.md,LookupValue,DocumentStatus.Changed,394
+listing-lifecycle.md,LookupValue,DocumentStatus.Countered,387
+listing-lifecycle.md,LookupValue,DocumentStatus.Deleted,395
+listing-lifecycle.md,LookupValue,DocumentStatus.Delivered,385
+listing-lifecycle.md,LookupValue,DocumentStatus.Finalized,391
+listing-lifecycle.md,LookupValue,DocumentStatus.In Escrow,390
+listing-lifecycle.md,LookupValue,DocumentStatus.Missing,382
+listing-lifecycle.md,LookupValue,DocumentStatus.Optional,381
+listing-lifecycle.md,LookupValue,DocumentStatus.Published,392
+listing-lifecycle.md,LookupValue,DocumentStatus.Received,384
+listing-lifecycle.md,LookupValue,DocumentStatus.Rejected,388
+listing-lifecycle.md,LookupValue,DocumentStatus.Required,380
+listing-lifecycle.md,LookupValue,DocumentStatus.Signed,389
+listing-lifecycle.md,LookupValue,DocumentStatus.Submitted,383
+listing-lifecycle.md,LookupValue,StandardStatus.Active,347
+listing-lifecycle.md,LookupValue,StandardStatus.Active Under Contract,348
+listing-lifecycle.md,LookupValue,StandardStatus.Canceled,353
+listing-lifecycle.md,LookupValue,StandardStatus.Closed,350
+listing-lifecycle.md,LookupValue,StandardStatus.Coming Soon,346
+listing-lifecycle.md,LookupValue,StandardStatus.Delete,355
+listing-lifecycle.md,LookupValue,StandardStatus.Expired,354
+listing-lifecycle.md,LookupValue,StandardStatus.Hold,351
+listing-lifecycle.md,LookupValue,StandardStatus.Incomplete,345
+listing-lifecycle.md,LookupValue,StandardStatus.Pending,349
+listing-lifecycle.md,LookupValue,StandardStatus.Withdrawn,352
+listing-lifecycle.md,Resource,HistoryTransactional,310
+listing-lifecycle.md,Resource,Property,309
 media-lifecycle.md,Field,Media.ChangedByMember,277
 media-lifecycle.md,Field,Media.ChangedByMemberKey,278
 media-lifecycle.md,Field,Media.ClassName,267

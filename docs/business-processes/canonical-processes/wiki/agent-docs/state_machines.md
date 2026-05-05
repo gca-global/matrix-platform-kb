@@ -111,6 +111,8 @@ stateDiagram-v2
 
 Source: [`processes/listing-lifecycle.md`](../../processes/listing-lifecycle.md)
 
+### Diagram 1
+
 ```mermaid
 stateDiagram-v2
     [*] --> Incomplete: intake started
@@ -144,6 +146,55 @@ stateDiagram-v2
       reso-dd-kb. IDX/OM payloads
       surface from Active onward.
     end note
+```
+
+### Diagram 2
+
+```mermaid
+stateDiagram-v2
+    [*] --> Proposed: project announced,<br/>parcel not yet acquired
+    Proposed --> RawLand: parcel acquired,<br/>untouched
+    RawLand --> RoughGrade: clearing / grading complete
+    RoughGrade --> SitePlanFiled: site plan submitted to authority
+    SitePlanFiled --> SitePlanApproved: authority approved
+    SitePlanApproved --> FinishedLots: subdivision lots ready
+    SitePlanApproved --> UnderConstruction: vertical build started
+    FinishedLots --> UnderConstruction: per-lot build started
+    UnderConstruction --> Completed: certificate of occupancy
+    Completed --> [*]
+    [*] --> Other: bespoke / not-yet-classified
+    [*] --> SeeRemarks: explanatory text in PublicRemarks
+```
+
+### Diagram 3
+
+```mermaid
+stateDiagram-v2
+    [*] --> Required: agent / template marks doc required
+    [*] --> Optional: doc is optional for this listing
+    Required --> Missing: deadline passed,<br/>no document submitted
+    Required --> Submitted: party submitted document
+    Optional --> Submitted: party submitted document
+    Missing --> Submitted: late submission
+    Submitted --> Received: counterparty acknowledged receipt
+    Received --> Delivered: routed to next signer / counterparty
+    Delivered --> Accepted: counterparty accepted
+    Delivered --> Countered: counterparty proposed changes
+    Delivered --> Rejected: counterparty refused
+    Countered --> Submitted: revised version submitted
+    Accepted --> Signed: signature(s) captured
+    Signed --> InEscrow: held by escrow / closing agent
+    Signed --> Finalized: fully executed,<br/>no more edits
+    InEscrow --> Finalized: escrow released
+    Finalized --> Published: publicly visible
+    Finalized --> Archived: deal closed,<br/>retention only
+    Published --> Archived: deal closed,<br/>retention only
+    Rejected --> [*]
+    Archived --> [*]
+    [*] --> Changed: revised version superseding<br/>a previously submitted doc
+    Changed --> Submitted: revised version flows back in
+    [*] --> Deleted: mistakenly added,<br/>removed
+    Deleted --> [*]
 ```
 
 ## Media lifecycle (canonical, RESO DD 2.0)
