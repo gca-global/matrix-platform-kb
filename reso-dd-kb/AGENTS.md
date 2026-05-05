@@ -36,6 +36,11 @@ upstream).
 | `raw/_signals_type.csv` | `scripts/03b_extract_type_signals.py` | No. Re-run 03b. |
 | `raw/_signals_name.csv` | `scripts/03c_extract_name_signals.py` | No. Re-run 03c. |
 | `raw/relationships.csv` | `scripts/03_merge_signals.py` | No. Re-run 03. |
+| `raw/_satellites_prefix.csv` | `scripts/04a_prefix_satellites.py` | No. Re-run 04a. |
+| `raw/_satellites_child_match.csv` | `scripts/04b_child_match.py` | No. Re-run 04b. |
+| `raw/_satellites_definition.csv` | `scripts/04c_definition_similarity.py` | No. Re-run 04c. |
+| `raw/_satellites_type.csv` | `scripts/04d_type_match.py` | No. Re-run 04d. |
+| `raw/satellites.csv` | `scripts/04_merge_satellites.py` | No. Re-run 04. |
 | `scripts/**` | humans + LLM agents (with review) | Yes. |
 | `README.md`, `AGENTS.md`, `methodology.md` | humans + LLM agents (with review) | Yes. |
 
@@ -98,13 +103,34 @@ See `methodology.md` -> "Methodology - Phase 2" for the patterns,
 scoring rules, and spot-check results.
 
 Phase 3 (DBML build) is the only consumer permitted to read
-`raw/relationships.csv`. Phase 2.5 (satellite audit) reads it too,
-but Phase 2.5's output (`raw/satellites.csv`) lives in its own commit.
+`raw/relationships.csv` (FK source) and `raw/satellites.csv`
+(column-drop source).
+
+## Phase 2.5 outputs (now present)
+
+The following files were added in Phase 2.5 (satellite / 2NF audit).
+They are derived from Phase 1 + Phase 2 outputs and rebuilt by
+re-running `04*.py`; do not hand-edit.
+
+- `raw/_satellites_prefix.csv` - one row per (FK, candidate) pair
+  whose StandardName starts with the FK column's stem.
+- `raw/_satellites_child_match.csv` - candidate -> target column
+  match (target_prefix / target_singular_prefix / bare_suffix /
+  case-folded / underscore-stripped variants).
+- `raw/_satellites_definition.csv` - Jaccard similarity over
+  role-context-stripped Definition tokens.
+- `raw/_satellites_type.csv` - SimpleDataType + Lookup match.
+- `raw/satellites.csv` - the merged, scored deliverable. One row
+  per (host_resource, host_field, candidate_satellite) triple, with
+  a `recommendation in {drop_from_host, drop_from_child, keep_both,
+  review}`.
+
+See `methodology.md` -> "Methodology - Phase 2.5" for the four
+signals, scoring, and spot-check results.
 
 ## What this directory does NOT contain (yet)
 
 - No `wiki/dbml/*.dbml` (Phase 3 output).
-- No `raw/satellites.csv` (Phase 2.5 output).
 - No alias map of any kind. The `RESOURCE_ALIASES` map from the
   previous iteration is intentionally not carried over - role
   aliases (`ListAgent -> Member`, `OriginatingSystem -> OUID`,

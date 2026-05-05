@@ -1,0 +1,209 @@
+host_resource,host_field,fk_stem,candidate_satellite,candidate_simple_type,target_resource,target_field,name_match_score,name_match_kind,jaccard,type_match,lookup_match,signals_fired,recommendation,notes
+CaravanStop,CaravanKey,Caravan,CaravanStopKey,String,Caravan,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopAttendedBy,"String List, Single",CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopClassName,"String List, Single",CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopDate,Date,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopEndTime,Timestamp,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopId,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopOrder,Number,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopRefreshments,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopRemarks,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopResourceName,"String List, Single",CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopShowingAgentFirstName,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopShowingAgentLastName,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopShowingAgentMlsId,String,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopKey,Stop,StopStartTime,Timestamp,CaravanStop,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+CaravanStop,StopShowingAgentKey,StopShowingAgent,StopShowingAgentFirstName,String,Member,MemberFirstName,1.00,target_prefix,0.500,1.0,1,A|B|D,review,borderline_jaccard
+CaravanStop,StopShowingAgentKey,StopShowingAgent,StopShowingAgentLastName,String,Member,MemberLastName,1.00,target_prefix,0.500,1.0,1,A|B|D,review,borderline_jaccard
+CaravanStop,StopShowingAgentKey,StopShowingAgent,StopShowingAgentMlsId,String,Member,MemberMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+ContactListings,ContactKey,Contact,ContactListingPreference,"String List, Single",Contacts,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+ContactListings,ContactKey,Contact,ContactListingsKey,String,Contacts,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+ContactListings,ContactKey,Contact,ContactLoginId,String,Contacts,ContactLoginId,1.00,target_singular_prefix,0.800,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+ContactListings,ContactKey,Contact,ContactNotesUnreadYN,Boolean,Contacts,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Contacts,OriginatingSystemID,OriginatingSystem,OriginatingSystemContactKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Contacts,OriginatingSystemID,OriginatingSystem,OriginatingSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Contacts,SourceSystemID,SourceSystem,SourceSystemContactKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Contacts,SourceSystemID,SourceSystem,SourceSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+HistoryTransactional,OriginatingSystemID,OriginatingSystem,OriginatingSystemHistoryKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+HistoryTransactional,OriginatingSystemID,OriginatingSystem,OriginatingSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+HistoryTransactional,SourceSystemID,SourceSystem,SourceSystemHistoryKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+HistoryTransactional,SourceSystemID,SourceSystem,SourceSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Media,SourceSystemID,SourceSystem,SourceSystemMediaKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Media,SourceSystemID,SourceSystem,SourceSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Media,SourceSystemID,SourceSystem,SourceSystemResourceRecordId,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Media,SourceSystemID,SourceSystem,SourceSystemResourceRecordKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Media,SourceSystemID,SourceSystem,SourceSystemResourceRecordSystemId,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Member,OfficeKey,Office,OfficeMlsId,String,Office,OfficeMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+Member,OfficeKey,Office,OfficeName,String,Office,OfficeName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Member,OriginatingSystemID,OriginatingSystem,OriginatingSystemMemberKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Member,OriginatingSystemID,OriginatingSystem,OriginatingSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Member,SourceSystemID,SourceSystem,SourceSystemMemberKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Member,SourceSystemID,SourceSystem,SourceSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Office,MainOfficeKey,MainOffice,MainOfficeMlsId,String,Office,OfficeMlsId,1.00,target_prefix,0.000,1.0,1,A|B|D,review,name_type_match_but_definitions_differ
+Office,OfficeBrokerKey,OfficeBroker,OfficeBrokerMlsId,String,Member,MemberMlsId,1.00,target_prefix,0.000,1.0,1,A|B|D,review,name_type_match_but_definitions_differ
+Office,OfficeManagerKey,OfficeManager,OfficeManagerMlsId,String,Member,MemberMlsId,1.00,target_prefix,0.000,1.0,1,A|B|D,review,name_type_match_but_definitions_differ
+Office,OriginatingSystemID,OriginatingSystem,OriginatingSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Office,OriginatingSystemID,OriginatingSystem,OriginatingSystemOfficeKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Office,SourceSystemID,SourceSystem,SourceSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Office,SourceSystemID,SourceSystem,SourceSystemOfficeKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+OfficeAssociation,OfficeKey,Office,OfficeAssociationPrimaryIndicator,"String List, Single",Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+OfficeAssociation,OfficeKey,Office,OfficeAssociationStatus,"String List, Single",Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+OfficeAssociation,OfficeKey,Office,OfficeAssociationStatusDate,Date,Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+OfficeAssociation,OfficeKey,Office,OfficeMlsId,String,Office,OfficeMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+OfficeCorporateLicense,OfficeKey,Office,OfficeCorporateLicense,String,Office,OfficeCorporateLicense,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+OfficeCorporateLicense,OfficeKey,Office,OfficeCorporateLicenseExpirationDate,Date,Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+OfficeCorporateLicense,OfficeKey,Office,OfficeCorporateLicenseKey,String,Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+OfficeCorporateLicense,OfficeKey,Office,OfficeCorporateLicenseState,"String List, Single",Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+OfficeCorporateLicense,OfficeKey,Office,OfficeCorporateLicenseType,"String List, Single",Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+OfficeCorporateLicense,OfficeKey,Office,OfficeMlsId,String,Office,OfficeMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+OpenHouse,ShowingAgentKey,ShowingAgent,ShowingAgentFirstName,String,Member,MemberFirstName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+OpenHouse,ShowingAgentKey,ShowingAgent,ShowingAgentLastName,String,Member,MemberLastName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+OpenHouse,ShowingAgentKey,ShowingAgent,ShowingAgentMlsID,String,Member,MemberMlsId,0.80,target_prefix_casefold,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentAOR,"String List, Single",Member,MemberAOR,1.00,target_prefix,0.750,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentDesignation,"String List, Multi",Member,MemberDesignation,1.00,target_prefix,0.952,0.5,0,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentDirectPhone,String,Member,MemberDirectPhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentEmail,String,Member,MemberEmail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentFax,String,Member,MemberFax,1.00,target_prefix,0.909,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentFirstName,String,Member,MemberFirstName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentFullName,String,Member,MemberFullName,1.00,target_prefix,0.667,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentHomePhone,String,Member,MemberHomePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentLastName,String,Member,MemberLastName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentMiddleName,String,Member,MemberMiddleName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentMlsId,String,Member,MemberMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentMobilePhone,String,Member,MemberMobilePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentNamePrefix,String,Member,MemberNamePrefix,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentNameSuffix,String,Member,MemberNameSuffix,1.00,target_prefix,0.714,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentOfficePhone,String,Member,MemberOfficePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentOfficePhoneExt,String,Member,MemberOfficePhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentPager,String,Member,MemberPager,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentPreferredPhone,String,Member,MemberPreferredPhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentPreferredPhoneExt,String,Member,MemberPreferredPhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentStateLicense,String,Member,MemberStateLicense,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentTollFreePhone,String,Member,MemberTollFreePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentURL,String,Member,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentVoiceMail,String,Member,MemberVoiceMail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerAgentKey,BuyerAgent,BuyerAgentVoiceMailExt,String,Member,MemberVoiceMailExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerOfficeKey,BuyerOffice,BuyerOfficeAOR,"String List, Single",Office,OfficeAOR,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerOfficeKey,BuyerOffice,BuyerOfficeEmail,String,Office,OfficeEmail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerOfficeKey,BuyerOffice,BuyerOfficeFax,String,Office,OfficeFax,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerOfficeKey,BuyerOffice,BuyerOfficeMlsId,String,Office,OfficeMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+Property,BuyerOfficeKey,BuyerOffice,BuyerOfficeName,String,Office,OfficeName,1.00,target_prefix,0.750,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerOfficeKey,BuyerOffice,BuyerOfficePhone,String,Office,OfficePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerOfficeKey,BuyerOffice,BuyerOfficePhoneExt,String,Office,OfficePhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,BuyerOfficeKey,BuyerOffice,BuyerOfficeURL,String,Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,BuyerTeamKey,BuyerTeam,BuyerTeamName,String,Teams,TeamName,1.00,target_singular_prefix,0.143,1.0,1,A|B|D,review,name_type_match_but_definitions_differ
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentAOR,"String List, Single",Member,MemberAOR,1.00,target_prefix,0.750,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentDesignation,"String List, Multi",Member,MemberDesignation,1.00,target_prefix,0.952,0.5,0,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentDirectPhone,String,Member,MemberDirectPhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentEmail,String,Member,MemberEmail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentFax,String,Member,MemberFax,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentFirstName,String,Member,MemberFirstName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentFullName,String,Member,MemberFullName,1.00,target_prefix,0.667,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentHomePhone,String,Member,MemberHomePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentLastName,String,Member,MemberLastName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentMiddleName,String,Member,MemberMiddleName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentMlsId,String,Member,MemberMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentMobilePhone,String,Member,MemberMobilePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentNamePrefix,String,Member,MemberNamePrefix,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentNameSuffix,String,Member,MemberNameSuffix,1.00,target_prefix,0.714,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentOfficePhone,String,Member,MemberOfficePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentOfficePhoneExt,String,Member,MemberOfficePhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentPager,String,Member,MemberPager,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentPreferredPhone,String,Member,MemberPreferredPhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentPreferredPhoneExt,String,Member,MemberPreferredPhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentStateLicense,String,Member,MemberStateLicense,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentTollFreePhone,String,Member,MemberTollFreePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentURL,String,Member,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentVoiceMail,String,Member,MemberVoiceMail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerAgentKey,CoBuyerAgent,CoBuyerAgentVoiceMailExt,String,Member,MemberVoiceMailExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerOfficeKey,CoBuyerOffice,CoBuyerOfficeAOR,"String List, Single",Office,OfficeAOR,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerOfficeKey,CoBuyerOffice,CoBuyerOfficeEmail,String,Office,OfficeEmail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerOfficeKey,CoBuyerOffice,CoBuyerOfficeFax,String,Office,OfficeFax,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerOfficeKey,CoBuyerOffice,CoBuyerOfficeMlsId,String,Office,OfficeMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+Property,CoBuyerOfficeKey,CoBuyerOffice,CoBuyerOfficeName,String,Office,OfficeName,1.00,target_prefix,0.750,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerOfficeKey,CoBuyerOffice,CoBuyerOfficePhone,String,Office,OfficePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerOfficeKey,CoBuyerOffice,CoBuyerOfficePhoneExt,String,Office,OfficePhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoBuyerOfficeKey,CoBuyerOffice,CoBuyerOfficeURL,String,Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,CoListAgentKey,CoListAgent,CoListAgentAOR,"String List, Single",Member,MemberAOR,1.00,target_prefix,0.750,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentDesignation,"String List, Multi",Member,MemberDesignation,1.00,target_prefix,1.000,0.5,0,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentDirectPhone,String,Member,MemberDirectPhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentEmail,String,Member,MemberEmail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentFax,String,Member,MemberFax,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentFirstName,String,Member,MemberFirstName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentFullName,String,Member,MemberFullName,1.00,target_prefix,0.667,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentHomePhone,String,Member,MemberHomePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentLastName,String,Member,MemberLastName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentMiddleName,String,Member,MemberMiddleName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentMlsId,String,Member,MemberMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+Property,CoListAgentKey,CoListAgent,CoListAgentMobilePhone,String,Member,MemberMobilePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentNamePrefix,String,Member,MemberNamePrefix,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentNameSuffix,String,Member,MemberNameSuffix,1.00,target_prefix,0.714,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentOfficePhone,String,Member,MemberOfficePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentOfficePhoneExt,String,Member,MemberOfficePhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentPager,String,Member,MemberPager,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentPreferredPhone,String,Member,MemberPreferredPhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentPreferredPhoneExt,String,Member,MemberPreferredPhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentStateLicense,String,Member,MemberStateLicense,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentTollFreePhone,String,Member,MemberTollFreePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentURL,String,Member,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,CoListAgentKey,CoListAgent,CoListAgentVoiceMail,String,Member,MemberVoiceMail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListAgentKey,CoListAgent,CoListAgentVoiceMailExt,String,Member,MemberVoiceMailExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListOfficeKey,CoListOffice,CoListOfficeAOR,"String List, Single",Office,OfficeAOR,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListOfficeKey,CoListOffice,CoListOfficeEmail,String,Office,OfficeEmail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListOfficeKey,CoListOffice,CoListOfficeFax,String,Office,OfficeFax,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListOfficeKey,CoListOffice,CoListOfficeMlsId,String,Office,OfficeMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+Property,CoListOfficeKey,CoListOffice,CoListOfficeName,String,Office,OfficeName,1.00,target_prefix,0.600,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListOfficeKey,CoListOffice,CoListOfficePhone,String,Office,OfficePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListOfficeKey,CoListOffice,CoListOfficePhoneExt,String,Office,OfficePhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,CoListOfficeKey,CoListOffice,CoListOfficeURL,String,Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,ListAgentKey,ListAgent,ListAgentAOR,"String List, Single",Member,MemberAOR,1.00,target_prefix,0.750,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentDesignation,"String List, Multi",Member,MemberDesignation,1.00,target_prefix,0.952,0.5,0,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentDirectPhone,String,Member,MemberDirectPhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentEmail,String,Member,MemberEmail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentFax,String,Member,MemberFax,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentFirstName,String,Member,MemberFirstName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentFullName,String,Member,MemberFullName,1.00,target_prefix,0.667,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentHomePhone,String,Member,MemberHomePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentLastName,String,Member,MemberLastName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentMiddleName,String,Member,MemberMiddleName,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentMlsId,String,Member,MemberMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+Property,ListAgentKey,ListAgent,ListAgentMobilePhone,String,Member,MemberMobilePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentNamePrefix,String,Member,MemberNamePrefix,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentNameSuffix,String,Member,MemberNameSuffix,1.00,target_prefix,0.714,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentOfficePhone,String,Member,MemberOfficePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentOfficePhoneExt,String,Member,MemberOfficePhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentPager,String,Member,MemberPager,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentPreferredPhone,String,Member,MemberPreferredPhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentPreferredPhoneExt,String,Member,MemberPreferredPhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentStateLicense,String,Member,MemberStateLicense,1.00,target_prefix,0.714,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentTollFreePhone,String,Member,MemberTollFreePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentURL,String,Member,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,ListAgentKey,ListAgent,ListAgentVoiceMail,String,Member,MemberVoiceMail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListAgentKey,ListAgent,ListAgentVoiceMailExt,String,Member,MemberVoiceMailExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListOfficeKey,ListOffice,ListOfficeAOR,"String List, Single",Office,OfficeAOR,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListOfficeKey,ListOffice,ListOfficeEmail,String,Office,OfficeEmail,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListOfficeKey,ListOffice,ListOfficeFax,String,Office,OfficeFax,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListOfficeKey,ListOffice,ListOfficeMlsId,String,Office,OfficeMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+Property,ListOfficeKey,ListOffice,ListOfficeName,String,Office,OfficeName,1.00,target_prefix,0.600,1.0,1,A|B|C|D,drop_from_host,
+Property,ListOfficeKey,ListOffice,ListOfficePhone,String,Office,OfficePhone,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListOfficeKey,ListOffice,ListOfficePhoneExt,String,Office,OfficePhoneExt,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,
+Property,ListOfficeKey,ListOffice,ListOfficeURL,String,Office,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,ListTeamKey,ListTeam,ListTeamName,String,Teams,TeamName,1.00,target_singular_prefix,0.125,1.0,1,A|B|D,review,name_type_match_but_definitions_differ
+Property,OriginatingSystemID,OriginatingSystem,OriginatingSystemKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,OriginatingSystemID,OriginatingSystem,OriginatingSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,SourceSystemID,SourceSystem,SourceSystemKey,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+Property,SourceSystemID,SourceSystem,SourceSystemName,String,OUID,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+PropertyGreenVerification,ListingKey,Listing,ListingId,String,Property,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+PropertyPowerProduction,ListingKey,Listing,ListingId,String,Property,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+PropertyRooms,ListingKey,Listing,ListingId,String,Property,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+PropertyUnitTypes,ListingKey,Listing,ListingId,String,Property,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+SavedSearch,MemberKey,Member,MemberMlsId,String,Member,MemberMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+Showing,ShowingAgentKey,ShowingAgent,ShowingAgentMlsID,String,Member,MemberMlsId,0.80,target_prefix_casefold,0.667,1.0,1,A|B|C|D,drop_from_host,
+ShowingAppointment,ShowingAgentKey,ShowingAgent,ShowingAgentMlsId,String,Member,MemberMlsId,1.00,target_prefix,0.667,1.0,1,A|B|C|D,review,jaccard_0.67_below_id_threshold_0.7
+ShowingRequest,ShowingAgentKey,ShowingAgent,ShowingAgentMlsId,String,Member,MemberMlsId,1.00,target_prefix,0.667,1.0,1,A|B|C|D,review,jaccard_0.67_below_id_threshold_0.7
+TeamMembers,MemberKey,Member,MemberLoginId,String,Member,MemberLoginId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+TeamMembers,MemberKey,Member,MemberMlsId,String,Member,MemberMlsId,1.00,target_prefix,1.000,1.0,1,A|B|C|D,drop_from_host,id_suffix_threshold_0.7
+TeamMembers,TeamKey,Team,TeamImpersonationLevel,"String List, Single",Teams,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+TeamMembers,TeamKey,Team,TeamMemberKey,String,Teams,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+TeamMembers,TeamKey,Team,TeamMemberStateLicense,String,Teams,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match
+TeamMembers,TeamKey,Team,TeamMemberType,"String List, Single",Teams,,0.00,no_match,0.000,0.0,0,A,keep_both,no_child_match

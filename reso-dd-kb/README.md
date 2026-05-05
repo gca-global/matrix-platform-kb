@@ -4,10 +4,9 @@ Knowledge base for the **RESO Data Dictionary 2.0**, built from a verifiable
 local mirror of [`dd.reso.org/DD2.0/`](https://dd.reso.org/DD2.0/).
 
 This directory is being rebuilt from scratch in three phases.
-**Phase 1 (mirror + structured extraction) and Phase 2 (FK
-correlation analysis) are complete.** Phase 2.5 (satellite / 2NF
-audit) and Phase 3 (DBML generation) will be added by subsequent
-commits.
+**Phase 1 (mirror + structured extraction), Phase 2 (FK correlation
+analysis) and Phase 2.5 (satellite / 2NF audit) are complete.**
+Phase 3 (DBML generation) will be added by a subsequent commit.
 
 ## Why a rebuild
 
@@ -44,6 +43,12 @@ scripts/
   03c_extract_name_signals.py        # Phase 2: name -> _signals_name.csv
   03_merge_signals.py                # Phase 2: merge -> relationships.csv
 
+  04a_prefix_satellites.py           # Phase 2.5: prefix candidates
+  04b_child_match.py                 # Phase 2.5: child column match
+  04c_definition_similarity.py       # Phase 2.5: Jaccard on prose
+  04d_type_match.py                  # Phase 2.5: type + lookup match
+  04_merge_satellites.py             # Phase 2.5: merge -> satellites.csv
+
 raw/                     # structured extraction
   # Phase 1 outputs
   resources.csv          # 41 rows
@@ -56,6 +61,12 @@ raw/                     # structured extraction
   _signals_type.csv
   _signals_name.csv
   relationships.csv      # 226 rows: FK inventory with per-row evidence
+  # Phase 2.5 outputs (derived from Phase 1 + Phase 2)
+  _satellites_prefix.csv
+  _satellites_child_match.csv
+  _satellites_definition.csv
+  _satellites_type.csv
+  satellites.csv         # 208 rows: 2NF audit with drop/review/keep
 ```
 
 ## Refresh workflow
@@ -74,6 +85,15 @@ python3 scripts/03c_extract_name_signals.py
 python3 scripts/03_merge_signals.py
 # 03_merge_signals.py runs verification gates and prints a
 # fk_kind x confidence histogram.
+
+# Phase 2.5: satellite / 2NF audit (cheap; <1s).
+python3 scripts/04a_prefix_satellites.py
+python3 scripts/04b_child_match.py
+python3 scripts/04c_definition_similarity.py
+python3 scripts/04d_type_match.py
+python3 scripts/04_merge_satellites.py
+# 04_merge_satellites.py runs verification gates and prints a
+# recommendation histogram.
 ```
 
 ## Phase plan (this README will be updated as each phase lands)
@@ -82,7 +102,7 @@ python3 scripts/03_merge_signals.py
 |---|---|---|
 | 1 | Mirror `dd.reso.org/DD2.0` + structured extraction | done |
 | 2 | FK correlation analysis from Definition prose + type + name -> `raw/relationships.csv` | done |
-| 2.5 | Satellite / duplicate detection (2NF audit) -> `raw/satellites.csv` | not started |
+| 2.5 | Satellite / duplicate detection (2NF audit) -> `raw/satellites.csv` | done |
 | 3 | DBML build consuming `raw/relationships.csv` + reviewed `raw/satellites.csv` | not started |
 
 See [`methodology.md`](methodology.md) for the per-phase methodology

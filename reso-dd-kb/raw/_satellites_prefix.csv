@@ -1,0 +1,209 @@
+host_resource,host_field,fk_stem,target_resource,candidate_satellite,suffix_after_stem,candidate_simple_type
+CaravanStop,CaravanKey,Caravan,Caravan,CaravanStopKey,StopKey,String
+CaravanStop,StopKey,Stop,CaravanStop,StopAttendedBy,AttendedBy,"String List, Single"
+CaravanStop,StopKey,Stop,CaravanStop,StopClassName,ClassName,"String List, Single"
+CaravanStop,StopKey,Stop,CaravanStop,StopDate,Date,Date
+CaravanStop,StopKey,Stop,CaravanStop,StopEndTime,EndTime,Timestamp
+CaravanStop,StopKey,Stop,CaravanStop,StopId,Id,String
+CaravanStop,StopKey,Stop,CaravanStop,StopOrder,Order,Number
+CaravanStop,StopKey,Stop,CaravanStop,StopRefreshments,Refreshments,String
+CaravanStop,StopKey,Stop,CaravanStop,StopRemarks,Remarks,String
+CaravanStop,StopKey,Stop,CaravanStop,StopResourceName,ResourceName,"String List, Single"
+CaravanStop,StopKey,Stop,CaravanStop,StopShowingAgentFirstName,ShowingAgentFirstName,String
+CaravanStop,StopKey,Stop,CaravanStop,StopShowingAgentLastName,ShowingAgentLastName,String
+CaravanStop,StopKey,Stop,CaravanStop,StopShowingAgentMlsId,ShowingAgentMlsId,String
+CaravanStop,StopKey,Stop,CaravanStop,StopStartTime,StartTime,Timestamp
+CaravanStop,StopShowingAgentKey,StopShowingAgent,Member,StopShowingAgentFirstName,FirstName,String
+CaravanStop,StopShowingAgentKey,StopShowingAgent,Member,StopShowingAgentLastName,LastName,String
+CaravanStop,StopShowingAgentKey,StopShowingAgent,Member,StopShowingAgentMlsId,MlsId,String
+ContactListings,ContactKey,Contact,Contacts,ContactListingPreference,ListingPreference,"String List, Single"
+ContactListings,ContactKey,Contact,Contacts,ContactListingsKey,ListingsKey,String
+ContactListings,ContactKey,Contact,Contacts,ContactLoginId,LoginId,String
+ContactListings,ContactKey,Contact,Contacts,ContactNotesUnreadYN,NotesUnreadYN,Boolean
+Contacts,OriginatingSystemID,OriginatingSystem,OUID,OriginatingSystemContactKey,ContactKey,String
+Contacts,OriginatingSystemID,OriginatingSystem,OUID,OriginatingSystemName,Name,String
+Contacts,SourceSystemID,SourceSystem,OUID,SourceSystemContactKey,ContactKey,String
+Contacts,SourceSystemID,SourceSystem,OUID,SourceSystemName,Name,String
+HistoryTransactional,OriginatingSystemID,OriginatingSystem,OUID,OriginatingSystemHistoryKey,HistoryKey,String
+HistoryTransactional,OriginatingSystemID,OriginatingSystem,OUID,OriginatingSystemName,Name,String
+HistoryTransactional,SourceSystemID,SourceSystem,OUID,SourceSystemHistoryKey,HistoryKey,String
+HistoryTransactional,SourceSystemID,SourceSystem,OUID,SourceSystemName,Name,String
+Media,SourceSystemID,SourceSystem,OUID,SourceSystemMediaKey,MediaKey,String
+Media,SourceSystemID,SourceSystem,OUID,SourceSystemName,Name,String
+Media,SourceSystemID,SourceSystem,OUID,SourceSystemResourceRecordId,ResourceRecordId,String
+Media,SourceSystemID,SourceSystem,OUID,SourceSystemResourceRecordKey,ResourceRecordKey,String
+Media,SourceSystemID,SourceSystem,OUID,SourceSystemResourceRecordSystemId,ResourceRecordSystemId,String
+Member,OfficeKey,Office,Office,OfficeMlsId,MlsId,String
+Member,OfficeKey,Office,Office,OfficeName,Name,String
+Member,OriginatingSystemID,OriginatingSystem,OUID,OriginatingSystemMemberKey,MemberKey,String
+Member,OriginatingSystemID,OriginatingSystem,OUID,OriginatingSystemName,Name,String
+Member,SourceSystemID,SourceSystem,OUID,SourceSystemMemberKey,MemberKey,String
+Member,SourceSystemID,SourceSystem,OUID,SourceSystemName,Name,String
+Office,MainOfficeKey,MainOffice,Office,MainOfficeMlsId,MlsId,String
+Office,OfficeBrokerKey,OfficeBroker,Member,OfficeBrokerMlsId,MlsId,String
+Office,OfficeManagerKey,OfficeManager,Member,OfficeManagerMlsId,MlsId,String
+Office,OriginatingSystemID,OriginatingSystem,OUID,OriginatingSystemName,Name,String
+Office,OriginatingSystemID,OriginatingSystem,OUID,OriginatingSystemOfficeKey,OfficeKey,String
+Office,SourceSystemID,SourceSystem,OUID,SourceSystemName,Name,String
+Office,SourceSystemID,SourceSystem,OUID,SourceSystemOfficeKey,OfficeKey,String
+OfficeAssociation,OfficeKey,Office,Office,OfficeAssociationPrimaryIndicator,AssociationPrimaryIndicator,"String List, Single"
+OfficeAssociation,OfficeKey,Office,Office,OfficeAssociationStatus,AssociationStatus,"String List, Single"
+OfficeAssociation,OfficeKey,Office,Office,OfficeAssociationStatusDate,AssociationStatusDate,Date
+OfficeAssociation,OfficeKey,Office,Office,OfficeMlsId,MlsId,String
+OfficeCorporateLicense,OfficeKey,Office,Office,OfficeCorporateLicense,CorporateLicense,String
+OfficeCorporateLicense,OfficeKey,Office,Office,OfficeCorporateLicenseExpirationDate,CorporateLicenseExpirationDate,Date
+OfficeCorporateLicense,OfficeKey,Office,Office,OfficeCorporateLicenseKey,CorporateLicenseKey,String
+OfficeCorporateLicense,OfficeKey,Office,Office,OfficeCorporateLicenseState,CorporateLicenseState,"String List, Single"
+OfficeCorporateLicense,OfficeKey,Office,Office,OfficeCorporateLicenseType,CorporateLicenseType,"String List, Single"
+OfficeCorporateLicense,OfficeKey,Office,Office,OfficeMlsId,MlsId,String
+OpenHouse,ShowingAgentKey,ShowingAgent,Member,ShowingAgentFirstName,FirstName,String
+OpenHouse,ShowingAgentKey,ShowingAgent,Member,ShowingAgentLastName,LastName,String
+OpenHouse,ShowingAgentKey,ShowingAgent,Member,ShowingAgentMlsID,MlsID,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentAOR,AOR,"String List, Single"
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentDesignation,Designation,"String List, Multi"
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentDirectPhone,DirectPhone,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentEmail,Email,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentFax,Fax,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentFirstName,FirstName,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentFullName,FullName,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentHomePhone,HomePhone,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentLastName,LastName,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentMiddleName,MiddleName,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentMlsId,MlsId,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentMobilePhone,MobilePhone,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentNamePrefix,NamePrefix,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentNameSuffix,NameSuffix,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentOfficePhone,OfficePhone,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentOfficePhoneExt,OfficePhoneExt,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentPager,Pager,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentPreferredPhone,PreferredPhone,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentPreferredPhoneExt,PreferredPhoneExt,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentStateLicense,StateLicense,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentTollFreePhone,TollFreePhone,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentURL,URL,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentVoiceMail,VoiceMail,String
+Property,BuyerAgentKey,BuyerAgent,Member,BuyerAgentVoiceMailExt,VoiceMailExt,String
+Property,BuyerOfficeKey,BuyerOffice,Office,BuyerOfficeAOR,AOR,"String List, Single"
+Property,BuyerOfficeKey,BuyerOffice,Office,BuyerOfficeEmail,Email,String
+Property,BuyerOfficeKey,BuyerOffice,Office,BuyerOfficeFax,Fax,String
+Property,BuyerOfficeKey,BuyerOffice,Office,BuyerOfficeMlsId,MlsId,String
+Property,BuyerOfficeKey,BuyerOffice,Office,BuyerOfficeName,Name,String
+Property,BuyerOfficeKey,BuyerOffice,Office,BuyerOfficePhone,Phone,String
+Property,BuyerOfficeKey,BuyerOffice,Office,BuyerOfficePhoneExt,PhoneExt,String
+Property,BuyerOfficeKey,BuyerOffice,Office,BuyerOfficeURL,URL,String
+Property,BuyerTeamKey,BuyerTeam,Teams,BuyerTeamName,Name,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentAOR,AOR,"String List, Single"
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentDesignation,Designation,"String List, Multi"
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentDirectPhone,DirectPhone,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentEmail,Email,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentFax,Fax,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentFirstName,FirstName,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentFullName,FullName,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentHomePhone,HomePhone,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentLastName,LastName,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentMiddleName,MiddleName,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentMlsId,MlsId,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentMobilePhone,MobilePhone,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentNamePrefix,NamePrefix,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentNameSuffix,NameSuffix,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentOfficePhone,OfficePhone,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentOfficePhoneExt,OfficePhoneExt,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentPager,Pager,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentPreferredPhone,PreferredPhone,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentPreferredPhoneExt,PreferredPhoneExt,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentStateLicense,StateLicense,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentTollFreePhone,TollFreePhone,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentURL,URL,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentVoiceMail,VoiceMail,String
+Property,CoBuyerAgentKey,CoBuyerAgent,Member,CoBuyerAgentVoiceMailExt,VoiceMailExt,String
+Property,CoBuyerOfficeKey,CoBuyerOffice,Office,CoBuyerOfficeAOR,AOR,"String List, Single"
+Property,CoBuyerOfficeKey,CoBuyerOffice,Office,CoBuyerOfficeEmail,Email,String
+Property,CoBuyerOfficeKey,CoBuyerOffice,Office,CoBuyerOfficeFax,Fax,String
+Property,CoBuyerOfficeKey,CoBuyerOffice,Office,CoBuyerOfficeMlsId,MlsId,String
+Property,CoBuyerOfficeKey,CoBuyerOffice,Office,CoBuyerOfficeName,Name,String
+Property,CoBuyerOfficeKey,CoBuyerOffice,Office,CoBuyerOfficePhone,Phone,String
+Property,CoBuyerOfficeKey,CoBuyerOffice,Office,CoBuyerOfficePhoneExt,PhoneExt,String
+Property,CoBuyerOfficeKey,CoBuyerOffice,Office,CoBuyerOfficeURL,URL,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentAOR,AOR,"String List, Single"
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentDesignation,Designation,"String List, Multi"
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentDirectPhone,DirectPhone,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentEmail,Email,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentFax,Fax,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentFirstName,FirstName,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentFullName,FullName,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentHomePhone,HomePhone,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentLastName,LastName,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentMiddleName,MiddleName,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentMlsId,MlsId,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentMobilePhone,MobilePhone,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentNamePrefix,NamePrefix,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentNameSuffix,NameSuffix,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentOfficePhone,OfficePhone,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentOfficePhoneExt,OfficePhoneExt,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentPager,Pager,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentPreferredPhone,PreferredPhone,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentPreferredPhoneExt,PreferredPhoneExt,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentStateLicense,StateLicense,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentTollFreePhone,TollFreePhone,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentURL,URL,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentVoiceMail,VoiceMail,String
+Property,CoListAgentKey,CoListAgent,Member,CoListAgentVoiceMailExt,VoiceMailExt,String
+Property,CoListOfficeKey,CoListOffice,Office,CoListOfficeAOR,AOR,"String List, Single"
+Property,CoListOfficeKey,CoListOffice,Office,CoListOfficeEmail,Email,String
+Property,CoListOfficeKey,CoListOffice,Office,CoListOfficeFax,Fax,String
+Property,CoListOfficeKey,CoListOffice,Office,CoListOfficeMlsId,MlsId,String
+Property,CoListOfficeKey,CoListOffice,Office,CoListOfficeName,Name,String
+Property,CoListOfficeKey,CoListOffice,Office,CoListOfficePhone,Phone,String
+Property,CoListOfficeKey,CoListOffice,Office,CoListOfficePhoneExt,PhoneExt,String
+Property,CoListOfficeKey,CoListOffice,Office,CoListOfficeURL,URL,String
+Property,ListAgentKey,ListAgent,Member,ListAgentAOR,AOR,"String List, Single"
+Property,ListAgentKey,ListAgent,Member,ListAgentDesignation,Designation,"String List, Multi"
+Property,ListAgentKey,ListAgent,Member,ListAgentDirectPhone,DirectPhone,String
+Property,ListAgentKey,ListAgent,Member,ListAgentEmail,Email,String
+Property,ListAgentKey,ListAgent,Member,ListAgentFax,Fax,String
+Property,ListAgentKey,ListAgent,Member,ListAgentFirstName,FirstName,String
+Property,ListAgentKey,ListAgent,Member,ListAgentFullName,FullName,String
+Property,ListAgentKey,ListAgent,Member,ListAgentHomePhone,HomePhone,String
+Property,ListAgentKey,ListAgent,Member,ListAgentLastName,LastName,String
+Property,ListAgentKey,ListAgent,Member,ListAgentMiddleName,MiddleName,String
+Property,ListAgentKey,ListAgent,Member,ListAgentMlsId,MlsId,String
+Property,ListAgentKey,ListAgent,Member,ListAgentMobilePhone,MobilePhone,String
+Property,ListAgentKey,ListAgent,Member,ListAgentNamePrefix,NamePrefix,String
+Property,ListAgentKey,ListAgent,Member,ListAgentNameSuffix,NameSuffix,String
+Property,ListAgentKey,ListAgent,Member,ListAgentOfficePhone,OfficePhone,String
+Property,ListAgentKey,ListAgent,Member,ListAgentOfficePhoneExt,OfficePhoneExt,String
+Property,ListAgentKey,ListAgent,Member,ListAgentPager,Pager,String
+Property,ListAgentKey,ListAgent,Member,ListAgentPreferredPhone,PreferredPhone,String
+Property,ListAgentKey,ListAgent,Member,ListAgentPreferredPhoneExt,PreferredPhoneExt,String
+Property,ListAgentKey,ListAgent,Member,ListAgentStateLicense,StateLicense,String
+Property,ListAgentKey,ListAgent,Member,ListAgentTollFreePhone,TollFreePhone,String
+Property,ListAgentKey,ListAgent,Member,ListAgentURL,URL,String
+Property,ListAgentKey,ListAgent,Member,ListAgentVoiceMail,VoiceMail,String
+Property,ListAgentKey,ListAgent,Member,ListAgentVoiceMailExt,VoiceMailExt,String
+Property,ListOfficeKey,ListOffice,Office,ListOfficeAOR,AOR,"String List, Single"
+Property,ListOfficeKey,ListOffice,Office,ListOfficeEmail,Email,String
+Property,ListOfficeKey,ListOffice,Office,ListOfficeFax,Fax,String
+Property,ListOfficeKey,ListOffice,Office,ListOfficeMlsId,MlsId,String
+Property,ListOfficeKey,ListOffice,Office,ListOfficeName,Name,String
+Property,ListOfficeKey,ListOffice,Office,ListOfficePhone,Phone,String
+Property,ListOfficeKey,ListOffice,Office,ListOfficePhoneExt,PhoneExt,String
+Property,ListOfficeKey,ListOffice,Office,ListOfficeURL,URL,String
+Property,ListTeamKey,ListTeam,Teams,ListTeamName,Name,String
+Property,OriginatingSystemID,OriginatingSystem,OUID,OriginatingSystemKey,Key,String
+Property,OriginatingSystemID,OriginatingSystem,OUID,OriginatingSystemName,Name,String
+Property,SourceSystemID,SourceSystem,OUID,SourceSystemKey,Key,String
+Property,SourceSystemID,SourceSystem,OUID,SourceSystemName,Name,String
+PropertyGreenVerification,ListingKey,Listing,Property,ListingId,Id,String
+PropertyPowerProduction,ListingKey,Listing,Property,ListingId,Id,String
+PropertyRooms,ListingKey,Listing,Property,ListingId,Id,String
+PropertyUnitTypes,ListingKey,Listing,Property,ListingId,Id,String
+SavedSearch,MemberKey,Member,Member,MemberMlsId,MlsId,String
+Showing,ShowingAgentKey,ShowingAgent,Member,ShowingAgentMlsID,MlsID,String
+ShowingAppointment,ShowingAgentKey,ShowingAgent,Member,ShowingAgentMlsId,MlsId,String
+ShowingRequest,ShowingAgentKey,ShowingAgent,Member,ShowingAgentMlsId,MlsId,String
+TeamMembers,MemberKey,Member,Member,MemberLoginId,LoginId,String
+TeamMembers,MemberKey,Member,Member,MemberMlsId,MlsId,String
+TeamMembers,TeamKey,Team,Teams,TeamImpersonationLevel,ImpersonationLevel,"String List, Single"
+TeamMembers,TeamKey,Team,Teams,TeamMemberKey,MemberKey,String
+TeamMembers,TeamKey,Team,Teams,TeamMemberStateLicense,MemberStateLicense,String
+TeamMembers,TeamKey,Team,Teams,TeamMemberType,MemberType,"String List, Single"

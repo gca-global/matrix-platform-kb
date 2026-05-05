@@ -385,6 +385,214 @@ Total: 226 relationships covering 226 distinct fields out of 1,745.
 The 86% of fields with no FK signal are scalar columns (strings,
 numbers, dates, lookups) - exactly as expected.
 
+# Methodology - Phase 2.5 (satellite / 2NF audit)
+
+## Goal
+
+For every FK on a host resource, find the *carry-along* columns that
+duplicate data already reachable through the FK join. Phase 2.5
+produces `raw/satellites.csv` - one row per
+(host_resource, host_field, candidate_satellite, target_resource,
+target_field) pair, with a recommendation in
+`{drop_from_host, drop_from_child, keep_both, review}`. Phase 3
+consumes the recommendations to build a true 2NF DBML.
+
+## Source-of-truth observation
+
+Manual inspection of the canonical pattern (Property's listing-agent
+satellites against the Member resource) confirmed RESO's convention:
+each resource prefixes its columns with the resource name (`Member`
+has `MemberFirstName`, `MemberMlsId`; `Office` has `OfficeName`,
+`OfficeEmail`). The satellite columns on the host echo the FK column's
+stem (`ListAgent`, `BuyerOffice`) and replace the resource-name
+prefix on the target side. So:
+
+  Property.ListAgentFirstName  <==>  Member.MemberFirstName
+  Property.BuyerOfficeName     <==>  Office.OfficeName
+  TeamMembers.MemberMlsId      <==>  Member.MemberMlsId
+
+24 of 26 `Property.ListAgent*` columns matched a `Member.Member*`
+column in the same shape; 8 of 10 `Property.ListOffice*` matched
+an `Office.Office*` column. The two unmatched cases per group are
+the bare `Resource`-typed companion (`ListAgent`, `ListOffice` -
+the FK's typed inverse, not a satellite) and `URL` columns that
+have no Member/Office equivalent.
+
+## Four signals
+
+Each candidate (host_resource, candidate_satellite, target_resource,
+target_field) triple is independently evaluated by four signals.
+A separate `_satellites_*.csv` carries each signal's raw output so
+reviewers can drill in.
+
+### Signal A: name prefix on host
+
+For every FK column `(host, host_field=fk, target)` in
+`relationships.csv` with `confidence in {high, medium}` and
+non-empty target_resource (polymorphic FKs are skipped), derive
+`stem = strip_key_id_suffix(fk)`. Every other column on `host`
+whose StandardName starts with `stem` (and is not itself another
+FK column or the bare `Resource`-typed companion) is a candidate
+satellite. The portion after the stem is the candidate's `suffix`.
+
+### Signal B: child-side column match
+
+For each candidate, attempt to find a column on `target_resource`
+named (in priority order):
+
+1. `<target><suffix>` (e.g. suffix=`FirstName`, target=`Member` ->
+   `MemberFirstName`)
+2. `<target_singular><suffix>` (for pluralised resources like
+   `TeamMembers` -> `TeamMember`, `Contacts` -> `Contact`)
+3. `<suffix>` (bare; rarely hits in DD 2.0 but kept for safety)
+
+Match scores: exact 1.0; case-folded 0.9; underscore-stripped 0.8;
+no match 0. The first non-zero score wins.
+
+### Signal C: Definition similarity
+
+Jaccard on whitespace-tokenised, lowercased, punctuation-stripped
+Definition prose with two filter sets removed:
+
+- **Stopwords**: `the, a, of, to, in, for, from, this, that, is, was,
+  be, an, on, with, by, as, at, or, and, it, its, if, e.g., i.e.,
+  etc., their, which, may, this, has, have`.
+- **Role-context tokens**: `listing, list, buyer, co, cobuyer,
+  agent, member, office, contact, contacts, team, teams, broker,
+  manager, owner, source, originating`. Without this set the
+  perfectly-equivalent `Property.ListAgentFirstName` ("The first
+  name of the listing agent.") vs `Member.MemberFirstName` ("The
+  first name of the member.") would score 0.4 (shared = `{first,
+  name}`); with the set removed it scores 1.0 (shared = `{first,
+  name}`, union = `{first, name}`).
+
+Calibration on 3 known carry-alongs:
+
+| pair | raw jaccard | role-stripped jaccard |
+|---|---:|---:|
+| Property.ListAgentMlsId / Member.MemberMlsId | 1.00 | 1.00 |
+| Property.ListOfficeName / Office.OfficeName | 0.60 | ~0.80 |
+| Property.ListAgentFirstName / Member.MemberFirstName | 0.40 | 1.00 |
+
+Threshold: jaccard >= 0.6 fires Signal C. jaccard in [0.4, 0.6) is
+borderline and feeds the `review` recommendation.
+
+### Signal D: type + lookup match
+
+Compare SimpleDataType and Lookup cells between host candidate and
+target field:
+
+- both match exactly -> `type_match=1`
+- only SimpleDataType matches -> `type_match=0.5`
+- mismatch -> `type_match=0`
+
+For Lookup specifically, both empty counts as a match (it just means
+neither column is enum-typed).
+
+## Recommendation rules
+
+`recommendation` in `{drop_from_host, drop_from_child, keep_both,
+review}`:
+
+- **drop_from_host** - all four signals fire AND jaccard >= 0.6 AND
+  type_match >= 0.5. The host column is a verbatim carry-along; the
+  FK already provides the join, so the host column violates 2NF.
+  Identifier columns (suffix matches `MlsId`, `Id`, `Key`,
+  `NationalAssociationId`, `LoginId`) require the stricter jaccard
+  >= 0.7 to limit denormalisation false positives.
+- **review** - 3 signals fire, OR all 4 fire but jaccard in
+  [0.4, 0.6). Common case: short definitions or definitions where
+  the host adds context the role-stripping didn't catch.
+- **keep_both** - 0..2 signals fire. The columns are unrelated
+  despite the prefix.
+- **drop_from_child** - reserved for human-supplied overrides via
+  `raw/_satellites_overrides.csv` (not auto-emitted in this phase).
+
+## Verification gates (hard-fail)
+
+`04_merge_satellites.py` exits non-zero if any of:
+
+1. A `satellites.csv` row's `(host_resource, host_field)` is not in
+   `fields.csv`.
+2. A row's `(target_resource, target_field)` is not in `fields.csv`.
+3. The row's `(host_resource, fk_column, target_resource)` FK is
+   not in `relationships.csv` with `confidence in {high, medium}`.
+4. `recommendation` not in
+   `{drop_from_host, drop_from_child, keep_both, review}`.
+
+## What Phase 2.5 does NOT do
+
+- Does NOT delete columns from any CSV. It produces a recommendation
+  file that Phase 3 consumes after human review.
+- Does NOT generate DBML.
+- Does NOT touch `mirror/`, `_meta/`, or any Phase-1 file.
+- Does NOT create new FKs - it only audits FKs already in
+  `relationships.csv`.
+
+## Spot-check results (2026-05-05)
+
+Two seeded samples (random.seed=42, then random.seed=1729 for a
+non-overlapping second pass) of `drop_from_host`, plus an audit of
+all `review` rows and all `keep_both` rows that name a non-empty
+target field.
+
+**`drop_from_host` precision: 30 / 30 = 100%** across both samples.
+Every audited row was a verbatim or near-verbatim carry-along
+of the target column. Examples:
+
+- `Property.ListAgentMlsId` <-> `Member.MemberMlsId` (jaccard=1.0)
+- `Property.BuyerOfficeName` <-> `Office.OfficeName` (jaccard=0.667;
+  host adds "representing the buyer", but the column IS the same)
+- `Property.CoListAgentVoiceMailExt` <-> `Member.MemberVoiceMailExt`
+  (jaccard=1.0; identical content)
+- `Property.CoListOfficeName` <-> `Office.OfficeName` (jaccard=0.6)
+- `OpenHouse.ShowingAgentMlsID` <-> `Member.MemberMlsId` (jaccard=1.0)
+
+**Tokenization fix during spot-check.** The first pass left `'` and
+`-` un-split, so possessives (`buyer's`) and compound role tokens
+(`co-agent`, `co-listing`) stayed as opaque tokens that role-context
+removal couldn't strip. Definitions like "the first name of the
+buyer's co-agent" got jaccard=0.5 against `Member.MemberFirstName`
+("the first name of the member") and were sent to `review` instead
+of `drop_from_host`. Fixed in `04c_definition_similarity.py` by
+splitting on `\s\-'\u2019` and discarding the trailing `s` from
+possessive remnants. After the fix:
+
+- 11 buyer's / co-agent / co-listing rows correctly graduated to
+  `drop_from_host`;
+- 5 high-name + high-type but low-jaccard cases (`Office.OfficeBrokerMlsId`
+  -> `Member.MemberMlsId`, `Property.BuyerTeamName` -> `Teams.TeamName`,
+  etc.) were lifted from `keep_both` -> `review` so the human
+  reviewer sees them.
+
+**Final histogram (208 candidates across 42 distinct FKs):**
+
+| recommendation     |  count |
+|--------------------|-------:|
+| drop_from_host     |    134 |
+| keep_both          |     65 |
+| review             |      9 |
+
+Of the 65 `keep_both` rows, 60 have an empty `target_field` (Signal
+B unmatched - the host has a `*URL` or `*StateLicense` column the
+target doesn't carry, which is correct semantics) and 5 are
+identifier columns where the FK already implies the join but the
+host column has been intentionally given a different role
+(`MainOfficeMlsId`, `OfficeBrokerMlsId` cases) - we did promote 3
+of these to `review` in the rule fix above; the remaining 5 are
+where Signal C still rejected the pair on prose grounds.
+
+The 9 `review` rows split:
+- 4 borderline-jaccard rows (extra context like "for the caravan
+  stop" or "scheduled to access the property") that a reviewer
+  would convert to drop;
+- 5 name+type-match-but-prose-differs rows (the
+  `OfficeBrokerMlsId` family) that need a deliberate human call.
+
+Phase 3 should consume only the `drop_from_host` rows after a human
+sign-off pass, treating `review` as a queue and `keep_both` as
+"leave alone".
+
 ## What Phase 2 does NOT do
 
 - No column drops, no satellite detection - that's Phase 2.5.
