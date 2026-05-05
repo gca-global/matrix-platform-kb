@@ -1,11 +1,29 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `caravan` (Caravan)
 
 > Fields and lookups for the date, time, location and other particulars about caravan events.
 
-- Source: [https://dd.reso.org/DD2.0/Caravan/](https://dd.reso.org/DD2.0/Caravan/)
-- Field count on dd.reso.org: **33**
-- Primary key: `caravan_key`
-- Last revised upstream: 2/3/2021
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `caravan_key` |
+| **Fields on dd.reso.org** | 33 |
+| **Columns in canonical DBML** | 33 (omits 0 satellite drops + 0 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 1 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/Caravan/](https://dd.reso.org/DD2.0/Caravan/) |
+| **Last revised upstream** | 2/3/2021 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    caravan["caravan"]
+    caravan_stop["caravan_stop"]
+    caravan_stop -->|"caravan_key"| caravan
+```
 
 ## Fields
 

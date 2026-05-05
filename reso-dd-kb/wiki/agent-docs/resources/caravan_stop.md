@@ -1,11 +1,31 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `caravan_stop` (CaravanStop)
 
 > Stops along a caravan tour, connecting Caravan records to Open House records.
 
-- Source: [https://dd.reso.org/DD2.0/CaravanStop/](https://dd.reso.org/DD2.0/CaravanStop/)
-- Field count on dd.reso.org: **25**
-- Primary key: `caravan_stop_key`
-- Last revised upstream: 2/3/2021
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `caravan_stop_key` |
+| **Fields on dd.reso.org** | 25 |
+| **Columns in canonical DBML** | 24 (omits 1 satellite drops + 0 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 2 / 0 |
+| **Review markers** | 2 |
+| **Source** | [https://dd.reso.org/DD2.0/CaravanStop/](https://dd.reso.org/DD2.0/CaravanStop/) |
+| **Last revised upstream** | 2/3/2021 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    caravan_stop["caravan_stop"]
+    caravan["caravan"]
+    caravan_stop -->|"caravan_key"| caravan
+    member["member"]
+    caravan_stop -->|"stop_showing_agent_key"| member
+```
 
 ## Fields
 

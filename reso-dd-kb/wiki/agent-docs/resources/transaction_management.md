@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `transaction_management` (TransactionManagement)
 
 > Tracking different types of transactions such as listing for sale or listing for lease.
 
-- Source: [https://dd.reso.org/DD2.0/TransactionManagement/](https://dd.reso.org/DD2.0/TransactionManagement/)
-- Field count on dd.reso.org: **4**
-- Primary key: `transaction_key`
-- Last revised upstream: 2/24/2022
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `transaction_key` |
+| **Fields on dd.reso.org** | 4 |
+| **Columns in canonical DBML** | 4 (omits 0 satellite drops + 0 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/TransactionManagement/](https://dd.reso.org/DD2.0/TransactionManagement/) |
+| **Last revised upstream** | 2/24/2022 |
 
 ## Fields
 

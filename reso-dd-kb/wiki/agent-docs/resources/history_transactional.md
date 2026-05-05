@@ -1,11 +1,32 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `history_transactional` (HistoryTransactional)
 
 > A transactional history of the listing, showing before and after values of field changes.
 
-- Source: [https://dd.reso.org/DD2.0/HistoryTransactional/](https://dd.reso.org/DD2.0/HistoryTransactional/)
-- Field count on dd.reso.org: **23**
-- Primary key: `history_transactional_key`
-- Last revised upstream: 9/24/2015
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `history_transactional_key` |
+| **Fields on dd.reso.org** | 23 |
+| **Columns in canonical DBML** | 20 (omits 0 satellite drops + 3 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 3 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/HistoryTransactional/](https://dd.reso.org/DD2.0/HistoryTransactional/) |
+| **Last revised upstream** | 9/24/2015 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    history_transactional["history_transactional"]
+    member["member"]
+    history_transactional -->|"changed_by_member_key"| member
+    ouid["ouid"]
+    history_transactional -->|"originating_system_id"| ouid
+    history_transactional -->|"source_system_id"| ouid
+```
 
 ## Fields
 

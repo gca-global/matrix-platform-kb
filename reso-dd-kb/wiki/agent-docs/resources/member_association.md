@@ -1,12 +1,31 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `member_association` (MemberAssociation)
 
 > Joining information relating Member and Association records to each other.
 
-- Source: [https://dd.reso.org/DD2.0/MemberAssociation/](https://dd.reso.org/DD2.0/MemberAssociation/)
-- Field count on dd.reso.org: **31**
-- Primary key: `association_key`
-- Note: PK chosen by override (RESO uses `AssociationKey` for this resource).
-- Last revised upstream: 9/7/2023
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `association_key` *(override; RESO uses `AssociationKey`)* |
+| **Fields on dd.reso.org** | 31 |
+| **Columns in canonical DBML** | 26 (omits 0 satellite drops + 4 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 2 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/MemberAssociation/](https://dd.reso.org/DD2.0/MemberAssociation/) |
+| **Last revised upstream** | 9/7/2023 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    member_association["member_association"]
+    association["association"]
+    member_association -->|"association_key"| association
+    member["member"]
+    member_association -->|"member_key"| member
+```
 
 ## Fields
 

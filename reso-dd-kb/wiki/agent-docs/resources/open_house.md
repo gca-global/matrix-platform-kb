@@ -1,11 +1,29 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `open_house` (OpenHouse)
 
 > Fields commonly used to record an open house event.
 
-- Source: [https://dd.reso.org/DD2.0/OpenHouse/](https://dd.reso.org/DD2.0/OpenHouse/)
-- Field count on dd.reso.org: **33**
-- Primary key: `open_house_key`
-- Last revised upstream: 8/8/2013
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `open_house_key` |
+| **Fields on dd.reso.org** | 33 |
+| **Columns in canonical DBML** | 23 (omits 3 satellite drops + 4 `Resource`-typed + 3 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 1 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/OpenHouse/](https://dd.reso.org/DD2.0/OpenHouse/) |
+| **Last revised upstream** | 8/8/2013 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    open_house["open_house"]
+    member["member"]
+    open_house -->|"showing_agent_key"| member
+```
 
 ## Fields
 

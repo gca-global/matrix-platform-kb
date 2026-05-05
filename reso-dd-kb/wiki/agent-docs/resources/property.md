@@ -1,12 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `property` (Property)
 
 > Fields commonly used in a Multiple Listing Service (MLS) listing.
 
-- Source: [https://dd.reso.org/DD2.0/Property/](https://dd.reso.org/DD2.0/Property/)
-- Field count on dd.reso.org: **652**
-- Primary key: `listing_key`
-- Note: PK chosen by override (RESO uses `ListingKey` for this resource).
-- Last revised upstream: 9/10/2019
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `listing_key` *(override; RESO uses `ListingKey`)* |
+| **Fields on dd.reso.org** | 652 |
+| **Columns in canonical DBML** | 512 (omits 120 satellite drops + 12 `Resource`-typed + 8 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 12 / 10 |
+| **Review markers** | 2 |
+| **Source** | [https://dd.reso.org/DD2.0/Property/](https://dd.reso.org/DD2.0/Property/) |
+| **Last revised upstream** | 9/10/2019 |
 
 ## Fields
 

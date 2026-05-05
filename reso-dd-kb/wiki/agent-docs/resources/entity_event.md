@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `entity_event` (EntityEvent)
 
 > An event log offering an alternative to timestamps, providing an OData-compliant logical timestamp methodology.
 
-- Source: [https://dd.reso.org/DD2.0/EntityEvent/](https://dd.reso.org/DD2.0/EntityEvent/)
-- Field count on dd.reso.org: **4**
-- Primary key: `resource_record_key`
-- Last revised upstream: 6/20/2019
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `resource_record_key` |
+| **Fields on dd.reso.org** | 4 |
+| **Columns in canonical DBML** | 4 (omits 0 satellite drops + 0 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/EntityEvent/](https://dd.reso.org/DD2.0/EntityEvent/) |
+| **Last revised upstream** | 6/20/2019 |
 
 ## Fields
 

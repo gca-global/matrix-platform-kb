@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `showing_availability` (ShowingAvailability)
 
 > Fields associated with property availability for showings, including method, dates and duration.
 
-- Source: [https://dd.reso.org/DD2.0/ShowingAvailability/](https://dd.reso.org/DD2.0/ShowingAvailability/)
-- Field count on dd.reso.org: **12**
-- Primary key: `showing_availability_key`
-- Last revised upstream: 6/16/2022
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `showing_availability_key` |
+| **Fields on dd.reso.org** | 12 |
+| **Columns in canonical DBML** | 12 (omits 0 satellite drops + 0 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/ShowingAvailability/](https://dd.reso.org/DD2.0/ShowingAvailability/) |
+| **Last revised upstream** | 6/16/2022 |
 
 ## Fields
 

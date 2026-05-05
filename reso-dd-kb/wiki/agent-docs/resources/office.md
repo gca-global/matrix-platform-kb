@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `office` (Office)
 
 > Roster of offices who are members of the MLS and/or association.
 
-- Source: [https://dd.reso.org/DD2.0/Office/](https://dd.reso.org/DD2.0/Office/)
-- Field count on dd.reso.org: **73**
-- Primary key: `office_key`
-- Last revised upstream: 8/5/2024
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `office_key` |
+| **Fields on dd.reso.org** | 73 |
+| **Columns in canonical DBML** | 65 (omits 0 satellite drops + 5 `Resource`-typed + 3 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 5 / 9 |
+| **Review markers** | 3 |
+| **Source** | [https://dd.reso.org/DD2.0/Office/](https://dd.reso.org/DD2.0/Office/) |
+| **Last revised upstream** | 8/5/2024 |
 
 ## Fields
 

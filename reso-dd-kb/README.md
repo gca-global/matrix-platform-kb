@@ -1,19 +1,51 @@
 # reso-dd-kb
 
-Knowledge base for the **RESO Data Dictionary 2.0**, built from a verifiable
-local mirror of [`dd.reso.org/DD2.0/`](https://dd.reso.org/DD2.0/).
+> **The RESO Data Dictionary 2.0 canonical model, packaged for humans, machines, and LLM coding agents.**
+>
+> Single source of truth: a verifiable local mirror of [`dd.reso.org/DD2.0/`](https://dd.reso.org/DD2.0/).
+> No alias maps. No hand-curated bridges. Every downstream byte traces back to a row in the mirror.
 
-This directory is the canonical knowledge base for the RESO DD 2.0
-data model used by this project. **All four phases (Phase 1: mirror +
-structured extraction, Phase 2: FK correlation, Phase 2.5: satellite /
-2NF audit, Phase 3: DBML generation, Phase 4: agent-consumption docs)
-are complete.**
+| | |
+|---|---|
+| **Resources** | 41 |
+| **Fields** | 1,745 |
+| **Lookups** | 222 (99 closed-SV enums) |
+| **Lookup values** | 3,683 |
+| **Foreign keys (committed)** | 64 |
+| **Schema** | [`wiki/dbml/canonical.dbml`](wiki/dbml/canonical.dbml) (270 KB) |
+| **Agent docs** | [`wiki/agent-docs/`](wiki/agent-docs/) (45 markdown files) |
 
-If you are an LLM coding agent reading this repo to learn the data
-model, start at [`USAGE.md`](USAGE.md) and then drill into
-[`wiki/agent-docs/_index.md`](wiki/agent-docs/_index.md). The
-canonical schema lives in [`wiki/dbml/canonical.dbml`](wiki/dbml/canonical.dbml)
-and [`wiki/dbml/lookups.dbml`](wiki/dbml/lookups.dbml).
+## Start here
+
+| If you are...                              | Read this first                                                          |
+|--------------------------------------------|--------------------------------------------------------------------------|
+| an LLM coding agent (Lovable / Cursor / Copilot) | [`USAGE.md`](USAGE.md), then [`wiki/agent-docs/_index.md`](wiki/agent-docs/_index.md) |
+| a developer wanting the schema             | [`wiki/dbml/canonical.dbml`](wiki/dbml/canonical.dbml)                   |
+| a developer building tooling               | [`raw/*.csv`](raw/) (stable, deterministic, snake-cased downstream)       |
+| an LLM agent **modifying** this repo       | [`AGENTS.md`](AGENTS.md)                                                  |
+| a reviewer auditing a refresh              | [`methodology.md`](methodology.md)                                       |
+
+## Architecture
+
+```mermaid
+flowchart LR
+    upstream["dd.reso.org/DD2.0/"] -->|"01 mirror"| mirror[("mirror/<br/>verbatim HTML")]
+    mirror -->|"02 parse"| raw[("raw/*.csv<br/>structured extraction")]
+    raw -->|"03 FK detection"| rels["raw/relationships.csv"]
+    raw -->|"04 satellite audit"| sats["raw/satellites.csv"]
+    rels --> dbml["wiki/dbml/canonical.dbml"]
+    sats --> dbml
+    raw --> dbml
+    dbml -->|"06 agent docs"| docs["wiki/agent-docs/**"]
+    raw --> docs
+    docs --> agent["consuming coding agent"]
+    dbml --> agent
+```
+
+All five phases are complete (Phase 1: mirror + extraction, Phase 2: FK
+correlation, Phase 2.5: satellite / 2NF audit, Phase 3: DBML, Phase 4:
+agent docs). Each script ends with hard-fail verification gates; nothing
+is committed if a gate breaks.
 
 ## Why a rebuild
 

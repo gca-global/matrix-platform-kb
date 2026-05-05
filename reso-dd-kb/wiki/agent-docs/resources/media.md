@@ -1,11 +1,32 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `media` (Media)
 
 > Photos, virtual tours, documents, supplements and other media related to listings.
 
-- Source: [https://dd.reso.org/DD2.0/Media/](https://dd.reso.org/DD2.0/Media/)
-- Field count on dd.reso.org: **41**
-- Primary key: `media_key`
-- Last revised upstream: 8/27/2015
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `media_key` |
+| **Fields on dd.reso.org** | 41 |
+| **Columns in canonical DBML** | 37 (omits 0 satellite drops + 3 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 3 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/Media/](https://dd.reso.org/DD2.0/Media/) |
+| **Last revised upstream** | 8/27/2015 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    media["media"]
+    member["member"]
+    media -->|"changed_by_member_id"| member
+    media -->|"changed_by_member_key"| member
+    ouid["ouid"]
+    media -->|"source_system_id"| ouid
+```
 
 ## Fields
 

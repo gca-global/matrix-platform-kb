@@ -1,6 +1,42 @@
+[index](_index.md) | [lookups](lookups.md) | [USAGE.md](../../USAGE.md)
+
 # Relationships (foreign keys)
 
-The **Committed Refs** section below is the source of truth - it is parsed directly from `wiki/dbml/canonical.dbml`. The **Phase-2 detected signals** section is a wider net derived from `raw/relationships.csv`; some of those rows are folded into a single committed Ref by Phase-3 normalisation (Resource-typed anchoring, per-target dedup) and a few are intentionally not emitted (low-confidence, polymorphic).
+> The **Committed Refs** section below is the source of truth - it is parsed directly from `wiki/dbml/canonical.dbml`. The **Phase-2 detected signals** section is a wider net derived from `raw/relationships.csv`; some of those rows are folded into a single committed Ref by Phase-3 normalisation (Resource-typed anchoring, per-target dedup) and a few are intentionally not emitted (low-confidence, polymorphic).
+
+## At a glance
+
+| Category | Count | In DBML? |
+|---|---:|---|
+| Committed Refs (high+medium, scalar) | 64 | yes (`Ref:`) |
+| Polymorphic FKs (target resolved at runtime) | 10 | comment only |
+| Inverse 1:N (collection_typed) | 48 | comment only |
+| Low-confidence (Phase 2 only) | 46 | no |
+
+## Connection backbone
+
+The most-connected resources and the FKs between them. Use this as a mental map before drilling into individual resource pages.
+
+```mermaid
+flowchart LR
+    association["association"]
+    member["member"]
+    office["office"]
+    ouid["ouid"]
+    property["property"]
+    teams["teams"]
+    member --> office
+    member --> ouid
+    office --> office
+    office --> member
+    office --> ouid
+    ouid --> member
+    property --> member
+    property --> office
+    property --> teams
+    property --> ouid
+    teams --> member
+```
 
 ## Committed Refs (in DBML)
 

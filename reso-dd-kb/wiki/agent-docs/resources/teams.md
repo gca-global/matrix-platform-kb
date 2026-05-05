@@ -1,11 +1,34 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `teams` (Teams)
 
 > Name and other information about teams of members who work together.
 
-- Source: [https://dd.reso.org/DD2.0/Teams/](https://dd.reso.org/DD2.0/Teams/)
-- Field count on dd.reso.org: **45**
-- Primary key: `team_key`
-- Last revised upstream: 9/24/2015
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `team_key` |
+| **Fields on dd.reso.org** | 45 |
+| **Columns in canonical DBML** | 39 (omits 0 satellite drops + 3 `Resource`-typed + 3 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 1 / 3 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/Teams/](https://dd.reso.org/DD2.0/Teams/) |
+| **Last revised upstream** | 9/24/2015 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    teams["teams"]
+    member["member"]
+    teams -->|"team_lead_key"| member
+    property["property"]
+    property -->|"buyer_team_key"| teams
+    property -->|"list_team_key"| teams
+    team_members["team_members"]
+    team_members -->|"team_key"| teams
+```
 
 ## Fields
 

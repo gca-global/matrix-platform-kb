@@ -130,6 +130,78 @@ PK_OVERRIDES: dict[str, str] = {
     "Queue": "QueueTransactionKey",
 }
 
+# Domain buckets for the index page. Any resource not listed here is
+# automatically placed under "Other" (and surfaces as a warning so we
+# remember to categorise it on the next refresh).
+DOMAIN_BUCKETS: list[tuple[str, list[str]]] = [
+    (
+        "Listings & properties",
+        [
+            "Property",
+            "PropertyGreenVerification",
+            "PropertyPowerProduction",
+            "PropertyPowerStorage",
+            "PropertyRooms",
+            "PropertyUnitTypes",
+        ],
+    ),
+    (
+        "People & organisations",
+        [
+            "Member",
+            "MemberAssociation",
+            "MemberStateLicense",
+            "Office",
+            "OfficeAssociation",
+            "OfficeCorporateLicense",
+            "Teams",
+            "TeamMembers",
+            "Contacts",
+            "ContactListings",
+            "ContactListingNotes",
+            "Association",
+        ],
+    ),
+    (
+        "Showings & access",
+        [
+            "OpenHouse",
+            "Showing",
+            "ShowingAppointment",
+            "ShowingAvailability",
+            "ShowingRequest",
+            "Caravan",
+            "CaravanStop",
+            "LockOrBox",
+        ],
+    ),
+    (
+        "Media, comms & engagement",
+        [
+            "Media",
+            "SocialMedia",
+            "OtherPhone",
+            "InternetTracking",
+            "InternetTrackingSummary",
+            "Prospecting",
+            "SavedSearch",
+            "TransactionManagement",
+        ],
+    ),
+    (
+        "System & metadata",
+        [
+            "OUID",
+            "Field",
+            "Lookup",
+            "Rules",
+            "Queue",
+            "HistoryTransactional",
+            "EntityEvent",
+        ],
+    ),
+]
+
 
 def derive_pk(resource_name: str, field_names: set[str]) -> str | None:
     if resource_name in PK_OVERRIDES:
@@ -291,31 +363,64 @@ def main() -> int:
             )
 
     lookups_lines: list[str] = []
+    lookups_lines.append(
+        "[index](_index.md) | [relationships](relationships.md) | "
+        "[USAGE.md](../../USAGE.md)"
+    )
+    lookups_lines.append("")
     lookups_lines.append("# Lookups (RESO DD 2.0)")
     lookups_lines.append("")
     lookups_lines.append(
-        f"{len(lookups_sorted)} lookups extracted from "
-        "`raw/lookups.csv` and `raw/lookup_values.csv`. "
-        "Use the table of contents to jump; each anchor is the "
-        "snake-cased lookup name."
+        f"> {len(lookups_sorted)} lookups, {len(lookup_values):,} total values, "
+        "extracted from `raw/lookups.csv` and `raw/lookup_values.csv`."
     )
     lookups_lines.append("")
-    lookups_lines.append("Kinds:")
+
+    # Stats banner.
+    n_sv = sum(1 for l in lookups_sorted if lookup_kind(l["LookupName"]) == "closed-SV")
+    n_mv = sum(1 for l in lookups_sorted if lookup_kind(l["LookupName"]) == "closed-MV")
+    n_open = sum(1 for l in lookups_sorted if lookup_kind(l["LookupName"]) == "open")
+    lookups_lines.append("## At a glance")
     lookups_lines.append("")
+    lookups_lines.append("| Kind | Count | DBML representation |")
+    lookups_lines.append("|---|---:|---|")
     lookups_lines.append(
-        "- **closed-SV** - a `String List, Single` column with a closed value "
-        "list. Emitted as a DBML `Enum` in `wiki/dbml/lookups.dbml`."
+        f"| **closed-SV** (single-value w/ closed list) | {n_sv} | "
+        "`Enum` block in `wiki/dbml/lookups.dbml`; column typed as the enum |"
     )
     lookups_lines.append(
-        "- **closed-MV** - a `String List, Multi` column with a closed value "
-        "list. Stored as `varchar` in DBML; column note carries `multi: <name>`."
+        f"| **closed-MV** (multi-value w/ closed list) | {n_mv} | "
+        "Column is `varchar`; column note carries `multi: <LookupName>` |"
     )
     lookups_lines.append(
-        "- **open** - jurisdiction-defined or no closed value list (e.g. "
-        "`AOR`, `City`). Stored as `varchar`."
+        f"| **open** (jurisdiction-defined, no closed list) | {n_open} | "
+        "Column is `varchar`; note `open: jurisdiction-defined` |"
     )
+    lookups_lines.append(f"| **TOTAL** | {len(lookups_sorted)} | |")
     lookups_lines.append("")
-    lookups_lines.append("## Index")
+
+    # Most-referenced lookups callout.
+    lookups_lines.append("## Most-referenced lookups")
+    lookups_lines.append("")
+    lookups_lines.append("Top 10 by number of host columns (helps you find the high-traffic enums fast).")
+    lookups_lines.append("")
+    lookups_lines.append("| Lookup | Hosts | Values | Kind |")
+    lookups_lines.append("|---|---:|---:|---|")
+    by_host_count = sorted(
+        lookups_sorted,
+        key=lambda l: -len(hosts_for_lookup.get(l["LookupName"], [])),
+    )[:10]
+    for l in by_host_count:
+        name = l["LookupName"]
+        n_hosts = len(hosts_for_lookup.get(name, []))
+        n_vals = len(lookup_values_by_name.get(name, []))
+        lookups_lines.append(
+            f"| [`{snake(name)}`](#{snake(name)}) | {n_hosts} | {n_vals} | "
+            f"{lookup_kind(name)} |"
+        )
+    lookups_lines.append("")
+
+    lookups_lines.append("## Full index (alphabetical)")
     lookups_lines.append("")
     lookups_lines.append("| Lookup | Kind | Values | Used by |")
     lookups_lines.append("|---|---|---:|---|")
@@ -387,10 +492,15 @@ def main() -> int:
     # relationships.md
     # ------------------------------------------------------------------
     rels_lines: list[str] = []
+    rels_lines.append(
+        "[index](_index.md) | [lookups](lookups.md) | "
+        "[USAGE.md](../../USAGE.md)"
+    )
+    rels_lines.append("")
     rels_lines.append("# Relationships (foreign keys)")
     rels_lines.append("")
     rels_lines.append(
-        "The **Committed Refs** section below is the source of truth - it "
+        "> The **Committed Refs** section below is the source of truth - it "
         "is parsed directly from `wiki/dbml/canonical.dbml`. The "
         "**Phase-2 detected signals** section is a wider net derived "
         "from `raw/relationships.csv`; some of those rows are folded "
@@ -398,6 +508,53 @@ def main() -> int:
         "(Resource-typed anchoring, per-target dedup) and a few are "
         "intentionally not emitted (low-confidence, polymorphic)."
     )
+    rels_lines.append("")
+
+    # At-a-glance banner (counts).
+    n_committed = len(dbml_refs)
+    n_poly = sum(1 for r in rels if r["notes"] == "polymorphic")
+    n_inverse = sum(1 for r in rels if r["fk_kind"] == "collection_typed")
+    n_low = sum(
+        1 for r in rels if r["confidence"] == "low" and r["target_resource"]
+    )
+    rels_lines.append("## At a glance")
+    rels_lines.append("")
+    rels_lines.append("| Category | Count | In DBML? |")
+    rels_lines.append("|---|---:|---|")
+    rels_lines.append(f"| Committed Refs (high+medium, scalar) | {n_committed} | yes (`Ref:`) |")
+    rels_lines.append(f"| Polymorphic FKs (target resolved at runtime) | {n_poly} | comment only |")
+    rels_lines.append(f"| Inverse 1:N (collection_typed) | {n_inverse} | comment only |")
+    rels_lines.append(f"| Low-confidence (Phase 2 only) | {n_low} | no |")
+    rels_lines.append("")
+
+    # Backbone mermaid: top central tables and the FKs between them.
+    backbone = {"property", "member", "office", "ouid", "teams", "association"}
+    backbone_refs = [
+        (ht, hc, tt, tc) for ht, hc, tt, tc, _ in dbml_refs
+        if ht in backbone and tt in backbone
+    ]
+    rels_lines.append("## Connection backbone")
+    rels_lines.append("")
+    rels_lines.append(
+        "The most-connected resources and the FKs between them. Use "
+        "this as a mental map before drilling into individual resource pages."
+    )
+    rels_lines.append("")
+    rels_lines.append("```mermaid")
+    rels_lines.append("flowchart LR")
+    for node in sorted(backbone):
+        rels_lines.append(f"    {node}[\"{node}\"]")
+    seen = set()
+    for ht, hc, tt, tc in sorted(backbone_refs):
+        # Collapse duplicate edges (e.g. multiple list_*_key FKs from
+        # property -> member); the backbone diagram is a structure map,
+        # not a column-by-column register.
+        key = (ht, tt)
+        if key in seen:
+            continue
+        seen.add(key)
+        rels_lines.append(f"    {ht} --> {tt}")
+    rels_lines.append("```")
     rels_lines.append("")
 
     def ref_arrow_from_rel(r: dict) -> str:
@@ -534,21 +691,89 @@ def main() -> int:
         rfields = fields_by_resource.get(rname, [])
         pk = pk_by_resource.get(rname)
 
+        # Per-resource counts for the at-a-glance banner.
+        n_fields_total = len(rfields)
+        n_dropped = sum(
+            1 for f in rfields if (rname, f["StandardName"]) in drop_set
+        )
+        n_review = sum(
+            1 for f in rfields if (rname, f["StandardName"]) in review_reason
+        )
+        n_resource_typed = sum(1 for f in rfields if f["SimpleDataType"] == "Resource")
+        n_collection_typed = sum(
+            1 for f in rfields if f["SimpleDataType"] == "Collection"
+        )
+        n_in_dbml = (
+            n_fields_total - n_dropped - n_resource_typed - n_collection_typed
+        )
+
         L: list[str] = []
+        # Quick-nav breadcrumb at the very top so an agent can always
+        # bounce between resources / lookups / relationships.
+        L.append(
+            "[index](../_index.md) | "
+            "[lookups](../lookups.md) | "
+            "[relationships](../relationships.md) | "
+            "[USAGE.md](../../../USAGE.md)"
+        )
+        L.append("")
         L.append(f"# `{snake_table}` ({rname})")
         L.append("")
         L.append(f"> {res.get('Description', '')}")
         L.append("")
-        L.append(f"- Source: [{res.get('SourceURL', '')}]({res.get('SourceURL', '')})")
-        L.append(f"- Field count on dd.reso.org: **{res.get('FieldCount', '?')}**")
-        L.append(f"- Primary key: `{snake(pk) if pk else '(unresolved)'}`")
-        if rname in PK_OVERRIDES:
-            L.append(
-                f"- Note: PK chosen by override (RESO uses `{PK_OVERRIDES[rname]}` "
-                f"for this resource)."
-            )
-        L.append(f"- Last revised upstream: {res.get('RevisedDate', '?')}")
+
+        # At-a-glance banner.
+        L.append("## At a glance")
         L.append("")
+        L.append("| | |")
+        L.append("|---|---|")
+        L.append(
+            f"| **Primary key** | `{snake(pk) if pk else '(unresolved)'}`"
+            + (f" *(override; RESO uses `{PK_OVERRIDES[rname]}`)*" if rname in PK_OVERRIDES else "")
+            + " |"
+        )
+        L.append(f"| **Fields on dd.reso.org** | {n_fields_total} |")
+        L.append(
+            f"| **Columns in canonical DBML** | {n_in_dbml} "
+            f"(omits {n_dropped} satellite drops + "
+            f"{n_resource_typed} `Resource`-typed + "
+            f"{n_collection_typed} `Collection`-typed) |"
+        )
+        L.append(
+            f"| **Foreign keys OUT / IN** | {len(refs_by_host_table.get(snake_table, []))} / "
+            f"{len(refs_by_target_table.get(snake_table, []))} |"
+        )
+        L.append(f"| **Review markers** | {n_review} |")
+        L.append(
+            f"| **Source** | [{res.get('SourceURL', '')}]({res.get('SourceURL', '')}) |"
+        )
+        L.append(f"| **Last revised upstream** | {res.get('RevisedDate', '?')} |")
+        L.append("")
+
+        # Per-resource ER diagram (only for resources with <=10 outgoing
+        # FKs - keeps the diagram readable; skipped for the giant central
+        # tables like Property where it would be unreadable anyway).
+        out_refs_for_diagram = sorted(refs_by_host_table.get(snake_table, []))
+        in_refs_for_diagram = sorted(refs_by_target_table.get(snake_table, []))
+        if 0 < len(out_refs_for_diagram) + len(in_refs_for_diagram) <= 10:
+            L.append("## Relationship diagram")
+            L.append("")
+            L.append("```mermaid")
+            L.append("flowchart LR")
+            L.append(f"    {snake_table}[\"{snake_table}\"]")
+            seen_nodes: set[str] = {snake_table}
+            for ht, hc, tt, tc, _ in out_refs_for_diagram:
+                if tt not in seen_nodes:
+                    L.append(f"    {tt}[\"{tt}\"]")
+                    seen_nodes.add(tt)
+                L.append(f"    {snake_table} -->|\"{hc}\"| {tt}")
+            for ht, hc, tt, tc, _ in in_refs_for_diagram:
+                if ht not in seen_nodes:
+                    L.append(f"    {ht}[\"{ht}\"]")
+                    seen_nodes.add(ht)
+                L.append(f"    {ht} -->|\"{hc}\"| {snake_table}")
+            L.append("```")
+            L.append("")
 
         # ---- Fields table ----------------------------------------------
         L.append("## Fields")
@@ -686,37 +911,111 @@ def main() -> int:
     idx.append("# RESO DD 2.0 - agent-docs index")
     idx.append("")
     idx.append(
-        "Generated by `scripts/06_emit_agent_docs.py`. Read "
-        "[`../USAGE.md`](../../USAGE.md) first for the consumption guide."
+        "> Generated by `scripts/06_emit_agent_docs.py`. Read "
+        "[`USAGE.md`](../../USAGE.md) first for the consumption guide."
     )
     idx.append("")
+
+    # At-a-glance stats banner.
+    idx.append("## At a glance")
+    idx.append("")
+    idx.append("| | |")
+    idx.append("|---|---|")
+    idx.append(f"| **Resources** | {len(resources)} |")
+    idx.append(f"| **Fields (RESO total)** | {len(fields):,} |")
+    idx.append(f"| **Lookups** | {len(lookups)} |")
+    idx.append(f"| **Lookup values** | {len(lookup_values):,} |")
+    idx.append(f"| **Foreign keys committed in DBML** | {len(dbml_refs)} |")
     idx.append(
-        f"- {len(resources)} resources / {len(fields)} fields / "
-        f"{len(lookups)} lookups / {len(lookup_values)} lookup values"
+        f"| **Schema** | [`canonical.dbml`](../dbml/canonical.dbml) + "
+        f"[`lookups.dbml`](../dbml/lookups.dbml) |"
     )
     idx.append("")
-    idx.append("## Resources")
-    idx.append("")
-    idx.append("| Resource | DBML table | Fields | Description |")
-    idx.append("|---|---|---:|---|")
-    for res in resources:
-        rname = res["ResourceName"]
-        snake_table = snake(rname)
-        idx.append(
-            f"| [`{rname}`](resources/{snake_table}.md) | `{snake_table}` | "
-            f"{res.get('FieldCount', '?')} | "
-            f"{md_escape_pipe(collapse_ws(res.get('Description', '')))} |"
-        )
-    idx.append("")
+
+    # Cross-cutting pages.
     idx.append("## Cross-cutting pages")
     idx.append("")
     idx.append(
-        f"- [`lookups.md`](lookups.md) - {len(lookups)} lookups, value lists, host columns."
+        f"- [`lookups.md`](lookups.md) - {len(lookups)} lookups, value tables, "
+        f"host-column index."
     )
     idx.append(
-        f"- [`relationships.md`](relationships.md) - committed FKs, polymorphic FKs, inverse 1:N, low-confidence."
+        f"- [`relationships.md`](relationships.md) - {len(dbml_refs)} committed Refs, "
+        f"polymorphic FKs, inverse 1:N, Phase-2 detected signals."
     )
     idx.append("")
+
+    # Most-connected resources callout.
+    in_count: dict[str, int] = defaultdict(int)
+    out_count: dict[str, int] = defaultdict(int)
+    for ht, hc, tt, tc, _ in dbml_refs:
+        out_count[ht] += 1
+        in_count[tt] += 1
+    most_connected = sorted(
+        ({snake(r["ResourceName"]) for r in resources}),
+        key=lambda t: -(in_count[t] + out_count[t]),
+    )[:5]
+    idx.append("## Most-connected resources")
+    idx.append("")
+    idx.append("| Resource | FKs IN | FKs OUT |")
+    idx.append("|---|---:|---:|")
+    for t in most_connected:
+        idx.append(f"| [`{t}`](resources/{t}.md) | {in_count[t]} | {out_count[t]} |")
+    idx.append("")
+
+    # Domain-grouped resource catalogue.
+    idx.append("## Resource catalogue (by domain)")
+    idx.append("")
+    res_by_name = {r["ResourceName"]: r for r in resources}
+    bucketed: set[str] = set()
+    for bucket_name, bucket_members in DOMAIN_BUCKETS:
+        idx.append(f"### {bucket_name}")
+        idx.append("")
+        idx.append("| Resource | DBML table | Fields | Description |")
+        idx.append("|---|---|---:|---|")
+        for rname in bucket_members:
+            r = res_by_name.get(rname)
+            if not r:
+                continue
+            bucketed.add(rname)
+            snake_table = snake(rname)
+            idx.append(
+                f"| [`{rname}`](resources/{snake_table}.md) | `{snake_table}` | "
+                f"{r.get('FieldCount', '?')} | "
+                f"{md_escape_pipe(collapse_ws(r.get('Description', '')))} |"
+            )
+        idx.append("")
+    # Surface anything not bucketed (typically RESO additions since the
+    # last categorisation pass).
+    leftovers = [r for r in resources if r["ResourceName"] not in bucketed]
+    if leftovers:
+        idx.append("### Other (please categorise on next refresh)")
+        idx.append("")
+        idx.append("| Resource | DBML table | Fields | Description |")
+        idx.append("|---|---|---:|---|")
+        for r in leftovers:
+            rname = r["ResourceName"]
+            snake_table = snake(rname)
+            idx.append(
+                f"| [`{rname}`](resources/{snake_table}.md) | `{snake_table}` | "
+                f"{r.get('FieldCount', '?')} | "
+                f"{md_escape_pipe(collapse_ws(r.get('Description', '')))} |"
+            )
+        idx.append("")
+
+    # Alphabetical fallback for direct-lookup convenience (also feeds
+    # GATE 5: every page linked exactly once - we link from the
+    # alphabetical list and from the domain bucket; we adjust the gate
+    # to accept any nonzero count instead of exactly 1 since the
+    # domain table also links).
+    idx.append("## Alphabetical index")
+    idx.append("")
+    for r in resources:
+        rname = r["ResourceName"]
+        snake_table = snake(rname)
+        idx.append(f"- [`{rname}`](resources/{snake_table}.md) - `{snake_table}`")
+    idx.append("")
+
     (DOCS_DIR / "_index.md").write_text("\n".join(idx) + "\n")
 
     # ------------------------------------------------------------------
@@ -819,7 +1118,9 @@ def main() -> int:
                 f"GATE 4: {host}.{cand} ({s['recommendation']}) not listed on resources/{snake(host)}.md"
             )
 
-    # Gate 5: _index.md links each emitted page exactly once.
+    # Gate 5: _index.md links each emitted page at least once. (The
+    # domain catalogue and the alphabetical fallback both link to each
+    # resource, so we expect >=1, not exactly 1.)
     idx_text = (DOCS_DIR / "_index.md").read_text()
     expected_links = (
         [f"resources/{fn}" for fn in written_resource_files]
@@ -827,15 +1128,20 @@ def main() -> int:
     )
     for href in expected_links:
         n = idx_text.count(f"({href})")
-        if n != 1:
-            failures.append(f"GATE 5: _index.md links '{href}' {n} times (expected 1)")
+        if n < 1:
+            failures.append(f"GATE 5: _index.md does not link '{href}' (expected >=1)")
 
     # ------------------------------------------------------------------
     # Summary.
     # ------------------------------------------------------------------
+    # Count per-lookup sections only (skip the top-level structural
+    # headings: At a glance, Most-referenced, Full index).
+    _toplevel_skip = {
+        "## At a glance", "## Most-referenced lookups", "## Full index (alphabetical)",
+    }
     n_lookup_sections = sum(
         1 for line in (DOCS_DIR / "lookups.md").read_text().splitlines()
-        if line.startswith("## ") and line != "## Index"
+        if line.startswith("## ") and line not in _toplevel_skip
     )
     print(f"[06] wrote {DOCS_DIR.relative_to(KB_ROOT)}/")
     print(f"     _index.md, lookups.md ({n_lookup_sections} sections), relationships.md")

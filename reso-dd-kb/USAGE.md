@@ -1,8 +1,36 @@
 # USAGE.md - guide for coding agents consuming this data model
 
-You are a coding agent (Lovable, Cursor, GitHub Copilot, ...) and you have
-been pointed at the `reso-dd-kb/` directory to learn the canonical data
-model used by this project. This document orients you.
+> **You are a coding agent (Lovable, Cursor, GitHub Copilot, ...) and you have
+> been pointed at the `reso-dd-kb/` directory to learn the canonical data
+> model used by this project. This document orients you.**
+
+## TL;DR (5 sentences)
+
+1. The canonical model is **RESO Data Dictionary 2.0**, 41 resources, 1,745 fields, 222 lookups.
+2. The **DBML schema** lives in [`wiki/dbml/canonical.dbml`](wiki/dbml/canonical.dbml) (270 KB) and [`wiki/dbml/lookups.dbml`](wiki/dbml/lookups.dbml).
+3. Per-resource human-readable docs are in [`wiki/agent-docs/resources/<snake>.md`](wiki/agent-docs/resources/) - one file per resource, with fields, FKs in/out, and lookup links.
+4. The full **enum-value tables** are in [`wiki/agent-docs/lookups.md`](wiki/agent-docs/lookups.md), one anchor per lookup (e.g. `#property_type`).
+5. Identifier style is **snake_case** in the DBML and the agent docs (matches what you should write in code); CamelCase only appears in the source CSVs and on `dd.reso.org`.
+
+## Quick start
+
+**"What table holds listings?"**
+-> [`wiki/agent-docs/resources/property.md`](wiki/agent-docs/resources/property.md). PK = `listing_key`.
+
+**"What columns does Property have?"**
+-> Same file, "Fields" section. The `flags` column tells you which are PKs, FKs, dropped (Phase-2.5 satellite audit), or `[REVIEW]`.
+
+**"What enum values are valid for `Property.PropertyType`?"**
+-> Open [`property.md`](wiki/agent-docs/resources/property.md), find the `property_type` row, follow the link to [`lookups.md#property_type`](wiki/agent-docs/lookups.md#property_type).
+
+**"Show me everything that references a Property."**
+-> Top of [`property.md`](wiki/agent-docs/resources/property.md), "Foreign keys IN" section. Or grep `> property\.` in [`relationships.md`](wiki/agent-docs/relationships.md).
+
+**"Generate a SQL DDL from this model."**
+-> Parse [`wiki/dbml/canonical.dbml`](wiki/dbml/canonical.dbml) with any DBML library (`dbml-cli`, `@dbml/core`, ...). Map the generic DBML types (`varchar`, `int`, `double`, `bool`, `timestamp`, `date`) to your SQL engine's types. Lookups are real `Enum` blocks in `lookups.dbml`; reference them as a separate file.
+
+**"I am writing tooling, not reading docs."**
+-> Go straight to [`raw/*.csv`](raw/). Stable column order, stable sort order, `csv.QUOTE_MINIMAL`, `\n` line endings. CamelCase identifiers (preserved from upstream).
 
 ## What this directory is
 

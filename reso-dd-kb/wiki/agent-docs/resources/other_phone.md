@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `other_phone` (OtherPhone)
 
 > Additional phone numbers for contacts or members, with type information.
 
-- Source: [https://dd.reso.org/DD2.0/OtherPhone/](https://dd.reso.org/DD2.0/OtherPhone/)
-- Field count on dd.reso.org: **10**
-- Primary key: `other_phone_key`
-- Last revised upstream: 4/4/2023
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `other_phone_key` |
+| **Fields on dd.reso.org** | 10 |
+| **Columns in canonical DBML** | 9 (omits 0 satellite drops + 0 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/OtherPhone/](https://dd.reso.org/DD2.0/OtherPhone/) |
+| **Last revised upstream** | 4/4/2023 |
 
 ## Fields
 

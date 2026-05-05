@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `member` (Member)
 
 > Roster of agents, brokers, appraisers, assistants, affiliates and other MLS/association members.
 
-- Source: [https://dd.reso.org/DD2.0/Member/](https://dd.reso.org/DD2.0/Member/)
-- Field count on dd.reso.org: **87**
-- Primary key: `member_key`
-- Last revised upstream: 7/25/2019
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `member_key` |
+| **Fields on dd.reso.org** | 87 |
+| **Columns in canonical DBML** | 78 (omits 2 satellite drops + 3 `Resource`-typed + 4 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 3 / 24 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/Member/](https://dd.reso.org/DD2.0/Member/) |
+| **Last revised upstream** | 7/25/2019 |
 
 ## Fields
 

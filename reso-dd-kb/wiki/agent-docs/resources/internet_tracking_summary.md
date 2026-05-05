@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `internet_tracking_summary` (InternetTrackingSummary)
 
 > Sum of specific tracking events over a period of time, such as listings viewed or shared.
 
-- Source: [https://dd.reso.org/DD2.0/InternetTrackingSummary/](https://dd.reso.org/DD2.0/InternetTrackingSummary/)
-- Field count on dd.reso.org: **27**
-- Primary key: `internet_tracking_summary_key`
-- Last revised upstream: 4/21/2021
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `internet_tracking_summary_key` |
+| **Fields on dd.reso.org** | 27 |
+| **Columns in canonical DBML** | 27 (omits 0 satellite drops + 0 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/InternetTrackingSummary/](https://dd.reso.org/DD2.0/InternetTrackingSummary/) |
+| **Last revised upstream** | 4/21/2021 |
 
 ## Fields
 

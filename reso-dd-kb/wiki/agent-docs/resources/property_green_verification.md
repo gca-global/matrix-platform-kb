@@ -1,12 +1,30 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `property_green_verification` (PropertyGreenVerification)
 
 > Multiple performance ratings applied to a property listing.
 
-- Source: [https://dd.reso.org/DD2.0/PropertyGreenVerification/](https://dd.reso.org/DD2.0/PropertyGreenVerification/)
-- Field count on dd.reso.org: **15**
-- Primary key: `green_building_verification_key`
-- Note: PK chosen by override (RESO uses `GreenBuildingVerificationKey` for this resource).
-- Last revised upstream: 5/24/2017
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `green_building_verification_key` *(override; RESO uses `GreenBuildingVerificationKey`)* |
+| **Fields on dd.reso.org** | 15 |
+| **Columns in canonical DBML** | 13 (omits 0 satellite drops + 1 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 2 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/PropertyGreenVerification/](https://dd.reso.org/DD2.0/PropertyGreenVerification/) |
+| **Last revised upstream** | 5/24/2017 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    property_green_verification["property_green_verification"]
+    property["property"]
+    property_green_verification -->|"listing_id"| property
+    property_green_verification -->|"listing_key"| property
+```
 
 ## Fields
 

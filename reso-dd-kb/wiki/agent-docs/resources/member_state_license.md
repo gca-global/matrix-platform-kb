@@ -1,11 +1,29 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `member_state_license` (MemberStateLicense)
 
 > Supports members that hold multiple state licenses.
 
-- Source: [https://dd.reso.org/DD2.0/MemberStateLicense/](https://dd.reso.org/DD2.0/MemberStateLicense/)
-- Field count on dd.reso.org: **10**
-- Primary key: `member_state_license_key`
-- Last revised upstream: 6/17/2021
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `member_state_license_key` |
+| **Fields on dd.reso.org** | 10 |
+| **Columns in canonical DBML** | 8 (omits 0 satellite drops + 1 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 1 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/MemberStateLicense/](https://dd.reso.org/DD2.0/MemberStateLicense/) |
+| **Last revised upstream** | 6/17/2021 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    member_state_license["member_state_license"]
+    member["member"]
+    member_state_license -->|"member_key"| member
+```
 
 ## Fields
 

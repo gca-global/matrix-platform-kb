@@ -1,11 +1,39 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `contacts` (Contacts)
 
 > Information on client and other contacts of the member.
 
-- Source: [https://dd.reso.org/DD2.0/Contacts/](https://dd.reso.org/DD2.0/Contacts/)
-- Field count on dd.reso.org: **91**
-- Primary key: `contact_key`
-- Last revised upstream: 9/24/2015
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `contact_key` |
+| **Fields on dd.reso.org** | 91 |
+| **Columns in canonical DBML** | 84 (omits 0 satellite drops + 3 `Resource`-typed + 4 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 4 / 3 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/Contacts/](https://dd.reso.org/DD2.0/Contacts/) |
+| **Last revised upstream** | 9/24/2015 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    contacts["contacts"]
+    ouid["ouid"]
+    contacts -->|"originating_system_id"| ouid
+    member["member"]
+    contacts -->|"owner_member_id"| member
+    contacts -->|"owner_member_key"| member
+    contacts -->|"source_system_id"| ouid
+    contact_listing_notes["contact_listing_notes"]
+    contact_listing_notes -->|"contact_key"| contacts
+    contact_listings["contact_listings"]
+    contact_listings -->|"contact_key"| contacts
+    prospecting["prospecting"]
+    prospecting -->|"contact_key"| contacts
+```
 
 ## Fields
 

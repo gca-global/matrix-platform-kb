@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `rules` (Rules)
 
 > Business and system rules transmitted from host to client application.
 
-- Source: [https://dd.reso.org/DD2.0/Rules/](https://dd.reso.org/DD2.0/Rules/)
-- Field count on dd.reso.org: **28**
-- Primary key: `rule_key`
-- Last revised upstream: 5/12/2018
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `rule_key` |
+| **Fields on dd.reso.org** | 28 |
+| **Columns in canonical DBML** | 25 (omits 0 satellite drops + 2 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/Rules/](https://dd.reso.org/DD2.0/Rules/) |
+| **Last revised upstream** | 5/12/2018 |
 
 ## Fields
 

@@ -1,11 +1,29 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `showing` (Showing)
 
 > 
 
-- Source: [https://dd.reso.org/DD2.0/Showing/](https://dd.reso.org/DD2.0/Showing/)
-- Field count on dd.reso.org: **44**
-- Primary key: `showing_key`
-- Last revised upstream: 6/16/2022
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `showing_key` |
+| **Fields on dd.reso.org** | 44 |
+| **Columns in canonical DBML** | 32 (omits 1 satellite drops + 8 `Resource`-typed + 3 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 1 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/Showing/](https://dd.reso.org/DD2.0/Showing/) |
+| **Last revised upstream** | 6/16/2022 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    showing["showing"]
+    member["member"]
+    showing -->|"showing_agent_key"| member
+```
 
 ## Fields
 

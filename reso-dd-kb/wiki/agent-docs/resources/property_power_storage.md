@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `property_power_storage` (PropertyPowerStorage)
 
 > Different means of storing power on a property.
 
-- Source: [https://dd.reso.org/DD2.0/PropertyPowerStorage/](https://dd.reso.org/DD2.0/PropertyPowerStorage/)
-- Field count on dd.reso.org: **6**
-- Primary key: `power_storage_key`
-- Last revised upstream: 1/19/2023
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `power_storage_key` |
+| **Fields on dd.reso.org** | 6 |
+| **Columns in canonical DBML** | 6 (omits 0 satellite drops + 0 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/PropertyPowerStorage/](https://dd.reso.org/DD2.0/PropertyPowerStorage/) |
+| **Last revised upstream** | 1/19/2023 |
 
 ## Fields
 

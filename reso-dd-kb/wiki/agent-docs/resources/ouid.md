@@ -1,12 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `ouid` (OUID)
 
 > Organization Unique Identifier (UOI), a common ID system for organizations that exchange real estate data.
 
-- Source: [https://dd.reso.org/DD2.0/OUID/](https://dd.reso.org/DD2.0/OUID/)
-- Field count on dd.reso.org: **46**
-- Primary key: `organization_unique_id_key`
-- Note: PK chosen by override (RESO uses `OrganizationUniqueIdKey` for this resource).
-- Last revised upstream: 9/1/2017
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `organization_unique_id_key` *(override; RESO uses `OrganizationUniqueIdKey`)* |
+| **Fields on dd.reso.org** | 46 |
+| **Columns in canonical DBML** | 42 (omits 0 satellite drops + 1 `Resource`-typed + 3 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 2 / 11 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/OUID/](https://dd.reso.org/DD2.0/OUID/) |
+| **Last revised upstream** | 9/1/2017 |
 
 ## Fields
 

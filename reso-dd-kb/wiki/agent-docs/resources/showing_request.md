@@ -1,11 +1,29 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `showing_request` (ShowingRequest)
 
 > Fields associated with showing requests, including method, date, time and more.
 
-- Source: [https://dd.reso.org/DD2.0/ShowingRequest/](https://dd.reso.org/DD2.0/ShowingRequest/)
-- Field count on dd.reso.org: **17**
-- Primary key: `showing_request_key`
-- Last revised upstream: 6/16/2022
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `showing_request_key` |
+| **Fields on dd.reso.org** | 17 |
+| **Columns in canonical DBML** | 17 (omits 0 satellite drops + 0 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 1 / 0 |
+| **Review markers** | 1 |
+| **Source** | [https://dd.reso.org/DD2.0/ShowingRequest/](https://dd.reso.org/DD2.0/ShowingRequest/) |
+| **Last revised upstream** | 6/16/2022 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    showing_request["showing_request"]
+    member["member"]
+    showing_request -->|"showing_agent_key"| member
+```
 
 ## Fields
 

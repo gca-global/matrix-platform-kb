@@ -1,11 +1,33 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `prospecting` (Prospecting)
 
 > Automatic email connecting Contacts and SavedSearch resources to send results matching saved search criteria.
 
-- Source: [https://dd.reso.org/DD2.0/Prospecting/](https://dd.reso.org/DD2.0/Prospecting/)
-- Field count on dd.reso.org: **31**
-- Primary key: `prospecting_key`
-- Last revised upstream: 5/2/2017
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `prospecting_key` |
+| **Fields on dd.reso.org** | 31 |
+| **Columns in canonical DBML** | 26 (omits 0 satellite drops + 3 `Resource`-typed + 2 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 3 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/Prospecting/](https://dd.reso.org/DD2.0/Prospecting/) |
+| **Last revised upstream** | 5/2/2017 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    prospecting["prospecting"]
+    contacts["contacts"]
+    prospecting -->|"contact_key"| contacts
+    member["member"]
+    prospecting -->|"owner_member_key"| member
+    saved_search["saved_search"]
+    prospecting -->|"saved_search_key"| saved_search
+```
 
 ## Fields
 

@@ -1,12 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `internet_tracking` (InternetTracking)
 
 > A standard data set for recording and transfer of event-related information of real estate products.
 
-- Source: [https://dd.reso.org/DD2.0/InternetTracking/](https://dd.reso.org/DD2.0/InternetTracking/)
-- Field count on dd.reso.org: **59**
-- Primary key: `event_key`
-- Note: PK chosen by override (RESO uses `EventKey` for this resource).
-- Last revised upstream: 9/1/2017
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `event_key` *(override; RESO uses `EventKey`)* |
+| **Fields on dd.reso.org** | 59 |
+| **Columns in canonical DBML** | 53 (omits 0 satellite drops + 6 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/InternetTracking/](https://dd.reso.org/DD2.0/InternetTracking/) |
+| **Last revised upstream** | 9/1/2017 |
 
 ## Fields
 

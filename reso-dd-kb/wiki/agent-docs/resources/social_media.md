@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `social_media` (SocialMedia)
 
 > Social media accounts for members, offices, contacts and other entities.
 
-- Source: [https://dd.reso.org/DD2.0/SocialMedia/](https://dd.reso.org/DD2.0/SocialMedia/)
-- Field count on dd.reso.org: **10**
-- Primary key: `social_media_key`
-- Last revised upstream: 3/27/2026
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `social_media_key` |
+| **Fields on dd.reso.org** | 10 |
+| **Columns in canonical DBML** | 9 (omits 0 satellite drops + 0 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/SocialMedia/](https://dd.reso.org/DD2.0/SocialMedia/) |
+| **Last revised upstream** | 3/27/2026 |
 
 ## Fields
 

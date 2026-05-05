@@ -1,11 +1,20 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `field` (Field)
 
 > Metadata about available fields on a given server in a predictable and user-friendly format.
 
-- Source: [https://dd.reso.org/DD2.0/Field/](https://dd.reso.org/DD2.0/Field/)
-- Field count on dd.reso.org: **4**
-- Primary key: `field_key`
-- Last revised upstream: 12/8/2021
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `field_key` |
+| **Fields on dd.reso.org** | 4 |
+| **Columns in canonical DBML** | 4 (omits 0 satellite drops + 0 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/Field/](https://dd.reso.org/DD2.0/Field/) |
+| **Last revised upstream** | 12/8/2021 |
 
 ## Fields
 

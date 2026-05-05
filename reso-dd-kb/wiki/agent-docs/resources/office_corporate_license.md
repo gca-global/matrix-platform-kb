@@ -1,11 +1,29 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `office_corporate_license` (OfficeCorporateLicense)
 
 > Supports offices that hold multiple state licenses.
 
-- Source: [https://dd.reso.org/DD2.0/OfficeCorporateLicense/](https://dd.reso.org/DD2.0/OfficeCorporateLicense/)
-- Field count on dd.reso.org: **10**
-- Primary key: `office_corporate_license_key`
-- Last revised upstream: 6/17/2021
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `office_corporate_license_key` |
+| **Fields on dd.reso.org** | 10 |
+| **Columns in canonical DBML** | 6 (omits 2 satellite drops + 1 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 1 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/OfficeCorporateLicense/](https://dd.reso.org/DD2.0/OfficeCorporateLicense/) |
+| **Last revised upstream** | 6/17/2021 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    office_corporate_license["office_corporate_license"]
+    office["office"]
+    office_corporate_license -->|"office_key"| office
+```
 
 ## Fields
 

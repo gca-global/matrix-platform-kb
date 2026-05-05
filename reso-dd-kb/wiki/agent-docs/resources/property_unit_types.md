@@ -1,12 +1,30 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `property_unit_types` (PropertyUnitTypes)
 
 > Unit type details for residential income and multifamily properties.
 
-- Source: [https://dd.reso.org/DD2.0/PropertyUnitTypes/](https://dd.reso.org/DD2.0/PropertyUnitTypes/)
-- Field count on dd.reso.org: **17**
-- Primary key: `unit_type_key`
-- Note: PK chosen by override (RESO uses `UnitTypeKey` for this resource).
-- Last revised upstream: 5/24/2017
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `unit_type_key` *(override; RESO uses `UnitTypeKey`)* |
+| **Fields on dd.reso.org** | 17 |
+| **Columns in canonical DBML** | 15 (omits 0 satellite drops + 1 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 2 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/PropertyUnitTypes/](https://dd.reso.org/DD2.0/PropertyUnitTypes/) |
+| **Last revised upstream** | 5/24/2017 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    property_unit_types["property_unit_types"]
+    property["property"]
+    property_unit_types -->|"listing_id"| property
+    property_unit_types -->|"listing_key"| property
+```
 
 ## Fields
 

@@ -1,11 +1,31 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `saved_search` (SavedSearch)
 
 > Saved search criteria and related data.
 
-- Source: [https://dd.reso.org/DD2.0/SavedSearch/](https://dd.reso.org/DD2.0/SavedSearch/)
-- Field count on dd.reso.org: **27**
-- Primary key: `saved_search_key`
-- Last revised upstream: 8/28/2019
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `saved_search_key` |
+| **Fields on dd.reso.org** | 27 |
+| **Columns in canonical DBML** | 22 (omits 1 satellite drops + 3 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 1 / 1 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/SavedSearch/](https://dd.reso.org/DD2.0/SavedSearch/) |
+| **Last revised upstream** | 8/28/2019 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    saved_search["saved_search"]
+    member["member"]
+    saved_search -->|"member_key"| member
+    prospecting["prospecting"]
+    prospecting -->|"saved_search_key"| saved_search
+```
 
 ## Fields
 

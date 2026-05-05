@@ -1,12 +1,31 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `office_association` (OfficeAssociation)
 
 > Joining information relating Office and Association records to each other.
 
-- Source: [https://dd.reso.org/DD2.0/OfficeAssociation/](https://dd.reso.org/DD2.0/OfficeAssociation/)
-- Field count on dd.reso.org: **23**
-- Primary key: `association_key`
-- Note: PK chosen by override (RESO uses `AssociationKey` for this resource).
-- Last revised upstream: 7/25/2019
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `association_key` *(override; RESO uses `AssociationKey`)* |
+| **Fields on dd.reso.org** | 23 |
+| **Columns in canonical DBML** | 17 (omits 1 satellite drops + 4 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 2 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/OfficeAssociation/](https://dd.reso.org/DD2.0/OfficeAssociation/) |
+| **Last revised upstream** | 7/25/2019 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    office_association["office_association"]
+    association["association"]
+    office_association -->|"association_key"| association
+    office["office"]
+    office_association -->|"office_key"| office
+```
 
 ## Fields
 

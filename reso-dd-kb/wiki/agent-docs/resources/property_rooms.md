@@ -1,12 +1,30 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `property_rooms` (PropertyRooms)
 
 > Detailed information about separate rooms in a property.
 
-- Source: [https://dd.reso.org/DD2.0/PropertyRooms/](https://dd.reso.org/DD2.0/PropertyRooms/)
-- Field count on dd.reso.org: **19**
-- Primary key: `room_key`
-- Note: PK chosen by override (RESO uses `RoomKey` for this resource).
-- Last revised upstream: 8/18/2023
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `room_key` *(override; RESO uses `RoomKey`)* |
+| **Fields on dd.reso.org** | 19 |
+| **Columns in canonical DBML** | 17 (omits 0 satellite drops + 1 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 2 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/PropertyRooms/](https://dd.reso.org/DD2.0/PropertyRooms/) |
+| **Last revised upstream** | 8/18/2023 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    property_rooms["property_rooms"]
+    property["property"]
+    property_rooms -->|"listing_id"| property
+    property_rooms -->|"listing_key"| property
+```
 
 ## Fields
 

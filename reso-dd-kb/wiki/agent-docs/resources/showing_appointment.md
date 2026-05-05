@@ -1,11 +1,29 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `showing_appointment` (ShowingAppointment)
 
 > Fields associated with showing appointments, including method, date, time and more.
 
-- Source: [https://dd.reso.org/DD2.0/ShowingAppointment/](https://dd.reso.org/DD2.0/ShowingAppointment/)
-- Field count on dd.reso.org: **12**
-- Primary key: `showing_appointment_key`
-- Last revised upstream: 6/16/2022
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `showing_appointment_key` |
+| **Fields on dd.reso.org** | 12 |
+| **Columns in canonical DBML** | 12 (omits 0 satellite drops + 0 `Resource`-typed + 0 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 1 / 0 |
+| **Review markers** | 1 |
+| **Source** | [https://dd.reso.org/DD2.0/ShowingAppointment/](https://dd.reso.org/DD2.0/ShowingAppointment/) |
+| **Last revised upstream** | 6/16/2022 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    showing_appointment["showing_appointment"]
+    member["member"]
+    showing_appointment -->|"showing_agent_key"| member
+```
 
 ## Fields
 

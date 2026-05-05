@@ -1,11 +1,29 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `lock_or_box` (LockOrBox)
 
 > Lockbox, smart lock and showing agent information.
 
-- Source: [https://dd.reso.org/DD2.0/LockOrBox/](https://dd.reso.org/DD2.0/LockOrBox/)
-- Field count on dd.reso.org: **44**
-- Primary key: `lock_or_box_key`
-- Last revised upstream: 7/25/2019
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `lock_or_box_key` |
+| **Fields on dd.reso.org** | 44 |
+| **Columns in canonical DBML** | 39 (omits 0 satellite drops + 4 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 1 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/LockOrBox/](https://dd.reso.org/DD2.0/LockOrBox/) |
+| **Last revised upstream** | 7/25/2019 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    lock_or_box["lock_or_box"]
+    office["office"]
+    lock_or_box -->|"showing_office_id"| office
+```
 
 ## Fields
 

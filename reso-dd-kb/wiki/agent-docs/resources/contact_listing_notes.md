@@ -1,11 +1,31 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `contact_listing_notes` (ContactListingNotes)
 
 > Notes about a given listing from interactions between the contact and member within a consumer portal.
 
-- Source: [https://dd.reso.org/DD2.0/ContactListingNotes/](https://dd.reso.org/DD2.0/ContactListingNotes/)
-- Field count on dd.reso.org: **10**
-- Primary key: `contact_listing_notes_key`
-- Last revised upstream: 5/24/2017
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `contact_listing_notes_key` |
+| **Fields on dd.reso.org** | 10 |
+| **Columns in canonical DBML** | 7 (omits 0 satellite drops + 2 `Resource`-typed + 1 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 2 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/ContactListingNotes/](https://dd.reso.org/DD2.0/ContactListingNotes/) |
+| **Last revised upstream** | 5/24/2017 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    contact_listing_notes["contact_listing_notes"]
+    contacts["contacts"]
+    contact_listing_notes -->|"contact_key"| contacts
+    property["property"]
+    contact_listing_notes -->|"listing_key"| property
+```
 
 ## Fields
 

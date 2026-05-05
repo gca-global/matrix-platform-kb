@@ -1,14 +1,36 @@
+[index](_index.md) | [relationships](relationships.md) | [USAGE.md](../../USAGE.md)
+
 # Lookups (RESO DD 2.0)
 
-222 lookups extracted from `raw/lookups.csv` and `raw/lookup_values.csv`. Use the table of contents to jump; each anchor is the snake-cased lookup name.
+> 222 lookups, 3,683 total values, extracted from `raw/lookups.csv` and `raw/lookup_values.csv`.
 
-Kinds:
+## At a glance
 
-- **closed-SV** - a `String List, Single` column with a closed value list. Emitted as a DBML `Enum` in `wiki/dbml/lookups.dbml`.
-- **closed-MV** - a `String List, Multi` column with a closed value list. Stored as `varchar` in DBML; column note carries `multi: <name>`.
-- **open** - jurisdiction-defined or no closed value list (e.g. `AOR`, `City`). Stored as `varchar`.
+| Kind | Count | DBML representation |
+|---|---:|---|
+| **closed-SV** (single-value w/ closed list) | 99 | `Enum` block in `wiki/dbml/lookups.dbml`; column typed as the enum |
+| **closed-MV** (multi-value w/ closed list) | 94 | Column is `varchar`; column note carries `multi: <LookupName>` |
+| **open** (jurisdiction-defined, no closed list) | 29 | Column is `varchar`; note `open: jurisdiction-defined` |
+| **TOTAL** | 222 | |
 
-## Index
+## Most-referenced lookups
+
+Top 10 by number of host columns (helps you find the high-traffic enums fast).
+
+| Lookup | Hosts | Values | Kind |
+|---|---:|---:|---|
+| [`state_or_province`](#state_or_province) | 19 | 65 | closed-SV |
+| [`linear_units`](#linear_units) | 15 | 2 | closed-SV |
+| [`aor`](#aor) | 13 | 0 | open |
+| [`country`](#country) | 12 | 246 | closed-SV |
+| [`county_or_parish`](#county_or_parish) | 11 | 0 | open |
+| [`area_units`](#area_units) | 9 | 2 | closed-SV |
+| [`area_source`](#area_source) | 8 | 9 | closed-SV |
+| [`class_name`](#class_name) | 8 | 17 | closed-SV |
+| [`resource_name`](#resource_name) | 7 | 5 | closed-SV |
+| [`social_media_type`](#social_media_type) | 7 | 17 | closed-SV |
+
+## Full index (alphabetical)
 
 | Lookup | Kind | Values | Used by |
 |---|---|---:|---|

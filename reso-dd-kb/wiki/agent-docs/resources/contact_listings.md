@@ -1,11 +1,31 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `contact_listings` (ContactListings)
 
 > Maintains the relationship between contacts and members around listings in consumer portals.
 
-- Source: [https://dd.reso.org/DD2.0/ContactListings/](https://dd.reso.org/DD2.0/ContactListings/)
-- Field count on dd.reso.org: **22**
-- Primary key: `contact_listings_key`
-- Last revised upstream: 9/26/2017
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `contact_listings_key` |
+| **Fields on dd.reso.org** | 22 |
+| **Columns in canonical DBML** | 17 (omits 1 satellite drops + 2 `Resource`-typed + 2 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 2 / 0 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/ContactListings/](https://dd.reso.org/DD2.0/ContactListings/) |
+| **Last revised upstream** | 9/26/2017 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    contact_listings["contact_listings"]
+    contacts["contacts"]
+    contact_listings -->|"contact_key"| contacts
+    property["property"]
+    contact_listings -->|"listing_key"| property
+```
 
 ## Fields
 

@@ -1,11 +1,31 @@
+[index](../_index.md) | [lookups](../lookups.md) | [relationships](../relationships.md) | [USAGE.md](../../../USAGE.md)
+
 # `association` (Association)
 
 > Fields pertaining to the local real estate trade association.
 
-- Source: [https://dd.reso.org/DD2.0/Association/](https://dd.reso.org/DD2.0/Association/)
-- Field count on dd.reso.org: **45**
-- Primary key: `association_key`
-- Last revised upstream: 8/5/2024
+## At a glance
+
+| | |
+|---|---|
+| **Primary key** | `association_key` |
+| **Fields on dd.reso.org** | 45 |
+| **Columns in canonical DBML** | 40 (omits 0 satellite drops + 3 `Resource`-typed + 2 `Collection`-typed) |
+| **Foreign keys OUT / IN** | 0 / 2 |
+| **Review markers** | 0 |
+| **Source** | [https://dd.reso.org/DD2.0/Association/](https://dd.reso.org/DD2.0/Association/) |
+| **Last revised upstream** | 8/5/2024 |
+
+## Relationship diagram
+
+```mermaid
+flowchart LR
+    association["association"]
+    member_association["member_association"]
+    member_association -->|"association_key"| association
+    office_association["office_association"]
+    office_association -->|"association_key"| association
+```
 
 ## Fields
 
