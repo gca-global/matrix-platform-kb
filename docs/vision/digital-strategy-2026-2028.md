@@ -1,6 +1,6 @@
 # Digital Strategy 2026-2028
 
-> Source: `vision/Sharp-Sothebys-International-Realty.pdf` (28-slide strategy deck)
+> Source: `raw/vision/Sharp-Sothebys-International-Realty.pdf` (28-slide strategy deck)
 > Authors: Sergey Lobov (CDSO), Sergey Seregin (CDTO)
 > Date: December 2025
 
@@ -126,7 +126,7 @@ First contact (site/ads/social) → Auto-qualification → Automated mailings �
 
 ## Digital Ecosystem Architecture
 
-The target architecture (see `vision/Sarp SIR Platform-2026-02-18-125014.mmd`) defines:
+The target architecture (see `raw/vision/Sarp SIR Platform-2026-02-18-125014.mmd`) defines:
 
 - **External Channels**: Email, Telegram, WhatsApp BSP, Voice, Google/Meta Ads
 - **Own Channels**: Public website, Personal cabinet (portal), Mobile app

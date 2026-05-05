@@ -1,7 +1,7 @@
 # Digital Ecosystem Architecture
 
-> Source: `vision/Sarp SIR Platform-2026-02-18-125014.mmd` (Mermaid system diagram)
-> Source: `vision/Sharp-Sothebys-International-Realty.pdf` (slides 10-13)
+> Source: `raw/vision/Sarp SIR Platform-2026-02-18-125014.mmd` (Mermaid system diagram)
+> Source: `raw/vision/Sharp-Sothebys-International-Realty.pdf` (slides 10-13)
 >
 > **For Lovable**: This shows the full ecosystem. For how to build apps, see [app-template.md](app-template.md).
 

@@ -1,6 +1,6 @@
 # Listing Operational Checklists
 
-> Source: `current busienss practice/Listing procedure check list January 2024.xlsx`
+> Source: `raw/current-business-practice/Listing procedure check list January 2024.xlsx`
 > Three parallel checklists for broker, marketing, and finance roles.
 >
 > **Sharp Matrix target**: These checklists document the current manual processes that
@@ -73,7 +73,7 @@
 
 ## Property Data Submission Requirements
 
-> Source: `current busienss practice/Check-list Listing Residential Properties and Land ENG 2025-2026.xlsx`
+> Source: `raw/current-business-practice/Check-list Listing Residential Properties and Land ENG 2025-2026.xlsx`
 
 ### Submission Process
 1. Email all listing data to: `listing@cyprus-sothebysrealty.com`

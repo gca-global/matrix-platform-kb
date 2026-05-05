@@ -37,19 +37,37 @@ echo ""
 # ---------------------------------------------------------------
 echo "--- Check 1: AGENTS.md file references ---"
 
-AGENTS_REFS=$(grep -oP '`docs/[^`]+`' "$AGENTS_MD" | tr -d '`' || true)
-AGENTS_REFS="$AGENTS_REFS $(grep -oP '`scripts/[^`]+`' "$AGENTS_MD" | tr -d '`' || true)"
+AGENTS_REFS_RAW=$(
+    {
+        grep -oP '`docs/[^`]+`' "$AGENTS_MD" || true
+        grep -oP '`scripts/[^`]+`' "$AGENTS_MD" || true
+        grep -oP '`raw/[^`]+`' "$AGENTS_MD" || true
+    } | tr -d '`'
+)
 
 AGENTS_COUNT=0
 AGENTS_MISSING=0
-for ref in $AGENTS_REFS; do
-    full_path="$REPO_ROOT/$ref"
+while IFS= read -r ref; do
+    [ -z "$ref" ] && continue
+    # Skip placeholder paths (template-style refs like `wiki/agent-docs/resources/<snake>.md`)
+    case "$ref" in
+        *'<'*'>'*) continue ;;
+    esac
     AGENTS_COUNT=$((AGENTS_COUNT + 1))
-    if [ ! -e "$full_path" ]; then
+    full_path="$REPO_ROOT/$ref"
+    if [[ "$ref" == *'*'* ]]; then
+        # Glob pattern - check at least one match exists
+        # shellcheck disable=SC2086
+        match_count=$(compgen -G "$full_path" 2>/dev/null | wc -l)
+        if [ "$match_count" -eq 0 ]; then
+            error "AGENTS.md references glob '$ref' but no files match"
+            AGENTS_MISSING=$((AGENTS_MISSING + 1))
+        fi
+    elif [ ! -e "$full_path" ]; then
         error "AGENTS.md references '$ref' but file does not exist"
         AGENTS_MISSING=$((AGENTS_MISSING + 1))
     fi
-done
+done <<< "$AGENTS_REFS_RAW"
 
 if [ "$AGENTS_MISSING" -eq 0 ]; then
     ok "All $AGENTS_COUNT file references in AGENTS.md resolve"
@@ -176,6 +194,31 @@ if [ "$NINETY_DAYS_AGO" -gt 0 ]; then
     fi
 else
     warn "Could not determine 90-day threshold (date command incompatible)"
+fi
+echo ""
+
+# ---------------------------------------------------------------
+# Check 5: reso-dd-kb generated artifacts fresher than source CSVs
+# ---------------------------------------------------------------
+echo "--- Check 5: reso-dd-kb generated artifacts vs source CSVs ---"
+
+RESO_KB="$DOCS_DIR/data-models/reso-dd-kb"
+RESO_INDEX="$RESO_KB/wiki/agent-docs/_index.md"
+RESO_FIELDS="$RESO_KB/raw/fields.csv"
+RESO_DBML="$RESO_KB/wiki/dbml/canonical.dbml"
+
+if [ -f "$RESO_INDEX" ] && [ -f "$RESO_FIELDS" ]; then
+    if [ "$RESO_FIELDS" -nt "$RESO_INDEX" ]; then
+        warn "reso-dd-kb: raw/fields.csv newer than wiki/agent-docs/_index.md - re-run scripts/06_emit_agent_docs.py"
+    fi
+    if [ -f "$RESO_DBML" ] && [ "$RESO_FIELDS" -nt "$RESO_DBML" ]; then
+        warn "reso-dd-kb: raw/fields.csv newer than wiki/dbml/canonical.dbml - re-run scripts/05_emit_dbml.py"
+    fi
+    if [ -z "${WARNINGS_RESO_KB+x}" ]; then
+        ok "reso-dd-kb generated artifacts are at least as fresh as raw/fields.csv"
+    fi
+else
+    warn "reso-dd-kb expected at $RESO_KB but key files missing (USAGE.md or raw/fields.csv)"
 fi
 echo ""
 

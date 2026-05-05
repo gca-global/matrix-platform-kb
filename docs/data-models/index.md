@@ -19,6 +19,7 @@
 │  Layer 3: RESO DD 2.0 (INTEROP STANDARD)                    │
 │  Industry standard names for syndication, RESO Web API,     │
 │  MLS feeds, and portal exports                              │
+│  Implemented by `reso-dd-kb/` (canonical source)             │
 ├─────────────────────────────────────────────────────────────┤
 │  Reference: Qobrix CRM (migration source)                   │
 │  Legacy CRM schema — maps to Dash/RESO for data migration   │
@@ -32,7 +33,7 @@
 | Document | What It Contains |
 |----------|-----------------|
 | [dash-data-model.md](dash-data-model.md) | **Start here for Dash field names** — Dash/Anywhere.com practical field reference: 50+ fields, 30+ feature groups, media, agent/office |
-| [`../../reso-dd-kb/USAGE.md`](../../reso-dd-kb/USAGE.md) | **Start here for any RESO DD 2.0 question** — canonical model: 41 resources, 1,745 fields, 222 lookups, DBML schema |
+| [reso-dd-kb/USAGE.md](reso-dd-kb/USAGE.md) | **Canonical RESO source — start here for any RESO DD 2.0 question.** 41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource docs. Implements Layer 3 of the hierarchy above. |
 | [reso-dd-overview.md](reso-dd-overview.md) | REDIRECT → `reso-dd-kb/` (kept for inbound link compatibility) |
 | [reso-canonical-schema.md](reso-canonical-schema.md) | REDIRECT → `reso-dd-kb/wiki/dbml/canonical.dbml` (kept for inbound link compatibility) |
 | [platform-extensions.md](platform-extensions.md) | All `x_sm_*` fields not in Dash or RESO DD |
@@ -77,5 +78,5 @@ AI Services ────────┘
 When building any new feature:
 1. **Start with Dash data model** — find the practical field name in [dash-data-model.md](dash-data-model.md)
 2. **Check platform extensions** — if no Dash field exists, check [platform-extensions.md](platform-extensions.md)
-3. **If neither exists** — propose a new `x_sm_*` extension following the governance in [platform-extensions.md](platform-extensions.md). Confirm the field is genuinely missing from RESO DD by checking [`reso-dd-kb/wiki/agent-docs/_index.md`](../../reso-dd-kb/wiki/agent-docs/_index.md).
+3. **If neither exists** — propose a new `x_sm_*` extension following the governance in [platform-extensions.md](platform-extensions.md). Confirm the field is genuinely missing from RESO DD by checking [reso-dd-kb/wiki/agent-docs/_index.md](reso-dd-kb/wiki/agent-docs/_index.md).
 4. **For syndication** — use the RESO mapping column in dash-data-model.md to find the interop name

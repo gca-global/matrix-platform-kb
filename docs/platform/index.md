@@ -40,9 +40,9 @@ See [app-template.md](app-template.md) for full technical details.
 
 | Source | Role in Sharp Matrix | Location |
 |--------|---------------------|----------|
-| **Dash / Anywhere.com** | **Practical core** — concrete field definitions for app development | `dash/BlankForm_*.docx`, Dash API |
-| **RESO DD 2.0** | Interop standard — names for syndication and external APIs | [`reso-dd-kb/`](../../reso-dd-kb/README.md) (canonical model: mirror + raw CSVs + DBML + agent-docs) |
-| **Qobrix CRM** | Legacy migration source — being decommissioned | `qobrix/qobrix_openapi.yaml` |
+| **Dash / Anywhere.com** | **Practical core** — concrete field definitions for app development | `raw/dash/BlankForm_*.docx`, Dash API |
+| **RESO DD 2.0** | Interop standard — names for syndication and external APIs | [`reso-dd-kb/`](../data-models/reso-dd-kb/README.md) (canonical model: mirror + raw CSVs + DBML + agent-docs) |
+| **Qobrix CRM** | Legacy migration source — being decommissioned | `raw/qobrix/qobrix_openapi.yaml` |
 
 ## Phased Migration
 

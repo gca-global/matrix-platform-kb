@@ -104,8 +104,7 @@ Supabase (CDL + Auth)  ◄──►  Databricks (DWH + ETL)  ◄──►  MLS /
 | Section | Contents |
 |---|---|
 | **[Platform](docs/platform/)** | App template, tech stack, dual-Supabase architecture, MLS datamart |
-| **[RESO DD KB](reso-dd-kb/)** | **Canonical RESO DD 2.0 model** — verified mirror of `dd.reso.org/DD2.0/`, 41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource markdown. **All RESO DD lookups for the platform start here.** |
-| **[Data Models](docs/data-models/)** | Dash field reference, Dash↔RESO mapping, CDL schema, ETL pipeline, `x_sm_*` extension governance |
+| **[Data Models](docs/data-models/)** | Dash field reference, Dash↔RESO mapping, CDL schema, ETL pipeline, `x_sm_*` extension governance — and **[canonical RESO DD 2.0](docs/data-models/reso-dd-kb/)** (41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource markdown). All RESO DD lookups for the platform start at [`docs/data-models/reso-dd-kb/USAGE.md`](docs/data-models/reso-dd-kb/USAGE.md). |
 | **[Business Processes](docs/business-processes/)** | Listing pipeline, sales pipeline, lead qualification workflows |
 | **[Product Specs](docs/product-specs/)** | UI specs — dashboards, forms, Kanban boards |
 | **[Vision](docs/vision/)** | Digital strategy 2026–2028, AI sales model |
@@ -114,27 +113,37 @@ Supabase (CDL + Auth)  ◄──►  Databricks (DWH + ETL)  ◄──►  MLS /
 
 ### Repository Structure
 
+Three top-level buckets: `docs/` (KB knowledge layer), `raw/` (hand-supplied source artifacts), `scripts/` (mechanical KB validation).
+
 ```
-AGENTS.md                    ← Entry point for LLMs
-README.md                    ← This file
-docs/
-  INDEX.md                   ← Master index with chapter summaries
-  ARCHITECTURE.md            ← System architecture
-  platform/                  ← Platform overview, app template, MLS datamart
-  data-models/               ← Dash data model, RESO interop, ETL pipeline
-  business-processes/        ← Listing pipeline, sales pipeline, lead qualification
-  product-specs/             ← UI specs: dashboards, forms, Kanban
-  vision/                    ← Digital strategy 2026-2028, AI sales model
-  references/                ← API catalogs, field summaries
-  zoe-ai-assistant-kb/       ← Zoe assistant knowledge base
-reso-dd-kb/                  ← Canonical RESO DD 2.0 model (mirror, raw CSVs, DBML, agent-docs)
-  USAGE.md                   ← LLM consumption guide — start here for any RESO question
-  wiki/dbml/canonical.dbml   ← 41-table DBML schema with FKs
-  wiki/agent-docs/           ← Per-resource markdown reference
-dash/                        ← SIR/Anywhere.com listing forms (DOCX)
-qobrix/                      ← Qobrix OpenAPI spec (YAML)
-vision/                      ← Strategy PDFs and architecture diagrams
-current-business-practice/   ← Operational checklists (XLSX)
+AGENTS.md                          ← Entry point for LLMs (~115-line TOC)
+README.md                          ← This file
+docs/                              ← KB knowledge layer (system of record)
+  INDEX.md                         ← Master index with chapter summaries
+  ARCHITECTURE.md                  ← System architecture
+  GOLDEN_PRINCIPLES.md             ← Engineering invariants & taste rules
+  QUALITY_SCORE.md                 ← Domain quality grades
+  platform/                        ← Platform overview, app template, MLS datamart
+  architecture/                    ← Intelligence layer, ADRs, data distribution
+  data-models/                     ← Dash data model, RESO interop, ETL pipeline
+    reso-dd-kb/                    ← Canonical RESO DD 2.0 model (mirror, CSVs, DBML, agent-docs)
+      AGENTS.md                    ← Subsystem rules (phase boundaries, file ownership)
+      USAGE.md                     ← LLM consumption guide — start here for any RESO question
+      wiki/dbml/canonical.dbml     ← 41-table DBML schema with FKs
+      wiki/agent-docs/             ← Per-resource markdown reference
+  business-processes/              ← Listing pipeline, sales pipeline, lead qualification
+  exec-plans/                      ← Active / completed execution plans, tech-debt tracker
+  product-specs/                   ← UI specs: dashboards, forms, Kanban
+  vision/                          ← Digital strategy 2026-2028, AI sales model
+  references/                      ← API catalogs, field summaries
+  zoe-ai-assistant-kb/             ← Zoe assistant knowledge base
+raw/                               ← Hand-supplied source artifacts
+  dash/                            ← SIR/Anywhere.com listing forms (DOCX)
+  qobrix/                          ← Qobrix OpenAPI spec (YAML)
+  vision/                          ← Strategy PDFs and architecture diagrams
+  current-business-practice/       ← Operational checklists (XLSX)
+scripts/
+  validate-kb.sh                   ← Mechanical KB validation (links, refs, freshness)
 ```
 
 ### Key Concepts

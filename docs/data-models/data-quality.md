@@ -150,5 +150,5 @@ The following capabilities are planned but not yet implemented:
 |-----|-----|
 | ETL pipeline architecture | [etl-pipeline.md](etl-pipeline.md) |
 | MLS pipeline overview | [mls-datamart.md](../platform/mls-datamart.md) |
-| RESO canonical schema | [`reso-dd-kb/wiki/dbml/canonical.dbml`](../../reso-dd-kb/wiki/dbml/canonical.dbml) |
+| RESO canonical schema | [`reso-dd-kb/wiki/dbml/canonical.dbml`](reso-dd-kb/wiki/dbml/canonical.dbml) |
 | Operations and monitoring | [operations.md](../platform/operations.md) |

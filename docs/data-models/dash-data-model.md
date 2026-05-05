@@ -255,6 +255,6 @@ Feature values are stored as comma-separated strings in Supabase. Use `string.sp
 | For | See |
 |-----|-----|
 | How this data reaches Supabase | [etl-pipeline.md](etl-pipeline.md) |
-| RESO interop field names | [`reso-dd-kb/wiki/agent-docs/resources/property.md`](../../reso-dd-kb/wiki/agent-docs/resources/property.md) (or any other resource) |
+| RESO interop field names | [`reso-dd-kb/wiki/agent-docs/resources/property.md`](reso-dd-kb/wiki/agent-docs/resources/property.md) (or any other resource) |
 | Platform extension fields | [platform-extensions.md](platform-extensions.md) |
 | How to build apps that use this data | [app-template.md](../platform/app-template.md) |

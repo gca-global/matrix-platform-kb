@@ -1,7 +1,7 @@
 # Sharp Matrix Platform Extensions (x_sm_*)
 
 > Fields and lookup values required by Sharp Matrix that do not exist in RESO DD 2.0.
-> All extensions follow the `x_sm_` prefix convention. The canonical RESO DD 2.0 model lives in [`reso-dd-kb/`](../../reso-dd-kb/README.md).
+> All extensions follow the `x_sm_` prefix convention. The canonical RESO DD 2.0 model lives in [`reso-dd-kb/`](reso-dd-kb/README.md).
 > for the governance process.
 
 ## Extension Fields — Property Resource
@@ -84,4 +84,4 @@ These are registered as platform-specific lookup values:
 |-----|-----|
 | Extension governance rules | This file (`platform-extensions.md`) |
 | Full field mapping with extensions flagged | [property-field-mapping.md](property-field-mapping.md) |
-| RESO DD 2.0 field reference | [`reso-dd-kb/wiki/agent-docs/_index.md`](../../reso-dd-kb/wiki/agent-docs/_index.md) |
+| RESO DD 2.0 field reference | [`reso-dd-kb/wiki/agent-docs/_index.md`](reso-dd-kb/wiki/agent-docs/_index.md) |

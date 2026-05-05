@@ -1,6 +1,6 @@
 # Qobrix CRM Data Model — Reference & Migration Source
 
-> Source: `qobrix/qobrix_openapi.yaml` (OpenAPI 3.0, API version 2.0)
+> Source: `raw/qobrix/qobrix_openapi.yaml` (OpenAPI 3.0, API version 2.0)
 > Documentation: https://qobrix.com/real-estate-crm/advanced-tools/rest-api/
 >
 > **Role in Sharp Matrix**: Qobrix is the **legacy CRM** Sharp SIR currently uses for **Cyprus** listings. Today it is exposed to the CDL via the `mls.sharpsir.group` RESO Web API projection and ingested by `mls-sync` (CDL `mls_sources.kind = 'legacy-internal'`, `is_sunsetting = true`).

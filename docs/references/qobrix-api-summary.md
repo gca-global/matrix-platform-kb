@@ -1,6 +1,6 @@
 # Qobrix API Resource Catalog
 
-> Source: `qobrix/qobrix_openapi.yaml` (OpenAPI 3.0, 68,149 lines)
+> Source: `raw/qobrix/qobrix_openapi.yaml` (OpenAPI 3.0, 68,149 lines)
 > Base URL: `https://{tenant}.qobrix.com/api/v2/`
 
 ## API Resources (83 Resource Groups)

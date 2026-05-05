@@ -273,5 +273,5 @@ For full endpoint reference, see [reso-web-api.md](../data-models/reso-web-api.m
 |-----|-----|
 | ETL pipeline technical details | [etl-pipeline.md](../data-models/etl-pipeline.md) |
 | RESO Web API endpoints | [reso-web-api.md](../data-models/reso-web-api.md) |
-| RESO DD canonical schema | [`reso-dd-kb/wiki/dbml/canonical.dbml`](../../reso-dd-kb/wiki/dbml/canonical.dbml) |
+| RESO DD canonical schema | [`reso-dd-kb/wiki/dbml/canonical.dbml`](../data-models/reso-dd-kb/wiki/dbml/canonical.dbml) |
 | How apps are built | [app-template.md](app-template.md) |

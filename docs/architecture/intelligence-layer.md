@@ -283,5 +283,5 @@ Each gets its own plan when prioritized.
 | **Distribution / channel routing / field-overrides (sibling Phase 2.5)** | [data-distribution-and-stewardship.md](data-distribution-and-stewardship.md) |
 | Personalization spec (visitor-side) | [product-specs/personalization.md](../product-specs/personalization.md) |
 | Phase-1 plan source | `matrix-platform-foundation/supabase/cdl/migrations/20260426*` + `matrix-platform-foundation/supabase/cdl/functions/mls-sync` |
-| RESO `InternetTracking` field reference | [`reso-dd-kb/wiki/agent-docs/resources/internet_tracking.md`](../../reso-dd-kb/wiki/agent-docs/resources/internet_tracking.md) |
+| RESO `InternetTracking` field reference | [`reso-dd-kb/wiki/agent-docs/resources/internet_tracking.md`](../data-models/reso-dd-kb/wiki/agent-docs/resources/internet_tracking.md) |
 | Ecosystem channels | [platform/ecosystem-architecture.md](../platform/ecosystem-architecture.md) |
