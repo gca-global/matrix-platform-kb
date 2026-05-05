@@ -30,6 +30,7 @@ For new-app auth issues (401/400/403), see `docs/platform/new-app-auth-troublesh
 | Subtree | Local rules |
 |---------|-------------|
 | `docs/data-models/reso-dd-kb/` | `docs/data-models/reso-dd-kb/AGENTS.md` — phase boundaries, file ownership, mirror politeness, determinism, verification gates |
+| `docs/data-models/source-mappings/` | `docs/data-models/source-mappings/AGENTS.md` — phase boundaries, file ownership, hard-fail join gates, determinism |
 
 ## Knowledge Base Structure
 
@@ -44,6 +45,7 @@ docs/                                   ← KB knowledge layer (system of record
 │   ├── index.md                       ← Data models chapter index (Dash-first hierarchy)
 │   ├── dash-data-model.md             ← Dash/Anywhere.com practical field reference
 │   ├── reso-dd-kb/                    ← CANONICAL RESO DD 2.0 — start at USAGE.md
+│   ├── source-mappings/               ← Dash/Qobrix/SIR -> RESO mapping pipeline
 │   ├── cdl-schema.md                  ← Common Data Layer (cross-app data, MLS Sync, lifecycle)
 │   ├── etl-pipeline.md                ← Bronze/Silver/Gold ETL
 │   ├── property-field-mapping.md      ← Dash ↔ RESO ↔ Qobrix ↔ SIR
@@ -74,6 +76,8 @@ scripts/
 | Look up any RESO DD 2.0 resource / field / lookup | `docs/data-models/reso-dd-kb/USAGE.md` |
 | When editing inside reso-dd-kb (local rules) | `docs/data-models/reso-dd-kb/AGENTS.md` |
 | Canonical RESO DBML / per-resource reference | `docs/data-models/reso-dd-kb/wiki/dbml/canonical.dbml`, `docs/data-models/reso-dd-kb/wiki/agent-docs/resources/<snake>.md` |
+| Map a Dash / Qobrix / SIR field to RESO | `docs/data-models/source-mappings/USAGE.md` |
+| When editing source-mappings (local rules) | `docs/data-models/source-mappings/AGENTS.md` |
 | Dash fields, field mapping, x_sm_* extensions | `docs/data-models/dash-data-model.md`, `docs/data-models/property-field-mapping.md`, `docs/data-models/platform-extensions.md` |
 | CDL schema / ETL pipeline / RESO Web API | `docs/data-models/cdl-schema.md`, `docs/data-models/etl-pipeline.md`, `docs/data-models/reso-web-api.md` |
 | Auth, roles, permissions, RLS | `docs/platform/security-model.md` |

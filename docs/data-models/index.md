@@ -34,6 +34,7 @@
 |----------|-----------------|
 | [dash-data-model.md](dash-data-model.md) | **Start here for Dash field names** — Dash/Anywhere.com practical field reference: 50+ fields, 30+ feature groups, media, agent/office |
 | [reso-dd-kb/USAGE.md](reso-dd-kb/USAGE.md) | **Canonical RESO source — start here for any RESO DD 2.0 question.** 41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource docs. Implements Layer 3 of the hierarchy above. |
+| [source-mappings/USAGE.md](source-mappings/USAGE.md) | **Cross-source mapping — start here when bridging Dash / Qobrix / SIR to canonical RESO.** Phase-gated pipeline (inventory -> curate -> join -> emit) for the 6 resources all three sources touch (Property, Member, Office, Contacts, Teams, Media). |
 | [reso-dd-overview.md](reso-dd-overview.md) | REDIRECT → `reso-dd-kb/` (kept for inbound link compatibility) |
 | [reso-canonical-schema.md](reso-canonical-schema.md) | REDIRECT → `reso-dd-kb/wiki/dbml/canonical.dbml` (kept for inbound link compatibility) |
 | [platform-extensions.md](platform-extensions.md) | All `x_sm_*` fields not in Dash or RESO DD |

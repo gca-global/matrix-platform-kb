@@ -1,0 +1,414 @@
+checklist,sheet,section,kind,step_label,field_type_hint,required_yn,example_value,timing_or_note,row_no,col_no
+ListingChecklist_2025_2026,Apartment,Apartment,step,Name of the broker (First Name Surname),,,,Landing page for seller,1,0
+ListingChecklist_2025_2026,Apartment,Seller Details,field,Telephone,text,,,,5,0
+ListingChecklist_2025_2026,Apartment,Seller Details,field,E-mail,text,,,,6,0
+ListingChecklist_2025_2026,Apartment,Seller Details,field,Country of origin/ residence,text,,,,8,0
+ListingChecklist_2025_2026,Apartment,Seller Details,field,Preferred method of communication,text,,,,9,0
+ListingChecklist_2025_2026,Apartment,Seller Details,field,Keyholder/Representative in CY,text,,,,10,0
+ListingChecklist_2025_2026,Apartment,Seller Details,field,Telephone/email of keyholder,text,,,,11,0
+ListingChecklist_2025_2026,Apartment,Seller Details,field,Keys in the office (yes/no),boolean,,NO,,12,0
+ListingChecklist_2025_2026,Apartment,Seller Details,section,Seller Details,,,,,2,0
+ListingChecklist_2025_2026,Apartment,Seller Details,step,Name of the Seller (as per the agreement),,,,,3,0
+ListingChecklist_2025_2026,Apartment,Seller Details,step,Contact person if Seller is a Company,,,,,4,0
+ListingChecklist_2025_2026,Apartment,Seller Details,step,"Source of contact (personal, introducer, company)",,,,,7,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Price €,number,,444,,14,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Commissions %,number,,0,,17,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Exclusivity (yes/no),boolean,,NO,,19,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Title deeds availability (yes/no),boolean,,NO,,20,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,"Excluded from Marketing resources (portals, promotion)",enum,,NO,,22,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Who else is selling,text,,,,23,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Seller's Banks of prefference,text,,,,25,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Crypto payment is possible (yes/no),boolean,,NO,,26,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Type of property (Apartment),text,,Apartment (standart),,34,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Number of floors in the building,text,,0,,35,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,What floor,text,,0,,36,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,№ Bedrooms,text,,0,,37,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,№ Bathrooms,text,,0,,38,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,№ Guest WC,text,,0,,39,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,"Views (sea, mountain, pool, garden, city etc)",enum,,Garden view,,40,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Internal area (sq.m.),number,,0,,41,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Covered Verandas (sq.m.),number,,0,,42,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Covered area (sq.m.) internal area + covered verandas,number,,0,,43,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Uncovered Verandas (sq.m.),number,,0,,44,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Uncovered area (sq.m.),number,,0,,45,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Roof garden (sq.m.),number,,0,,46,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Carden area for Ground-floor apartment (sq.m.),number,,0,,47,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Total area (sq.m.),number,,0,,48,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Store room,text,,NO,,50,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Maid's room,text,,NO,,51,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Separate laundry room,number,,NO,,52,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Smart home,text,,NO,,53,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,"Swimming Pool (communal or private, none)",enum,,None,,54,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Year of construction,date,,,,57,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Year of renovation (if applicable),date,,,,58,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Appliances-white goods (yes/no),boolean,,NO,,60,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,"Amenities if in a complex (gym, sauna, playground etc)",enum,,,,64,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Additional Extras,text,,,,65,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,"Distance to the beach (m, km)/requested by owner",enum,,,,66,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Special notes,text,,,,67,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Documents List for Properties with Title Deed,text,,,yes/no,74,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Documents List for Properties without Title Deed,text,,,,78,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Key holder,text,,,,87,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Contact person,text,,,,88,0
+ListingChecklist_2025_2026,Apartment,Selling Details,field,Notice,text,,,,89,0
+ListingChecklist_2025_2026,Apartment,Selling Details,section,Selling Details,,,,,13,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,+VAT (yes/no),,,,,15,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,VAT expiration date,,,,,16,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,"Introducer fee, if any",,,,Not visible to the seller,18,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Suitable for PR,,,,,21,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Where payments are accepted (countries),,,,,24,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Check-list Data approved by the Seller,,,,No need,27,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Property Technical Details,,,,,28,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,"City, Area of location",,,,,29,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Google maps point (pin the according block),,,,,30,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,"Address: str, №",,,,,31,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Project name and unit number,,,,,32,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Link to photos,,,,,33,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Elevator,,,,,49,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Parking Covered Count (№),,,,,55,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Parking Unovered Count (№),,,,,56,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Furnishing,,,,,59,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,"Air_condition, VRV",,,,,61,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Heating Type,,,,,62,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Heating Medium,,,,,63,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Property description (180 words). Paste here or attach a separate file.,,,,,68,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Document check list for Brokers,,,,,73,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Copy of Title Deed,,,,,75,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,"Check if Title Deed reflects the property correctly and is in the name of the Client listing. If not update and its says only land, then you need to request a copy of the Building Permit with the approved plans and the Certificate of Final Approval",,,,,76,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Plans,,,,,77,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Copy of the Contract of Sale with ALL the attachments,,,,,79,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Copy of Title Deed to the land on which the property is built,,,,,80,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Copy of the Building Permit with the approved plans and the Certificate of Final Approval(their Lawyers should have this),,,,,81,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Listing Agreement,,,,,83,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Listing agreement signed,,,,,84,0
+ListingChecklist_2025_2026,Apartment,Selling Details,step,Viewing checklist,,,,,86,0
+ListingChecklist_2025_2026,House,House,step,Name of the broker (First Name Surname),,,,Landing page for seller,1,0
+ListingChecklist_2025_2026,House,Seller Details,field,Telephone,text,,,,5,0
+ListingChecklist_2025_2026,House,Seller Details,field,E-mail,text,,,,6,0
+ListingChecklist_2025_2026,House,Seller Details,field,Country of origin/ residence,text,,,,8,0
+ListingChecklist_2025_2026,House,Seller Details,field,Preferred method of communication,text,,,,9,0
+ListingChecklist_2025_2026,House,Seller Details,field,Keyholder/Representative in CY,text,,,,10,0
+ListingChecklist_2025_2026,House,Seller Details,field,Telephone/email of keyholder,text,,,,11,0
+ListingChecklist_2025_2026,House,Seller Details,field,Keys in the office (yes/no),boolean,,NO,,12,0
+ListingChecklist_2025_2026,House,Seller Details,section,Seller Details,,,,,2,0
+ListingChecklist_2025_2026,House,Seller Details,step,Name of the Seller (as per the agreement),,,,,3,0
+ListingChecklist_2025_2026,House,Seller Details,step,Contact person if Seller is a Company,,,,,4,0
+ListingChecklist_2025_2026,House,Seller Details,step,"Source of contact (personal, introducer, company)",,,,,7,0
+ListingChecklist_2025_2026,House,Selling Details,field,Price €,number,,444,,14,0
+ListingChecklist_2025_2026,House,Selling Details,field,Commissions %,number,,0,,17,0
+ListingChecklist_2025_2026,House,Selling Details,field,Exclusivity (yes/no),boolean,,NO,,19,0
+ListingChecklist_2025_2026,House,Selling Details,field,Title deeds availability (yes/no),boolean,,NO,,20,0
+ListingChecklist_2025_2026,House,Selling Details,field,"Excluded from Marketing resources (portals, promotion)",enum,,NO,,22,0
+ListingChecklist_2025_2026,House,Selling Details,field,Who else is selling,text,,,,23,0
+ListingChecklist_2025_2026,House,Selling Details,field,Where payments are accepted (countries),text,,,,24,0
+ListingChecklist_2025_2026,House,Selling Details,field,Seller's Banks of prefference,text,,,,25,0
+ListingChecklist_2025_2026,House,Selling Details,field,Crypto payment is possible (yes/no),boolean,,NO,,26,0
+ListingChecklist_2025_2026,House,Selling Details,field,Type of property (House),text,,Detached_house,,34,0
+ListingChecklist_2025_2026,House,Selling Details,field,№ Bedrooms,text,,0,,35,0
+ListingChecklist_2025_2026,House,Selling Details,field,№ Bathrooms,text,,0,,36,0
+ListingChecklist_2025_2026,House,Selling Details,field,№ Guest WC,text,,0,,37,0
+ListingChecklist_2025_2026,House,Selling Details,field,"Views (sea, mountain, pool, garden, city etc)",enum,,Garden view,,38,0
+ListingChecklist_2025_2026,House,Selling Details,field,Internal area (sq.m.),number,,0,,39,0
+ListingChecklist_2025_2026,House,Selling Details,field,Covered Verandas (sq.m.),number,,0,,40,0
+ListingChecklist_2025_2026,House,Selling Details,field,Covered area (sq.m.) internal area + covered verandas,number,,0,,41,0
+ListingChecklist_2025_2026,House,Selling Details,field,Uncovered Verandas (sq.m.),number,,0,,42,0
+ListingChecklist_2025_2026,House,Selling Details,field,Uncovered area (sq.m.),number,,0,,43,0
+ListingChecklist_2025_2026,House,Selling Details,field,Roof garden (sq.m.),number,,0,,44,0
+ListingChecklist_2025_2026,House,Selling Details,field,Plot area (sq.m.),number,,0,,45,0
+ListingChecklist_2025_2026,House,Selling Details,field,Total area (sq.m.),number,,0,,46,0
+ListingChecklist_2025_2026,House,Selling Details,field,Store room,text,,NO,,48,0
+ListingChecklist_2025_2026,House,Selling Details,field,Maid's room,text,,NO,,49,0
+ListingChecklist_2025_2026,House,Selling Details,field,Separate laundry room,number,,NO,,50,0
+ListingChecklist_2025_2026,House,Selling Details,field,Smart home,text,,NO,,51,0
+ListingChecklist_2025_2026,House,Selling Details,field,"Swimming Pool (communal or private, none)",enum,,None,,52,0
+ListingChecklist_2025_2026,House,Selling Details,field,Year of construction,date,,,,55,0
+ListingChecklist_2025_2026,House,Selling Details,field,Year of renovation (if applicable),date,,,,56,0
+ListingChecklist_2025_2026,House,Selling Details,field,Appliances-white goods (yes/no),boolean,,NO,,58,0
+ListingChecklist_2025_2026,House,Selling Details,field,"Amenities if in a complex (gym, sauna, playground etc)",enum,,,,62,0
+ListingChecklist_2025_2026,House,Selling Details,field,Additional Extras,text,,,,63,0
+ListingChecklist_2025_2026,House,Selling Details,field,"Distance to the beach (m, km)/requested by owner",enum,,,,64,0
+ListingChecklist_2025_2026,House,Selling Details,field,Special notes,text,,,,65,0
+ListingChecklist_2025_2026,House,Selling Details,field,Documents List for Properties with Title Deed,text,,,,72,0
+ListingChecklist_2025_2026,House,Selling Details,field,Documents List for Properties without Title Deed,text,,,,76,0
+ListingChecklist_2025_2026,House,Selling Details,field,Key holder,text,,,,85,0
+ListingChecklist_2025_2026,House,Selling Details,field,Contact person,text,,,,86,0
+ListingChecklist_2025_2026,House,Selling Details,field,Notice,text,,,,87,0
+ListingChecklist_2025_2026,House,Selling Details,section,Selling Details,,,,,13,0
+ListingChecklist_2025_2026,House,Selling Details,step,+VAT (yes/no),,,,,15,0
+ListingChecklist_2025_2026,House,Selling Details,step,VAT expiration date,,,,,16,0
+ListingChecklist_2025_2026,House,Selling Details,step,"Introducer fee, if any",,,,Not visible to the seller,18,0
+ListingChecklist_2025_2026,House,Selling Details,step,Suitable for PR,,,,,21,0
+ListingChecklist_2025_2026,House,Selling Details,step,Check-list Data approved by the Seller,,,,No need,27,0
+ListingChecklist_2025_2026,House,Selling Details,step,Property Technical Details,,,,,28,0
+ListingChecklist_2025_2026,House,Selling Details,step,"City, Area of location",,,,,29,0
+ListingChecklist_2025_2026,House,Selling Details,step,Google maps point (pin the according block),,,,,30,0
+ListingChecklist_2025_2026,House,Selling Details,step,"Address: str, №",,,,,31,0
+ListingChecklist_2025_2026,House,Selling Details,step,Project name and unit number,,,,,32,0
+ListingChecklist_2025_2026,House,Selling Details,step,Link to photos,,,,,33,0
+ListingChecklist_2025_2026,House,Selling Details,step,Elevator,,,,,47,0
+ListingChecklist_2025_2026,House,Selling Details,step,Parking Covered Count (№),,,,,53,0
+ListingChecklist_2025_2026,House,Selling Details,step,Parking Unovered Count (№),,,,,54,0
+ListingChecklist_2025_2026,House,Selling Details,step,Furnishing,,,,,57,0
+ListingChecklist_2025_2026,House,Selling Details,step,"Air_condition, VRV",,,,,59,0
+ListingChecklist_2025_2026,House,Selling Details,step,Heating Type,,,,,60,0
+ListingChecklist_2025_2026,House,Selling Details,step,Heating Medium,,,,,61,0
+ListingChecklist_2025_2026,House,Selling Details,step,Property description (180 words). Paste here or attach a separate file.,,,,,66,0
+ListingChecklist_2025_2026,House,Selling Details,step,Document check list for Brokers,,,,,71,0
+ListingChecklist_2025_2026,House,Selling Details,step,Copy of Title Deed,,,,,73,0
+ListingChecklist_2025_2026,House,Selling Details,step,"Check if Title Deed reflects the property correctly and is in the name of the Client listing. If not update and its says only land, then you need to request a copy of the Building Permit with the approved plans and the Certificate of Final Approval",,,,yes/no,74,0
+ListingChecklist_2025_2026,House,Selling Details,step,Plans,,,,,75,0
+ListingChecklist_2025_2026,House,Selling Details,step,Copy of the Contract of Sale with ALL the attachments,,,,,77,0
+ListingChecklist_2025_2026,House,Selling Details,step,Copy of Title Deed to the land on which the property is built,,,,,78,0
+ListingChecklist_2025_2026,House,Selling Details,step,Copy of the Building Permit with the approved plans and the Certificate of Final Approval(their Lawyers should have this),,,,,79,0
+ListingChecklist_2025_2026,House,Selling Details,step,Listing Agreement,,,,,81,0
+ListingChecklist_2025_2026,House,Selling Details,step,Listing agreement signed,,,,,82,0
+ListingChecklist_2025_2026,House,Selling Details,step,Viewing checklist,,,,,84,0
+ListingChecklist_2025_2026,"Instructions, Notes ENG","Instructions, Notes ENG",step,1,,,,,3,0
+ListingChecklist_2025_2026,"Instructions, Notes ENG","Instructions, Notes ENG",step,1a),,,,,9,0
+ListingChecklist_2025_2026,"Instructions, Notes ENG","Instructions, Notes ENG",step,1b),,,,,10,0
+ListingChecklist_2025_2026,"Instructions, Notes ENG","Instructions, Notes ENG",step,1c),,,,,11,0
+ListingChecklist_2025_2026,"Instructions, Notes ENG","Instructions, Notes ENG",step,1d),,,,,12,0
+ListingChecklist_2025_2026,"Instructions, Notes ENG","Instructions, Notes ENG",step,2,,,,,14,0
+ListingChecklist_2025_2026,"Instructions, Notes ENG","Instructions, Notes ENG",step,3,,,,,15,0
+ListingChecklist_2025_2026,"Instructions, Notes ENG","Instructions, Notes ENG",step,4,,,,,16,0
+ListingChecklist_2025_2026,"Instructions, Notes ENG","Instructions, Notes ENG",step,5,,,,,17,0
+ListingChecklist_2025_2026,"Instructions, Notes ENG","Instructions, Notes ENG",step,6,,,,,18,0
+ListingChecklist_2025_2026,Land,Land,step,Name of the broker (First Name Surname),,,,Landing page for seller,1,0
+ListingChecklist_2025_2026,Land,Seller Details,field,Telephone,text,,,,5,0
+ListingChecklist_2025_2026,Land,Seller Details,field,E-mail,text,,,,6,0
+ListingChecklist_2025_2026,Land,Seller Details,field,Country of origin/ residence,text,,,,8,0
+ListingChecklist_2025_2026,Land,Seller Details,field,Preferred method of communication,text,,,,9,0
+ListingChecklist_2025_2026,Land,Seller Details,field,Keyholder/Representative in CY,text,,,,10,0
+ListingChecklist_2025_2026,Land,Seller Details,section,Seller Details,,,,,2,0
+ListingChecklist_2025_2026,Land,Seller Details,step,Name of the Seller (as per the agreement),,,,,3,0
+ListingChecklist_2025_2026,Land,Seller Details,step,Contact person if Seller is a Company,,,,,4,0
+ListingChecklist_2025_2026,Land,Seller Details,step,"Source of contact (personal, introducer, company)",,,,,7,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Price €,number,,444,,12,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Commissions %,number,,0,,15,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Exclusivity (yes/no),boolean,,NO,,17,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Title deeds availability (yes/no),boolean,,NO,,18,0
+ListingChecklist_2025_2026,Land,Selling Details,field,"Excluded from Marketing resources (portals, promotion)",enum,,NO,,21,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Who else is selling,text,,,,22,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Where payments are accepted (countries),text,,,,23,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Seller's Banks of prefference,text,,,,24,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Crypto payment is possible (yes/no),boolean,,NO,,25,0
+ListingChecklist_2025_2026,Land,Selling Details,field,"Location (area, town)",number,,,,28,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Google maps point (or link),text,,,,29,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Land Type,text,,Plot,,32,0
+ListingChecklist_2025_2026,Land,Selling Details,field,"Distance to the beach (m, km)/requested by owner",enum,,,,51,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Additional Extras,text,,,,52,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Special notes,text,,,,53,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Documents List for Properties with Title Deed,text,,,yes/no,60,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Documents List for Properties without Title Deed,text,,,,64,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Key holder,text,,,,73,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Contact person,text,,,,74,0
+ListingChecklist_2025_2026,Land,Selling Details,field,Notice,text,,,,75,0
+ListingChecklist_2025_2026,Land,Selling Details,section,Selling Details,,,,,11,0
+ListingChecklist_2025_2026,Land,Selling Details,step,+VAT (yes/no),,,,,13,0
+ListingChecklist_2025_2026,Land,Selling Details,step,VAT expiration date,,,,,14,0
+ListingChecklist_2025_2026,Land,Selling Details,step,"Introducer fee, if any",,,,Not visible to the seller,16,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Registration DLS № (from Title Deeds),,,,,19,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Checking the number in the Land Registry Portal,,,,,20,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Check-list Data approved by the Seller,,,,No need,26,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Property Technical Details,,,,,27,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Address: str,,,,,30,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Link to photos,,,,,31,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Town Planning Zone,,,,,33,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Building Coverage (%),,,,,34,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Building Density (%),,,,,35,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Height,,,,,36,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Building Type,,,,,37,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Plot Area (sq.m),,,,,38,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Electricity,,,,,39,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Electricity Type (filters),,,,,40,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Water,,,,,41,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Mountain View,,,,,42,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Sea View,,,,,43,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Abuts Green Area,,,,,44,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Beach Front,,,,,45,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Corner Plot,,,,,46,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Elevated Area,,,,,47,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Land Locked,,,,,48,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Registered Road,,,,,49,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Right Of Way,,,,,50,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Description (180 words) or added separately,,,,,54,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Document check list for Brokers,,,,,59,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Copy of Title Deed,,,,,61,0
+ListingChecklist_2025_2026,Land,Selling Details,step,"Check if Title Deed reflects the property correctly and is in the name of the Client listing. If not update and its says only land, then you need to request a copy of the Building Permit with the approved plans and the Certificate of Final Approval",,,,,62,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Plans,,,,,63,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Copy of the Contract of Sale with ALL the attachments,,,,,65,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Copy of Title Deed to the land on which the property is built,,,,,66,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Copy of the Building Permit with the approved plans and the Certificate of Final Approval(their Lawyers should have this),,,,,67,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Listing Agreement,,,,,69,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Listing agreement signed,,,,,70,0
+ListingChecklist_2025_2026,Land,Selling Details,step,Viewing checklist,,,,,72,0
+ListingChecklist_2025_2026,Multiple Apartments,Multiple Apartments,step,Name of the broker (First Name Surname),,,,,1,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,field,Telephone,text,,,,5,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,field,E-mail,text,,,,6,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,field,Country of origin/ residence,text,,,"* If a listing from one seller includes multiple properties in the same building, you can add data by property in the ""Selling Details"", ""Property Technical Details"" in the columns next to each other (C, D, E, etc.)",8,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,field,Preferred method of communication,text,,,,9,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,field,Keyholder/Representative in CY,text,,,,10,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,field,Telephone/email of keyholder,text,,,,11,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,field,Keys in the office (yes/no),boolean,,NO,,12,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,section,Seller Details,,,,,2,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,step,Name of the Seller (as per the agreement),,,,,3,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,step,Contact person if Seller is a Company,,,,,4,0
+ListingChecklist_2025_2026,Multiple Apartments,Seller Details,step,"Source of contact (personal, introducer, company)",,,,,7,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Price €,number,,444,0,14,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Commissions %,number,,0,0,17,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Exclusivity (yes/no),boolean,,NO,NO,19,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Title deeds availability (yes/no),boolean,,NO,NO,20,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,"Excluded from Marketing resources (portals, promotion)",enum,,NO,NO,22,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Who else is selling,text,,,,23,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Where payments are accepted (countries),text,,,,24,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Seller's Banks of prefference,text,,,,25,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Crypto payment is possible (yes/no),boolean,,NO,NO,26,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Type of property (Apartment),text,,Apartment (standart),Apartment (standart),34,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Number of floors in the building,text,,0,0,35,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,What floor,text,,0,0,36,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,№ Bedrooms,text,,0,0,37,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,№ Bathrooms,text,,0,0,38,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,№ Guest WC,text,,0,0,39,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,"Views (sea, mountain, pool, garden, city etc)",enum,,Garden view,Garden view,40,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Internal area (sq.m.),number,,0,0,41,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Covered Verandas (sq.m.),number,,0,0,42,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Covered area (sq.m.) internal area + covered verandas,number,,0,0,43,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Uncovered Verandas (sq.m.),number,,0,0,44,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Uncovered area (sq.m.),number,,0,0,45,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Roof garden (sq.m.),number,,0,0,46,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Carden area for Ground-floor apartment (sq.m.),number,,0,0,47,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Total area (sq.m.),number,,0,0,48,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Store room,text,,NO,NO,50,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Maid's room,text,,NO,NO,51,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Separate laundry room,number,,NO,NO,52,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Smart home,text,,NO,NO,53,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,"Swimming Pool (communal or private, none)",enum,,None,None,54,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Year of construction,date,,,,57,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Year of renovation (if applicable),date,,,,58,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Appliances-white goods (yes/no),boolean,,NO,NO,60,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,"Amenities if in a complex (gym, sauna, playground etc)",enum,,,,64,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Additional Extras,text,,,,65,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,"Distance to the beach (m, km)/requested by owner",enum,,,,66,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Special notes,text,,,,67,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Documents List for Properties with Title Deed,text,,,yes/no,74,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Documents List for Properties without Title Deed,text,,,,78,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Key holder,text,,,,87,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Contact person,text,,,,88,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,field,Notice,text,,,,89,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,section,Selling Details,,,,,13,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,+VAT (yes/no),,,,NO,15,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,VAT expiration date,,,,,16,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,"Introducer fee, if any",,,,,18,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Suitable for PR,,,,NO,21,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Check-list Data approved by the Seller,,,,NO,27,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Property Technical Details,,,,,28,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,"City, Area of location",,,,,29,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Google maps point (pin the according block),,,,,30,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,"Address: str, №",,,,,31,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Project name and unit number,,,,"Name, unit №2",32,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Link to photos,,,,,33,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Elevator,,,,NO,49,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Parking Covered Count (№),,,,,55,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Parking Unovered Count (№),,,,,56,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Furnishing,,,,Unfurnished,59,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,"Air_condition, VRV",,,,NO,61,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Heating Type,,,,Autonomous_heating_system,62,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Heating Medium,,,,underfloor_heating,63,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Property description (180 words). Paste here or attach a separate file.,,,,qwerty (if separate),68,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Document check list for Brokers,,,,,73,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Copy of Title Deed,,,,,75,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,"Check if Title Deed reflects the property correctly and is in the name of the Client listing. If not update and its says only land, then you need to request a copy of the Building Permit with the approved plans and the Certificate of Final Approval",,,,,76,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Plans,,,,,77,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Copy of the Contract of Sale with ALL the attachments,,,,,79,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Copy of Title Deed to the land on which the property is built,,,,,80,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Copy of the Building Permit with the approved plans and the Certificate of Final Approval(their Lawyers should have this),,,,,81,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Listing Agreement,,,,,83,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Listing agreement signed,,,,,84,0
+ListingChecklist_2025_2026,Multiple Apartments,Selling Details,step,Viewing checklist,,,,,86,0
+ListingChecklist_2025_2026,filters,contact source,enum_value,Personal,,,,,2,0
+ListingChecklist_2025_2026,filters,contact source,enum_value,YES,,,,,2,1
+ListingChecklist_2025_2026,filters,contact source,enum_value,Apartment (standart),,,,,2,2
+ListingChecklist_2025_2026,filters,contact source,enum_value,City view,,,,,2,3
+ListingChecklist_2025_2026,filters,contact source,enum_value,Furnished,,,,,2,4
+ListingChecklist_2025_2026,filters,contact source,enum_value,Private,,,,,2,5
+ListingChecklist_2025_2026,filters,contact source,enum_value,None,,,,,2,6
+ListingChecklist_2025_2026,filters,contact source,enum_value,Autonomous_heating_system,,,,,2,7
+ListingChecklist_2025_2026,filters,contact source,enum_value,single_phase,,,,,2,8
+ListingChecklist_2025_2026,filters,contact source,enum_value,Agricultural,,,,,2,9
+ListingChecklist_2025_2026,filters,contact source,enum_value,agricultural,,,,,2,10
+ListingChecklist_2025_2026,filters,contact source,enum_value,commercial_building,,,,,2,11
+ListingChecklist_2025_2026,filters,contact source,enum_value,Introducer,,,,,3,0
+ListingChecklist_2025_2026,filters,contact source,enum_value,NO,,,,,3,1
+ListingChecklist_2025_2026,filters,contact source,enum_value,Duplex Apartment,,,,,3,2
+ListingChecklist_2025_2026,filters,contact source,enum_value,Garden view,,,,,3,3
+ListingChecklist_2025_2026,filters,contact source,enum_value,Semi_furnished,,,,,3,4
+ListingChecklist_2025_2026,filters,contact source,enum_value,Communal,,,,,3,5
+ListingChecklist_2025_2026,filters,contact source,enum_value,bottle_gas_lpg,,,,,3,6
+ListingChecklist_2025_2026,filters,contact source,enum_value,three_phase,,,,,3,8
+ListingChecklist_2025_2026,filters,contact source,enum_value,Field,,,,,3,9
+ListingChecklist_2025_2026,filters,contact source,enum_value,commercial,,,,,3,10
+ListingChecklist_2025_2026,filters,contact source,enum_value,mixed-use_building,,,,,3,11
+ListingChecklist_2025_2026,filters,contact source,enum_value,Company/CRM,,,,,4,0
+ListingChecklist_2025_2026,filters,contact source,enum_value,Ground Floor Apartment,,,,,4,2
+ListingChecklist_2025_2026,filters,contact source,enum_value,Mountain view,,,,,4,3
+ListingChecklist_2025_2026,filters,contact source,enum_value,Optionally_furnished,,,,,4,4
+ListingChecklist_2025_2026,filters,contact source,enum_value,electric_heating,,,,,4,6
+ListingChecklist_2025_2026,filters,contact source,enum_value,industrial,,,,,4,8
+ListingChecklist_2025_2026,filters,contact source,enum_value,Plot,,,,,4,9
+ListingChecklist_2025_2026,filters,contact source,enum_value,office_building,,,,,4,11
+ListingChecklist_2025_2026,filters,contact source,section,contact source,,,,,1,0
+ListingProcedure_2024,Brokers,Brokers,step,Updated January 2024,,,,,1,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,section,Listing Process Checklist Brokers,,,,,4,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Appointment with the Seller,,,,,6,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Presentation Sell with Us,,,,,7,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Due Diligence Report,,,,,9,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Get title deeds & permits from the seller,,,,,10,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Give titled deeds & permits to Alesia,,,,,11,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,"""Valuation"" report *",,,,,12,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Get OK from Anastasia,,,,,13,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Signing of Agreement & Getting Info,,,,,15,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Get ready listing agreement from Alesia,,,,,16,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Send agreement with agreed commissions,,,,,17,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Highlight that the price has to be the same,,,,,18,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Signed by all owners and Alex,,,,,19,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Checklist Property Details,,,,,20,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Personal photos and video,,,,,21,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Upload signed listing agreement in CRM,,,,,23,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Give signed agreement to Nadezda,,,,,24,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Arrange photoshoot with Irina (property to be cleaned and prepared!!!),,,,,26,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Invite sales team to view the property on the day of photoshoot,,,,,27,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Make personal stories and videos & tag Cyprus Sotheby's & Anastasia,,,,,28,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,"Give checklist, photos and description of the property to Natalia Sh",,,,,30,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Present your property at Listing meeting (every second Wednesday),,,,,32,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Once a month to call after Listtrack report,,,,,34,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Reflect a call in CRM & schedule next follow up,,,,,35,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Registration of viewings,,,,,37,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Listing broker confirms appointment with the seller,,,,,38,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Natalia sends written appointment request,,,,,39,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Client viewing confirmation,,,,,41,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Form signed by seller,,,,,42,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Signed form given to Natalia Sh,,,,,43,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Payment,,,,,45,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Invoice issued by Nadezda,,,,,46,0
+ListingProcedure_2024,Brokers,Listing Process Checklist Brokers,step,Follow up on payment - listing broker,,,,,47,0
+ListingProcedure_2024,Finances,Listing Process Checklist Marketing (only after listing agreement is signed),section,Listing Process Checklist Marketing (only after listing agreement is signed),,,,,1,0
+ListingProcedure_2024,Finances,Listing Process Checklist Marketing (only after listing agreement is signed),step,Filing of agreement,,,,,3,0
+ListingProcedure_2024,Finances,Listing Process Checklist Marketing (only after listing agreement is signed),step,Paper copy,,,,,4,0
+ListingProcedure_2024,Finances,Listing Process Checklist Marketing (only after listing agreement is signed),step,Digital copy,,,,,5,0
+ListingProcedure_2024,Finances,Listing Process Checklist Marketing (only after listing agreement is signed),step,Registry of agreements,,,,,6,0
+ListingProcedure_2024,Finances,Listing Process Checklist Marketing (only after listing agreement is signed),step,Photoshoot expences approval if applicable,,,,,8,0
+ListingProcedure_2024,Finances,Listing Process Checklist Marketing (only after listing agreement is signed),step,Get form from marketing & sign,,,,,9,0
+ListingProcedure_2024,Finances,Listing Process Checklist Marketing (only after listing agreement is signed),step,Viewing confirmation,,,,,11,0
+ListingProcedure_2024,Finances,Listing Process Checklist Marketing (only after listing agreement is signed),step,File paper copy together with agreement,,,,,12,0
+ListingProcedure_2024,Finances,Listing Process Checklist Marketing (only after listing agreement is signed),step,Invoicing,,,,,14,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),section,Listing Process Checklist Marketing (only after listing agreement is signed),,,,,1,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),step,Get property details checklist & description from broker,,,,,3,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),step,Get pictures,,,,,4,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),step,Add property to CRM,,,,1 week from the receipt of signed listing agreement,7,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),step,Add property to Cyprus website,,,,1 week from the receipt of signed listing agreement (if aplicable),9,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),step,Add property to SIR website and all portals,,,,1 week from the receipt of signed listing agreement (if aplicable),11,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),step,Add seller details and broker details in Listtrack (monthly report),,,,,13,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),step,"Add property to marketing schedule (SMM, newsletters, etc.)",,,,,15,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),step,Registration of appointments,,,,,17,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),step,Scan and add to CRM viewing confirmations,,,,,19,0
+ListingProcedure_2024,Marketing,Listing Process Checklist Marketing (only after listing agreement is signed),step,Paper copy to be given to Nadezda,,,,,20,0

@@ -1,0 +1,2516 @@
+form,section,kind,field_label,field_type_hint,required_yn,table_index,row_index,cell_index
+Commercial_Lease,ADDITIONAL INFORMATION,enum_value,Attribute,,,43,1,0
+Commercial_Lease,ADDITIONAL INFORMATION,enum_value,Value,,,43,1,1
+Commercial_Lease,Additional,enum_value,Commercial – Hospitality (fields are only available if the Property Subtype is Hospitality),,,37,1,0
+Commercial_Lease,Additional,enum_value,Commercial – Industrial (fields are only available if the Property Subtype is Industrial),,,37,4,0
+Commercial_Lease,Additional,enum_value,Sprinkler,,,37,5,2
+Commercial_Lease,Additional,enum_value,Ground Level,,,37,6,2
+Commercial_Lease,Additional,enum_value,Dock Height,,,37,7,0
+Commercial_Lease,Additional,enum_value,Cross Docks,,,37,7,2
+Commercial_Lease,Additional,enum_value,Sublease,,,37,8,1
+Commercial_Lease,Additional,enum_value,Rail Access,,,37,8,2
+Commercial_Lease,Additional,enum_value,Commercial – Multi-Family (fields are only available if the Property Subtype is Multi-Family),,,37,9,0
+Commercial_Lease,Additional,enum_value,Commercial – Office Bldg (fields are only available if the Property Subtype is Office Bldg),,,37,11,0
+Commercial_Lease,Additional,enum_value,Commercial – Retail (fields are only available if the Property Subtype is Retail),,,37,13,0
+Commercial_Lease,Additional,enum_value,Commercial – Other (fields are only available if the Property Subtype is Other),,,37,15,0
+Commercial_Lease,Additional,field,No. of Docks,number,no,37,2,0
+Commercial_Lease,Additional,field,No of Half Bath,number,no,37,2,1
+Commercial_Lease,Additional,field,No. of Conference Rooms,number,no,37,2,2
+Commercial_Lease,Additional,field,Total Units,text,no,37,3,0
+Commercial_Lease,Additional,field,No of Ballrooms,number,no,37,3,1
+Commercial_Lease,Additional,field,Ceiling Height,text,no,37,5,1
+Commercial_Lease,Additional,field,(Industrial) Power,text,no,37,6,0
+Commercial_Lease,Additional,field,Column Spacing,text,no,37,6,1
+Commercial_Lease,Additional,field,Turning Radius,text,no,37,7,1
+Commercial_Lease,Additional,field,Clearance,text,no,37,8,0
+Commercial_Lease,Additional,field,No of Full Bath,number,no,37,10,2
+Commercial_Lease,Additional,field,Anchor Stores,text,no,37,14,2
+Commercial_Lease,Additional details,enum_value,Contact Details,,,39,1,0
+Commercial_Lease,Additional details,enum_value,Contact: Developer Municipal Tax Office Owner Property Manager Tenant Utility,,,39,2,0
+Commercial_Lease,Additional details,field,First Name,text,no,39,3,0
+Commercial_Lease,Additional details,field,Last Name,text,no,39,3,1
+Commercial_Lease,Additional details,field,Entity Name,text,no,39,3,2
+Commercial_Lease,Additional details,field,Email,text,no,39,4,0
+Commercial_Lease,Additional details,field,Phone,text,no,39,4,1
+Commercial_Lease,Additional details,field,Website Name,text,no,39,4,2
+Commercial_Lease,Additional details,field,Address Line 1,text,no,39,5,0
+Commercial_Lease,Additional details,field,Address Line 2,text,no,39,5,1
+Commercial_Lease,Additional details,field,Address Line 3,text,no,39,5,2
+Commercial_Lease,Additional details,field,City,text,no,39,6,0
+Commercial_Lease,Additional details,field,State/Province,text,no,39,6,1
+Commercial_Lease,Additional details,field,Zip/Postal Code,text,no,39,6,2
+Commercial_Lease,Amenities:,enum_value,Agricultural Easement(s),,,10,1,0
+Commercial_Lease,Amenities:,enum_value,Hobby Farm,,,10,1,1
+Commercial_Lease,Amenities:,enum_value,Silo,,,10,1,2
+Commercial_Lease,Amenities:,enum_value,Bay/Beach Club,,,10,2,0
+Commercial_Lease,Amenities:,enum_value,Horse Facilities,,,10,2,1
+Commercial_Lease,Amenities:,enum_value,Ski Resort,,,10,2,2
+Commercial_Lease,Amenities:,enum_value,Caretaker House,,,10,3,0
+Commercial_Lease,Amenities:,enum_value,Horse Ranch,,,10,3,1
+Commercial_Lease,Amenities:,enum_value,Sporting Ranch,,,10,3,2
+Commercial_Lease,Amenities:,enum_value,Cattle Ranch,,,10,4,0
+Commercial_Lease,Amenities:,enum_value,Hunting Ranch,,,10,4,1
+Commercial_Lease,Amenities:,enum_value,Stables,,,10,4,2
+Commercial_Lease,Amenities:,enum_value,Conservation Easement(s),,,10,5,0
+Commercial_Lease,Amenities:,enum_value,Investment Ranch,,,10,5,1
+Commercial_Lease,Amenities:,enum_value,Station,,,10,5,2
+Commercial_Lease,Amenities:,enum_value,Elk Ranch,,,10,6,0
+Commercial_Lease,Amenities:,enum_value,Live Water,,,10,6,1
+Commercial_Lease,Amenities:,enum_value,Tennis Courts,,,10,6,2
+Commercial_Lease,Amenities:,enum_value,Estate Farm,,,10,7,0
+Commercial_Lease,Amenities:,enum_value,Modular Sports Courts,,,10,7,1
+Commercial_Lease,Amenities:,enum_value,Timberland,,,10,7,2
+Commercial_Lease,Amenities:,enum_value,Estate Ranch,,,10,8,0
+Commercial_Lease,Amenities:,enum_value,Outdoor Basketball Court,,,10,8,1
+Commercial_Lease,Amenities:,enum_value,Walk-to-ski,,,10,8,2
+Commercial_Lease,Amenities:,enum_value,Fly Fishing,,,10,9,0
+Commercial_Lease,Amenities:,enum_value,Playground,,,10,9,1
+Commercial_Lease,Amenities:,enum_value,Yacht Club,,,10,9,2
+Commercial_Lease,Amenities:,enum_value,Guest Ranch,,,10,10,0
+Commercial_Lease,Amenities:,enum_value,Recreational Ranch,,,10,10,1
+Commercial_Lease,Appliances:,enum_value,Dishwasher,,,11,1,0
+Commercial_Lease,Appliances:,enum_value,Garbage Disposal,,,11,1,1
+Commercial_Lease,Appliances:,enum_value,Refrigerator,,,11,1,2
+Commercial_Lease,Appliances:,enum_value,Double Oven,,,11,2,0
+Commercial_Lease,Appliances:,enum_value,Microwave,,,11,2,1
+Commercial_Lease,Appliances:,enum_value,Trash Compactor,,,11,2,2
+Commercial_Lease,Appliances:,enum_value,Dryer,,,11,3,0
+Commercial_Lease,Appliances:,enum_value,Range/Oven,,,11,3,1
+Commercial_Lease,Appliances:,enum_value,Washer,,,11,3,2
+Commercial_Lease,Area Amenities:,enum_value,Aquatic Activities,,,12,1,0
+Commercial_Lease,Area Amenities:,enum_value,Area Hunting,,,12,1,1
+Commercial_Lease,Area Amenities:,enum_value,Casino/Gambling,,,12,1,2
+Commercial_Lease,Area Amenities:,enum_value,Area Boat Dock,,,12,2,0
+Commercial_Lease,Area Amenities:,enum_value,Area Pool,,,12,2,1
+Commercial_Lease,Area Amenities:,enum_value,Deep Water Mooring,,,12,2,2
+Commercial_Lease,Area Amenities:,enum_value,Area Boat Ramp,,,12,3,0
+Commercial_Lease,Area Amenities:,enum_value,Area Skiing,,,12,3,1
+Commercial_Lease,Area Amenities:,enum_value,Golf,,,12,3,2
+Commercial_Lease,Area Amenities:,enum_value,Area Climbing,,,12,4,0
+Commercial_Lease,Area Amenities:,enum_value,Area Snowmobiling,,,12,4,1
+Commercial_Lease,Area Amenities:,enum_value,Jogging/Biking Path,,,12,4,2
+Commercial_Lease,Area Amenities:,enum_value,Area Fishing,,,12,5,0
+Commercial_Lease,Area Amenities:,enum_value,Area Tennis,,,12,5,1
+Commercial_Lease,Area Amenities:,enum_value,Outdoor Activities,,,12,5,2
+Commercial_Lease,Area Amenities:,enum_value,Area Hiking,,,12,6,0
+Commercial_Lease,Area Amenities:,enum_value,Biking,,,12,6,1
+Commercial_Lease,Area Amenities:,enum_value,Area Horse Riding/Stables,,,12,7,0
+Commercial_Lease,Area Amenities:,enum_value,Boating,,,12,7,1
+Commercial_Lease,Area Description:,enum_value,Country Living,,,13,1,0
+Commercial_Lease,Area Description:,enum_value,Green Living,,,13,1,1
+Commercial_Lease,Area Description:,enum_value,Resort,,,13,1,2
+Commercial_Lease,Area Description:,enum_value,Cycling,,,13,2,0
+Commercial_Lease,Area Description:,enum_value,Historic/Antique,,,13,2,1
+Commercial_Lease,Area Description:,enum_value,Rock Beach,,,13,2,2
+Commercial_Lease,Area Description:,enum_value,Desert Living,,,13,3,0
+Commercial_Lease,Area Description:,enum_value,Hunting,,,13,3,1
+Commercial_Lease,Area Description:,enum_value,Sand Beach,,,13,3,2
+Commercial_Lease,Area Description:,enum_value,Equestrian/Polo,,,13,4,0
+Commercial_Lease,Area Description:,enum_value,Metropolitan,,,13,4,1
+Commercial_Lease,Area Description:,enum_value,Ski-in/Ski-Out,,,13,4,2
+Commercial_Lease,Area Description:,enum_value,Fishing,,,13,5,0
+Commercial_Lease,Area Description:,enum_value,Mountain,,,13,5,1
+Commercial_Lease,Area Description:,enum_value,Skiing,,,13,5,2
+Commercial_Lease,Area Description:,enum_value,Flood Area,,,13,6,0
+Commercial_Lease,Area Description:,enum_value,Other Beach,,,13,6,1
+Commercial_Lease,Area Description:,enum_value,Suburban,,,13,6,2
+Commercial_Lease,Area Description:,enum_value,Game Farm/Safari,,,13,7,0
+Commercial_Lease,Area Description:,enum_value,Privacy,,,13,7,1
+Commercial_Lease,Area Description:,enum_value,Wine Country,,,13,7,2
+Commercial_Lease,Body of Water:,enum_value,Bay,,,14,1,0
+Commercial_Lease,Body of Water:,enum_value,Lake,,,14,1,1
+Commercial_Lease,Body of Water:,enum_value,River,,,14,1,2
+Commercial_Lease,Body of Water:,enum_value,Canal,,,14,2,0
+Commercial_Lease,Body of Water:,enum_value,Ocean,,,14,2,1
+Commercial_Lease,Body of Water:,enum_value,Sound,,,14,2,2
+Commercial_Lease,Body of Water:,enum_value,Inlet,,,14,3,0
+Commercial_Lease,Body of Water:,enum_value,Pond,,,14,3,1
+Commercial_Lease,Body of Water:,enum_value,Lagoon,,,14,4,0
+Commercial_Lease,Body of Water:,enum_value,Reservoir,,,14,4,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Property Information (choose one subtype and one corresponding style),,,0,1,0
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Property Subtype√,,,0,2,0
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Property Style√,,,0,2,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Hospitality,,,0,3,0
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Bed and Breakfast,,,0,3,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Hosp. Resort Business,,,0,3,2
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Other Style,,,0,3,3
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Hosp. Hotel/Motel,,,0,4,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Industrial,,,0,5,0
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Industrial Bldg- Flex Space,,,0,5,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Industrial Bldg- Manufacturing,,,0,5,2
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Industrial Bldg- R&D,,,0,5,3
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Industrial Bldg- Warehouse,,,0,6,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family,,,0,7,0
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family – 2-4 Units,,,0,7,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family (5-20 Units),,,0,7,2
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family (Over 20 Units),,,0,7,3
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Office Building,,,0,8,0
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Office Bldg- General,,,0,8,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Office Bldg- Government,,,0,8,2
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Office Bldg- Medical,,,0,8,3
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Office Bldg- Condo,,,0,9,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail,,,0,10,0
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Hosp. Restaurant,,,0,10,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail- Auto/Vehicle,,,0,10,3
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail- Daycare,,,0,11,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail- Free Standing,,,0,11,2
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail- Street Retail,,,0,11,3
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail Bldg- General Use,,,0,12,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail Bldg- Local Strip,,,0,12,2
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail Bldg- Neighborhood Ctr,,,0,12,3
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail Bldg- Regional Mall,,,0,13,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail Bldg- SGL User (BigBox),,,0,13,2
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail Business,,,0,13,3
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail – Free Standing,,,0,14,1
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail – Street Retail,,,0,14,2
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Retail – Daycare,,,0,14,3
+Commercial_Lease,Commercial Lease listing Required Fields are noted with a red checkmark (√),enum_value,Other,,,0,15,0
+Commercial_Lease,Cooling:,enum_value,A/C,,,15,1,0
+Commercial_Lease,Cooling:,enum_value,Humidifier,,,15,1,1
+Commercial_Lease,Cooling:,enum_value,Window A/C,,,15,1,2
+Commercial_Lease,Cooling:,enum_value,Central A/C,,,15,2,0
+Commercial_Lease,Cooling:,enum_value,No A/C,,,15,2,1
+Commercial_Lease,Cooling:,enum_value,Zoned A/C,,,15,2,2
+Commercial_Lease,Cooling:,enum_value,Central A/C – Electric,,,15,3,0
+Commercial_Lease,Cooling:,enum_value,Other A/C,,,15,3,1
+Commercial_Lease,Cooling:,enum_value,Central A/C – Gas,,,15,4,0
+Commercial_Lease,Cooling:,enum_value,Wall Unit A/C,,,15,4,1
+Commercial_Lease,Exterior Description:,enum_value,Brick,,,17,1,0
+Commercial_Lease,Exterior Description:,enum_value,Wood Frame,,,17,1,1
+Commercial_Lease,Exterior Description:,enum_value,Concrete Block,,,17,2,0
+Commercial_Lease,Exterior Description:,enum_value,Stone,,,17,2,1
+Commercial_Lease,Exterior Description:,enum_value,Stucco,,,17,3,0
+Commercial_Lease,Exterior Description:,enum_value,Wood Siding,,,17,3,1
+Commercial_Lease,Exterior Description:,enum_value,Vinyl Siding,,,17,4,0
+Commercial_Lease,Exterior Description:,enum_value,E.I.F.S,,,17,4,1
+Commercial_Lease,Exterior Description:,enum_value,Steel Frame,,,17,5,0
+Commercial_Lease,Exterior:,enum_value,Barn/Stable,,,16,1,0
+Commercial_Lease,Exterior:,enum_value,Double Pane/Storm Windows,,,16,1,1
+Commercial_Lease,Exterior:,enum_value,Storage Shed,,,16,1,2
+Commercial_Lease,Exterior:,enum_value,BBQ,,,16,2,0
+Commercial_Lease,Exterior:,enum_value,Fire Pit,,,16,2,1
+Commercial_Lease,Exterior:,enum_value,Storm Door,,,16,2,2
+Commercial_Lease,Exterior:,enum_value,Boat House,,,16,3,0
+Commercial_Lease,Exterior:,enum_value,Gardens,,,16,3,1
+Commercial_Lease,Exterior:,enum_value,Storm Windows,,,16,3,2
+Commercial_Lease,Exterior:,enum_value,Boat Ramp,,,16,4,0
+Commercial_Lease,Exterior:,enum_value,Guest House,,,16,4,1
+Commercial_Lease,Exterior:,enum_value,Thermal Windows/Doors,,,16,4,2
+Commercial_Lease,Exterior:,enum_value,Carriage House,,,16,5,0
+Commercial_Lease,Exterior:,enum_value,Helipad,,,16,5,1
+Commercial_Lease,Exterior:,enum_value,Underground Lawn Sprinkler,,,16,5,2
+Commercial_Lease,Exterior:,enum_value,Covered Terraces,,,16,6,0
+Commercial_Lease,Exterior:,enum_value,Out Building,,,16,6,1
+Commercial_Lease,Exterior:,enum_value,Water Feature,,,16,6,2
+Commercial_Lease,Exterior:,enum_value,Dock,,,16,7,0
+Commercial_Lease,Exterior:,enum_value,Porte-Cochere,,,16,7,1
+Commercial_Lease,Exterior:,enum_value,Dock Rights,,,16,8,0
+Commercial_Lease,Exterior:,enum_value,Sidewalk,,,16,8,1
+Commercial_Lease,Exterior:,enum_value,Dog Run,,,16,9,0
+Commercial_Lease,Exterior:,enum_value,Sprinkler System,,,16,9,1
+Commercial_Lease,FEAtures,enum_value,Features,,,7,1,0
+Commercial_Lease,FEAtures,enum_value,New Construction,,,7,3,0
+Commercial_Lease,FEAtures,enum_value,11-20 Years Old,,,7,3,1
+Commercial_Lease,FEAtures,enum_value,41-50 Years Old,,,7,3,2
+Commercial_Lease,FEAtures,enum_value,1-5 Years Old,,,7,4,0
+Commercial_Lease,FEAtures,enum_value,21-30 Years Old,,,7,4,1
+Commercial_Lease,FEAtures,enum_value,Over 50 Years Old,,,7,4,2
+Commercial_Lease,FEAtures,enum_value,6-10 Years Old,,,7,5,0
+Commercial_Lease,FEAtures,enum_value,31-40 Years Old,,,7,5,1
+Commercial_Lease,FEAtures,field,Age,text,no,7,2,0
+Commercial_Lease,Fencing:,enum_value,Fenced Yard,,,18,1,0
+Commercial_Lease,Fencing:,enum_value,Partially Fenced,,,18,1,1
+Commercial_Lease,Fencing:,enum_value,Vinyl Fence,,,18,1,2
+Commercial_Lease,Fencing:,enum_value,Metal Fence,,,18,2,0
+Commercial_Lease,Fencing:,enum_value,Privacy Fence,,,18,2,1
+Commercial_Lease,Fencing:,enum_value,Wood Fence,,,18,2,2
+Commercial_Lease,Flooring:,enum_value,Ceramic,,,19,1,0
+Commercial_Lease,Flooring:,enum_value,Linoleum,,,19,1,1
+Commercial_Lease,Flooring:,enum_value,Tile,,,19,1,2
+Commercial_Lease,Flooring:,enum_value,Hardwood,,,19,2,0
+Commercial_Lease,Flooring:,enum_value,Marble,,,19,2,1
+Commercial_Lease,Flooring:,enum_value,Wall to Wall Carpet,,,19,2,2
+Commercial_Lease,Flooring:,enum_value,Laminate,,,19,3,0
+Commercial_Lease,Flooring:,enum_value,Mixed,,,19,3,1
+Commercial_Lease,Floors,enum_value,Floor Name,,,36,2,0
+Commercial_Lease,Floors,enum_value,Length,,,36,2,2
+Commercial_Lease,Floors,enum_value,Width,,,36,2,3
+Commercial_Lease,Floors,field,Number of Floors/Levels,number,no,36,1,0
+Commercial_Lease,Floors,field,Avg Floor Size,number,no,36,1,1
+Commercial_Lease,Floors,field,Available Floors,text,no,36,1,4
+Commercial_Lease,General:,enum_value,Built-in Vacuum,,,20,1,0
+Commercial_Lease,General:,enum_value,Fenced Range Land,,,20,1,1
+Commercial_Lease,General:,enum_value,Skylight,,,20,1,2
+Commercial_Lease,General:,enum_value,Ceiling Fan(s),,,20,2,0
+Commercial_Lease,General:,enum_value,Fire Alarms,,,20,2,1
+Commercial_Lease,General:,enum_value,Smoke Detector,,,20,2,2
+Commercial_Lease,General:,enum_value,Clubhouse,,,20,3,0
+Commercial_Lease,General:,enum_value,Guard Gate,,,20,3,1
+Commercial_Lease,General:,enum_value,Stereo System,,,20,3,2
+Commercial_Lease,General:,enum_value,Concierge Services,,,20,4,0
+Commercial_Lease,General:,enum_value,Lake Privileges,,,20,4,1
+Commercial_Lease,General:,enum_value,Storage Area,,,20,4,2
+Commercial_Lease,General:,enum_value,Doorman,,,20,5,0
+Commercial_Lease,General:,enum_value,Laundry Facilities,,,20,5,1
+Commercial_Lease,General:,enum_value,Wheel Chair Accessible,,,20,5,2
+Commercial_Lease,General:,enum_value,Elevator,,,20,6,0
+Commercial_Lease,General:,enum_value,Private Airport,,,20,6,1
+Commercial_Lease,General:,enum_value,Window Treatments,,,20,6,2
+Commercial_Lease,General:,enum_value,Energy-saving Features,,,20,7,0
+Commercial_Lease,General:,enum_value,Private Elevator,,,20,7,1
+Commercial_Lease,General:,enum_value,Workshop,,,20,7,2
+Commercial_Lease,General:,enum_value,Escalator,,,20,8,0
+Commercial_Lease,General:,enum_value,Security System,,,20,8,1
+Commercial_Lease,General:,enum_value,Direct Elevator Access,,,20,8,2
+Commercial_Lease,Geographic location,field,City Region,text,no,34,1,0
+Commercial_Lease,Geographic location,field,Continent Region,text,no,34,1,1
+Commercial_Lease,Geographic location,field,Property Location,text,no,34,1,2
+Commercial_Lease,Geographic location,field,State Region,text,no,34,2,0
+Commercial_Lease,Geographic location,field,Country Region,number,no,34,2,1
+Commercial_Lease,Geographic location,field,Development,text,no,34,2,2
+Commercial_Lease,Heating Type:,enum_value,Baseboard,,,22,1,0
+Commercial_Lease,Heating Type:,enum_value,Multi-Zone Heat,,,22,1,1
+Commercial_Lease,Heating Type:,enum_value,Radiator,,,22,1,2
+Commercial_Lease,Heating Type:,enum_value,Forced Air,,,22,2,0
+Commercial_Lease,Heating Type:,enum_value,No Heat,,,22,2,1
+Commercial_Lease,Heating Type:,enum_value,Solar Power,,,22,2,2
+Commercial_Lease,Heating Type:,enum_value,Gravity,,,22,3,0
+Commercial_Lease,Heating Type:,enum_value,Other,,,22,3,1
+Commercial_Lease,Heating Type:,enum_value,Steam Heat,,,22,3,2
+Commercial_Lease,Heating Type:,enum_value,Heat Pump,,,22,4,0
+Commercial_Lease,Heating Type:,enum_value,Pellet Stove,,,22,4,1
+Commercial_Lease,Heating Type:,enum_value,Hydro,,,22,5,0
+Commercial_Lease,Heating Type:,enum_value,Radiant Floor,,,22,5,1
+Commercial_Lease,Heating – Fuel Type:,enum_value,Coal,,,21,1,0
+Commercial_Lease,Heating – Fuel Type:,enum_value,Hydro Heat,,,21,1,1
+Commercial_Lease,Heating – Fuel Type:,enum_value,Propane,,,21,1,2
+Commercial_Lease,Heating – Fuel Type:,enum_value,Electric,,,21,2,0
+Commercial_Lease,Heating – Fuel Type:,enum_value,None,,,21,2,1
+Commercial_Lease,Heating – Fuel Type:,enum_value,Solar,,,21,2,2
+Commercial_Lease,Heating – Fuel Type:,enum_value,Gas,,,21,3,0
+Commercial_Lease,Heating – Fuel Type:,enum_value,Oil,,,21,3,1
+Commercial_Lease,Heating – Fuel Type:,enum_value,Wood,,,21,3,2
+Commercial_Lease,Heating – Fuel Type:,enum_value,Geothermal,,,21,4,0
+Commercial_Lease,Heating – Fuel Type:,enum_value,Other,,,21,4,1
+Commercial_Lease,Interior:,enum_value,Bay/Bow Window,,,23,1,0
+Commercial_Lease,Interior:,enum_value,Fireplace in Master BR,,,23,1,1
+Commercial_Lease,Interior:,enum_value,Screen Room,,,23,1,2
+Commercial_Lease,Interior:,enum_value,Beam – Ceilings,,,23,2,0
+Commercial_Lease,Interior:,enum_value,High Tech Cabling,,,23,2,1
+Commercial_Lease,Interior:,enum_value,Track Lighting,,,23,2,2
+Commercial_Lease,Interior:,enum_value,Blinds,,,23,3,0
+Commercial_Lease,Interior:,enum_value,In-Home Gym,,,23,3,1
+Commercial_Lease,Interior:,enum_value,Two-story Family Room,,,23,3,2
+Commercial_Lease,Interior:,enum_value,Bowling Alley,,,23,4,0
+Commercial_Lease,Interior:,enum_value,In-Law Suite,,,23,4,1
+Commercial_Lease,Interior:,enum_value,Vaulted Ceilings,,,23,4,2
+Commercial_Lease,Interior:,enum_value,Cathedral Ceilings,,,23,5,0
+Commercial_Lease,Interior:,enum_value,Indoor Basketball Court,,,23,5,1
+Commercial_Lease,Interior:,enum_value,Walk-in Closet,,,23,5,2
+Commercial_Lease,Interior:,enum_value,Cedar Closets,,,23,6,0
+Commercial_Lease,Interior:,enum_value,Indoor Racquetball Court,,,23,6,1
+Commercial_Lease,Interior:,enum_value,Wet Bar,,,23,6,2
+Commercial_Lease,Interior:,enum_value,Dry Bar,,,23,7,0
+Commercial_Lease,Interior:,enum_value,Intercom System,,,23,7,1
+Commercial_Lease,Interior:,enum_value,Wine Cellar,,,23,7,2
+Commercial_Lease,Interior:,enum_value,Exercise Area,,,23,8,0
+Commercial_Lease,Interior:,enum_value,Laundry Chute,,,23,8,1
+Commercial_Lease,Landlord Information,enum_value,Seller Lead: Agent Office,,,38,1,4
+Commercial_Lease,Landlord Information,enum_value,Landlord Type: Person/Individual(s) Corporation Developer Doing Business As Estate Financial Inst. Government Limited Liability Company Limited Liability Limited Partnership Limited Liability Partnership Limited Partnership Other Partnership Pension Fund Professional Limited Liability Company REIT Sole Partnership Trust Vendor,,,38,2,0
+Commercial_Lease,Landlord Information,enum_value,"Use Property Address (if checked, the address fields below are not required.)",,,38,7,0
+Commercial_Lease,Landlord Information,field,Landlord Source,text,no,38,1,0
+Commercial_Lease,Landlord Information,field,First Name 1,text,no,38,3,0
+Commercial_Lease,Landlord Information,field,Last Name 1,text,no,38,3,2
+Commercial_Lease,Landlord Information,field,First Name 2,text,no,38,4,0
+Commercial_Lease,Landlord Information,field,Last Name 2,text,no,38,4,2
+Commercial_Lease,Landlord Information,field,Entity Name,text,no,38,5,0
+Commercial_Lease,Landlord Information,field,Email,text,no,38,6,0
+Commercial_Lease,Landlord Information,field,Website,text,no,38,6,1
+Commercial_Lease,Landlord Information,field,Phone,text,no,38,6,5
+Commercial_Lease,Landlord Information,field,Address Line 1,text,no,38,8,0
+Commercial_Lease,Landlord Information,field,Address Line 2,text,no,38,8,3
+Commercial_Lease,Landlord Information,field,Address Line 3,text,no,38,8,6
+Commercial_Lease,Landlord Information,field,City,text,no,38,9,0
+Commercial_Lease,Landlord Information,field,State/Province,text,no,38,9,3
+Commercial_Lease,Landlord Information,field,Zip/Postal Code,text,no,38,9,6
+Commercial_Lease,Lease Requirements,enum_value,Employment Verification Lease Options Available Lease Renewal Option 1Month Security 1.5 Month Security Flat Security Credit Check Required Flood Insurance Required Repair Insurance Required Rent Excludes Utilities,,,41,2,0
+Commercial_Lease,Lease Requirements,field,Lease Term,text,no,41,1,0
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Language,,,6,1,0
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Remark Type,,,6,1,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Remark,,,6,1,2
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,English,,,6,2,0
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Property Description√,,,6,2,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Area Description,,,6,3,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Directions,,,6,4,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Headline,,,6,5,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 1,,,6,6,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 2,,,6,7,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 3,,,6,8,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 4,,,6,9,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 5,,,6,10,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 6,,,6,11,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Location,,,6,12,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Owner/Expert Quote,,,6,13,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Transportation,,,6,14,1
+Commercial_Lease,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Zoning Description,,,6,15,1
+Commercial_Lease,Location,field,Country,number,yes,1,1,0
+Commercial_Lease,Location,field,Address Line 1,text,yes,1,1,2
+Commercial_Lease,Location,field,Address Line 2,text,no,1,2,0
+Commercial_Lease,Location,field,Address Line 3,text,no,1,2,3
+Commercial_Lease,Location,field,City,text,yes,1,3,0
+Commercial_Lease,Location,field,District/County,number,no,1,3,1
+Commercial_Lease,Location,field,State/Province,text,yes,1,3,4
+Commercial_Lease,Location,field,Zip/Postal Code,text,yes,1,4,0
+Commercial_Lease,Location,field,Neighborhood,text,no,1,4,1
+Commercial_Lease,Location:,enum_value,Backs to Golf Course,,,24,1,0
+Commercial_Lease,Location:,enum_value,Gulf,,,24,1,1
+Commercial_Lease,Location:,enum_value,Ocean/Beach,,,24,1,2
+Commercial_Lease,Location:,enum_value,Backs to Park Land,,,24,2,0
+Commercial_Lease,Location:,enum_value,Harbor,,,24,2,1
+Commercial_Lease,Location:,enum_value,Ocean Block,,,24,2,2
+Commercial_Lease,Location:,enum_value,Bayside,,,24,3,0
+Commercial_Lease,Location:,enum_value,In Shopping Mall,,,24,3,1
+Commercial_Lease,Location:,enum_value,Ocean Front,,,24,3,2
+Commercial_Lease,Location:,enum_value,Beach Front,,,24,4,0
+Commercial_Lease,Location:,enum_value,Intercoastal Waterway,,,24,4,1
+Commercial_Lease,Location:,enum_value,Off Water,,,24,4,2
+Commercial_Lease,Location:,enum_value,Canal Front,,,24,5,0
+Commercial_Lease,Location:,enum_value,Island,,,24,5,1
+Commercial_Lease,Location:,enum_value,Riverfront,,,24,5,2
+Commercial_Lease,Location:,enum_value,Channel Front,,,24,6,0
+Commercial_Lease,Location:,enum_value,Lagoon,,,24,6,1
+Commercial_Lease,Location:,enum_value,Slope Side,,,24,6,2
+Commercial_Lease,Location:,enum_value,Cul-de-Sac,,,24,7,0
+Commercial_Lease,Location:,enum_value,Lakefront,,,24,7,1
+Commercial_Lease,Location:,enum_value,Waterfront,,,24,7,2
+Commercial_Lease,Location:,enum_value,Fairway Frontage,,,24,8,0
+Commercial_Lease,Location:,enum_value,Marina,,,24,8,1
+Commercial_Lease,Lot Description:,enum_value,Access Type– Other,,,25,1,0
+Commercial_Lease,Lot Description:,enum_value,Irregular,,,25,1,1
+Commercial_Lease,Lot Description:,enum_value,Pond on Lot,,,25,1,2
+Commercial_Lease,Lot Description:,enum_value,Access Type- Road,,,25,2,0
+Commercial_Lease,Lot Description:,enum_value,Lake on Lot,,,25,2,1
+Commercial_Lease,Lot Description:,enum_value,Possible Subdivision,,,25,2,2
+Commercial_Lease,Lot Description:,enum_value,Access Type- Water,,,25,3,0
+Commercial_Lease,Lot Description:,enum_value,Level,,,25,3,1
+Commercial_Lease,Lot Description:,enum_value,Stream on Lot,,,25,3,2
+Commercial_Lease,Lot Description:,enum_value,Corner,,,25,4,0
+Commercial_Lease,Lot Description:,enum_value,New Development,,,25,4,1
+Commercial_Lease,Lot Description:,enum_value,Wooded,,,25,4,2
+Commercial_Lease,Lot Description:,enum_value,Flag,,,25,5,0
+Commercial_Lease,Lot Description:,enum_value,Open,,,25,5,1
+Commercial_Lease,MLS Information,enum_value,MLS ID√,,,3,1,0
+Commercial_Lease,MLS Information,enum_value,MLS NAME,,,3,1,1
+Commercial_Lease,Other:,enum_value,Association Fee,,,26,1,0
+Commercial_Lease,Other:,enum_value,Water Softener- Rent,,,26,1,1
+Commercial_Lease,Other:,enum_value,Water Softener- Own,,,26,2,0
+Commercial_Lease,Other:,enum_value,Whole House Water Filter,,,26,2,1
+Commercial_Lease,Pre-Wiring:,enum_value,Cable,,,27,1,0
+Commercial_Lease,Pre-Wiring:,enum_value,Garage Door,,,27,1,1
+Commercial_Lease,Pre-Wiring:,enum_value,Phone Jacks,,,27,1,2
+Commercial_Lease,Pre-Wiring:,enum_value,Entertainment System,,,27,2,0
+Commercial_Lease,Pre-Wiring:,enum_value,Generator,,,27,2,1
+Commercial_Lease,Pre-Wiring:,enum_value,Security System,,,27,2,2
+Commercial_Lease,Property Description:,enum_value,Acreage,,,28,1,0
+Commercial_Lease,Property Description:,enum_value,Farm/Ranch,,,28,1,1
+Commercial_Lease,Property Description:,enum_value,Vineyard,,,28,1,2
+Commercial_Lease,Property Description:,enum_value,Community Living,,,28,2,0
+Commercial_Lease,Property Description:,enum_value,Farm Assessment,,,28,2,1
+Commercial_Lease,Property Description:,enum_value,Winery,,,28,2,2
+Commercial_Lease,Property Description:,enum_value,Easement,,,28,3,0
+Commercial_Lease,Property Description:,enum_value,Fenced Farm Acreage,,,28,3,1
+Commercial_Lease,Property Description:,enum_value,Eco-Friendly (Green),,,28,4,0
+Commercial_Lease,Property Description:,enum_value,Ski Property,,,28,4,1
+Commercial_Lease,Property Details,enum_value,Property Use: Bank Owned Other Commercial Other Residential Owner Occupied Rental or Investment Second Home Use in a Business Vacant Vacation Home Net Leased Property Business for Sale,,,33,1,0
+Commercial_Lease,Property Details,enum_value,New Construction,,,33,2,2
+Commercial_Lease,Property Details,field,# of Parking Places,text,no,33,2,0
+Commercial_Lease,Property Details,field,Year Built,date,no,33,2,1
+Commercial_Lease,Property Details,field,Year Renovated,date,no,33,3,0
+Commercial_Lease,Property Details,field,Last Sold On,text,no,33,3,1
+Commercial_Lease,Property Details,field,Zoning,text,no,33,3,2
+Commercial_Lease,Property Details,field,Lot Dimensions,text,no,33,4,0
+Commercial_Lease,Property Details,field,Cap Rate Percent,number,no,33,4,1
+Commercial_Lease,Property Details,field,Occupancy Rate,number,no,33,5,0
+Commercial_Lease,Property Details,field,Parking Ratio,text,no,33,5,1
+Commercial_Lease,Property fees,enum_value,Fee Type,,,42,1,0
+Commercial_Lease,Property fees,enum_value,Fee Amount,,,42,1,1
+Commercial_Lease,Property fees,enum_value,Frequency,,,42,1,2
+Commercial_Lease,Property information,field,Max Contiguous Area,text,no,4,1,0
+Commercial_Lease,Property information,field,Building Area,text,no,4,1,1
+Commercial_Lease,Property information,field,Property Name,text,no,4,1,2
+Commercial_Lease,Property information,field,Min Divisible Area,text,no,4,2,0
+Commercial_Lease,Property information,field,Lot Size,number,no,4,2,1
+Commercial_Lease,Property information,field,Common Area Factor,text,no,4,3,0
+Commercial_Lease,Property information,field,Space Available,text,no,4,3,1
+Commercial_Lease,Road Type:,enum_value,4 Way Interchange,,,29,1,0
+Commercial_Lease,Road Type:,enum_value,Interchange,,,29,1,1
+Commercial_Lease,Road Type:,enum_value,Private Road,,,29,1,2
+Commercial_Lease,Road Type:,enum_value,City/Town Street,,,29,2,0
+Commercial_Lease,Road Type:,enum_value,Interstate,,,29,2,1
+Commercial_Lease,Road Type:,enum_value,State Road,,,29,2,2
+Commercial_Lease,Road Type:,enum_value,County Street,,,29,3,0
+Commercial_Lease,Road Type:,enum_value,Main Thoroughfare,,,29,3,1
+Commercial_Lease,Road Type:,enum_value,Turnpike,,,29,3,2
+Commercial_Lease,Roof:,enum_value,Asphalt/Fiberglass,,,30,1,0
+Commercial_Lease,Roof:,enum_value,Composition Shingle,,,30,1,1
+Commercial_Lease,Roof:,enum_value,Slate Roof,,,30,1,2
+Commercial_Lease,Roof:,enum_value,Asphalt Shingle Roof,,,30,2,0
+Commercial_Lease,Roof:,enum_value,Fiberglass,,,30,2,1
+Commercial_Lease,Roof:,enum_value,Spanish Tiles,,,30,2,2
+Commercial_Lease,Roof:,enum_value,Cedar Shake,,,30,3,0
+Commercial_Lease,Roof:,enum_value,Metal Roof,,,30,3,1
+Commercial_Lease,Roof:,enum_value,Tar & Gravel,,,30,3,2
+Commercial_Lease,Roof:,enum_value,Cement Tiles,,,30,4,0
+Commercial_Lease,Roof:,enum_value,Rubber,,,30,4,1
+Commercial_Lease,Roof:,enum_value,Wood Shingles/Shakes,,,30,4,2
+Commercial_Lease,Sales Associate Information,enum_value,Sales Associate/Team ID,,,5,1,0
+Commercial_Lease,Sales Associate Information,enum_value,Sales Associate/Team Name√,,,5,1,1
+Commercial_Lease,Sewer:,enum_value,Aerobic System,,,8,1,0
+Commercial_Lease,Sewer:,enum_value,City,,,8,1,1
+Commercial_Lease,Sewer:,enum_value,Private,,,8,1,2
+Commercial_Lease,Sewer:,enum_value,Central,,,8,2,0
+Commercial_Lease,Sewer:,enum_value,Mound,,,8,2,1
+Commercial_Lease,Sewer:,enum_value,Public,,,8,2,2
+Commercial_Lease,Sewer:,enum_value,Cesspool,,,8,3,0
+Commercial_Lease,Sewer:,enum_value,None,,,8,3,1
+Commercial_Lease,Sewer:,enum_value,Septic,,,8,3,2
+Commercial_Lease,Special Market:,enum_value,College/University,,,31,1,0
+Commercial_Lease,Special Market:,enum_value,Luxury Properties,,,31,1,1
+Commercial_Lease,Special Market:,enum_value,Resort/Lake,,,31,1,2
+Commercial_Lease,Special Market:,enum_value,Hospitality,,,31,2,0
+Commercial_Lease,Special Market:,enum_value,Military Properties,,,31,2,1
+Commercial_Lease,Special Market:,enum_value,Vacation/Second Home,,,31,2,2
+Commercial_Lease,Special Market:,enum_value,International Properties,,,31,3,0
+Commercial_Lease,Special Market:,enum_value,New Homes,,,31,3,1
+Commercial_Lease,Suites,enum_value,Name,,,35,1,0
+Commercial_Lease,Suites,enum_value,Area,,,35,1,1
+Commercial_Lease,Suites,enum_value,Column Spacing,,,35,1,2
+Commercial_Lease,Suites,enum_value,# of Full Baths,,,35,1,3
+Commercial_Lease,Suites,enum_value,# of ½ Baths,,,35,1,4
+Commercial_Lease,Suites,enum_value,Rate,,,35,1,5
+Commercial_Lease,Suites,enum_value,Lease Term,,,35,1,6
+Commercial_Lease,Suites,enum_value,Available?,,,35,1,7
+Commercial_Lease,Views:,enum_value,Bay,,,32,1,0
+Commercial_Lease,Views:,enum_value,Mountain,,,32,1,1
+Commercial_Lease,Views:,enum_value,Sound,,,32,1,2
+Commercial_Lease,Views:,enum_value,City/Strip,,,32,2,0
+Commercial_Lease,Views:,enum_value,Ocean,,,32,2,1
+Commercial_Lease,Views:,enum_value,Water,,,32,2,2
+Commercial_Lease,Views:,enum_value,Golf,,,32,3,0
+Commercial_Lease,Views:,enum_value,Pond,,,32,3,1
+Commercial_Lease,Views:,enum_value,Lake & Stream,,,32,4,0
+Commercial_Lease,Views:,enum_value,Scenic,,,32,4,1
+Commercial_Lease,Water:,enum_value,Central,,,9,1,0
+Commercial_Lease,Water:,enum_value,Municipal Water,,,9,1,1
+Commercial_Lease,Water:,enum_value,Spring,,,9,1,2
+Commercial_Lease,Water:,enum_value,City Water,,,9,2,0
+Commercial_Lease,Water:,enum_value,No Water,,,9,2,1
+Commercial_Lease,Water:,enum_value,Storage Tank,,,9,2,2
+Commercial_Lease,Water:,enum_value,Lake Water,,,9,3,0
+Commercial_Lease,Water:,enum_value,Other Water Source,,,9,3,1
+Commercial_Lease,Water:,enum_value,Well,,,9,3,2
+Commercial_Lease,listing information,enum_value,Prelisting,,,2,2,0
+Commercial_Lease,listing information,enum_value,Display Options: Do not show listing online Do not show address online Allow Mapping Price Upon Request,,,2,4,0
+Commercial_Lease,listing information,enum_value,Showing Options: Call to show,,,2,5,0
+Commercial_Lease,listing information,field,Listing Office,text,yes,2,1,0
+Commercial_Lease,listing information,field,Minimum Lease Rate,number,yes,2,1,1
+Commercial_Lease,listing information,field,Date Available,date,no,2,1,3
+Commercial_Lease,listing information,field,Maximum Lease Rate,number,no,2,2,1
+Commercial_Lease,listing information,field,Lease Type,text,yes,2,2,3
+Commercial_Lease,listing information,field,List Date,date,yes,2,3,0
+Commercial_Lease,listing information,field,Expires On,text,yes,2,3,2
+Commercial_Sale,ADDITIONAL INFORMATION,enum_value,Attribute,,,43,1,0
+Commercial_Sale,ADDITIONAL INFORMATION,enum_value,Value,,,43,1,1
+Commercial_Sale,Additional,enum_value,Commercial – Hospitality (fields are only available if the Property Subtype is Hospitality),,,37,1,0
+Commercial_Sale,Additional,enum_value,Commercial – Industrial (fields are only available if the Property Subtype is Industrial),,,37,4,0
+Commercial_Sale,Additional,enum_value,Sprinkler,,,37,5,2
+Commercial_Sale,Additional,enum_value,Ground Level,,,37,6,2
+Commercial_Sale,Additional,enum_value,Dock Height,,,37,7,0
+Commercial_Sale,Additional,enum_value,Cross Docks,,,37,7,2
+Commercial_Sale,Additional,enum_value,Sublease,,,37,8,1
+Commercial_Sale,Additional,enum_value,Rail Access,,,37,8,2
+Commercial_Sale,Additional,enum_value,Commercial – Multi-Family (fields are only available if the Property Subtype is Multi-Family),,,37,9,0
+Commercial_Sale,Additional,enum_value,Commercial – Office Bldg (fields are only available if the Property Subtype is Office Bldg),,,37,11,0
+Commercial_Sale,Additional,enum_value,Commercial – Retail (fields are only available if the Property Subtype is Retail),,,37,13,0
+Commercial_Sale,Additional,enum_value,Commercial – Other (fields are only available if the Property Subtype is Other),,,37,15,0
+Commercial_Sale,Additional,field,No. of Docks,number,no,37,2,0
+Commercial_Sale,Additional,field,No of Half Bath,number,no,37,2,1
+Commercial_Sale,Additional,field,No. of Conference Rooms,number,no,37,2,2
+Commercial_Sale,Additional,field,Total Units,text,no,37,3,0
+Commercial_Sale,Additional,field,No of Ballrooms,number,no,37,3,1
+Commercial_Sale,Additional,field,Ceiling Height,text,no,37,5,1
+Commercial_Sale,Additional,field,(Industrial) Power,text,no,37,6,0
+Commercial_Sale,Additional,field,Column Spacing,text,no,37,6,1
+Commercial_Sale,Additional,field,Turning Radius,text,no,37,7,1
+Commercial_Sale,Additional,field,Clearance,text,no,37,8,0
+Commercial_Sale,Additional,field,No of Full Bath,number,no,37,10,2
+Commercial_Sale,Additional,field,Anchor Stores,text,no,37,14,2
+Commercial_Sale,Additional details,enum_value,Contact Details,,,39,1,0
+Commercial_Sale,Additional details,enum_value,Contact: Developer Municipal Tax Office Owner Property Manager Tenant Utility,,,39,2,0
+Commercial_Sale,Additional details,field,First Name,text,no,39,3,0
+Commercial_Sale,Additional details,field,Last Name,text,no,39,3,1
+Commercial_Sale,Additional details,field,Entity Name,text,no,39,3,2
+Commercial_Sale,Additional details,field,Email,text,no,39,4,0
+Commercial_Sale,Additional details,field,Phone,text,no,39,4,1
+Commercial_Sale,Additional details,field,Website Name,text,no,39,4,2
+Commercial_Sale,Additional details,field,Address Line 1,text,no,39,5,0
+Commercial_Sale,Additional details,field,Address Line 2,text,no,39,5,1
+Commercial_Sale,Additional details,field,Address Line 3,text,no,39,5,2
+Commercial_Sale,Additional details,field,City,text,no,39,6,0
+Commercial_Sale,Additional details,field,State/Province,text,no,39,6,1
+Commercial_Sale,Additional details,field,Zip/Postal Code,text,no,39,6,2
+Commercial_Sale,Amenities:,enum_value,Agricultural Easement(s),,,10,1,0
+Commercial_Sale,Amenities:,enum_value,Hobby Farm,,,10,1,1
+Commercial_Sale,Amenities:,enum_value,Silo,,,10,1,2
+Commercial_Sale,Amenities:,enum_value,Bay/Beach Club,,,10,2,0
+Commercial_Sale,Amenities:,enum_value,Horse Facilities,,,10,2,1
+Commercial_Sale,Amenities:,enum_value,Ski Resort,,,10,2,2
+Commercial_Sale,Amenities:,enum_value,Caretaker House,,,10,3,0
+Commercial_Sale,Amenities:,enum_value,Horse Ranch,,,10,3,1
+Commercial_Sale,Amenities:,enum_value,Sporting Ranch,,,10,3,2
+Commercial_Sale,Amenities:,enum_value,Cattle Ranch,,,10,4,0
+Commercial_Sale,Amenities:,enum_value,Hunting Ranch,,,10,4,1
+Commercial_Sale,Amenities:,enum_value,Stables,,,10,4,2
+Commercial_Sale,Amenities:,enum_value,Conservation Easement(s),,,10,5,0
+Commercial_Sale,Amenities:,enum_value,Investment Ranch,,,10,5,1
+Commercial_Sale,Amenities:,enum_value,Station,,,10,5,2
+Commercial_Sale,Amenities:,enum_value,Elk Ranch,,,10,6,0
+Commercial_Sale,Amenities:,enum_value,Live Water,,,10,6,1
+Commercial_Sale,Amenities:,enum_value,Tennis Courts,,,10,6,2
+Commercial_Sale,Amenities:,enum_value,Estate Farm,,,10,7,0
+Commercial_Sale,Amenities:,enum_value,Modular Sports Courts,,,10,7,1
+Commercial_Sale,Amenities:,enum_value,Timberland,,,10,7,2
+Commercial_Sale,Amenities:,enum_value,Estate Ranch,,,10,8,0
+Commercial_Sale,Amenities:,enum_value,Outdoor Basketball Court,,,10,8,1
+Commercial_Sale,Amenities:,enum_value,Walk-to-ski,,,10,8,2
+Commercial_Sale,Amenities:,enum_value,Fly Fishing,,,10,9,0
+Commercial_Sale,Amenities:,enum_value,Playground,,,10,9,1
+Commercial_Sale,Amenities:,enum_value,Yacht Club,,,10,9,2
+Commercial_Sale,Amenities:,enum_value,Guest Ranch,,,10,10,0
+Commercial_Sale,Amenities:,enum_value,Recreational Ranch,,,10,10,1
+Commercial_Sale,Appliances:,enum_value,Dishwasher,,,11,1,0
+Commercial_Sale,Appliances:,enum_value,Garbage Disposal,,,11,1,1
+Commercial_Sale,Appliances:,enum_value,Refrigerator,,,11,1,2
+Commercial_Sale,Appliances:,enum_value,Double Oven,,,11,2,0
+Commercial_Sale,Appliances:,enum_value,Microwave,,,11,2,1
+Commercial_Sale,Appliances:,enum_value,Trash Compactor,,,11,2,2
+Commercial_Sale,Appliances:,enum_value,Dryer,,,11,3,0
+Commercial_Sale,Appliances:,enum_value,Range/Oven,,,11,3,1
+Commercial_Sale,Appliances:,enum_value,Washer,,,11,3,2
+Commercial_Sale,Area Amenities:,enum_value,Aquatic Activities,,,12,1,0
+Commercial_Sale,Area Amenities:,enum_value,Area Hunting,,,12,1,1
+Commercial_Sale,Area Amenities:,enum_value,Casino/Gambling,,,12,1,2
+Commercial_Sale,Area Amenities:,enum_value,Area Boat Dock,,,12,2,0
+Commercial_Sale,Area Amenities:,enum_value,Area Pool,,,12,2,1
+Commercial_Sale,Area Amenities:,enum_value,Deep Water Mooring,,,12,2,2
+Commercial_Sale,Area Amenities:,enum_value,Area Boat Ramp,,,12,3,0
+Commercial_Sale,Area Amenities:,enum_value,Area Skiing,,,12,3,1
+Commercial_Sale,Area Amenities:,enum_value,Golf,,,12,3,2
+Commercial_Sale,Area Amenities:,enum_value,Area Climbing,,,12,4,0
+Commercial_Sale,Area Amenities:,enum_value,Area Snowmobiling,,,12,4,1
+Commercial_Sale,Area Amenities:,enum_value,Jogging/Biking Path,,,12,4,2
+Commercial_Sale,Area Amenities:,enum_value,Area Fishing,,,12,5,0
+Commercial_Sale,Area Amenities:,enum_value,Area Tennis,,,12,5,1
+Commercial_Sale,Area Amenities:,enum_value,Outdoor Activities,,,12,5,2
+Commercial_Sale,Area Amenities:,enum_value,Area Hiking,,,12,6,0
+Commercial_Sale,Area Amenities:,enum_value,Biking,,,12,6,1
+Commercial_Sale,Area Amenities:,enum_value,Area Horse Riding/Stables,,,12,7,0
+Commercial_Sale,Area Amenities:,enum_value,Boating,,,12,7,1
+Commercial_Sale,Area Description:,enum_value,Country Living,,,13,1,0
+Commercial_Sale,Area Description:,enum_value,Green Living,,,13,1,1
+Commercial_Sale,Area Description:,enum_value,Resort,,,13,1,2
+Commercial_Sale,Area Description:,enum_value,Cycling,,,13,2,0
+Commercial_Sale,Area Description:,enum_value,Historic/Antique,,,13,2,1
+Commercial_Sale,Area Description:,enum_value,Rock Beach,,,13,2,2
+Commercial_Sale,Area Description:,enum_value,Desert Living,,,13,3,0
+Commercial_Sale,Area Description:,enum_value,Hunting,,,13,3,1
+Commercial_Sale,Area Description:,enum_value,Sand Beach,,,13,3,2
+Commercial_Sale,Area Description:,enum_value,Equestrian/Polo,,,13,4,0
+Commercial_Sale,Area Description:,enum_value,Metropolitan,,,13,4,1
+Commercial_Sale,Area Description:,enum_value,Ski-in/Ski-Out,,,13,4,2
+Commercial_Sale,Area Description:,enum_value,Fishing,,,13,5,0
+Commercial_Sale,Area Description:,enum_value,Mountain,,,13,5,1
+Commercial_Sale,Area Description:,enum_value,Skiing,,,13,5,2
+Commercial_Sale,Area Description:,enum_value,Flood Area,,,13,6,0
+Commercial_Sale,Area Description:,enum_value,Other Beach,,,13,6,1
+Commercial_Sale,Area Description:,enum_value,Suburban,,,13,6,2
+Commercial_Sale,Area Description:,enum_value,Game Farm/Safari,,,13,7,0
+Commercial_Sale,Area Description:,enum_value,Privacy,,,13,7,1
+Commercial_Sale,Area Description:,enum_value,Wine Country,,,13,7,2
+Commercial_Sale,Body of Water:,enum_value,Bay,,,14,1,0
+Commercial_Sale,Body of Water:,enum_value,Lake,,,14,1,1
+Commercial_Sale,Body of Water:,enum_value,River,,,14,1,2
+Commercial_Sale,Body of Water:,enum_value,Canal,,,14,2,0
+Commercial_Sale,Body of Water:,enum_value,Ocean,,,14,2,1
+Commercial_Sale,Body of Water:,enum_value,Sound,,,14,2,2
+Commercial_Sale,Body of Water:,enum_value,Inlet,,,14,3,0
+Commercial_Sale,Body of Water:,enum_value,Pond,,,14,3,1
+Commercial_Sale,Body of Water:,enum_value,Lagoon,,,14,4,0
+Commercial_Sale,Body of Water:,enum_value,Reservoir,,,14,4,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Property Information (choose one subtype and one corresponding style),,,0,1,0
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Property Subtype√,,,0,2,0
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Property Style√,,,0,2,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Hospitality,,,0,3,0
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Bed and Breakfast,,,0,3,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Hosp. Resort Business,,,0,3,2
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Other Style,,,0,3,3
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Hosp. Hotel/Motel,,,0,4,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Industrial,,,0,5,0
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Industrial Bldg- Flex Space,,,0,5,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Industrial Bldg- Manufacturing,,,0,5,2
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Industrial Bldg- R&D,,,0,5,3
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Industrial Bldg- Warehouse,,,0,6,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family,,,0,7,0
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family – 2-4 Units,,,0,7,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family (5-20 Units),,,0,7,2
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family (Over 20 Units),,,0,7,3
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Office Building,,,0,8,0
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Office Bldg- General,,,0,8,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Office Bldg- Government,,,0,8,2
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Office Bldg- Medical,,,0,8,3
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Office Bldg- Condo,,,0,9,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail,,,0,10,0
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Hosp. Restaurant,,,0,10,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail- Auto/Vehicle,,,0,10,3
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail- Daycare,,,0,11,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail- Free Standing,,,0,11,2
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail- Street Retail,,,0,11,3
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail Bldg- General Use,,,0,12,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail Bldg- Local Strip,,,0,12,2
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail Bldg- Neighborhood Ctr,,,0,12,3
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail Bldg- Regional Mall,,,0,13,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail Bldg- SGL User (BigBox),,,0,13,2
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail Business,,,0,13,3
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail – Free Standing,,,0,14,1
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail – Street Retail,,,0,14,2
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Retail – Daycare,,,0,14,3
+Commercial_Sale,Commercial Sale listing Required Fields are noted with a red checkmark (√),enum_value,Other,,,0,15,0
+Commercial_Sale,Cooling:,enum_value,A/C,,,15,1,0
+Commercial_Sale,Cooling:,enum_value,Humidifier,,,15,1,1
+Commercial_Sale,Cooling:,enum_value,Window A/C,,,15,1,2
+Commercial_Sale,Cooling:,enum_value,Central A/C,,,15,2,0
+Commercial_Sale,Cooling:,enum_value,No A/C,,,15,2,1
+Commercial_Sale,Cooling:,enum_value,Zoned A/C,,,15,2,2
+Commercial_Sale,Cooling:,enum_value,Central A/C – Electric,,,15,3,0
+Commercial_Sale,Cooling:,enum_value,Other A/C,,,15,3,1
+Commercial_Sale,Cooling:,enum_value,Central A/C – Gas,,,15,4,0
+Commercial_Sale,Cooling:,enum_value,Wall Unit A/C,,,15,4,1
+Commercial_Sale,Exterior Description:,enum_value,Brick,,,17,1,0
+Commercial_Sale,Exterior Description:,enum_value,Wood Frame,,,17,1,1
+Commercial_Sale,Exterior Description:,enum_value,Concrete Block,,,17,2,0
+Commercial_Sale,Exterior Description:,enum_value,Stone,,,17,2,1
+Commercial_Sale,Exterior Description:,enum_value,Stucco,,,17,3,0
+Commercial_Sale,Exterior Description:,enum_value,Wood Siding,,,17,3,1
+Commercial_Sale,Exterior Description:,enum_value,Vinyl Siding,,,17,4,0
+Commercial_Sale,Exterior Description:,enum_value,E.I.F.S,,,17,4,1
+Commercial_Sale,Exterior Description:,enum_value,Steel Frame,,,17,5,0
+Commercial_Sale,Exterior:,enum_value,Barn/Stable,,,16,1,0
+Commercial_Sale,Exterior:,enum_value,Double Pane/Storm Windows,,,16,1,1
+Commercial_Sale,Exterior:,enum_value,Storage Shed,,,16,1,2
+Commercial_Sale,Exterior:,enum_value,BBQ,,,16,2,0
+Commercial_Sale,Exterior:,enum_value,Fire Pit,,,16,2,1
+Commercial_Sale,Exterior:,enum_value,Storm Door,,,16,2,2
+Commercial_Sale,Exterior:,enum_value,Boat House,,,16,3,0
+Commercial_Sale,Exterior:,enum_value,Gardens,,,16,3,1
+Commercial_Sale,Exterior:,enum_value,Storm Windows,,,16,3,2
+Commercial_Sale,Exterior:,enum_value,Boat Ramp,,,16,4,0
+Commercial_Sale,Exterior:,enum_value,Guest House,,,16,4,1
+Commercial_Sale,Exterior:,enum_value,Thermal Windows/Doors,,,16,4,2
+Commercial_Sale,Exterior:,enum_value,Carriage House,,,16,5,0
+Commercial_Sale,Exterior:,enum_value,Helipad,,,16,5,1
+Commercial_Sale,Exterior:,enum_value,Underground Lawn Sprinkler,,,16,5,2
+Commercial_Sale,Exterior:,enum_value,Covered Terraces,,,16,6,0
+Commercial_Sale,Exterior:,enum_value,Out Building,,,16,6,1
+Commercial_Sale,Exterior:,enum_value,Water Feature,,,16,6,2
+Commercial_Sale,Exterior:,enum_value,Dock,,,16,7,0
+Commercial_Sale,Exterior:,enum_value,Porte-Cochere,,,16,7,1
+Commercial_Sale,Exterior:,enum_value,Dock Rights,,,16,8,0
+Commercial_Sale,Exterior:,enum_value,Sidewalk,,,16,8,1
+Commercial_Sale,Exterior:,enum_value,Dog Run,,,16,9,0
+Commercial_Sale,Exterior:,enum_value,Sprinkler System,,,16,9,1
+Commercial_Sale,FEAtures,enum_value,Features,,,7,1,0
+Commercial_Sale,FEAtures,enum_value,New Construction,,,7,3,0
+Commercial_Sale,FEAtures,enum_value,11-20 Years Old,,,7,3,1
+Commercial_Sale,FEAtures,enum_value,41-50 Years Old,,,7,3,2
+Commercial_Sale,FEAtures,enum_value,1-5 Years Old,,,7,4,0
+Commercial_Sale,FEAtures,enum_value,21-30 Years Old,,,7,4,1
+Commercial_Sale,FEAtures,enum_value,Over 50 Years Old,,,7,4,2
+Commercial_Sale,FEAtures,enum_value,6-10 Years Old,,,7,5,0
+Commercial_Sale,FEAtures,enum_value,31-40 Years Old,,,7,5,1
+Commercial_Sale,FEAtures,field,Age,text,no,7,2,0
+Commercial_Sale,Fencing:,enum_value,Fenced Yard,,,18,1,0
+Commercial_Sale,Fencing:,enum_value,Partially Fenced,,,18,1,1
+Commercial_Sale,Fencing:,enum_value,Vinyl Fence,,,18,1,2
+Commercial_Sale,Fencing:,enum_value,Metal Fence,,,18,2,0
+Commercial_Sale,Fencing:,enum_value,Privacy Fence,,,18,2,1
+Commercial_Sale,Fencing:,enum_value,Wood Fence,,,18,2,2
+Commercial_Sale,Flooring:,enum_value,Ceramic,,,19,1,0
+Commercial_Sale,Flooring:,enum_value,Linoleum,,,19,1,1
+Commercial_Sale,Flooring:,enum_value,Tile,,,19,1,2
+Commercial_Sale,Flooring:,enum_value,Hardwood,,,19,2,0
+Commercial_Sale,Flooring:,enum_value,Marble,,,19,2,1
+Commercial_Sale,Flooring:,enum_value,Wall to Wall Carpet,,,19,2,2
+Commercial_Sale,Flooring:,enum_value,Laminate,,,19,3,0
+Commercial_Sale,Flooring:,enum_value,Mixed,,,19,3,1
+Commercial_Sale,Floors,enum_value,Floor Name,,,36,2,0
+Commercial_Sale,Floors,enum_value,Length,,,36,2,2
+Commercial_Sale,Floors,enum_value,Width,,,36,2,3
+Commercial_Sale,Floors,field,Number of Floors/Levels,number,no,36,1,0
+Commercial_Sale,Floors,field,Avg Floor Size,number,no,36,1,1
+Commercial_Sale,Floors,field,Available Floors,text,no,36,1,4
+Commercial_Sale,General:,enum_value,Built-in Vacuum,,,20,1,0
+Commercial_Sale,General:,enum_value,Fenced Range Land,,,20,1,1
+Commercial_Sale,General:,enum_value,Skylight,,,20,1,2
+Commercial_Sale,General:,enum_value,Ceiling Fan(s),,,20,2,0
+Commercial_Sale,General:,enum_value,Fire Alarms,,,20,2,1
+Commercial_Sale,General:,enum_value,Smoke Detector,,,20,2,2
+Commercial_Sale,General:,enum_value,Clubhouse,,,20,3,0
+Commercial_Sale,General:,enum_value,Guard Gate,,,20,3,1
+Commercial_Sale,General:,enum_value,Stereo System,,,20,3,2
+Commercial_Sale,General:,enum_value,Concierge Services,,,20,4,0
+Commercial_Sale,General:,enum_value,Lake Privileges,,,20,4,1
+Commercial_Sale,General:,enum_value,Storage Area,,,20,4,2
+Commercial_Sale,General:,enum_value,Doorman,,,20,5,0
+Commercial_Sale,General:,enum_value,Laundry Facilities,,,20,5,1
+Commercial_Sale,General:,enum_value,Wheel Chair Accessible,,,20,5,2
+Commercial_Sale,General:,enum_value,Elevator,,,20,6,0
+Commercial_Sale,General:,enum_value,Private Airport,,,20,6,1
+Commercial_Sale,General:,enum_value,Window Treatments,,,20,6,2
+Commercial_Sale,General:,enum_value,Energy-saving Features,,,20,7,0
+Commercial_Sale,General:,enum_value,Private Elevator,,,20,7,1
+Commercial_Sale,General:,enum_value,Workshop,,,20,7,2
+Commercial_Sale,General:,enum_value,Escalator,,,20,8,0
+Commercial_Sale,General:,enum_value,Security System,,,20,8,1
+Commercial_Sale,General:,enum_value,Direct Elevator Access,,,20,8,2
+Commercial_Sale,Geographic location,field,City Region,text,no,34,1,0
+Commercial_Sale,Geographic location,field,Continent Region,text,no,34,1,1
+Commercial_Sale,Geographic location,field,Property Location,text,no,34,1,2
+Commercial_Sale,Geographic location,field,State Region,text,no,34,2,0
+Commercial_Sale,Geographic location,field,Country Region,number,no,34,2,1
+Commercial_Sale,Geographic location,field,Development,text,no,34,2,2
+Commercial_Sale,Heating Type:,enum_value,Baseboard,,,22,1,0
+Commercial_Sale,Heating Type:,enum_value,Multi-Zone Heat,,,22,1,1
+Commercial_Sale,Heating Type:,enum_value,Radiator,,,22,1,2
+Commercial_Sale,Heating Type:,enum_value,Forced Air,,,22,2,0
+Commercial_Sale,Heating Type:,enum_value,No Heat,,,22,2,1
+Commercial_Sale,Heating Type:,enum_value,Solar Power,,,22,2,2
+Commercial_Sale,Heating Type:,enum_value,Gravity,,,22,3,0
+Commercial_Sale,Heating Type:,enum_value,Other,,,22,3,1
+Commercial_Sale,Heating Type:,enum_value,Steam Heat,,,22,3,2
+Commercial_Sale,Heating Type:,enum_value,Heat Pump,,,22,4,0
+Commercial_Sale,Heating Type:,enum_value,Pellet Stove,,,22,4,1
+Commercial_Sale,Heating Type:,enum_value,Hydro,,,22,5,0
+Commercial_Sale,Heating Type:,enum_value,Radiant Floor,,,22,5,1
+Commercial_Sale,Heating – Fuel Type:,enum_value,Coal,,,21,1,0
+Commercial_Sale,Heating – Fuel Type:,enum_value,Hydro Heat,,,21,1,1
+Commercial_Sale,Heating – Fuel Type:,enum_value,Propane,,,21,1,2
+Commercial_Sale,Heating – Fuel Type:,enum_value,Electric,,,21,2,0
+Commercial_Sale,Heating – Fuel Type:,enum_value,None,,,21,2,1
+Commercial_Sale,Heating – Fuel Type:,enum_value,Solar,,,21,2,2
+Commercial_Sale,Heating – Fuel Type:,enum_value,Gas,,,21,3,0
+Commercial_Sale,Heating – Fuel Type:,enum_value,Oil,,,21,3,1
+Commercial_Sale,Heating – Fuel Type:,enum_value,Wood,,,21,3,2
+Commercial_Sale,Heating – Fuel Type:,enum_value,Geothermal,,,21,4,0
+Commercial_Sale,Heating – Fuel Type:,enum_value,Other,,,21,4,1
+Commercial_Sale,Interior:,enum_value,Bay/Bow Window,,,23,1,0
+Commercial_Sale,Interior:,enum_value,Fireplace in Master BR,,,23,1,1
+Commercial_Sale,Interior:,enum_value,Screen Room,,,23,1,2
+Commercial_Sale,Interior:,enum_value,Beam – Ceilings,,,23,2,0
+Commercial_Sale,Interior:,enum_value,High Tech Cabling,,,23,2,1
+Commercial_Sale,Interior:,enum_value,Track Lighting,,,23,2,2
+Commercial_Sale,Interior:,enum_value,Blinds,,,23,3,0
+Commercial_Sale,Interior:,enum_value,In-Home Gym,,,23,3,1
+Commercial_Sale,Interior:,enum_value,Two-story Family Room,,,23,3,2
+Commercial_Sale,Interior:,enum_value,Bowling Alley,,,23,4,0
+Commercial_Sale,Interior:,enum_value,In-Law Suite,,,23,4,1
+Commercial_Sale,Interior:,enum_value,Vaulted Ceilings,,,23,4,2
+Commercial_Sale,Interior:,enum_value,Cathedral Ceilings,,,23,5,0
+Commercial_Sale,Interior:,enum_value,Indoor Basketball Court,,,23,5,1
+Commercial_Sale,Interior:,enum_value,Walk-in Closet,,,23,5,2
+Commercial_Sale,Interior:,enum_value,Cedar Closets,,,23,6,0
+Commercial_Sale,Interior:,enum_value,Indoor Racquetball Court,,,23,6,1
+Commercial_Sale,Interior:,enum_value,Wet Bar,,,23,6,2
+Commercial_Sale,Interior:,enum_value,Dry Bar,,,23,7,0
+Commercial_Sale,Interior:,enum_value,Intercom System,,,23,7,1
+Commercial_Sale,Interior:,enum_value,Wine Cellar,,,23,7,2
+Commercial_Sale,Interior:,enum_value,Exercise Area,,,23,8,0
+Commercial_Sale,Interior:,enum_value,Laundry Chute,,,23,8,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Language,,,6,1,0
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Remark Type,,,6,1,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Remark,,,6,1,2
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,English,,,6,2,0
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Property Description√,,,6,2,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Area Description,,,6,3,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Directions,,,6,4,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Headline,,,6,5,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 1,,,6,6,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 2,,,6,7,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 3,,,6,8,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 4,,,6,9,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 5,,,6,10,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 6,,,6,11,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Location,,,6,12,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Owner/Expert Quote,,,6,13,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Transportation,,,6,14,1
+Commercial_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Zoning Description,,,6,15,1
+Commercial_Sale,Location,field,Country,number,yes,1,1,0
+Commercial_Sale,Location,field,Address Line 1,text,yes,1,1,2
+Commercial_Sale,Location,field,Address Line 2,text,no,1,2,0
+Commercial_Sale,Location,field,Address Line 3,text,no,1,2,3
+Commercial_Sale,Location,field,City,text,yes,1,3,0
+Commercial_Sale,Location,field,District/County,number,no,1,3,1
+Commercial_Sale,Location,field,State/Province,text,yes,1,3,4
+Commercial_Sale,Location,field,Zip/Postal Code,text,yes,1,4,0
+Commercial_Sale,Location,field,Neighborhood,text,no,1,4,1
+Commercial_Sale,Location:,enum_value,Backs to Golf Course,,,24,1,0
+Commercial_Sale,Location:,enum_value,Gulf,,,24,1,1
+Commercial_Sale,Location:,enum_value,Ocean/Beach,,,24,1,2
+Commercial_Sale,Location:,enum_value,Backs to Park Land,,,24,2,0
+Commercial_Sale,Location:,enum_value,Harbor,,,24,2,1
+Commercial_Sale,Location:,enum_value,Ocean Block,,,24,2,2
+Commercial_Sale,Location:,enum_value,Bayside,,,24,3,0
+Commercial_Sale,Location:,enum_value,In Shopping Mall,,,24,3,1
+Commercial_Sale,Location:,enum_value,Ocean Front,,,24,3,2
+Commercial_Sale,Location:,enum_value,Beach Front,,,24,4,0
+Commercial_Sale,Location:,enum_value,Intercoastal Waterway,,,24,4,1
+Commercial_Sale,Location:,enum_value,Off Water,,,24,4,2
+Commercial_Sale,Location:,enum_value,Canal Front,,,24,5,0
+Commercial_Sale,Location:,enum_value,Island,,,24,5,1
+Commercial_Sale,Location:,enum_value,Riverfront,,,24,5,2
+Commercial_Sale,Location:,enum_value,Channel Front,,,24,6,0
+Commercial_Sale,Location:,enum_value,Lagoon,,,24,6,1
+Commercial_Sale,Location:,enum_value,Slope Side,,,24,6,2
+Commercial_Sale,Location:,enum_value,Cul-de-Sac,,,24,7,0
+Commercial_Sale,Location:,enum_value,Lakefront,,,24,7,1
+Commercial_Sale,Location:,enum_value,Waterfront,,,24,7,2
+Commercial_Sale,Location:,enum_value,Fairway Frontage,,,24,8,0
+Commercial_Sale,Location:,enum_value,Marina,,,24,8,1
+Commercial_Sale,Lot Description:,enum_value,Access Type– Other,,,25,1,0
+Commercial_Sale,Lot Description:,enum_value,Irregular,,,25,1,1
+Commercial_Sale,Lot Description:,enum_value,Pond on Lot,,,25,1,2
+Commercial_Sale,Lot Description:,enum_value,Access Type- Road,,,25,2,0
+Commercial_Sale,Lot Description:,enum_value,Lake on Lot,,,25,2,1
+Commercial_Sale,Lot Description:,enum_value,Possible Subdivision,,,25,2,2
+Commercial_Sale,Lot Description:,enum_value,Access Type- Water,,,25,3,0
+Commercial_Sale,Lot Description:,enum_value,Level,,,25,3,1
+Commercial_Sale,Lot Description:,enum_value,Stream on Lot,,,25,3,2
+Commercial_Sale,Lot Description:,enum_value,Corner,,,25,4,0
+Commercial_Sale,Lot Description:,enum_value,New Development,,,25,4,1
+Commercial_Sale,Lot Description:,enum_value,Wooded,,,25,4,2
+Commercial_Sale,Lot Description:,enum_value,Flag,,,25,5,0
+Commercial_Sale,Lot Description:,enum_value,Open,,,25,5,1
+Commercial_Sale,MLS Information,enum_value,MLS ID√,,,3,1,0
+Commercial_Sale,MLS Information,enum_value,MLS NAME,,,3,1,1
+Commercial_Sale,Other:,enum_value,Association Fee,,,26,1,0
+Commercial_Sale,Other:,enum_value,Water Softener- Rent,,,26,1,1
+Commercial_Sale,Other:,enum_value,Water Softener- Own,,,26,2,0
+Commercial_Sale,Other:,enum_value,Whole House Water Filter,,,26,2,1
+Commercial_Sale,Pre-Wiring:,enum_value,Cable,,,27,1,0
+Commercial_Sale,Pre-Wiring:,enum_value,Garage Door,,,27,1,1
+Commercial_Sale,Pre-Wiring:,enum_value,Phone Jacks,,,27,1,2
+Commercial_Sale,Pre-Wiring:,enum_value,Entertainment System,,,27,2,0
+Commercial_Sale,Pre-Wiring:,enum_value,Generator,,,27,2,1
+Commercial_Sale,Pre-Wiring:,enum_value,Security System,,,27,2,2
+Commercial_Sale,Property Description:,enum_value,Acreage,,,28,1,0
+Commercial_Sale,Property Description:,enum_value,Farm/Ranch,,,28,1,1
+Commercial_Sale,Property Description:,enum_value,Vineyard,,,28,1,2
+Commercial_Sale,Property Description:,enum_value,Community Living,,,28,2,0
+Commercial_Sale,Property Description:,enum_value,Farm Assessment,,,28,2,1
+Commercial_Sale,Property Description:,enum_value,Winery,,,28,2,2
+Commercial_Sale,Property Description:,enum_value,Easement,,,28,3,0
+Commercial_Sale,Property Description:,enum_value,Fenced Farm Acreage,,,28,3,1
+Commercial_Sale,Property Description:,enum_value,Eco-Friendly (Green),,,28,4,0
+Commercial_Sale,Property Description:,enum_value,Ski Property,,,28,4,1
+Commercial_Sale,Property Details,enum_value,Property Use: Bank Owned Other Commercial Other Residential Owner Occupied Rental or Investment Second Home Use in a Business Vacant Vacation Home Net Leased Property Business for Sale,,,33,1,0
+Commercial_Sale,Property Details,enum_value,New Construction,,,33,2,2
+Commercial_Sale,Property Details,field,# of Parking Places,text,no,33,2,0
+Commercial_Sale,Property Details,field,Year Built,date,no,33,2,1
+Commercial_Sale,Property Details,field,Year Renovated,date,no,33,3,0
+Commercial_Sale,Property Details,field,Last Sold On,text,no,33,3,1
+Commercial_Sale,Property Details,field,Zoning,text,no,33,3,2
+Commercial_Sale,Property Details,field,Tax Roll Number,text,no,33,4,0
+Commercial_Sale,Property Details,field,Lot Dimensions,text,no,33,4,1
+Commercial_Sale,Property Details,field,Cap Rate Percent,number,no,33,4,2
+Commercial_Sale,Property Details,field,Parking Ratio,text,no,33,5,0
+Commercial_Sale,Property Details,field,Occupancy Rate,number,no,33,5,1
+Commercial_Sale,Property fees,enum_value,Fee Type,,,42,1,0
+Commercial_Sale,Property fees,enum_value,Fee Amount,,,42,1,1
+Commercial_Sale,Property fees,enum_value,Frequency,,,42,1,2
+Commercial_Sale,Property information,enum_value,Brand Programs: ERA Distinctive Properties ERA Home Protection Plan Gold Star,,,4,4,0
+Commercial_Sale,Property information,field,Max Contiguous Area,text,no,4,1,0
+Commercial_Sale,Property information,field,Building Area,text,no,4,1,1
+Commercial_Sale,Property information,field,Tax Year,date,no,4,1,2
+Commercial_Sale,Property information,field,Min Divisible Area,text,no,4,2,0
+Commercial_Sale,Property information,field,Lot Size,number,no,4,2,1
+Commercial_Sale,Property information,field,Property Name,text,no,4,2,2
+Commercial_Sale,Property information,field,Common Area Factor,text,no,4,3,0
+Commercial_Sale,Property information,field,Annual Tax Amount,number,no,4,3,1
+Commercial_Sale,Road Type:,enum_value,4 Way Interchange,,,29,1,0
+Commercial_Sale,Road Type:,enum_value,Interchange,,,29,1,1
+Commercial_Sale,Road Type:,enum_value,Private Road,,,29,1,2
+Commercial_Sale,Road Type:,enum_value,City/Town Street,,,29,2,0
+Commercial_Sale,Road Type:,enum_value,Interstate,,,29,2,1
+Commercial_Sale,Road Type:,enum_value,State Road,,,29,2,2
+Commercial_Sale,Road Type:,enum_value,County Street,,,29,3,0
+Commercial_Sale,Road Type:,enum_value,Main Thoroughfare,,,29,3,1
+Commercial_Sale,Road Type:,enum_value,Turnpike,,,29,3,2
+Commercial_Sale,Roof:,enum_value,Asphalt/Fiberglass,,,30,1,0
+Commercial_Sale,Roof:,enum_value,Composition Shingle,,,30,1,1
+Commercial_Sale,Roof:,enum_value,Slate Roof,,,30,1,2
+Commercial_Sale,Roof:,enum_value,Asphalt Shingle Roof,,,30,2,0
+Commercial_Sale,Roof:,enum_value,Fiberglass,,,30,2,1
+Commercial_Sale,Roof:,enum_value,Spanish Tiles,,,30,2,2
+Commercial_Sale,Roof:,enum_value,Cedar Shake,,,30,3,0
+Commercial_Sale,Roof:,enum_value,Metal Roof,,,30,3,1
+Commercial_Sale,Roof:,enum_value,Tar & Gravel,,,30,3,2
+Commercial_Sale,Roof:,enum_value,Cement Tiles,,,30,4,0
+Commercial_Sale,Roof:,enum_value,Rubber,,,30,4,1
+Commercial_Sale,Roof:,enum_value,Wood Shingles/Shakes,,,30,4,2
+Commercial_Sale,Sales Associate Information,enum_value,Sales Associate/Team ID,,,5,1,0
+Commercial_Sale,Sales Associate Information,enum_value,Sales Associate/Team Name√,,,5,1,1
+Commercial_Sale,Seller Information,enum_value,Seller Lead: Agent Office,,,38,1,4
+Commercial_Sale,Seller Information,enum_value,Seller Type: Person/Individual(s) Corporation Developer Doing Business As Estate Financial Inst. Government Limited Liability Company Limited Liability Limited Partnership Limited Liability Partnership Limited Partnership Other Partnership Pension Fund Professional Limited Liability Company REIT Sole Partnership Trust Vendor,,,38,2,0
+Commercial_Sale,Seller Information,enum_value,"Use Property Address (if checked, the address fields below are not required.)",,,38,7,0
+Commercial_Sale,Seller Information,field,Seller Source,text,no,38,1,0
+Commercial_Sale,Seller Information,field,First Name 1,text,no,38,3,0
+Commercial_Sale,Seller Information,field,Last Name 1,text,no,38,3,2
+Commercial_Sale,Seller Information,field,First Name 2,text,no,38,4,0
+Commercial_Sale,Seller Information,field,Last Name 2,text,no,38,4,2
+Commercial_Sale,Seller Information,field,Entity Name,text,no,38,5,0
+Commercial_Sale,Seller Information,field,Email,text,no,38,6,0
+Commercial_Sale,Seller Information,field,Website,text,no,38,6,1
+Commercial_Sale,Seller Information,field,Phone,text,no,38,6,5
+Commercial_Sale,Seller Information,field,Address Line 1,text,no,38,8,0
+Commercial_Sale,Seller Information,field,Address Line 2,text,no,38,8,3
+Commercial_Sale,Seller Information,field,Address Line 3,text,no,38,8,6
+Commercial_Sale,Seller Information,field,City,text,no,38,9,0
+Commercial_Sale,Seller Information,field,State/Province,text,no,38,9,3
+Commercial_Sale,Seller Information,field,Zip/Postal Code,text,no,38,9,6
+Commercial_Sale,Sewer:,enum_value,Aerobic System,,,8,1,0
+Commercial_Sale,Sewer:,enum_value,City,,,8,1,1
+Commercial_Sale,Sewer:,enum_value,Private,,,8,1,2
+Commercial_Sale,Sewer:,enum_value,Central,,,8,2,0
+Commercial_Sale,Sewer:,enum_value,Mound,,,8,2,1
+Commercial_Sale,Sewer:,enum_value,Public,,,8,2,2
+Commercial_Sale,Sewer:,enum_value,Cesspool,,,8,3,0
+Commercial_Sale,Sewer:,enum_value,None,,,8,3,1
+Commercial_Sale,Sewer:,enum_value,Septic,,,8,3,2
+Commercial_Sale,Special Market:,enum_value,College/University,,,31,1,0
+Commercial_Sale,Special Market:,enum_value,Luxury Properties,,,31,1,1
+Commercial_Sale,Special Market:,enum_value,Resort/Lake,,,31,1,2
+Commercial_Sale,Special Market:,enum_value,Hospitality,,,31,2,0
+Commercial_Sale,Special Market:,enum_value,Military Properties,,,31,2,1
+Commercial_Sale,Special Market:,enum_value,Vacation/Second Home,,,31,2,2
+Commercial_Sale,Special Market:,enum_value,International Properties,,,31,3,0
+Commercial_Sale,Special Market:,enum_value,New Homes,,,31,3,1
+Commercial_Sale,Suites,enum_value,Name,,,35,1,0
+Commercial_Sale,Suites,enum_value,Area,,,35,1,1
+Commercial_Sale,Suites,enum_value,Column Spacing,,,35,1,2
+Commercial_Sale,Suites,enum_value,# of Full Baths,,,35,1,3
+Commercial_Sale,Suites,enum_value,# of ½ Baths,,,35,1,4
+Commercial_Sale,Suites,enum_value,Rate,,,35,1,5
+Commercial_Sale,Suites,enum_value,Lease Term,,,35,1,6
+Commercial_Sale,Suites,enum_value,Available?,,,35,1,7
+Commercial_Sale,Views:,enum_value,Bay,,,32,1,0
+Commercial_Sale,Views:,enum_value,Mountain,,,32,1,1
+Commercial_Sale,Views:,enum_value,Sound,,,32,1,2
+Commercial_Sale,Views:,enum_value,City/Strip,,,32,2,0
+Commercial_Sale,Views:,enum_value,Ocean,,,32,2,1
+Commercial_Sale,Views:,enum_value,Water,,,32,2,2
+Commercial_Sale,Views:,enum_value,Golf,,,32,3,0
+Commercial_Sale,Views:,enum_value,Pond,,,32,3,1
+Commercial_Sale,Views:,enum_value,Lake & Stream,,,32,4,0
+Commercial_Sale,Views:,enum_value,Scenic,,,32,4,1
+Commercial_Sale,Water:,enum_value,Central,,,9,1,0
+Commercial_Sale,Water:,enum_value,Municipal Water,,,9,1,1
+Commercial_Sale,Water:,enum_value,Spring,,,9,1,2
+Commercial_Sale,Water:,enum_value,City Water,,,9,2,0
+Commercial_Sale,Water:,enum_value,No Water,,,9,2,1
+Commercial_Sale,Water:,enum_value,Storage Tank,,,9,2,2
+Commercial_Sale,Water:,enum_value,Lake Water,,,9,3,0
+Commercial_Sale,Water:,enum_value,Other Water Source,,,9,3,1
+Commercial_Sale,Water:,enum_value,Well,,,9,3,2
+Commercial_Sale,income and financial information,field,Gross Income,text,no,41,1,0
+Commercial_Sale,income and financial information,field,Expenses,text,no,41,1,1
+Commercial_Sale,income and financial information,field,Net Operating Income,text,no,41,1,2
+Commercial_Sale,income and financial information,field,Cash Flow,text,no,41,2,0
+Commercial_Sale,income and financial information,field,Down Payment,text,no,41,2,1
+Commercial_Sale,income and financial information,field,Loan Payment,text,no,41,2,2
+Commercial_Sale,income and financial information,field,Fully Leased Income,text,no,41,3,0
+Commercial_Sale,listing information,enum_value,Prelisting,,,2,2,0
+Commercial_Sale,listing information,enum_value,Foreclosure Short Sale,,,2,2,3
+Commercial_Sale,listing information,enum_value,Display Options: Auction Do not show list price online Do not show listing online Do not show address online Allow Mapping Price Upon Request,,,2,4,0
+Commercial_Sale,listing information,enum_value,Showing Options: Call to show,,,2,5,0
+Commercial_Sale,listing information,field,Listing Office,text,yes,2,1,0
+Commercial_Sale,listing information,field,List Price,number,yes,2,1,1
+Commercial_Sale,listing information,field,Date Available,date,no,2,1,3
+Commercial_Sale,listing information,field,Price Per Area,number,no,2,2,1
+Commercial_Sale,listing information,field,List Date,date,yes,2,3,0
+Commercial_Sale,listing information,field,Expires On,text,yes,2,3,2
+Person,ADDITIONAL INFORMATION,enum_value,Attribute,,,17,1,0
+Person,ADDITIONAL INFORMATION,enum_value,Value,,,17,1,1
+Person,Agent Team Support Assignment,enum_value,Name,,,7,1,0
+Person,CUSTOMER TESTIMONIAL,enum_value,Testifier Name,,,12,1,0
+Person,CUSTOMER TESTIMONIAL,enum_value,Language,,,12,1,1
+Person,CUSTOMER TESTIMONIAL,enum_value,Testimonial Description,,,12,1,2
+Person,Email,enum_value,Address Type,,,1,1,0
+Person,Email,enum_value,Email Address,,,1,1,1
+Person,Email,enum_value,Business√,,,1,2,0
+Person,Emergency Contact,enum_value,Name,,,14,1,0
+Person,Emergency Contact,enum_value,Phone Number,,,14,1,1
+Person,Emergency Contact,enum_value,Primary?,,,14,1,2
+Person,Insurance,enum_value,Insurance Type,,,15,1,0
+Person,Insurance,enum_value,Expiration Date,,,15,1,1
+Person,Insurance,enum_value,Auto,,,15,2,0
+Person,Insurance,enum_value,Errors & Omissions,,,15,3,0
+Person,Licenses,enum_value,License Type,,,5,1,0
+Person,Licenses,enum_value,Number,,,5,1,1
+Person,Licenses,enum_value,State,,,5,1,2
+Person,Licenses,enum_value,Issue Date,,,5,1,3
+Person,Licenses,enum_value,Expiration Date,,,5,1,4
+Person,Non-Sales Position,enum_value,Position,,,6,1,0
+Person,Non-Sales Position,enum_value,Office(s),,,6,1,1
+Person,Non-Sales Position,enum_value,Effective Date,,,6,1,2
+Person,Non-Sales Position,enum_value,Show Online?,,,6,1,3
+Person,Other Information,enum_value,Gender: Male Female,,,13,2,2
+Person,Other Information,enum_value,Home Address,,,13,3,0
+Person,Other Information,field,Started in Real Estate,text,no,13,1,0
+Person,Other Information,field,Education,text,no,13,1,1
+Person,Other Information,field,Previous Occupation,text,no,13,1,2
+Person,Other Information,field,Birth Date,date,no,13,2,0
+Person,Other Information,field,Recruited By,text,no,13,2,1
+Person,Other Information,field,Country,number,no,13,4,0
+Person,Other Information,field,Address Line 1,text,no,13,4,1
+Person,Other Information,field,Address Line 2,text,no,13,4,2
+Person,Other Information,field,City,text,no,13,5,0
+Person,Other Information,field,State,text,no,13,5,1
+Person,Other Information,field,Zip/Postal Code,text,no,13,5,2
+Person,PRESS MENTIONS,enum_value,Article Headline,,,16,1,0
+Person,PRESS MENTIONS,enum_value,Article URL,,,16,1,1
+Person,PRESS MENTIONS,enum_value,Publication Date,,,16,1,2
+Person,PRESS MENTIONS,enum_value,Publication Outlet Name,,,16,1,3
+Person,Person Required Fields are noted with a red checkmark (√),enum_value,Essentials,,,0,1,0
+Person,Person Required Fields are noted with a red checkmark (√),field,First Name,text,yes,0,2,0
+Person,Person Required Fields are noted with a red checkmark (√),field,Middle Name,text,no,0,2,1
+Person,Person Required Fields are noted with a red checkmark (√),field,Last Name,text,yes,0,2,2
+Person,Person Required Fields are noted with a red checkmark (√),field,Suffix,text,no,0,2,3
+Person,Person Required Fields are noted with a red checkmark (√),field,Familiar Name,text,yes,0,3,0
+Person,Person Required Fields are noted with a red checkmark (√),field,Printed Name,text,yes,0,3,1
+Person,Person Required Fields are noted with a red checkmark (√),field,Started in Brand,text,no,0,4,0
+Person,Person Required Fields are noted with a red checkmark (√),field,Previous Affiliation,text,no,0,4,1
+Person,Phone,enum_value,Phone Type,,,2,1,0
+Person,Phone,enum_value,Phone Number,,,2,1,1
+Person,Phone,enum_value,Mobile,,,2,2,0
+Person,Phone,enum_value,Business,,,2,3,0
+Person,Phone,enum_value,Fax,,,2,4,0
+Person,Phone,enum_value,Commercial Fax,,,2,5,0
+Person,Phone,enum_value,Home,,,2,6,0
+Person,Positions √A person must have at least 1 active sales or Non-Sales Position,enum_value,Sales Position,,,4,1,0
+Person,Positions √A person must have at least 1 active sales or Non-Sales Position,enum_value,Specialty: Residential Commercial,,,4,2,0
+Person,Positions √A person must have at least 1 active sales or Non-Sales Position,enum_value,Full Time Part Time,,,4,2,2
+Person,Positions √A person must have at least 1 active sales or Non-Sales Position,enum_value,MLS,,,4,3,0
+Person,Positions √A person must have at least 1 active sales or Non-Sales Position,enum_value,Agent MLS Id,,,4,4,0
+Person,Positions √A person must have at least 1 active sales or Non-Sales Position,enum_value,MLS Name,,,4,4,2
+Person,Positions √A person must have at least 1 active sales or Non-Sales Position,enum_value,Position,,,4,7,0
+Person,Positions √A person must have at least 1 active sales or Non-Sales Position,enum_value,Office(s),,,4,7,1
+Person,Positions √A person must have at least 1 active sales or Non-Sales Position,enum_value,Effective Date,,,4,7,2
+Person,Positions √A person must have at least 1 active sales or Non-Sales Position,enum_value,Show Online?,,,4,7,3
+Person,Profile,field,Designations,text,no,10,1,0
+Person,Profile,field,Specializations,text,no,10,2,0
+Person,Profile,field,Spoken Languages,text,no,10,3,0
+Person,"Profile Description Available languages: English, Spanish",enum_value,Language,,,11,1,0
+Person,"Profile Description Available languages: English, Spanish",enum_value,Remark Type,,,11,1,1
+Person,"Profile Description Available languages: English, Spanish",enum_value,Remark,,,11,1,2
+Person,"Profile Description Available languages: English, Spanish",enum_value,English,,,11,2,0
+Person,"Profile Description Available languages: English, Spanish",enum_value,Personal Profile,,,11,2,1
+Person,"Profile Description Available languages: English, Spanish",enum_value,Hobbies,,,11,3,1
+Person,"Profile Description Available languages: English, Spanish",enum_value,Headline,,,11,4,1
+Person,"Profile Description Available languages: English, Spanish",enum_value,Other Awards & Recognition,,,11,5,1
+Person,WEbsites,enum_value,Website Type,,,3,1,0
+Person,WEbsites,enum_value,URL,,,3,1,1
+Person,WEbsites,enum_value,Twitter,,,3,2,0
+Person,WEbsites,enum_value,Facebook,,,3,3,0
+Person,WEbsites,enum_value,Google+,,,3,4,0
+Person,WEbsites,enum_value,Youtube,,,3,5,0
+Person,WEbsites,enum_value,Pinterest,,,3,6,0
+Person,WEbsites,enum_value,Yelp,,,3,7,0
+Person,WEbsites,enum_value,Other,,,3,8,0
+Residential_Rental,ADDITIONAL INFORMATION,enum_value,Attribute,,,57,1,0
+Residential_Rental,ADDITIONAL INFORMATION,enum_value,Value,,,57,1,1
+Residential_Rental,Additional details,enum_value,Contact Details,,,53,1,0
+Residential_Rental,Additional details,enum_value,Contact: Developer Municipal Tax Office Owner Property Manager Tenant Utility,,,53,2,0
+Residential_Rental,Additional details,field,First Name,text,no,53,3,0
+Residential_Rental,Additional details,field,Last Name,text,no,53,3,1
+Residential_Rental,Additional details,field,Entity Name,text,no,53,3,2
+Residential_Rental,Additional details,field,Email,text,no,53,4,0
+Residential_Rental,Additional details,field,Phone,text,no,53,4,1
+Residential_Rental,Additional details,field,Website Name,text,no,53,4,2
+Residential_Rental,Additional details,field,Address Line 1,text,no,53,5,0
+Residential_Rental,Additional details,field,Address Line 2,text,no,53,5,1
+Residential_Rental,Additional details,field,Address Line 3,text,no,53,5,2
+Residential_Rental,Additional details,field,City,text,no,53,6,0
+Residential_Rental,Additional details,field,State/Province,text,no,53,6,1
+Residential_Rental,Additional details,field,Zip/Postal Code,text,no,53,6,2
+Residential_Rental,Amenities:,enum_value,Agricultural Easement(s),,,18,1,0
+Residential_Rental,Amenities:,enum_value,Hobby Farm,,,18,1,1
+Residential_Rental,Amenities:,enum_value,Silo,,,18,1,2
+Residential_Rental,Amenities:,enum_value,Bay/Beach Club,,,18,2,0
+Residential_Rental,Amenities:,enum_value,Horse Facilities,,,18,2,1
+Residential_Rental,Amenities:,enum_value,Ski Resort,,,18,2,2
+Residential_Rental,Amenities:,enum_value,Caretaker House,,,18,3,0
+Residential_Rental,Amenities:,enum_value,Horse Ranch,,,18,3,1
+Residential_Rental,Amenities:,enum_value,Sporting Ranch,,,18,3,2
+Residential_Rental,Amenities:,enum_value,Cattle Ranch,,,18,4,0
+Residential_Rental,Amenities:,enum_value,Hunting Ranch,,,18,4,1
+Residential_Rental,Amenities:,enum_value,Stables,,,18,4,2
+Residential_Rental,Amenities:,enum_value,Conservation Easement(s),,,18,5,0
+Residential_Rental,Amenities:,enum_value,Investment Ranch,,,18,5,1
+Residential_Rental,Amenities:,enum_value,Station,,,18,5,2
+Residential_Rental,Amenities:,enum_value,Elk Ranch,,,18,6,0
+Residential_Rental,Amenities:,enum_value,Live Water,,,18,6,1
+Residential_Rental,Amenities:,enum_value,Tennis Courts,,,18,6,2
+Residential_Rental,Amenities:,enum_value,Estate Farm,,,18,7,0
+Residential_Rental,Amenities:,enum_value,Modular Sports Courts,,,18,7,1
+Residential_Rental,Amenities:,enum_value,Timberland,,,18,7,2
+Residential_Rental,Amenities:,enum_value,Estate Ranch,,,18,8,0
+Residential_Rental,Amenities:,enum_value,Outdoor Basketball Court,,,18,8,1
+Residential_Rental,Amenities:,enum_value,Walk-to-ski,,,18,8,2
+Residential_Rental,Amenities:,enum_value,Fly Fishing,,,18,9,0
+Residential_Rental,Amenities:,enum_value,Playground,,,18,9,1
+Residential_Rental,Amenities:,enum_value,Yacht Club,,,18,9,2
+Residential_Rental,Amenities:,enum_value,Guest Ranch,,,18,10,0
+Residential_Rental,Amenities:,enum_value,Recreational Ranch,,,18,10,1
+Residential_Rental,Appliances:,enum_value,Dishwasher,,,19,1,0
+Residential_Rental,Appliances:,enum_value,Garbage Disposal,,,19,1,1
+Residential_Rental,Appliances:,enum_value,Refrigerator,,,19,1,2
+Residential_Rental,Appliances:,enum_value,Double Oven,,,19,2,0
+Residential_Rental,Appliances:,enum_value,Microwave,,,19,2,1
+Residential_Rental,Appliances:,enum_value,Trash Compactor,,,19,2,2
+Residential_Rental,Appliances:,enum_value,Dryer,,,19,3,0
+Residential_Rental,Appliances:,enum_value,Range/Oven,,,19,3,1
+Residential_Rental,Appliances:,enum_value,Washer,,,19,3,2
+Residential_Rental,Area Amenities:,enum_value,Aquatic Activities,,,20,1,0
+Residential_Rental,Area Amenities:,enum_value,Area Hunting,,,20,1,1
+Residential_Rental,Area Amenities:,enum_value,Casino/Gambling,,,20,1,2
+Residential_Rental,Area Amenities:,enum_value,Area Boat Dock,,,20,2,0
+Residential_Rental,Area Amenities:,enum_value,Area Pool,,,20,2,1
+Residential_Rental,Area Amenities:,enum_value,Deep Water Mooring,,,20,2,2
+Residential_Rental,Area Amenities:,enum_value,Area Boat Ramp,,,20,3,0
+Residential_Rental,Area Amenities:,enum_value,Area Skiing,,,20,3,1
+Residential_Rental,Area Amenities:,enum_value,Golf,,,20,3,2
+Residential_Rental,Area Amenities:,enum_value,Area Climbing,,,20,4,0
+Residential_Rental,Area Amenities:,enum_value,Area Snowmobiling,,,20,4,1
+Residential_Rental,Area Amenities:,enum_value,Jogging/Biking Path,,,20,4,2
+Residential_Rental,Area Amenities:,enum_value,Area Fishing,,,20,5,0
+Residential_Rental,Area Amenities:,enum_value,Area Tennis,,,20,5,1
+Residential_Rental,Area Amenities:,enum_value,Outdoor Activities,,,20,5,2
+Residential_Rental,Area Amenities:,enum_value,Area Hiking,,,20,6,0
+Residential_Rental,Area Amenities:,enum_value,Biking,,,20,6,1
+Residential_Rental,Area Amenities:,enum_value,Area Horse Riding/Stables,,,20,7,0
+Residential_Rental,Area Amenities:,enum_value,Boating,,,20,7,1
+Residential_Rental,Area Description:,enum_value,Country Living,,,21,1,0
+Residential_Rental,Area Description:,enum_value,Green Living,,,21,1,1
+Residential_Rental,Area Description:,enum_value,Resort,,,21,1,2
+Residential_Rental,Area Description:,enum_value,Cycling,,,21,2,0
+Residential_Rental,Area Description:,enum_value,Historic/Antique,,,21,2,1
+Residential_Rental,Area Description:,enum_value,Rock Beach,,,21,2,2
+Residential_Rental,Area Description:,enum_value,Desert Living,,,21,3,0
+Residential_Rental,Area Description:,enum_value,Hunting,,,21,3,1
+Residential_Rental,Area Description:,enum_value,Sand Beach,,,21,3,2
+Residential_Rental,Area Description:,enum_value,Equestrian/Polo,,,21,4,0
+Residential_Rental,Area Description:,enum_value,Metropolitan,,,21,4,1
+Residential_Rental,Area Description:,enum_value,Ski-in/Ski-Out,,,21,4,2
+Residential_Rental,Area Description:,enum_value,Fishing,,,21,5,0
+Residential_Rental,Area Description:,enum_value,Mountain,,,21,5,1
+Residential_Rental,Area Description:,enum_value,Skiing,,,21,5,2
+Residential_Rental,Area Description:,enum_value,Flood Area,,,21,6,0
+Residential_Rental,Area Description:,enum_value,Other Beach,,,21,6,1
+Residential_Rental,Area Description:,enum_value,Suburban,,,21,6,2
+Residential_Rental,Area Description:,enum_value,Game Farm/Safari,,,21,7,0
+Residential_Rental,Area Description:,enum_value,Privacy,,,21,7,1
+Residential_Rental,Area Description:,enum_value,Wine Country,,,21,7,2
+Residential_Rental,Basement:,enum_value,None,,,10,1,0
+Residential_Rental,Basement:,enum_value,Full,,,10,1,1
+Residential_Rental,Basement:,enum_value,Slab Foundation,,,10,1,2
+Residential_Rental,Basement:,enum_value,Crawl Space,,,10,2,0
+Residential_Rental,Basement:,enum_value,Other,,,10,2,1
+Residential_Rental,Basement:,enum_value,Unfinished,,,10,2,2
+Residential_Rental,Basement:,enum_value,Finished,,,10,3,0
+Residential_Rental,Basement:,enum_value,Partial,,,10,3,1
+Residential_Rental,Basement:,enum_value,Walk-out,,,10,3,2
+Residential_Rental,Bath Features:,enum_value,Bidet,,,22,1,0
+Residential_Rental,Bath Features:,enum_value,Stall Shower and Tub,,,22,1,1
+Residential_Rental,Bath Features:,enum_value,Tub Only,,,22,1,2
+Residential_Rental,Bath Features:,enum_value,Jacuzzi Tub,,,22,2,0
+Residential_Rental,Bath Features:,enum_value,Steam Shower,,,22,2,1
+Residential_Rental,Bath Features:,enum_value,Steam Room,,,22,2,2
+Residential_Rental,Bath Features:,enum_value,Stall Shower,,,22,3,0
+Residential_Rental,Bath Features:,enum_value,Tub and Shower,,,22,3,1
+Residential_Rental,Bath Features:,enum_value,Jetted Tub,,,22,3,2
+Residential_Rental,Body of Water:,enum_value,Bay,,,23,1,0
+Residential_Rental,Body of Water:,enum_value,Lake,,,23,1,1
+Residential_Rental,Body of Water:,enum_value,River,,,23,1,2
+Residential_Rental,Body of Water:,enum_value,Canal,,,23,2,0
+Residential_Rental,Body of Water:,enum_value,Ocean,,,23,2,1
+Residential_Rental,Body of Water:,enum_value,Sound,,,23,2,2
+Residential_Rental,Body of Water:,enum_value,Inlet,,,23,3,0
+Residential_Rental,Body of Water:,enum_value,Pond,,,23,3,1
+Residential_Rental,Body of Water:,enum_value,Lagoon,,,23,4,0
+Residential_Rental,Body of Water:,enum_value,Reservoir,,,23,4,1
+Residential_Rental,Community Type:,enum_value,55+ Community,,,24,1,0
+Residential_Rental,Community Type:,enum_value,Country Club,,,24,1,1
+Residential_Rental,Community Type:,enum_value,Golf Course,,,24,1,2
+Residential_Rental,Community Type:,enum_value,Adult Community,,,24,2,0
+Residential_Rental,Community Type:,enum_value,FHA Compliant,,,24,2,1
+Residential_Rental,Community Type:,enum_value,Tennis,,,24,2,2
+Residential_Rental,Community Type:,enum_value,Beach Resort,,,24,3,0
+Residential_Rental,Community Type:,enum_value,Fly-In,,,24,3,1
+Residential_Rental,Community Type:,enum_value,Co-Op,,,24,4,0
+Residential_Rental,Community Type:,enum_value,Gated,,,24,4,1
+Residential_Rental,Cooling:,enum_value,A/C,,,25,1,0
+Residential_Rental,Cooling:,enum_value,Humidifier,,,25,1,1
+Residential_Rental,Cooling:,enum_value,Window A/C,,,25,1,2
+Residential_Rental,Cooling:,enum_value,Central A/C,,,25,2,0
+Residential_Rental,Cooling:,enum_value,No A/C,,,25,2,1
+Residential_Rental,Cooling:,enum_value,Zoned A/C,,,25,2,2
+Residential_Rental,Cooling:,enum_value,Central A/C – Electric,,,25,3,0
+Residential_Rental,Cooling:,enum_value,Other A/C,,,25,3,1
+Residential_Rental,Cooling:,enum_value,Central A/C – Gas,,,25,4,0
+Residential_Rental,Cooling:,enum_value,Wall Unit A/C,,,25,4,1
+Residential_Rental,Exterior Description:,enum_value,Brick,,,27,1,0
+Residential_Rental,Exterior Description:,enum_value,Wood Frame,,,27,1,1
+Residential_Rental,Exterior Description:,enum_value,Concrete Block,,,27,2,0
+Residential_Rental,Exterior Description:,enum_value,Stone,,,27,2,1
+Residential_Rental,Exterior Description:,enum_value,Stucco,,,27,3,0
+Residential_Rental,Exterior Description:,enum_value,Wood Siding,,,27,3,1
+Residential_Rental,Exterior Description:,enum_value,Vinyl Siding,,,27,4,0
+Residential_Rental,Exterior Description:,enum_value,E.I.F.S,,,27,4,1
+Residential_Rental,Exterior Description:,enum_value,Steel Frame,,,27,5,0
+Residential_Rental,Exterior Living Space:,enum_value,Balcony/Lanai,,,28,1,0
+Residential_Rental,Exterior Living Space:,enum_value,Outdoor Kitchen,,,28,1,1
+Residential_Rental,Exterior Living Space:,enum_value,Screened Porch,,,28,1,2
+Residential_Rental,Exterior Living Space:,enum_value,Courtyard,,,28,2,0
+Residential_Rental,Exterior Living Space:,enum_value,Outdoor Rooms,,,28,2,1
+Residential_Rental,Exterior Living Space:,enum_value,Terrace,,,28,2,2
+Residential_Rental,Exterior Living Space:,enum_value,Deck,,,28,3,0
+Residential_Rental,Exterior Living Space:,enum_value,Patio,,,28,3,1
+Residential_Rental,Exterior Living Space:,enum_value,Enclosed Porch,,,28,4,0
+Residential_Rental,Exterior Living Space:,enum_value,Porch,,,28,4,1
+Residential_Rental,Exterior:,enum_value,Barn/Stable,,,26,1,0
+Residential_Rental,Exterior:,enum_value,Double Pane/Storm Windows,,,26,1,1
+Residential_Rental,Exterior:,enum_value,Storage Shed,,,26,1,2
+Residential_Rental,Exterior:,enum_value,BBQ,,,26,2,0
+Residential_Rental,Exterior:,enum_value,Fire Pit,,,26,2,1
+Residential_Rental,Exterior:,enum_value,Storm Door,,,26,2,2
+Residential_Rental,Exterior:,enum_value,Boat House,,,26,3,0
+Residential_Rental,Exterior:,enum_value,Gardens,,,26,3,1
+Residential_Rental,Exterior:,enum_value,Storm Windows,,,26,3,2
+Residential_Rental,Exterior:,enum_value,Boat Ramp,,,26,4,0
+Residential_Rental,Exterior:,enum_value,Guest House,,,26,4,1
+Residential_Rental,Exterior:,enum_value,Thermal Windows/Doors,,,26,4,2
+Residential_Rental,Exterior:,enum_value,Carriage House,,,26,5,0
+Residential_Rental,Exterior:,enum_value,Helipad,,,26,5,1
+Residential_Rental,Exterior:,enum_value,Underground Lawn Sprinkler,,,26,5,2
+Residential_Rental,Exterior:,enum_value,Covered Terraces,,,26,6,0
+Residential_Rental,Exterior:,enum_value,Out Building,,,26,6,1
+Residential_Rental,Exterior:,enum_value,Water Feature,,,26,6,2
+Residential_Rental,Exterior:,enum_value,Dock,,,26,7,0
+Residential_Rental,Exterior:,enum_value,Porte-Cochere,,,26,7,1
+Residential_Rental,Exterior:,enum_value,Dock Rights,,,26,8,0
+Residential_Rental,Exterior:,enum_value,Sidewalk,,,26,8,1
+Residential_Rental,Exterior:,enum_value,Dog Run,,,26,9,0
+Residential_Rental,Exterior:,enum_value,Sprinkler System,,,26,9,1
+Residential_Rental,FEAtures,enum_value,Features,,,9,1,0
+Residential_Rental,FEAtures,enum_value,New Construction,,,9,3,0
+Residential_Rental,FEAtures,enum_value,11-20 Years Old,,,9,3,1
+Residential_Rental,FEAtures,enum_value,41-50 Years Old,,,9,3,2
+Residential_Rental,FEAtures,enum_value,1-5 Years Old,,,9,4,0
+Residential_Rental,FEAtures,enum_value,21-30 Years Old,,,9,4,1
+Residential_Rental,FEAtures,enum_value,Over 50 Years Old,,,9,4,2
+Residential_Rental,FEAtures,enum_value,6-10 Years Old,,,9,5,0
+Residential_Rental,FEAtures,enum_value,31-40 Years Old,,,9,5,1
+Residential_Rental,FEAtures,field,Age of Home,text,no,9,2,0
+Residential_Rental,Fencing:,enum_value,Fenced Yard,,,29,1,0
+Residential_Rental,Fencing:,enum_value,Partially Fenced,,,29,1,1
+Residential_Rental,Fencing:,enum_value,Vinyl Fence,,,29,1,2
+Residential_Rental,Fencing:,enum_value,Metal Fence,,,29,2,0
+Residential_Rental,Fencing:,enum_value,Privacy Fence,,,29,2,1
+Residential_Rental,Fencing:,enum_value,Wood Fence,,,29,2,2
+Residential_Rental,Fireplace Count:,enum_value,1 Fireplace,,,11,1,0
+Residential_Rental,Fireplace Count:,enum_value,3 Fireplaces,,,11,1,1
+Residential_Rental,Fireplace Count:,enum_value,2 Fireplaces,,,11,2,0
+Residential_Rental,Fireplace Count:,enum_value,4+ Fireplaces,,,11,2,1
+Residential_Rental,Fireplace Description:,enum_value,2 Sided,,,16,1,0
+Residential_Rental,Fireplace Description:,enum_value,Gas,,,16,1,1
+Residential_Rental,Fireplace Description:,enum_value,Wood Burning Stove,,,16,1,2
+Residential_Rental,Fireplace Description:,enum_value,Brick,,,16,2,0
+Residential_Rental,Fireplace Description:,enum_value,Stone,,,16,2,1
+Residential_Rental,Fireplace Description:,enum_value,Fireplace,,,16,3,0
+Residential_Rental,Fireplace Description:,enum_value,Wood Burning,,,16,3,1
+Residential_Rental,Flooring:,enum_value,Ceramic,,,30,1,0
+Residential_Rental,Flooring:,enum_value,Linoleum,,,30,1,1
+Residential_Rental,Flooring:,enum_value,Tile,,,30,1,2
+Residential_Rental,Flooring:,enum_value,Hardwood,,,30,2,0
+Residential_Rental,Flooring:,enum_value,Marble,,,30,2,1
+Residential_Rental,Flooring:,enum_value,Wall to Wall Carpet,,,30,2,2
+Residential_Rental,Flooring:,enum_value,Laminate,,,30,3,0
+Residential_Rental,Flooring:,enum_value,Mixed,,,30,3,1
+Residential_Rental,Floors,enum_value,Floor Name,,,50,2,0
+Residential_Rental,Floors,enum_value,Length,,,50,2,1
+Residential_Rental,Floors,enum_value,Width,,,50,2,2
+Residential_Rental,Floors,field,Number of Floors/Levels,number,no,50,1,0
+Residential_Rental,Garage Count:,enum_value,1 Car Garage,,,12,1,0
+Residential_Rental,Garage Count:,enum_value,3 Car Garage,,,12,1,1
+Residential_Rental,Garage Count:,enum_value,5+ Car Garage,,,12,1,2
+Residential_Rental,Garage Count:,enum_value,2 Car Garage,,,12,2,0
+Residential_Rental,Garage Count:,enum_value,4 Car Garage,,,12,2,1
+Residential_Rental,Garage Description:,enum_value,Attached Garage,,,17,1,0
+Residential_Rental,Garage Description:,enum_value,Detached Garage,,,17,1,1
+Residential_Rental,Garage Description:,enum_value,No Garage,,,17,1,2
+Residential_Rental,Garage Description:,enum_value,Carport,,,17,2,0
+Residential_Rental,Garage Description:,enum_value,Garage,,,17,2,1
+Residential_Rental,Garage Description:,enum_value,RV Parking,,,17,2,2
+Residential_Rental,Garage Description:,enum_value,Curb Parking,,,17,3,0
+Residential_Rental,Garage Description:,enum_value,Golfcart Garage,,,17,3,1
+Residential_Rental,General:,enum_value,Built-in Vacuum,,,31,1,0
+Residential_Rental,General:,enum_value,Fenced Range Land,,,31,1,1
+Residential_Rental,General:,enum_value,Skylight,,,31,1,2
+Residential_Rental,General:,enum_value,Ceiling Fan(s),,,31,2,0
+Residential_Rental,General:,enum_value,Fire Alarms,,,31,2,1
+Residential_Rental,General:,enum_value,Smoke Detector,,,31,2,2
+Residential_Rental,General:,enum_value,Clubhouse,,,31,3,0
+Residential_Rental,General:,enum_value,Guard Gate,,,31,3,1
+Residential_Rental,General:,enum_value,Stereo System,,,31,3,2
+Residential_Rental,General:,enum_value,Concierge Services,,,31,4,0
+Residential_Rental,General:,enum_value,Lake Privileges,,,31,4,1
+Residential_Rental,General:,enum_value,Storage Area,,,31,4,2
+Residential_Rental,General:,enum_value,Doorman,,,31,5,0
+Residential_Rental,General:,enum_value,Laundry Facilities,,,31,5,1
+Residential_Rental,General:,enum_value,Wheel Chair Accessible,,,31,5,2
+Residential_Rental,General:,enum_value,Elevator,,,31,6,0
+Residential_Rental,General:,enum_value,Private Airport,,,31,6,1
+Residential_Rental,General:,enum_value,Window Treatments,,,31,6,2
+Residential_Rental,General:,enum_value,Energy-saving Features,,,31,7,0
+Residential_Rental,General:,enum_value,Private Elevator,,,31,7,1
+Residential_Rental,General:,enum_value,Workshop,,,31,7,2
+Residential_Rental,General:,enum_value,Escalator,,,31,8,0
+Residential_Rental,General:,enum_value,Security System,,,31,8,1
+Residential_Rental,General:,enum_value,Direct Elevator Access,,,31,8,2
+Residential_Rental,Geographic location,field,City Region,text,no,48,1,0
+Residential_Rental,Geographic location,field,Continent Region,text,no,48,1,1
+Residential_Rental,Geographic location,field,Property Location,text,no,48,1,2
+Residential_Rental,Geographic location,field,State Region,text,no,48,2,0
+Residential_Rental,Geographic location,field,Township,text,no,48,2,1
+Residential_Rental,Geographic location,field,Development,text,no,48,2,2
+Residential_Rental,Geographic location,field,Country Region,number,no,48,3,0
+Residential_Rental,Geographic location,field,Post Office,text,no,48,3,1
+Residential_Rental,Heating Type:,enum_value,Baseboard,,,33,1,0
+Residential_Rental,Heating Type:,enum_value,Multi-Zone Heat,,,33,1,1
+Residential_Rental,Heating Type:,enum_value,Radiator,,,33,1,2
+Residential_Rental,Heating Type:,enum_value,Forced Air,,,33,2,0
+Residential_Rental,Heating Type:,enum_value,No Heat,,,33,2,1
+Residential_Rental,Heating Type:,enum_value,Solar Power,,,33,2,2
+Residential_Rental,Heating Type:,enum_value,Gravity,,,33,3,0
+Residential_Rental,Heating Type:,enum_value,Other,,,33,3,1
+Residential_Rental,Heating Type:,enum_value,Steam Heat,,,33,3,2
+Residential_Rental,Heating Type:,enum_value,Heat Pump,,,33,4,0
+Residential_Rental,Heating Type:,enum_value,Pellet Stove,,,33,4,1
+Residential_Rental,Heating Type:,enum_value,Hydro,,,33,5,0
+Residential_Rental,Heating Type:,enum_value,Radiant Floor,,,33,5,1
+Residential_Rental,Heating – Fuel Type:,enum_value,Coal,,,32,1,0
+Residential_Rental,Heating – Fuel Type:,enum_value,Hydro Heat,,,32,1,1
+Residential_Rental,Heating – Fuel Type:,enum_value,Propane,,,32,1,2
+Residential_Rental,Heating – Fuel Type:,enum_value,Electric,,,32,2,0
+Residential_Rental,Heating – Fuel Type:,enum_value,None,,,32,2,1
+Residential_Rental,Heating – Fuel Type:,enum_value,Solar,,,32,2,2
+Residential_Rental,Heating – Fuel Type:,enum_value,Gas,,,32,3,0
+Residential_Rental,Heating – Fuel Type:,enum_value,Oil,,,32,3,1
+Residential_Rental,Heating – Fuel Type:,enum_value,Wood,,,32,3,2
+Residential_Rental,Heating – Fuel Type:,enum_value,Geothermal,,,32,4,0
+Residential_Rental,Heating – Fuel Type:,enum_value,Other,,,32,4,1
+Residential_Rental,Interior:,enum_value,Bay/Bow Window,,,34,1,0
+Residential_Rental,Interior:,enum_value,Fireplace in Master BR,,,34,1,1
+Residential_Rental,Interior:,enum_value,Screen Room,,,34,1,2
+Residential_Rental,Interior:,enum_value,Beam – Ceilings,,,34,2,0
+Residential_Rental,Interior:,enum_value,High Tech Cabling,,,34,2,1
+Residential_Rental,Interior:,enum_value,Track Lighting,,,34,2,2
+Residential_Rental,Interior:,enum_value,Blinds,,,34,3,0
+Residential_Rental,Interior:,enum_value,In-Home Gym,,,34,3,1
+Residential_Rental,Interior:,enum_value,Two-story Family Room,,,34,3,2
+Residential_Rental,Interior:,enum_value,Bowling Alley,,,34,4,0
+Residential_Rental,Interior:,enum_value,In-Law Suite,,,34,4,1
+Residential_Rental,Interior:,enum_value,Vaulted Ceilings,,,34,4,2
+Residential_Rental,Interior:,enum_value,Cathedral Ceilings,,,34,5,0
+Residential_Rental,Interior:,enum_value,Indoor Basketball Court,,,34,5,1
+Residential_Rental,Interior:,enum_value,Walk-in Closet,,,34,5,2
+Residential_Rental,Interior:,enum_value,Cedar Closets,,,34,6,0
+Residential_Rental,Interior:,enum_value,Indoor Racquetball Court,,,34,6,1
+Residential_Rental,Interior:,enum_value,Wet Bar,,,34,6,2
+Residential_Rental,Interior:,enum_value,Dry Bar,,,34,7,0
+Residential_Rental,Interior:,enum_value,Intercom System,,,34,7,1
+Residential_Rental,Interior:,enum_value,Wine Cellar,,,34,7,2
+Residential_Rental,Interior:,enum_value,Exercise Area,,,34,8,0
+Residential_Rental,Interior:,enum_value,Laundry Chute,,,34,8,1
+Residential_Rental,Kitchen Features:,enum_value,Breakfast Bar,,,35,1,0
+Residential_Rental,Kitchen Features:,enum_value,Country Kitchen,,,35,1,1
+Residential_Rental,Kitchen Features:,enum_value,Gourmet Kitchen,,,35,1,2
+Residential_Rental,Kitchen Features:,enum_value,Butlers Pantry,,,35,2,0
+Residential_Rental,Kitchen Features:,enum_value,Designer Kitchen,,,35,2,1
+Residential_Rental,Kitchen Features:,enum_value,Granite Countertops,,,35,2,2
+Residential_Rental,Kitchen Features:,enum_value,Catering Kitchen,,,35,3,0
+Residential_Rental,Kitchen Features:,enum_value,Eat-in Kitchen,,,35,3,1
+Residential_Rental,Kitchen Features:,enum_value,Kitchen Facilities,,,35,3,2
+Residential_Rental,Kitchen Features:,enum_value,Center Island,,,35,4,0
+Residential_Rental,Kitchen Features:,enum_value,Galley Kitchen,,,35,4,1
+Residential_Rental,Kitchen Features:,enum_value,Marble Countertop,,,35,4,2
+Residential_Rental,Landlord Information,enum_value,Landlord Lead: Agent Office,,,52,1,4
+Residential_Rental,Landlord Information,enum_value,Landlord Type: Person/Individual(s) Corporation Developer Doing Business As Estate Financial Inst. Government Limited Liability Company Limited Liability Limited Partnership Limited Liability Partnership Limited Partnership Other Partnership Pension Fund Professional Limited Liability Company REIT Sole Partnership Trust Vendor,,,52,2,0
+Residential_Rental,Landlord Information,enum_value,"Use Property Address (if checked, the address fields below are not required.)",,,52,7,0
+Residential_Rental,Landlord Information,field,Landlord Source,text,no,52,1,0
+Residential_Rental,Landlord Information,field,First Name 1,text,no,52,3,0
+Residential_Rental,Landlord Information,field,Last Name 1,text,no,52,3,2
+Residential_Rental,Landlord Information,field,First Name 2,text,no,52,4,0
+Residential_Rental,Landlord Information,field,Last Name 2,text,no,52,4,2
+Residential_Rental,Landlord Information,field,Entity Name,text,no,52,5,0
+Residential_Rental,Landlord Information,field,Email,text,no,52,6,0
+Residential_Rental,Landlord Information,field,Website,text,no,52,6,1
+Residential_Rental,Landlord Information,field,Phone,text,no,52,6,5
+Residential_Rental,Landlord Information,field,Address Line 1,text,no,52,8,0
+Residential_Rental,Landlord Information,field,Address Line 2,text,no,52,8,3
+Residential_Rental,Landlord Information,field,Address Line 3,text,no,52,8,6
+Residential_Rental,Landlord Information,field,City,text,no,52,9,0
+Residential_Rental,Landlord Information,field,State/Province,text,no,52,9,3
+Residential_Rental,Landlord Information,field,Zip/Postal Code,text,no,52,9,6
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Language,,,8,1,0
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Remark Type,,,8,1,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Remark,,,8,1,2
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,English,,,8,2,0
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Property Description√,,,8,2,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Area Description,,,8,3,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Directions,,,8,4,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Headline,,,8,5,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 1,,,8,6,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 2,,,8,7,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 3,,,8,8,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 4,,,8,9,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 5,,,8,10,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 6,,,8,11,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Location,,,8,12,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Owner/Expert Quote,,,8,13,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Transportation,,,8,14,1
+Residential_Rental,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Zoning Description,,,8,15,1
+Residential_Rental,Location,field,Country,number,yes,2,1,0
+Residential_Rental,Location,field,Address Line 1,text,yes,2,1,2
+Residential_Rental,Location,field,Address Line 2,text,no,2,2,0
+Residential_Rental,Location,field,Address Line 3,text,no,2,2,3
+Residential_Rental,Location,field,City,text,yes,2,3,0
+Residential_Rental,Location,field,District/County,number,no,2,3,1
+Residential_Rental,Location,field,State/Province,text,yes,2,3,4
+Residential_Rental,Location,field,Zip/Postal Code,text,yes,2,4,0
+Residential_Rental,Location,field,Neighborhood,text,no,2,4,1
+Residential_Rental,Location:,enum_value,Backs to Golf Course,,,36,1,0
+Residential_Rental,Location:,enum_value,Gulf,,,36,1,1
+Residential_Rental,Location:,enum_value,Ocean/Beach,,,36,1,2
+Residential_Rental,Location:,enum_value,Backs to Park Land,,,36,2,0
+Residential_Rental,Location:,enum_value,Harbor,,,36,2,1
+Residential_Rental,Location:,enum_value,Ocean Block,,,36,2,2
+Residential_Rental,Location:,enum_value,Bayside,,,36,3,0
+Residential_Rental,Location:,enum_value,In Shopping Mall,,,36,3,1
+Residential_Rental,Location:,enum_value,Ocean Front,,,36,3,2
+Residential_Rental,Location:,enum_value,Beach Front,,,36,4,0
+Residential_Rental,Location:,enum_value,Intercoastal Waterway,,,36,4,1
+Residential_Rental,Location:,enum_value,Off Water,,,36,4,2
+Residential_Rental,Location:,enum_value,Canal Front,,,36,5,0
+Residential_Rental,Location:,enum_value,Island,,,36,5,1
+Residential_Rental,Location:,enum_value,Riverfront,,,36,5,2
+Residential_Rental,Location:,enum_value,Channel Front,,,36,6,0
+Residential_Rental,Location:,enum_value,Lagoon,,,36,6,1
+Residential_Rental,Location:,enum_value,Slope Side,,,36,6,2
+Residential_Rental,Location:,enum_value,Cul-de-Sac,,,36,7,0
+Residential_Rental,Location:,enum_value,Lakefront,,,36,7,1
+Residential_Rental,Location:,enum_value,Waterfront,,,36,7,2
+Residential_Rental,Location:,enum_value,Fairway Frontage,,,36,8,0
+Residential_Rental,Location:,enum_value,Marina,,,36,8,1
+Residential_Rental,Lot Description:,enum_value,Access Type– Other,,,37,1,0
+Residential_Rental,Lot Description:,enum_value,Irregular,,,37,1,1
+Residential_Rental,Lot Description:,enum_value,Pond on Lot,,,37,1,2
+Residential_Rental,Lot Description:,enum_value,Access Type- Road,,,37,2,0
+Residential_Rental,Lot Description:,enum_value,Lake on Lot,,,37,2,1
+Residential_Rental,Lot Description:,enum_value,Possible Subdivision,,,37,2,2
+Residential_Rental,Lot Description:,enum_value,Access Type- Water,,,37,3,0
+Residential_Rental,Lot Description:,enum_value,Level,,,37,3,1
+Residential_Rental,Lot Description:,enum_value,Stream on Lot,,,37,3,2
+Residential_Rental,Lot Description:,enum_value,Corner,,,37,4,0
+Residential_Rental,Lot Description:,enum_value,New Development,,,37,4,1
+Residential_Rental,Lot Description:,enum_value,Wooded,,,37,4,2
+Residential_Rental,Lot Description:,enum_value,Flag,,,37,5,0
+Residential_Rental,Lot Description:,enum_value,Open,,,37,5,1
+Residential_Rental,Lot Size:,enum_value,Under ½ Acre,,,13,1,0
+Residential_Rental,Lot Size:,enum_value,2-5 Acres,,,13,1,1
+Residential_Rental,Lot Size:,enum_value,20-50 Acres,,,13,1,2
+Residential_Rental,Lot Size:,enum_value,1/2 -1 Acre,,,13,2,0
+Residential_Rental,Lot Size:,enum_value,5-10 Acres,,,13,2,1
+Residential_Rental,Lot Size:,enum_value,50-100 Acres,,,13,2,2
+Residential_Rental,Lot Size:,enum_value,1-2 Acres,,,13,3,0
+Residential_Rental,Lot Size:,enum_value,10-20 Acres,,,13,3,1
+Residential_Rental,Lot Size:,enum_value,100+ Acres,,,13,3,2
+Residential_Rental,MLS Information,enum_value,MLS ID√,,,4,1,0
+Residential_Rental,MLS Information,enum_value,MLS NAME,,,4,1,1
+Residential_Rental,Open houses,field,Date,date,no,5,1,0
+Residential_Rental,Open houses,field,Start Time,text,no,5,1,1
+Residential_Rental,Open houses,field,End Time,text,no,5,1,2
+Residential_Rental,Open houses,field,By Appointment Only Display Start and End Time on the Internet Open House (In Person) Livestream Virtual Open House Livestream Virtual Open House URL,text,no,5,1,3
+Residential_Rental,Open houses,field,Special Instructions (if any),text,no,5,2,0
+Residential_Rental,Other:,enum_value,Association Fee,,,38,1,0
+Residential_Rental,Other:,enum_value,Water Softener- Rent,,,38,1,1
+Residential_Rental,Other:,enum_value,Water Softener- Own,,,38,2,0
+Residential_Rental,Other:,enum_value,Whole House Water Filter,,,38,2,1
+Residential_Rental,Pool Description:,enum_value,Above Ground,,,39,1,0
+Residential_Rental,Pool Description:,enum_value,Inground,,,39,1,1
+Residential_Rental,Pool Description:,enum_value,Resistance/Spa,,,39,1,2
+Residential_Rental,Pool Description:,enum_value,Hot Tub,,,39,2,0
+Residential_Rental,Pool Description:,enum_value,Outdoor,,,39,2,1
+Residential_Rental,Pool Description:,enum_value,Indoor,,,39,3,0
+Residential_Rental,Pool Description:,enum_value,Pool,,,39,3,1
+Residential_Rental,Pre-Wiring:,enum_value,Cable,,,40,1,0
+Residential_Rental,Pre-Wiring:,enum_value,Garage Door,,,40,1,1
+Residential_Rental,Pre-Wiring:,enum_value,Phone Jacks,,,40,1,2
+Residential_Rental,Pre-Wiring:,enum_value,Entertainment System,,,40,2,0
+Residential_Rental,Pre-Wiring:,enum_value,Generator,,,40,2,1
+Residential_Rental,Pre-Wiring:,enum_value,Security System,,,40,2,2
+Residential_Rental,Property Description:,enum_value,Acreage,,,41,1,0
+Residential_Rental,Property Description:,enum_value,Farm/Ranch,,,41,1,1
+Residential_Rental,Property Description:,enum_value,Vineyard,,,41,1,2
+Residential_Rental,Property Description:,enum_value,Community Living,,,41,2,0
+Residential_Rental,Property Description:,enum_value,Farm Assessment,,,41,2,1
+Residential_Rental,Property Description:,enum_value,Winery,,,41,2,2
+Residential_Rental,Property Description:,enum_value,Easement,,,41,3,0
+Residential_Rental,Property Description:,enum_value,Fenced Farm Acreage,,,41,3,1
+Residential_Rental,Property Description:,enum_value,Eco-Friendly (Green),,,41,4,0
+Residential_Rental,Property Description:,enum_value,Ski Property,,,41,4,1
+Residential_Rental,Property Details,enum_value,Property Use: Bank Owned Other Commercial Other Residential Owner Occupied Rental or Investment Second Home Use in a Business Vacant Vacation Home Net Leased Property Business for Sale,,,47,1,0
+Residential_Rental,Property Details,enum_value,New Construction,,,47,2,2
+Residential_Rental,Property Details,field,# of Parking Places,text,no,47,2,0
+Residential_Rental,Property Details,field,Year Built,date,no,47,2,1
+Residential_Rental,Property Details,field,Year Renovated,date,no,47,3,0
+Residential_Rental,Property fees,enum_value,Fee Type,,,56,1,0
+Residential_Rental,Property fees,enum_value,Fee Amount,,,56,1,1
+Residential_Rental,Property fees,enum_value,Frequency,,,56,1,2
+Residential_Rental,Property information,enum_value,MULTI UNITS,,,6,4,0
+Residential_Rental,Property information,enum_value,Unit Details,,,6,6,0
+Residential_Rental,Property information,enum_value,Unit Name,,,6,7,0
+Residential_Rental,Property information,enum_value,# of Bedrooms,,,6,7,1
+Residential_Rental,Property information,enum_value,# of Baths,,,6,7,3
+Residential_Rental,Property information,enum_value,Full,,,6,7,5
+Residential_Rental,Property information,enum_value,1/2,,,6,7,6
+Residential_Rental,Property information,enum_value,3/4,,,6,7,7
+Residential_Rental,Property information,enum_value,1/4,,,6,7,8
+Residential_Rental,Property information,enum_value,Brand Programs: Property Display Feed The Collection Icon,,,6,11,0
+Residential_Rental,Property information,field,No. of Bedrooms,number,yes,6,1,0
+Residential_Rental,Property information,field,No. of Three Quarter Baths,number,no,6,1,2
+Residential_Rental,Property information,field,Lot Size,number,no,6,1,4
+Residential_Rental,Property information,field,No. of Full Baths,number,no,6,2,0
+Residential_Rental,Property information,field,No. of Quarter Baths,number,no,6,2,2
+Residential_Rental,Property information,field,Property Name,text,no,6,2,4
+Residential_Rental,Property information,field,No. of Half Baths,number,no,6,3,0
+Residential_Rental,Property information,field,Building Area,text,no,6,3,2
+Residential_Rental,Property information,field,No. of Units,number,no,6,5,0
+Residential_Rental,Property style (choose one)√,enum_value,1 Level Ranch,,,1,1,0
+Residential_Rental,Property style (choose one)√,enum_value,Colonial,,,1,1,1
+Residential_Rental,Property style (choose one)√,enum_value,Expanded Ranch,,,1,1,2
+Residential_Rental,Property style (choose one)√,enum_value,Multi-Level,,,1,1,3
+Residential_Rental,Property style (choose one)√,enum_value,Spanish/Mediterranean,,,1,1,4
+Residential_Rental,Property style (choose one)√,enum_value,1.5 Story,,,1,2,0
+Residential_Rental,Property style (choose one)√,enum_value,Colonial-American,,,1,2,1
+Residential_Rental,Property style (choose one)√,enum_value,Farmhouse,,,1,2,2
+Residential_Rental,Property style (choose one)√,enum_value,New Englander,,,1,2,3
+Residential_Rental,Property style (choose one)√,enum_value,Split Level,,,1,2,4
+Residential_Rental,Property style (choose one)√,enum_value,2 Story,,,1,3,0
+Residential_Rental,Property style (choose one)√,enum_value,Colonial-Dutch,,,1,3,1
+Residential_Rental,Property style (choose one)√,enum_value,Federal,,,1,3,2
+Residential_Rental,Property style (choose one)√,enum_value,Northwest Contemporary,,,1,3,3
+Residential_Rental,Property style (choose one)√,enum_value,Studio,,,1,3,4
+Residential_Rental,Property style (choose one)√,enum_value,Antique,,,1,4,0
+Residential_Rental,Property style (choose one)√,enum_value,Colonial-French,,,1,4,1
+Residential_Rental,Property style (choose one)√,enum_value,Georgian,,,1,4,2
+Residential_Rental,Property style (choose one)√,enum_value,Not Applicable,,,1,4,3
+Residential_Rental,Property style (choose one)√,enum_value,Traditional,,,1,4,4
+Residential_Rental,Property style (choose one)√,enum_value,Art Deco,,,1,5,0
+Residential_Rental,Property style (choose one)√,enum_value,Colonial-Salt Box,,,1,5,1
+Residential_Rental,Property style (choose one)√,enum_value,Georgian-Greek Revival,,,1,5,2
+Residential_Rental,Property style (choose one)√,enum_value,Other Style,,,1,5,3
+Residential_Rental,Property style (choose one)√,enum_value,Tudor,,,1,5,4
+Residential_Rental,Property style (choose one)√,enum_value,Art Nouveau,,,1,6,0
+Residential_Rental,Property style (choose one)√,enum_value,Contemporary,,,1,6,1
+Residential_Rental,Property style (choose one)√,enum_value,Georgian-Neo Classicism,,,1,6,2
+Residential_Rental,Property style (choose one)√,enum_value,Palazzo,,,1,6,3
+Residential_Rental,Property style (choose one)√,enum_value,Tuscan,,,1,6,4
+Residential_Rental,Property style (choose one)√,enum_value,Arts & Crafts,,,1,7,0
+Residential_Rental,Property style (choose one)√,enum_value,Cottage,,,1,7,1
+Residential_Rental,Property style (choose one)√,enum_value,Georgian-Regency,,,1,7,2
+Residential_Rental,Property style (choose one)√,enum_value,Penthouse,,,1,7,3
+Residential_Rental,Property style (choose one)√,enum_value,Victorian,,,1,7,4
+Residential_Rental,Property style (choose one)√,enum_value,Bi-Level,,,1,8,0
+Residential_Rental,Property style (choose one)√,enum_value,Cottage/Cabin,,,1,8,1
+Residential_Rental,Property style (choose one)√,enum_value,High-Rise,,,1,8,2
+Residential_Rental,Property style (choose one)√,enum_value,Post & Beam,,,1,8,3
+Residential_Rental,Property style (choose one)√,enum_value,Victorian-Gothic Revival,,,1,8,4
+Residential_Rental,Property style (choose one)√,enum_value,Brownstone,,,1,9,0
+Residential_Rental,Property style (choose one)√,enum_value,Cottage/Resort,,,1,9,1
+Residential_Rental,Property style (choose one)√,enum_value,Historical,,,1,9,2
+Residential_Rental,Property style (choose one)√,enum_value,Post-War,,,1,9,3
+Residential_Rental,Property style (choose one)√,enum_value,Victorian-Italianate,,,1,9,4
+Residential_Rental,Property style (choose one)√,enum_value,Bungalow,,,1,10,0
+Residential_Rental,Property style (choose one)√,enum_value,Country Home,,,1,10,1
+Residential_Rental,Property style (choose one)√,enum_value,Lodge,,,1,10,2
+Residential_Rental,Property style (choose one)√,enum_value,Pre-War,,,1,10,3
+Residential_Rental,Property style (choose one)√,enum_value,Victorian-Queen Anne,,,1,10,4
+Residential_Rental,Property style (choose one)√,enum_value,Cape Cod,,,1,11,0
+Residential_Rental,Property style (choose one)√,enum_value,Craftsman,,,1,11,1
+Residential_Rental,Property style (choose one)√,enum_value,Loft,,,1,11,2
+Residential_Rental,Property style (choose one)√,enum_value,Raised Ranch,,,1,11,3
+Residential_Rental,Property style (choose one)√,enum_value,Victorian–Shingle,,,1,11,4
+Residential_Rental,Property style (choose one)√,enum_value,Carriage House,,,1,12,0
+Residential_Rental,Property style (choose one)√,enum_value,Custom,,,1,12,1
+Residential_Rental,Property style (choose one)√,enum_value,Log,,,1,12,2
+Residential_Rental,Property style (choose one)√,enum_value,Saltbox,,,1,12,3
+Residential_Rental,Property style (choose one)√,enum_value,Victorian-Stick,,,1,12,4
+Residential_Rental,Property style (choose one)√,enum_value,Castle,,,1,13,0
+Residential_Rental,Property style (choose one)√,enum_value,Desert Living,,,1,13,1
+Residential_Rental,Property style (choose one)√,enum_value,Low Country,,,1,13,2
+Residential_Rental,Property style (choose one)√,enum_value,Santa Fe,,,1,13,3
+Residential_Rental,Property style (choose one)√,enum_value,Villa,,,1,13,4
+Residential_Rental,Property style (choose one)√,enum_value,Chalet,,,1,14,0
+Residential_Rental,Property style (choose one)√,enum_value,Estate,,,1,14,1
+Residential_Rental,Property style (choose one)√,enum_value,Low-Rise,,,1,14,2
+Residential_Rental,Property style (choose one)√,enum_value,Shotgun,,,1,14,3
+Residential_Rental,Property style (choose one)√,enum_value,Western,,,1,14,4
+Residential_Rental,Property style (choose one)√,enum_value,Chateau,,,1,15,0
+Residential_Rental,Property style (choose one)√,enum_value,European,,,1,15,1
+Residential_Rental,Property style (choose one)√,enum_value,Modern,,,1,15,2
+Residential_Rental,Property style (choose one)√,enum_value,Southwest,,,1,15,3
+Residential_Rental,Rental requirements,enum_value,Requirements: Employment Verification Lease Options Available Pet Security Deposit Lease Renewal Option 1 Month Security 1.5 Month Security Flat Security Credit Check Required Flood Insurance Required Rental Insurance Required Repair Insurance Required,,,55,2,0
+Residential_Rental,Rental requirements,enum_value,Restrictions: Dogs Allowed Cats Allowed No Smoking Rent Excludes Utilities No Pets,,,55,3,0
+Residential_Rental,Rental requirements,enum_value,Rent Includes: Gas Lawn Maintenance Sewer Fee Association Fee Heat Pool Maintenance Snow Removal Cable TV Hot Water Oil Trash Removal Electric Common Area Maintenance Repairs Water Storage Available,,,55,4,0
+Residential_Rental,Rental requirements,field,Lease Term,text,no,55,1,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,essentials,,,0,1,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Property Subtype (choose one) √,,,0,2,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Apartment,,,0,3,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Historical,,,0,3,1
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family Home,,,0,3,2
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Single Family Detached,,,0,3,3
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Co-Op,,,0,4,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Land-Agricultural (Not Zoned),,,0,4,1
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Other Residential,,,0,4,2
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Timeshare,,,0,4,3
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Condominium,,,0,5,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Land–Multi-Family Acreage,,,0,5,1
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Private Island,,,0,5,2
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Townhouse,,,0,5,3
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Duplex,,,0,6,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Land-Single-Family Acreage,,,0,6,1
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Recreational,,,0,6,2
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Triplex,,,0,6,3
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Farm/Ranch,,,0,7,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Mixed Use,,,0,7,1
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Residential Lot,,,0,7,2
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Vineyard-Res,,,0,7,3
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Flat,,,0,8,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Mobile/Manufactured Hm w Land,,,0,8,1
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Row,,,0,8,2
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Winery-Res,,,0,8,3
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Fourplex,,,0,9,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Mobile/Manufactured Home,,,0,9,1
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Semi-Detached,,,0,9,2
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Fractional Ownership,,,0,10,0
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family (2-4 Units),,,0,10,1
+Residential_Rental,Residential Rental listing Required Fields are noted with a red checkmark (√),enum_value,Single Family Attached,,,0,10,2
+Residential_Rental,Road Type:,enum_value,4 Way Interchange,,,42,1,0
+Residential_Rental,Road Type:,enum_value,Interchange,,,42,1,1
+Residential_Rental,Road Type:,enum_value,Private Road,,,42,1,2
+Residential_Rental,Road Type:,enum_value,City/Town Street,,,42,2,0
+Residential_Rental,Road Type:,enum_value,Interstate,,,42,2,1
+Residential_Rental,Road Type:,enum_value,State Road,,,42,2,2
+Residential_Rental,Road Type:,enum_value,County Street,,,42,3,0
+Residential_Rental,Road Type:,enum_value,Main Thoroughfare,,,42,3,1
+Residential_Rental,Road Type:,enum_value,Turnpike,,,42,3,2
+Residential_Rental,Roof:,enum_value,Asphalt/Fiberglass,,,43,1,0
+Residential_Rental,Roof:,enum_value,Composition Shingle,,,43,1,1
+Residential_Rental,Roof:,enum_value,Slate Roof,,,43,1,2
+Residential_Rental,Roof:,enum_value,Asphalt Shingle Roof,,,43,2,0
+Residential_Rental,Roof:,enum_value,Fiberglass,,,43,2,1
+Residential_Rental,Roof:,enum_value,Spanish Tiles,,,43,2,2
+Residential_Rental,Roof:,enum_value,Cedar Shake,,,43,3,0
+Residential_Rental,Roof:,enum_value,Metal Roof,,,43,3,1
+Residential_Rental,Roof:,enum_value,Tar & Gravel,,,43,3,2
+Residential_Rental,Roof:,enum_value,Cement Tiles,,,43,4,0
+Residential_Rental,Roof:,enum_value,Rubber,,,43,4,1
+Residential_Rental,Roof:,enum_value,Wood Shingles/Shakes,,,43,4,2
+Residential_Rental,Rooms,enum_value,Room Name,,,49,2,0
+Residential_Rental,Rooms,enum_value,Length,,,49,2,1
+Residential_Rental,Rooms,enum_value,Width,,,49,2,2
+Residential_Rental,Rooms,field,Number of Rooms,number,no,49,1,0
+Residential_Rental,Rooms:,enum_value,Artist Studio,,,44,1,0
+Residential_Rental,Rooms:,enum_value,Casita,,,44,1,1
+Residential_Rental,Rooms:,enum_value,Media Room/Home Theater,,,44,1,2
+Residential_Rental,Rooms:,enum_value,Billiards Room,,,44,2,0
+Residential_Rental,Rooms:,enum_value,Library,,,44,2,1
+Residential_Rental,Rooms:,enum_value,Staff Quarters,,,44,2,2
+Residential_Rental,Sales Associate Information,enum_value,Sales Associate/Team ID,,,7,1,0
+Residential_Rental,Sales Associate Information,enum_value,Sales Associate/Team Name√,,,7,1,1
+Residential_Rental,Schools,enum_value,School Name,,,51,2,0
+Residential_Rental,Schools,enum_value,School Type,,,51,2,1
+Residential_Rental,Schools,enum_value,Distance From Property,,,51,2,2
+Residential_Rental,Schools,field,Elementary School District,text,no,51,1,0
+Residential_Rental,Schools,field,Middle School District,text,no,51,1,1
+Residential_Rental,Schools,field,High School District,text,no,51,1,2
+Residential_Rental,Sewer:,enum_value,Aerobic System,,,14,1,0
+Residential_Rental,Sewer:,enum_value,City,,,14,1,1
+Residential_Rental,Sewer:,enum_value,Private,,,14,1,2
+Residential_Rental,Sewer:,enum_value,Central,,,14,2,0
+Residential_Rental,Sewer:,enum_value,Mound,,,14,2,1
+Residential_Rental,Sewer:,enum_value,Public,,,14,2,2
+Residential_Rental,Sewer:,enum_value,Cesspool,,,14,3,0
+Residential_Rental,Sewer:,enum_value,None,,,14,3,1
+Residential_Rental,Sewer:,enum_value,Septic,,,14,3,2
+Residential_Rental,Special Market:,enum_value,College/University,,,45,1,0
+Residential_Rental,Special Market:,enum_value,Luxury Properties,,,45,1,1
+Residential_Rental,Special Market:,enum_value,Resort/Lake,,,45,1,2
+Residential_Rental,Special Market:,enum_value,Hospitality,,,45,2,0
+Residential_Rental,Special Market:,enum_value,Military Properties,,,45,2,1
+Residential_Rental,Special Market:,enum_value,Vacation/Second Home,,,45,2,2
+Residential_Rental,Special Market:,enum_value,International Properties,,,45,3,0
+Residential_Rental,Special Market:,enum_value,New Homes,,,45,3,1
+Residential_Rental,Views:,enum_value,Bay,,,46,1,0
+Residential_Rental,Views:,enum_value,Mountain,,,46,1,1
+Residential_Rental,Views:,enum_value,Sound,,,46,1,2
+Residential_Rental,Views:,enum_value,City/Strip,,,46,2,0
+Residential_Rental,Views:,enum_value,Ocean,,,46,2,1
+Residential_Rental,Views:,enum_value,Water,,,46,2,2
+Residential_Rental,Views:,enum_value,Golf,,,46,3,0
+Residential_Rental,Views:,enum_value,Pond,,,46,3,1
+Residential_Rental,Views:,enum_value,Lake & Stream,,,46,4,0
+Residential_Rental,Views:,enum_value,Scenic,,,46,4,1
+Residential_Rental,Water:,enum_value,Central,,,15,1,0
+Residential_Rental,Water:,enum_value,Municipal Water,,,15,1,1
+Residential_Rental,Water:,enum_value,Spring,,,15,1,2
+Residential_Rental,Water:,enum_value,City Water,,,15,2,0
+Residential_Rental,Water:,enum_value,No Water,,,15,2,1
+Residential_Rental,Water:,enum_value,Storage Tank,,,15,2,2
+Residential_Rental,Water:,enum_value,Lake Water,,,15,3,0
+Residential_Rental,Water:,enum_value,Other Water Source,,,15,3,1
+Residential_Rental,Water:,enum_value,Well,,,15,3,2
+Residential_Rental,listing information,enum_value,Prelisting,,,3,2,0
+Residential_Rental,listing information,enum_value,Display Options: Do not show listing online Do not show rental price online Do not show address online Price Upon Request,,,3,4,0
+Residential_Rental,listing information,enum_value,Showing Options: Call to show,,,3,5,0
+Residential_Rental,listing information,field,Listing Office,text,yes,3,1,0
+Residential_Rental,listing information,field,Rental Price,number,yes,3,1,1
+Residential_Rental,listing information,field,Date Available,date,no,3,1,3
+Residential_Rental,listing information,field,Frequency,text,yes,3,2,2
+Residential_Rental,listing information,field,List Date,date,yes,3,3,0
+Residential_Rental,listing information,field,Expiration Date,date,yes,3,3,2
+Residential_Sale,ADDITIONAL INFORMATION,enum_value,Attribute,,,56,1,0
+Residential_Sale,ADDITIONAL INFORMATION,enum_value,Value,,,56,1,1
+Residential_Sale,Additional details,enum_value,Contact Details,,,53,1,0
+Residential_Sale,Additional details,enum_value,Contact: Developer Municipal Tax Office Owner Property Manager Tenant Utility,,,53,2,0
+Residential_Sale,Additional details,field,First Name,text,no,53,3,0
+Residential_Sale,Additional details,field,Last Name,text,no,53,3,1
+Residential_Sale,Additional details,field,Entity Name,text,no,53,3,2
+Residential_Sale,Additional details,field,Email,text,no,53,4,0
+Residential_Sale,Additional details,field,Phone,text,no,53,4,1
+Residential_Sale,Additional details,field,Website Name,text,no,53,4,2
+Residential_Sale,Additional details,field,Address Line 1,text,no,53,5,0
+Residential_Sale,Additional details,field,Address Line 2,text,no,53,5,1
+Residential_Sale,Additional details,field,Address Line 3,text,no,53,5,2
+Residential_Sale,Additional details,field,City,text,no,53,6,0
+Residential_Sale,Additional details,field,State/Province,text,no,53,6,1
+Residential_Sale,Additional details,field,Zip/Postal Code,text,no,53,6,2
+Residential_Sale,Amenities:,enum_value,Agricultural Easement(s),,,18,1,0
+Residential_Sale,Amenities:,enum_value,Hobby Farm,,,18,1,1
+Residential_Sale,Amenities:,enum_value,Silo,,,18,1,2
+Residential_Sale,Amenities:,enum_value,Bay/Beach Club,,,18,2,0
+Residential_Sale,Amenities:,enum_value,Horse Facilities,,,18,2,1
+Residential_Sale,Amenities:,enum_value,Ski Resort,,,18,2,2
+Residential_Sale,Amenities:,enum_value,Caretaker House,,,18,3,0
+Residential_Sale,Amenities:,enum_value,Horse Ranch,,,18,3,1
+Residential_Sale,Amenities:,enum_value,Sporting Ranch,,,18,3,2
+Residential_Sale,Amenities:,enum_value,Cattle Ranch,,,18,4,0
+Residential_Sale,Amenities:,enum_value,Hunting Ranch,,,18,4,1
+Residential_Sale,Amenities:,enum_value,Stables,,,18,4,2
+Residential_Sale,Amenities:,enum_value,Conservation Easement(s),,,18,5,0
+Residential_Sale,Amenities:,enum_value,Investment Ranch,,,18,5,1
+Residential_Sale,Amenities:,enum_value,Station,,,18,5,2
+Residential_Sale,Amenities:,enum_value,Elk Ranch,,,18,6,0
+Residential_Sale,Amenities:,enum_value,Live Water,,,18,6,1
+Residential_Sale,Amenities:,enum_value,Tennis Courts,,,18,6,2
+Residential_Sale,Amenities:,enum_value,Estate Farm,,,18,7,0
+Residential_Sale,Amenities:,enum_value,Modular Sports Courts,,,18,7,1
+Residential_Sale,Amenities:,enum_value,Timberland,,,18,7,2
+Residential_Sale,Amenities:,enum_value,Estate Ranch,,,18,8,0
+Residential_Sale,Amenities:,enum_value,Outdoor Basketball Court,,,18,8,1
+Residential_Sale,Amenities:,enum_value,Walk-to-ski,,,18,8,2
+Residential_Sale,Amenities:,enum_value,Fly Fishing,,,18,9,0
+Residential_Sale,Amenities:,enum_value,Playground,,,18,9,1
+Residential_Sale,Amenities:,enum_value,Yacht Club,,,18,9,2
+Residential_Sale,Amenities:,enum_value,Guest Ranch,,,18,10,0
+Residential_Sale,Amenities:,enum_value,Recreational Ranch,,,18,10,1
+Residential_Sale,Appliances:,enum_value,Dishwasher,,,19,1,0
+Residential_Sale,Appliances:,enum_value,Garbage Disposal,,,19,1,1
+Residential_Sale,Appliances:,enum_value,Refrigerator,,,19,1,2
+Residential_Sale,Appliances:,enum_value,Double Oven,,,19,2,0
+Residential_Sale,Appliances:,enum_value,Microwave,,,19,2,1
+Residential_Sale,Appliances:,enum_value,Trash Compactor,,,19,2,2
+Residential_Sale,Appliances:,enum_value,Dryer,,,19,3,0
+Residential_Sale,Appliances:,enum_value,Range/Oven,,,19,3,1
+Residential_Sale,Appliances:,enum_value,Washer,,,19,3,2
+Residential_Sale,Area Amenities:,enum_value,Aquatic Activities,,,20,1,0
+Residential_Sale,Area Amenities:,enum_value,Area Hunting,,,20,1,1
+Residential_Sale,Area Amenities:,enum_value,Casino/Gambling,,,20,1,2
+Residential_Sale,Area Amenities:,enum_value,Area Boat Dock,,,20,2,0
+Residential_Sale,Area Amenities:,enum_value,Area Pool,,,20,2,1
+Residential_Sale,Area Amenities:,enum_value,Deep Water Mooring,,,20,2,2
+Residential_Sale,Area Amenities:,enum_value,Area Boat Ramp,,,20,3,0
+Residential_Sale,Area Amenities:,enum_value,Area Skiing,,,20,3,1
+Residential_Sale,Area Amenities:,enum_value,Golf,,,20,3,2
+Residential_Sale,Area Amenities:,enum_value,Area Climbing,,,20,4,0
+Residential_Sale,Area Amenities:,enum_value,Area Snowmobiling,,,20,4,1
+Residential_Sale,Area Amenities:,enum_value,Jogging/Biking Path,,,20,4,2
+Residential_Sale,Area Amenities:,enum_value,Area Fishing,,,20,5,0
+Residential_Sale,Area Amenities:,enum_value,Area Tennis,,,20,5,1
+Residential_Sale,Area Amenities:,enum_value,Outdoor Activities,,,20,5,2
+Residential_Sale,Area Amenities:,enum_value,Area Hiking,,,20,6,0
+Residential_Sale,Area Amenities:,enum_value,Biking,,,20,6,1
+Residential_Sale,Area Amenities:,enum_value,Area Horse Riding/Stables,,,20,7,0
+Residential_Sale,Area Amenities:,enum_value,Boating,,,20,7,1
+Residential_Sale,Area Description:,enum_value,Country Living,,,21,1,0
+Residential_Sale,Area Description:,enum_value,Green Living,,,21,1,1
+Residential_Sale,Area Description:,enum_value,Resort,,,21,1,2
+Residential_Sale,Area Description:,enum_value,Cycling,,,21,2,0
+Residential_Sale,Area Description:,enum_value,Historic/Antique,,,21,2,1
+Residential_Sale,Area Description:,enum_value,Rock Beach,,,21,2,2
+Residential_Sale,Area Description:,enum_value,Desert Living,,,21,3,0
+Residential_Sale,Area Description:,enum_value,Hunting,,,21,3,1
+Residential_Sale,Area Description:,enum_value,Sand Beach,,,21,3,2
+Residential_Sale,Area Description:,enum_value,Equestrian/Polo,,,21,4,0
+Residential_Sale,Area Description:,enum_value,Metropolitan,,,21,4,1
+Residential_Sale,Area Description:,enum_value,Ski-in/Ski-Out,,,21,4,2
+Residential_Sale,Area Description:,enum_value,Fishing,,,21,5,0
+Residential_Sale,Area Description:,enum_value,Mountain,,,21,5,1
+Residential_Sale,Area Description:,enum_value,Skiing,,,21,5,2
+Residential_Sale,Area Description:,enum_value,Flood Area,,,21,6,0
+Residential_Sale,Area Description:,enum_value,Other Beach,,,21,6,1
+Residential_Sale,Area Description:,enum_value,Suburban,,,21,6,2
+Residential_Sale,Area Description:,enum_value,Game Farm/Safari,,,21,7,0
+Residential_Sale,Area Description:,enum_value,Privacy,,,21,7,1
+Residential_Sale,Area Description:,enum_value,Wine Country,,,21,7,2
+Residential_Sale,Basement:,enum_value,None,,,10,1,0
+Residential_Sale,Basement:,enum_value,Full,,,10,1,1
+Residential_Sale,Basement:,enum_value,Slab Foundation,,,10,1,2
+Residential_Sale,Basement:,enum_value,Crawl Space,,,10,2,0
+Residential_Sale,Basement:,enum_value,Other,,,10,2,1
+Residential_Sale,Basement:,enum_value,Unfinished,,,10,2,2
+Residential_Sale,Basement:,enum_value,Finished,,,10,3,0
+Residential_Sale,Basement:,enum_value,Partial,,,10,3,1
+Residential_Sale,Basement:,enum_value,Walk-out,,,10,3,2
+Residential_Sale,Bath Features:,enum_value,Bidet,,,22,1,0
+Residential_Sale,Bath Features:,enum_value,Stall Shower and Tub,,,22,1,1
+Residential_Sale,Bath Features:,enum_value,Tub Only,,,22,1,2
+Residential_Sale,Bath Features:,enum_value,Jacuzzi Tub,,,22,2,0
+Residential_Sale,Bath Features:,enum_value,Steam Shower,,,22,2,1
+Residential_Sale,Bath Features:,enum_value,Steam Room,,,22,2,2
+Residential_Sale,Bath Features:,enum_value,Stall Shower,,,22,3,0
+Residential_Sale,Bath Features:,enum_value,Tub and Shower,,,22,3,1
+Residential_Sale,Bath Features:,enum_value,Jetted Tub,,,22,3,2
+Residential_Sale,Body of Water:,enum_value,Bay,,,23,1,0
+Residential_Sale,Body of Water:,enum_value,Lake,,,23,1,1
+Residential_Sale,Body of Water:,enum_value,River,,,23,1,2
+Residential_Sale,Body of Water:,enum_value,Canal,,,23,2,0
+Residential_Sale,Body of Water:,enum_value,Ocean,,,23,2,1
+Residential_Sale,Body of Water:,enum_value,Sound,,,23,2,2
+Residential_Sale,Body of Water:,enum_value,Inlet,,,23,3,0
+Residential_Sale,Body of Water:,enum_value,Pond,,,23,3,1
+Residential_Sale,Body of Water:,enum_value,Lagoon,,,23,4,0
+Residential_Sale,Body of Water:,enum_value,Reservoir,,,23,4,1
+Residential_Sale,Community Type:,enum_value,55+ Community,,,24,1,0
+Residential_Sale,Community Type:,enum_value,Country Club,,,24,1,1
+Residential_Sale,Community Type:,enum_value,Golf Course,,,24,1,2
+Residential_Sale,Community Type:,enum_value,Adult Community,,,24,2,0
+Residential_Sale,Community Type:,enum_value,FHA Compliant,,,24,2,1
+Residential_Sale,Community Type:,enum_value,Tennis,,,24,2,2
+Residential_Sale,Community Type:,enum_value,Beach Resort,,,24,3,0
+Residential_Sale,Community Type:,enum_value,Fly-In,,,24,3,1
+Residential_Sale,Community Type:,enum_value,Co-Op,,,24,4,0
+Residential_Sale,Community Type:,enum_value,Gated,,,24,4,1
+Residential_Sale,Cooling:,enum_value,A/C,,,25,1,0
+Residential_Sale,Cooling:,enum_value,Humidifier,,,25,1,1
+Residential_Sale,Cooling:,enum_value,Window A/C,,,25,1,2
+Residential_Sale,Cooling:,enum_value,Central A/C,,,25,2,0
+Residential_Sale,Cooling:,enum_value,No A/C,,,25,2,1
+Residential_Sale,Cooling:,enum_value,Zoned A/C,,,25,2,2
+Residential_Sale,Cooling:,enum_value,Central A/C – Electric,,,25,3,0
+Residential_Sale,Cooling:,enum_value,Other A/C,,,25,3,1
+Residential_Sale,Cooling:,enum_value,Central A/C – Gas,,,25,4,0
+Residential_Sale,Cooling:,enum_value,Wall Unit A/C,,,25,4,1
+Residential_Sale,Exterior Description:,enum_value,Brick,,,27,1,0
+Residential_Sale,Exterior Description:,enum_value,Wood Frame,,,27,1,1
+Residential_Sale,Exterior Description:,enum_value,Concrete Block,,,27,2,0
+Residential_Sale,Exterior Description:,enum_value,Stone,,,27,2,1
+Residential_Sale,Exterior Description:,enum_value,Stucco,,,27,3,0
+Residential_Sale,Exterior Description:,enum_value,Wood Siding,,,27,3,1
+Residential_Sale,Exterior Description:,enum_value,Vinyl Siding,,,27,4,0
+Residential_Sale,Exterior Description:,enum_value,E.I.F.S,,,27,4,1
+Residential_Sale,Exterior Description:,enum_value,Steel Frame,,,27,5,0
+Residential_Sale,Exterior Living Space:,enum_value,Balcony/Lanai,,,28,1,0
+Residential_Sale,Exterior Living Space:,enum_value,Outdoor Kitchen,,,28,1,1
+Residential_Sale,Exterior Living Space:,enum_value,Screened Porch,,,28,1,2
+Residential_Sale,Exterior Living Space:,enum_value,Courtyard,,,28,2,0
+Residential_Sale,Exterior Living Space:,enum_value,Outdoor Rooms,,,28,2,1
+Residential_Sale,Exterior Living Space:,enum_value,Terrace,,,28,2,2
+Residential_Sale,Exterior Living Space:,enum_value,Deck,,,28,3,0
+Residential_Sale,Exterior Living Space:,enum_value,Patio,,,28,3,1
+Residential_Sale,Exterior Living Space:,enum_value,Enclosed Porch,,,28,4,0
+Residential_Sale,Exterior Living Space:,enum_value,Porch,,,28,4,1
+Residential_Sale,Exterior:,enum_value,Barn/Stable,,,26,1,0
+Residential_Sale,Exterior:,enum_value,Double Pane/Storm Windows,,,26,1,1
+Residential_Sale,Exterior:,enum_value,Storage Shed,,,26,1,2
+Residential_Sale,Exterior:,enum_value,BBQ,,,26,2,0
+Residential_Sale,Exterior:,enum_value,Fire Pit,,,26,2,1
+Residential_Sale,Exterior:,enum_value,Storm Door,,,26,2,2
+Residential_Sale,Exterior:,enum_value,Boat House,,,26,3,0
+Residential_Sale,Exterior:,enum_value,Gardens,,,26,3,1
+Residential_Sale,Exterior:,enum_value,Storm Windows,,,26,3,2
+Residential_Sale,Exterior:,enum_value,Boat Ramp,,,26,4,0
+Residential_Sale,Exterior:,enum_value,Guest House,,,26,4,1
+Residential_Sale,Exterior:,enum_value,Thermal Windows/Doors,,,26,4,2
+Residential_Sale,Exterior:,enum_value,Carriage House,,,26,5,0
+Residential_Sale,Exterior:,enum_value,Helipad,,,26,5,1
+Residential_Sale,Exterior:,enum_value,Underground Lawn Sprinkler,,,26,5,2
+Residential_Sale,Exterior:,enum_value,Covered Terraces,,,26,6,0
+Residential_Sale,Exterior:,enum_value,Out Building,,,26,6,1
+Residential_Sale,Exterior:,enum_value,Water Feature,,,26,6,2
+Residential_Sale,Exterior:,enum_value,Dock,,,26,7,0
+Residential_Sale,Exterior:,enum_value,Porte-Cochere,,,26,7,1
+Residential_Sale,Exterior:,enum_value,Dock Rights,,,26,8,0
+Residential_Sale,Exterior:,enum_value,Sidewalk,,,26,8,1
+Residential_Sale,Exterior:,enum_value,Dog Run,,,26,9,0
+Residential_Sale,Exterior:,enum_value,Sprinkler System,,,26,9,1
+Residential_Sale,FEAtures,enum_value,Features,,,9,1,0
+Residential_Sale,FEAtures,enum_value,New Construction,,,9,3,0
+Residential_Sale,FEAtures,enum_value,11-20 Years Old,,,9,3,1
+Residential_Sale,FEAtures,enum_value,41-50 Years Old,,,9,3,2
+Residential_Sale,FEAtures,enum_value,1-5 Years Old,,,9,4,0
+Residential_Sale,FEAtures,enum_value,21-30 Years Old,,,9,4,1
+Residential_Sale,FEAtures,enum_value,Over 50 Years Old,,,9,4,2
+Residential_Sale,FEAtures,enum_value,6-10 Years Old,,,9,5,0
+Residential_Sale,FEAtures,enum_value,31-40 Years Old,,,9,5,1
+Residential_Sale,FEAtures,field,Age of Home,text,no,9,2,0
+Residential_Sale,Fencing:,enum_value,Fenced Yard,,,29,1,0
+Residential_Sale,Fencing:,enum_value,Partially Fenced,,,29,1,1
+Residential_Sale,Fencing:,enum_value,Vinyl Fence,,,29,1,2
+Residential_Sale,Fencing:,enum_value,Metal Fence,,,29,2,0
+Residential_Sale,Fencing:,enum_value,Privacy Fence,,,29,2,1
+Residential_Sale,Fencing:,enum_value,Wood Fence,,,29,2,2
+Residential_Sale,Fireplace Count:,enum_value,1 Fireplace,,,11,1,0
+Residential_Sale,Fireplace Count:,enum_value,3 Fireplaces,,,11,1,1
+Residential_Sale,Fireplace Count:,enum_value,2 Fireplaces,,,11,2,0
+Residential_Sale,Fireplace Count:,enum_value,4+ Fireplaces,,,11,2,1
+Residential_Sale,Fireplace Description:,enum_value,2 Sided,,,16,1,0
+Residential_Sale,Fireplace Description:,enum_value,Gas,,,16,1,1
+Residential_Sale,Fireplace Description:,enum_value,Wood Burning Stove,,,16,1,2
+Residential_Sale,Fireplace Description:,enum_value,Brick,,,16,2,0
+Residential_Sale,Fireplace Description:,enum_value,Stone,,,16,2,1
+Residential_Sale,Fireplace Description:,enum_value,Fireplace,,,16,3,0
+Residential_Sale,Fireplace Description:,enum_value,Wood Burning,,,16,3,1
+Residential_Sale,Flooring:,enum_value,Ceramic,,,30,1,0
+Residential_Sale,Flooring:,enum_value,Linoleum,,,30,1,1
+Residential_Sale,Flooring:,enum_value,Tile,,,30,1,2
+Residential_Sale,Flooring:,enum_value,Hardwood,,,30,2,0
+Residential_Sale,Flooring:,enum_value,Marble,,,30,2,1
+Residential_Sale,Flooring:,enum_value,Wall to Wall Carpet,,,30,2,2
+Residential_Sale,Flooring:,enum_value,Laminate,,,30,3,0
+Residential_Sale,Flooring:,enum_value,Mixed,,,30,3,1
+Residential_Sale,Floors,enum_value,Floor Name,,,50,2,0
+Residential_Sale,Floors,enum_value,Length,,,50,2,1
+Residential_Sale,Floors,enum_value,Width,,,50,2,2
+Residential_Sale,Floors,field,Number of Floors/Levels,number,no,50,1,0
+Residential_Sale,Garage Count:,enum_value,1 Car Garage,,,12,1,0
+Residential_Sale,Garage Count:,enum_value,3 Car Garage,,,12,1,1
+Residential_Sale,Garage Count:,enum_value,5+ Car Garage,,,12,1,2
+Residential_Sale,Garage Count:,enum_value,2 Car Garage,,,12,2,0
+Residential_Sale,Garage Count:,enum_value,4 Car Garage,,,12,2,1
+Residential_Sale,Garage Description:,enum_value,Attached Garage,,,17,1,0
+Residential_Sale,Garage Description:,enum_value,Detached Garage,,,17,1,1
+Residential_Sale,Garage Description:,enum_value,No Garage,,,17,1,2
+Residential_Sale,Garage Description:,enum_value,Carport,,,17,2,0
+Residential_Sale,Garage Description:,enum_value,Garage,,,17,2,1
+Residential_Sale,Garage Description:,enum_value,RV Parking,,,17,2,2
+Residential_Sale,Garage Description:,enum_value,Curb Parking,,,17,3,0
+Residential_Sale,Garage Description:,enum_value,Golfcart Garage,,,17,3,1
+Residential_Sale,General:,enum_value,Built-in Vacuum,,,31,1,0
+Residential_Sale,General:,enum_value,Fenced Range Land,,,31,1,1
+Residential_Sale,General:,enum_value,Skylight,,,31,1,2
+Residential_Sale,General:,enum_value,Ceiling Fan(s),,,31,2,0
+Residential_Sale,General:,enum_value,Fire Alarms,,,31,2,1
+Residential_Sale,General:,enum_value,Smoke Detector,,,31,2,2
+Residential_Sale,General:,enum_value,Clubhouse,,,31,3,0
+Residential_Sale,General:,enum_value,Guard Gate,,,31,3,1
+Residential_Sale,General:,enum_value,Stereo System,,,31,3,2
+Residential_Sale,General:,enum_value,Concierge Services,,,31,4,0
+Residential_Sale,General:,enum_value,Lake Privileges,,,31,4,1
+Residential_Sale,General:,enum_value,Storage Area,,,31,4,2
+Residential_Sale,General:,enum_value,Doorman,,,31,5,0
+Residential_Sale,General:,enum_value,Laundry Facilities,,,31,5,1
+Residential_Sale,General:,enum_value,Wheel Chair Accessible,,,31,5,2
+Residential_Sale,General:,enum_value,Elevator,,,31,6,0
+Residential_Sale,General:,enum_value,Private Airport,,,31,6,1
+Residential_Sale,General:,enum_value,Window Treatments,,,31,6,2
+Residential_Sale,General:,enum_value,Energy-saving Features,,,31,7,0
+Residential_Sale,General:,enum_value,Private Elevator,,,31,7,1
+Residential_Sale,General:,enum_value,Workshop,,,31,7,2
+Residential_Sale,General:,enum_value,Escalator,,,31,8,0
+Residential_Sale,General:,enum_value,Security System,,,31,8,1
+Residential_Sale,General:,enum_value,Direct Elevator Access,,,31,8,2
+Residential_Sale,Geographic location,field,City Region,text,no,48,1,0
+Residential_Sale,Geographic location,field,Continent Region,text,no,48,1,1
+Residential_Sale,Geographic location,field,Property Location,text,no,48,1,2
+Residential_Sale,Geographic location,field,State Region,text,no,48,2,0
+Residential_Sale,Geographic location,field,Township,text,no,48,2,1
+Residential_Sale,Geographic location,field,Development,text,no,48,2,2
+Residential_Sale,Geographic location,field,Country Region,number,no,48,3,0
+Residential_Sale,Geographic location,field,Post Office,text,no,48,3,1
+Residential_Sale,Heating Type:,enum_value,Baseboard,,,33,1,0
+Residential_Sale,Heating Type:,enum_value,Multi-Zone Heat,,,33,1,1
+Residential_Sale,Heating Type:,enum_value,Radiator,,,33,1,2
+Residential_Sale,Heating Type:,enum_value,Forced Air,,,33,2,0
+Residential_Sale,Heating Type:,enum_value,No Heat,,,33,2,1
+Residential_Sale,Heating Type:,enum_value,Solar Power,,,33,2,2
+Residential_Sale,Heating Type:,enum_value,Gravity,,,33,3,0
+Residential_Sale,Heating Type:,enum_value,Other,,,33,3,1
+Residential_Sale,Heating Type:,enum_value,Steam Heat,,,33,3,2
+Residential_Sale,Heating Type:,enum_value,Heat Pump,,,33,4,0
+Residential_Sale,Heating Type:,enum_value,Pellet Stove,,,33,4,1
+Residential_Sale,Heating Type:,enum_value,Hydro,,,33,5,0
+Residential_Sale,Heating Type:,enum_value,Radiant Floor,,,33,5,1
+Residential_Sale,Heating – Fuel Type:,enum_value,Coal,,,32,1,0
+Residential_Sale,Heating – Fuel Type:,enum_value,Hydro Heat,,,32,1,1
+Residential_Sale,Heating – Fuel Type:,enum_value,Propane,,,32,1,2
+Residential_Sale,Heating – Fuel Type:,enum_value,Electric,,,32,2,0
+Residential_Sale,Heating – Fuel Type:,enum_value,None,,,32,2,1
+Residential_Sale,Heating – Fuel Type:,enum_value,Solar,,,32,2,2
+Residential_Sale,Heating – Fuel Type:,enum_value,Gas,,,32,3,0
+Residential_Sale,Heating – Fuel Type:,enum_value,Oil,,,32,3,1
+Residential_Sale,Heating – Fuel Type:,enum_value,Wood,,,32,3,2
+Residential_Sale,Heating – Fuel Type:,enum_value,Geothermal,,,32,4,0
+Residential_Sale,Heating – Fuel Type:,enum_value,Other,,,32,4,1
+Residential_Sale,Interior:,enum_value,Bay/Bow Window,,,34,1,0
+Residential_Sale,Interior:,enum_value,Fireplace in Master BR,,,34,1,1
+Residential_Sale,Interior:,enum_value,Screen Room,,,34,1,2
+Residential_Sale,Interior:,enum_value,Beam – Ceilings,,,34,2,0
+Residential_Sale,Interior:,enum_value,High Tech Cabling,,,34,2,1
+Residential_Sale,Interior:,enum_value,Track Lighting,,,34,2,2
+Residential_Sale,Interior:,enum_value,Blinds,,,34,3,0
+Residential_Sale,Interior:,enum_value,In-Home Gym,,,34,3,1
+Residential_Sale,Interior:,enum_value,Two-story Family Room,,,34,3,2
+Residential_Sale,Interior:,enum_value,Bowling Alley,,,34,4,0
+Residential_Sale,Interior:,enum_value,In-Law Suite,,,34,4,1
+Residential_Sale,Interior:,enum_value,Vaulted Ceilings,,,34,4,2
+Residential_Sale,Interior:,enum_value,Cathedral Ceilings,,,34,5,0
+Residential_Sale,Interior:,enum_value,Indoor Basketball Court,,,34,5,1
+Residential_Sale,Interior:,enum_value,Walk-in Closet,,,34,5,2
+Residential_Sale,Interior:,enum_value,Cedar Closets,,,34,6,0
+Residential_Sale,Interior:,enum_value,Indoor Racquetball Court,,,34,6,1
+Residential_Sale,Interior:,enum_value,Wet Bar,,,34,6,2
+Residential_Sale,Interior:,enum_value,Dry Bar,,,34,7,0
+Residential_Sale,Interior:,enum_value,Intercom System,,,34,7,1
+Residential_Sale,Interior:,enum_value,Wine Cellar,,,34,7,2
+Residential_Sale,Interior:,enum_value,Exercise Area,,,34,8,0
+Residential_Sale,Interior:,enum_value,Laundry Chute,,,34,8,1
+Residential_Sale,Kitchen Features:,enum_value,Breakfast Bar,,,35,1,0
+Residential_Sale,Kitchen Features:,enum_value,Country Kitchen,,,35,1,1
+Residential_Sale,Kitchen Features:,enum_value,Gourmet Kitchen,,,35,1,2
+Residential_Sale,Kitchen Features:,enum_value,Butlers Pantry,,,35,2,0
+Residential_Sale,Kitchen Features:,enum_value,Designer Kitchen,,,35,2,1
+Residential_Sale,Kitchen Features:,enum_value,Granite Countertops,,,35,2,2
+Residential_Sale,Kitchen Features:,enum_value,Catering Kitchen,,,35,3,0
+Residential_Sale,Kitchen Features:,enum_value,Eat-in Kitchen,,,35,3,1
+Residential_Sale,Kitchen Features:,enum_value,Kitchen Facilities,,,35,3,2
+Residential_Sale,Kitchen Features:,enum_value,Center Island,,,35,4,0
+Residential_Sale,Kitchen Features:,enum_value,Galley Kitchen,,,35,4,1
+Residential_Sale,Kitchen Features:,enum_value,Marble Countertop,,,35,4,2
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Language,,,8,1,0
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Remark Type,,,8,1,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Remark,,,8,1,2
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,English,,,8,2,0
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Property Description√,,,8,2,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Area Description,,,8,3,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Directions,,,8,4,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Headline,,,8,5,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 1,,,8,6,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 2,,,8,7,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 3,,,8,8,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 4,,,8,9,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 5,,,8,10,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Highlight 6,,,8,11,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Location,,,8,12,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Owner/Expert Quote,,,8,13,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Transportation,,,8,14,1
+Residential_Sale,"Listing Remarks Available languages: English, Spanish Property Description in English is mandatory!",enum_value,Zoning Description,,,8,15,1
+Residential_Sale,Location,field,Country,number,yes,2,1,0
+Residential_Sale,Location,field,Address Line 1,text,yes,2,1,2
+Residential_Sale,Location,field,Address Line 2,text,no,2,2,0
+Residential_Sale,Location,field,Address Line 3,text,no,2,2,3
+Residential_Sale,Location,field,City,text,yes,2,3,0
+Residential_Sale,Location,field,District/County,number,no,2,3,1
+Residential_Sale,Location,field,State/Province,text,yes,2,3,4
+Residential_Sale,Location,field,Zip/Postal Code,text,yes,2,4,0
+Residential_Sale,Location,field,Neighborhood,text,no,2,4,1
+Residential_Sale,Location:,enum_value,Backs to Golf Course,,,36,1,0
+Residential_Sale,Location:,enum_value,Gulf,,,36,1,1
+Residential_Sale,Location:,enum_value,Ocean/Beach,,,36,1,2
+Residential_Sale,Location:,enum_value,Backs to Park Land,,,36,2,0
+Residential_Sale,Location:,enum_value,Harbor,,,36,2,1
+Residential_Sale,Location:,enum_value,Ocean Block,,,36,2,2
+Residential_Sale,Location:,enum_value,Bayside,,,36,3,0
+Residential_Sale,Location:,enum_value,In Shopping Mall,,,36,3,1
+Residential_Sale,Location:,enum_value,Ocean Front,,,36,3,2
+Residential_Sale,Location:,enum_value,Beach Front,,,36,4,0
+Residential_Sale,Location:,enum_value,Intercoastal Waterway,,,36,4,1
+Residential_Sale,Location:,enum_value,Off Water,,,36,4,2
+Residential_Sale,Location:,enum_value,Canal Front,,,36,5,0
+Residential_Sale,Location:,enum_value,Island,,,36,5,1
+Residential_Sale,Location:,enum_value,Riverfront,,,36,5,2
+Residential_Sale,Location:,enum_value,Channel Front,,,36,6,0
+Residential_Sale,Location:,enum_value,Lagoon,,,36,6,1
+Residential_Sale,Location:,enum_value,Slope Side,,,36,6,2
+Residential_Sale,Location:,enum_value,Cul-de-Sac,,,36,7,0
+Residential_Sale,Location:,enum_value,Lakefront,,,36,7,1
+Residential_Sale,Location:,enum_value,Waterfront,,,36,7,2
+Residential_Sale,Location:,enum_value,Fairway Frontage,,,36,8,0
+Residential_Sale,Location:,enum_value,Marina,,,36,8,1
+Residential_Sale,Lot Description:,enum_value,Access Type– Other,,,37,1,0
+Residential_Sale,Lot Description:,enum_value,Irregular,,,37,1,1
+Residential_Sale,Lot Description:,enum_value,Pond on Lot,,,37,1,2
+Residential_Sale,Lot Description:,enum_value,Access Type- Road,,,37,2,0
+Residential_Sale,Lot Description:,enum_value,Lake on Lot,,,37,2,1
+Residential_Sale,Lot Description:,enum_value,Possible Subdivision,,,37,2,2
+Residential_Sale,Lot Description:,enum_value,Access Type- Water,,,37,3,0
+Residential_Sale,Lot Description:,enum_value,Level,,,37,3,1
+Residential_Sale,Lot Description:,enum_value,Stream on Lot,,,37,3,2
+Residential_Sale,Lot Description:,enum_value,Corner,,,37,4,0
+Residential_Sale,Lot Description:,enum_value,New Development,,,37,4,1
+Residential_Sale,Lot Description:,enum_value,Wooded,,,37,4,2
+Residential_Sale,Lot Description:,enum_value,Flag,,,37,5,0
+Residential_Sale,Lot Description:,enum_value,Open,,,37,5,1
+Residential_Sale,Lot Size:,enum_value,Under ½ Acre,,,13,1,0
+Residential_Sale,Lot Size:,enum_value,2-5 Acres,,,13,1,1
+Residential_Sale,Lot Size:,enum_value,20-50 Acres,,,13,1,2
+Residential_Sale,Lot Size:,enum_value,1/2 -1 Acre,,,13,2,0
+Residential_Sale,Lot Size:,enum_value,5-10 Acres,,,13,2,1
+Residential_Sale,Lot Size:,enum_value,50-100 Acres,,,13,2,2
+Residential_Sale,Lot Size:,enum_value,1-2 Acres,,,13,3,0
+Residential_Sale,Lot Size:,enum_value,10-20 Acres,,,13,3,1
+Residential_Sale,Lot Size:,enum_value,100+ Acres,,,13,3,2
+Residential_Sale,MLS Information,enum_value,MLS ID√,,,4,1,0
+Residential_Sale,MLS Information,enum_value,MLS NAME,,,4,1,1
+Residential_Sale,Open houses,field,Date,date,no,5,1,0
+Residential_Sale,Open houses,field,Start Time,text,no,5,1,1
+Residential_Sale,Open houses,field,End Time,text,no,5,1,2
+Residential_Sale,Open houses,field,By Appointment Only Display Start and End Time on the Internet Open House (In Person) Livestream Virtual Open House Livestream Virtual Open House URL,text,no,5,1,3
+Residential_Sale,Open houses,field,Special Instructions (if any),text,no,5,2,0
+Residential_Sale,Other:,enum_value,Association Fee,,,38,1,0
+Residential_Sale,Other:,enum_value,Water Softener- Rent,,,38,1,1
+Residential_Sale,Other:,enum_value,Water Softener- Own,,,38,2,0
+Residential_Sale,Other:,enum_value,Whole House Water Filter,,,38,2,1
+Residential_Sale,Pool Description:,enum_value,Above Ground,,,39,1,0
+Residential_Sale,Pool Description:,enum_value,Inground,,,39,1,1
+Residential_Sale,Pool Description:,enum_value,Resistance/Spa,,,39,1,2
+Residential_Sale,Pool Description:,enum_value,Hot Tub,,,39,2,0
+Residential_Sale,Pool Description:,enum_value,Outdoor,,,39,2,1
+Residential_Sale,Pool Description:,enum_value,Indoor,,,39,3,0
+Residential_Sale,Pool Description:,enum_value,Pool,,,39,3,1
+Residential_Sale,Pre-Wiring:,enum_value,Cable,,,40,1,0
+Residential_Sale,Pre-Wiring:,enum_value,Garage Door,,,40,1,1
+Residential_Sale,Pre-Wiring:,enum_value,Phone Jacks,,,40,1,2
+Residential_Sale,Pre-Wiring:,enum_value,Entertainment System,,,40,2,0
+Residential_Sale,Pre-Wiring:,enum_value,Generator,,,40,2,1
+Residential_Sale,Pre-Wiring:,enum_value,Security System,,,40,2,2
+Residential_Sale,Property Description:,enum_value,Acreage,,,41,1,0
+Residential_Sale,Property Description:,enum_value,Farm/Ranch,,,41,1,1
+Residential_Sale,Property Description:,enum_value,Vineyard,,,41,1,2
+Residential_Sale,Property Description:,enum_value,Community Living,,,41,2,0
+Residential_Sale,Property Description:,enum_value,Farm Assessment,,,41,2,1
+Residential_Sale,Property Description:,enum_value,Winery,,,41,2,2
+Residential_Sale,Property Description:,enum_value,Easement,,,41,3,0
+Residential_Sale,Property Description:,enum_value,Fenced Farm Acreage,,,41,3,1
+Residential_Sale,Property Description:,enum_value,Eco-Friendly (Green),,,41,4,0
+Residential_Sale,Property Description:,enum_value,Ski Property,,,41,4,1
+Residential_Sale,Property Details,enum_value,Property Use: Bank Owned Other Commercial Other Residential Owner Occupied Rental or Investment Second Home Use in a Business Vacant Vacation Home Net Leased Property Business for Sale,,,47,1,0
+Residential_Sale,Property Details,enum_value,New Construction,,,47,2,2
+Residential_Sale,Property Details,field,# of Parking Places,text,no,47,2,0
+Residential_Sale,Property Details,field,Year Built,date,no,47,2,1
+Residential_Sale,Property Details,field,Year Renovated,date,no,47,3,0
+Residential_Sale,Property Details,field,Last Sold On,text,no,47,3,1
+Residential_Sale,Property Details,field,Zoning,text,no,47,3,2
+Residential_Sale,Property Details,field,Tax Roll Number,text,no,47,4,0
+Residential_Sale,Property Details,field,Lot Dimensions,text,no,47,4,1
+Residential_Sale,Property fees,enum_value,Fee Type,,,55,1,0
+Residential_Sale,Property fees,enum_value,Fee Amount,,,55,1,1
+Residential_Sale,Property fees,enum_value,Frequency,,,55,1,2
+Residential_Sale,Property information,enum_value,MULTI UNITS,,,6,5,0
+Residential_Sale,Property information,enum_value,Unit Details,,,6,7,0
+Residential_Sale,Property information,enum_value,Unit Name,,,6,8,0
+Residential_Sale,Property information,enum_value,# of Bedrooms,,,6,8,1
+Residential_Sale,Property information,enum_value,# of Baths,,,6,8,3
+Residential_Sale,Property information,enum_value,Full,,,6,8,5
+Residential_Sale,Property information,enum_value,1/2,,,6,8,6
+Residential_Sale,Property information,enum_value,3/4,,,6,8,7
+Residential_Sale,Property information,enum_value,1/4,,,6,8,8
+Residential_Sale,Property information,enum_value,Brand Programs: Property Display Feed The Collection Icon,,,6,12,0
+Residential_Sale,Property information,field,No. of Bedrooms,number,yes,6,1,0
+Residential_Sale,Property information,field,No. of Three Quarter Baths,number,no,6,1,2
+Residential_Sale,Property information,field,Tax Year,date,no,6,1,4
+Residential_Sale,Property information,field,No. of Full Baths,number,no,6,2,0
+Residential_Sale,Property information,field,Building Area,text,no,6,2,2
+Residential_Sale,Property information,field,Property Name,text,no,6,2,4
+Residential_Sale,Property information,field,No. of Half Baths,number,no,6,3,0
+Residential_Sale,Property information,field,Lot Size,number,no,6,3,2
+Residential_Sale,Property information,field,No. of Quarter Baths,number,no,6,4,0
+Residential_Sale,Property information,field,Annual Tax Amount,number,no,6,4,2
+Residential_Sale,Property information,field,No. of Units,number,no,6,6,0
+Residential_Sale,Property style (choose one)√,enum_value,1 Level Ranch,,,1,1,0
+Residential_Sale,Property style (choose one)√,enum_value,Colonial,,,1,1,1
+Residential_Sale,Property style (choose one)√,enum_value,Expanded Ranch,,,1,1,2
+Residential_Sale,Property style (choose one)√,enum_value,Multi-Level,,,1,1,3
+Residential_Sale,Property style (choose one)√,enum_value,Spanish/Mediterranean,,,1,1,4
+Residential_Sale,Property style (choose one)√,enum_value,1.5 Story,,,1,2,0
+Residential_Sale,Property style (choose one)√,enum_value,Colonial-American,,,1,2,1
+Residential_Sale,Property style (choose one)√,enum_value,Farmhouse,,,1,2,2
+Residential_Sale,Property style (choose one)√,enum_value,New Englander,,,1,2,3
+Residential_Sale,Property style (choose one)√,enum_value,Split Level,,,1,2,4
+Residential_Sale,Property style (choose one)√,enum_value,2 Story,,,1,3,0
+Residential_Sale,Property style (choose one)√,enum_value,Colonial-Dutch,,,1,3,1
+Residential_Sale,Property style (choose one)√,enum_value,Federal,,,1,3,2
+Residential_Sale,Property style (choose one)√,enum_value,Northwest Contemporary,,,1,3,3
+Residential_Sale,Property style (choose one)√,enum_value,Studio,,,1,3,4
+Residential_Sale,Property style (choose one)√,enum_value,Antique,,,1,4,0
+Residential_Sale,Property style (choose one)√,enum_value,Colonial-French,,,1,4,1
+Residential_Sale,Property style (choose one)√,enum_value,Georgian,,,1,4,2
+Residential_Sale,Property style (choose one)√,enum_value,Not Applicable,,,1,4,3
+Residential_Sale,Property style (choose one)√,enum_value,Traditional,,,1,4,4
+Residential_Sale,Property style (choose one)√,enum_value,Art Deco,,,1,5,0
+Residential_Sale,Property style (choose one)√,enum_value,Colonial-Salt Box,,,1,5,1
+Residential_Sale,Property style (choose one)√,enum_value,Georgian-Greek Revival,,,1,5,2
+Residential_Sale,Property style (choose one)√,enum_value,Other Style,,,1,5,3
+Residential_Sale,Property style (choose one)√,enum_value,Tudor,,,1,5,4
+Residential_Sale,Property style (choose one)√,enum_value,Art Nouveau,,,1,6,0
+Residential_Sale,Property style (choose one)√,enum_value,Contemporary,,,1,6,1
+Residential_Sale,Property style (choose one)√,enum_value,Georgian-Neo Classicism,,,1,6,2
+Residential_Sale,Property style (choose one)√,enum_value,Palazzo,,,1,6,3
+Residential_Sale,Property style (choose one)√,enum_value,Tuscan,,,1,6,4
+Residential_Sale,Property style (choose one)√,enum_value,Arts & Crafts,,,1,7,0
+Residential_Sale,Property style (choose one)√,enum_value,Cottage,,,1,7,1
+Residential_Sale,Property style (choose one)√,enum_value,Georgian-Regency,,,1,7,2
+Residential_Sale,Property style (choose one)√,enum_value,Penthouse,,,1,7,3
+Residential_Sale,Property style (choose one)√,enum_value,Victorian,,,1,7,4
+Residential_Sale,Property style (choose one)√,enum_value,Bi-Level,,,1,8,0
+Residential_Sale,Property style (choose one)√,enum_value,Cottage/Cabin,,,1,8,1
+Residential_Sale,Property style (choose one)√,enum_value,High-Rise,,,1,8,2
+Residential_Sale,Property style (choose one)√,enum_value,Post & Beam,,,1,8,3
+Residential_Sale,Property style (choose one)√,enum_value,Victorian-Gothic Revival,,,1,8,4
+Residential_Sale,Property style (choose one)√,enum_value,Brownstone,,,1,9,0
+Residential_Sale,Property style (choose one)√,enum_value,Cottage/Resort,,,1,9,1
+Residential_Sale,Property style (choose one)√,enum_value,Historical,,,1,9,2
+Residential_Sale,Property style (choose one)√,enum_value,Post-War,,,1,9,3
+Residential_Sale,Property style (choose one)√,enum_value,Victorian-Italianate,,,1,9,4
+Residential_Sale,Property style (choose one)√,enum_value,Bungalow,,,1,10,0
+Residential_Sale,Property style (choose one)√,enum_value,Country Home,,,1,10,1
+Residential_Sale,Property style (choose one)√,enum_value,Lodge,,,1,10,2
+Residential_Sale,Property style (choose one)√,enum_value,Pre-War,,,1,10,3
+Residential_Sale,Property style (choose one)√,enum_value,Victorian-Queen Anne,,,1,10,4
+Residential_Sale,Property style (choose one)√,enum_value,Cape Cod,,,1,11,0
+Residential_Sale,Property style (choose one)√,enum_value,Craftsman,,,1,11,1
+Residential_Sale,Property style (choose one)√,enum_value,Loft,,,1,11,2
+Residential_Sale,Property style (choose one)√,enum_value,Raised Ranch,,,1,11,3
+Residential_Sale,Property style (choose one)√,enum_value,Victorian–Shingle,,,1,11,4
+Residential_Sale,Property style (choose one)√,enum_value,Carriage House,,,1,12,0
+Residential_Sale,Property style (choose one)√,enum_value,Custom,,,1,12,1
+Residential_Sale,Property style (choose one)√,enum_value,Log,,,1,12,2
+Residential_Sale,Property style (choose one)√,enum_value,Saltbox,,,1,12,3
+Residential_Sale,Property style (choose one)√,enum_value,Victorian-Stick,,,1,12,4
+Residential_Sale,Property style (choose one)√,enum_value,Castle,,,1,13,0
+Residential_Sale,Property style (choose one)√,enum_value,Desert Living,,,1,13,1
+Residential_Sale,Property style (choose one)√,enum_value,Low Country,,,1,13,2
+Residential_Sale,Property style (choose one)√,enum_value,Santa Fe,,,1,13,3
+Residential_Sale,Property style (choose one)√,enum_value,Villa,,,1,13,4
+Residential_Sale,Property style (choose one)√,enum_value,Chalet,,,1,14,0
+Residential_Sale,Property style (choose one)√,enum_value,Estate,,,1,14,1
+Residential_Sale,Property style (choose one)√,enum_value,Low-Rise,,,1,14,2
+Residential_Sale,Property style (choose one)√,enum_value,Shotgun,,,1,14,3
+Residential_Sale,Property style (choose one)√,enum_value,Western,,,1,14,4
+Residential_Sale,Property style (choose one)√,enum_value,Chateau,,,1,15,0
+Residential_Sale,Property style (choose one)√,enum_value,European,,,1,15,1
+Residential_Sale,Property style (choose one)√,enum_value,Modern,,,1,15,2
+Residential_Sale,Property style (choose one)√,enum_value,Southwest,,,1,15,3
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,essentials,,,0,1,0
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Property Subtype (choose one) √,,,0,2,0
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Apartment,,,0,3,0
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Historical,,,0,3,1
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family Home,,,0,3,2
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Single Family Detached,,,0,3,3
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Co-Op,,,0,4,0
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Land-Agricultural (Not Zoned),,,0,4,1
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Other Residential,,,0,4,2
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Timeshare,,,0,4,3
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Condominium,,,0,5,0
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Land–Multi-Family Acreage,,,0,5,1
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Private Island,,,0,5,2
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Townhouse,,,0,5,3
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Duplex,,,0,6,0
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Land-Single-Family Acreage,,,0,6,1
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Recreational,,,0,6,2
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Triplex,,,0,6,3
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Farm/Ranch,,,0,7,0
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Mixed Use,,,0,7,1
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Residential Lot,,,0,7,2
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Vineyard-Res,,,0,7,3
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Flat,,,0,8,0
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Mobile/Manufactured Hm w Land,,,0,8,1
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Row,,,0,8,2
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Winery-Res,,,0,8,3
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Fourplex,,,0,9,0
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Mobile/Manufactured Home,,,0,9,1
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Semi-Detached,,,0,9,2
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Fractional Ownership,,,0,10,0
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Multi-Family (2-4 Units),,,0,10,1
+Residential_Sale,Residential Sale listing Required Fields are noted with a red checkmark (√),enum_value,Single Family Attached,,,0,10,2
+Residential_Sale,Road Type:,enum_value,4 Way Interchange,,,42,1,0
+Residential_Sale,Road Type:,enum_value,Interchange,,,42,1,1
+Residential_Sale,Road Type:,enum_value,Private Road,,,42,1,2
+Residential_Sale,Road Type:,enum_value,City/Town Street,,,42,2,0
+Residential_Sale,Road Type:,enum_value,Interstate,,,42,2,1
+Residential_Sale,Road Type:,enum_value,State Road,,,42,2,2
+Residential_Sale,Road Type:,enum_value,County Street,,,42,3,0
+Residential_Sale,Road Type:,enum_value,Main Thoroughfare,,,42,3,1
+Residential_Sale,Road Type:,enum_value,Turnpike,,,42,3,2
+Residential_Sale,Roof:,enum_value,Asphalt/Fiberglass,,,43,1,0
+Residential_Sale,Roof:,enum_value,Composition Shingle,,,43,1,1
+Residential_Sale,Roof:,enum_value,Slate Roof,,,43,1,2
+Residential_Sale,Roof:,enum_value,Asphalt Shingle Roof,,,43,2,0
+Residential_Sale,Roof:,enum_value,Fiberglass,,,43,2,1
+Residential_Sale,Roof:,enum_value,Spanish Tiles,,,43,2,2
+Residential_Sale,Roof:,enum_value,Cedar Shake,,,43,3,0
+Residential_Sale,Roof:,enum_value,Metal Roof,,,43,3,1
+Residential_Sale,Roof:,enum_value,Tar & Gravel,,,43,3,2
+Residential_Sale,Roof:,enum_value,Cement Tiles,,,43,4,0
+Residential_Sale,Roof:,enum_value,Rubber,,,43,4,1
+Residential_Sale,Roof:,enum_value,Wood Shingles/Shakes,,,43,4,2
+Residential_Sale,Rooms,enum_value,Room Name,,,49,2,0
+Residential_Sale,Rooms,enum_value,Length,,,49,2,1
+Residential_Sale,Rooms,enum_value,Width,,,49,2,2
+Residential_Sale,Rooms,field,Number of Rooms,number,no,49,1,0
+Residential_Sale,Rooms:,enum_value,Artist Studio,,,44,1,0
+Residential_Sale,Rooms:,enum_value,Casita,,,44,1,1
+Residential_Sale,Rooms:,enum_value,Media Room/Home Theater,,,44,1,2
+Residential_Sale,Rooms:,enum_value,Billiards Room,,,44,2,0
+Residential_Sale,Rooms:,enum_value,Library,,,44,2,1
+Residential_Sale,Rooms:,enum_value,Staff Quarters,,,44,2,2
+Residential_Sale,Sales Associate Information,enum_value,Sales Associate/Team ID,,,7,1,0
+Residential_Sale,Sales Associate Information,enum_value,Sales Associate/Team Name√,,,7,1,1
+Residential_Sale,Schools,enum_value,School Name,,,51,2,0
+Residential_Sale,Schools,enum_value,School Type,,,51,2,1
+Residential_Sale,Schools,enum_value,Distance From Property,,,51,2,2
+Residential_Sale,Schools,field,Elementary School District,text,no,51,1,0
+Residential_Sale,Schools,field,Middle School District,text,no,51,1,1
+Residential_Sale,Schools,field,High School District,text,no,51,1,2
+Residential_Sale,Seller Information,enum_value,Seller Lead: Agent Office,,,52,1,4
+Residential_Sale,Seller Information,enum_value,Seller Type: Person/Individual(s) Corporation Developer Doing Business As Estate Financial Inst. Government Limited Liability Company Limited Liability Limited Partnership Limited Liability Partnership Limited Partnership Other Partnership Pension Fund Professional Limited Liability Company REIT Sole Partnership Trust Vendor,,,52,2,0
+Residential_Sale,Seller Information,enum_value,"Use Property Address (if checked, the address fields below are not required.)",,,52,7,0
+Residential_Sale,Seller Information,field,Seller Source,text,no,52,1,0
+Residential_Sale,Seller Information,field,First Name 1,text,no,52,3,0
+Residential_Sale,Seller Information,field,Last Name 1,text,no,52,3,2
+Residential_Sale,Seller Information,field,First Name 2,text,no,52,4,0
+Residential_Sale,Seller Information,field,Last Name 2,text,no,52,4,2
+Residential_Sale,Seller Information,field,Entity Name,text,no,52,5,0
+Residential_Sale,Seller Information,field,Email,text,no,52,6,0
+Residential_Sale,Seller Information,field,Website,text,no,52,6,1
+Residential_Sale,Seller Information,field,Phone,text,no,52,6,5
+Residential_Sale,Seller Information,field,Address Line 1,text,no,52,8,0
+Residential_Sale,Seller Information,field,Address Line 2,text,no,52,8,3
+Residential_Sale,Seller Information,field,Address Line 3,text,no,52,8,6
+Residential_Sale,Seller Information,field,City,text,no,52,9,0
+Residential_Sale,Seller Information,field,State/Province,text,no,52,9,3
+Residential_Sale,Seller Information,field,Zip/Postal Code,text,no,52,9,6
+Residential_Sale,Sewer:,enum_value,Aerobic System,,,14,1,0
+Residential_Sale,Sewer:,enum_value,City,,,14,1,1
+Residential_Sale,Sewer:,enum_value,Private,,,14,1,2
+Residential_Sale,Sewer:,enum_value,Central,,,14,2,0
+Residential_Sale,Sewer:,enum_value,Mound,,,14,2,1
+Residential_Sale,Sewer:,enum_value,Public,,,14,2,2
+Residential_Sale,Sewer:,enum_value,Cesspool,,,14,3,0
+Residential_Sale,Sewer:,enum_value,None,,,14,3,1
+Residential_Sale,Sewer:,enum_value,Septic,,,14,3,2
+Residential_Sale,Special Market:,enum_value,College/University,,,45,1,0
+Residential_Sale,Special Market:,enum_value,Luxury Properties,,,45,1,1
+Residential_Sale,Special Market:,enum_value,Resort/Lake,,,45,1,2
+Residential_Sale,Special Market:,enum_value,Hospitality,,,45,2,0
+Residential_Sale,Special Market:,enum_value,Military Properties,,,45,2,1
+Residential_Sale,Special Market:,enum_value,Vacation/Second Home,,,45,2,2
+Residential_Sale,Special Market:,enum_value,International Properties,,,45,3,0
+Residential_Sale,Special Market:,enum_value,New Homes,,,45,3,1
+Residential_Sale,Views:,enum_value,Bay,,,46,1,0
+Residential_Sale,Views:,enum_value,Mountain,,,46,1,1
+Residential_Sale,Views:,enum_value,Sound,,,46,1,2
+Residential_Sale,Views:,enum_value,City/Strip,,,46,2,0
+Residential_Sale,Views:,enum_value,Ocean,,,46,2,1
+Residential_Sale,Views:,enum_value,Water,,,46,2,2
+Residential_Sale,Views:,enum_value,Golf,,,46,3,0
+Residential_Sale,Views:,enum_value,Pond,,,46,3,1
+Residential_Sale,Views:,enum_value,Lake & Stream,,,46,4,0
+Residential_Sale,Views:,enum_value,Scenic,,,46,4,1
+Residential_Sale,Water:,enum_value,Central,,,15,1,0
+Residential_Sale,Water:,enum_value,Municipal Water,,,15,1,1
+Residential_Sale,Water:,enum_value,Spring,,,15,1,2
+Residential_Sale,Water:,enum_value,City Water,,,15,2,0
+Residential_Sale,Water:,enum_value,No Water,,,15,2,1
+Residential_Sale,Water:,enum_value,Storage Tank,,,15,2,2
+Residential_Sale,Water:,enum_value,Lake Water,,,15,3,0
+Residential_Sale,Water:,enum_value,Other Water Source,,,15,3,1
+Residential_Sale,Water:,enum_value,Well,,,15,3,2
+Residential_Sale,listing information,enum_value,Prelisting,,,3,2,0
+Residential_Sale,listing information,enum_value,Foreclosure Short Sale,,,3,2,2
+Residential_Sale,listing information,enum_value,Display Options: Auction Do not show list price online Do not show listing online Do not show address online,,,3,4,0
+Residential_Sale,listing information,enum_value,Showing Options: Call to show,,,3,5,0
+Residential_Sale,listing information,field,Listing Office,text,yes,3,1,0
+Residential_Sale,listing information,field,List Price,number,yes,3,1,1
+Residential_Sale,listing information,field,Date Available,date,no,3,1,3
+Residential_Sale,listing information,field,Anticipated List Date (for Prelisting)/List Date,date,yes,3,3,0
+Residential_Sale,listing information,field,Expiration Date,date,yes,3,3,2
+Team,ADDITIONAL INFORMATION,enum_value,Attribute,,,4,1,0
+Team,ADDITIONAL INFORMATION,enum_value,Value,,,4,1,1
+Team,"Profile Description Available languages: English, Spanish",enum_value,Language,,,3,1,0
+Team,"Profile Description Available languages: English, Spanish",enum_value,Remark Type,,,3,1,1
+Team,"Profile Description Available languages: English, Spanish",enum_value,Remark,,,3,1,2
+Team,"Profile Description Available languages: English, Spanish",enum_value,English,,,3,2,0
+Team,"Profile Description Available languages: English, Spanish",enum_value,Team Profile,,,3,2,1
+Team,"Profile Description Available languages: English, Spanish",enum_value,Hobbies,,,3,3,1
+Team,"Profile Description Available languages: English, Spanish",enum_value,Specializations,,,3,4,1
+Team,"Profile Description Available languages: English, Spanish",enum_value,Other Awards & Recognition,,,3,5,1
+Team,WEbsites,enum_value,Website Type,,,2,1,0
+Team,WEbsites,enum_value,URL,,,2,1,1
+Team,WEbsites,enum_value,Twitter,,,2,2,0
+Team,WEbsites,enum_value,Facebook,,,2,3,0
+Team,WEbsites,enum_value,Google+,,,2,4,0
+Team,WEbsites,enum_value,Youtube,,,2,5,0
+Team,WEbsites,enum_value,Pinterest,,,2,6,0
+Team,WEbsites,enum_value,Yelp,,,2,7,0
+Team,WEbsites,enum_value,Other,,,2,8,0
+Team,contact details,field,Email,text,no,1,1,0
+Team,contact details,field,Phone,text,no,1,1,1
+Team,team Required Fields are noted with a red checkmark (√),enum_value,Essentials,,,0,1,0
+Team,team Required Fields are noted with a red checkmark (√),enum_value,Show Online?,,,0,2,4
+Team,team Required Fields are noted with a red checkmark (√),enum_value,Team Members√,,,0,3,0
+Team,team Required Fields are noted with a red checkmark (√),enum_value,Sales Associate Name,,,0,4,0
+Team,team Required Fields are noted with a red checkmark (√),enum_value,Team Rep (y/n),,,0,4,2
+Team,team Required Fields are noted with a red checkmark (√),field,Team Type,text,yes,0,2,0
+Team,team Required Fields are noted with a red checkmark (√),field,Team Name,text,yes,0,2,1
+Team,team Required Fields are noted with a red checkmark (√),field,Active Date,date,yes,0,2,3
