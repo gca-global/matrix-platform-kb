@@ -1,407 +1,175 @@
-# RESO DD methodology — one-page primer
+# Methodology - Phase 1 (mirror + extract)
 
-Read this before opening any `wiki/resources/<Resource>.md`. Five
-concepts cover ~95% of "how do I model X in RESO?" questions.
+## Why this exists
 
----
+The previous iteration of `reso-dd-kb/` blended three sources:
 
-## 1. Naming
+1. The xlsx export of the RESO DD 2.0 spreadsheet.
+2. A targeted scrape of `dd.reso.org/DD2.0/`.
+3. A hand-curated `RESOURCE_ALIASES` map filling the gaps.
 
-- **Resources** are PascalCase singular (sometimes plural for
-  collections): `Property`, `Member`, `Office`, `Teams`, `OpenHouse`,
-  `PropertyRooms`, `PropertyUnitTypes`, `PropertyPowerProduction`,
-  `Contacts`, `HistoryTransactional`, `InternetTracking`, ...
-- **Fields** are PascalCase: `ListingId`, `OwnerName`, `BuilderName`,
-  `RoomType`. The wire-format API also uses PascalCase verbatim;
-  Atlas's database mirrors this in `snake_case` per Postgres
-  convention (`owner_name`, `builder_name`).
-- **Lookups** carry a `LookupName` and have a stable
-  `StandardLookupValue`. There are also legacy OData values; prefer
-  the standard form.
-- **Atlas-custom fields** (e.g. `LifecycleState`) are flagged with
-  `source = atlas_custom` in `raw/field_descriptions.csv` and have no
-  upstream URL. They exist only inside Atlas to power UI / ETL logic.
+The xlsx + wiki sources both derive from RESO's master metadata DB and
+agreed on FK info to the bit, but neither carried the full per-field
+Definition prose nor surfaced relationships beyond a sparse 113 of
+1,745 fields. The alias map was needed to bridge well-known role-name
+gaps (`Listing -> Property`, `Contact -> Contacts`,
+`OriginatingSystem -> OUID`, ...) that no source declared explicitly.
 
-## 2. Keys + relationships
+The Phase 1 rebuild moves to a single source of truth - a verbatim
+local mirror of `dd.reso.org/DD2.0/` - and captures *every* visible
+metadata cell on every page, including the full Definition prose. The
+prose contains explicit FK statements (e.g. "primary key of the source
+resource", "foreign key from the X Resource", "X Resource's YKey"),
+which Phase 2 will mine for relationships. Once that's done, the alias
+map should mostly disappear.
 
-RESO uses two parallel id systems:
+## Phase 1 steps
 
-| Suffix | Purpose | Uniqueness | Example |
-|---|---|---|---|
-| `*Key` | system-unique surrogate id | global within originating system | `ListingKey`, `MemberKey`, `OfficeKey`, `RoomKey` |
-| `*MlsId` / `*Id` | well-known business id | unique per OriginatingSystem | `ListingId` (MLS number), `MemberMlsId`, `OfficeMlsId` |
+### 1. Mirror
 
-Foreign keys reference the `*Key` form: `Property.ListAgentKey →
-Member.MemberKey`. Use the `*Key` for joins; show the `*MlsId` to
-humans.
+```bash
+bash scripts/01_mirror.sh
+```
 
-**Owner / Builder are NOT keys.** RESO models the property owner and
-the builder as **scalar text fields on Property** (`OwnerName`,
-`OwnerPhone`, `BuilderName`, `BuilderModel`). There is no
-`OwnerKey` / `BuilderKey`. To resolve "all listings owned by X",
-match on text. This is intentional: the owner is private CRM data
-(see `Contacts` resource) and is only optionally backed by a
-contact record.
+Uses `wget --mirror` with politeness flags:
 
-## 3. Lookups
-
-Every lookup field carries:
-
-- a `LookupName` (e.g. `OccupantType`, `RoomLevel`, `PropertyType`),
-- one or more rows in `raw/lookups.csv` with `StandardLookupValue` +
-  `Definition`,
-- a `LookupStatus` declaring **closed** (only listed values allowed)
-  or **open** (jurisdictions may extend).
-
-Do not invent values. If you need a value RESO does not have, file a
-RESO Change Proposal first; in the interim, store the value in the
-nearest `*Remarks` field.
-
-## 4. Lifecycle (Property only)
-
-Two RESO fields, plus one Atlas-derived bucket, classify a listing's
-operational state:
-
-| Field | Source | Purpose |
-|---|---|---|
-| `StandardStatus` | RESO DD | normalized MLS status (`Active`, `Pending`, `Closed`, `Withdrawn`, `Expired`, `Canceled`, `Hold`, `Incomplete`, `Delete`) |
-| `MlsStatus` | RESO DD | feed-native status before normalization (free-form) |
-| `LifecycleState` | **Atlas-custom** | three-bucket UI chip: `Listing` / `Marketing` / `Rent`. Computed from `ListingService`, `ListingAgreement`, `LeaseConsideredYN`, `SaleConsideredYN`. |
-
-`LifecycleState` is **not** RESO; it exists only to drive the operator-
-facing chip filter on the Atlas listings index. Always cite as
-"Atlas-custom" when surfacing it.
-
-## 5. Canonical DBML: how it was cooked
-
-The canonical DBML (`wiki/dbml/reso-2.0-canonical.dbml`) is **2NF
-normalized**. It is generated end-to-end by
-[`scripts/build_reso_canonical_dbml.py`](scripts/build_reso_canonical_dbml.py)
-from `raw/fields.csv`, `raw/lookups.csv`, and
-`raw/field_metadata.csv`. This section explains every transformation
-the script applies, in the order it runs them.
-
-### Inputs
-
-| File | Source | Used for |
-|---|---|---|
-| `raw/fields.csv` | parsed from `RESO_Data_Dictionary_2.0.xlsx` (`Fields` sheet) | every column, FK, lookup link |
-| `raw/lookups.csv` | parsed from `RESO_Data_Dictionary_2.0.xlsx` (`Lookups` sheet) | distinct `LookupName` set -> one ref table per lookup |
-| `raw/field_metadata.csv` | scraped from `dd.reso.org/DD2.0/<Resource>/<Field>/` | `Org%` adoption + structured KV in column Notes |
-
-The xlsx is the upstream RESO truth. `dd.reso.org` adds adoption
-metrics RESO publishes on the live site but not in the spec file.
-
-### Step 1 — Group fields by Resource and derive each PK
-
-`load_fields()` reads `fields.csv` and groups rows by `ResourceName`.
-For every Resource we derive the primary key:
-
-- **`PK_OVERRIDES`** (16 entries) covers Resources where the canonical
-  PK is not `<Resource>Key` — e.g. `Property` -> `ListingKey`,
-  `Contacts` -> `ContactKey`, `OUID` -> `OrganizationUniqueIdKey`,
-  `PropertyRooms` -> `RoomKey`, `Teams` -> `TeamKey`.
-- Otherwise: the field named `<Resource>Key` is the PK
-  (e.g. `Member.MemberKey`).
-
-These PKs become the `[pk]` columns in DBML and the FK targets for
-every relationship downstream.
-
-### Step 2 — Detect satellite fields (2NF normalization)
-
-`compute_satellites(by_res, resource_pks)` walks each host resource
-`H` and every Resource-typed field `F` on `H` (rows where
-`SimpleDataType = "Resource"`). For each `F` we know:
-
-- `target = SourceResource` (e.g. `Member`)
-- `tkey = TargetResourceKey` (e.g. `ListAgentKey`)
-
-We compute the **satellite prefix** = `tkey` with the trailing
-`Key` / `ID` / `Id` stripped (e.g. `ListAgent`, `OriginatingSystem`).
-A field `g` on `H` is a satellite of `F` iff:
-
-- `g.SimpleDataType` is **not** `Resource` (forward FKs handled below);
-- `g.StandardName` starts with the satellite prefix, with an uppercase
-  letter immediately after (word boundary so `Contact` doesn't match
-  `ContactListingsKey`);
-- `g.StandardName` is **not** the host's own PK;
-- `g.StandardName` is **not** another FK column on `H` (i.e. not the
-  `TargetResourceKey` of some other Resource-typed sibling).
-
-A column matched by multiple FKs is dropped once. The result: 215
-satellites across 16 hosts. They split into two flavours, both dropped
-uniformly:
-
-1. **True denormalizations** — the column also exists on the target
-   (`Property.ListAgentEmail` mirrors `Member.MemberEmail`). Reachable
-   via the FK join.
-2. **Auxiliary identifiers / relationship attributes** — the column
-   does not exist on the target and would belong in a junction table
-   in a fully relational model
-   (`Property.OriginatingSystemKey`,
-   `ContactListings.ListingViewedYN`).
-
-Full per-host list of every drop:
-[`wiki/dbml/2nf-satellite-drops.md`](wiki/dbml/2nf-satellite-drops.md).
-The same list is reproduced as a comment header inside the canonical
-DBML.
-
-### Step 3 — Detect foreign keys (four passes)
-
-For every host `H`, the script emits DBML `Ref:` lines from four
-orthogonal signals.
-
-**Pass 1 — Resource-typed siblings (primary signal).** For each row
-on `H` with `SimpleDataType = "Resource"`, emit
-`Ref: H.<TargetResourceKey> > <SourceResource>.<PK>`. The scalar FK
-column itself (`ListAgentKey` etc.) is materialised by another row in
-`fields.csv`; this pass only emits the relationship edge.
-
-**Pass 2 — Definition prose, "foreign key relating to ...".** Some
-`*Key` fields lack a Resource-typed sibling but their Definition text
-says `"This is a foreign key relating to the Member Resource"`. The
-regex
-`r"(?:foreign key (?:relating|related) to|relates to|relating to|references?)\s+(?:the\s+)?(\w+)\s+[Rr]esource"`
-captures the target Resource name. Emit a Ref to `<Target>.<PK>`.
-
-**Pass 3 — Definition prose, `<Resource>'s <field>`.** Variant
-phrasing where the Definition names the target inline (e.g. "the OUID
-Resource's OrganizationUniqueId"). Lower priority than pass 2.
-
-**Pass 4 — Name-shape `<Word>Key`.** Field name ends in `Key` and the
-prefix is itself a known Resource (or its singular form for plural
-Resources like `Contacts` -> `Contact`, `Teams` -> `Team`,
-`Rules` -> `Rule`). Lowest priority; only fires when no prose was
-found.
-
-Passes 2-4 are filtered against the satellite drop set from step 2 (no
-point Ref-ing a column we won't render). They land in a dedicated
-`// ---- Extra FKs ----` footer block, each tagged with the detection
-signal so reviewers can verify the heuristic. Full list:
-[`wiki/dbml/extra-fks.md`](wiki/dbml/extra-fks.md).
-
-### Step 3.5 — Resource-name aliases and polymorphic FKs
-
-Two RESO-specific patterns force extensions to the FK passes above:
-
-**Resource-name aliases.** RESO's field naming uses *role aliases* and
-plural/singular variants that don't match a Resource name 1:1. Without
-an alias map, name-shape and Resource-typed-fallback passes miss
-genuine FKs. The map (full list in
-`scripts/build_reso_canonical_dbml.py::RESOURCE_ALIASES`) covers:
-
-- *Pluralisation gaps*: `Contact -> Contacts`, `Team -> Teams`,
-  `Rule -> Rules`.
-- *Semantic synonyms*: `Listing -> Property` (a Listing is a Property
-  record offered for sale/lease).
-- *System-tracking refs*: `OriginatingSystem -> OUID`,
-  `SourceSystem -> OUID` (the Organization Unique Identifier resource
-  holds system rows).
-- *Member roles*: `BuyerAgent`, `CoBuyerAgent`, `ListAgent`,
-  `CoListAgent`, `ShowingAgent`, `OwnerMember`, `ChangedByMember`,
-  `Appointer`, `ExecutiveOfficerMember`, `AssociationMember` all
-  resolve to `Member`.
-- *Office roles*: `BuyerOffice`, `CoBuyerOffice`, `ListOffice`,
-  `CoListOffice` -> `Office`.
-- *Team roles*: `BuyerTeam`, `CoBuyerTeam`, `ListTeam`, `CoListTeam`
-  -> `Teams`.
-
-The alias map also handles *org-prefixed compound keys* like
-`OriginatingSystemMemberKey` or `SourceSystemHistoryKey`: strip the
-recognised prefix (`OriginatingSystem`, `SourceSystem`, `LocalSystem`)
-then alias-resolve the remainder. So `OriginatingSystemMemberKey` ->
-strip `OriginatingSystem` -> `Member` (direct match) -> FK to Member.
-
-The Resource-typed sibling pass (pass 1) also gained a fallback: when
-the raw CSV's `SourceResource` cell is empty (12 cases as of DD 2.0,
-e.g. `OpenHouse.Listing`, `Prospecting.Contact`), the StandardName
-itself is alias-resolved. The resulting Ref is tagged `[alias]` in
-its trailing comment so reviewers can audit the heuristic.
-
-**Polymorphic FKs (`ResourceRecordKey`).** Six resources
-(`EntityEvent`, `HistoryTransactional`, `Media`, `OtherPhone`,
-`Queue`, `SocialMedia`) carry a `ResourceRecordKey` column paired
-with a `ResourceName` column - together they form a polymorphic
-reference: the row's `resource_name` value names the target table,
-and `resource_record_key` matches that table's PK. DBML's `Ref:`
-syntax can't express polymorphism via a single Ref (would need 41
-Refs - one per possible target - which would be misleading). The
-build emits a `// Polymorphic FK: (resource_name, resource_record_key)
--> ANY resource (target table named by resource_name)` comment on each
-host table so the relationship is documented explicitly.
-
-After these extensions, the canonical DBML carries **121 Refs** across
-**33 of 41 tables**. The remaining 8 orphan tables fall into two
-groups:
-
-- *Polymorphic-only children* whose only FK is `ResourceRecordKey`
-  (e.g. `EntityEvent`, `OtherPhone`, `SocialMedia`).
-- *Self-contained meta / leaf tables* (`Field`, `Lookup`,
-  `PropertyPowerStorage`, `TransactionManagement`,
-  `InternetTrackingSummary`) whose RESO definition holds no FK columns
-  beyond their own PK. `InternetTrackingSummary` carries a `ListingId`
-  column (RESO's human-readable MLS number, distinct from `ListingKey`)
-  which is a *soft* alternate-key reference; the build does not
-  auto-Ref `<X>Id` columns to avoid false positives, since `Id` stems
-  are too generic to disambiguate safely.
-
-### Step 4 — Type lookup columns and emit enums in a companion file
-
-Lookups split three ways based on how they are used by fields:
-
-| Bucket | Count | DBML treatment |
-|---|---:|---|
-| Referenced by ≥1 `String List, Single` column | **99** | `Enum <snake_name> { ... values ... }` block in `wiki/dbml/reso-2.0-lookups.dbml`; the host column in the main canonical DBML is typed as `<snake_name>` |
-| Referenced only by `String List, Multi` columns | **94** | NOT enum-able (DBML's single-column type system can't model array membership); host column stays `varchar` and tags `(multi-value; column stores comma-separated codes)` in its Note; LookupName listed at the bottom of the lookups DBML for discoverability |
-| Open lookups (declared by RESO, no closed value list in `raw/lookups.csv`) | **29** | NOT enum-able (no closed value set); host column stays `varchar` and tags `(open: jurisdiction-defined; no closed value list)` in its Note; LookupName listed at the bottom of the lookups DBML |
-| **Distinct LookupNames referenced by fields** | **222** | 99 + 94 + 29 reconciles |
-
-The open lookups cover jurisdiction-defined value sets: `City`,
-`PostalCity`, `CountyOrParish`, `MlsStatus`, `MediaStatus`,
-`OrganizationType`, `AOR`, `ElementarySchool`, `HighSchool`,
-`MiddleOrJuniorSchool`, `*District`, `MLSAreaMajor`, `MLSAreaMinor`,
-`StreetSuffix`, `RuleType`, `SavedSearchType`,
-`MemberMlsSecurityClass`, `TeamImpersonationLevel`,
-`SyndicateAgentOption`, `ImageSizeDescription`,
-`SearchQueryExceptions`, `BuildingFeatures`, `Disclosures`,
-`DocumentsAvailable`, `GreenLocation`, `IrrigationSource`,
-`ShowingDays`. Each MLS / jurisdiction extends them locally.
-
-#### Why the lookups live in a separate DBML file
-
-DBML enums must be declared at the top level of a DBML file. Bundling
-all 99 enums alongside the 41 Resource tables inflated the canonical
-file to ~5,000 lines / ~488 KB, beyond what `dbdiagram.io` and similar
-tools render comfortably. Splitting them out drops the main file to
-~1,800 lines while preserving full enum value sets in a co-loadable
-companion:
-
-- `reso-2.0-canonical.dbml` — 41 Resource tables + cross-resource Refs.
-  Single-value lookup columns are typed as the snake_case LookupName
-  (e.g. `property.standard_status standard_status`). When this file is
-  loaded standalone in a DBML viewer, the type renders as an opaque
-  custom type — the name itself serves as documentation.
-- `reso-2.0-lookups.dbml` — 99 `Enum <snake_name> { ... }` blocks
-  carrying every RESO standard value (with `legacy=ComingSoon` style
-  Notes for any value whose LegacyODataValue differs from the
-  StandardLookupValue). Multi-word values like `Active Under Contract`
-  are double-quoted per DBML grammar.
-
-DBML viewers loaded with both files (e.g. `dbdiagram.io` "Import file"
-twice into the same diagram) resolve the column type to a real
-validated enum. Atlas's `build_atlas_target_dbml.py` is free to choose
-its own representation (today it inherits the canonical's choice; this
-may change as a separate decision).
-
-#### Why not emit lookup `Ref:` lines
-
-In the previous reference-table design, every single-value lookup
-column emitted `Ref: host.col > lookup_name.code`. With enums, the
-type-system *is* the constraint — no Ref line is needed. The main
-DBML's `Ref:` count drops from 259 to 71 (only cross-resource
-relationships remain), and the noise-to-signal ratio improves.
-
-Zero orphan enums: every enum in the lookups DBML has at least one
-referencing column in `raw/fields.csv`.
-
-### Step 5 — Skip Collection-typed inverse references
-
-`SimpleDataType = "Collection"` rows (`Property.Media`,
-`Property.OpenHouse`, `Property.Rooms`, ...) are inverse 1:N
-relationships — the FK column lives on the child resource, not on the
-host. They are **not** rendered as host columns. Each host table
-emits an `// Inverse 1:N (Collection-typed in RESO; FK lives on
-child)` comment listing them so the relationship is documented; the
-forward FK from child to host is emitted by passes 1-4 on the child.
-54 Collection rows handled this way.
-
-`collection_inverse_targets()` resolves each Collection field's child
-target via `SourceResource` first (set on 48/54 rows) and falls back
-to matching `StandardName` against known Resource names for the
-remaining 6 (`OpenHouse.HistoryTransactional` -> `HistoryTransactional`
-resource, etc.). Zero unresolved.
-
-### Step 6 — Render columns and per-column Notes
-
-Non-satellite, non-Collection scalar fields are rendered as DBML
-columns. The DBML type comes from `TYPE_MAP`:
-
-| RESO `SimpleDataType` | DBML type |
+| Flag | Why |
 |---|---|
-| `String` | `varchar(<SugMaxLength>)` |
-| `String List, Single` / `String List, Multi` | `varchar` |
-| `Number` | `numeric` |
-| `Boolean` | `boolean` |
-| `Date` | `date` |
-| `Timestamp` | `timestamp` |
+| `--mirror` | Recursive, infinite depth, timestamping. |
+| `--no-parent` | Do not crawl above `/DD2.0/`. |
+| `--convert-links` | Rewrite internal links so the mirror is browsable offline. |
+| `--adjust-extension` | Save as `.html` so `index.html` is unambiguous. |
+| `--page-requisites` | Pull CSS/images so pages render locally. |
+| `--no-host-directories` | Output paths are `mirror/DD2.0/...`, not `mirror/dd.reso.org/DD2.0/...`. |
+| `--domains=dd.reso.org` | Refuse to follow off-domain links. |
+| `--wait=1 --random-wait` | ~1 req/s with jitter; gentle on the server. |
+| `--user-agent=...` | Identifies the bot with a contact email. |
+| `--execute robots=on` | Respects RESO's `robots.txt`. |
+| `--output-file=...` | Full crawl log goes to `_meta/crawl.log`. |
 
-Each column carries a single-line `Note:` with `StandardName`,
-`Definition` (truncated to 160 chars), `type=<SimpleDataType>`,
-`lookup=<Name>` if applicable, length / precision constraints, and
-`adoption org=<Org%> (n/N)` from `field_metadata.csv`.
+After wget exits, `scripts/_emit_manifest.py` walks the mirror tree
+and emits `_meta/manifest.json`: one entry per file with URL, local
+path, status code, byte size, and sha256. This manifest is what later
+phases trust - if a fact isn't in the manifest, it isn't in the
+canonical KB.
 
-### Step 7 — Output
+The manifest's authoritative status field is "do we have the bytes?"
+(i.e. file present on disk and non-empty -> 200). The historical HTTP
+status from the crawl log is preserved in `crawl_log_status` whenever
+it disagrees, so reviewers can tell that a file was, for example,
+re-fetched manually after a transient 5xx during the original crawl.
 
-Four files are written by a single invocation of
-`scripts/build_reso_canonical_dbml.py`:
+#### Manual gap-fills
 
-1. `wiki/dbml/reso-2.0-canonical.dbml` (~1,800 lines) - the schema
-   itself: 41 Resource tables + 71 cross-resource Refs (Resource-typed
-   siblings + extra FKs from prose / name-shape passes). Single-value
-   lookup columns are typed as the snake_case LookupName.
-2. `wiki/dbml/reso-2.0-lookups.dbml` (~2,200 lines) - the lookup
-   companion: 99 `Enum` blocks with every RESO standard value, plus
-   commented sections listing the 94 multi-only and 29 open lookups
-   that cannot be enums.
-3. `wiki/dbml/2nf-satellite-drops.md` - human-readable enumeration of
-   every dropped satellite, grouped by host + FK + target.
-4. `wiki/dbml/extra-fks.md` - human-readable enumeration of every FK
-   discovered by passes 2-4.
+Two upstream artefacts caused the initial crawl to be off by one:
 
-The main DBML's header carries the satellite + extras counts and links
-to the companion files; it does NOT re-inline the per-host satellite
-list (that's what `2nf-satellite-drops.md` is for). This keeps the
-schema small enough for any DBML viewer.
+1. The Property index page contains 652 `<a class="dd-field-link">`
+   entries, but one of them (`CoListOfficeAOR`) is rendered with an
+   absolute URL (`https://dd.reso.org/DD2.0/Property/CoListOfficeAOR/`)
+   while the other 651 are relative. `wget --mirror` follows relative
+   hrefs but treats unconverted absolute hrefs as out-of-scope; the
+   page was therefore not fetched on the initial pass.
+2. `https://dd.reso.org/DD2.0/lookups/PowerProductionType/Photovoltaics/`
+   returned a transient `503 Service Unavailable` during the crawl
+   and wget did not retry it (the page is reachable as soon as the
+   request is repeated).
 
-### What this leaves to operational stores
+Both pages were filled in via a one-shot `curl` into the correct
+mirror path. The next time `01_mirror.sh` is run, wget's
+`--timestamping` will pick them up if upstream changes.
 
-The wiki Resource pages (`wiki/resources/*.md`) still document
-satellites and Collection fields because they are part of the
-published RESO 2.0 spec — useful when an LLM is asked "what does RESO
-say about Property.ListAgentEmail?".
-Operational/denormalized stores (Atlas) may opt back in to a chosen
-subset of satellites for query performance via
-[`scripts/build_atlas_target_dbml.py`](scripts/build_atlas_target_dbml.py).
-The canonical model stays clean.
+To make these gap-fills self-healing rather than ad-hoc, a future
+revision of `01_mirror.sh` should: (a) parse `crawl.log` for any
+non-2xx status and re-fetch each URL once with `curl`, and (b) walk
+every fetched resource page and confirm that every `dd-field-link`
+href has a corresponding on-disk file, fetching any missing ones.
+Both checks are cheap (sub-second) and make the mirror step idempotent.
 
-## 6. Reading Org%
+### 2. URL patterns
 
-Every Field row in `wiki/resources/<Resource>.md` carries one adoption
-percentage from RESO certification stats:
+Confirmed by pre-flight probe on 2026-05-04:
 
-| Column | Meaning | Source |
+| Page | URL pattern | Count |
 |---|---|---|
-| `Org%` | % of organizations that emit this field at least once | dd.reso.org page "Usage — Adoption XX% n of N Organizations" |
+| Index | `/DD2.0/` | 1 |
+| Resource | `/DD2.0/<Resource>/` | 41 (links counted on the index page) |
+| Field | `/DD2.0/<Resource>/<Field>/` | ~1,745 |
+| Lookup | `/DD2.0/lookups/<LookupName>/` (lowercase plural; confirmed via field page link) | ~222 |
+| Lookup value | `/DD2.0/lookups/<LookupName>/<ValueName>/` (URL-encoded spaces) | ~3,500 |
+| xref payload | `/DD2.0/xref/payload/<Payload>/` | small |
+| xref property-type | `/DD2.0/xref/property-type/<Type>/` | small |
+| xref status | `/DD2.0/xref/status/<Status>/` | small |
+| xref version-added | `/DD2.0/xref/version-added/<Version>/` | small |
 
-Read it as **adoption pressure**, not data quality. `Org% > 50%` means
-"most certified organizations publish this field at least once" — a
-strong signal that it is a safe canonical to depend on. `Org% < 10%`
-means "nearly nobody publishes this" — usually a niche or new field.
+Notes from the probe:
 
-`n / N` lives in `raw/field_metadata.csv` (`OrgAdopted` / `OrgTotal`).
-We carry the percentage in the Resource pages because that is the
-question the agent gets asked; the absolute counts stay in the raw
-CSV for forensic answers.
+- `https://dd.reso.org/robots.txt` returns 404. There is no
+  `robots.txt`, which is treated as "no restrictions" by wget. We
+  still pass `--execute robots=on` and snapshot the response body
+  (the styled 404 page) to `_meta/robots.txt` for the record.
+- Field pages are well-structured: the Definition prose lives in
+  `<div class="dd-definition-callout">`, the metadata cells in two
+  `<table class="dd-metadata-table">` tables under the "Details"
+  `<div class="dd-metadata-card">`, the adoption block in
+  `<div class="dd-usage">`, and the per-lookup-value preview in a
+  `<table class="dd-lookups-table">`.
+- The "Details" tables are key/value pairs (one `<th>` and one
+  `<td>` per row). Cells like `Source Resource` use the em-dash
+  character `—` to mean "not set" - the parser must treat `—` as
+  empty.
+- Field pages also embed the per-value lookup table (with each
+  value's definition). The parser will still mirror the dedicated
+  `/DD2.0/lookups/<Lookup>/<Value>/` pages because they may carry
+  additional context (e.g. version-added, synonyms) that the
+  embedded preview truncates.
 
-> Historical note: ddwiki.reso.org used to also publish a `Sys%`
-> (per-System) breakdown. RESO retired ddwiki and migrated to
-> dd.reso.org, which only exposes per-Organization adoption. Older
-> commits in this KB still reference `Sys%`; current files do not.
+### 3. Parse
 
-## TL;DR for the LLM
+```bash
+python3 scripts/02_parse_mirror.py
+```
 
-1. Read this page to remember naming, keys, lookups, lifecycle, Org%.
-2. Open `wiki/resources/<Resource>.md`.
-3. Find the field row in the Fields table.
-4. Cite using the dd.reso.org URL in the right-most `Source` column when prose context is needed.
-5. Never invent a field or a lookup value.
+Uses `beautifulsoup4 + lxml`. Walks `mirror/DD2.0/**/index.html` and
+emits structured CSVs under `raw/`:
+
+| File | Source pages | Captures |
+|---|---|---|
+| `resources.csv` | `/DD2.0/<Resource>/index.html` | name, description, field_count, source_url |
+| `fields.csv` | `/DD2.0/<Resource>/<Field>/index.html` | every metadata cell from the two tables on the page (Standard Name, Display Name, Group, Simple Data Type, Max Length, Max Precision, Synonyms, Status, BEDES, Lookup Status, Lookup, Property Types, Payloads, Spanish Name, French-Canadian Name, Status Change Date, Revised Date, Added in Version, Source Resource) + the Usage / Adoption block (OrgPct, OrgAdopted, OrgTotal) |
+| `field_definitions.csv` | same | full Definition prose verbatim, in a separate file because Definitions can be multi-paragraph and would dominate `fields.csv` width |
+| `lookups.csv` | `/DD2.0/<Lookup>/index.html` | once URL pattern is confirmed |
+| `lookup_values.csv` | `/DD2.0/<Lookup>/<Value>/index.html` | once URL pattern is confirmed |
+
+CSVs are sorted by `(Resource, StandardName)` (or equivalent) and use
+a stable column order. Re-running the parser on the same mirror
+produces a byte-identical output (so the only diffs in git come from
+real changes upstream).
+
+### 4. Verification gates
+
+`02_parse_mirror.py` ends with hard assertions. The script exits
+non-zero on any breach. We do NOT commit a partial / inconsistent
+mirror.
+
+Required gates:
+
+1. `resources.csv` has exactly N rows where N = number of resources
+   linked from the DD 2.0 index page (currently 41).
+2. `fields.csv` row count equals `sum(field_count)` over
+   `resources.csv` (currently 1,745).
+3. Every row in `fields.csv` has a corresponding non-empty Definition
+   in `field_definitions.csv`.
+4. Every URL in `_meta/manifest.json` has status 200 (no 4xx, no 5xx,
+   no missing entries).
+5. Every link found inside any resource page resolves to a fetched
+   field page in the mirror.
+6. (Once lookup URLs are confirmed:) `lookups.csv` and
+   `lookup_values.csv` row counts match the link counts found in
+   field pages.
+
+## What's deferred
+
+Phase 1 does NOT do any FK detection, satellite analysis, or DBML
+generation. Those are explicit Phase 2, 2.5, and 3 concerns and live
+in separate methodology sections that will be added when those phases
+land.

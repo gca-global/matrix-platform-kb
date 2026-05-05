@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+  <title>BuyerAgentDesignation - Lookups - DD 2.0 - RESO Data Dictionary</title>
+  <meta name="description" content="BuyerAgentDesignation - Lookups - DD 2.0 – RESO Data Dictionary documentation">
+  <meta property="og:title" content="BuyerAgentDesignation - Lookups - DD 2.0 - RESO Data Dictionary">
+  <meta property="og:description" content="BuyerAgentDesignation - Lookups - DD 2.0 – RESO Data Dictionary documentation">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RESO Data Dictionary">
+  <meta property="og:image" content="https://www.reso.org/wp-content/uploads/2020/06/RESO-Logo-Fullname_Horizontal_Blue.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="BuyerAgentDesignation - Lookups - DD 2.0 - RESO Data Dictionary">
+  <meta name="twitter:description" content="BuyerAgentDesignation - Lookups - DD 2.0 – RESO Data Dictionary documentation">
+  <meta name="twitter:image" content="https://www.reso.org/wp-content/uploads/2020/06/RESO-Logo-Fullname_Horizontal_Blue.png">
+  <link rel="stylesheet" href="../../../assets/dd.css">
+  <link href="../../../pagefind/pagefind-ui.css" rel="stylesheet">
+  <script>(function(){var t=localStorage.getItem('dd-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');})()</script>
+</head>
+<body data-version="2.0">
+  <header class="site-header">
+    <a href="https://dd.reso.org/" class="header-logo">
+      <img src="../../../assets/reso-logo-white.png" alt="RESO" />
+    </a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <nav class="header-nav" id="headerNav">
+      <a href="https://dd.reso.org/">Home</a>
+      <a href="https://reso.org">RESO.org</a>
+      <button class="search-trigger" id="searchTrigger" type="button">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        Search<kbd>/</kbd>
+      </button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <div class="dd-layout">
+    <aside class="dd-sidebar" id="ddSidebar">
+      <div class="dd-sidebar-header">
+        <div class="dd-sidebar-title">Data Dictionary</div>
+        <select class="dd-version-select" id="ddVersionSelect" onchange="window.location.href='/DD' + this.value + '/'">
+          <option value="1.7">DD 1.7</option>
+          <option value="2.0" selected>DD 2.0</option>
+          <option value="2.1">DD 2.1 (DRAFT)</option>
+        </select>
+      </div>
+      <div class="dd-sidebar-search" id="sidebarSearch">
+        <svg class="dd-sidebar-search-icon" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="sidebarSearchInput" name="search" placeholder="Search..." aria-label="Search" readonly />
+        <kbd>/</kbd>
+      </div>
+      <div class="dd-sidebar-section" data-section="about">
+<div class="dd-sidebar-section-title">About <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../../about/index.html" class="dd-nav-resource-link">Introduction</a></li>
+<li class="dd-nav-resource"><a href="../../about/release-guide/index.html" class="dd-nav-resource-link">Release Guide</a></li>
+<li class="dd-nav-resource"><a href="../../about/changelog/index.html" class="dd-nav-resource-link">Change Log</a></li>
+<li class="dd-nav-resource"><a href="../../about/certification/index.html" class="dd-nav-resource-link">Certification</a></li>
+<li class="dd-nav-resource"><a href="../../about/terms/index.html" class="dd-nav-resource-link">Terms and Definitions</a></li>
+<li class="dd-nav-resource"><a href="../../about/deprecated/index.html" class="dd-nav-resource-link">Deprecated Fields</a></li>
+<li class="dd-nav-resource"><a href="../../about/resources/index.html" class="dd-nav-resource-link">Resource Summary</a></li>
+<li class="dd-nav-resource"><a href="../../about/search-tips/index.html" class="dd-nav-resource-link">Search Tips</a></li>
+</ul>
+</div>
+<div class="dd-sidebar-section" data-section="resources">
+<div class="dd-sidebar-section-title">Resources <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource">
+  <a href="../../Property/index.html" class="dd-nav-resource-link">Property</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Business" class="dd-nav-group-link">Business</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Characteristics" class="dd-nav-group-link">Characteristics</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Equipment" class="dd-nav-group-link">Equipment</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Farming" class="dd-nav-group-link">Farming</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Financial" class="dd-nav-group-link">Financial</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-HOA" class="dd-nav-group-link">HOA</a>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Listing-AgentOffice" class="dd-nav-group-link">AgentOffice</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-BuyerAgent" class="dd-nav-group-link">BuyerAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-BuyerOffice" class="dd-nav-group-link">BuyerOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-BuyerTeam" class="dd-nav-group-link">BuyerTeam</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoBuyerAgent" class="dd-nav-group-link">CoBuyerAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoBuyerOffice" class="dd-nav-group-link">CoBuyerOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoListAgent" class="dd-nav-group-link">CoListAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoListOffice" class="dd-nav-group-link">CoListOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-ListAgent" class="dd-nav-group-link">ListAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-ListOffice" class="dd-nav-group-link">ListOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-ListTeam" class="dd-nav-group-link">ListTeam</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-Team" class="dd-nav-group-link">Team</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Closing" class="dd-nav-group-link">Closing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Compensation" class="dd-nav-group-link">Compensation</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Contract" class="dd-nav-group-link">Contract</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Dates" class="dd-nav-group-link">Dates</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Marketing" class="dd-nav-group-link">Marketing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Media" class="dd-nav-group-link">Media</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Price" class="dd-nav-group-link">Price</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Remarks" class="dd-nav-group-link">Remarks</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Showing" class="dd-nav-group-link">Showing</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Location" class="dd-nav-group-link">Location</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-Address" class="dd-nav-group-link">Address</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-Area" class="dd-nav-group-link">Area</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-GIS" class="dd-nav-group-link">GIS</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-School" class="dd-nav-group-link">School</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-OccupantOwner" class="dd-nav-group-link">OccupantOwner</a>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Structure" class="dd-nav-group-link">Structure</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Structure-Performance" class="dd-nav-group-link">Performance</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Structure-Performance-GreenMarketing" class="dd-nav-group-link">GreenMarketing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Structure-Performance-GreenVerification" class="dd-nav-group-link">GreenVerification</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Structure-Rooms" class="dd-nav-group-link">Rooms</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Tax" class="dd-nav-group-link">Tax</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-UnitTypes" class="dd-nav-group-link">UnitTypes</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Utilities" class="dd-nav-group-link">Utilities</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Association/index.html" class="dd-nav-resource-link">Association</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Caravan/index.html" class="dd-nav-resource-link">Caravan</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../CaravanStop/index.html" class="dd-nav-resource-link">CaravanStop</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ContactListingNotes/index.html" class="dd-nav-resource-link">ContactListingNotes</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ContactListings/index.html" class="dd-nav-resource-link">ContactListings</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Contacts/index.html" class="dd-nav-resource-link">Contacts</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../EntityEvent/index.html" class="dd-nav-resource-link">EntityEvent</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Field/index.html" class="dd-nav-resource-link">Field</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../HistoryTransactional/index.html" class="dd-nav-resource-link">HistoryTransactional</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../InternetTracking/index.html" class="dd-nav-resource-link">InternetTracking</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../InternetTracking/index.html#group-Actor" class="dd-nav-group-link">Actor</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../InternetTracking/index.html#group-Event" class="dd-nav-group-link">Event</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../InternetTracking/index.html#group-Object" class="dd-nav-group-link">Object</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../InternetTrackingSummary/index.html" class="dd-nav-resource-link">InternetTrackingSummary</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../LockOrBox/index.html" class="dd-nav-resource-link">LockOrBox</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Lookup/index.html" class="dd-nav-resource-link">Lookup</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Media/index.html" class="dd-nav-resource-link">Media</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../Media/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Member/index.html" class="dd-nav-resource-link">Member</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../MemberAssociation/index.html" class="dd-nav-resource-link">MemberAssociation</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../MemberStateLicense/index.html" class="dd-nav-resource-link">MemberStateLicense</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OUID/index.html" class="dd-nav-resource-link">OUID</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Office/index.html" class="dd-nav-resource-link">Office</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OfficeAssociation/index.html" class="dd-nav-resource-link">OfficeAssociation</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OfficeCorporateLicense/index.html" class="dd-nav-resource-link">OfficeCorporateLicense</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OpenHouse/index.html" class="dd-nav-resource-link">OpenHouse</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OtherPhone/index.html" class="dd-nav-resource-link">OtherPhone</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyGreenVerification/index.html" class="dd-nav-resource-link">PropertyGreenVerification</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyPowerProduction/index.html" class="dd-nav-resource-link">PropertyPowerProduction</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyPowerStorage/index.html" class="dd-nav-resource-link">PropertyPowerStorage</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyRooms/index.html" class="dd-nav-resource-link">PropertyRooms</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyUnitTypes/index.html" class="dd-nav-resource-link">PropertyUnitTypes</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Prospecting/index.html" class="dd-nav-resource-link">Prospecting</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Queue/index.html" class="dd-nav-resource-link">Queue</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Rules/index.html" class="dd-nav-resource-link">Rules</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../SavedSearch/index.html" class="dd-nav-resource-link">SavedSearch</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Showing/index.html" class="dd-nav-resource-link">Showing</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../Showing/index.html#group-Agent" class="dd-nav-group-link">Agent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Showing/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ShowingAppointment/index.html" class="dd-nav-resource-link">ShowingAppointment</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ShowingAvailability/index.html" class="dd-nav-resource-link">ShowingAvailability</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ShowingRequest/index.html" class="dd-nav-resource-link">ShowingRequest</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../SocialMedia/index.html" class="dd-nav-resource-link">SocialMedia</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../TeamMembers/index.html" class="dd-nav-resource-link">TeamMembers</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Teams/index.html" class="dd-nav-resource-link">Teams</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../TransactionManagement/index.html" class="dd-nav-resource-link">TransactionManagement</a>
+</li>
+</ul>
+</div>
+<div class="dd-sidebar-section expanded" data-section="lookups">
+<div class="dd-sidebar-section-title">Lookups <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../AccessibilityFeatures/index.html" class="dd-nav-resource-link">AccessibilityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../ActorType/index.html" class="dd-nav-resource-link">ActorType</a></li>
+<li class="dd-nav-resource"><a href="../Appliances/index.html" class="dd-nav-resource-link">Appliances</a></li>
+<li class="dd-nav-resource"><a href="../ArchitecturalStyle/index.html" class="dd-nav-resource-link">ArchitecturalStyle</a></li>
+<li class="dd-nav-resource"><a href="../AreaSource/index.html" class="dd-nav-resource-link">AreaSource</a></li>
+<li class="dd-nav-resource"><a href="../AreaUnits/index.html" class="dd-nav-resource-link">AreaUnits</a></li>
+<li class="dd-nav-resource"><a href="../AssociationAmenities/index.html" class="dd-nav-resource-link">AssociationAmenities</a></li>
+<li class="dd-nav-resource"><a href="../AssociationFeeIncludes/index.html" class="dd-nav-resource-link">AssociationFeeIncludes</a></li>
+<li class="dd-nav-resource"><a href="../AssociationStatus/index.html" class="dd-nav-resource-link">AssociationStatus</a></li>
+<li class="dd-nav-resource"><a href="../AssociationType/index.html" class="dd-nav-resource-link">AssociationType</a></li>
+<li class="dd-nav-resource"><a href="../Attended/index.html" class="dd-nav-resource-link">Attended</a></li>
+<li class="dd-nav-resource"><a href="../Basement/index.html" class="dd-nav-resource-link">Basement</a></li>
+<li class="dd-nav-resource"><a href="../BillingPreference/index.html" class="dd-nav-resource-link">BillingPreference</a></li>
+<li class="dd-nav-resource"><a href="../BodyType/index.html" class="dd-nav-resource-link">BodyType</a></li>
+<li class="dd-nav-resource"><a href="../BusinessType/index.html" class="dd-nav-resource-link">BusinessType</a></li>
+<li class="dd-nav-resource"><a href="index.html" class="dd-nav-resource-link active">BuyerAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../BuyerFinancing/index.html" class="dd-nav-resource-link">BuyerFinancing</a></li>
+<li class="dd-nav-resource"><a href="../CaravanAllowedClassNames/index.html" class="dd-nav-resource-link">CaravanAllowedClassNames</a></li>
+<li class="dd-nav-resource"><a href="../CaravanAllowedStatuses/index.html" class="dd-nav-resource-link">CaravanAllowedStatuses</a></li>
+<li class="dd-nav-resource"><a href="../CaravanResourceName/index.html" class="dd-nav-resource-link">CaravanResourceName</a></li>
+<li class="dd-nav-resource"><a href="../CaravanStatus/index.html" class="dd-nav-resource-link">CaravanStatus</a></li>
+<li class="dd-nav-resource"><a href="../CaravanStopAttended/index.html" class="dd-nav-resource-link">CaravanStopAttended</a></li>
+<li class="dd-nav-resource"><a href="../CaravanStopClassName/index.html" class="dd-nav-resource-link">CaravanStopClassName</a></li>
+<li class="dd-nav-resource"><a href="../CaravanType/index.html" class="dd-nav-resource-link">CaravanType</a></li>
+<li class="dd-nav-resource"><a href="../ChangeType/index.html" class="dd-nav-resource-link">ChangeType</a></li>
+<li class="dd-nav-resource"><a href="../ClassName/index.html" class="dd-nav-resource-link">ClassName</a></li>
+<li class="dd-nav-resource"><a href="../ClosetType/index.html" class="dd-nav-resource-link">ClosetType</a></li>
+<li class="dd-nav-resource"><a href="../CoBuyerAgentDesignation/index.html" class="dd-nav-resource-link">CoBuyerAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../CoListAgentDesignation/index.html" class="dd-nav-resource-link">CoListAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../CommonInterest/index.html" class="dd-nav-resource-link">CommonInterest</a></li>
+<li class="dd-nav-resource"><a href="../CommonWalls/index.html" class="dd-nav-resource-link">CommonWalls</a></li>
+<li class="dd-nav-resource"><a href="../CommunityFeatures/index.html" class="dd-nav-resource-link">CommunityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../CompensationType/index.html" class="dd-nav-resource-link">CompensationType</a></li>
+<li class="dd-nav-resource"><a href="../Concessions/index.html" class="dd-nav-resource-link">Concessions</a></li>
+<li class="dd-nav-resource"><a href="../ConstructionMaterials/index.html" class="dd-nav-resource-link">ConstructionMaterials</a></li>
+<li class="dd-nav-resource"><a href="../ContactListingPreference/index.html" class="dd-nav-resource-link">ContactListingPreference</a></li>
+<li class="dd-nav-resource"><a href="../ContactStatus/index.html" class="dd-nav-resource-link">ContactStatus</a></li>
+<li class="dd-nav-resource"><a href="../ContactType/index.html" class="dd-nav-resource-link">ContactType</a></li>
+<li class="dd-nav-resource"><a href="../Cooling/index.html" class="dd-nav-resource-link">Cooling</a></li>
+<li class="dd-nav-resource"><a href="../Country/index.html" class="dd-nav-resource-link">Country</a></li>
+<li class="dd-nav-resource"><a href="../CurrentFinancing/index.html" class="dd-nav-resource-link">CurrentFinancing</a></li>
+<li class="dd-nav-resource"><a href="../CurrentOrPossibleUse/index.html" class="dd-nav-resource-link">CurrentOrPossibleUse</a></li>
+<li class="dd-nav-resource"><a href="../DailySchedule/index.html" class="dd-nav-resource-link">DailySchedule</a></li>
+<li class="dd-nav-resource"><a href="../DevelopmentStatus/index.html" class="dd-nav-resource-link">DevelopmentStatus</a></li>
+<li class="dd-nav-resource"><a href="../DeviceType/index.html" class="dd-nav-resource-link">DeviceType</a></li>
+<li class="dd-nav-resource"><a href="../DirectionFaces/index.html" class="dd-nav-resource-link">DirectionFaces</a></li>
+<li class="dd-nav-resource"><a href="../DocumentStatus/index.html" class="dd-nav-resource-link">DocumentStatus</a></li>
+<li class="dd-nav-resource"><a href="../DoorFeatures/index.html" class="dd-nav-resource-link">DoorFeatures</a></li>
+<li class="dd-nav-resource"><a href="../Electric/index.html" class="dd-nav-resource-link">Electric</a></li>
+<li class="dd-nav-resource"><a href="../EventSource/index.html" class="dd-nav-resource-link">EventSource</a></li>
+<li class="dd-nav-resource"><a href="../EventTarget/index.html" class="dd-nav-resource-link">EventTarget</a></li>
+<li class="dd-nav-resource"><a href="../EventType/index.html" class="dd-nav-resource-link">EventType</a></li>
+<li class="dd-nav-resource"><a href="../ExistingLeaseType/index.html" class="dd-nav-resource-link">ExistingLeaseType</a></li>
+<li class="dd-nav-resource"><a href="../ExteriorFeatures/index.html" class="dd-nav-resource-link">ExteriorFeatures</a></li>
+<li class="dd-nav-resource"><a href="../FeeFrequency/index.html" class="dd-nav-resource-link">FeeFrequency</a></li>
+<li class="dd-nav-resource"><a href="../Fencing/index.html" class="dd-nav-resource-link">Fencing</a></li>
+<li class="dd-nav-resource"><a href="../FhaEligibility/index.html" class="dd-nav-resource-link">FhaEligibility</a></li>
+<li class="dd-nav-resource"><a href="../FinancialDataSource/index.html" class="dd-nav-resource-link">FinancialDataSource</a></li>
+<li class="dd-nav-resource"><a href="../FireplaceFeatures/index.html" class="dd-nav-resource-link">FireplaceFeatures</a></li>
+<li class="dd-nav-resource"><a href="../Flooring/index.html" class="dd-nav-resource-link">Flooring</a></li>
+<li class="dd-nav-resource"><a href="../FoundationDetails/index.html" class="dd-nav-resource-link">FoundationDetails</a></li>
+<li class="dd-nav-resource"><a href="../FrontageType/index.html" class="dd-nav-resource-link">FrontageType</a></li>
+<li class="dd-nav-resource"><a href="../Furnished/index.html" class="dd-nav-resource-link">Furnished</a></li>
+<li class="dd-nav-resource"><a href="../GreenBuildingVerificationType/index.html" class="dd-nav-resource-link">GreenBuildingVerificationType</a></li>
+<li class="dd-nav-resource"><a href="../GreenEnergyEfficient/index.html" class="dd-nav-resource-link">GreenEnergyEfficient</a></li>
+<li class="dd-nav-resource"><a href="../GreenEnergyGeneration/index.html" class="dd-nav-resource-link">GreenEnergyGeneration</a></li>
+<li class="dd-nav-resource"><a href="../GreenIndoorAirQuality/index.html" class="dd-nav-resource-link">GreenIndoorAirQuality</a></li>
+<li class="dd-nav-resource"><a href="../GreenSustainability/index.html" class="dd-nav-resource-link">GreenSustainability</a></li>
+<li class="dd-nav-resource"><a href="../GreenVerificationSource/index.html" class="dd-nav-resource-link">GreenVerificationSource</a></li>
+<li class="dd-nav-resource"><a href="../GreenVerificationStatus/index.html" class="dd-nav-resource-link">GreenVerificationStatus</a></li>
+<li class="dd-nav-resource"><a href="../GreenWaterConservation/index.html" class="dd-nav-resource-link">GreenWaterConservation</a></li>
+<li class="dd-nav-resource"><a href="../Heating/index.html" class="dd-nav-resource-link">Heating</a></li>
+<li class="dd-nav-resource"><a href="../HorseAmenities/index.html" class="dd-nav-resource-link">HorseAmenities</a></li>
+<li class="dd-nav-resource"><a href="../HoursDaysOfOperation/index.html" class="dd-nav-resource-link">HoursDaysOfOperation</a></li>
+<li class="dd-nav-resource"><a href="../IanaTimeZoneValues/index.html" class="dd-nav-resource-link">IanaTimeZoneValues</a></li>
+<li class="dd-nav-resource"><a href="../ImageOf/index.html" class="dd-nav-resource-link">ImageOf</a></li>
+<li class="dd-nav-resource"><a href="../IncomeIncludes/index.html" class="dd-nav-resource-link">IncomeIncludes</a></li>
+<li class="dd-nav-resource"><a href="../InteriorOrRoomFeatures/index.html" class="dd-nav-resource-link">InteriorOrRoomFeatures</a></li>
+<li class="dd-nav-resource"><a href="../LaborInformation/index.html" class="dd-nav-resource-link">LaborInformation</a></li>
+<li class="dd-nav-resource"><a href="../Languages/index.html" class="dd-nav-resource-link">Languages</a></li>
+<li class="dd-nav-resource"><a href="../LaundryFeatures/index.html" class="dd-nav-resource-link">LaundryFeatures</a></li>
+<li class="dd-nav-resource"><a href="../LeaseRenewalCompensation/index.html" class="dd-nav-resource-link">LeaseRenewalCompensation</a></li>
+<li class="dd-nav-resource"><a href="../LeaseTerm/index.html" class="dd-nav-resource-link">LeaseTerm</a></li>
+<li class="dd-nav-resource"><a href="../Levels/index.html" class="dd-nav-resource-link">Levels</a></li>
+<li class="dd-nav-resource"><a href="../LinearUnits/index.html" class="dd-nav-resource-link">LinearUnits</a></li>
+<li class="dd-nav-resource"><a href="../ListAgentDesignation/index.html" class="dd-nav-resource-link">ListAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../ListingAgreement/index.html" class="dd-nav-resource-link">ListingAgreement</a></li>
+<li class="dd-nav-resource"><a href="../ListingService/index.html" class="dd-nav-resource-link">ListingService</a></li>
+<li class="dd-nav-resource"><a href="../ListingTerms/index.html" class="dd-nav-resource-link">ListingTerms</a></li>
+<li class="dd-nav-resource"><a href="../ListingURLDescription/index.html" class="dd-nav-resource-link">ListingURLDescription</a></li>
+<li class="dd-nav-resource"><a href="../LockBoxType/index.html" class="dd-nav-resource-link">LockBoxType</a></li>
+<li class="dd-nav-resource"><a href="../LockOrBoxAccessType/index.html" class="dd-nav-resource-link">LockOrBoxAccessType</a></li>
+<li class="dd-nav-resource"><a href="../LotDimensionsSource/index.html" class="dd-nav-resource-link">LotDimensionsSource</a></li>
+<li class="dd-nav-resource"><a href="../LotFeatures/index.html" class="dd-nav-resource-link">LotFeatures</a></li>
+<li class="dd-nav-resource"><a href="../LotSizeSource/index.html" class="dd-nav-resource-link">LotSizeSource</a></li>
+<li class="dd-nav-resource"><a href="../LotSizeUnits/index.html" class="dd-nav-resource-link">LotSizeUnits</a></li>
+<li class="dd-nav-resource"><a href="../MediaAlteration/index.html" class="dd-nav-resource-link">MediaAlteration</a></li>
+<li class="dd-nav-resource"><a href="../MediaCategory/index.html" class="dd-nav-resource-link">MediaCategory</a></li>
+<li class="dd-nav-resource"><a href="../MediaType/index.html" class="dd-nav-resource-link">MediaType</a></li>
+<li class="dd-nav-resource"><a href="../MemberAssociationBillStatus/index.html" class="dd-nav-resource-link">MemberAssociationBillStatus</a></li>
+<li class="dd-nav-resource"><a href="../MemberDesignation/index.html" class="dd-nav-resource-link">MemberDesignation</a></li>
+<li class="dd-nav-resource"><a href="../MemberOtherPhoneType/index.html" class="dd-nav-resource-link">MemberOtherPhoneType</a></li>
+<li class="dd-nav-resource"><a href="../MemberStateLicenseType/index.html" class="dd-nav-resource-link">MemberStateLicenseType</a></li>
+<li class="dd-nav-resource"><a href="../MemberStatus/index.html" class="dd-nav-resource-link">MemberStatus</a></li>
+<li class="dd-nav-resource"><a href="../MemberType/index.html" class="dd-nav-resource-link">MemberType</a></li>
+<li class="dd-nav-resource"><a href="../NotedBy/index.html" class="dd-nav-resource-link">NotedBy</a></li>
+<li class="dd-nav-resource"><a href="../ObjectIdType/index.html" class="dd-nav-resource-link">ObjectIdType</a></li>
+<li class="dd-nav-resource"><a href="../ObjectType/index.html" class="dd-nav-resource-link">ObjectType</a></li>
+<li class="dd-nav-resource"><a href="../OccupantType/index.html" class="dd-nav-resource-link">OccupantType</a></li>
+<li class="dd-nav-resource"><a href="../OfficeAssociationPrimaryIndicator/index.html" class="dd-nav-resource-link">OfficeAssociationPrimaryIndicator</a></li>
+<li class="dd-nav-resource"><a href="../OfficeBranchType/index.html" class="dd-nav-resource-link">OfficeBranchType</a></li>
+<li class="dd-nav-resource"><a href="../OfficeCorporateLicenseType/index.html" class="dd-nav-resource-link">OfficeCorporateLicenseType</a></li>
+<li class="dd-nav-resource"><a href="../OfficeStatus/index.html" class="dd-nav-resource-link">OfficeStatus</a></li>
+<li class="dd-nav-resource"><a href="../OfficeType/index.html" class="dd-nav-resource-link">OfficeType</a></li>
+<li class="dd-nav-resource"><a href="../OpenHouseStatus/index.html" class="dd-nav-resource-link">OpenHouseStatus</a></li>
+<li class="dd-nav-resource"><a href="../OpenHouseType/index.html" class="dd-nav-resource-link">OpenHouseType</a></li>
+<li class="dd-nav-resource"><a href="../OperatingExpenseIncludes/index.html" class="dd-nav-resource-link">OperatingExpenseIncludes</a></li>
+<li class="dd-nav-resource"><a href="../OtherEquipment/index.html" class="dd-nav-resource-link">OtherEquipment</a></li>
+<li class="dd-nav-resource"><a href="../OtherPhoneType/index.html" class="dd-nav-resource-link">OtherPhoneType</a></li>
+<li class="dd-nav-resource"><a href="../OtherStructures/index.html" class="dd-nav-resource-link">OtherStructures</a></li>
+<li class="dd-nav-resource"><a href="../OwnerPays/index.html" class="dd-nav-resource-link">OwnerPays</a></li>
+<li class="dd-nav-resource"><a href="../OwnershipType/index.html" class="dd-nav-resource-link">OwnershipType</a></li>
+<li class="dd-nav-resource"><a href="../ParkingFeatures/index.html" class="dd-nav-resource-link">ParkingFeatures</a></li>
+<li class="dd-nav-resource"><a href="../PatioAndPorchFeatures/index.html" class="dd-nav-resource-link">PatioAndPorchFeatures</a></li>
+<li class="dd-nav-resource"><a href="../Permission/index.html" class="dd-nav-resource-link">Permission</a></li>
+<li class="dd-nav-resource"><a href="../PetsAllowed/index.html" class="dd-nav-resource-link">PetsAllowed</a></li>
+<li class="dd-nav-resource"><a href="../PoolFeatures/index.html" class="dd-nav-resource-link">PoolFeatures</a></li>
+<li class="dd-nav-resource"><a href="../Possession/index.html" class="dd-nav-resource-link">Possession</a></li>
+<li class="dd-nav-resource"><a href="../PowerProductionAnnualStatus/index.html" class="dd-nav-resource-link">PowerProductionAnnualStatus</a></li>
+<li class="dd-nav-resource"><a href="../PowerProductionOwnership/index.html" class="dd-nav-resource-link">PowerProductionOwnership</a></li>
+<li class="dd-nav-resource"><a href="../PowerProductionType/index.html" class="dd-nav-resource-link">PowerProductionType</a></li>
+<li class="dd-nav-resource"><a href="../PowerStorageType/index.html" class="dd-nav-resource-link">PowerStorageType</a></li>
+<li class="dd-nav-resource"><a href="../PreferredAddress/index.html" class="dd-nav-resource-link">PreferredAddress</a></li>
+<li class="dd-nav-resource"><a href="../PreferredMail/index.html" class="dd-nav-resource-link">PreferredMail</a></li>
+<li class="dd-nav-resource"><a href="../PreferredMedia/index.html" class="dd-nav-resource-link">PreferredMedia</a></li>
+<li class="dd-nav-resource"><a href="../PreferredPhone/index.html" class="dd-nav-resource-link">PreferredPhone</a></li>
+<li class="dd-nav-resource"><a href="../PreferredPublication/index.html" class="dd-nav-resource-link">PreferredPublication</a></li>
+<li class="dd-nav-resource"><a href="../PropertyCondition/index.html" class="dd-nav-resource-link">PropertyCondition</a></li>
+<li class="dd-nav-resource"><a href="../PropertySubType/index.html" class="dd-nav-resource-link">PropertySubType</a></li>
+<li class="dd-nav-resource"><a href="../PropertyType/index.html" class="dd-nav-resource-link">PropertyType</a></li>
+<li class="dd-nav-resource"><a href="../QueueTransactionType/index.html" class="dd-nav-resource-link">QueueTransactionType</a></li>
+<li class="dd-nav-resource"><a href="../ReasonActiveOrDisabled/index.html" class="dd-nav-resource-link">ReasonActiveOrDisabled</a></li>
+<li class="dd-nav-resource"><a href="../RentIncludes/index.html" class="dd-nav-resource-link">RentIncludes</a></li>
+<li class="dd-nav-resource"><a href="../ResourceName/index.html" class="dd-nav-resource-link">ResourceName</a></li>
+<li class="dd-nav-resource"><a href="../ResponseTypes/index.html" class="dd-nav-resource-link">ResponseTypes</a></li>
+<li class="dd-nav-resource"><a href="../RoadFrontageType/index.html" class="dd-nav-resource-link">RoadFrontageType</a></li>
+<li class="dd-nav-resource"><a href="../RoadResponsibility/index.html" class="dd-nav-resource-link">RoadResponsibility</a></li>
+<li class="dd-nav-resource"><a href="../RoadSurfaceType/index.html" class="dd-nav-resource-link">RoadSurfaceType</a></li>
+<li class="dd-nav-resource"><a href="../Roof/index.html" class="dd-nav-resource-link">Roof</a></li>
+<li class="dd-nav-resource"><a href="../RoomLengthWidthSource/index.html" class="dd-nav-resource-link">RoomLengthWidthSource</a></li>
+<li class="dd-nav-resource"><a href="../RoomLevel/index.html" class="dd-nav-resource-link">RoomLevel</a></li>
+<li class="dd-nav-resource"><a href="../RoomType/index.html" class="dd-nav-resource-link">RoomType</a></li>
+<li class="dd-nav-resource"><a href="../RuleFormat/index.html" class="dd-nav-resource-link">RuleFormat</a></li>
+<li class="dd-nav-resource"><a href="../ScheduleType/index.html" class="dd-nav-resource-link">ScheduleType</a></li>
+<li class="dd-nav-resource"><a href="../SearchQueryType/index.html" class="dd-nav-resource-link">SearchQueryType</a></li>
+<li class="dd-nav-resource"><a href="../SecurityFeatures/index.html" class="dd-nav-resource-link">SecurityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../Sewer/index.html" class="dd-nav-resource-link">Sewer</a></li>
+<li class="dd-nav-resource"><a href="../ShowingAppointmentMethod/index.html" class="dd-nav-resource-link">ShowingAppointmentMethod</a></li>
+<li class="dd-nav-resource"><a href="../ShowingAppointmentStatus/index.html" class="dd-nav-resource-link">ShowingAppointmentStatus</a></li>
+<li class="dd-nav-resource"><a href="../ShowingConsiderations/index.html" class="dd-nav-resource-link">ShowingConsiderations</a></li>
+<li class="dd-nav-resource"><a href="../ShowingContactType/index.html" class="dd-nav-resource-link">ShowingContactType</a></li>
+<li class="dd-nav-resource"><a href="../ShowingMethod/index.html" class="dd-nav-resource-link">ShowingMethod</a></li>
+<li class="dd-nav-resource"><a href="../ShowingMethodRequest/index.html" class="dd-nav-resource-link">ShowingMethodRequest</a></li>
+<li class="dd-nav-resource"><a href="../ShowingRequestType/index.html" class="dd-nav-resource-link">ShowingRequestType</a></li>
+<li class="dd-nav-resource"><a href="../ShowingRequestor/index.html" class="dd-nav-resource-link">ShowingRequestor</a></li>
+<li class="dd-nav-resource"><a href="../ShowingRequirements/index.html" class="dd-nav-resource-link">ShowingRequirements</a></li>
+<li class="dd-nav-resource"><a href="../ShowingServiceName/index.html" class="dd-nav-resource-link">ShowingServiceName</a></li>
+<li class="dd-nav-resource"><a href="../ShowingStatus/index.html" class="dd-nav-resource-link">ShowingStatus</a></li>
+<li class="dd-nav-resource"><a href="../Skirt/index.html" class="dd-nav-resource-link">Skirt</a></li>
+<li class="dd-nav-resource"><a href="../SocialMediaType/index.html" class="dd-nav-resource-link">SocialMediaType</a></li>
+<li class="dd-nav-resource"><a href="../SpaFeatures/index.html" class="dd-nav-resource-link">SpaFeatures</a></li>
+<li class="dd-nav-resource"><a href="../SpecialLicenses/index.html" class="dd-nav-resource-link">SpecialLicenses</a></li>
+<li class="dd-nav-resource"><a href="../SpecialListingConditions/index.html" class="dd-nav-resource-link">SpecialListingConditions</a></li>
+<li class="dd-nav-resource"><a href="../StandardStatus/index.html" class="dd-nav-resource-link">StandardStatus</a></li>
+<li class="dd-nav-resource"><a href="../StateOrProvince/index.html" class="dd-nav-resource-link">StateOrProvince</a></li>
+<li class="dd-nav-resource"><a href="../StreetDirection/index.html" class="dd-nav-resource-link">StreetDirection</a></li>
+<li class="dd-nav-resource"><a href="../StructureType/index.html" class="dd-nav-resource-link">StructureType</a></li>
+<li class="dd-nav-resource"><a href="../SyndicateTo/index.html" class="dd-nav-resource-link">SyndicateTo</a></li>
+<li class="dd-nav-resource"><a href="../TaxStatusCurrent/index.html" class="dd-nav-resource-link">TaxStatusCurrent</a></li>
+<li class="dd-nav-resource"><a href="../TeamMemberType/index.html" class="dd-nav-resource-link">TeamMemberType</a></li>
+<li class="dd-nav-resource"><a href="../TeamStatus/index.html" class="dd-nav-resource-link">TeamStatus</a></li>
+<li class="dd-nav-resource"><a href="../TenantPays/index.html" class="dd-nav-resource-link">TenantPays</a></li>
+<li class="dd-nav-resource"><a href="../TrackingType/index.html" class="dd-nav-resource-link">TrackingType</a></li>
+<li class="dd-nav-resource"><a href="../TransactionType/index.html" class="dd-nav-resource-link">TransactionType</a></li>
+<li class="dd-nav-resource"><a href="../UnitTypeType/index.html" class="dd-nav-resource-link">UnitTypeType</a></li>
+<li class="dd-nav-resource"><a href="../UnitsFurnished/index.html" class="dd-nav-resource-link">UnitsFurnished</a></li>
+<li class="dd-nav-resource"><a href="../Utilities/index.html" class="dd-nav-resource-link">Utilities</a></li>
+<li class="dd-nav-resource"><a href="../Vegetation/index.html" class="dd-nav-resource-link">Vegetation</a></li>
+<li class="dd-nav-resource"><a href="../View/index.html" class="dd-nav-resource-link">View</a></li>
+<li class="dd-nav-resource"><a href="../WaterSource/index.html" class="dd-nav-resource-link">WaterSource</a></li>
+<li class="dd-nav-resource"><a href="../WaterfrontFeatures/index.html" class="dd-nav-resource-link">WaterfrontFeatures</a></li>
+<li class="dd-nav-resource"><a href="../WindowFeatures/index.html" class="dd-nav-resource-link">WindowFeatures</a></li>
+<li class="dd-nav-resource"><a href="../YearBuiltSource/index.html" class="dd-nav-resource-link">YearBuiltSource</a></li>
+</ul>
+</div>
+<div class="dd-sidebar-section" data-section="browse-by">
+<div class="dd-sidebar-section-title">Browse By <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../../xref/payload/index.html" class="dd-nav-resource-link">Payload</a></li>
+<li class="dd-nav-resource"><a href="../../xref/property-type/index.html" class="dd-nav-resource-link">Property Type</a></li>
+<li class="dd-nav-resource"><a href="../../xref/status/index.html" class="dd-nav-resource-link">Element Status</a></li>
+<li class="dd-nav-resource"><a href="../../xref/version-added/index.html" class="dd-nav-resource-link">Version Added</a></li>
+</ul>
+</div>
+
+    </aside>
+
+    <div class="dd-sidebar-overlay" id="ddSidebarOverlay"></div>
+    <button class="dd-sidebar-toggle" id="ddSidebarToggle" type="button" aria-label="Toggle sidebar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+
+    <div class="dd-content" data-pagefind-body data-pagefind-filter="dd-version:2.0" data-pagefind-meta="dd-version:DD 2.0">
+      <div class="dd-resource-sticky"><div class="dd-condensed-title">BuyerAgentDesignation Lookup</div><nav class="dd-breadcrumb" data-pagefind-ignore><a href="https://dd.reso.org/">Data Dictionary</a> <span class="dd-breadcrumb-sep">/</span> <a href="../../index.html">DD 2.0</a> <span class="dd-breadcrumb-sep">/</span> <a href="../index.html">Lookups</a> <span class="dd-breadcrumb-sep">/</span> <span>BuyerAgentDesignation</span></nav><div class="dd-page-header"><h1>BuyerAgentDesignation Lookup</h1><p class="dd-page-subtitle">27 values &middot; Used by 1 field</p></div><div class="dd-table-filter"><input type="text" name="filter" placeholder="Filter values..." aria-label="Filter values" /><span class="dd-table-filter-count"></span></div></div><div class="dd-sticky-col-headers"><table><colgroup><col style="width:25%"><col><col style="width:12%"></colgroup><tr><th>Lookup Value</th><th>Definition</th><th>Status</th></tr></table></div><div class="dd-fields-table-wrapper"><table class="dd-fields-table dd-lookup-table"><colgroup><col style="width:25%"><col><col style="width:12%"></colgroup><thead><tr><th>Lookup Value</th><th>Definition</th><th>Status</th></tr></thead><tbody><tr><td><a href="Accredited&#32;Buyer's&#32;Representative&#32;%252F&#32;ABR/index.html" class="dd-field-link">Accredited Buyer's Representative / ABR</a><div class="dd-field-standard-name">AccreditedBuyersRepresentative</div></td><td class="dd-field-def">The Accredited Buyer’s Representative (ABR®) designation is designed for real estate buyer agents who focus on working directly with buyer-clients....</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Accredited&#32;Land&#32;Consultant&#32;%252F&#32;ALC/index.html" class="dd-field-link">Accredited Land Consultant / ALC</a><div class="dd-field-standard-name">AccreditedLandConsultant</div></td><td class="dd-field-def">Accredited Land Consultants (ALCs) are the most trusted, knowledgeable, experienced and highest-producing experts in all segments of land. Conferred...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="At&#32;Home&#32;With&#32;Diversity&#32;%252F&#32;AHWD/index.html" class="dd-field-link">At Home With Diversity / AHWD</a><div class="dd-field-standard-name">AtHomeWithDiversity</div></td><td class="dd-field-def">Learn to work effectively with and within today’s diverse real estate market. The At Home With Diversity certification teaches you how to conduct...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Certified&#32;Commercial&#32;Investment&#32;Member&#32;%252F&#32;CCIM/index.html" class="dd-field-link">Certified Commercial Investment Member / CCIM</a><div class="dd-field-standard-name">CertifiedCommercialInvestmentMember</div></td><td class="dd-field-def">The Certified Commercial Investment Member (CCIM) designation is commercial real estate’s global standard for professional achievement, earned...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Certified&#32;Distressed&#32;Property&#32;Expert&#32;%252F&#32;CDPE/index.html" class="dd-field-link">Certified Distressed Property Expert / CDPE</a><div class="dd-field-standard-name">CertifiedDistressedPropertyExpert</div></td><td class="dd-field-def">A Certified Distressed Property Expert® (CDPE) has a thorough understanding of complex issues in today’s turbulent real estate industry and knowledge...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Certified&#32;International&#32;Property&#32;Specialist&#32;%252F&#32;CIPS/index.html" class="dd-field-link">Certified International Property Specialist / CIPS</a><div class="dd-field-standard-name">CertifiedInternationalPropertySpecialist</div></td><td class="dd-field-def">The CIPS designation is for REALTORS® from the United States and abroad, as well as association staff and volunteer leaders who wish to develop or...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Certified&#32;Property&#32;Manager&#32;%252F&#32;CPM/index.html" class="dd-field-link">Certified Property Manager / CPM</a><div class="dd-field-standard-name">CertifiedPropertyManager</div></td><td class="dd-field-def">Certified Property Managers® (CPM®) are recognized as experts in real estate management, and they are at the top of the profession. Seventy percent...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Certified&#32;Real&#32;Estate&#32;Brokerage&#32;Manager&#32;%252F&#32;CRB/index.html" class="dd-field-link">Certified Real Estate Brokerage Manager / CRB</a><div class="dd-field-standard-name">CertifiedRealEstateBrokerageManager</div></td><td class="dd-field-def">The Certified Real Estate Brokerage Manager (CRB) Designation raises professional standards, strengthens individual and office performance, and...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Certified&#32;Real&#32;Estate&#32;Team&#32;Specialist&#32;%252F&#32;C-RETS/index.html" class="dd-field-link">Certified Real Estate Team Specialist / C-RETS</a><div class="dd-field-standard-name">CertifiedRealEstateTeamSpecialist</div></td><td class="dd-field-def">The Certified Real Estate Team Specialist certification is designed to improve team development, individual leadership skills and financial...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Certified&#32;Residential&#32;Specialist&#32;%252F&#32;CRS/index.html" class="dd-field-link">Certified Residential Specialist / CRS</a><div class="dd-field-standard-name">CertifiedResidentialSpecialist</div></td><td class="dd-field-def">Certified Residential Specialist (CRS) is the highest credential awarded to residential sales agents, managers and brokers....</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Counselor&#32;of&#32;Real&#32;Estate&#32;%252F&#32;CRE/index.html" class="dd-field-link">Counselor of Real Estate / CRE</a><div class="dd-field-standard-name">CounselorOfRealEstate</div></td><td class="dd-field-def">The Counselors of Real Estate® (CRE®) is an international group of recognized professionals who provide seasoned, expert, objective advice on real...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="e-PRO/index.html" class="dd-field-link">e-PRO</a><div class="dd-field-standard-name">ePRO</div></td><td class="dd-field-def">NAR's e-PRO® certification teaches you to use cutting-edge technologies and digital initiatives to link up with today's savvy real estate consumer....</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="General&#32;Accredited&#32;Appraiser&#32;%252F&#32;GAA/index.html" class="dd-field-link">General Accredited Appraiser / GAA</a><div class="dd-field-standard-name">GeneralAccreditedAppraiser</div></td><td class="dd-field-def">For general appraisers, this designation is awarded to those whose education and experience exceed state appraisal certification requirements and is...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Graduate,&#32;REALTOR&#32;Institute&#32;%252F&#32;GRI/index.html" class="dd-field-link">Graduate, REALTOR Institute / GRI</a><div class="dd-field-standard-name">GraduateRealtorInstitute</div></td><td class="dd-field-def">REALTORS® with the GRI designation have in-depth training in legal and regulatory issues, technology, professional standards, and the sales process....</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Military&#32;Relocation&#32;Professional&#32;%252F&#32;MRP/index.html" class="dd-field-link">Military Relocation Professional / MRP</a><div class="dd-field-standard-name">MilitaryRelocationProfessional</div></td><td class="dd-field-def">The National Association of REALTORS® Military Relocation Professional certification focuses on educating real estate professionals about working...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NAR's&#32;Green&#32;Designation&#32;%252F&#32;GREEN/index.html" class="dd-field-link">NAR's Green Designation / GREEN</a><div class="dd-field-standard-name">NARsGreenDesignation</div></td><td class="dd-field-def">Through the National Association of REALTORS® Green designation, the Green Resource Council provides ongoing education, resources and tools to help...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Performance&#32;Management&#32;Network&#32;%252F&#32;PMN/index.html" class="dd-field-link">Performance Management Network / PMN</a><div class="dd-field-standard-name">PerformanceManagementNetwork</div></td><td class="dd-field-def">This designation is unique to the REALTOR® family of designations, emphasizing that in order to enhance your business, you must enhance yourself. It...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Pricing&#32;Strategy&#32;Advisor&#32;%252F&#32;PSA/index.html" class="dd-field-link">Pricing Strategy Advisor / PSA</a><div class="dd-field-standard-name">PricingStrategyAdvisor</div></td><td class="dd-field-def">Enhance your skills in pricing properties, creating CMAs (comparative market analysis), working with appraisers and guiding clients through the...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Real&#32;Estate&#32;Negotiation&#32;Expert&#32;%252F&#32;RENE/index.html" class="dd-field-link">Real Estate Negotiation Expert / RENE</a><div class="dd-field-standard-name">RealEstateNegotiationExpert</div></td><td class="dd-field-def">This certification is for real estate professionals who want to sharpen their negotiation skills. The RENE certification program gives REALTORS® the...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="REALTOR&#32;Association&#32;Certified&#32;Executive&#32;%252F&#32;RCE/index.html" class="dd-field-link">REALTOR Association Certified Executive / RCE</a><div class="dd-field-standard-name">RealtorAssociationCertifiedExecutive</div></td><td class="dd-field-def">The REALTOR® Association Certified Executive (RCE) is the only professional designation designed specifically for REALTOR® association executives....</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Residential&#32;Accredited&#32;Appraiser&#32;%252F&#32;RAA/index.html" class="dd-field-link">Residential Accredited Appraiser / RAA</a><div class="dd-field-standard-name">ResidentialAccreditedAppraiser</div></td><td class="dd-field-def">For residential appraisers, this designation is awarded to those whose education and experience exceed state appraisal certification requirements and...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Resort&#32;&amp;&#32;Second-Home&#32;Property&#32;Specialist&#32;%252F&#32;RSPS/index.html" class="dd-field-link">Resort &amp; Second-Home Property Specialist / RSPS</a><div class="dd-field-standard-name">ResortAndSecondHomePropertySpecialist</div></td><td class="dd-field-def">This certification is designed for REALTORS® who facilitate the buying, selling or management of properties for investment, development, retirement...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Seller&#32;Representative&#32;Specialist&#32;%252F&#32;SRS/index.html" class="dd-field-link">Seller Representative Specialist / SRS</a><div class="dd-field-standard-name">SellerRepresentativeSpecialist</div></td><td class="dd-field-def">The Seller Representative Specialist (SRS) designation is the premier credential in seller representation. It is designed to elevate professional...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Seniors&#32;Real&#32;Estate&#32;Specialist&#32;%252F&#32;SRES/index.html" class="dd-field-link">Seniors Real Estate Specialist / SRES</a><div class="dd-field-standard-name">SeniorsRealEstateSpecialist</div></td><td class="dd-field-def">The Seniors Real Estate Specialist (SRES®) designation program educates REALTORS® on how to profitably and ethically serve the real estate needs of...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Short&#32;Sales&#32;&amp;&#32;Foreclosure&#32;Resource&#32;%252F&#32;SFR/index.html" class="dd-field-link">Short Sales &amp; Foreclosure Resource / SFR</a><div class="dd-field-standard-name">ShortSalesAndForeclosureResource</div></td><td class="dd-field-def">The Short Sales &amp; Foreclosure Resource (SFR®) certification teaches real estate professionals to work with distressed sellers and the finance, tax...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Society&#32;of&#32;Industrial&#32;and&#32;Office&#32;REALTORS&#32;%252F&#32;SIOR/index.html" class="dd-field-link">Society of Industrial and Office REALTORS / SIOR</a><div class="dd-field-standard-name">SocietyOfIndustrialAndOfficeRealtors</div></td><td class="dd-field-def">The Society of Industrial and Office REALTORS® (SIOR) designation is held by only the most knowledgeable, experienced and successful commercial real...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="Transnational&#32;Referral&#32;Certification&#32;%252F&#32;TRC/index.html" class="dd-field-link">Transnational Referral Certification / TRC</a><div class="dd-field-standard-name">TransnationalReferralCertification</div></td><td class="dd-field-def">Real estate professionals who have taken the Transnational Referral Certified (TRC) training, have completed special training on making and receiving...</td><td><span class="dd-type-badge">Active</span></td></tr></tbody></table></div><div class="dd-metadata-card"><h2>Used By</h2><table class="dd-fields-table"><thead><tr><th>Resource</th><th>Field</th><th>Display Name</th><th class="dd-col-usage">Usage</th></tr></thead><tbody><tr><td><a href="../../Property/index.html" class="dd-field-link">Property</a></td><td><a href="../../Property/BuyerAgentDesignation/index.html" class="dd-field-link">BuyerAgentDesignation</a></td><td>Buyer Agent Designation</td><td class="dd-col-usage"><span class="dd-usage-badge">30%</span></td></tr></tbody></table></div>
+      <div class="dd-page-generated"><a href="../../about/terms/index.html" target="_blank">Terms and Definitions</a><span>Generated May 4, 2026</span></div>
+    </div>
+  </div>
+
+  <!-- Search modal -->
+  <div class="search-modal-overlay" id="searchOverlay">
+    <div class="search-modal" id="searchModal">
+      <div id="search"></div>
+      <div class="dd-search-welcome visible" id="ddSearchWelcome">
+        <div class="dd-search-welcome-icon">🔍</div>
+        <p id="ddSearchWelcomeText">Search across all Data Dictionary resources, fields and lookup values.</p>
+        <p class="dd-search-hint">Press <kbd>Esc</kbd> to close</p>
+      </div>
+      <div class="dd-search-empty" id="ddSearchEmpty">No results found. Try a different search term or filter.</div>
+    </div>
+  </div>
+  <template id="searchFiltersTemplate">
+    <div class="dd-search-meta">
+      <div class="dd-search-filters" id="ddSearchFilters">
+        <button class="dd-search-filter-pill" data-version="">All</button>
+        <button class="dd-search-filter-pill" data-version="1.7">DD 1.7</button>
+        <button class="dd-search-filter-pill active" data-version="2.0">DD 2.0</button>
+        <button class="dd-search-filter-pill" data-version="2.1">DD 2.1</button>
+      </div>
+      <div class="dd-search-count" id="ddSearchCount"></div>
+    </div>
+  </template>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="https://reso.org">Real Estate Standards Organization (RESO)</a>. All rights reserved.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="https://github.com/RESOStandards/reso-data-dictionary-documentation">Source</a> &middot;
+      <a href="https://www.reso.org/eula/">Terms of Use</a>
+    </p>
+  </footer>
+
+  <script src="../../../assets/dd.js"></script>
+</body>
+</html>

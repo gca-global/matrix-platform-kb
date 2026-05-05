@@ -1,0 +1,10 @@
+[01_mirror] target:  /tmp/matrix-platform-kb/reso-dd-kb/mirror
+[01_mirror] log:     /tmp/matrix-platform-kb/reso-dd-kb/_meta/crawl.log
+[01_mirror] start:   2026-05-04T19:50:30+00:00
+[01_mirror] robots.txt status: 404, 6827 bytes
+[01_mirror] wget rc:  8
+[01_mirror] end:     2026-05-04T21:39:24+00:00
+[_emit_manifest] 5729 files; status counts: 0=1, 200=5728
+[_emit_manifest] wrote /tmp/matrix-platform-kb/reso-dd-kb/_meta/manifest.json
+[01_mirror] FAIL: 1 URLs did not return 200; first 10:
+  0  https://dd.reso.org/.gitkeep

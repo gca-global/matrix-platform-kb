@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <title>Member - DD 2.0 - RESO Data Dictionary</title>
+  <meta name="description" content="Roster of agents, brokers, appraisers, assistants, affiliates and other MLS/association members. 87 fields in RESO Data Dictionary 2.0.">
+  <meta property="og:title" content="Member - DD 2.0 - RESO Data Dictionary">
+  <meta property="og:description" content="Roster of agents, brokers, appraisers, assistants, affiliates and other MLS/association members. 87 fields in RESO Data Dictionary 2.0.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RESO Data Dictionary">
+  <meta property="og:image" content="https://www.reso.org/wp-content/uploads/2020/06/RESO-Logo-Fullname_Horizontal_Blue.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Member - DD 2.0 - RESO Data Dictionary">
+  <meta name="twitter:description" content="Roster of agents, brokers, appraisers, assistants, affiliates and other MLS/association members. 87 fields in RESO Data Dictionary 2.0.">
+  <meta name="twitter:image" content="https://www.reso.org/wp-content/uploads/2020/06/RESO-Logo-Fullname_Horizontal_Blue.png">
+  <link rel="stylesheet" href="../../assets/dd.css">
+  <link href="../../pagefind/pagefind-ui.css" rel="stylesheet">
+  <script>(function(){var t=localStorage.getItem('dd-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');})()</script>
+</head>
+<body data-version="2.0">
+  <header class="site-header">
+    <a href="https://dd.reso.org/" class="header-logo">
+      <img src="../../assets/reso-logo-white.png" alt="RESO" />
+    </a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <nav class="header-nav" id="headerNav">
+      <a href="https://dd.reso.org/">Home</a>
+      <a href="https://reso.org">RESO.org</a>
+      <button class="search-trigger" id="searchTrigger" type="button">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        Search<kbd>/</kbd>
+      </button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <div class="dd-layout">
+    <aside class="dd-sidebar" id="ddSidebar">
+      <div class="dd-sidebar-header">
+        <div class="dd-sidebar-title">Data Dictionary</div>
+        <select class="dd-version-select" id="ddVersionSelect" onchange="window.location.href='/DD' + this.value + '/'">
+          <option value="1.7">DD 1.7</option>
+          <option value="2.0" selected>DD 2.0</option>
+          <option value="2.1">DD 2.1 (DRAFT)</option>
+        </select>
+      </div>
+      <div class="dd-sidebar-search" id="sidebarSearch">
+        <svg class="dd-sidebar-search-icon" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="sidebarSearchInput" name="search" placeholder="Search..." aria-label="Search" readonly />
+        <kbd>/</kbd>
+      </div>
+      <div class="dd-sidebar-section" data-section="about">
+<div class="dd-sidebar-section-title">About <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../about/index.html" class="dd-nav-resource-link">Introduction</a></li>
+<li class="dd-nav-resource"><a href="../about/release-guide/index.html" class="dd-nav-resource-link">Release Guide</a></li>
+<li class="dd-nav-resource"><a href="../about/changelog/index.html" class="dd-nav-resource-link">Change Log</a></li>
+<li class="dd-nav-resource"><a href="../about/certification/index.html" class="dd-nav-resource-link">Certification</a></li>
+<li class="dd-nav-resource"><a href="../about/terms/index.html" class="dd-nav-resource-link">Terms and Definitions</a></li>
+<li class="dd-nav-resource"><a href="../about/deprecated/index.html" class="dd-nav-resource-link">Deprecated Fields</a></li>
+<li class="dd-nav-resource"><a href="../about/resources/index.html" class="dd-nav-resource-link">Resource Summary</a></li>
+<li class="dd-nav-resource"><a href="../about/search-tips/index.html" class="dd-nav-resource-link">Search Tips</a></li>
+</ul>
+</div>
+<div class="dd-sidebar-section expanded" data-section="resources">
+<div class="dd-sidebar-section-title">Resources <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource">
+  <a href="../Property/index.html" class="dd-nav-resource-link">Property</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Business" class="dd-nav-group-link">Business</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Characteristics" class="dd-nav-group-link">Characteristics</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Equipment" class="dd-nav-group-link">Equipment</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Farming" class="dd-nav-group-link">Farming</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Financial" class="dd-nav-group-link">Financial</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-HOA" class="dd-nav-group-link">HOA</a>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../Property/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group has-children">
+      <a href="../Property/index.html#group-Listing-AgentOffice" class="dd-nav-group-link">AgentOffice</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-BuyerAgent" class="dd-nav-group-link">BuyerAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-BuyerOffice" class="dd-nav-group-link">BuyerOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-BuyerTeam" class="dd-nav-group-link">BuyerTeam</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-CoBuyerAgent" class="dd-nav-group-link">CoBuyerAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-CoBuyerOffice" class="dd-nav-group-link">CoBuyerOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-CoListAgent" class="dd-nav-group-link">CoListAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-CoListOffice" class="dd-nav-group-link">CoListOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-ListAgent" class="dd-nav-group-link">ListAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-ListOffice" class="dd-nav-group-link">ListOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-ListTeam" class="dd-nav-group-link">ListTeam</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-Team" class="dd-nav-group-link">Team</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Closing" class="dd-nav-group-link">Closing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Compensation" class="dd-nav-group-link">Compensation</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Contract" class="dd-nav-group-link">Contract</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Dates" class="dd-nav-group-link">Dates</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Marketing" class="dd-nav-group-link">Marketing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Media" class="dd-nav-group-link">Media</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Price" class="dd-nav-group-link">Price</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Remarks" class="dd-nav-group-link">Remarks</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Showing" class="dd-nav-group-link">Showing</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../Property/index.html#group-Location" class="dd-nav-group-link">Location</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Location-Address" class="dd-nav-group-link">Address</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Location-Area" class="dd-nav-group-link">Area</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Location-GIS" class="dd-nav-group-link">GIS</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Location-School" class="dd-nav-group-link">School</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-OccupantOwner" class="dd-nav-group-link">OccupantOwner</a>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../Property/index.html#group-Structure" class="dd-nav-group-link">Structure</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group has-children">
+      <a href="../Property/index.html#group-Structure-Performance" class="dd-nav-group-link">Performance</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Structure-Performance-GreenMarketing" class="dd-nav-group-link">GreenMarketing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Structure-Performance-GreenVerification" class="dd-nav-group-link">GreenVerification</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Structure-Rooms" class="dd-nav-group-link">Rooms</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Tax" class="dd-nav-group-link">Tax</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-UnitTypes" class="dd-nav-group-link">UnitTypes</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Utilities" class="dd-nav-group-link">Utilities</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Association/index.html" class="dd-nav-resource-link">Association</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Caravan/index.html" class="dd-nav-resource-link">Caravan</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../CaravanStop/index.html" class="dd-nav-resource-link">CaravanStop</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../ContactListingNotes/index.html" class="dd-nav-resource-link">ContactListingNotes</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../ContactListings/index.html" class="dd-nav-resource-link">ContactListings</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Contacts/index.html" class="dd-nav-resource-link">Contacts</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../EntityEvent/index.html" class="dd-nav-resource-link">EntityEvent</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Field/index.html" class="dd-nav-resource-link">Field</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../HistoryTransactional/index.html" class="dd-nav-resource-link">HistoryTransactional</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../InternetTracking/index.html" class="dd-nav-resource-link">InternetTracking</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../InternetTracking/index.html#group-Actor" class="dd-nav-group-link">Actor</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../InternetTracking/index.html#group-Event" class="dd-nav-group-link">Event</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../InternetTracking/index.html#group-Object" class="dd-nav-group-link">Object</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../InternetTrackingSummary/index.html" class="dd-nav-resource-link">InternetTrackingSummary</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../LockOrBox/index.html" class="dd-nav-resource-link">LockOrBox</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Lookup/index.html" class="dd-nav-resource-link">Lookup</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Media/index.html" class="dd-nav-resource-link">Media</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../Media/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource expanded">
+  <a href="index.html" class="dd-nav-resource-link active">Member</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../MemberAssociation/index.html" class="dd-nav-resource-link">MemberAssociation</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../MemberStateLicense/index.html" class="dd-nav-resource-link">MemberStateLicense</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../OUID/index.html" class="dd-nav-resource-link">OUID</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Office/index.html" class="dd-nav-resource-link">Office</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../OfficeAssociation/index.html" class="dd-nav-resource-link">OfficeAssociation</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../OfficeCorporateLicense/index.html" class="dd-nav-resource-link">OfficeCorporateLicense</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../OpenHouse/index.html" class="dd-nav-resource-link">OpenHouse</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../OtherPhone/index.html" class="dd-nav-resource-link">OtherPhone</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../PropertyGreenVerification/index.html" class="dd-nav-resource-link">PropertyGreenVerification</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../PropertyPowerProduction/index.html" class="dd-nav-resource-link">PropertyPowerProduction</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../PropertyPowerStorage/index.html" class="dd-nav-resource-link">PropertyPowerStorage</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../PropertyRooms/index.html" class="dd-nav-resource-link">PropertyRooms</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../PropertyUnitTypes/index.html" class="dd-nav-resource-link">PropertyUnitTypes</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Prospecting/index.html" class="dd-nav-resource-link">Prospecting</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Queue/index.html" class="dd-nav-resource-link">Queue</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Rules/index.html" class="dd-nav-resource-link">Rules</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../SavedSearch/index.html" class="dd-nav-resource-link">SavedSearch</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Showing/index.html" class="dd-nav-resource-link">Showing</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../Showing/index.html#group-Agent" class="dd-nav-group-link">Agent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Showing/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../ShowingAppointment/index.html" class="dd-nav-resource-link">ShowingAppointment</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../ShowingAvailability/index.html" class="dd-nav-resource-link">ShowingAvailability</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../ShowingRequest/index.html" class="dd-nav-resource-link">ShowingRequest</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../SocialMedia/index.html" class="dd-nav-resource-link">SocialMedia</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../TeamMembers/index.html" class="dd-nav-resource-link">TeamMembers</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Teams/index.html" class="dd-nav-resource-link">Teams</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../TransactionManagement/index.html" class="dd-nav-resource-link">TransactionManagement</a>
+</li>
+</ul>
+</div>
+<div class="dd-sidebar-section" data-section="lookups">
+<div class="dd-sidebar-section-title">Lookups <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../lookups/AccessibilityFeatures/index.html" class="dd-nav-resource-link">AccessibilityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ActorType/index.html" class="dd-nav-resource-link">ActorType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Appliances/index.html" class="dd-nav-resource-link">Appliances</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ArchitecturalStyle/index.html" class="dd-nav-resource-link">ArchitecturalStyle</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AreaSource/index.html" class="dd-nav-resource-link">AreaSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AreaUnits/index.html" class="dd-nav-resource-link">AreaUnits</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AssociationAmenities/index.html" class="dd-nav-resource-link">AssociationAmenities</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AssociationFeeIncludes/index.html" class="dd-nav-resource-link">AssociationFeeIncludes</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AssociationStatus/index.html" class="dd-nav-resource-link">AssociationStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AssociationType/index.html" class="dd-nav-resource-link">AssociationType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Attended/index.html" class="dd-nav-resource-link">Attended</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Basement/index.html" class="dd-nav-resource-link">Basement</a></li>
+<li class="dd-nav-resource"><a href="../lookups/BillingPreference/index.html" class="dd-nav-resource-link">BillingPreference</a></li>
+<li class="dd-nav-resource"><a href="../lookups/BodyType/index.html" class="dd-nav-resource-link">BodyType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/BusinessType/index.html" class="dd-nav-resource-link">BusinessType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/BuyerAgentDesignation/index.html" class="dd-nav-resource-link">BuyerAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/BuyerFinancing/index.html" class="dd-nav-resource-link">BuyerFinancing</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanAllowedClassNames/index.html" class="dd-nav-resource-link">CaravanAllowedClassNames</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanAllowedStatuses/index.html" class="dd-nav-resource-link">CaravanAllowedStatuses</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanResourceName/index.html" class="dd-nav-resource-link">CaravanResourceName</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanStatus/index.html" class="dd-nav-resource-link">CaravanStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanStopAttended/index.html" class="dd-nav-resource-link">CaravanStopAttended</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanStopClassName/index.html" class="dd-nav-resource-link">CaravanStopClassName</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanType/index.html" class="dd-nav-resource-link">CaravanType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ChangeType/index.html" class="dd-nav-resource-link">ChangeType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ClassName/index.html" class="dd-nav-resource-link">ClassName</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ClosetType/index.html" class="dd-nav-resource-link">ClosetType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CoBuyerAgentDesignation/index.html" class="dd-nav-resource-link">CoBuyerAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CoListAgentDesignation/index.html" class="dd-nav-resource-link">CoListAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CommonInterest/index.html" class="dd-nav-resource-link">CommonInterest</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CommonWalls/index.html" class="dd-nav-resource-link">CommonWalls</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CommunityFeatures/index.html" class="dd-nav-resource-link">CommunityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CompensationType/index.html" class="dd-nav-resource-link">CompensationType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Concessions/index.html" class="dd-nav-resource-link">Concessions</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ConstructionMaterials/index.html" class="dd-nav-resource-link">ConstructionMaterials</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ContactListingPreference/index.html" class="dd-nav-resource-link">ContactListingPreference</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ContactStatus/index.html" class="dd-nav-resource-link">ContactStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ContactType/index.html" class="dd-nav-resource-link">ContactType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Cooling/index.html" class="dd-nav-resource-link">Cooling</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Country/index.html" class="dd-nav-resource-link">Country</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CurrentFinancing/index.html" class="dd-nav-resource-link">CurrentFinancing</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CurrentOrPossibleUse/index.html" class="dd-nav-resource-link">CurrentOrPossibleUse</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DailySchedule/index.html" class="dd-nav-resource-link">DailySchedule</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DevelopmentStatus/index.html" class="dd-nav-resource-link">DevelopmentStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DeviceType/index.html" class="dd-nav-resource-link">DeviceType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DirectionFaces/index.html" class="dd-nav-resource-link">DirectionFaces</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DocumentStatus/index.html" class="dd-nav-resource-link">DocumentStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DoorFeatures/index.html" class="dd-nav-resource-link">DoorFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Electric/index.html" class="dd-nav-resource-link">Electric</a></li>
+<li class="dd-nav-resource"><a href="../lookups/EventSource/index.html" class="dd-nav-resource-link">EventSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/EventTarget/index.html" class="dd-nav-resource-link">EventTarget</a></li>
+<li class="dd-nav-resource"><a href="../lookups/EventType/index.html" class="dd-nav-resource-link">EventType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ExistingLeaseType/index.html" class="dd-nav-resource-link">ExistingLeaseType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ExteriorFeatures/index.html" class="dd-nav-resource-link">ExteriorFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FeeFrequency/index.html" class="dd-nav-resource-link">FeeFrequency</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Fencing/index.html" class="dd-nav-resource-link">Fencing</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FhaEligibility/index.html" class="dd-nav-resource-link">FhaEligibility</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FinancialDataSource/index.html" class="dd-nav-resource-link">FinancialDataSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FireplaceFeatures/index.html" class="dd-nav-resource-link">FireplaceFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Flooring/index.html" class="dd-nav-resource-link">Flooring</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FoundationDetails/index.html" class="dd-nav-resource-link">FoundationDetails</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FrontageType/index.html" class="dd-nav-resource-link">FrontageType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Furnished/index.html" class="dd-nav-resource-link">Furnished</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenBuildingVerificationType/index.html" class="dd-nav-resource-link">GreenBuildingVerificationType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenEnergyEfficient/index.html" class="dd-nav-resource-link">GreenEnergyEfficient</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenEnergyGeneration/index.html" class="dd-nav-resource-link">GreenEnergyGeneration</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenIndoorAirQuality/index.html" class="dd-nav-resource-link">GreenIndoorAirQuality</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenSustainability/index.html" class="dd-nav-resource-link">GreenSustainability</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenVerificationSource/index.html" class="dd-nav-resource-link">GreenVerificationSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenVerificationStatus/index.html" class="dd-nav-resource-link">GreenVerificationStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenWaterConservation/index.html" class="dd-nav-resource-link">GreenWaterConservation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Heating/index.html" class="dd-nav-resource-link">Heating</a></li>
+<li class="dd-nav-resource"><a href="../lookups/HorseAmenities/index.html" class="dd-nav-resource-link">HorseAmenities</a></li>
+<li class="dd-nav-resource"><a href="../lookups/HoursDaysOfOperation/index.html" class="dd-nav-resource-link">HoursDaysOfOperation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/IanaTimeZoneValues/index.html" class="dd-nav-resource-link">IanaTimeZoneValues</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ImageOf/index.html" class="dd-nav-resource-link">ImageOf</a></li>
+<li class="dd-nav-resource"><a href="../lookups/IncomeIncludes/index.html" class="dd-nav-resource-link">IncomeIncludes</a></li>
+<li class="dd-nav-resource"><a href="../lookups/InteriorOrRoomFeatures/index.html" class="dd-nav-resource-link">InteriorOrRoomFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LaborInformation/index.html" class="dd-nav-resource-link">LaborInformation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Languages/index.html" class="dd-nav-resource-link">Languages</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LaundryFeatures/index.html" class="dd-nav-resource-link">LaundryFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LeaseRenewalCompensation/index.html" class="dd-nav-resource-link">LeaseRenewalCompensation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LeaseTerm/index.html" class="dd-nav-resource-link">LeaseTerm</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Levels/index.html" class="dd-nav-resource-link">Levels</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LinearUnits/index.html" class="dd-nav-resource-link">LinearUnits</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ListAgentDesignation/index.html" class="dd-nav-resource-link">ListAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ListingAgreement/index.html" class="dd-nav-resource-link">ListingAgreement</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ListingService/index.html" class="dd-nav-resource-link">ListingService</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ListingTerms/index.html" class="dd-nav-resource-link">ListingTerms</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ListingURLDescription/index.html" class="dd-nav-resource-link">ListingURLDescription</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LockBoxType/index.html" class="dd-nav-resource-link">LockBoxType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LockOrBoxAccessType/index.html" class="dd-nav-resource-link">LockOrBoxAccessType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LotDimensionsSource/index.html" class="dd-nav-resource-link">LotDimensionsSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LotFeatures/index.html" class="dd-nav-resource-link">LotFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LotSizeSource/index.html" class="dd-nav-resource-link">LotSizeSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LotSizeUnits/index.html" class="dd-nav-resource-link">LotSizeUnits</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MediaAlteration/index.html" class="dd-nav-resource-link">MediaAlteration</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MediaCategory/index.html" class="dd-nav-resource-link">MediaCategory</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MediaType/index.html" class="dd-nav-resource-link">MediaType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberAssociationBillStatus/index.html" class="dd-nav-resource-link">MemberAssociationBillStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberDesignation/index.html" class="dd-nav-resource-link">MemberDesignation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberOtherPhoneType/index.html" class="dd-nav-resource-link">MemberOtherPhoneType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberStateLicenseType/index.html" class="dd-nav-resource-link">MemberStateLicenseType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberStatus/index.html" class="dd-nav-resource-link">MemberStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberType/index.html" class="dd-nav-resource-link">MemberType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/NotedBy/index.html" class="dd-nav-resource-link">NotedBy</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ObjectIdType/index.html" class="dd-nav-resource-link">ObjectIdType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ObjectType/index.html" class="dd-nav-resource-link">ObjectType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OccupantType/index.html" class="dd-nav-resource-link">OccupantType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OfficeAssociationPrimaryIndicator/index.html" class="dd-nav-resource-link">OfficeAssociationPrimaryIndicator</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OfficeBranchType/index.html" class="dd-nav-resource-link">OfficeBranchType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OfficeCorporateLicenseType/index.html" class="dd-nav-resource-link">OfficeCorporateLicenseType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OfficeStatus/index.html" class="dd-nav-resource-link">OfficeStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OfficeType/index.html" class="dd-nav-resource-link">OfficeType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OpenHouseStatus/index.html" class="dd-nav-resource-link">OpenHouseStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OpenHouseType/index.html" class="dd-nav-resource-link">OpenHouseType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OperatingExpenseIncludes/index.html" class="dd-nav-resource-link">OperatingExpenseIncludes</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OtherEquipment/index.html" class="dd-nav-resource-link">OtherEquipment</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OtherPhoneType/index.html" class="dd-nav-resource-link">OtherPhoneType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OtherStructures/index.html" class="dd-nav-resource-link">OtherStructures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OwnerPays/index.html" class="dd-nav-resource-link">OwnerPays</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OwnershipType/index.html" class="dd-nav-resource-link">OwnershipType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ParkingFeatures/index.html" class="dd-nav-resource-link">ParkingFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PatioAndPorchFeatures/index.html" class="dd-nav-resource-link">PatioAndPorchFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Permission/index.html" class="dd-nav-resource-link">Permission</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PetsAllowed/index.html" class="dd-nav-resource-link">PetsAllowed</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PoolFeatures/index.html" class="dd-nav-resource-link">PoolFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Possession/index.html" class="dd-nav-resource-link">Possession</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PowerProductionAnnualStatus/index.html" class="dd-nav-resource-link">PowerProductionAnnualStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PowerProductionOwnership/index.html" class="dd-nav-resource-link">PowerProductionOwnership</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PowerProductionType/index.html" class="dd-nav-resource-link">PowerProductionType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PowerStorageType/index.html" class="dd-nav-resource-link">PowerStorageType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PreferredAddress/index.html" class="dd-nav-resource-link">PreferredAddress</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PreferredMail/index.html" class="dd-nav-resource-link">PreferredMail</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PreferredMedia/index.html" class="dd-nav-resource-link">PreferredMedia</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PreferredPhone/index.html" class="dd-nav-resource-link">PreferredPhone</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PreferredPublication/index.html" class="dd-nav-resource-link">PreferredPublication</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PropertyCondition/index.html" class="dd-nav-resource-link">PropertyCondition</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PropertySubType/index.html" class="dd-nav-resource-link">PropertySubType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PropertyType/index.html" class="dd-nav-resource-link">PropertyType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/QueueTransactionType/index.html" class="dd-nav-resource-link">QueueTransactionType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ReasonActiveOrDisabled/index.html" class="dd-nav-resource-link">ReasonActiveOrDisabled</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RentIncludes/index.html" class="dd-nav-resource-link">RentIncludes</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ResourceName/index.html" class="dd-nav-resource-link">ResourceName</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ResponseTypes/index.html" class="dd-nav-resource-link">ResponseTypes</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoadFrontageType/index.html" class="dd-nav-resource-link">RoadFrontageType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoadResponsibility/index.html" class="dd-nav-resource-link">RoadResponsibility</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoadSurfaceType/index.html" class="dd-nav-resource-link">RoadSurfaceType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Roof/index.html" class="dd-nav-resource-link">Roof</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoomLengthWidthSource/index.html" class="dd-nav-resource-link">RoomLengthWidthSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoomLevel/index.html" class="dd-nav-resource-link">RoomLevel</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoomType/index.html" class="dd-nav-resource-link">RoomType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RuleFormat/index.html" class="dd-nav-resource-link">RuleFormat</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ScheduleType/index.html" class="dd-nav-resource-link">ScheduleType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SearchQueryType/index.html" class="dd-nav-resource-link">SearchQueryType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SecurityFeatures/index.html" class="dd-nav-resource-link">SecurityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Sewer/index.html" class="dd-nav-resource-link">Sewer</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingAppointmentMethod/index.html" class="dd-nav-resource-link">ShowingAppointmentMethod</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingAppointmentStatus/index.html" class="dd-nav-resource-link">ShowingAppointmentStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingConsiderations/index.html" class="dd-nav-resource-link">ShowingConsiderations</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingContactType/index.html" class="dd-nav-resource-link">ShowingContactType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingMethod/index.html" class="dd-nav-resource-link">ShowingMethod</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingMethodRequest/index.html" class="dd-nav-resource-link">ShowingMethodRequest</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingRequestType/index.html" class="dd-nav-resource-link">ShowingRequestType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingRequestor/index.html" class="dd-nav-resource-link">ShowingRequestor</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingRequirements/index.html" class="dd-nav-resource-link">ShowingRequirements</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingServiceName/index.html" class="dd-nav-resource-link">ShowingServiceName</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingStatus/index.html" class="dd-nav-resource-link">ShowingStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Skirt/index.html" class="dd-nav-resource-link">Skirt</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SocialMediaType/index.html" class="dd-nav-resource-link">SocialMediaType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SpaFeatures/index.html" class="dd-nav-resource-link">SpaFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SpecialLicenses/index.html" class="dd-nav-resource-link">SpecialLicenses</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SpecialListingConditions/index.html" class="dd-nav-resource-link">SpecialListingConditions</a></li>
+<li class="dd-nav-resource"><a href="../lookups/StandardStatus/index.html" class="dd-nav-resource-link">StandardStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/StateOrProvince/index.html" class="dd-nav-resource-link">StateOrProvince</a></li>
+<li class="dd-nav-resource"><a href="../lookups/StreetDirection/index.html" class="dd-nav-resource-link">StreetDirection</a></li>
+<li class="dd-nav-resource"><a href="../lookups/StructureType/index.html" class="dd-nav-resource-link">StructureType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SyndicateTo/index.html" class="dd-nav-resource-link">SyndicateTo</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TaxStatusCurrent/index.html" class="dd-nav-resource-link">TaxStatusCurrent</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TeamMemberType/index.html" class="dd-nav-resource-link">TeamMemberType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TeamStatus/index.html" class="dd-nav-resource-link">TeamStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TenantPays/index.html" class="dd-nav-resource-link">TenantPays</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TrackingType/index.html" class="dd-nav-resource-link">TrackingType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TransactionType/index.html" class="dd-nav-resource-link">TransactionType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/UnitTypeType/index.html" class="dd-nav-resource-link">UnitTypeType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/UnitsFurnished/index.html" class="dd-nav-resource-link">UnitsFurnished</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Utilities/index.html" class="dd-nav-resource-link">Utilities</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Vegetation/index.html" class="dd-nav-resource-link">Vegetation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/View/index.html" class="dd-nav-resource-link">View</a></li>
+<li class="dd-nav-resource"><a href="../lookups/WaterSource/index.html" class="dd-nav-resource-link">WaterSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/WaterfrontFeatures/index.html" class="dd-nav-resource-link">WaterfrontFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/WindowFeatures/index.html" class="dd-nav-resource-link">WindowFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/YearBuiltSource/index.html" class="dd-nav-resource-link">YearBuiltSource</a></li>
+</ul>
+</div>
+<div class="dd-sidebar-section" data-section="browse-by">
+<div class="dd-sidebar-section-title">Browse By <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../xref/payload/index.html" class="dd-nav-resource-link">Payload</a></li>
+<li class="dd-nav-resource"><a href="../xref/property-type/index.html" class="dd-nav-resource-link">Property Type</a></li>
+<li class="dd-nav-resource"><a href="../xref/status/index.html" class="dd-nav-resource-link">Element Status</a></li>
+<li class="dd-nav-resource"><a href="../xref/version-added/index.html" class="dd-nav-resource-link">Version Added</a></li>
+</ul>
+</div>
+
+    </aside>
+
+    <div class="dd-sidebar-overlay" id="ddSidebarOverlay"></div>
+    <button class="dd-sidebar-toggle" id="ddSidebarToggle" type="button" aria-label="Toggle sidebar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+
+    <div class="dd-content" data-pagefind-body data-pagefind-filter="dd-version:2.0" data-pagefind-meta="dd-version:DD 2.0">
+      <div class="dd-resource-sticky"><div class="dd-condensed-title">Member</div><nav class="dd-breadcrumb" data-pagefind-ignore><a href="https://dd.reso.org/">Data Dictionary</a> <span class="dd-breadcrumb-sep">/</span> <a href="../index.html">DD 2.0</a> <span class="dd-breadcrumb-sep">/</span> <span>Member</span></nav><div class="dd-page-header"><h1 data-pagefind-meta="title" data-pagefind-weight="10">Member Resource <button class="dd-copy-btn" data-copy="Member" title="Copy name"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></h1><span class="dd-search-norm" data-pagefind-weight="100">member</span><p class="dd-page-subtitle" data-pagefind-meta="description">87 fields &middot; Last revised 7/25/2019</p><span class="dd-search-norm" data-pagefind-meta="date">7/25/2019</span></div><div class="dd-definition-callout"><span class="dd-callout-label">Definition</span><span class="dd-callout-text">Roster of agents, brokers, appraisers, assistants, affiliates and other MLS/association members.</span><button class="dd-callout-toggle">... more</button></div><div class="dd-toolbar"><div class="dd-table-filter"><input type="text" name="filter" placeholder="Filter fields..." aria-label="Filter fields" /><span class="dd-table-filter-count"></span></div><div class="dd-sort-controls">
+    <span class="dd-sort-label">Sort by</span>
+    <button class="dd-sort-pill active" data-sort="name">Name <span class="dd-sort-arrow">&#9650;</span></button>
+    <button class="dd-sort-pill" data-sort="type">Type <span class="dd-sort-arrow">&#9650;</span></button>
+    <button class="dd-sort-pill" data-sort="usage">Usage <span class="dd-sort-arrow">&#9650;</span></button>
+    <button class="dd-sort-pill" data-sort="added">Date Added <span class="dd-sort-arrow">&#9650;</span></button>
+    <button class="dd-sort-pill" data-sort="revised">Revised <span class="dd-sort-arrow">&#9650;</span></button>
+    <span class="dd-sort-mobile-label"><svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor"><path d="M5 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L5 6.414V12zm10-4a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/></svg></span>
+    <select class="dd-sort-select" aria-label="Sort by">
+      <option value="name" selected>Name</option>
+      <option value="type">Type</option>
+      <option value="usage">Usage</option>
+      <option value="added">Date Added</option>
+      <option value="revised">Revised</option>
+    </select>
+    <button class="dd-sort-dir-btn" title="Toggle sort direction">&#9650;</button>
+    
+  </div></div></div><div class="dd-sticky-col-headers"><table><colgroup><col style="width:22%"><col><col style="width:18%"><col style="width:12%"></colgroup><tr><th>Field</th><th>Definition</th><th>Type</th><th class="dd-col-usage">Usage</th></tr></table></div><div class="dd-fields-table-wrapper" data-pagefind-ignore><table class="dd-fields-table"><colgroup><col style="width:22%"><col><col style="width:18%"><col style="width:12%"></colgroup><thead><tr><th>Field</th><th>Definition</th><th>Type</th><th class="dd-col-usage">Usage</th></tr></thead><tbody><tr data-name="HistoryTransactional" data-type="Collection" data-usage="-1" data-added="1.7.0" data-revised="1/11/2020" data-group=""><td><a href="HistoryTransactional/index.html" class="dd-field-link">History Transactional</a><div class="dd-field-standard-name">HistoryTransactional</div></td><td class="dd-field-def">The history of the Member record.</td><td><span class="dd-type-badge">Collection</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="JobTitle" data-type="String" data-usage="0.05232558139534884" data-added="" data-revised="6/17/2021" data-group=""><td><a href="JobTitle/index.html" class="dd-field-link">Job Title</a><div class="dd-field-standard-name">JobTitle</div></td><td class="dd-field-def">The title or position of the member within their organization.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">5%</span></td></tr><tr data-name="LastLoginTimestamp" data-type="Timestamp" data-usage="0.023255813953488372" data-added="" data-revised="6/17/2021" data-group=""><td><a href="LastLoginTimestamp/index.html" class="dd-field-link">Last Login Timestamp</a><div class="dd-field-standard-name">LastLoginTimestamp</div></td><td class="dd-field-def">The date/time the member last logged into the source or other system.</td><td><span class="dd-type-badge">Timestamp</span></td><td class="dd-col-usage"><span class="dd-usage-badge">2%</span></td></tr><tr data-name="Media" data-type="Collection" data-usage="0.0755813953488372" data-added="1.7.0" data-revised="1/12/2020" data-group=""><td><a href="Media/index.html" class="dd-field-link">Media</a><div class="dd-field-standard-name">Media</div></td><td class="dd-field-def">The media for the Member record.</td><td><span class="dd-type-badge">Collection</span></td><td class="dd-col-usage"><span class="dd-usage-badge">8%</span></td></tr><tr data-name="MemberAOR" data-type="String List, Single" data-usage="0.313953488372093" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberAOR/index.html" class="dd-field-link">Member AOR</a><div class="dd-field-standard-name">MemberAOR</div></td><td class="dd-field-def">The member's primary board or association of REALTORS®.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge">31%</span></td></tr><tr data-name="MemberAORMlsId" data-type="String" data-usage="0.14244186046511628" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberAORMlsId/index.html" class="dd-field-link">Member AOR MLS ID</a><div class="dd-field-standard-name">MemberAORMlsId</div></td><td class="dd-field-def">The local, well-known identifier for the member's association of REALTORS®. This value may not be unique, specifically in the case of aggregation... <a href="MemberAORMlsId/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">14%</span></td></tr><tr data-name="MemberAORkey" data-type="String" data-usage="0.12790697674418605" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberAORkey/index.html" class="dd-field-link">Member AOR Key</a><div class="dd-field-standard-name">MemberAORkey</div></td><td class="dd-field-def">A system unique identifier. Specifically, in aggregation systems, the Member AOR Key is the system unique identifier from the system that the record... <a href="MemberAORkey/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">13%</span></td></tr><tr data-name="MemberAddress1" data-type="String" data-usage="0.9098837209302325" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberAddress1/index.html" class="dd-field-link">Member Address 1</a><div class="dd-field-standard-name">MemberAddress1</div></td><td class="dd-field-def">The street number, direction, name and suffix of the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">91%</span></td></tr><tr data-name="MemberAddress2" data-type="String" data-usage="0.8284883720930233" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberAddress2/index.html" class="dd-field-link">Member Address 2</a><div class="dd-field-standard-name">MemberAddress2</div></td><td class="dd-field-def">The unit/suite number of the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">83%</span></td></tr><tr data-name="MemberAlternateId" data-type="String" data-usage="0.02616279069767442" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberAlternateId/index.html" class="dd-field-link">Member Alternate ID</a><div class="dd-field-standard-name">MemberAlternateId</div></td><td class="dd-field-def">This is an alternate ID with no specific use.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">3%</span></td></tr><tr data-name="MemberAssociationComments" data-type="String" data-usage="0.11046511627906977" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberAssociationComments/index.html" class="dd-field-link">Member Association Comments</a><div class="dd-field-standard-name">MemberAssociationComments</div></td><td class="dd-field-def">The association's notes regarding the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">11%</span></td></tr><tr data-name="MemberBillingPreference" data-type="String List, Single" data-usage="-1" data-added="2.0.0" data-revised="4/4/2023" data-group=""><td><a href="MemberBillingPreference/index.html" class="dd-field-link">Member Billing Preference</a><div class="dd-field-standard-name">MemberBillingPreference</div></td><td class="dd-field-def">The member's preferred method of billing.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="MemberBio" data-type="String" data-usage="0.11337209302325581" data-added="2.0.0" data-revised="4/18/2023" data-group=""><td><a href="MemberBio/index.html" class="dd-field-link">Member Bio</a><div class="dd-field-standard-name">MemberBio</div></td><td class="dd-field-def">A text field containing biography information for the member record. This may be resume-like information, including experience and qualifications.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">11%</span></td></tr><tr data-name="MemberCarrierRoute" data-type="String" data-usage="0.029069767441860465" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberCarrierRoute/index.html" class="dd-field-link">Member Carrier Route</a><div class="dd-field-standard-name">MemberCarrierRoute</div></td><td class="dd-field-def">The group of addresses to which the U.S. Postal Service (USPS) assigns the same code to aid in mail delivery. For the USPS, these codes are nine... <a href="MemberCarrierRoute/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">3%</span></td></tr><tr data-name="MemberCity" data-type="String" data-usage="0.9447674418604651" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberCity/index.html" class="dd-field-link">Member City</a><div class="dd-field-standard-name">MemberCity</div></td><td class="dd-field-def">The city of the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">94%</span></td></tr><tr data-name="MemberCommitteeCount" data-type="Number" data-usage="-1" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberCommitteeCount/index.html" class="dd-field-link">Member Committee Count</a><div class="dd-field-standard-name">MemberCommitteeCount</div></td><td class="dd-field-def">The number of current/active committees in which the member belongs.</td><td><span class="dd-type-badge">Number</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="MemberCountry" data-type="String List, Single" data-usage="0.313953488372093" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberCountry/index.html" class="dd-field-link">Member Country</a><div class="dd-field-standard-name">MemberCountry</div></td><td class="dd-field-def">The country abbreviation in a postal address.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge">31%</span></td></tr><tr data-name="MemberCountyOrParish" data-type="String List, Single" data-usage="0.04941860465116279" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberCountyOrParish/index.html" class="dd-field-link">Member County Or Parish</a><div class="dd-field-standard-name">MemberCountyOrParish</div></td><td class="dd-field-def">The county or parish in which the member is addressed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge">5%</span></td></tr><tr data-name="MemberDesignation" data-type="String List, Multi" data-usage="0.49127906976744184" data-added="" data-revised="3/27/2026" data-group=""><td><a href="MemberDesignation/index.html" class="dd-field-link">Member Designation</a><div class="dd-field-standard-name">MemberDesignation</div></td><td class="dd-field-def">Designations and certifications acknowledging experience and expertise in various real estate sectors are awarded by the National Association of... <a href="MemberDesignation/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String List, Multi</span></td><td class="dd-col-usage"><span class="dd-usage-badge">49%</span></td></tr><tr data-name="MemberDirectPhone" data-type="String" data-usage="0.32848837209302323" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberDirectPhone/index.html" class="dd-field-link">Member Direct Phone</a><div class="dd-field-standard-name">MemberDirectPhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="MemberDirectPhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">33%</span></td></tr><tr data-name="MemberEmail" data-type="String" data-usage="0.9796511627906976" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberEmail/index.html" class="dd-field-link">Member Email</a><div class="dd-field-standard-name">MemberEmail</div></td><td class="dd-field-def">The email address of the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">98%</span></td></tr><tr data-name="MemberFax" data-type="String" data-usage="0.7209302325581395" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberFax/index.html" class="dd-field-link">Member Fax</a><div class="dd-field-standard-name">MemberFax</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="MemberFax/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">72%</span></td></tr><tr data-name="MemberFirstName" data-type="String" data-usage="0.9854651162790697" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberFirstName/index.html" class="dd-field-link">Member First Name</a><div class="dd-field-standard-name">MemberFirstName</div></td><td class="dd-field-def">The first name of the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">99%</span></td></tr><tr data-name="MemberFullName" data-type="String" data-usage="0.9215116279069767" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberFullName/index.html" class="dd-field-link">Member Full Name</a><div class="dd-field-standard-name">MemberFullName</div></td><td class="dd-field-def">The first, middle and last name of the member or an alternate full name.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">92%</span></td></tr><tr data-name="MemberHomePhone" data-type="String" data-usage="0.5203488372093024" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberHomePhone/index.html" class="dd-field-link">Member Home Phone</a><div class="dd-field-standard-name">MemberHomePhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="MemberHomePhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">52%</span></td></tr><tr data-name="MemberIsAssistantTo" data-type="String" data-usage="0.029069767441860465" data-added="1.5.0" data-revised="6/17/2021" data-group=""><td><a href="MemberIsAssistantTo/index.html" class="dd-field-link">Member Is Assistant To</a><div class="dd-field-standard-name">MemberIsAssistantTo</div></td><td class="dd-field-def">The MemberMlsId of the agent/broker that this member assists. The typical use will be to add the agent's ID to this field when editing the member... <a href="MemberIsAssistantTo/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">3%</span></td></tr><tr data-name="MemberKey" data-type="String" data-usage="0.9680232558139535" data-added="" data-revised="1/9/2022" data-group=""><td><a href="MemberKey/index.html" class="dd-field-link">Member Key</a><div class="dd-field-standard-name">MemberKey</div></td><td class="dd-field-def">A unique identifier for this record from the immediate source. This is a string that can include a Uniform Resource Identifier (URI) or other forms.... <a href="MemberKey/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">97%</span></td></tr><tr data-name="MemberLanguages" data-type="String List, Multi" data-usage="0.4563953488372093" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberLanguages/index.html" class="dd-field-link">Member Languages</a><div class="dd-field-standard-name">MemberLanguages</div></td><td class="dd-field-def">The languages the member speaks.</td><td><span class="dd-type-badge">String List, Multi</span></td><td class="dd-col-usage"><span class="dd-usage-badge">46%</span></td></tr><tr data-name="MemberLastName" data-type="String" data-usage="0.9825581395348837" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberLastName/index.html" class="dd-field-link">Member Last Name</a><div class="dd-field-standard-name">MemberLastName</div></td><td class="dd-field-def">The last name of the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">98%</span></td></tr><tr data-name="MemberLoginId" data-type="String" data-usage="0.561046511627907" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberLoginId/index.html" class="dd-field-link">Member Login ID</a><div class="dd-field-standard-name">MemberLoginId</div></td><td class="dd-field-def">The ID used to log on to the MLS system.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">56%</span></td></tr><tr data-name="MemberMailOptOutYN" data-type="Boolean" data-usage="-1" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberMailOptOutYN/index.html" class="dd-field-link">Member Mail Opt Out Y/N</a><div class="dd-field-standard-name">MemberMailOptOutYN</div></td><td class="dd-field-def">Indicates whether or not the member has opted out of receiving solicitation via mail.</td><td><span class="dd-type-badge">Boolean</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="MemberMiddleName" data-type="String" data-usage="0.7674418604651163" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberMiddleName/index.html" class="dd-field-link">Member Middle Name</a><div class="dd-field-standard-name">MemberMiddleName</div></td><td class="dd-field-def">The middle name of the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">77%</span></td></tr><tr data-name="MemberMlsAccessYN" data-type="Boolean" data-usage="0.2063953488372093" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberMlsAccessYN/index.html" class="dd-field-link">Member MLS Access Yes/No</a><div class="dd-field-standard-name">MemberMlsAccessYN</div></td><td class="dd-field-def">Indicates whether or not the member has access to the MLS system.</td><td><span class="dd-type-badge">Boolean</span></td><td class="dd-col-usage"><span class="dd-usage-badge">21%</span></td></tr><tr data-name="MemberMlsId" data-type="String" data-usage="0.9622093023255814" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberMlsId/index.html" class="dd-field-link">Member MLS ID</a><div class="dd-field-standard-name">MemberMlsId</div></td><td class="dd-field-def">The local, well-known identifier for the member. This value may not be unique, specifically in the case of aggregation systems, and it should be the... <a href="MemberMlsId/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">96%</span></td></tr><tr data-name="MemberMlsSecurityClass" data-type="String List, Single" data-usage="0.46511627906976744" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberMlsSecurityClass/index.html" class="dd-field-link">Member MLS Security Class</a><div class="dd-field-standard-name">MemberMlsSecurityClass</div></td><td class="dd-field-def">The MLS security group or class given to the member.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge">47%</span></td></tr><tr data-name="MemberMobilePhone" data-type="String" data-usage="0.8808139534883721" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberMobilePhone/index.html" class="dd-field-link">Member Mobile Phone</a><div class="dd-field-standard-name">MemberMobilePhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="MemberMobilePhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">88%</span></td></tr><tr data-name="MemberNamePrefix" data-type="String" data-usage="0.1511627906976744" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberNamePrefix/index.html" class="dd-field-link">Member Name Prefix</a><div class="dd-field-standard-name">MemberNamePrefix</div></td><td class="dd-field-def">The prefix to the member name (e.g., Dr., Mr., Ms.).</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">15%</span></td></tr><tr data-name="MemberNameSuffix" data-type="String" data-usage="0.2005813953488372" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberNameSuffix/index.html" class="dd-field-link">Member Name Suffix</a><div class="dd-field-standard-name">MemberNameSuffix</div></td><td class="dd-field-def">The suffix to the member surname (e.g., Esq., Jr., III).</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">20%</span></td></tr><tr data-name="MemberNationalAssociationEntryDate" data-type="Date" data-usage="0.00872093023255814" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberNationalAssociationEntryDate/index.html" class="dd-field-link">Member National Association Entry Date</a><div class="dd-field-standard-name">MemberNationalAssociationEntryDate</div></td><td class="dd-field-def">The date that the member's record was entered with the National Association of REALTORS®.</td><td><span class="dd-type-badge">Date</span></td><td class="dd-col-usage"><span class="dd-usage-badge">1%</span></td></tr><tr data-name="MemberNationalAssociationId" data-type="String" data-usage="0.9098837209302325" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberNationalAssociationId/index.html" class="dd-field-link">Member National Association ID</a><div class="dd-field-standard-name">MemberNationalAssociationId</div></td><td class="dd-field-def">The national association ID of the member (e.g., in the U.S., this is the NRDS number).</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">91%</span></td></tr><tr data-name="MemberNickname" data-type="String" data-usage="0.21220930232558138" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberNickname/index.html" class="dd-field-link">Member Nickname</a><div class="dd-field-standard-name">MemberNickname</div></td><td class="dd-field-def">An alternate name used by the member, usually as a substitute for the first name.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">21%</span></td></tr><tr data-name="MemberOfficePhone" data-type="String" data-usage="0.6802325581395349" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberOfficePhone/index.html" class="dd-field-link">Member Office Phone</a><div class="dd-field-standard-name">MemberOfficePhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="MemberOfficePhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">68%</span></td></tr><tr data-name="MemberOfficePhoneExt" data-type="String" data-usage="0.45348837209302323" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberOfficePhoneExt/index.html" class="dd-field-link">Member Office Phone Ext</a><div class="dd-field-standard-name">MemberOfficePhoneExt</div></td><td class="dd-field-def">The extension of the given phone number, if applicable.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">45%</span></td></tr><tr data-name="MemberOtherPhone" data-type="Collection" data-usage="0.0029069767441860465" data-added="1.7.0" data-revised="6/17/2021" data-group=""><td><a href="MemberOtherPhone/index.html" class="dd-field-link">Member Other Phone</a><div class="dd-field-standard-name">MemberOtherPhone</div></td><td class="dd-field-def">A collection of the types of other phone fields available for this member. The collection includes the type of system and other details pertinent... <a href="MemberOtherPhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">Collection</span></td><td class="dd-col-usage"><span class="dd-usage-badge">0%</span></td></tr><tr data-name="MemberOtherPhoneType" data-type="String List, Single" data-usage="0.005813953488372093" data-added="" data-revised="3/27/2026" data-group=""><td><a href="MemberOtherPhoneType/index.html" class="dd-field-link">Member Other Phone Type</a><div class="dd-field-standard-name">MemberOtherPhoneType</div></td><td class="dd-field-def">A list of phone types (e.g., Home, Mobile, Second) that do not already exist in the given phone fields or if a second type of phone field is needed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge">1%</span></td></tr><tr data-name="MemberPager" data-type="String" data-usage="0.23546511627906977" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberPager/index.html" class="dd-field-link">Member Pager</a><div class="dd-field-standard-name">MemberPager</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="MemberPager/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">24%</span></td></tr><tr data-name="MemberPassword" data-type="String" data-usage="0.01744186046511628" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberPassword/index.html" class="dd-field-link">Member Password</a><div class="dd-field-standard-name">MemberPassword</div></td><td class="dd-field-def">A password that the member wishes to share with other systems. Normal security considerations apply and are the responsibility of the entity... <a href="MemberPassword/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">2%</span></td></tr><tr data-name="MemberPhoneTTYTDD" data-type="String" data-usage="-1" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberPhoneTTYTDD/index.html" class="dd-field-link">Member Phone Tty/Tdd</a><div class="dd-field-standard-name">MemberPhoneTTYTDD</div></td><td class="dd-field-def">TTY/TDD stands for Teletypewriter/Telecommunications Device for the Deaf. This involves a user terminal with keyboard input and printer or display... <a href="MemberPhoneTTYTDD/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="MemberPostalCode" data-type="String" data-usage="0.9447674418604651" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberPostalCode/index.html" class="dd-field-link">Member Postal Code</a><div class="dd-field-standard-name">MemberPostalCode</div></td><td class="dd-field-def">The postal code of the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">94%</span></td></tr><tr data-name="MemberPostalCodePlus4" data-type="String" data-usage="0.4331395348837209" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberPostalCodePlus4/index.html" class="dd-field-link">Member Postal Code Plus 4</a><div class="dd-field-standard-name">MemberPostalCodePlus4</div></td><td class="dd-field-def">The four-digit extension of the U.S. Zip Code.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">43%</span></td></tr><tr data-name="MemberPreferredMail" data-type="String List, Single" data-usage="-1" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberPreferredMail/index.html" class="dd-field-link">Member Preferred Mail</a><div class="dd-field-standard-name">MemberPreferredMail</div></td><td class="dd-field-def">The preferred mailing address for the member.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="MemberPreferredMedia" data-type="String List, Single" data-usage="-1" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberPreferredMedia/index.html" class="dd-field-link">Member Preferred Media</a><div class="dd-field-standard-name">MemberPreferredMedia</div></td><td class="dd-field-def">The method the member prefers to receive media by (e.g., Email, Mail, Fax).</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="MemberPreferredPhone" data-type="String" data-usage="0.8517441860465116" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberPreferredPhone/index.html" class="dd-field-link">Member Preferred Phone</a><div class="dd-field-standard-name">MemberPreferredPhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="MemberPreferredPhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">85%</span></td></tr><tr data-name="MemberPreferredPhoneExt" data-type="String" data-usage="0.37790697674418605" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberPreferredPhoneExt/index.html" class="dd-field-link">Member Preferred Phone Ext</a><div class="dd-field-standard-name">MemberPreferredPhoneExt</div></td><td class="dd-field-def">The extension of the given phone number, if applicable.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">38%</span></td></tr><tr data-name="MemberPreferredPublication" data-type="String List, Single" data-usage="-1" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberPreferredPublication/index.html" class="dd-field-link">Member Preferred Publication</a><div class="dd-field-standard-name">MemberPreferredPublication</div></td><td class="dd-field-def">Indicates where the member would like to receive any publications from the association.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="MemberPrimaryAorId" data-type="String" data-usage="0.011627906976744186" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberPrimaryAorId/index.html" class="dd-field-link">Member Primary AOR ID</a><div class="dd-field-standard-name">MemberPrimaryAorId</div></td><td class="dd-field-def">The primary association of REALTORS® (AOR) associated with the member. This may be another AOR where the member has their primary membership.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">1%</span></td></tr><tr data-name="MemberSocialMedia" data-type="Collection" data-usage="-1" data-added="1.7.0" data-revised="6/17/2021" data-group=""><td><a href="MemberSocialMedia/index.html" class="dd-field-link">Member Social Media</a><div class="dd-field-standard-name">MemberSocialMedia</div></td><td class="dd-field-def">A collection of the types of social media fields available for this member. The collection includes the type of system and other details pertinent to... <a href="MemberSocialMedia/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">Collection</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="MemberStateLicense" data-type="String" data-usage="0.9186046511627907" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberStateLicense/index.html" class="dd-field-link">Member State License</a><div class="dd-field-standard-name">MemberStateLicense</div></td><td class="dd-field-def">The license of the member. Multiple licenses should be separated by a comma and space.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">92%</span></td></tr><tr data-name="MemberStateLicenseExpirationDate" data-type="Date" data-usage="0.0029069767441860465" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberStateLicenseExpirationDate/index.html" class="dd-field-link">Member State License Expiration Date</a><div class="dd-field-standard-name">MemberStateLicenseExpirationDate</div></td><td class="dd-field-def">The expiration date for the member's license.</td><td><span class="dd-type-badge">Date</span></td><td class="dd-col-usage"><span class="dd-usage-badge">0%</span></td></tr><tr data-name="MemberStateLicenseState" data-type="String List, Single" data-usage="0.1569767441860465" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberStateLicenseState/index.html" class="dd-field-link">Member State License State</a><div class="dd-field-standard-name">MemberStateLicenseState</div></td><td class="dd-field-def">The state in which the member is licensed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge">16%</span></td></tr><tr data-name="MemberStateLicenseType" data-type="String" data-usage="0.02616279069767442" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberStateLicenseType/index.html" class="dd-field-link">Member State License Type</a><div class="dd-field-standard-name">MemberStateLicenseType</div></td><td class="dd-field-def">The license type of the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">3%</span></td></tr><tr data-name="MemberStateOrProvince" data-type="String List, Single" data-usage="0.9476744186046512" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberStateOrProvince/index.html" class="dd-field-link">Member State Or Province</a><div class="dd-field-standard-name">MemberStateOrProvince</div></td><td class="dd-field-def">The state or province in which the member is addressed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge">95%</span></td></tr><tr data-name="MemberStatus" data-type="String List, Single" data-usage="0.9273255813953488" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberStatus/index.html" class="dd-field-link">Member Status</a><div class="dd-field-standard-name">MemberStatus</div></td><td class="dd-field-def">Indicates if the account is active, inactive or under disciplinary action.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge">93%</span></td></tr><tr data-name="MemberTollFreePhone" data-type="String" data-usage="0.2441860465116279" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberTollFreePhone/index.html" class="dd-field-link">Member Toll Free Phone</a><div class="dd-field-standard-name">MemberTollFreePhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="MemberTollFreePhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">24%</span></td></tr><tr data-name="MemberTransferDate" data-type="Date" data-usage="0.03197674418604651" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberTransferDate/index.html" class="dd-field-link">Member Transfer Date</a><div class="dd-field-standard-name">MemberTransferDate</div></td><td class="dd-field-def">The date that the member transferred from one member office to another</td><td><span class="dd-type-badge">Date</span></td><td class="dd-col-usage"><span class="dd-usage-badge">3%</span></td></tr><tr data-name="MemberType" data-type="String List, Single" data-usage="0.875" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberType/index.html" class="dd-field-link">Member Type</a><div class="dd-field-standard-name">MemberType</div></td><td class="dd-field-def">The type of member (i.e., Agent, Broker, Office Manager, Appraiser, Photographer, Assistant, Mortgage Loan Originator, REALTOR, Association Staff,... <a href="MemberType/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge">88%</span></td></tr><tr data-name="MemberVoiceMail" data-type="String" data-usage="0.03197674418604651" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberVoiceMail/index.html" class="dd-field-link">Member Voice Mail</a><div class="dd-field-standard-name">MemberVoiceMail</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="MemberVoiceMail/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">3%</span></td></tr><tr data-name="MemberVoiceMailExt" data-type="String" data-usage="0.011627906976744186" data-added="" data-revised="6/17/2021" data-group=""><td><a href="MemberVoiceMailExt/index.html" class="dd-field-link">Member Voice Mail Ext</a><div class="dd-field-standard-name">MemberVoiceMailExt</div></td><td class="dd-field-def">The extension of the given phone number, if applicable.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">1%</span></td></tr><tr data-name="MemberVotingPrecinct" data-type="String" data-usage="-1" data-added="2.0.0" data-revised="7/25/2019" data-group=""><td><a href="MemberVotingPrecinct/index.html" class="dd-field-link">Member Voting Precinct</a><div class="dd-field-standard-name">MemberVotingPrecinct</div></td><td class="dd-field-def">The voting precinct of the member.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="ModificationTimestamp" data-type="Timestamp" data-usage="0.9825581395348837" data-added="" data-revised="6/17/2021" data-group=""><td><a href="ModificationTimestamp/index.html" class="dd-field-link">Modification Timestamp</a><div class="dd-field-standard-name">ModificationTimestamp</div></td><td class="dd-field-def">The date/time the roster (member or office) record was last modified.</td><td><span class="dd-type-badge">Timestamp</span></td><td class="dd-col-usage"><span class="dd-usage-badge">98%</span></td></tr><tr data-name="Office" data-type="Resource" data-usage="-1" data-added="1.7.0" data-revised="1/6/2020" data-group=""><td><a href="Office/index.html" class="dd-field-link">Office</a><div class="dd-field-standard-name">Office</div></td><td class="dd-field-def">The office the member belongs to.</td><td><span class="dd-type-badge">Resource</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OfficeKey" data-type="String" data-usage="0.7616279069767442" data-added="" data-revised="6/17/2021" data-group=""><td><a href="OfficeKey/index.html" class="dd-field-link">Office Key</a><div class="dd-field-standard-name">OfficeKey</div></td><td class="dd-field-def">A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just... <a href="OfficeKey/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">76%</span></td></tr><tr data-name="OfficeMlsId" data-type="String" data-usage="0.938953488372093" data-added="" data-revised="6/17/2021" data-group=""><td><a href="OfficeMlsId/index.html" class="dd-field-link">Office MLS ID</a><div class="dd-field-standard-name">OfficeMlsId</div></td><td class="dd-field-def">The local, well-known identifier. This value may not be unique, specifically in the case of aggregation systems, and it should be the identifier from... <a href="OfficeMlsId/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">94%</span></td></tr><tr data-name="OfficeName" data-type="String" data-usage="0.7267441860465116" data-added="" data-revised="6/17/2021" data-group=""><td><a href="OfficeName/index.html" class="dd-field-link">Office Name</a><div class="dd-field-standard-name">OfficeName</div></td><td class="dd-field-def">The legal name of the brokerage.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">73%</span></td></tr><tr data-name="OfficeNationalAssociationId" data-type="String" data-usage="0.00872093023255814" data-added="2.0.0" data-revised="1/17/2020" data-group=""><td><a href="OfficeNationalAssociationId/index.html" class="dd-field-link">Office National Association ID</a><div class="dd-field-standard-name">OfficeNationalAssociationId</div></td><td class="dd-field-def">The national association ID of the office (i.e., in the U.S., this is the NRDS number).</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">1%</span></td></tr><tr data-name="OriginalEntryTimestamp" data-type="Timestamp" data-usage="0.7441860465116279" data-added="" data-revised="6/17/2021" data-group=""><td><a href="OriginalEntryTimestamp/index.html" class="dd-field-link">Original Entry Timestamp</a><div class="dd-field-standard-name">OriginalEntryTimestamp</div></td><td class="dd-field-def">The date/time the roster (member or office) record was originally input into the source system.</td><td><span class="dd-type-badge">Timestamp</span></td><td class="dd-col-usage"><span class="dd-usage-badge">74%</span></td></tr><tr data-name="OriginatingSystem" data-type="Resource" data-usage="-1" data-added="1.7.0" data-revised="1/7/2020" data-group=""><td><a href="OriginatingSystem/index.html" class="dd-field-link">Originating System</a><div class="dd-field-standard-name">OriginatingSystem</div></td><td class="dd-field-def">The originating system of the Member record.</td><td><span class="dd-type-badge">Resource</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OriginatingSystemID" data-type="String" data-usage="0.7180232558139535" data-added="1.5.0" data-revised="6/17/2021" data-group=""><td><a href="OriginatingSystemID/index.html" class="dd-field-link">Originating System ID</a><div class="dd-field-standard-name">OriginatingSystemID</div></td><td class="dd-field-def">The OUID Resource's OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative control over the... <a href="OriginatingSystemID/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">72%</span></td></tr><tr data-name="OriginatingSystemMemberKey" data-type="String" data-usage="0.872093023255814" data-added="" data-revised="6/17/2021" data-group=""><td><a href="OriginatingSystemMemberKey/index.html" class="dd-field-link">Originating System Member Key</a><div class="dd-field-standard-name">OriginatingSystemMemberKey</div></td><td class="dd-field-def">The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the... <a href="OriginatingSystemMemberKey/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">87%</span></td></tr><tr data-name="OriginatingSystemName" data-type="String" data-usage="0.9244186046511628" data-added="" data-revised="6/17/2021" data-group=""><td><a href="OriginatingSystemName/index.html" class="dd-field-link">Originating System Name</a><div class="dd-field-standard-name">OriginatingSystemName</div></td><td class="dd-field-def">The name of the originating record provider, most commonly the name of the MLS. The place where the member is originally input by the member. The... <a href="OriginatingSystemName/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">92%</span></td></tr><tr data-name="SocialMediaType" data-type="String List, Single" data-usage="0.020348837209302327" data-added="" data-revised="3/27/2026" data-group=""><td><a href="SocialMediaType/index.html" class="dd-field-link">Social Media Type</a><div class="dd-field-standard-name">SocialMediaType</div></td><td class="dd-field-def">A list of social media platforms (e.g., Facebook, LinkedIn, Instagram) associated with the MemberSocialMedia field.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge">2%</span></td></tr><tr data-name="SourceSystem" data-type="Resource" data-usage="-1" data-added="1.7.0" data-revised="1/8/2020" data-group=""><td><a href="SourceSystem/index.html" class="dd-field-link">Source System</a><div class="dd-field-standard-name">SourceSystem</div></td><td class="dd-field-def">The source system of the Member record.</td><td><span class="dd-type-badge">Resource</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="SourceSystemID" data-type="String" data-usage="0.5843023255813954" data-added="1.5.0" data-revised="6/17/2021" data-group=""><td><a href="SourceSystemID/index.html" class="dd-field-link">Source System ID</a><div class="dd-field-standard-name">SourceSystemID</div></td><td class="dd-field-def">The OUID Resource's OrganizationUniqueId of the source record provider. The source system is the system from which the record was directly received.... <a href="SourceSystemID/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">58%</span></td></tr><tr data-name="SourceSystemMemberKey" data-type="String" data-usage="0.5697674418604651" data-added="1.5.0" data-revised="6/17/2021" data-group=""><td><a href="SourceSystemMemberKey/index.html" class="dd-field-link">Source System Member Key</a><div class="dd-field-standard-name">SourceSystemMemberKey</div></td><td class="dd-field-def">The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In... <a href="SourceSystemMemberKey/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">57%</span></td></tr><tr data-name="SourceSystemName" data-type="String" data-usage="0.3953488372093023" data-added="1.5.0" data-revised="6/17/2021" data-group=""><td><a href="SourceSystemName/index.html" class="dd-field-link">Source System Name</a><div class="dd-field-standard-name">SourceSystemName</div></td><td class="dd-field-def">The name of the immediate record provider. The system from which the record was directly received. The legal name of the company.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">40%</span></td></tr><tr data-name="SyndicateTo" data-type="String List, Multi" data-usage="0.01744186046511628" data-added="1.4.0" data-revised="3/27/2026" data-group=""><td><a href="SyndicateTo/index.html" class="dd-field-link">Syndicate To</a><div class="dd-field-standard-name">SyndicateTo</div></td><td class="dd-field-def">When permitted by the broker, the options made by the individual agent on where they would like their listings syndicated (i.e., Zillow, Trulia,... <a href="SyndicateTo/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String List, Multi</span></td><td class="dd-col-usage"><span class="dd-usage-badge">2%</span></td></tr><tr data-name="UniqueLicenseeIdentifier" data-type="String" data-usage="-1" data-added="2.0.0" data-revised="10/24/2020" data-group=""><td><a href="UniqueLicenseeIdentifier/index.html" class="dd-field-link">Unique Licensee Identifier</a><div class="dd-field-standard-name">UniqueLicenseeIdentifier</div></td><td class="dd-field-def">The Unique Licensee Identifier (ULI) represents a single ID for a licensed real estate agent. It differs from the National Association of REALTORS®... <a href="UniqueLicenseeIdentifier/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr></tbody></table></div>
+      <div class="dd-page-generated"><a href="../about/terms/index.html" target="_blank">Terms and Definitions</a><span>Generated May 4, 2026</span></div>
+    </div>
+  </div>
+
+  <!-- Search modal -->
+  <div class="search-modal-overlay" id="searchOverlay">
+    <div class="search-modal" id="searchModal">
+      <div id="search"></div>
+      <div class="dd-search-welcome visible" id="ddSearchWelcome">
+        <div class="dd-search-welcome-icon">🔍</div>
+        <p id="ddSearchWelcomeText">Search across all Data Dictionary resources, fields and lookup values.</p>
+        <p class="dd-search-hint">Press <kbd>Esc</kbd> to close</p>
+      </div>
+      <div class="dd-search-empty" id="ddSearchEmpty">No results found. Try a different search term or filter.</div>
+    </div>
+  </div>
+  <template id="searchFiltersTemplate">
+    <div class="dd-search-meta">
+      <div class="dd-search-filters" id="ddSearchFilters">
+        <button class="dd-search-filter-pill" data-version="">All</button>
+        <button class="dd-search-filter-pill" data-version="1.7">DD 1.7</button>
+        <button class="dd-search-filter-pill active" data-version="2.0">DD 2.0</button>
+        <button class="dd-search-filter-pill" data-version="2.1">DD 2.1</button>
+      </div>
+      <div class="dd-search-count" id="ddSearchCount"></div>
+    </div>
+  </template>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="https://reso.org">Real Estate Standards Organization (RESO)</a>. All rights reserved.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="https://github.com/RESOStandards/reso-data-dictionary-documentation">Source</a> &middot;
+      <a href="https://www.reso.org/eula/">Terms of Use</a>
+    </p>
+  </footer>
+
+  <script src="../../assets/dd.js"></script>
+</body>
+</html>

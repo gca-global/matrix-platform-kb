@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <title>Contacts - DD 2.0 - RESO Data Dictionary</title>
+  <meta name="description" content="Information on client and other contacts of the member. 91 fields in RESO Data Dictionary 2.0.">
+  <meta property="og:title" content="Contacts - DD 2.0 - RESO Data Dictionary">
+  <meta property="og:description" content="Information on client and other contacts of the member. 91 fields in RESO Data Dictionary 2.0.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RESO Data Dictionary">
+  <meta property="og:image" content="https://www.reso.org/wp-content/uploads/2020/06/RESO-Logo-Fullname_Horizontal_Blue.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Contacts - DD 2.0 - RESO Data Dictionary">
+  <meta name="twitter:description" content="Information on client and other contacts of the member. 91 fields in RESO Data Dictionary 2.0.">
+  <meta name="twitter:image" content="https://www.reso.org/wp-content/uploads/2020/06/RESO-Logo-Fullname_Horizontal_Blue.png">
+  <link rel="stylesheet" href="../../assets/dd.css">
+  <link href="../../pagefind/pagefind-ui.css" rel="stylesheet">
+  <script>(function(){var t=localStorage.getItem('dd-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');})()</script>
+</head>
+<body data-version="2.0">
+  <header class="site-header">
+    <a href="https://dd.reso.org/" class="header-logo">
+      <img src="../../assets/reso-logo-white.png" alt="RESO" />
+    </a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <nav class="header-nav" id="headerNav">
+      <a href="https://dd.reso.org/">Home</a>
+      <a href="https://reso.org">RESO.org</a>
+      <button class="search-trigger" id="searchTrigger" type="button">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        Search<kbd>/</kbd>
+      </button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <div class="dd-layout">
+    <aside class="dd-sidebar" id="ddSidebar">
+      <div class="dd-sidebar-header">
+        <div class="dd-sidebar-title">Data Dictionary</div>
+        <select class="dd-version-select" id="ddVersionSelect" onchange="window.location.href='/DD' + this.value + '/'">
+          <option value="1.7">DD 1.7</option>
+          <option value="2.0" selected>DD 2.0</option>
+          <option value="2.1">DD 2.1 (DRAFT)</option>
+        </select>
+      </div>
+      <div class="dd-sidebar-search" id="sidebarSearch">
+        <svg class="dd-sidebar-search-icon" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="sidebarSearchInput" name="search" placeholder="Search..." aria-label="Search" readonly />
+        <kbd>/</kbd>
+      </div>
+      <div class="dd-sidebar-section" data-section="about">
+<div class="dd-sidebar-section-title">About <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../about/index.html" class="dd-nav-resource-link">Introduction</a></li>
+<li class="dd-nav-resource"><a href="../about/release-guide/index.html" class="dd-nav-resource-link">Release Guide</a></li>
+<li class="dd-nav-resource"><a href="../about/changelog/index.html" class="dd-nav-resource-link">Change Log</a></li>
+<li class="dd-nav-resource"><a href="../about/certification/index.html" class="dd-nav-resource-link">Certification</a></li>
+<li class="dd-nav-resource"><a href="../about/terms/index.html" class="dd-nav-resource-link">Terms and Definitions</a></li>
+<li class="dd-nav-resource"><a href="../about/deprecated/index.html" class="dd-nav-resource-link">Deprecated Fields</a></li>
+<li class="dd-nav-resource"><a href="../about/resources/index.html" class="dd-nav-resource-link">Resource Summary</a></li>
+<li class="dd-nav-resource"><a href="../about/search-tips/index.html" class="dd-nav-resource-link">Search Tips</a></li>
+</ul>
+</div>
+<div class="dd-sidebar-section expanded" data-section="resources">
+<div class="dd-sidebar-section-title">Resources <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource">
+  <a href="../Property/index.html" class="dd-nav-resource-link">Property</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Business" class="dd-nav-group-link">Business</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Characteristics" class="dd-nav-group-link">Characteristics</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Equipment" class="dd-nav-group-link">Equipment</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Farming" class="dd-nav-group-link">Farming</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Financial" class="dd-nav-group-link">Financial</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-HOA" class="dd-nav-group-link">HOA</a>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../Property/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group has-children">
+      <a href="../Property/index.html#group-Listing-AgentOffice" class="dd-nav-group-link">AgentOffice</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-BuyerAgent" class="dd-nav-group-link">BuyerAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-BuyerOffice" class="dd-nav-group-link">BuyerOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-BuyerTeam" class="dd-nav-group-link">BuyerTeam</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-CoBuyerAgent" class="dd-nav-group-link">CoBuyerAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-CoBuyerOffice" class="dd-nav-group-link">CoBuyerOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-CoListAgent" class="dd-nav-group-link">CoListAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-CoListOffice" class="dd-nav-group-link">CoListOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-ListAgent" class="dd-nav-group-link">ListAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-ListOffice" class="dd-nav-group-link">ListOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-ListTeam" class="dd-nav-group-link">ListTeam</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-AgentOffice-Team" class="dd-nav-group-link">Team</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Closing" class="dd-nav-group-link">Closing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Compensation" class="dd-nav-group-link">Compensation</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Contract" class="dd-nav-group-link">Contract</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Dates" class="dd-nav-group-link">Dates</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Marketing" class="dd-nav-group-link">Marketing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Media" class="dd-nav-group-link">Media</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Price" class="dd-nav-group-link">Price</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Remarks" class="dd-nav-group-link">Remarks</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Listing-Showing" class="dd-nav-group-link">Showing</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../Property/index.html#group-Location" class="dd-nav-group-link">Location</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Location-Address" class="dd-nav-group-link">Address</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Location-Area" class="dd-nav-group-link">Area</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Location-GIS" class="dd-nav-group-link">GIS</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Location-School" class="dd-nav-group-link">School</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-OccupantOwner" class="dd-nav-group-link">OccupantOwner</a>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../Property/index.html#group-Structure" class="dd-nav-group-link">Structure</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group has-children">
+      <a href="../Property/index.html#group-Structure-Performance" class="dd-nav-group-link">Performance</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Structure-Performance-GreenMarketing" class="dd-nav-group-link">GreenMarketing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Structure-Performance-GreenVerification" class="dd-nav-group-link">GreenVerification</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Structure-Rooms" class="dd-nav-group-link">Rooms</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Tax" class="dd-nav-group-link">Tax</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-UnitTypes" class="dd-nav-group-link">UnitTypes</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Property/index.html#group-Utilities" class="dd-nav-group-link">Utilities</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Association/index.html" class="dd-nav-resource-link">Association</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Caravan/index.html" class="dd-nav-resource-link">Caravan</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../CaravanStop/index.html" class="dd-nav-resource-link">CaravanStop</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../ContactListingNotes/index.html" class="dd-nav-resource-link">ContactListingNotes</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../ContactListings/index.html" class="dd-nav-resource-link">ContactListings</a>
+</li>
+<li class="dd-nav-resource expanded">
+  <a href="index.html" class="dd-nav-resource-link active">Contacts</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../EntityEvent/index.html" class="dd-nav-resource-link">EntityEvent</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Field/index.html" class="dd-nav-resource-link">Field</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../HistoryTransactional/index.html" class="dd-nav-resource-link">HistoryTransactional</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../InternetTracking/index.html" class="dd-nav-resource-link">InternetTracking</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../InternetTracking/index.html#group-Actor" class="dd-nav-group-link">Actor</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../InternetTracking/index.html#group-Event" class="dd-nav-group-link">Event</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../InternetTracking/index.html#group-Object" class="dd-nav-group-link">Object</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../InternetTrackingSummary/index.html" class="dd-nav-resource-link">InternetTrackingSummary</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../LockOrBox/index.html" class="dd-nav-resource-link">LockOrBox</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Lookup/index.html" class="dd-nav-resource-link">Lookup</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Media/index.html" class="dd-nav-resource-link">Media</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../Media/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Member/index.html" class="dd-nav-resource-link">Member</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../MemberAssociation/index.html" class="dd-nav-resource-link">MemberAssociation</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../MemberStateLicense/index.html" class="dd-nav-resource-link">MemberStateLicense</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../OUID/index.html" class="dd-nav-resource-link">OUID</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Office/index.html" class="dd-nav-resource-link">Office</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../OfficeAssociation/index.html" class="dd-nav-resource-link">OfficeAssociation</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../OfficeCorporateLicense/index.html" class="dd-nav-resource-link">OfficeCorporateLicense</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../OpenHouse/index.html" class="dd-nav-resource-link">OpenHouse</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../OtherPhone/index.html" class="dd-nav-resource-link">OtherPhone</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../PropertyGreenVerification/index.html" class="dd-nav-resource-link">PropertyGreenVerification</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../PropertyPowerProduction/index.html" class="dd-nav-resource-link">PropertyPowerProduction</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../PropertyPowerStorage/index.html" class="dd-nav-resource-link">PropertyPowerStorage</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../PropertyRooms/index.html" class="dd-nav-resource-link">PropertyRooms</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../PropertyUnitTypes/index.html" class="dd-nav-resource-link">PropertyUnitTypes</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Prospecting/index.html" class="dd-nav-resource-link">Prospecting</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Queue/index.html" class="dd-nav-resource-link">Queue</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Rules/index.html" class="dd-nav-resource-link">Rules</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../SavedSearch/index.html" class="dd-nav-resource-link">SavedSearch</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Showing/index.html" class="dd-nav-resource-link">Showing</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../Showing/index.html#group-Agent" class="dd-nav-group-link">Agent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../Showing/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../ShowingAppointment/index.html" class="dd-nav-resource-link">ShowingAppointment</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../ShowingAvailability/index.html" class="dd-nav-resource-link">ShowingAvailability</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../ShowingRequest/index.html" class="dd-nav-resource-link">ShowingRequest</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../SocialMedia/index.html" class="dd-nav-resource-link">SocialMedia</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../TeamMembers/index.html" class="dd-nav-resource-link">TeamMembers</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../Teams/index.html" class="dd-nav-resource-link">Teams</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../TransactionManagement/index.html" class="dd-nav-resource-link">TransactionManagement</a>
+</li>
+</ul>
+</div>
+<div class="dd-sidebar-section" data-section="lookups">
+<div class="dd-sidebar-section-title">Lookups <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../lookups/AccessibilityFeatures/index.html" class="dd-nav-resource-link">AccessibilityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ActorType/index.html" class="dd-nav-resource-link">ActorType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Appliances/index.html" class="dd-nav-resource-link">Appliances</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ArchitecturalStyle/index.html" class="dd-nav-resource-link">ArchitecturalStyle</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AreaSource/index.html" class="dd-nav-resource-link">AreaSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AreaUnits/index.html" class="dd-nav-resource-link">AreaUnits</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AssociationAmenities/index.html" class="dd-nav-resource-link">AssociationAmenities</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AssociationFeeIncludes/index.html" class="dd-nav-resource-link">AssociationFeeIncludes</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AssociationStatus/index.html" class="dd-nav-resource-link">AssociationStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/AssociationType/index.html" class="dd-nav-resource-link">AssociationType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Attended/index.html" class="dd-nav-resource-link">Attended</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Basement/index.html" class="dd-nav-resource-link">Basement</a></li>
+<li class="dd-nav-resource"><a href="../lookups/BillingPreference/index.html" class="dd-nav-resource-link">BillingPreference</a></li>
+<li class="dd-nav-resource"><a href="../lookups/BodyType/index.html" class="dd-nav-resource-link">BodyType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/BusinessType/index.html" class="dd-nav-resource-link">BusinessType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/BuyerAgentDesignation/index.html" class="dd-nav-resource-link">BuyerAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/BuyerFinancing/index.html" class="dd-nav-resource-link">BuyerFinancing</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanAllowedClassNames/index.html" class="dd-nav-resource-link">CaravanAllowedClassNames</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanAllowedStatuses/index.html" class="dd-nav-resource-link">CaravanAllowedStatuses</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanResourceName/index.html" class="dd-nav-resource-link">CaravanResourceName</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanStatus/index.html" class="dd-nav-resource-link">CaravanStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanStopAttended/index.html" class="dd-nav-resource-link">CaravanStopAttended</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanStopClassName/index.html" class="dd-nav-resource-link">CaravanStopClassName</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CaravanType/index.html" class="dd-nav-resource-link">CaravanType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ChangeType/index.html" class="dd-nav-resource-link">ChangeType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ClassName/index.html" class="dd-nav-resource-link">ClassName</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ClosetType/index.html" class="dd-nav-resource-link">ClosetType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CoBuyerAgentDesignation/index.html" class="dd-nav-resource-link">CoBuyerAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CoListAgentDesignation/index.html" class="dd-nav-resource-link">CoListAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CommonInterest/index.html" class="dd-nav-resource-link">CommonInterest</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CommonWalls/index.html" class="dd-nav-resource-link">CommonWalls</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CommunityFeatures/index.html" class="dd-nav-resource-link">CommunityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CompensationType/index.html" class="dd-nav-resource-link">CompensationType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Concessions/index.html" class="dd-nav-resource-link">Concessions</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ConstructionMaterials/index.html" class="dd-nav-resource-link">ConstructionMaterials</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ContactListingPreference/index.html" class="dd-nav-resource-link">ContactListingPreference</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ContactStatus/index.html" class="dd-nav-resource-link">ContactStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ContactType/index.html" class="dd-nav-resource-link">ContactType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Cooling/index.html" class="dd-nav-resource-link">Cooling</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Country/index.html" class="dd-nav-resource-link">Country</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CurrentFinancing/index.html" class="dd-nav-resource-link">CurrentFinancing</a></li>
+<li class="dd-nav-resource"><a href="../lookups/CurrentOrPossibleUse/index.html" class="dd-nav-resource-link">CurrentOrPossibleUse</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DailySchedule/index.html" class="dd-nav-resource-link">DailySchedule</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DevelopmentStatus/index.html" class="dd-nav-resource-link">DevelopmentStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DeviceType/index.html" class="dd-nav-resource-link">DeviceType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DirectionFaces/index.html" class="dd-nav-resource-link">DirectionFaces</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DocumentStatus/index.html" class="dd-nav-resource-link">DocumentStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/DoorFeatures/index.html" class="dd-nav-resource-link">DoorFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Electric/index.html" class="dd-nav-resource-link">Electric</a></li>
+<li class="dd-nav-resource"><a href="../lookups/EventSource/index.html" class="dd-nav-resource-link">EventSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/EventTarget/index.html" class="dd-nav-resource-link">EventTarget</a></li>
+<li class="dd-nav-resource"><a href="../lookups/EventType/index.html" class="dd-nav-resource-link">EventType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ExistingLeaseType/index.html" class="dd-nav-resource-link">ExistingLeaseType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ExteriorFeatures/index.html" class="dd-nav-resource-link">ExteriorFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FeeFrequency/index.html" class="dd-nav-resource-link">FeeFrequency</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Fencing/index.html" class="dd-nav-resource-link">Fencing</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FhaEligibility/index.html" class="dd-nav-resource-link">FhaEligibility</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FinancialDataSource/index.html" class="dd-nav-resource-link">FinancialDataSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FireplaceFeatures/index.html" class="dd-nav-resource-link">FireplaceFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Flooring/index.html" class="dd-nav-resource-link">Flooring</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FoundationDetails/index.html" class="dd-nav-resource-link">FoundationDetails</a></li>
+<li class="dd-nav-resource"><a href="../lookups/FrontageType/index.html" class="dd-nav-resource-link">FrontageType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Furnished/index.html" class="dd-nav-resource-link">Furnished</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenBuildingVerificationType/index.html" class="dd-nav-resource-link">GreenBuildingVerificationType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenEnergyEfficient/index.html" class="dd-nav-resource-link">GreenEnergyEfficient</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenEnergyGeneration/index.html" class="dd-nav-resource-link">GreenEnergyGeneration</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenIndoorAirQuality/index.html" class="dd-nav-resource-link">GreenIndoorAirQuality</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenSustainability/index.html" class="dd-nav-resource-link">GreenSustainability</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenVerificationSource/index.html" class="dd-nav-resource-link">GreenVerificationSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenVerificationStatus/index.html" class="dd-nav-resource-link">GreenVerificationStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/GreenWaterConservation/index.html" class="dd-nav-resource-link">GreenWaterConservation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Heating/index.html" class="dd-nav-resource-link">Heating</a></li>
+<li class="dd-nav-resource"><a href="../lookups/HorseAmenities/index.html" class="dd-nav-resource-link">HorseAmenities</a></li>
+<li class="dd-nav-resource"><a href="../lookups/HoursDaysOfOperation/index.html" class="dd-nav-resource-link">HoursDaysOfOperation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/IanaTimeZoneValues/index.html" class="dd-nav-resource-link">IanaTimeZoneValues</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ImageOf/index.html" class="dd-nav-resource-link">ImageOf</a></li>
+<li class="dd-nav-resource"><a href="../lookups/IncomeIncludes/index.html" class="dd-nav-resource-link">IncomeIncludes</a></li>
+<li class="dd-nav-resource"><a href="../lookups/InteriorOrRoomFeatures/index.html" class="dd-nav-resource-link">InteriorOrRoomFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LaborInformation/index.html" class="dd-nav-resource-link">LaborInformation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Languages/index.html" class="dd-nav-resource-link">Languages</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LaundryFeatures/index.html" class="dd-nav-resource-link">LaundryFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LeaseRenewalCompensation/index.html" class="dd-nav-resource-link">LeaseRenewalCompensation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LeaseTerm/index.html" class="dd-nav-resource-link">LeaseTerm</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Levels/index.html" class="dd-nav-resource-link">Levels</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LinearUnits/index.html" class="dd-nav-resource-link">LinearUnits</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ListAgentDesignation/index.html" class="dd-nav-resource-link">ListAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ListingAgreement/index.html" class="dd-nav-resource-link">ListingAgreement</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ListingService/index.html" class="dd-nav-resource-link">ListingService</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ListingTerms/index.html" class="dd-nav-resource-link">ListingTerms</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ListingURLDescription/index.html" class="dd-nav-resource-link">ListingURLDescription</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LockBoxType/index.html" class="dd-nav-resource-link">LockBoxType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LockOrBoxAccessType/index.html" class="dd-nav-resource-link">LockOrBoxAccessType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LotDimensionsSource/index.html" class="dd-nav-resource-link">LotDimensionsSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LotFeatures/index.html" class="dd-nav-resource-link">LotFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LotSizeSource/index.html" class="dd-nav-resource-link">LotSizeSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/LotSizeUnits/index.html" class="dd-nav-resource-link">LotSizeUnits</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MediaAlteration/index.html" class="dd-nav-resource-link">MediaAlteration</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MediaCategory/index.html" class="dd-nav-resource-link">MediaCategory</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MediaType/index.html" class="dd-nav-resource-link">MediaType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberAssociationBillStatus/index.html" class="dd-nav-resource-link">MemberAssociationBillStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberDesignation/index.html" class="dd-nav-resource-link">MemberDesignation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberOtherPhoneType/index.html" class="dd-nav-resource-link">MemberOtherPhoneType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberStateLicenseType/index.html" class="dd-nav-resource-link">MemberStateLicenseType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberStatus/index.html" class="dd-nav-resource-link">MemberStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/MemberType/index.html" class="dd-nav-resource-link">MemberType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/NotedBy/index.html" class="dd-nav-resource-link">NotedBy</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ObjectIdType/index.html" class="dd-nav-resource-link">ObjectIdType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ObjectType/index.html" class="dd-nav-resource-link">ObjectType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OccupantType/index.html" class="dd-nav-resource-link">OccupantType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OfficeAssociationPrimaryIndicator/index.html" class="dd-nav-resource-link">OfficeAssociationPrimaryIndicator</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OfficeBranchType/index.html" class="dd-nav-resource-link">OfficeBranchType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OfficeCorporateLicenseType/index.html" class="dd-nav-resource-link">OfficeCorporateLicenseType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OfficeStatus/index.html" class="dd-nav-resource-link">OfficeStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OfficeType/index.html" class="dd-nav-resource-link">OfficeType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OpenHouseStatus/index.html" class="dd-nav-resource-link">OpenHouseStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OpenHouseType/index.html" class="dd-nav-resource-link">OpenHouseType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OperatingExpenseIncludes/index.html" class="dd-nav-resource-link">OperatingExpenseIncludes</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OtherEquipment/index.html" class="dd-nav-resource-link">OtherEquipment</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OtherPhoneType/index.html" class="dd-nav-resource-link">OtherPhoneType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OtherStructures/index.html" class="dd-nav-resource-link">OtherStructures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OwnerPays/index.html" class="dd-nav-resource-link">OwnerPays</a></li>
+<li class="dd-nav-resource"><a href="../lookups/OwnershipType/index.html" class="dd-nav-resource-link">OwnershipType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ParkingFeatures/index.html" class="dd-nav-resource-link">ParkingFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PatioAndPorchFeatures/index.html" class="dd-nav-resource-link">PatioAndPorchFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Permission/index.html" class="dd-nav-resource-link">Permission</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PetsAllowed/index.html" class="dd-nav-resource-link">PetsAllowed</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PoolFeatures/index.html" class="dd-nav-resource-link">PoolFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Possession/index.html" class="dd-nav-resource-link">Possession</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PowerProductionAnnualStatus/index.html" class="dd-nav-resource-link">PowerProductionAnnualStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PowerProductionOwnership/index.html" class="dd-nav-resource-link">PowerProductionOwnership</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PowerProductionType/index.html" class="dd-nav-resource-link">PowerProductionType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PowerStorageType/index.html" class="dd-nav-resource-link">PowerStorageType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PreferredAddress/index.html" class="dd-nav-resource-link">PreferredAddress</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PreferredMail/index.html" class="dd-nav-resource-link">PreferredMail</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PreferredMedia/index.html" class="dd-nav-resource-link">PreferredMedia</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PreferredPhone/index.html" class="dd-nav-resource-link">PreferredPhone</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PreferredPublication/index.html" class="dd-nav-resource-link">PreferredPublication</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PropertyCondition/index.html" class="dd-nav-resource-link">PropertyCondition</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PropertySubType/index.html" class="dd-nav-resource-link">PropertySubType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/PropertyType/index.html" class="dd-nav-resource-link">PropertyType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/QueueTransactionType/index.html" class="dd-nav-resource-link">QueueTransactionType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ReasonActiveOrDisabled/index.html" class="dd-nav-resource-link">ReasonActiveOrDisabled</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RentIncludes/index.html" class="dd-nav-resource-link">RentIncludes</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ResourceName/index.html" class="dd-nav-resource-link">ResourceName</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ResponseTypes/index.html" class="dd-nav-resource-link">ResponseTypes</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoadFrontageType/index.html" class="dd-nav-resource-link">RoadFrontageType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoadResponsibility/index.html" class="dd-nav-resource-link">RoadResponsibility</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoadSurfaceType/index.html" class="dd-nav-resource-link">RoadSurfaceType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Roof/index.html" class="dd-nav-resource-link">Roof</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoomLengthWidthSource/index.html" class="dd-nav-resource-link">RoomLengthWidthSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoomLevel/index.html" class="dd-nav-resource-link">RoomLevel</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RoomType/index.html" class="dd-nav-resource-link">RoomType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/RuleFormat/index.html" class="dd-nav-resource-link">RuleFormat</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ScheduleType/index.html" class="dd-nav-resource-link">ScheduleType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SearchQueryType/index.html" class="dd-nav-resource-link">SearchQueryType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SecurityFeatures/index.html" class="dd-nav-resource-link">SecurityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Sewer/index.html" class="dd-nav-resource-link">Sewer</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingAppointmentMethod/index.html" class="dd-nav-resource-link">ShowingAppointmentMethod</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingAppointmentStatus/index.html" class="dd-nav-resource-link">ShowingAppointmentStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingConsiderations/index.html" class="dd-nav-resource-link">ShowingConsiderations</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingContactType/index.html" class="dd-nav-resource-link">ShowingContactType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingMethod/index.html" class="dd-nav-resource-link">ShowingMethod</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingMethodRequest/index.html" class="dd-nav-resource-link">ShowingMethodRequest</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingRequestType/index.html" class="dd-nav-resource-link">ShowingRequestType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingRequestor/index.html" class="dd-nav-resource-link">ShowingRequestor</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingRequirements/index.html" class="dd-nav-resource-link">ShowingRequirements</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingServiceName/index.html" class="dd-nav-resource-link">ShowingServiceName</a></li>
+<li class="dd-nav-resource"><a href="../lookups/ShowingStatus/index.html" class="dd-nav-resource-link">ShowingStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Skirt/index.html" class="dd-nav-resource-link">Skirt</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SocialMediaType/index.html" class="dd-nav-resource-link">SocialMediaType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SpaFeatures/index.html" class="dd-nav-resource-link">SpaFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SpecialLicenses/index.html" class="dd-nav-resource-link">SpecialLicenses</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SpecialListingConditions/index.html" class="dd-nav-resource-link">SpecialListingConditions</a></li>
+<li class="dd-nav-resource"><a href="../lookups/StandardStatus/index.html" class="dd-nav-resource-link">StandardStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/StateOrProvince/index.html" class="dd-nav-resource-link">StateOrProvince</a></li>
+<li class="dd-nav-resource"><a href="../lookups/StreetDirection/index.html" class="dd-nav-resource-link">StreetDirection</a></li>
+<li class="dd-nav-resource"><a href="../lookups/StructureType/index.html" class="dd-nav-resource-link">StructureType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/SyndicateTo/index.html" class="dd-nav-resource-link">SyndicateTo</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TaxStatusCurrent/index.html" class="dd-nav-resource-link">TaxStatusCurrent</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TeamMemberType/index.html" class="dd-nav-resource-link">TeamMemberType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TeamStatus/index.html" class="dd-nav-resource-link">TeamStatus</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TenantPays/index.html" class="dd-nav-resource-link">TenantPays</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TrackingType/index.html" class="dd-nav-resource-link">TrackingType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/TransactionType/index.html" class="dd-nav-resource-link">TransactionType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/UnitTypeType/index.html" class="dd-nav-resource-link">UnitTypeType</a></li>
+<li class="dd-nav-resource"><a href="../lookups/UnitsFurnished/index.html" class="dd-nav-resource-link">UnitsFurnished</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Utilities/index.html" class="dd-nav-resource-link">Utilities</a></li>
+<li class="dd-nav-resource"><a href="../lookups/Vegetation/index.html" class="dd-nav-resource-link">Vegetation</a></li>
+<li class="dd-nav-resource"><a href="../lookups/View/index.html" class="dd-nav-resource-link">View</a></li>
+<li class="dd-nav-resource"><a href="../lookups/WaterSource/index.html" class="dd-nav-resource-link">WaterSource</a></li>
+<li class="dd-nav-resource"><a href="../lookups/WaterfrontFeatures/index.html" class="dd-nav-resource-link">WaterfrontFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/WindowFeatures/index.html" class="dd-nav-resource-link">WindowFeatures</a></li>
+<li class="dd-nav-resource"><a href="../lookups/YearBuiltSource/index.html" class="dd-nav-resource-link">YearBuiltSource</a></li>
+</ul>
+</div>
+<div class="dd-sidebar-section" data-section="browse-by">
+<div class="dd-sidebar-section-title">Browse By <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../xref/payload/index.html" class="dd-nav-resource-link">Payload</a></li>
+<li class="dd-nav-resource"><a href="../xref/property-type/index.html" class="dd-nav-resource-link">Property Type</a></li>
+<li class="dd-nav-resource"><a href="../xref/status/index.html" class="dd-nav-resource-link">Element Status</a></li>
+<li class="dd-nav-resource"><a href="../xref/version-added/index.html" class="dd-nav-resource-link">Version Added</a></li>
+</ul>
+</div>
+
+    </aside>
+
+    <div class="dd-sidebar-overlay" id="ddSidebarOverlay"></div>
+    <button class="dd-sidebar-toggle" id="ddSidebarToggle" type="button" aria-label="Toggle sidebar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+
+    <div class="dd-content" data-pagefind-body data-pagefind-filter="dd-version:2.0" data-pagefind-meta="dd-version:DD 2.0">
+      <div class="dd-resource-sticky"><div class="dd-condensed-title">Contacts</div><nav class="dd-breadcrumb" data-pagefind-ignore><a href="https://dd.reso.org/">Data Dictionary</a> <span class="dd-breadcrumb-sep">/</span> <a href="../index.html">DD 2.0</a> <span class="dd-breadcrumb-sep">/</span> <span>Contacts</span></nav><div class="dd-page-header"><h1 data-pagefind-meta="title" data-pagefind-weight="10">Contacts Resource <button class="dd-copy-btn" data-copy="Contacts" title="Copy name"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></h1><span class="dd-search-norm" data-pagefind-weight="100">contacts</span><p class="dd-page-subtitle" data-pagefind-meta="description">91 fields &middot; Last revised 9/24/2015</p><span class="dd-search-norm" data-pagefind-meta="date">9/24/2015</span></div><div class="dd-definition-callout"><span class="dd-callout-label">Definition</span><span class="dd-callout-text">Information on client and other contacts of the member.</span><button class="dd-callout-toggle">... more</button></div><div class="dd-toolbar"><div class="dd-table-filter"><input type="text" name="filter" placeholder="Filter fields..." aria-label="Filter fields" /><span class="dd-table-filter-count"></span></div><div class="dd-sort-controls">
+    <span class="dd-sort-label">Sort by</span>
+    <button class="dd-sort-pill active" data-sort="name">Name <span class="dd-sort-arrow">&#9650;</span></button>
+    <button class="dd-sort-pill" data-sort="type">Type <span class="dd-sort-arrow">&#9650;</span></button>
+    <button class="dd-sort-pill" data-sort="usage">Usage <span class="dd-sort-arrow">&#9650;</span></button>
+    <button class="dd-sort-pill" data-sort="added">Date Added <span class="dd-sort-arrow">&#9650;</span></button>
+    <button class="dd-sort-pill" data-sort="revised">Revised <span class="dd-sort-arrow">&#9650;</span></button>
+    <span class="dd-sort-mobile-label"><svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor"><path d="M5 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L5 6.414V12zm10-4a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z"/></svg></span>
+    <select class="dd-sort-select" aria-label="Sort by">
+      <option value="name" selected>Name</option>
+      <option value="type">Type</option>
+      <option value="usage">Usage</option>
+      <option value="added">Date Added</option>
+      <option value="revised">Revised</option>
+    </select>
+    <button class="dd-sort-dir-btn" title="Toggle sort direction">&#9650;</button>
+    
+  </div></div></div><div class="dd-sticky-col-headers"><table><colgroup><col style="width:22%"><col><col style="width:18%"><col style="width:12%"></colgroup><tr><th>Field</th><th>Definition</th><th>Type</th><th class="dd-col-usage">Usage</th></tr></table></div><div class="dd-fields-table-wrapper" data-pagefind-ignore><table class="dd-fields-table"><colgroup><col style="width:22%"><col><col style="width:18%"><col style="width:12%"></colgroup><thead><tr><th>Field</th><th>Definition</th><th>Type</th><th class="dd-col-usage">Usage</th></tr></thead><tbody><tr data-name="Anniversary" data-type="Date" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="Anniversary/index.html" class="dd-field-link">Anniversary</a><div class="dd-field-standard-name">Anniversary</div></td><td class="dd-field-def">The month, day and year of the contact's wedding anniversary.</td><td><span class="dd-type-badge">Date</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="AssistantEmail" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="AssistantEmail/index.html" class="dd-field-link">Assistant Email</a><div class="dd-field-standard-name">AssistantEmail</div></td><td class="dd-field-def">The email address of the contact's assistant.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="AssistantName" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="AssistantName/index.html" class="dd-field-link">Assistant Name</a><div class="dd-field-standard-name">AssistantName</div></td><td class="dd-field-def">The name of the contact's assistant.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="AssistantPhone" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="AssistantPhone/index.html" class="dd-field-link">Assistant Phone</a><div class="dd-field-standard-name">AssistantPhone</div></td><td class="dd-field-def">The phone number of the contact's assistant.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="AssistantPhoneExt" data-type="String" data-usage="-1" data-added="" data-revised="1/17/2016" data-group=""><td><a href="AssistantPhoneExt/index.html" class="dd-field-link">Assistant Phone Ext</a><div class="dd-field-standard-name">AssistantPhoneExt</div></td><td class="dd-field-def">The phone number extension of the contact's assistant.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Birthdate" data-type="Date" data-usage="-1" data-added="" data-revised="11/9/2016" data-group=""><td><a href="Birthdate/index.html" class="dd-field-link">Birthdate</a><div class="dd-field-standard-name">Birthdate</div></td><td class="dd-field-def">The month, day and year of the contact's birthday.</td><td><span class="dd-type-badge">Date</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="BusinessFax" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="BusinessFax/index.html" class="dd-field-link">Business Fax</a><div class="dd-field-standard-name">BusinessFax</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="BusinessFax/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Children" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="Children/index.html" class="dd-field-link">Children</a><div class="dd-field-standard-name">Children</div></td><td class="dd-field-def">A list of the names of the contact's children in a comma-separated list.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Company" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="Company/index.html" class="dd-field-link">Company</a><div class="dd-field-standard-name">Company</div></td><td class="dd-field-def">The contact's company or employer.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="ContactKey" data-type="String" data-usage="0.0029069767441860465" data-added="" data-revised="12/12/2012" data-group=""><td><a href="ContactKey/index.html" class="dd-field-link">Contact Key</a><div class="dd-field-standard-name">ContactKey</div></td><td class="dd-field-def">A system unique identifier. Specifically, in aggregation systems, the ContactKey is the system unique identifier from the system that the record was... <a href="ContactKey/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge">0%</span></td></tr><tr data-name="ContactLoginId" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="ContactLoginId/index.html" class="dd-field-link">Contact Login ID</a><div class="dd-field-standard-name">ContactLoginId</div></td><td class="dd-field-def">The local, well-known identifier for the contact. This value may not be unique, specifically in the case of aggregation systems. This value should be... <a href="ContactLoginId/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="ContactPassword" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="ContactPassword/index.html" class="dd-field-link">Contact Password</a><div class="dd-field-standard-name">ContactPassword</div></td><td class="dd-field-def">A client password that the member wishes to share with other systems. Normal security considerations apply and are the responsibility of the entity... <a href="ContactPassword/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="ContactStatus" data-type="String List, Single" data-usage="-1" data-added="" data-revised="3/27/2026" data-group=""><td><a href="ContactStatus/index.html" class="dd-field-link">Contact Status</a><div class="dd-field-standard-name">ContactStatus</div></td><td class="dd-field-def">The status of the contact (i.e., Active, Inactive, On Vacation, Deleted, etc.).</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="ContactType" data-type="String List, Multi" data-usage="-1" data-added="" data-revised="6/17/2016" data-group=""><td><a href="ContactType/index.html" class="dd-field-link">Contact Type</a><div class="dd-field-standard-name">ContactType</div></td><td class="dd-field-def">The type of contact (i.e., Business, Friend, Family, Prospect, Ready to Buy, etc.).</td><td><span class="dd-type-badge">String List, Multi</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="ContactsOtherPhone" data-type="Collection" data-usage="-1" data-added="1.7.0" data-revised="10/26/2017" data-group=""><td><a href="ContactsOtherPhone/index.html" class="dd-field-link">Contacts Other Phone</a><div class="dd-field-standard-name">ContactsOtherPhone</div></td><td class="dd-field-def">A collection of the types of other phone fields available for Contacts. The collection includes the type of system and other details pertinent about... <a href="ContactsOtherPhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">Collection</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="ContactsSocialMedia" data-type="Collection" data-usage="-1" data-added="1.7.0" data-revised="10/26/2017" data-group=""><td><a href="ContactsSocialMedia/index.html" class="dd-field-link">Contacts Social Media</a><div class="dd-field-standard-name">ContactsSocialMedia</div></td><td class="dd-field-def">A collection of the types of social media fields available for Contacts. The collection includes the type of system and other details relating to... <a href="ContactsSocialMedia/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">Collection</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Department" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="Department/index.html" class="dd-field-link">Department</a><div class="dd-field-standard-name">Department</div></td><td class="dd-field-def">The department in which the contact works.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="DirectPhone" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="DirectPhone/index.html" class="dd-field-link">Direct Phone</a><div class="dd-field-standard-name">DirectPhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="DirectPhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Email" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="Email/index.html" class="dd-field-link">Email</a><div class="dd-field-standard-name">Email</div></td><td class="dd-field-def">The preferred email address of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Email2" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="Email2/index.html" class="dd-field-link">Email 2</a><div class="dd-field-standard-name">Email2</div></td><td class="dd-field-def">The secondary email address of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Email3" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="Email3/index.html" class="dd-field-link">Email 3</a><div class="dd-field-standard-name">Email3</div></td><td class="dd-field-def">The tertiary email address of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="FirstName" data-type="String" data-usage="-1" data-added="" data-revised="1/23/2019" data-group=""><td><a href="FirstName/index.html" class="dd-field-link">First Name</a><div class="dd-field-standard-name">FirstName</div></td><td class="dd-field-def">The first name of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="FullName" data-type="String" data-usage="-1" data-added="" data-revised="1/23/2019" data-group=""><td><a href="FullName/index.html" class="dd-field-link">Full Name</a><div class="dd-field-standard-name">FullName</div></td><td class="dd-field-def">The first, middle and last name of the contact or an alternate full name.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HistoryTransactional" data-type="Collection" data-usage="-1" data-added="" data-revised="1/6/2022" data-group=""><td><a href="HistoryTransactional/index.html" class="dd-field-link">History Transactional</a><div class="dd-field-standard-name">HistoryTransactional</div></td><td class="dd-field-def">The history of the contact's record.</td><td><span class="dd-type-badge">Collection</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomeAddress1" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="HomeAddress1/index.html" class="dd-field-link">Home Address 1</a><div class="dd-field-standard-name">HomeAddress1</div></td><td class="dd-field-def">The street number, direction, name and suffix of the contact's home.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomeAddress2" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="HomeAddress2/index.html" class="dd-field-link">Home Address 2</a><div class="dd-field-standard-name">HomeAddress2</div></td><td class="dd-field-def">The unit/suite number of the contact's home.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomeCarrierRoute" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="HomeCarrierRoute/index.html" class="dd-field-link">Home Carrier Route</a><div class="dd-field-standard-name">HomeCarrierRoute</div></td><td class="dd-field-def">The group of addresses to which the U.S. Postal Service (USPS) assigns the same code to aid in mail delivery. For the USPS, these codes are nine... <a href="HomeCarrierRoute/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomeCity" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="HomeCity/index.html" class="dd-field-link">Home City</a><div class="dd-field-standard-name">HomeCity</div></td><td class="dd-field-def">The city of the contact's home.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomeCountry" data-type="String List, Single" data-usage="-1" data-added="" data-revised="1/11/2016" data-group=""><td><a href="HomeCountry/index.html" class="dd-field-link">Home Country</a><div class="dd-field-standard-name">HomeCountry</div></td><td class="dd-field-def">The country abbreviation in a postal address.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomeCountyOrParish" data-type="String List, Single" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="HomeCountyOrParish/index.html" class="dd-field-link">Home County Or Parish</a><div class="dd-field-standard-name">HomeCountyOrParish</div></td><td class="dd-field-def">The county or parish in which the contact's home is addressed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomeFax" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="HomeFax/index.html" class="dd-field-link">Home Fax</a><div class="dd-field-standard-name">HomeFax</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="HomeFax/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomePhone" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="HomePhone/index.html" class="dd-field-link">Home Phone</a><div class="dd-field-standard-name">HomePhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="HomePhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomePostalCode" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="HomePostalCode/index.html" class="dd-field-link">Home Postal Code</a><div class="dd-field-standard-name">HomePostalCode</div></td><td class="dd-field-def">The postal code of the contact's home.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomePostalCodePlus4" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="HomePostalCodePlus4/index.html" class="dd-field-link">Home Postal Code Plus 4</a><div class="dd-field-standard-name">HomePostalCodePlus4</div></td><td class="dd-field-def">The four-digit extension of the U.S. Zip Code.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="HomeStateOrProvince" data-type="String List, Single" data-usage="-1" data-added="" data-revised="8/12/2015" data-group=""><td><a href="HomeStateOrProvince/index.html" class="dd-field-link">Home State Or Province</a><div class="dd-field-standard-name">HomeStateOrProvince</div></td><td class="dd-field-def">The state or province in which the contact's home is addressed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="JobTitle" data-type="String" data-usage="-1" data-added="" data-revised="1/23/2019" data-group=""><td><a href="JobTitle/index.html" class="dd-field-link">Job Title</a><div class="dd-field-standard-name">JobTitle</div></td><td class="dd-field-def">The title or position of the contact within their organization.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Language" data-type="String List, Multi" data-usage="-1" data-added="" data-revised="1/15/2016" data-group=""><td><a href="Language/index.html" class="dd-field-link">Language</a><div class="dd-field-standard-name">Language</div></td><td class="dd-field-def">The languages spoken by the contact.</td><td><span class="dd-type-badge">String List, Multi</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="LastName" data-type="String" data-usage="-1" data-added="" data-revised="1/23/2019" data-group=""><td><a href="LastName/index.html" class="dd-field-link">Last Name</a><div class="dd-field-standard-name">LastName</div></td><td class="dd-field-def">The last name of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="LeadSource" data-type="String" data-usage="-1" data-added="1.6" data-revised="8/23/2016" data-group=""><td><a href="LeadSource/index.html" class="dd-field-link">Lead Source</a><div class="dd-field-standard-name">LeadSource</div></td><td class="dd-field-def">The source or person that provided the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Media" data-type="Collection" data-usage="-1" data-added="" data-revised="1/6/2022" data-group=""><td><a href="Media/index.html" class="dd-field-link">Media</a><div class="dd-field-standard-name">Media</div></td><td class="dd-field-def">The media for the contact's record.</td><td><span class="dd-type-badge">Collection</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="MiddleName" data-type="String" data-usage="-1" data-added="" data-revised="1/23/2019" data-group=""><td><a href="MiddleName/index.html" class="dd-field-link">Middle Name</a><div class="dd-field-standard-name">MiddleName</div></td><td class="dd-field-def">The middle name of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="MobilePhone" data-type="String" data-usage="-1" data-added="" data-revised="10/9/2018" data-group=""><td><a href="MobilePhone/index.html" class="dd-field-link">Mobile Phone</a><div class="dd-field-standard-name">MobilePhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="MobilePhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="ModificationTimestamp" data-type="Timestamp" data-usage="0.0029069767441860465" data-added="" data-revised="9/24/2015" data-group=""><td><a href="ModificationTimestamp/index.html" class="dd-field-link">Modification Timestamp</a><div class="dd-field-standard-name">ModificationTimestamp</div></td><td class="dd-field-def">The date/time the Contact record was last modified.</td><td><span class="dd-type-badge">Timestamp</span></td><td class="dd-col-usage"><span class="dd-usage-badge">0%</span></td></tr><tr data-name="NamePrefix" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="NamePrefix/index.html" class="dd-field-link">Name Prefix</a><div class="dd-field-standard-name">NamePrefix</div></td><td class="dd-field-def">The prefix to the name (e.g., Dr., Mr., Ms.).</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="NameSuffix" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="NameSuffix/index.html" class="dd-field-link">Name Suffix</a><div class="dd-field-standard-name">NameSuffix</div></td><td class="dd-field-def">The suffix to the surname (e.g., Esq., Jr., III).</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Nickname" data-type="String" data-usage="-1" data-added="" data-revised="1/23/2019" data-group=""><td><a href="Nickname/index.html" class="dd-field-link">Nickname</a><div class="dd-field-standard-name">Nickname</div></td><td class="dd-field-def">An alternate name used by the contact, usually as a substitute for the first name.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Notes" data-type="String" data-usage="-1" data-added="" data-revised="2/21/2013" data-group=""><td><a href="Notes/index.html" class="dd-field-link">Notes</a><div class="dd-field-standard-name">Notes</div></td><td class="dd-field-def">The recorded notes about the client.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OfficePhone" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="OfficePhone/index.html" class="dd-field-link">Office Phone</a><div class="dd-field-standard-name">OfficePhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="OfficePhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OfficePhoneExt" data-type="String" data-usage="-1" data-added="" data-revised="1/17/2016" data-group=""><td><a href="OfficePhoneExt/index.html" class="dd-field-link">Office Phone Ext</a><div class="dd-field-standard-name">OfficePhoneExt</div></td><td class="dd-field-def">The extension of the given phone number (if applicable).</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OriginalEntryTimestamp" data-type="Timestamp" data-usage="-1" data-added="" data-revised="9/24/2015" data-group=""><td><a href="OriginalEntryTimestamp/index.html" class="dd-field-link">Original Entry Timestamp</a><div class="dd-field-standard-name">OriginalEntryTimestamp</div></td><td class="dd-field-def">The date/time the contact record was originally input into the source system.</td><td><span class="dd-type-badge">Timestamp</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OriginatingSystem" data-type="Resource" data-usage="-1" data-added="" data-revised="1/6/2022" data-group=""><td><a href="OriginatingSystem/index.html" class="dd-field-link">Originating System</a><div class="dd-field-standard-name">OriginatingSystem</div></td><td class="dd-field-def">The originating system of the contact's record.</td><td><span class="dd-type-badge">Resource</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OriginatingSystemContactKey" data-type="String" data-usage="-1" data-added="" data-revised="2/18/2016" data-group=""><td><a href="OriginatingSystemContactKey/index.html" class="dd-field-link">Originating System Contact Key</a><div class="dd-field-standard-name">OriginatingSystemContactKey</div></td><td class="dd-field-def">The system key, a unique record identifier, from the originating system. The originating system is the system with authoritative control over the... <a href="OriginatingSystemContactKey/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OriginatingSystemID" data-type="String" data-usage="-1" data-added="1.5.0" data-revised="2/18/2016" data-group=""><td><a href="OriginatingSystemID/index.html" class="dd-field-link">Originating System ID</a><div class="dd-field-standard-name">OriginatingSystemID</div></td><td class="dd-field-def">The OUID Resource's OrganizationUniqueId of the originating record provider. The originating system is the system with authoritative control over the... <a href="OriginatingSystemID/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OriginatingSystemName" data-type="String" data-usage="-1" data-added="" data-revised="2/18/2016" data-group=""><td><a href="OriginatingSystemName/index.html" class="dd-field-link">Originating System Name</a><div class="dd-field-standard-name">OriginatingSystemName</div></td><td class="dd-field-def">The name of the originating record provider, most commonly the name of the MLS. The place where the contact is originally input by the member. The... <a href="OriginatingSystemName/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OtherAddress1" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="OtherAddress1/index.html" class="dd-field-link">Other Address 1</a><div class="dd-field-standard-name">OtherAddress1</div></td><td class="dd-field-def">The other street number, direction, name and suffix of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OtherAddress2" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="OtherAddress2/index.html" class="dd-field-link">Other Address 2</a><div class="dd-field-standard-name">OtherAddress2</div></td><td class="dd-field-def">The other unit/suite number of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OtherCarrierRoute" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="OtherCarrierRoute/index.html" class="dd-field-link">Other Carrier Route</a><div class="dd-field-standard-name">OtherCarrierRoute</div></td><td class="dd-field-def">The group of addresses to which the U.S. Postal Service (USPS) assigns the same code to aid in mail delivery. For the USPS, these codes are 9 digits:... <a href="OtherCarrierRoute/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OtherCity" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="OtherCity/index.html" class="dd-field-link">Other City</a><div class="dd-field-standard-name">OtherCity</div></td><td class="dd-field-def">The other city of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OtherCountry" data-type="String List, Single" data-usage="-1" data-added="" data-revised="1/11/2016" data-group=""><td><a href="OtherCountry/index.html" class="dd-field-link">Other Country</a><div class="dd-field-standard-name">OtherCountry</div></td><td class="dd-field-def">The other country abbreviation in a postal address.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OtherCountyOrParish" data-type="String List, Single" data-usage="-1" data-added="" data-revised="8/9/2013" data-group=""><td><a href="OtherCountyOrParish/index.html" class="dd-field-link">Other County Or Parish</a><div class="dd-field-standard-name">OtherCountyOrParish</div></td><td class="dd-field-def">The other county or parish in which the contact is addressed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OtherPhoneType" data-type="String List, Single" data-usage="-1" data-added="" data-revised="3/27/2026" data-group=""><td><a href="OtherPhoneType/index.html" class="dd-field-link">Other Phone Type</a><div class="dd-field-standard-name">OtherPhoneType</div></td><td class="dd-field-def">A list of phone types (e.g., Home, Mobile, Second) that do not already exist in the given phone fields or if a second type of phone field is needed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OtherPostalCode" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="OtherPostalCode/index.html" class="dd-field-link">Other Postal Code</a><div class="dd-field-standard-name">OtherPostalCode</div></td><td class="dd-field-def">The other postal code of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OtherPostalCodePlus4" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="OtherPostalCodePlus4/index.html" class="dd-field-link">Other Postal Code Plus 4</a><div class="dd-field-standard-name">OtherPostalCodePlus4</div></td><td class="dd-field-def">The other four-digit extension of the U.S. Zip Code.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OtherStateOrProvince" data-type="String List, Single" data-usage="-1" data-added="" data-revised="8/12/2015" data-group=""><td><a href="OtherStateOrProvince/index.html" class="dd-field-link">Other State Or Province</a><div class="dd-field-standard-name">OtherStateOrProvince</div></td><td class="dd-field-def">The other state or province in which the contact is addressed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OwnerMember" data-type="Resource" data-usage="-1" data-added="" data-revised="1/6/2022" data-group=""><td><a href="OwnerMember/index.html" class="dd-field-link">Owner Member</a><div class="dd-field-standard-name">OwnerMember</div></td><td class="dd-field-def">The member who owns the contact's record.</td><td><span class="dd-type-badge">Resource</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OwnerMemberID" data-type="String" data-usage="-1" data-added="" data-revised="1/17/2017" data-group=""><td><a href="OwnerMemberID/index.html" class="dd-field-link">Owner Member ID</a><div class="dd-field-standard-name">OwnerMemberID</div></td><td class="dd-field-def">The local, well-known identifier for the member in charge of the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="OwnerMemberKey" data-type="String" data-usage="-1" data-added="" data-revised="1/17/2017" data-group=""><td><a href="OwnerMemberKey/index.html" class="dd-field-link">Owner Member Key</a><div class="dd-field-standard-name">OwnerMemberKey</div></td><td class="dd-field-def">The unique identifier (key) of the member owning the contact. This is a foreign key relating to the Member resource's MemberKey.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="Pager" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="Pager/index.html" class="dd-field-link">Pager</a><div class="dd-field-standard-name">Pager</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="Pager/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="PhoneTTYTDD" data-type="String" data-usage="-1" data-added="" data-revised="11/30/2018" data-group=""><td><a href="PhoneTTYTDD/index.html" class="dd-field-link">Phone Tty/Tdd</a><div class="dd-field-standard-name">PhoneTTYTDD</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="PhoneTTYTDD/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="PreferredAddress" data-type="String List, Single" data-usage="-1" data-added="" data-revised="3/27/2026" data-group=""><td><a href="PreferredAddress/index.html" class="dd-field-link">Preferred Address</a><div class="dd-field-standard-name">PreferredAddress</div></td><td class="dd-field-def">A list of the address options (i.e., Home, Work and Other) used to determine the address preferred by the client.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="PreferredPhone" data-type="String List, Single" data-usage="-1" data-added="" data-revised="3/27/2026" data-group=""><td><a href="PreferredPhone/index.html" class="dd-field-link">Preferred Phone</a><div class="dd-field-standard-name">PreferredPhone</div></td><td class="dd-field-def">A list of the phone options (e.g., Office, Mobile, Direct, Voicemail) used to determine the phone preferred by the client.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="ReferredBy" data-type="String" data-usage="-1" data-added="" data-revised="10/18/2014" data-group=""><td><a href="ReferredBy/index.html" class="dd-field-link">Referred By</a><div class="dd-field-standard-name">ReferredBy</div></td><td class="dd-field-def">The name of the person who referred the contact.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="ReverseProspectingEnabledYN" data-type="Boolean" data-usage="-1" data-added="2.0.0" data-revised="4/30/2019" data-group=""><td><a href="ReverseProspectingEnabledYN/index.html" class="dd-field-link">Reverse Prospecting Enabled Yes/No</a><div class="dd-field-standard-name">ReverseProspectingEnabledYN</div></td><td class="dd-field-def">Reverse prospecting, a system that allows listing agents to see the agent/member whose client has a search criteria that found the agent's listing,... <a href="ReverseProspectingEnabledYN/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">Boolean</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="SocialMediaType" data-type="String List, Single" data-usage="-1" data-added="" data-revised="3/27/2026" data-group=""><td><a href="SocialMediaType/index.html" class="dd-field-link">Social Media Type</a><div class="dd-field-standard-name">SocialMediaType</div></td><td class="dd-field-def">A list of social media platforms (e.g., Facebook, LinkedIn, Instagram) associated with the ContactsSocialMedia field.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="SourceSystem" data-type="Resource" data-usage="-1" data-added="" data-revised="1/6/2022" data-group=""><td><a href="SourceSystem/index.html" class="dd-field-link">Source System</a><div class="dd-field-standard-name">SourceSystem</div></td><td class="dd-field-def">The source system of the contact's record.</td><td><span class="dd-type-badge">Resource</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="SourceSystemContactKey" data-type="String" data-usage="-1" data-added="1.5.0" data-revised="2/18/2016" data-group=""><td><a href="SourceSystemContactKey/index.html" class="dd-field-link">Source System Contact Key</a><div class="dd-field-standard-name">SourceSystemContactKey</div></td><td class="dd-field-def">The system key, a unique record identifier, from the source system. The source system is the system from which the record was directly received. In... <a href="SourceSystemContactKey/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="SourceSystemID" data-type="String" data-usage="-1" data-added="1.5.0" data-revised="2/18/2016" data-group=""><td><a href="SourceSystemID/index.html" class="dd-field-link">Source System ID</a><div class="dd-field-standard-name">SourceSystemID</div></td><td class="dd-field-def">The OUID Resource's OrganizationUniqueId of the source record provider. The source system is the system from which the record was directly received.... <a href="SourceSystemID/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="SourceSystemName" data-type="String" data-usage="-1" data-added="1.5.0" data-revised="2/18/2016" data-group=""><td><a href="SourceSystemName/index.html" class="dd-field-link">Source System Name</a><div class="dd-field-standard-name">SourceSystemName</div></td><td class="dd-field-def">The name of the immediate record provider. The system from which the record was directly received. The legal name of the company.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="SpousePartnerName" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="SpousePartnerName/index.html" class="dd-field-link">Spouse Partner Name</a><div class="dd-field-standard-name">SpousePartnerName</div></td><td class="dd-field-def">The contact's spouse or partner.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="TollFreePhone" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="TollFreePhone/index.html" class="dd-field-link">Toll Free Phone</a><div class="dd-field-standard-name">TollFreePhone</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="TollFreePhone/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="VoiceMail" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="VoiceMail/index.html" class="dd-field-link">Voice Mail</a><div class="dd-field-standard-name">VoiceMail</div></td><td class="dd-field-def">North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local... <a href="VoiceMail/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="VoiceMailExt" data-type="String" data-usage="-1" data-added="" data-revised="1/17/2016" data-group=""><td><a href="VoiceMailExt/index.html" class="dd-field-link">Voice Mail Ext</a><div class="dd-field-standard-name">VoiceMailExt</div></td><td class="dd-field-def">The extension of the given phone number (if applicable).</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="WorkAddress1" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="WorkAddress1/index.html" class="dd-field-link">Work Address 1</a><div class="dd-field-standard-name">WorkAddress1</div></td><td class="dd-field-def">The street number, direction, name and suffix of the contact's work.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="WorkAddress2" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="WorkAddress2/index.html" class="dd-field-link">Work Address 2</a><div class="dd-field-standard-name">WorkAddress2</div></td><td class="dd-field-def">The unit/suite number of the contact's work.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="WorkCarrierRoute" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="WorkCarrierRoute/index.html" class="dd-field-link">Work Carrier Route</a><div class="dd-field-standard-name">WorkCarrierRoute</div></td><td class="dd-field-def">The group of addresses to which the U.S. Postal Service (USPS) assigns the same code to aid in mail delivery. For the USPS, these codes are nine... <a href="WorkCarrierRoute/index.html" class="dd-more-link">more</a></td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="WorkCity" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="WorkCity/index.html" class="dd-field-link">Work City</a><div class="dd-field-standard-name">WorkCity</div></td><td class="dd-field-def">The city of the contact's work.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="WorkCountry" data-type="String List, Single" data-usage="-1" data-added="" data-revised="1/11/2016" data-group=""><td><a href="WorkCountry/index.html" class="dd-field-link">Work Country</a><div class="dd-field-standard-name">WorkCountry</div></td><td class="dd-field-def">The country abbreviation in a postal address.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="WorkCountyOrParish" data-type="String List, Single" data-usage="-1" data-added="" data-revised="8/9/2013" data-group=""><td><a href="WorkCountyOrParish/index.html" class="dd-field-link">Work County Or Parish</a><div class="dd-field-standard-name">WorkCountyOrParish</div></td><td class="dd-field-def">The county or parish in which the contact's work is addressed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="WorkPostalCode" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="WorkPostalCode/index.html" class="dd-field-link">Work Postal Code</a><div class="dd-field-standard-name">WorkPostalCode</div></td><td class="dd-field-def">The postal code of the contact's work.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="WorkPostalCodePlus4" data-type="String" data-usage="-1" data-added="" data-revised="12/12/2012" data-group=""><td><a href="WorkPostalCodePlus4/index.html" class="dd-field-link">Work Postal Code Plus 4</a><div class="dd-field-standard-name">WorkPostalCodePlus4</div></td><td class="dd-field-def">The four-digit extension of a U.S. Zip Code.</td><td><span class="dd-type-badge">String</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr data-name="WorkStateOrProvince" data-type="String List, Single" data-usage="-1" data-added="" data-revised="8/12/2015" data-group=""><td><a href="WorkStateOrProvince/index.html" class="dd-field-link">Work State Or Province</a><div class="dd-field-standard-name">WorkStateOrProvince</div></td><td class="dd-field-def">The state or province in which the contact's work is addressed.</td><td><span class="dd-type-badge">String List, Single</span></td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr></tbody></table></div>
+      <div class="dd-page-generated"><a href="../about/terms/index.html" target="_blank">Terms and Definitions</a><span>Generated May 4, 2026</span></div>
+    </div>
+  </div>
+
+  <!-- Search modal -->
+  <div class="search-modal-overlay" id="searchOverlay">
+    <div class="search-modal" id="searchModal">
+      <div id="search"></div>
+      <div class="dd-search-welcome visible" id="ddSearchWelcome">
+        <div class="dd-search-welcome-icon">🔍</div>
+        <p id="ddSearchWelcomeText">Search across all Data Dictionary resources, fields and lookup values.</p>
+        <p class="dd-search-hint">Press <kbd>Esc</kbd> to close</p>
+      </div>
+      <div class="dd-search-empty" id="ddSearchEmpty">No results found. Try a different search term or filter.</div>
+    </div>
+  </div>
+  <template id="searchFiltersTemplate">
+    <div class="dd-search-meta">
+      <div class="dd-search-filters" id="ddSearchFilters">
+        <button class="dd-search-filter-pill" data-version="">All</button>
+        <button class="dd-search-filter-pill" data-version="1.7">DD 1.7</button>
+        <button class="dd-search-filter-pill active" data-version="2.0">DD 2.0</button>
+        <button class="dd-search-filter-pill" data-version="2.1">DD 2.1</button>
+      </div>
+      <div class="dd-search-count" id="ddSearchCount"></div>
+    </div>
+  </template>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="https://reso.org">Real Estate Standards Organization (RESO)</a>. All rights reserved.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="https://github.com/RESOStandards/reso-data-dictionary-documentation">Source</a> &middot;
+      <a href="https://www.reso.org/eula/">Terms of Use</a>
+    </p>
+  </footer>
+
+  <script src="../../assets/dd.js"></script>
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+  <title>Country - Lookups - DD 2.0 - RESO Data Dictionary</title>
+  <meta name="description" content="Country - Lookups - DD 2.0 – RESO Data Dictionary documentation">
+  <meta property="og:title" content="Country - Lookups - DD 2.0 - RESO Data Dictionary">
+  <meta property="og:description" content="Country - Lookups - DD 2.0 – RESO Data Dictionary documentation">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RESO Data Dictionary">
+  <meta property="og:image" content="https://www.reso.org/wp-content/uploads/2020/06/RESO-Logo-Fullname_Horizontal_Blue.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Country - Lookups - DD 2.0 - RESO Data Dictionary">
+  <meta name="twitter:description" content="Country - Lookups - DD 2.0 – RESO Data Dictionary documentation">
+  <meta name="twitter:image" content="https://www.reso.org/wp-content/uploads/2020/06/RESO-Logo-Fullname_Horizontal_Blue.png">
+  <link rel="stylesheet" href="../../../assets/dd.css">
+  <link href="../../../pagefind/pagefind-ui.css" rel="stylesheet">
+  <script>(function(){var t=localStorage.getItem('dd-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');})()</script>
+</head>
+<body data-version="2.0">
+  <header class="site-header">
+    <a href="https://dd.reso.org/" class="header-logo">
+      <img src="../../../assets/reso-logo-white.png" alt="RESO" />
+    </a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <nav class="header-nav" id="headerNav">
+      <a href="https://dd.reso.org/">Home</a>
+      <a href="https://reso.org">RESO.org</a>
+      <button class="search-trigger" id="searchTrigger" type="button">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        Search<kbd>/</kbd>
+      </button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <div class="dd-layout">
+    <aside class="dd-sidebar" id="ddSidebar">
+      <div class="dd-sidebar-header">
+        <div class="dd-sidebar-title">Data Dictionary</div>
+        <select class="dd-version-select" id="ddVersionSelect" onchange="window.location.href='/DD' + this.value + '/'">
+          <option value="1.7">DD 1.7</option>
+          <option value="2.0" selected>DD 2.0</option>
+          <option value="2.1">DD 2.1 (DRAFT)</option>
+        </select>
+      </div>
+      <div class="dd-sidebar-search" id="sidebarSearch">
+        <svg class="dd-sidebar-search-icon" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="sidebarSearchInput" name="search" placeholder="Search..." aria-label="Search" readonly />
+        <kbd>/</kbd>
+      </div>
+      <div class="dd-sidebar-section" data-section="about">
+<div class="dd-sidebar-section-title">About <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../../about/index.html" class="dd-nav-resource-link">Introduction</a></li>
+<li class="dd-nav-resource"><a href="../../about/release-guide/index.html" class="dd-nav-resource-link">Release Guide</a></li>
+<li class="dd-nav-resource"><a href="../../about/changelog/index.html" class="dd-nav-resource-link">Change Log</a></li>
+<li class="dd-nav-resource"><a href="../../about/certification/index.html" class="dd-nav-resource-link">Certification</a></li>
+<li class="dd-nav-resource"><a href="../../about/terms/index.html" class="dd-nav-resource-link">Terms and Definitions</a></li>
+<li class="dd-nav-resource"><a href="../../about/deprecated/index.html" class="dd-nav-resource-link">Deprecated Fields</a></li>
+<li class="dd-nav-resource"><a href="../../about/resources/index.html" class="dd-nav-resource-link">Resource Summary</a></li>
+<li class="dd-nav-resource"><a href="../../about/search-tips/index.html" class="dd-nav-resource-link">Search Tips</a></li>
+</ul>
+</div>
+<div class="dd-sidebar-section" data-section="resources">
+<div class="dd-sidebar-section-title">Resources <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource">
+  <a href="../../Property/index.html" class="dd-nav-resource-link">Property</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Business" class="dd-nav-group-link">Business</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Characteristics" class="dd-nav-group-link">Characteristics</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Equipment" class="dd-nav-group-link">Equipment</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Farming" class="dd-nav-group-link">Farming</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Financial" class="dd-nav-group-link">Financial</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-HOA" class="dd-nav-group-link">HOA</a>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Listing-AgentOffice" class="dd-nav-group-link">AgentOffice</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-BuyerAgent" class="dd-nav-group-link">BuyerAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-BuyerOffice" class="dd-nav-group-link">BuyerOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-BuyerTeam" class="dd-nav-group-link">BuyerTeam</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoBuyerAgent" class="dd-nav-group-link">CoBuyerAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoBuyerOffice" class="dd-nav-group-link">CoBuyerOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoListAgent" class="dd-nav-group-link">CoListAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoListOffice" class="dd-nav-group-link">CoListOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-ListAgent" class="dd-nav-group-link">ListAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-ListOffice" class="dd-nav-group-link">ListOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-ListTeam" class="dd-nav-group-link">ListTeam</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-Team" class="dd-nav-group-link">Team</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Closing" class="dd-nav-group-link">Closing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Compensation" class="dd-nav-group-link">Compensation</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Contract" class="dd-nav-group-link">Contract</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Dates" class="dd-nav-group-link">Dates</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Marketing" class="dd-nav-group-link">Marketing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Media" class="dd-nav-group-link">Media</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Price" class="dd-nav-group-link">Price</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Remarks" class="dd-nav-group-link">Remarks</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Showing" class="dd-nav-group-link">Showing</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Location" class="dd-nav-group-link">Location</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-Address" class="dd-nav-group-link">Address</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-Area" class="dd-nav-group-link">Area</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-GIS" class="dd-nav-group-link">GIS</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-School" class="dd-nav-group-link">School</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-OccupantOwner" class="dd-nav-group-link">OccupantOwner</a>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Structure" class="dd-nav-group-link">Structure</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Structure-Performance" class="dd-nav-group-link">Performance</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Structure-Performance-GreenMarketing" class="dd-nav-group-link">GreenMarketing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Structure-Performance-GreenVerification" class="dd-nav-group-link">GreenVerification</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Structure-Rooms" class="dd-nav-group-link">Rooms</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Tax" class="dd-nav-group-link">Tax</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-UnitTypes" class="dd-nav-group-link">UnitTypes</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Utilities" class="dd-nav-group-link">Utilities</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Association/index.html" class="dd-nav-resource-link">Association</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Caravan/index.html" class="dd-nav-resource-link">Caravan</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../CaravanStop/index.html" class="dd-nav-resource-link">CaravanStop</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ContactListingNotes/index.html" class="dd-nav-resource-link">ContactListingNotes</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ContactListings/index.html" class="dd-nav-resource-link">ContactListings</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Contacts/index.html" class="dd-nav-resource-link">Contacts</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../EntityEvent/index.html" class="dd-nav-resource-link">EntityEvent</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Field/index.html" class="dd-nav-resource-link">Field</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../HistoryTransactional/index.html" class="dd-nav-resource-link">HistoryTransactional</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../InternetTracking/index.html" class="dd-nav-resource-link">InternetTracking</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../InternetTracking/index.html#group-Actor" class="dd-nav-group-link">Actor</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../InternetTracking/index.html#group-Event" class="dd-nav-group-link">Event</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../InternetTracking/index.html#group-Object" class="dd-nav-group-link">Object</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../InternetTrackingSummary/index.html" class="dd-nav-resource-link">InternetTrackingSummary</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../LockOrBox/index.html" class="dd-nav-resource-link">LockOrBox</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Lookup/index.html" class="dd-nav-resource-link">Lookup</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Media/index.html" class="dd-nav-resource-link">Media</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../Media/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Member/index.html" class="dd-nav-resource-link">Member</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../MemberAssociation/index.html" class="dd-nav-resource-link">MemberAssociation</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../MemberStateLicense/index.html" class="dd-nav-resource-link">MemberStateLicense</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OUID/index.html" class="dd-nav-resource-link">OUID</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Office/index.html" class="dd-nav-resource-link">Office</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OfficeAssociation/index.html" class="dd-nav-resource-link">OfficeAssociation</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OfficeCorporateLicense/index.html" class="dd-nav-resource-link">OfficeCorporateLicense</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OpenHouse/index.html" class="dd-nav-resource-link">OpenHouse</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OtherPhone/index.html" class="dd-nav-resource-link">OtherPhone</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyGreenVerification/index.html" class="dd-nav-resource-link">PropertyGreenVerification</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyPowerProduction/index.html" class="dd-nav-resource-link">PropertyPowerProduction</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyPowerStorage/index.html" class="dd-nav-resource-link">PropertyPowerStorage</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyRooms/index.html" class="dd-nav-resource-link">PropertyRooms</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyUnitTypes/index.html" class="dd-nav-resource-link">PropertyUnitTypes</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Prospecting/index.html" class="dd-nav-resource-link">Prospecting</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Queue/index.html" class="dd-nav-resource-link">Queue</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Rules/index.html" class="dd-nav-resource-link">Rules</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../SavedSearch/index.html" class="dd-nav-resource-link">SavedSearch</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Showing/index.html" class="dd-nav-resource-link">Showing</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../Showing/index.html#group-Agent" class="dd-nav-group-link">Agent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Showing/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ShowingAppointment/index.html" class="dd-nav-resource-link">ShowingAppointment</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ShowingAvailability/index.html" class="dd-nav-resource-link">ShowingAvailability</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ShowingRequest/index.html" class="dd-nav-resource-link">ShowingRequest</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../SocialMedia/index.html" class="dd-nav-resource-link">SocialMedia</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../TeamMembers/index.html" class="dd-nav-resource-link">TeamMembers</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Teams/index.html" class="dd-nav-resource-link">Teams</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../TransactionManagement/index.html" class="dd-nav-resource-link">TransactionManagement</a>
+</li>
+</ul>
+</div>
+<div class="dd-sidebar-section expanded" data-section="lookups">
+<div class="dd-sidebar-section-title">Lookups <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../AccessibilityFeatures/index.html" class="dd-nav-resource-link">AccessibilityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../ActorType/index.html" class="dd-nav-resource-link">ActorType</a></li>
+<li class="dd-nav-resource"><a href="../Appliances/index.html" class="dd-nav-resource-link">Appliances</a></li>
+<li class="dd-nav-resource"><a href="../ArchitecturalStyle/index.html" class="dd-nav-resource-link">ArchitecturalStyle</a></li>
+<li class="dd-nav-resource"><a href="../AreaSource/index.html" class="dd-nav-resource-link">AreaSource</a></li>
+<li class="dd-nav-resource"><a href="../AreaUnits/index.html" class="dd-nav-resource-link">AreaUnits</a></li>
+<li class="dd-nav-resource"><a href="../AssociationAmenities/index.html" class="dd-nav-resource-link">AssociationAmenities</a></li>
+<li class="dd-nav-resource"><a href="../AssociationFeeIncludes/index.html" class="dd-nav-resource-link">AssociationFeeIncludes</a></li>
+<li class="dd-nav-resource"><a href="../AssociationStatus/index.html" class="dd-nav-resource-link">AssociationStatus</a></li>
+<li class="dd-nav-resource"><a href="../AssociationType/index.html" class="dd-nav-resource-link">AssociationType</a></li>
+<li class="dd-nav-resource"><a href="../Attended/index.html" class="dd-nav-resource-link">Attended</a></li>
+<li class="dd-nav-resource"><a href="../Basement/index.html" class="dd-nav-resource-link">Basement</a></li>
+<li class="dd-nav-resource"><a href="../BillingPreference/index.html" class="dd-nav-resource-link">BillingPreference</a></li>
+<li class="dd-nav-resource"><a href="../BodyType/index.html" class="dd-nav-resource-link">BodyType</a></li>
+<li class="dd-nav-resource"><a href="../BusinessType/index.html" class="dd-nav-resource-link">BusinessType</a></li>
+<li class="dd-nav-resource"><a href="../BuyerAgentDesignation/index.html" class="dd-nav-resource-link">BuyerAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../BuyerFinancing/index.html" class="dd-nav-resource-link">BuyerFinancing</a></li>
+<li class="dd-nav-resource"><a href="../CaravanAllowedClassNames/index.html" class="dd-nav-resource-link">CaravanAllowedClassNames</a></li>
+<li class="dd-nav-resource"><a href="../CaravanAllowedStatuses/index.html" class="dd-nav-resource-link">CaravanAllowedStatuses</a></li>
+<li class="dd-nav-resource"><a href="../CaravanResourceName/index.html" class="dd-nav-resource-link">CaravanResourceName</a></li>
+<li class="dd-nav-resource"><a href="../CaravanStatus/index.html" class="dd-nav-resource-link">CaravanStatus</a></li>
+<li class="dd-nav-resource"><a href="../CaravanStopAttended/index.html" class="dd-nav-resource-link">CaravanStopAttended</a></li>
+<li class="dd-nav-resource"><a href="../CaravanStopClassName/index.html" class="dd-nav-resource-link">CaravanStopClassName</a></li>
+<li class="dd-nav-resource"><a href="../CaravanType/index.html" class="dd-nav-resource-link">CaravanType</a></li>
+<li class="dd-nav-resource"><a href="../ChangeType/index.html" class="dd-nav-resource-link">ChangeType</a></li>
+<li class="dd-nav-resource"><a href="../ClassName/index.html" class="dd-nav-resource-link">ClassName</a></li>
+<li class="dd-nav-resource"><a href="../ClosetType/index.html" class="dd-nav-resource-link">ClosetType</a></li>
+<li class="dd-nav-resource"><a href="../CoBuyerAgentDesignation/index.html" class="dd-nav-resource-link">CoBuyerAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../CoListAgentDesignation/index.html" class="dd-nav-resource-link">CoListAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../CommonInterest/index.html" class="dd-nav-resource-link">CommonInterest</a></li>
+<li class="dd-nav-resource"><a href="../CommonWalls/index.html" class="dd-nav-resource-link">CommonWalls</a></li>
+<li class="dd-nav-resource"><a href="../CommunityFeatures/index.html" class="dd-nav-resource-link">CommunityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../CompensationType/index.html" class="dd-nav-resource-link">CompensationType</a></li>
+<li class="dd-nav-resource"><a href="../Concessions/index.html" class="dd-nav-resource-link">Concessions</a></li>
+<li class="dd-nav-resource"><a href="../ConstructionMaterials/index.html" class="dd-nav-resource-link">ConstructionMaterials</a></li>
+<li class="dd-nav-resource"><a href="../ContactListingPreference/index.html" class="dd-nav-resource-link">ContactListingPreference</a></li>
+<li class="dd-nav-resource"><a href="../ContactStatus/index.html" class="dd-nav-resource-link">ContactStatus</a></li>
+<li class="dd-nav-resource"><a href="../ContactType/index.html" class="dd-nav-resource-link">ContactType</a></li>
+<li class="dd-nav-resource"><a href="../Cooling/index.html" class="dd-nav-resource-link">Cooling</a></li>
+<li class="dd-nav-resource"><a href="index.html" class="dd-nav-resource-link active">Country</a></li>
+<li class="dd-nav-resource"><a href="../CurrentFinancing/index.html" class="dd-nav-resource-link">CurrentFinancing</a></li>
+<li class="dd-nav-resource"><a href="../CurrentOrPossibleUse/index.html" class="dd-nav-resource-link">CurrentOrPossibleUse</a></li>
+<li class="dd-nav-resource"><a href="../DailySchedule/index.html" class="dd-nav-resource-link">DailySchedule</a></li>
+<li class="dd-nav-resource"><a href="../DevelopmentStatus/index.html" class="dd-nav-resource-link">DevelopmentStatus</a></li>
+<li class="dd-nav-resource"><a href="../DeviceType/index.html" class="dd-nav-resource-link">DeviceType</a></li>
+<li class="dd-nav-resource"><a href="../DirectionFaces/index.html" class="dd-nav-resource-link">DirectionFaces</a></li>
+<li class="dd-nav-resource"><a href="../DocumentStatus/index.html" class="dd-nav-resource-link">DocumentStatus</a></li>
+<li class="dd-nav-resource"><a href="../DoorFeatures/index.html" class="dd-nav-resource-link">DoorFeatures</a></li>
+<li class="dd-nav-resource"><a href="../Electric/index.html" class="dd-nav-resource-link">Electric</a></li>
+<li class="dd-nav-resource"><a href="../EventSource/index.html" class="dd-nav-resource-link">EventSource</a></li>
+<li class="dd-nav-resource"><a href="../EventTarget/index.html" class="dd-nav-resource-link">EventTarget</a></li>
+<li class="dd-nav-resource"><a href="../EventType/index.html" class="dd-nav-resource-link">EventType</a></li>
+<li class="dd-nav-resource"><a href="../ExistingLeaseType/index.html" class="dd-nav-resource-link">ExistingLeaseType</a></li>
+<li class="dd-nav-resource"><a href="../ExteriorFeatures/index.html" class="dd-nav-resource-link">ExteriorFeatures</a></li>
+<li class="dd-nav-resource"><a href="../FeeFrequency/index.html" class="dd-nav-resource-link">FeeFrequency</a></li>
+<li class="dd-nav-resource"><a href="../Fencing/index.html" class="dd-nav-resource-link">Fencing</a></li>
+<li class="dd-nav-resource"><a href="../FhaEligibility/index.html" class="dd-nav-resource-link">FhaEligibility</a></li>
+<li class="dd-nav-resource"><a href="../FinancialDataSource/index.html" class="dd-nav-resource-link">FinancialDataSource</a></li>
+<li class="dd-nav-resource"><a href="../FireplaceFeatures/index.html" class="dd-nav-resource-link">FireplaceFeatures</a></li>
+<li class="dd-nav-resource"><a href="../Flooring/index.html" class="dd-nav-resource-link">Flooring</a></li>
+<li class="dd-nav-resource"><a href="../FoundationDetails/index.html" class="dd-nav-resource-link">FoundationDetails</a></li>
+<li class="dd-nav-resource"><a href="../FrontageType/index.html" class="dd-nav-resource-link">FrontageType</a></li>
+<li class="dd-nav-resource"><a href="../Furnished/index.html" class="dd-nav-resource-link">Furnished</a></li>
+<li class="dd-nav-resource"><a href="../GreenBuildingVerificationType/index.html" class="dd-nav-resource-link">GreenBuildingVerificationType</a></li>
+<li class="dd-nav-resource"><a href="../GreenEnergyEfficient/index.html" class="dd-nav-resource-link">GreenEnergyEfficient</a></li>
+<li class="dd-nav-resource"><a href="../GreenEnergyGeneration/index.html" class="dd-nav-resource-link">GreenEnergyGeneration</a></li>
+<li class="dd-nav-resource"><a href="../GreenIndoorAirQuality/index.html" class="dd-nav-resource-link">GreenIndoorAirQuality</a></li>
+<li class="dd-nav-resource"><a href="../GreenSustainability/index.html" class="dd-nav-resource-link">GreenSustainability</a></li>
+<li class="dd-nav-resource"><a href="../GreenVerificationSource/index.html" class="dd-nav-resource-link">GreenVerificationSource</a></li>
+<li class="dd-nav-resource"><a href="../GreenVerificationStatus/index.html" class="dd-nav-resource-link">GreenVerificationStatus</a></li>
+<li class="dd-nav-resource"><a href="../GreenWaterConservation/index.html" class="dd-nav-resource-link">GreenWaterConservation</a></li>
+<li class="dd-nav-resource"><a href="../Heating/index.html" class="dd-nav-resource-link">Heating</a></li>
+<li class="dd-nav-resource"><a href="../HorseAmenities/index.html" class="dd-nav-resource-link">HorseAmenities</a></li>
+<li class="dd-nav-resource"><a href="../HoursDaysOfOperation/index.html" class="dd-nav-resource-link">HoursDaysOfOperation</a></li>
+<li class="dd-nav-resource"><a href="../IanaTimeZoneValues/index.html" class="dd-nav-resource-link">IanaTimeZoneValues</a></li>
+<li class="dd-nav-resource"><a href="../ImageOf/index.html" class="dd-nav-resource-link">ImageOf</a></li>
+<li class="dd-nav-resource"><a href="../IncomeIncludes/index.html" class="dd-nav-resource-link">IncomeIncludes</a></li>
+<li class="dd-nav-resource"><a href="../InteriorOrRoomFeatures/index.html" class="dd-nav-resource-link">InteriorOrRoomFeatures</a></li>
+<li class="dd-nav-resource"><a href="../LaborInformation/index.html" class="dd-nav-resource-link">LaborInformation</a></li>
+<li class="dd-nav-resource"><a href="../Languages/index.html" class="dd-nav-resource-link">Languages</a></li>
+<li class="dd-nav-resource"><a href="../LaundryFeatures/index.html" class="dd-nav-resource-link">LaundryFeatures</a></li>
+<li class="dd-nav-resource"><a href="../LeaseRenewalCompensation/index.html" class="dd-nav-resource-link">LeaseRenewalCompensation</a></li>
+<li class="dd-nav-resource"><a href="../LeaseTerm/index.html" class="dd-nav-resource-link">LeaseTerm</a></li>
+<li class="dd-nav-resource"><a href="../Levels/index.html" class="dd-nav-resource-link">Levels</a></li>
+<li class="dd-nav-resource"><a href="../LinearUnits/index.html" class="dd-nav-resource-link">LinearUnits</a></li>
+<li class="dd-nav-resource"><a href="../ListAgentDesignation/index.html" class="dd-nav-resource-link">ListAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../ListingAgreement/index.html" class="dd-nav-resource-link">ListingAgreement</a></li>
+<li class="dd-nav-resource"><a href="../ListingService/index.html" class="dd-nav-resource-link">ListingService</a></li>
+<li class="dd-nav-resource"><a href="../ListingTerms/index.html" class="dd-nav-resource-link">ListingTerms</a></li>
+<li class="dd-nav-resource"><a href="../ListingURLDescription/index.html" class="dd-nav-resource-link">ListingURLDescription</a></li>
+<li class="dd-nav-resource"><a href="../LockBoxType/index.html" class="dd-nav-resource-link">LockBoxType</a></li>
+<li class="dd-nav-resource"><a href="../LockOrBoxAccessType/index.html" class="dd-nav-resource-link">LockOrBoxAccessType</a></li>
+<li class="dd-nav-resource"><a href="../LotDimensionsSource/index.html" class="dd-nav-resource-link">LotDimensionsSource</a></li>
+<li class="dd-nav-resource"><a href="../LotFeatures/index.html" class="dd-nav-resource-link">LotFeatures</a></li>
+<li class="dd-nav-resource"><a href="../LotSizeSource/index.html" class="dd-nav-resource-link">LotSizeSource</a></li>
+<li class="dd-nav-resource"><a href="../LotSizeUnits/index.html" class="dd-nav-resource-link">LotSizeUnits</a></li>
+<li class="dd-nav-resource"><a href="../MediaAlteration/index.html" class="dd-nav-resource-link">MediaAlteration</a></li>
+<li class="dd-nav-resource"><a href="../MediaCategory/index.html" class="dd-nav-resource-link">MediaCategory</a></li>
+<li class="dd-nav-resource"><a href="../MediaType/index.html" class="dd-nav-resource-link">MediaType</a></li>
+<li class="dd-nav-resource"><a href="../MemberAssociationBillStatus/index.html" class="dd-nav-resource-link">MemberAssociationBillStatus</a></li>
+<li class="dd-nav-resource"><a href="../MemberDesignation/index.html" class="dd-nav-resource-link">MemberDesignation</a></li>
+<li class="dd-nav-resource"><a href="../MemberOtherPhoneType/index.html" class="dd-nav-resource-link">MemberOtherPhoneType</a></li>
+<li class="dd-nav-resource"><a href="../MemberStateLicenseType/index.html" class="dd-nav-resource-link">MemberStateLicenseType</a></li>
+<li class="dd-nav-resource"><a href="../MemberStatus/index.html" class="dd-nav-resource-link">MemberStatus</a></li>
+<li class="dd-nav-resource"><a href="../MemberType/index.html" class="dd-nav-resource-link">MemberType</a></li>
+<li class="dd-nav-resource"><a href="../NotedBy/index.html" class="dd-nav-resource-link">NotedBy</a></li>
+<li class="dd-nav-resource"><a href="../ObjectIdType/index.html" class="dd-nav-resource-link">ObjectIdType</a></li>
+<li class="dd-nav-resource"><a href="../ObjectType/index.html" class="dd-nav-resource-link">ObjectType</a></li>
+<li class="dd-nav-resource"><a href="../OccupantType/index.html" class="dd-nav-resource-link">OccupantType</a></li>
+<li class="dd-nav-resource"><a href="../OfficeAssociationPrimaryIndicator/index.html" class="dd-nav-resource-link">OfficeAssociationPrimaryIndicator</a></li>
+<li class="dd-nav-resource"><a href="../OfficeBranchType/index.html" class="dd-nav-resource-link">OfficeBranchType</a></li>
+<li class="dd-nav-resource"><a href="../OfficeCorporateLicenseType/index.html" class="dd-nav-resource-link">OfficeCorporateLicenseType</a></li>
+<li class="dd-nav-resource"><a href="../OfficeStatus/index.html" class="dd-nav-resource-link">OfficeStatus</a></li>
+<li class="dd-nav-resource"><a href="../OfficeType/index.html" class="dd-nav-resource-link">OfficeType</a></li>
+<li class="dd-nav-resource"><a href="../OpenHouseStatus/index.html" class="dd-nav-resource-link">OpenHouseStatus</a></li>
+<li class="dd-nav-resource"><a href="../OpenHouseType/index.html" class="dd-nav-resource-link">OpenHouseType</a></li>
+<li class="dd-nav-resource"><a href="../OperatingExpenseIncludes/index.html" class="dd-nav-resource-link">OperatingExpenseIncludes</a></li>
+<li class="dd-nav-resource"><a href="../OtherEquipment/index.html" class="dd-nav-resource-link">OtherEquipment</a></li>
+<li class="dd-nav-resource"><a href="../OtherPhoneType/index.html" class="dd-nav-resource-link">OtherPhoneType</a></li>
+<li class="dd-nav-resource"><a href="../OtherStructures/index.html" class="dd-nav-resource-link">OtherStructures</a></li>
+<li class="dd-nav-resource"><a href="../OwnerPays/index.html" class="dd-nav-resource-link">OwnerPays</a></li>
+<li class="dd-nav-resource"><a href="../OwnershipType/index.html" class="dd-nav-resource-link">OwnershipType</a></li>
+<li class="dd-nav-resource"><a href="../ParkingFeatures/index.html" class="dd-nav-resource-link">ParkingFeatures</a></li>
+<li class="dd-nav-resource"><a href="../PatioAndPorchFeatures/index.html" class="dd-nav-resource-link">PatioAndPorchFeatures</a></li>
+<li class="dd-nav-resource"><a href="../Permission/index.html" class="dd-nav-resource-link">Permission</a></li>
+<li class="dd-nav-resource"><a href="../PetsAllowed/index.html" class="dd-nav-resource-link">PetsAllowed</a></li>
+<li class="dd-nav-resource"><a href="../PoolFeatures/index.html" class="dd-nav-resource-link">PoolFeatures</a></li>
+<li class="dd-nav-resource"><a href="../Possession/index.html" class="dd-nav-resource-link">Possession</a></li>
+<li class="dd-nav-resource"><a href="../PowerProductionAnnualStatus/index.html" class="dd-nav-resource-link">PowerProductionAnnualStatus</a></li>
+<li class="dd-nav-resource"><a href="../PowerProductionOwnership/index.html" class="dd-nav-resource-link">PowerProductionOwnership</a></li>
+<li class="dd-nav-resource"><a href="../PowerProductionType/index.html" class="dd-nav-resource-link">PowerProductionType</a></li>
+<li class="dd-nav-resource"><a href="../PowerStorageType/index.html" class="dd-nav-resource-link">PowerStorageType</a></li>
+<li class="dd-nav-resource"><a href="../PreferredAddress/index.html" class="dd-nav-resource-link">PreferredAddress</a></li>
+<li class="dd-nav-resource"><a href="../PreferredMail/index.html" class="dd-nav-resource-link">PreferredMail</a></li>
+<li class="dd-nav-resource"><a href="../PreferredMedia/index.html" class="dd-nav-resource-link">PreferredMedia</a></li>
+<li class="dd-nav-resource"><a href="../PreferredPhone/index.html" class="dd-nav-resource-link">PreferredPhone</a></li>
+<li class="dd-nav-resource"><a href="../PreferredPublication/index.html" class="dd-nav-resource-link">PreferredPublication</a></li>
+<li class="dd-nav-resource"><a href="../PropertyCondition/index.html" class="dd-nav-resource-link">PropertyCondition</a></li>
+<li class="dd-nav-resource"><a href="../PropertySubType/index.html" class="dd-nav-resource-link">PropertySubType</a></li>
+<li class="dd-nav-resource"><a href="../PropertyType/index.html" class="dd-nav-resource-link">PropertyType</a></li>
+<li class="dd-nav-resource"><a href="../QueueTransactionType/index.html" class="dd-nav-resource-link">QueueTransactionType</a></li>
+<li class="dd-nav-resource"><a href="../ReasonActiveOrDisabled/index.html" class="dd-nav-resource-link">ReasonActiveOrDisabled</a></li>
+<li class="dd-nav-resource"><a href="../RentIncludes/index.html" class="dd-nav-resource-link">RentIncludes</a></li>
+<li class="dd-nav-resource"><a href="../ResourceName/index.html" class="dd-nav-resource-link">ResourceName</a></li>
+<li class="dd-nav-resource"><a href="../ResponseTypes/index.html" class="dd-nav-resource-link">ResponseTypes</a></li>
+<li class="dd-nav-resource"><a href="../RoadFrontageType/index.html" class="dd-nav-resource-link">RoadFrontageType</a></li>
+<li class="dd-nav-resource"><a href="../RoadResponsibility/index.html" class="dd-nav-resource-link">RoadResponsibility</a></li>
+<li class="dd-nav-resource"><a href="../RoadSurfaceType/index.html" class="dd-nav-resource-link">RoadSurfaceType</a></li>
+<li class="dd-nav-resource"><a href="../Roof/index.html" class="dd-nav-resource-link">Roof</a></li>
+<li class="dd-nav-resource"><a href="../RoomLengthWidthSource/index.html" class="dd-nav-resource-link">RoomLengthWidthSource</a></li>
+<li class="dd-nav-resource"><a href="../RoomLevel/index.html" class="dd-nav-resource-link">RoomLevel</a></li>
+<li class="dd-nav-resource"><a href="../RoomType/index.html" class="dd-nav-resource-link">RoomType</a></li>
+<li class="dd-nav-resource"><a href="../RuleFormat/index.html" class="dd-nav-resource-link">RuleFormat</a></li>
+<li class="dd-nav-resource"><a href="../ScheduleType/index.html" class="dd-nav-resource-link">ScheduleType</a></li>
+<li class="dd-nav-resource"><a href="../SearchQueryType/index.html" class="dd-nav-resource-link">SearchQueryType</a></li>
+<li class="dd-nav-resource"><a href="../SecurityFeatures/index.html" class="dd-nav-resource-link">SecurityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../Sewer/index.html" class="dd-nav-resource-link">Sewer</a></li>
+<li class="dd-nav-resource"><a href="../ShowingAppointmentMethod/index.html" class="dd-nav-resource-link">ShowingAppointmentMethod</a></li>
+<li class="dd-nav-resource"><a href="../ShowingAppointmentStatus/index.html" class="dd-nav-resource-link">ShowingAppointmentStatus</a></li>
+<li class="dd-nav-resource"><a href="../ShowingConsiderations/index.html" class="dd-nav-resource-link">ShowingConsiderations</a></li>
+<li class="dd-nav-resource"><a href="../ShowingContactType/index.html" class="dd-nav-resource-link">ShowingContactType</a></li>
+<li class="dd-nav-resource"><a href="../ShowingMethod/index.html" class="dd-nav-resource-link">ShowingMethod</a></li>
+<li class="dd-nav-resource"><a href="../ShowingMethodRequest/index.html" class="dd-nav-resource-link">ShowingMethodRequest</a></li>
+<li class="dd-nav-resource"><a href="../ShowingRequestType/index.html" class="dd-nav-resource-link">ShowingRequestType</a></li>
+<li class="dd-nav-resource"><a href="../ShowingRequestor/index.html" class="dd-nav-resource-link">ShowingRequestor</a></li>
+<li class="dd-nav-resource"><a href="../ShowingRequirements/index.html" class="dd-nav-resource-link">ShowingRequirements</a></li>
+<li class="dd-nav-resource"><a href="../ShowingServiceName/index.html" class="dd-nav-resource-link">ShowingServiceName</a></li>
+<li class="dd-nav-resource"><a href="../ShowingStatus/index.html" class="dd-nav-resource-link">ShowingStatus</a></li>
+<li class="dd-nav-resource"><a href="../Skirt/index.html" class="dd-nav-resource-link">Skirt</a></li>
+<li class="dd-nav-resource"><a href="../SocialMediaType/index.html" class="dd-nav-resource-link">SocialMediaType</a></li>
+<li class="dd-nav-resource"><a href="../SpaFeatures/index.html" class="dd-nav-resource-link">SpaFeatures</a></li>
+<li class="dd-nav-resource"><a href="../SpecialLicenses/index.html" class="dd-nav-resource-link">SpecialLicenses</a></li>
+<li class="dd-nav-resource"><a href="../SpecialListingConditions/index.html" class="dd-nav-resource-link">SpecialListingConditions</a></li>
+<li class="dd-nav-resource"><a href="../StandardStatus/index.html" class="dd-nav-resource-link">StandardStatus</a></li>
+<li class="dd-nav-resource"><a href="../StateOrProvince/index.html" class="dd-nav-resource-link">StateOrProvince</a></li>
+<li class="dd-nav-resource"><a href="../StreetDirection/index.html" class="dd-nav-resource-link">StreetDirection</a></li>
+<li class="dd-nav-resource"><a href="../StructureType/index.html" class="dd-nav-resource-link">StructureType</a></li>
+<li class="dd-nav-resource"><a href="../SyndicateTo/index.html" class="dd-nav-resource-link">SyndicateTo</a></li>
+<li class="dd-nav-resource"><a href="../TaxStatusCurrent/index.html" class="dd-nav-resource-link">TaxStatusCurrent</a></li>
+<li class="dd-nav-resource"><a href="../TeamMemberType/index.html" class="dd-nav-resource-link">TeamMemberType</a></li>
+<li class="dd-nav-resource"><a href="../TeamStatus/index.html" class="dd-nav-resource-link">TeamStatus</a></li>
+<li class="dd-nav-resource"><a href="../TenantPays/index.html" class="dd-nav-resource-link">TenantPays</a></li>
+<li class="dd-nav-resource"><a href="../TrackingType/index.html" class="dd-nav-resource-link">TrackingType</a></li>
+<li class="dd-nav-resource"><a href="../TransactionType/index.html" class="dd-nav-resource-link">TransactionType</a></li>
+<li class="dd-nav-resource"><a href="../UnitTypeType/index.html" class="dd-nav-resource-link">UnitTypeType</a></li>
+<li class="dd-nav-resource"><a href="../UnitsFurnished/index.html" class="dd-nav-resource-link">UnitsFurnished</a></li>
+<li class="dd-nav-resource"><a href="../Utilities/index.html" class="dd-nav-resource-link">Utilities</a></li>
+<li class="dd-nav-resource"><a href="../Vegetation/index.html" class="dd-nav-resource-link">Vegetation</a></li>
+<li class="dd-nav-resource"><a href="../View/index.html" class="dd-nav-resource-link">View</a></li>
+<li class="dd-nav-resource"><a href="../WaterSource/index.html" class="dd-nav-resource-link">WaterSource</a></li>
+<li class="dd-nav-resource"><a href="../WaterfrontFeatures/index.html" class="dd-nav-resource-link">WaterfrontFeatures</a></li>
+<li class="dd-nav-resource"><a href="../WindowFeatures/index.html" class="dd-nav-resource-link">WindowFeatures</a></li>
+<li class="dd-nav-resource"><a href="../YearBuiltSource/index.html" class="dd-nav-resource-link">YearBuiltSource</a></li>
+</ul>
+</div>
+<div class="dd-sidebar-section" data-section="browse-by">
+<div class="dd-sidebar-section-title">Browse By <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../../xref/payload/index.html" class="dd-nav-resource-link">Payload</a></li>
+<li class="dd-nav-resource"><a href="../../xref/property-type/index.html" class="dd-nav-resource-link">Property Type</a></li>
+<li class="dd-nav-resource"><a href="../../xref/status/index.html" class="dd-nav-resource-link">Element Status</a></li>
+<li class="dd-nav-resource"><a href="../../xref/version-added/index.html" class="dd-nav-resource-link">Version Added</a></li>
+</ul>
+</div>
+
+    </aside>
+
+    <div class="dd-sidebar-overlay" id="ddSidebarOverlay"></div>
+    <button class="dd-sidebar-toggle" id="ddSidebarToggle" type="button" aria-label="Toggle sidebar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+
+    <div class="dd-content" data-pagefind-body data-pagefind-filter="dd-version:2.0" data-pagefind-meta="dd-version:DD 2.0">
+      <div class="dd-resource-sticky"><div class="dd-condensed-title">Country Lookup</div><nav class="dd-breadcrumb" data-pagefind-ignore><a href="https://dd.reso.org/">Data Dictionary</a> <span class="dd-breadcrumb-sep">/</span> <a href="../../index.html">DD 2.0</a> <span class="dd-breadcrumb-sep">/</span> <a href="../index.html">Lookups</a> <span class="dd-breadcrumb-sep">/</span> <span>Country</span></nav><div class="dd-page-header"><h1>Country Lookup</h1><p class="dd-page-subtitle">246 values &middot; Used by 12 fields</p></div><div class="dd-table-filter"><input type="text" name="filter" placeholder="Filter values..." aria-label="Filter values" /><span class="dd-table-filter-count"></span></div></div><div class="dd-sticky-col-headers"><table><colgroup><col style="width:25%"><col><col style="width:12%"></colgroup><tr><th>Lookup Value</th><th>Definition</th><th>Status</th></tr></table></div><div class="dd-fields-table-wrapper"><table class="dd-fields-table dd-lookup-table"><colgroup><col style="width:25%"><col><col style="width:12%"></colgroup><thead><tr><th>Lookup Value</th><th>Definition</th><th>Status</th></tr></thead><tbody><tr><td><a href="AD/index.html" class="dd-field-link">AD</a></td><td class="dd-field-def">Andorra is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AE/index.html" class="dd-field-link">AE</a></td><td class="dd-field-def">United Arab Emirates is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AF/index.html" class="dd-field-link">AF</a></td><td class="dd-field-def">Afghanistan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AG/index.html" class="dd-field-link">AG</a></td><td class="dd-field-def">Antigua Barbuda is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AI/index.html" class="dd-field-link">AI</a></td><td class="dd-field-def">Anguilla is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AL/index.html" class="dd-field-link">AL</a></td><td class="dd-field-def">Albania is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AM/index.html" class="dd-field-link">AM</a></td><td class="dd-field-def">Armenia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AN/index.html" class="dd-field-link">AN</a></td><td class="dd-field-def">Netherlands Antilles is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AO/index.html" class="dd-field-link">AO</a></td><td class="dd-field-def">Angola is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AQ/index.html" class="dd-field-link">AQ</a></td><td class="dd-field-def">Antarctica is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AR/index.html" class="dd-field-link">AR</a></td><td class="dd-field-def">Argentina is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AS/index.html" class="dd-field-link">AS</a></td><td class="dd-field-def">American Samoa is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AT/index.html" class="dd-field-link">AT</a></td><td class="dd-field-def">Austria is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AU/index.html" class="dd-field-link">AU</a></td><td class="dd-field-def">Australia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AW/index.html" class="dd-field-link">AW</a></td><td class="dd-field-def">Aruba is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AX/index.html" class="dd-field-link">AX</a></td><td class="dd-field-def">Aland Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="AZ/index.html" class="dd-field-link">AZ</a></td><td class="dd-field-def">Azerbaijan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BA/index.html" class="dd-field-link">BA</a></td><td class="dd-field-def">Bosnia Herzegovina is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BB/index.html" class="dd-field-link">BB</a></td><td class="dd-field-def">Barbados is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BD/index.html" class="dd-field-link">BD</a></td><td class="dd-field-def">Bangladesh is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BE/index.html" class="dd-field-link">BE</a></td><td class="dd-field-def">Belgium is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BF/index.html" class="dd-field-link">BF</a></td><td class="dd-field-def">Burkina Faso is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BG/index.html" class="dd-field-link">BG</a></td><td class="dd-field-def">Bulgaria is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BH/index.html" class="dd-field-link">BH</a></td><td class="dd-field-def">Bahrain is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BI/index.html" class="dd-field-link">BI</a></td><td class="dd-field-def">Burundi is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BJ/index.html" class="dd-field-link">BJ</a></td><td class="dd-field-def">Benin is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BL/index.html" class="dd-field-link">BL</a></td><td class="dd-field-def">Saint Barthelemy is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BM/index.html" class="dd-field-link">BM</a></td><td class="dd-field-def">Bermuda is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BN/index.html" class="dd-field-link">BN</a></td><td class="dd-field-def">Brunei Darussalam is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BO/index.html" class="dd-field-link">BO</a></td><td class="dd-field-def">Bolivia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BR/index.html" class="dd-field-link">BR</a></td><td class="dd-field-def">Brazil is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BS/index.html" class="dd-field-link">BS</a></td><td class="dd-field-def">Bahamas is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BT/index.html" class="dd-field-link">BT</a></td><td class="dd-field-def">Bhutan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BV/index.html" class="dd-field-link">BV</a></td><td class="dd-field-def">Bouvet Island is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BW/index.html" class="dd-field-link">BW</a></td><td class="dd-field-def">Botswana is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BY/index.html" class="dd-field-link">BY</a></td><td class="dd-field-def">Belarus is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="BZ/index.html" class="dd-field-link">BZ</a></td><td class="dd-field-def">Belize is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CA/index.html" class="dd-field-link">CA</a></td><td class="dd-field-def">Canada is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CC/index.html" class="dd-field-link">CC</a></td><td class="dd-field-def">Cocos (Keeling) Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CD/index.html" class="dd-field-link">CD</a></td><td class="dd-field-def">Congo Democratic Republic is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CF/index.html" class="dd-field-link">CF</a></td><td class="dd-field-def">Central African Republic is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CG/index.html" class="dd-field-link">CG</a></td><td class="dd-field-def">Congo is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CH/index.html" class="dd-field-link">CH</a></td><td class="dd-field-def">Switzerland is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CI/index.html" class="dd-field-link">CI</a></td><td class="dd-field-def">Cote d'Ivoire is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CK/index.html" class="dd-field-link">CK</a></td><td class="dd-field-def">Cook Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CL/index.html" class="dd-field-link">CL</a></td><td class="dd-field-def">Chile is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CM/index.html" class="dd-field-link">CM</a></td><td class="dd-field-def">Cameroon is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CN/index.html" class="dd-field-link">CN</a></td><td class="dd-field-def">China is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CO/index.html" class="dd-field-link">CO</a></td><td class="dd-field-def">Colombia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CR/index.html" class="dd-field-link">CR</a></td><td class="dd-field-def">Costa Rica is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CU/index.html" class="dd-field-link">CU</a></td><td class="dd-field-def">Cuba is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CV/index.html" class="dd-field-link">CV</a></td><td class="dd-field-def">Cabo Verde is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CX/index.html" class="dd-field-link">CX</a></td><td class="dd-field-def">Christmas Island is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CY/index.html" class="dd-field-link">CY</a></td><td class="dd-field-def">Cyprus is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="CZ/index.html" class="dd-field-link">CZ</a></td><td class="dd-field-def">Czechia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="DE/index.html" class="dd-field-link">DE</a></td><td class="dd-field-def">Germany is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="DJ/index.html" class="dd-field-link">DJ</a></td><td class="dd-field-def">Djibouti is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="DK/index.html" class="dd-field-link">DK</a></td><td class="dd-field-def">Denmark is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="DM/index.html" class="dd-field-link">DM</a></td><td class="dd-field-def">Dominica is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="DO/index.html" class="dd-field-link">DO</a></td><td class="dd-field-def">Dominican Republic is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="DZ/index.html" class="dd-field-link">DZ</a></td><td class="dd-field-def">Algeria is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="EC/index.html" class="dd-field-link">EC</a></td><td class="dd-field-def">Ecuador is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="EE/index.html" class="dd-field-link">EE</a></td><td class="dd-field-def">Estonia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="EG/index.html" class="dd-field-link">EG</a></td><td class="dd-field-def">Egypt is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="EH/index.html" class="dd-field-link">EH</a></td><td class="dd-field-def">Western Sahara is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="ER/index.html" class="dd-field-link">ER</a></td><td class="dd-field-def">Eritrea is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="ES/index.html" class="dd-field-link">ES</a></td><td class="dd-field-def">Spain is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="ET/index.html" class="dd-field-link">ET</a></td><td class="dd-field-def">Ethiopia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="FI/index.html" class="dd-field-link">FI</a></td><td class="dd-field-def">Finland is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="FJ/index.html" class="dd-field-link">FJ</a></td><td class="dd-field-def">Fiji is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="FK/index.html" class="dd-field-link">FK</a></td><td class="dd-field-def">Falkland Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="FM/index.html" class="dd-field-link">FM</a></td><td class="dd-field-def">Micronesia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="FO/index.html" class="dd-field-link">FO</a></td><td class="dd-field-def">Faroe Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="FR/index.html" class="dd-field-link">FR</a></td><td class="dd-field-def">France is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GA/index.html" class="dd-field-link">GA</a></td><td class="dd-field-def">Gabon is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GB/index.html" class="dd-field-link">GB</a></td><td class="dd-field-def">United Kingdom is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GD/index.html" class="dd-field-link">GD</a></td><td class="dd-field-def">Grenada is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GE/index.html" class="dd-field-link">GE</a></td><td class="dd-field-def">Georgia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GF/index.html" class="dd-field-link">GF</a></td><td class="dd-field-def">French Guiana is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GG/index.html" class="dd-field-link">GG</a></td><td class="dd-field-def">Guernsey is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GH/index.html" class="dd-field-link">GH</a></td><td class="dd-field-def">Ghana is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GI/index.html" class="dd-field-link">GI</a></td><td class="dd-field-def">Gibraltar is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GL/index.html" class="dd-field-link">GL</a></td><td class="dd-field-def">Greenland is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GM/index.html" class="dd-field-link">GM</a></td><td class="dd-field-def">Gambia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GN/index.html" class="dd-field-link">GN</a></td><td class="dd-field-def">Guinea is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GP/index.html" class="dd-field-link">GP</a></td><td class="dd-field-def">Guadeloupe is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GQ/index.html" class="dd-field-link">GQ</a></td><td class="dd-field-def">Equatorial Guinea is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GR/index.html" class="dd-field-link">GR</a></td><td class="dd-field-def">Greece is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GS/index.html" class="dd-field-link">GS</a></td><td class="dd-field-def">South Georgia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GT/index.html" class="dd-field-link">GT</a></td><td class="dd-field-def">Guatemala is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GU/index.html" class="dd-field-link">GU</a></td><td class="dd-field-def">Guam is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GW/index.html" class="dd-field-link">GW</a></td><td class="dd-field-def">Guinea-Bissau is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="GY/index.html" class="dd-field-link">GY</a></td><td class="dd-field-def">Guyana is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="HK/index.html" class="dd-field-link">HK</a></td><td class="dd-field-def">Hong Kong is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="HM/index.html" class="dd-field-link">HM</a></td><td class="dd-field-def">Heard And McDonald Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="HN/index.html" class="dd-field-link">HN</a></td><td class="dd-field-def">Honduras is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="HR/index.html" class="dd-field-link">HR</a></td><td class="dd-field-def">Croatia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="HT/index.html" class="dd-field-link">HT</a></td><td class="dd-field-def">Haiti is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="HU/index.html" class="dd-field-link">HU</a></td><td class="dd-field-def">Hungary is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="ID/index.html" class="dd-field-link">ID</a></td><td class="dd-field-def">Indonesia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="IE/index.html" class="dd-field-link">IE</a></td><td class="dd-field-def">Ireland is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="IL/index.html" class="dd-field-link">IL</a></td><td class="dd-field-def">Israel is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="IM/index.html" class="dd-field-link">IM</a></td><td class="dd-field-def">Isle Of Man is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="IN/index.html" class="dd-field-link">IN</a></td><td class="dd-field-def">India is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="IO/index.html" class="dd-field-link">IO</a></td><td class="dd-field-def">British Indian Ocean Territory is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="IQ/index.html" class="dd-field-link">IQ</a></td><td class="dd-field-def">Iraq is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="IR/index.html" class="dd-field-link">IR</a></td><td class="dd-field-def">Iran is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="IS/index.html" class="dd-field-link">IS</a></td><td class="dd-field-def">Iceland is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="IT/index.html" class="dd-field-link">IT</a></td><td class="dd-field-def">Italy is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="JE/index.html" class="dd-field-link">JE</a></td><td class="dd-field-def">Jersey is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="JM/index.html" class="dd-field-link">JM</a></td><td class="dd-field-def">Jamaica is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="JO/index.html" class="dd-field-link">JO</a></td><td class="dd-field-def">Jordan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="JP/index.html" class="dd-field-link">JP</a></td><td class="dd-field-def">Japan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KE/index.html" class="dd-field-link">KE</a></td><td class="dd-field-def">Kenya is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KG/index.html" class="dd-field-link">KG</a></td><td class="dd-field-def">Kyrgyzstan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KH/index.html" class="dd-field-link">KH</a></td><td class="dd-field-def">Cambodia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KI/index.html" class="dd-field-link">KI</a></td><td class="dd-field-def">Kiribati is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KM/index.html" class="dd-field-link">KM</a></td><td class="dd-field-def">Comoros is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KN/index.html" class="dd-field-link">KN</a></td><td class="dd-field-def">Saint Kitts And Nevis is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KP/index.html" class="dd-field-link">KP</a></td><td class="dd-field-def">North Korea, officially named the Democratic People's Republic of Korea, is the country in which the individual, entity or property is located. The...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KR/index.html" class="dd-field-link">KR</a></td><td class="dd-field-def">South Korea, officially named the Republic of Korea, is the country in which the individual, entity or property is located. The two-letter code is...</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KW/index.html" class="dd-field-link">KW</a></td><td class="dd-field-def">Kuwait is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KY/index.html" class="dd-field-link">KY</a></td><td class="dd-field-def">Cayman Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="KZ/index.html" class="dd-field-link">KZ</a></td><td class="dd-field-def">Kazakhstan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LA/index.html" class="dd-field-link">LA</a></td><td class="dd-field-def">Lao is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LB/index.html" class="dd-field-link">LB</a></td><td class="dd-field-def">Lebanon is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LC/index.html" class="dd-field-link">LC</a></td><td class="dd-field-def">Saint Lucia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LI/index.html" class="dd-field-link">LI</a></td><td class="dd-field-def">Liechtenstein is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LK/index.html" class="dd-field-link">LK</a></td><td class="dd-field-def">Sri Lanka is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LR/index.html" class="dd-field-link">LR</a></td><td class="dd-field-def">Liberia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LS/index.html" class="dd-field-link">LS</a></td><td class="dd-field-def">Lesotho is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LT/index.html" class="dd-field-link">LT</a></td><td class="dd-field-def">Lithuania is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LU/index.html" class="dd-field-link">LU</a></td><td class="dd-field-def">Luxembourg is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LV/index.html" class="dd-field-link">LV</a></td><td class="dd-field-def">Latvia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="LY/index.html" class="dd-field-link">LY</a></td><td class="dd-field-def">Libyan Arab Jamahiriya is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MA/index.html" class="dd-field-link">MA</a></td><td class="dd-field-def">Morocco is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MC/index.html" class="dd-field-link">MC</a></td><td class="dd-field-def">Monaco is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MD/index.html" class="dd-field-link">MD</a></td><td class="dd-field-def">Moldova is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="ME/index.html" class="dd-field-link">ME</a></td><td class="dd-field-def">Montenegro is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MF/index.html" class="dd-field-link">MF</a></td><td class="dd-field-def">Saint Martin is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MG/index.html" class="dd-field-link">MG</a></td><td class="dd-field-def">Madagascar is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MH/index.html" class="dd-field-link">MH</a></td><td class="dd-field-def">Marshall Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MK/index.html" class="dd-field-link">MK</a></td><td class="dd-field-def">Macedonia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="ML/index.html" class="dd-field-link">ML</a></td><td class="dd-field-def">Mali is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MM/index.html" class="dd-field-link">MM</a></td><td class="dd-field-def">Myanmar is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MN/index.html" class="dd-field-link">MN</a></td><td class="dd-field-def">Mongolia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MO/index.html" class="dd-field-link">MO</a></td><td class="dd-field-def">Macao is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MP/index.html" class="dd-field-link">MP</a></td><td class="dd-field-def">Northern Mariana Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MQ/index.html" class="dd-field-link">MQ</a></td><td class="dd-field-def">Martinique is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MR/index.html" class="dd-field-link">MR</a></td><td class="dd-field-def">Mauritania is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MS/index.html" class="dd-field-link">MS</a></td><td class="dd-field-def">Montserrat is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MT/index.html" class="dd-field-link">MT</a></td><td class="dd-field-def">Malta is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MU/index.html" class="dd-field-link">MU</a></td><td class="dd-field-def">Mauritius is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MV/index.html" class="dd-field-link">MV</a></td><td class="dd-field-def">Maldives is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MW/index.html" class="dd-field-link">MW</a></td><td class="dd-field-def">Malawi is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MX/index.html" class="dd-field-link">MX</a></td><td class="dd-field-def">Mexico is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MY/index.html" class="dd-field-link">MY</a></td><td class="dd-field-def">Malaysia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="MZ/index.html" class="dd-field-link">MZ</a></td><td class="dd-field-def">Mozambique is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NA/index.html" class="dd-field-link">NA</a></td><td class="dd-field-def">Namibia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NC/index.html" class="dd-field-link">NC</a></td><td class="dd-field-def">New Caledonia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NE/index.html" class="dd-field-link">NE</a></td><td class="dd-field-def">Niger is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NF/index.html" class="dd-field-link">NF</a></td><td class="dd-field-def">Norfolk Island is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NG/index.html" class="dd-field-link">NG</a></td><td class="dd-field-def">Nigeria is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NI/index.html" class="dd-field-link">NI</a></td><td class="dd-field-def">Nicaragua is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NL/index.html" class="dd-field-link">NL</a></td><td class="dd-field-def">Netherlands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NP/index.html" class="dd-field-link">NP</a></td><td class="dd-field-def">Nepal is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NR/index.html" class="dd-field-link">NR</a></td><td class="dd-field-def">Nauru is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NU/index.html" class="dd-field-link">NU</a></td><td class="dd-field-def">Niue is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="NZ/index.html" class="dd-field-link">NZ</a></td><td class="dd-field-def">New Zealand is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="OM/index.html" class="dd-field-link">OM</a></td><td class="dd-field-def">Oman is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="OT/index.html" class="dd-field-link">OT</a></td><td class="dd-field-def">The country in which the individual, entity or property is located is something other than what is covered by ISO standard 3166</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PA/index.html" class="dd-field-link">PA</a></td><td class="dd-field-def">Panama is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PE/index.html" class="dd-field-link">PE</a></td><td class="dd-field-def">Peru is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PF/index.html" class="dd-field-link">PF</a></td><td class="dd-field-def">French Polynesia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PG/index.html" class="dd-field-link">PG</a></td><td class="dd-field-def">Papua New Guinea is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PH/index.html" class="dd-field-link">PH</a></td><td class="dd-field-def">Philippines is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PK/index.html" class="dd-field-link">PK</a></td><td class="dd-field-def">Pakistan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PL/index.html" class="dd-field-link">PL</a></td><td class="dd-field-def">Poland is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PM/index.html" class="dd-field-link">PM</a></td><td class="dd-field-def">Saint Pierre And Miquelon is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PN/index.html" class="dd-field-link">PN</a></td><td class="dd-field-def">Pitcairn is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PR/index.html" class="dd-field-link">PR</a></td><td class="dd-field-def">Puerto Rico is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PS/index.html" class="dd-field-link">PS</a></td><td class="dd-field-def">Palestinian Territory is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PT/index.html" class="dd-field-link">PT</a></td><td class="dd-field-def">Portugal is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PW/index.html" class="dd-field-link">PW</a></td><td class="dd-field-def">Palau is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="PY/index.html" class="dd-field-link">PY</a></td><td class="dd-field-def">Paraguay is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="QA/index.html" class="dd-field-link">QA</a></td><td class="dd-field-def">Qatar is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="RE/index.html" class="dd-field-link">RE</a></td><td class="dd-field-def">Reunion is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="RO/index.html" class="dd-field-link">RO</a></td><td class="dd-field-def">Romania is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="RS/index.html" class="dd-field-link">RS</a></td><td class="dd-field-def">Serbia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="RU/index.html" class="dd-field-link">RU</a></td><td class="dd-field-def">Russian Federation is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="RW/index.html" class="dd-field-link">RW</a></td><td class="dd-field-def">Rwanda is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SA/index.html" class="dd-field-link">SA</a></td><td class="dd-field-def">Saudi Arabia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SB/index.html" class="dd-field-link">SB</a></td><td class="dd-field-def">Solomon Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SC/index.html" class="dd-field-link">SC</a></td><td class="dd-field-def">Seychelles is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SD/index.html" class="dd-field-link">SD</a></td><td class="dd-field-def">Sudan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SE/index.html" class="dd-field-link">SE</a></td><td class="dd-field-def">Sweden is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SG/index.html" class="dd-field-link">SG</a></td><td class="dd-field-def">Singapore is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SH/index.html" class="dd-field-link">SH</a></td><td class="dd-field-def">Saint Helena is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SI/index.html" class="dd-field-link">SI</a></td><td class="dd-field-def">Slovenia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SJ/index.html" class="dd-field-link">SJ</a></td><td class="dd-field-def">Svalbard - Jan Mayen is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SK/index.html" class="dd-field-link">SK</a></td><td class="dd-field-def">Slovakia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SL/index.html" class="dd-field-link">SL</a></td><td class="dd-field-def">Sierra Leone is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SM/index.html" class="dd-field-link">SM</a></td><td class="dd-field-def">San Marino is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SN/index.html" class="dd-field-link">SN</a></td><td class="dd-field-def">Senegal is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SO/index.html" class="dd-field-link">SO</a></td><td class="dd-field-def">Somalia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SR/index.html" class="dd-field-link">SR</a></td><td class="dd-field-def">Suriname is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="ST/index.html" class="dd-field-link">ST</a></td><td class="dd-field-def">Sao Tome And Principe is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SV/index.html" class="dd-field-link">SV</a></td><td class="dd-field-def">El Salvador is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SY/index.html" class="dd-field-link">SY</a></td><td class="dd-field-def">Syrian Arab Republic is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="SZ/index.html" class="dd-field-link">SZ</a></td><td class="dd-field-def">Swaziland is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TC/index.html" class="dd-field-link">TC</a></td><td class="dd-field-def">Turks - Caicos Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TD/index.html" class="dd-field-link">TD</a></td><td class="dd-field-def">Chad is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TF/index.html" class="dd-field-link">TF</a></td><td class="dd-field-def">French Southern Territories is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TG/index.html" class="dd-field-link">TG</a></td><td class="dd-field-def">Togo is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TH/index.html" class="dd-field-link">TH</a></td><td class="dd-field-def">Thailand is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TJ/index.html" class="dd-field-link">TJ</a></td><td class="dd-field-def">Tajikistan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TK/index.html" class="dd-field-link">TK</a></td><td class="dd-field-def">Tokelau is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TL/index.html" class="dd-field-link">TL</a></td><td class="dd-field-def">Timor-Leste is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TM/index.html" class="dd-field-link">TM</a></td><td class="dd-field-def">Turkmenistan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TN/index.html" class="dd-field-link">TN</a></td><td class="dd-field-def">Tunisia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TO/index.html" class="dd-field-link">TO</a></td><td class="dd-field-def">Tonga is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TR/index.html" class="dd-field-link">TR</a></td><td class="dd-field-def">Türkiye is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TT/index.html" class="dd-field-link">TT</a></td><td class="dd-field-def">Trinidad - Tobago is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TV/index.html" class="dd-field-link">TV</a></td><td class="dd-field-def">Tuvalu is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TW/index.html" class="dd-field-link">TW</a></td><td class="dd-field-def">Taiwan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="TZ/index.html" class="dd-field-link">TZ</a></td><td class="dd-field-def">Tanzania is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="UA/index.html" class="dd-field-link">UA</a></td><td class="dd-field-def">Ukraine is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="UG/index.html" class="dd-field-link">UG</a></td><td class="dd-field-def">Uganda is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="UM/index.html" class="dd-field-link">UM</a></td><td class="dd-field-def">United States Minor Islands is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="US/index.html" class="dd-field-link">US</a></td><td class="dd-field-def">United States is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="UY/index.html" class="dd-field-link">UY</a></td><td class="dd-field-def">Uruguay is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="UZ/index.html" class="dd-field-link">UZ</a></td><td class="dd-field-def">Uzbekistan is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="VA/index.html" class="dd-field-link">VA</a></td><td class="dd-field-def">Holy See (Vatican City) is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="VC/index.html" class="dd-field-link">VC</a></td><td class="dd-field-def">Saint Vincent - Grenadines is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="VE/index.html" class="dd-field-link">VE</a></td><td class="dd-field-def">Venezuela is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="VG/index.html" class="dd-field-link">VG</a></td><td class="dd-field-def">Virgin Islands British is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="VI/index.html" class="dd-field-link">VI</a></td><td class="dd-field-def">Virgin Islands U.S. is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="VN/index.html" class="dd-field-link">VN</a></td><td class="dd-field-def">Viet Nam is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="VU/index.html" class="dd-field-link">VU</a></td><td class="dd-field-def">Vanuatu is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="WF/index.html" class="dd-field-link">WF</a></td><td class="dd-field-def">Wallis And Futuna is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="WS/index.html" class="dd-field-link">WS</a></td><td class="dd-field-def">Samoa is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="YE/index.html" class="dd-field-link">YE</a></td><td class="dd-field-def">Yemen is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="YT/index.html" class="dd-field-link">YT</a></td><td class="dd-field-def">Mayotte is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="ZA/index.html" class="dd-field-link">ZA</a></td><td class="dd-field-def">South Africa is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="ZM/index.html" class="dd-field-link">ZM</a></td><td class="dd-field-def">Zambia is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr><tr><td><a href="ZW/index.html" class="dd-field-link">ZW</a></td><td class="dd-field-def">Zimbabwe is the country in which the individual, entity or property is located. The two-letter code is based on ISO standard 3166.</td><td><span class="dd-type-badge">Active</span></td></tr></tbody></table></div><div class="dd-metadata-card"><h2>Used By</h2><table class="dd-fields-table"><thead><tr><th>Resource</th><th>Field</th><th>Display Name</th><th class="dd-col-usage">Usage</th></tr></thead><tbody><tr><td><a href="../../Property/index.html" class="dd-field-link">Property</a></td><td><a href="../../Property/Country/index.html" class="dd-field-link">Country</a></td><td>Country</td><td class="dd-col-usage"><span class="dd-usage-badge">41%</span></td></tr><tr><td><a href="../../Association/index.html" class="dd-field-link">Association</a></td><td><a href="../../Association/AssociationCountry/index.html" class="dd-field-link">AssociationCountry</a></td><td>Association Country</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../Association/index.html" class="dd-field-link">Association</a></td><td><a href="../../Association/AssociationMailCountry/index.html" class="dd-field-link">AssociationMailCountry</a></td><td>Association Mail Country</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../Contacts/index.html" class="dd-field-link">Contacts</a></td><td><a href="../../Contacts/HomeCountry/index.html" class="dd-field-link">HomeCountry</a></td><td>Home Country</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../Contacts/index.html" class="dd-field-link">Contacts</a></td><td><a href="../../Contacts/OtherCountry/index.html" class="dd-field-link">OtherCountry</a></td><td>Other Country</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../Contacts/index.html" class="dd-field-link">Contacts</a></td><td><a href="../../Contacts/WorkCountry/index.html" class="dd-field-link">WorkCountry</a></td><td>Work Country</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../LockOrBox/index.html" class="dd-field-link">LockOrBox</a></td><td><a href="../../LockOrBox/ListingCountry/index.html" class="dd-field-link">ListingCountry</a></td><td>Listing Country</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../Member/index.html" class="dd-field-link">Member</a></td><td><a href="../../Member/MemberCountry/index.html" class="dd-field-link">MemberCountry</a></td><td>Member Country</td><td class="dd-col-usage"><span class="dd-usage-badge">31%</span></td></tr><tr><td><a href="../../Office/index.html" class="dd-field-link">Office</a></td><td><a href="../../Office/OfficeCountry/index.html" class="dd-field-link">OfficeCountry</a></td><td>Office Country</td><td class="dd-col-usage"><span class="dd-usage-badge">3%</span></td></tr><tr><td><a href="../../Office/index.html" class="dd-field-link">Office</a></td><td><a href="../../Office/OfficeMailCountry/index.html" class="dd-field-link">OfficeMailCountry</a></td><td>Office Mail Country</td><td class="dd-col-usage"><span class="dd-usage-badge">1%</span></td></tr><tr><td><a href="../../OUID/index.html" class="dd-field-link">OUID</a></td><td><a href="../../OUID/OrganizationCountry/index.html" class="dd-field-link">OrganizationCountry</a></td><td>Organization Country</td><td class="dd-col-usage"><span class="dd-usage-badge">0%</span></td></tr><tr><td><a href="../../Teams/index.html" class="dd-field-link">Teams</a></td><td><a href="../../Teams/TeamCountry/index.html" class="dd-field-link">TeamCountry</a></td><td>Team Country</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr></tbody></table></div>
+      <div class="dd-page-generated"><a href="../../about/terms/index.html" target="_blank">Terms and Definitions</a><span>Generated May 4, 2026</span></div>
+    </div>
+  </div>
+
+  <!-- Search modal -->
+  <div class="search-modal-overlay" id="searchOverlay">
+    <div class="search-modal" id="searchModal">
+      <div id="search"></div>
+      <div class="dd-search-welcome visible" id="ddSearchWelcome">
+        <div class="dd-search-welcome-icon">🔍</div>
+        <p id="ddSearchWelcomeText">Search across all Data Dictionary resources, fields and lookup values.</p>
+        <p class="dd-search-hint">Press <kbd>Esc</kbd> to close</p>
+      </div>
+      <div class="dd-search-empty" id="ddSearchEmpty">No results found. Try a different search term or filter.</div>
+    </div>
+  </div>
+  <template id="searchFiltersTemplate">
+    <div class="dd-search-meta">
+      <div class="dd-search-filters" id="ddSearchFilters">
+        <button class="dd-search-filter-pill" data-version="">All</button>
+        <button class="dd-search-filter-pill" data-version="1.7">DD 1.7</button>
+        <button class="dd-search-filter-pill active" data-version="2.0">DD 2.0</button>
+        <button class="dd-search-filter-pill" data-version="2.1">DD 2.1</button>
+      </div>
+      <div class="dd-search-count" id="ddSearchCount"></div>
+    </div>
+  </template>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="https://reso.org">Real Estate Standards Organization (RESO)</a>. All rights reserved.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="https://github.com/RESOStandards/reso-data-dictionary-documentation">Source</a> &middot;
+      <a href="https://www.reso.org/eula/">Terms of Use</a>
+    </p>
+  </footer>
+
+  <script src="../../../assets/dd.js"></script>
+</body>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+  <title>Language - Prospecting - RESO Data Dictionary</title>
+  <meta name="description" content="The language that will be used in the given automated email.">
+  <meta property="og:title" content="Language - Prospecting - RESO Data Dictionary">
+  <meta property="og:description" content="The language that will be used in the given automated email.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RESO Data Dictionary">
+  <meta property="og:image" content="https://www.reso.org/wp-content/uploads/2020/06/RESO-Logo-Fullname_Horizontal_Blue.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Language - Prospecting - RESO Data Dictionary">
+  <meta name="twitter:description" content="The language that will be used in the given automated email.">
+  <meta name="twitter:image" content="https://www.reso.org/wp-content/uploads/2020/06/RESO-Logo-Fullname_Horizontal_Blue.png">
+  <link rel="stylesheet" href="../../../assets/dd.css">
+  <link href="../../../pagefind/pagefind-ui.css" rel="stylesheet">
+  <script>(function(){var t=localStorage.getItem('dd-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');})()</script>
+</head>
+<body data-version="2.0">
+  <header class="site-header">
+    <a href="https://dd.reso.org/" class="header-logo">
+      <img src="../../../assets/reso-logo-white.png" alt="RESO" />
+    </a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <nav class="header-nav" id="headerNav">
+      <a href="https://dd.reso.org/">Home</a>
+      <a href="https://reso.org">RESO.org</a>
+      <button class="search-trigger" id="searchTrigger" type="button">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        Search<kbd>/</kbd>
+      </button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <div class="dd-layout">
+    <aside class="dd-sidebar" id="ddSidebar">
+      <div class="dd-sidebar-header">
+        <div class="dd-sidebar-title">Data Dictionary</div>
+        <select class="dd-version-select" id="ddVersionSelect" onchange="window.location.href='/DD' + this.value + '/'">
+          <option value="1.7">DD 1.7</option>
+          <option value="2.0" selected>DD 2.0</option>
+          <option value="2.1">DD 2.1 (DRAFT)</option>
+        </select>
+      </div>
+      <div class="dd-sidebar-search" id="sidebarSearch">
+        <svg class="dd-sidebar-search-icon" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="sidebarSearchInput" name="search" placeholder="Search..." aria-label="Search" readonly />
+        <kbd>/</kbd>
+      </div>
+      <div class="dd-sidebar-section" data-section="about">
+<div class="dd-sidebar-section-title">About <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../../about/index.html" class="dd-nav-resource-link">Introduction</a></li>
+<li class="dd-nav-resource"><a href="../../about/release-guide/index.html" class="dd-nav-resource-link">Release Guide</a></li>
+<li class="dd-nav-resource"><a href="../../about/changelog/index.html" class="dd-nav-resource-link">Change Log</a></li>
+<li class="dd-nav-resource"><a href="../../about/certification/index.html" class="dd-nav-resource-link">Certification</a></li>
+<li class="dd-nav-resource"><a href="../../about/terms/index.html" class="dd-nav-resource-link">Terms and Definitions</a></li>
+<li class="dd-nav-resource"><a href="../../about/deprecated/index.html" class="dd-nav-resource-link">Deprecated Fields</a></li>
+<li class="dd-nav-resource"><a href="../../about/resources/index.html" class="dd-nav-resource-link">Resource Summary</a></li>
+<li class="dd-nav-resource"><a href="../../about/search-tips/index.html" class="dd-nav-resource-link">Search Tips</a></li>
+</ul>
+</div>
+<div class="dd-sidebar-section expanded" data-section="resources">
+<div class="dd-sidebar-section-title">Resources <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource">
+  <a href="../../Property/index.html" class="dd-nav-resource-link">Property</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Business" class="dd-nav-group-link">Business</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Characteristics" class="dd-nav-group-link">Characteristics</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Equipment" class="dd-nav-group-link">Equipment</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Farming" class="dd-nav-group-link">Farming</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Financial" class="dd-nav-group-link">Financial</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-HOA" class="dd-nav-group-link">HOA</a>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Listing-AgentOffice" class="dd-nav-group-link">AgentOffice</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-BuyerAgent" class="dd-nav-group-link">BuyerAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-BuyerOffice" class="dd-nav-group-link">BuyerOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-BuyerTeam" class="dd-nav-group-link">BuyerTeam</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoBuyerAgent" class="dd-nav-group-link">CoBuyerAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoBuyerOffice" class="dd-nav-group-link">CoBuyerOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoListAgent" class="dd-nav-group-link">CoListAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-CoListOffice" class="dd-nav-group-link">CoListOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-ListAgent" class="dd-nav-group-link">ListAgent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-ListOffice" class="dd-nav-group-link">ListOffice</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-ListTeam" class="dd-nav-group-link">ListTeam</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-AgentOffice-Team" class="dd-nav-group-link">Team</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Closing" class="dd-nav-group-link">Closing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Compensation" class="dd-nav-group-link">Compensation</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Contract" class="dd-nav-group-link">Contract</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Dates" class="dd-nav-group-link">Dates</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Marketing" class="dd-nav-group-link">Marketing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Media" class="dd-nav-group-link">Media</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Price" class="dd-nav-group-link">Price</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Remarks" class="dd-nav-group-link">Remarks</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Listing-Showing" class="dd-nav-group-link">Showing</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Location" class="dd-nav-group-link">Location</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-Address" class="dd-nav-group-link">Address</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-Area" class="dd-nav-group-link">Area</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-GIS" class="dd-nav-group-link">GIS</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Location-School" class="dd-nav-group-link">School</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-OccupantOwner" class="dd-nav-group-link">OccupantOwner</a>
+    </li>
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Structure" class="dd-nav-group-link">Structure</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group has-children">
+      <a href="../../Property/index.html#group-Structure-Performance" class="dd-nav-group-link">Performance</a>
+      <ul class="dd-nav-subgroups">
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Structure-Performance-GreenMarketing" class="dd-nav-group-link">GreenMarketing</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Structure-Performance-GreenVerification" class="dd-nav-group-link">GreenVerification</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Structure-Rooms" class="dd-nav-group-link">Rooms</a>
+    </li>
+      </ul>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Tax" class="dd-nav-group-link">Tax</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-UnitTypes" class="dd-nav-group-link">UnitTypes</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Property/index.html#group-Utilities" class="dd-nav-group-link">Utilities</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Association/index.html" class="dd-nav-resource-link">Association</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Caravan/index.html" class="dd-nav-resource-link">Caravan</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../CaravanStop/index.html" class="dd-nav-resource-link">CaravanStop</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ContactListingNotes/index.html" class="dd-nav-resource-link">ContactListingNotes</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ContactListings/index.html" class="dd-nav-resource-link">ContactListings</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Contacts/index.html" class="dd-nav-resource-link">Contacts</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../EntityEvent/index.html" class="dd-nav-resource-link">EntityEvent</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Field/index.html" class="dd-nav-resource-link">Field</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../HistoryTransactional/index.html" class="dd-nav-resource-link">HistoryTransactional</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../InternetTracking/index.html" class="dd-nav-resource-link">InternetTracking</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../InternetTracking/index.html#group-Actor" class="dd-nav-group-link">Actor</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../InternetTracking/index.html#group-Event" class="dd-nav-group-link">Event</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../InternetTracking/index.html#group-Object" class="dd-nav-group-link">Object</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../InternetTrackingSummary/index.html" class="dd-nav-resource-link">InternetTrackingSummary</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../LockOrBox/index.html" class="dd-nav-resource-link">LockOrBox</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Lookup/index.html" class="dd-nav-resource-link">Lookup</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Media/index.html" class="dd-nav-resource-link">Media</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../Media/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Member/index.html" class="dd-nav-resource-link">Member</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../MemberAssociation/index.html" class="dd-nav-resource-link">MemberAssociation</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../MemberStateLicense/index.html" class="dd-nav-resource-link">MemberStateLicense</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OUID/index.html" class="dd-nav-resource-link">OUID</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Office/index.html" class="dd-nav-resource-link">Office</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OfficeAssociation/index.html" class="dd-nav-resource-link">OfficeAssociation</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OfficeCorporateLicense/index.html" class="dd-nav-resource-link">OfficeCorporateLicense</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OpenHouse/index.html" class="dd-nav-resource-link">OpenHouse</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../OtherPhone/index.html" class="dd-nav-resource-link">OtherPhone</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyGreenVerification/index.html" class="dd-nav-resource-link">PropertyGreenVerification</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyPowerProduction/index.html" class="dd-nav-resource-link">PropertyPowerProduction</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyPowerStorage/index.html" class="dd-nav-resource-link">PropertyPowerStorage</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyRooms/index.html" class="dd-nav-resource-link">PropertyRooms</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../PropertyUnitTypes/index.html" class="dd-nav-resource-link">PropertyUnitTypes</a>
+</li>
+<li class="dd-nav-resource expanded">
+  <a href="../index.html" class="dd-nav-resource-link active">Prospecting</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Queue/index.html" class="dd-nav-resource-link">Queue</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Rules/index.html" class="dd-nav-resource-link">Rules</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../SavedSearch/index.html" class="dd-nav-resource-link">SavedSearch</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Showing/index.html" class="dd-nav-resource-link">Showing</a>
+  <ul class="dd-nav-groups">
+    <li class="dd-nav-group">
+      <a href="../../Showing/index.html#group-Agent" class="dd-nav-group-link">Agent</a>
+    </li>
+    <li class="dd-nav-group">
+      <a href="../../Showing/index.html#group-Listing" class="dd-nav-group-link">Listing</a>
+    </li>
+  </ul>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ShowingAppointment/index.html" class="dd-nav-resource-link">ShowingAppointment</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ShowingAvailability/index.html" class="dd-nav-resource-link">ShowingAvailability</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../ShowingRequest/index.html" class="dd-nav-resource-link">ShowingRequest</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../SocialMedia/index.html" class="dd-nav-resource-link">SocialMedia</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../TeamMembers/index.html" class="dd-nav-resource-link">TeamMembers</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../Teams/index.html" class="dd-nav-resource-link">Teams</a>
+</li>
+<li class="dd-nav-resource">
+  <a href="../../TransactionManagement/index.html" class="dd-nav-resource-link">TransactionManagement</a>
+</li>
+</ul>
+</div>
+<div class="dd-sidebar-section" data-section="lookups">
+<div class="dd-sidebar-section-title">Lookups <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../../lookups/AccessibilityFeatures/index.html" class="dd-nav-resource-link">AccessibilityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ActorType/index.html" class="dd-nav-resource-link">ActorType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Appliances/index.html" class="dd-nav-resource-link">Appliances</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ArchitecturalStyle/index.html" class="dd-nav-resource-link">ArchitecturalStyle</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/AreaSource/index.html" class="dd-nav-resource-link">AreaSource</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/AreaUnits/index.html" class="dd-nav-resource-link">AreaUnits</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/AssociationAmenities/index.html" class="dd-nav-resource-link">AssociationAmenities</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/AssociationFeeIncludes/index.html" class="dd-nav-resource-link">AssociationFeeIncludes</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/AssociationStatus/index.html" class="dd-nav-resource-link">AssociationStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/AssociationType/index.html" class="dd-nav-resource-link">AssociationType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Attended/index.html" class="dd-nav-resource-link">Attended</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Basement/index.html" class="dd-nav-resource-link">Basement</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/BillingPreference/index.html" class="dd-nav-resource-link">BillingPreference</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/BodyType/index.html" class="dd-nav-resource-link">BodyType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/BusinessType/index.html" class="dd-nav-resource-link">BusinessType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/BuyerAgentDesignation/index.html" class="dd-nav-resource-link">BuyerAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/BuyerFinancing/index.html" class="dd-nav-resource-link">BuyerFinancing</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CaravanAllowedClassNames/index.html" class="dd-nav-resource-link">CaravanAllowedClassNames</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CaravanAllowedStatuses/index.html" class="dd-nav-resource-link">CaravanAllowedStatuses</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CaravanResourceName/index.html" class="dd-nav-resource-link">CaravanResourceName</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CaravanStatus/index.html" class="dd-nav-resource-link">CaravanStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CaravanStopAttended/index.html" class="dd-nav-resource-link">CaravanStopAttended</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CaravanStopClassName/index.html" class="dd-nav-resource-link">CaravanStopClassName</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CaravanType/index.html" class="dd-nav-resource-link">CaravanType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ChangeType/index.html" class="dd-nav-resource-link">ChangeType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ClassName/index.html" class="dd-nav-resource-link">ClassName</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ClosetType/index.html" class="dd-nav-resource-link">ClosetType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CoBuyerAgentDesignation/index.html" class="dd-nav-resource-link">CoBuyerAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CoListAgentDesignation/index.html" class="dd-nav-resource-link">CoListAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CommonInterest/index.html" class="dd-nav-resource-link">CommonInterest</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CommonWalls/index.html" class="dd-nav-resource-link">CommonWalls</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CommunityFeatures/index.html" class="dd-nav-resource-link">CommunityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CompensationType/index.html" class="dd-nav-resource-link">CompensationType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Concessions/index.html" class="dd-nav-resource-link">Concessions</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ConstructionMaterials/index.html" class="dd-nav-resource-link">ConstructionMaterials</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ContactListingPreference/index.html" class="dd-nav-resource-link">ContactListingPreference</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ContactStatus/index.html" class="dd-nav-resource-link">ContactStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ContactType/index.html" class="dd-nav-resource-link">ContactType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Cooling/index.html" class="dd-nav-resource-link">Cooling</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Country/index.html" class="dd-nav-resource-link">Country</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CurrentFinancing/index.html" class="dd-nav-resource-link">CurrentFinancing</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/CurrentOrPossibleUse/index.html" class="dd-nav-resource-link">CurrentOrPossibleUse</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/DailySchedule/index.html" class="dd-nav-resource-link">DailySchedule</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/DevelopmentStatus/index.html" class="dd-nav-resource-link">DevelopmentStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/DeviceType/index.html" class="dd-nav-resource-link">DeviceType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/DirectionFaces/index.html" class="dd-nav-resource-link">DirectionFaces</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/DocumentStatus/index.html" class="dd-nav-resource-link">DocumentStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/DoorFeatures/index.html" class="dd-nav-resource-link">DoorFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Electric/index.html" class="dd-nav-resource-link">Electric</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/EventSource/index.html" class="dd-nav-resource-link">EventSource</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/EventTarget/index.html" class="dd-nav-resource-link">EventTarget</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/EventType/index.html" class="dd-nav-resource-link">EventType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ExistingLeaseType/index.html" class="dd-nav-resource-link">ExistingLeaseType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ExteriorFeatures/index.html" class="dd-nav-resource-link">ExteriorFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/FeeFrequency/index.html" class="dd-nav-resource-link">FeeFrequency</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Fencing/index.html" class="dd-nav-resource-link">Fencing</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/FhaEligibility/index.html" class="dd-nav-resource-link">FhaEligibility</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/FinancialDataSource/index.html" class="dd-nav-resource-link">FinancialDataSource</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/FireplaceFeatures/index.html" class="dd-nav-resource-link">FireplaceFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Flooring/index.html" class="dd-nav-resource-link">Flooring</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/FoundationDetails/index.html" class="dd-nav-resource-link">FoundationDetails</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/FrontageType/index.html" class="dd-nav-resource-link">FrontageType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Furnished/index.html" class="dd-nav-resource-link">Furnished</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/GreenBuildingVerificationType/index.html" class="dd-nav-resource-link">GreenBuildingVerificationType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/GreenEnergyEfficient/index.html" class="dd-nav-resource-link">GreenEnergyEfficient</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/GreenEnergyGeneration/index.html" class="dd-nav-resource-link">GreenEnergyGeneration</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/GreenIndoorAirQuality/index.html" class="dd-nav-resource-link">GreenIndoorAirQuality</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/GreenSustainability/index.html" class="dd-nav-resource-link">GreenSustainability</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/GreenVerificationSource/index.html" class="dd-nav-resource-link">GreenVerificationSource</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/GreenVerificationStatus/index.html" class="dd-nav-resource-link">GreenVerificationStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/GreenWaterConservation/index.html" class="dd-nav-resource-link">GreenWaterConservation</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Heating/index.html" class="dd-nav-resource-link">Heating</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/HorseAmenities/index.html" class="dd-nav-resource-link">HorseAmenities</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/HoursDaysOfOperation/index.html" class="dd-nav-resource-link">HoursDaysOfOperation</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/IanaTimeZoneValues/index.html" class="dd-nav-resource-link">IanaTimeZoneValues</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ImageOf/index.html" class="dd-nav-resource-link">ImageOf</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/IncomeIncludes/index.html" class="dd-nav-resource-link">IncomeIncludes</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/InteriorOrRoomFeatures/index.html" class="dd-nav-resource-link">InteriorOrRoomFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LaborInformation/index.html" class="dd-nav-resource-link">LaborInformation</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Languages/index.html" class="dd-nav-resource-link">Languages</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LaundryFeatures/index.html" class="dd-nav-resource-link">LaundryFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LeaseRenewalCompensation/index.html" class="dd-nav-resource-link">LeaseRenewalCompensation</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LeaseTerm/index.html" class="dd-nav-resource-link">LeaseTerm</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Levels/index.html" class="dd-nav-resource-link">Levels</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LinearUnits/index.html" class="dd-nav-resource-link">LinearUnits</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ListAgentDesignation/index.html" class="dd-nav-resource-link">ListAgentDesignation</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ListingAgreement/index.html" class="dd-nav-resource-link">ListingAgreement</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ListingService/index.html" class="dd-nav-resource-link">ListingService</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ListingTerms/index.html" class="dd-nav-resource-link">ListingTerms</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ListingURLDescription/index.html" class="dd-nav-resource-link">ListingURLDescription</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LockBoxType/index.html" class="dd-nav-resource-link">LockBoxType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LockOrBoxAccessType/index.html" class="dd-nav-resource-link">LockOrBoxAccessType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LotDimensionsSource/index.html" class="dd-nav-resource-link">LotDimensionsSource</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LotFeatures/index.html" class="dd-nav-resource-link">LotFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LotSizeSource/index.html" class="dd-nav-resource-link">LotSizeSource</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/LotSizeUnits/index.html" class="dd-nav-resource-link">LotSizeUnits</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/MediaAlteration/index.html" class="dd-nav-resource-link">MediaAlteration</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/MediaCategory/index.html" class="dd-nav-resource-link">MediaCategory</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/MediaType/index.html" class="dd-nav-resource-link">MediaType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/MemberAssociationBillStatus/index.html" class="dd-nav-resource-link">MemberAssociationBillStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/MemberDesignation/index.html" class="dd-nav-resource-link">MemberDesignation</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/MemberOtherPhoneType/index.html" class="dd-nav-resource-link">MemberOtherPhoneType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/MemberStateLicenseType/index.html" class="dd-nav-resource-link">MemberStateLicenseType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/MemberStatus/index.html" class="dd-nav-resource-link">MemberStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/MemberType/index.html" class="dd-nav-resource-link">MemberType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/NotedBy/index.html" class="dd-nav-resource-link">NotedBy</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ObjectIdType/index.html" class="dd-nav-resource-link">ObjectIdType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ObjectType/index.html" class="dd-nav-resource-link">ObjectType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OccupantType/index.html" class="dd-nav-resource-link">OccupantType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OfficeAssociationPrimaryIndicator/index.html" class="dd-nav-resource-link">OfficeAssociationPrimaryIndicator</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OfficeBranchType/index.html" class="dd-nav-resource-link">OfficeBranchType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OfficeCorporateLicenseType/index.html" class="dd-nav-resource-link">OfficeCorporateLicenseType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OfficeStatus/index.html" class="dd-nav-resource-link">OfficeStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OfficeType/index.html" class="dd-nav-resource-link">OfficeType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OpenHouseStatus/index.html" class="dd-nav-resource-link">OpenHouseStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OpenHouseType/index.html" class="dd-nav-resource-link">OpenHouseType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OperatingExpenseIncludes/index.html" class="dd-nav-resource-link">OperatingExpenseIncludes</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OtherEquipment/index.html" class="dd-nav-resource-link">OtherEquipment</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OtherPhoneType/index.html" class="dd-nav-resource-link">OtherPhoneType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OtherStructures/index.html" class="dd-nav-resource-link">OtherStructures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OwnerPays/index.html" class="dd-nav-resource-link">OwnerPays</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/OwnershipType/index.html" class="dd-nav-resource-link">OwnershipType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ParkingFeatures/index.html" class="dd-nav-resource-link">ParkingFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PatioAndPorchFeatures/index.html" class="dd-nav-resource-link">PatioAndPorchFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Permission/index.html" class="dd-nav-resource-link">Permission</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PetsAllowed/index.html" class="dd-nav-resource-link">PetsAllowed</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PoolFeatures/index.html" class="dd-nav-resource-link">PoolFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Possession/index.html" class="dd-nav-resource-link">Possession</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PowerProductionAnnualStatus/index.html" class="dd-nav-resource-link">PowerProductionAnnualStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PowerProductionOwnership/index.html" class="dd-nav-resource-link">PowerProductionOwnership</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PowerProductionType/index.html" class="dd-nav-resource-link">PowerProductionType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PowerStorageType/index.html" class="dd-nav-resource-link">PowerStorageType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PreferredAddress/index.html" class="dd-nav-resource-link">PreferredAddress</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PreferredMail/index.html" class="dd-nav-resource-link">PreferredMail</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PreferredMedia/index.html" class="dd-nav-resource-link">PreferredMedia</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PreferredPhone/index.html" class="dd-nav-resource-link">PreferredPhone</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PreferredPublication/index.html" class="dd-nav-resource-link">PreferredPublication</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PropertyCondition/index.html" class="dd-nav-resource-link">PropertyCondition</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PropertySubType/index.html" class="dd-nav-resource-link">PropertySubType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/PropertyType/index.html" class="dd-nav-resource-link">PropertyType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/QueueTransactionType/index.html" class="dd-nav-resource-link">QueueTransactionType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ReasonActiveOrDisabled/index.html" class="dd-nav-resource-link">ReasonActiveOrDisabled</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/RentIncludes/index.html" class="dd-nav-resource-link">RentIncludes</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ResourceName/index.html" class="dd-nav-resource-link">ResourceName</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ResponseTypes/index.html" class="dd-nav-resource-link">ResponseTypes</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/RoadFrontageType/index.html" class="dd-nav-resource-link">RoadFrontageType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/RoadResponsibility/index.html" class="dd-nav-resource-link">RoadResponsibility</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/RoadSurfaceType/index.html" class="dd-nav-resource-link">RoadSurfaceType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Roof/index.html" class="dd-nav-resource-link">Roof</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/RoomLengthWidthSource/index.html" class="dd-nav-resource-link">RoomLengthWidthSource</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/RoomLevel/index.html" class="dd-nav-resource-link">RoomLevel</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/RoomType/index.html" class="dd-nav-resource-link">RoomType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/RuleFormat/index.html" class="dd-nav-resource-link">RuleFormat</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ScheduleType/index.html" class="dd-nav-resource-link">ScheduleType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/SearchQueryType/index.html" class="dd-nav-resource-link">SearchQueryType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/SecurityFeatures/index.html" class="dd-nav-resource-link">SecurityFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Sewer/index.html" class="dd-nav-resource-link">Sewer</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingAppointmentMethod/index.html" class="dd-nav-resource-link">ShowingAppointmentMethod</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingAppointmentStatus/index.html" class="dd-nav-resource-link">ShowingAppointmentStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingConsiderations/index.html" class="dd-nav-resource-link">ShowingConsiderations</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingContactType/index.html" class="dd-nav-resource-link">ShowingContactType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingMethod/index.html" class="dd-nav-resource-link">ShowingMethod</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingMethodRequest/index.html" class="dd-nav-resource-link">ShowingMethodRequest</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingRequestType/index.html" class="dd-nav-resource-link">ShowingRequestType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingRequestor/index.html" class="dd-nav-resource-link">ShowingRequestor</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingRequirements/index.html" class="dd-nav-resource-link">ShowingRequirements</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingServiceName/index.html" class="dd-nav-resource-link">ShowingServiceName</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/ShowingStatus/index.html" class="dd-nav-resource-link">ShowingStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Skirt/index.html" class="dd-nav-resource-link">Skirt</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/SocialMediaType/index.html" class="dd-nav-resource-link">SocialMediaType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/SpaFeatures/index.html" class="dd-nav-resource-link">SpaFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/SpecialLicenses/index.html" class="dd-nav-resource-link">SpecialLicenses</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/SpecialListingConditions/index.html" class="dd-nav-resource-link">SpecialListingConditions</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/StandardStatus/index.html" class="dd-nav-resource-link">StandardStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/StateOrProvince/index.html" class="dd-nav-resource-link">StateOrProvince</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/StreetDirection/index.html" class="dd-nav-resource-link">StreetDirection</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/StructureType/index.html" class="dd-nav-resource-link">StructureType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/SyndicateTo/index.html" class="dd-nav-resource-link">SyndicateTo</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/TaxStatusCurrent/index.html" class="dd-nav-resource-link">TaxStatusCurrent</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/TeamMemberType/index.html" class="dd-nav-resource-link">TeamMemberType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/TeamStatus/index.html" class="dd-nav-resource-link">TeamStatus</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/TenantPays/index.html" class="dd-nav-resource-link">TenantPays</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/TrackingType/index.html" class="dd-nav-resource-link">TrackingType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/TransactionType/index.html" class="dd-nav-resource-link">TransactionType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/UnitTypeType/index.html" class="dd-nav-resource-link">UnitTypeType</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/UnitsFurnished/index.html" class="dd-nav-resource-link">UnitsFurnished</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Utilities/index.html" class="dd-nav-resource-link">Utilities</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/Vegetation/index.html" class="dd-nav-resource-link">Vegetation</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/View/index.html" class="dd-nav-resource-link">View</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/WaterSource/index.html" class="dd-nav-resource-link">WaterSource</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/WaterfrontFeatures/index.html" class="dd-nav-resource-link">WaterfrontFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/WindowFeatures/index.html" class="dd-nav-resource-link">WindowFeatures</a></li>
+<li class="dd-nav-resource"><a href="../../lookups/YearBuiltSource/index.html" class="dd-nav-resource-link">YearBuiltSource</a></li>
+</ul>
+</div>
+<div class="dd-sidebar-section" data-section="browse-by">
+<div class="dd-sidebar-section-title">Browse By <span class="dd-section-arrow">&#9660;</span></div>
+<ul class="dd-nav-resources">
+<li class="dd-nav-resource"><a href="../../xref/payload/index.html" class="dd-nav-resource-link">Payload</a></li>
+<li class="dd-nav-resource"><a href="../../xref/property-type/index.html" class="dd-nav-resource-link">Property Type</a></li>
+<li class="dd-nav-resource"><a href="../../xref/status/index.html" class="dd-nav-resource-link">Element Status</a></li>
+<li class="dd-nav-resource"><a href="../../xref/version-added/index.html" class="dd-nav-resource-link">Version Added</a></li>
+</ul>
+</div>
+
+    </aside>
+
+    <div class="dd-sidebar-overlay" id="ddSidebarOverlay"></div>
+    <button class="dd-sidebar-toggle" id="ddSidebarToggle" type="button" aria-label="Toggle sidebar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+
+    <div class="dd-content" data-pagefind-body data-pagefind-filter="dd-version:2.0" data-pagefind-meta="dd-version:DD 2.0">
+      <div class="dd-detail-sticky"><nav class="dd-breadcrumb" data-pagefind-ignore><a href="https://dd.reso.org/">Data Dictionary</a> <span class="dd-breadcrumb-sep">/</span> <a href="../../index.html">DD 2.0</a> <span class="dd-breadcrumb-sep">/</span> <a href="../index.html">Prospecting</a> <span class="dd-breadcrumb-sep">/</span> <span>Language</span></nav><div class="dd-page-header"><h1 data-pagefind-meta="title" data-pagefind-weight="10">Language Field <button class="dd-copy-btn" data-copy="Language" title="Copy name"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></h1><span class="dd-search-norm" data-pagefind-weight="100">language</span><p class="dd-page-subtitle" data-pagefind-meta="description">Prospecting Resource</p><span class="dd-search-norm" data-pagefind-meta="definition">The language that will be used in the given automated email.</span><span class="dd-search-norm" data-pagefind-meta="date">5/2/2017</span></div></div><div class="dd-definition-callout"><span class="dd-callout-label">Definition</span>The language that will be used in the given automated email.</div><div class="dd-metadata-card"><h2>Details</h2><div class="dd-meta-grid"><table class="dd-metadata-table"><tr><th>Standard Name</th><td>Language <button class="dd-copy-btn" data-copy="Language" title="Copy"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td></tr><tr><th>Display Name</th><td>Language <button class="dd-copy-btn" data-copy="Language" title="Copy"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td></tr><tr><th>Group</th><td>—</td></tr><tr><th>Simple Data Type</th><td>String List, Single</td></tr><tr><th>Max Length<small>Suggested</small></th><td>25</td></tr><tr><th>Max Precision<small>Suggested</small></th><td>—</td></tr><tr><th>Synonyms</th><td>—</td></tr><tr><th>Status</th><td><a href="../../xref/status/Active/index.html" class="dd-field-link">Active</a></td></tr><tr><th>BEDES</th><td>—</td></tr></table><table class="dd-metadata-table"><tr><th>Lookup Status</th><td>Open with Enumerations</td></tr><tr><th>Lookup</th><td><a href="../../lookups/Languages/index.html" class="dd-field-link">Languages</a></td></tr><tr><th>Property Types</th><td>—</td></tr><tr><th>Payloads</th><td>—</td></tr><tr><th>Spanish Name</th><td>Idioma</td></tr><tr><th>French-Canadian Name</th><td>—</td></tr><tr><th>Status Change Date</th><td>8/9/2017</td></tr><tr><th>Revised Date</th><td>5/2/2017</td></tr><tr><th>Added in Version</th><td><a href="../../xref/version-added/1.6.0/index.html" class="dd-field-link">1.6.0</a></td></tr><tr><th>Source Resource</th><td>—</td></tr></table></div></div><div class="dd-metadata-card" data-pagefind-ignore><h2>Usage</h2><div class="dd-usage dd-usage-na">
+      <span class="dd-usage-label">Adoption</span><span class="dd-usage-value">0%</span>
+      <p class="dd-usage-note">Usage data not yet available</p>
+    </div></div><div class="dd-collapsible"><button class="dd-collapsible-toggle">Lookups (190) <span class="dd-toggle-icon">+</span></button><div class="dd-collapsible-content" data-pagefind-ignore><table class="dd-lookups-table"><thead><tr><th>Standard Value</th><th>Definition</th><th class="dd-col-usage">Usage</th></tr></thead><tbody><tr><td><a href="../../lookups/Languages/Abkhazian/index.html">Abkhazian</a></td><td class="dd-field-def">The language spoken by the member/individual is Abkhazian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Afar/index.html">Afar</a></td><td class="dd-field-def">The language spoken by the member/individual is Afar.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Afrikaans/index.html">Afrikaans</a></td><td class="dd-field-def">The language spoken by the member/individual is Afrikaans.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Albanian/index.html">Albanian</a></td><td class="dd-field-def">The language spoken by the member/individual is Albanian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/American&#32;Sign&#32;Language/index.html">American Sign Language</a></td><td class="dd-field-def">The language spoken by the member/individual is American Sign Language.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Amharic/index.html">Amharic</a></td><td class="dd-field-def">The language spoken by the member/individual is Amharic.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Arabic/index.html">Arabic</a></td><td class="dd-field-def">The language spoken by the member/individual is Arabic.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Aramaic/index.html">Aramaic</a></td><td class="dd-field-def">The language spoken by the member/individual is Aramaic.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Armenian/index.html">Armenian</a></td><td class="dd-field-def">The language spoken by the member/individual is Armenian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Assamese/index.html">Assamese</a></td><td class="dd-field-def">The language spoken by the member/individual is Assamese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Assyrian&#32;Neo-Aramaic/index.html">Assyrian Neo-Aramaic</a></td><td class="dd-field-def">The language spoken by the member/individual is Assyrian Neo-Aramaic.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Avestan/index.html">Avestan</a></td><td class="dd-field-def">The language spoken by the member/individual is Avestan.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Aymara/index.html">Aymara</a></td><td class="dd-field-def">The language spoken by the member/individual is Aymara.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Azerbaijani/index.html">Azerbaijani</a></td><td class="dd-field-def">The language spoken by the member/individual is Azerbaijani.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Bambara/index.html">Bambara</a></td><td class="dd-field-def">The language spoken by the member/individual is Bambara.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Bashkir/index.html">Bashkir</a></td><td class="dd-field-def">The language spoken by the member/individual is Bashkir.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Basque/index.html">Basque</a></td><td class="dd-field-def">The language spoken by the member/individual is Basque.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Bengali/index.html">Bengali</a></td><td class="dd-field-def">The language spoken by the member/individual is Bengali.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Bihari/index.html">Bihari</a></td><td class="dd-field-def">The language spoken by the member/individual is Bihari.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Bikol/index.html">Bikol</a></td><td class="dd-field-def">The language spoken by the member/individual is Bikol.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Bislama/index.html">Bislama</a></td><td class="dd-field-def">The language spoken by the member/individual is Bislama.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Bosnian/index.html">Bosnian</a></td><td class="dd-field-def">The language spoken by the member/individual is Bosnian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Brazilian&#32;Portuguese/index.html">Brazilian Portuguese</a></td><td class="dd-field-def">The language spoken by the member/individual is Brazilian Portuguese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Bulgarian/index.html">Bulgarian</a></td><td class="dd-field-def">The language spoken by the member/individual is Bulgarian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Burmese/index.html">Burmese</a></td><td class="dd-field-def">The language spoken by the member/individual is Burmese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Byelorussian/index.html">Byelorussian</a></td><td class="dd-field-def">The language spoken by the member/individual is Byelorussian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Cambodian/index.html">Cambodian</a></td><td class="dd-field-def">The language spoken by the member/individual is Cambodian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Cantonese/index.html">Cantonese</a></td><td class="dd-field-def">The language spoken by the member/individual is Cantonese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Cape&#32;Verdean&#32;Creole/index.html">Cape Verdean Creole</a></td><td class="dd-field-def">The language spoken by the member/individual is Cape Verdean Creole.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Catalan/index.html">Catalan</a></td><td class="dd-field-def">The language spoken by the member/individual is Catalan.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Cebuano/index.html">Cebuano</a></td><td class="dd-field-def">The language spoken by the member/individual is Cebuano.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Chamorro/index.html">Chamorro</a></td><td class="dd-field-def">The language spoken by the member/individual is Chamorro.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Chechen/index.html">Chechen</a></td><td class="dd-field-def">The language spoken by the member/individual is Chechen.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Chinese/index.html">Chinese</a></td><td class="dd-field-def">The language spoken by the member/individual is Chinese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Chuukese/index.html">Chuukese</a></td><td class="dd-field-def">The language spoken by the member/individual is Chuukese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Chuvash/index.html">Chuvash</a></td><td class="dd-field-def">The language spoken by the member/individual is Chuvash.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Cornish/index.html">Cornish</a></td><td class="dd-field-def">The language spoken by the member/individual is Cornish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Corsican/index.html">Corsican</a></td><td class="dd-field-def">The language spoken by the member/individual is Corsican.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Croatian/index.html">Croatian</a></td><td class="dd-field-def">The language spoken by the member/individual is Croatian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Czech/index.html">Czech</a></td><td class="dd-field-def">The language spoken by the member/individual is Czech.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Danish/index.html">Danish</a></td><td class="dd-field-def">The language spoken by the member/individual is Danish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Dari&#32;(Afghan&#32;Persian)/index.html">Dari (Afghan Persian)</a></td><td class="dd-field-def">The language spoken by the member/individual is Dari (Afghan Persian).</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Dioula/index.html">Dioula</a></td><td class="dd-field-def">The language spoken by the member/individual is Dioula.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Dutch/index.html">Dutch</a></td><td class="dd-field-def">The language spoken by the member/individual is Dutch.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Dzongkha/index.html">Dzongkha</a></td><td class="dd-field-def">The language spoken by the member/individual is Dzongkha.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/English/index.html">English</a></td><td class="dd-field-def">The language spoken by the member/individual is English.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Esperanto/index.html">Esperanto</a></td><td class="dd-field-def">The language spoken by the member/individual is Esperanto.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Estonian/index.html">Estonian</a></td><td class="dd-field-def">The language spoken by the member/individual is Estonian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Faroese/index.html">Faroese</a></td><td class="dd-field-def">The language spoken by the member/individual is Faroese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Farsi/index.html">Farsi</a></td><td class="dd-field-def">The language spoken by the member/individual is Farsi.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Fiji/index.html">Fiji</a></td><td class="dd-field-def">The language spoken by the member/individual is Fiji.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Finnish/index.html">Finnish</a></td><td class="dd-field-def">The language spoken by the member/individual is Finnish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Flemish/index.html">Flemish</a></td><td class="dd-field-def">The language spoken by the member/individual is Flemish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/French/index.html">French</a></td><td class="dd-field-def">The language spoken by the member/individual is French.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Frisian/index.html">Frisian</a></td><td class="dd-field-def">The language spoken by the member/individual is Frisian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Galician/index.html">Galician</a></td><td class="dd-field-def">The language spoken by the member/individual is Galician.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Georgian/index.html">Georgian</a></td><td class="dd-field-def">The language spoken by the member/individual is Georgian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/German/index.html">German</a></td><td class="dd-field-def">The language spoken by the member/individual is German.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Greek/index.html">Greek</a></td><td class="dd-field-def">The language spoken by the member/individual is Greek.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Greenlandic/index.html">Greenlandic</a></td><td class="dd-field-def">The language spoken by the member/individual is Greenlandic.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Guarani/index.html">Guarani</a></td><td class="dd-field-def">The language spoken by the member/individual is Guarani.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Gujarati/index.html">Gujarati</a></td><td class="dd-field-def">The language spoken by the member/individual is Gujarati.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Haitian&#32;Creole/index.html">Haitian Creole</a></td><td class="dd-field-def">The language spoken by the member/individual is Haitian Creole.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Hausa/index.html">Hausa</a></td><td class="dd-field-def">The language spoken by the member/individual is Hausa.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Hebrew/index.html">Hebrew</a></td><td class="dd-field-def">The language spoken by the member/individual is Hebrew.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Herero/index.html">Herero</a></td><td class="dd-field-def">The language spoken by the member/individual is Herero.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Hiligaynon/index.html">Hiligaynon</a></td><td class="dd-field-def">The language spoken by the member/individual is Hiligaynon.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Hindi/index.html">Hindi</a></td><td class="dd-field-def">The language spoken by the member/individual is Hindi.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Hiri&#32;Motu/index.html">Hiri Motu</a></td><td class="dd-field-def">The language spoken by the member/individual is Hiri Motu.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Hmong/index.html">Hmong</a></td><td class="dd-field-def">The language spoken by the member/individual is Hmong.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Hungarian/index.html">Hungarian</a></td><td class="dd-field-def">The language spoken by the member/individual is Hungarian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Iban/index.html">Iban</a></td><td class="dd-field-def">The language spoken by the member/individual is Iban.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Icelandic/index.html">Icelandic</a></td><td class="dd-field-def">The language spoken by the member/individual is Icelandic.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Igbo/index.html">Igbo</a></td><td class="dd-field-def">The language spoken by the member/individual is Igbo.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Ilocano/index.html">Ilocano</a></td><td class="dd-field-def">The language spoken by the member/individual is Ilocano.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Indonesian/index.html">Indonesian</a></td><td class="dd-field-def">The language spoken by the member/individual is Indonesian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Interlingua/index.html">Interlingua</a></td><td class="dd-field-def">The language spoken by the member/individual is Interlingua.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Inuktitut/index.html">Inuktitut</a></td><td class="dd-field-def">The language spoken by the member/individual is Inuktitut.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Inupiak/index.html">Inupiak</a></td><td class="dd-field-def">The language spoken by the member/individual is Inupiak.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Irish&#32;(Gaelic)/index.html">Irish (Gaelic)</a></td><td class="dd-field-def">The language spoken by the member/individual is Irish (Gaelic).</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Italian/index.html">Italian</a></td><td class="dd-field-def">The language spoken by the member/individual is Italian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Japanese/index.html">Japanese</a></td><td class="dd-field-def">The language spoken by the member/individual is Japanese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Javanese/index.html">Javanese</a></td><td class="dd-field-def">The language spoken by the member/individual is Javanese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kannada/index.html">Kannada</a></td><td class="dd-field-def">The language spoken by the member/individual is Kannada.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kashmiri/index.html">Kashmiri</a></td><td class="dd-field-def">The language spoken by the member/individual is Kashmiri.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kazakh/index.html">Kazakh</a></td><td class="dd-field-def">The language spoken by the member/individual is Kazakh.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/K'iche'/index.html">K'iche'</a></td><td class="dd-field-def">The language spoken by the member/individual is K'iche'.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kichwa/index.html">Kichwa</a></td><td class="dd-field-def">The language spoken by the member/individual is Kichwa.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kikuyu/index.html">Kikuyu</a></td><td class="dd-field-def">The language spoken by the member/individual is Kikuyu.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kinyarwanda/index.html">Kinyarwanda</a></td><td class="dd-field-def">The language spoken by the member/individual is Kinyarwanda.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kirghiz/index.html">Kirghiz</a></td><td class="dd-field-def">The language spoken by the member/individual is Kirghiz.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kirundi/index.html">Kirundi</a></td><td class="dd-field-def">The language spoken by the member/individual is Kirundi.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Komi/index.html">Komi</a></td><td class="dd-field-def">The language spoken by the member/individual is Komi.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Korean/index.html">Korean</a></td><td class="dd-field-def">The language spoken by the member/individual is Korean.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kpelle/index.html">Kpelle</a></td><td class="dd-field-def">The language spoken by the member/individual is Kpelle.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kru/index.html">Kru</a></td><td class="dd-field-def">The language spoken by the member/individual is Kru.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Kurdish/index.html">Kurdish</a></td><td class="dd-field-def">The language spoken by the member/individual is Kurdish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Lao/index.html">Lao</a></td><td class="dd-field-def">The language spoken by the member/individual is Lao.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Latin/index.html">Latin</a></td><td class="dd-field-def">The language spoken by the member/individual is Latin.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Latvian/index.html">Latvian</a></td><td class="dd-field-def">The language spoken by the member/individual is Latvian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Lingala/index.html">Lingala</a></td><td class="dd-field-def">The language spoken by the member/individual is Lingala.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Lithuanian/index.html">Lithuanian</a></td><td class="dd-field-def">The language spoken by the member/individual is Lithuanian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Luxemburgish/index.html">Luxemburgish</a></td><td class="dd-field-def">The language spoken by the member/individual is Luxemburgish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Macedonian/index.html">Macedonian</a></td><td class="dd-field-def">The language spoken by the member/individual is Macedonian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Malagasy/index.html">Malagasy</a></td><td class="dd-field-def">The language spoken by the member/individual is Malagasy.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Malay/index.html">Malay</a></td><td class="dd-field-def">The language spoken by the member/individual is Malay.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Malayalam/index.html">Malayalam</a></td><td class="dd-field-def">The language spoken by the member/individual is Malayalam.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Maltese/index.html">Maltese</a></td><td class="dd-field-def">The language spoken by the member/individual is Maltese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Mandarin/index.html">Mandarin</a></td><td class="dd-field-def">The language spoken by the member/individual is Mandarin.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Maninka/index.html">Maninka</a></td><td class="dd-field-def">The language spoken by the member/individual is Maninka.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Manx&#32;Gaelic/index.html">Manx Gaelic</a></td><td class="dd-field-def">The language spoken by the member/individual is Manx Gaelic.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Maori/index.html">Maori</a></td><td class="dd-field-def">The language spoken by the member/individual is Maori.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Marathi/index.html">Marathi</a></td><td class="dd-field-def">The language spoken by the member/individual is Marathi.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Marshallese/index.html">Marshallese</a></td><td class="dd-field-def">The language spoken by the member/individual is Marshallese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Moldovan/index.html">Moldovan</a></td><td class="dd-field-def">The language spoken by the member/individual is Moldovan.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Mongolian/index.html">Mongolian</a></td><td class="dd-field-def">The language spoken by the member/individual is Mongolian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Nauru/index.html">Nauru</a></td><td class="dd-field-def">The language spoken by the member/individual is Nauru.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Navajo/index.html">Navajo</a></td><td class="dd-field-def">The language spoken by the member/individual is Navajo.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Ndebele/index.html">Ndebele</a></td><td class="dd-field-def">The language spoken by the member/individual is Ndebele.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Ndonga/index.html">Ndonga</a></td><td class="dd-field-def">The language spoken by the member/individual is Ndonga.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Nepali/index.html">Nepali</a></td><td class="dd-field-def">The language spoken by the member/individual is Nepali.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Norwegian/index.html">Norwegian</a></td><td class="dd-field-def">The language spoken by the member/individual is Norwegian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Norwegian&#32;(Nynorsk)/index.html">Norwegian (Nynorsk)</a></td><td class="dd-field-def">The language spoken by the member/individual is Norwegian (Nynorsk).</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Nyanja/index.html">Nyanja</a></td><td class="dd-field-def">The language spoken by the member/individual is Nyanja.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Occitan/index.html">Occitan</a></td><td class="dd-field-def">The language spoken by the member/individual is Occitan.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Oriya/index.html">Oriya</a></td><td class="dd-field-def">The language spoken by the member/individual is Oriya.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Oromo/index.html">Oromo</a></td><td class="dd-field-def">The language spoken by the member/individual is Oromo.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Ossetian/index.html">Ossetian</a></td><td class="dd-field-def">The language spoken by the member/individual is Ossetian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Pali/index.html">Pali</a></td><td class="dd-field-def">The language spoken by the member/individual is Pali.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Pangasinan/index.html">Pangasinan</a></td><td class="dd-field-def">The language spoken by the member/individual is Pangasinan.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Papiamento/index.html">Papiamento</a></td><td class="dd-field-def">The language spoken by the member/individual is Papiamento.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Pashto/index.html">Pashto</a></td><td class="dd-field-def">The language spoken by the member/individual is Pashto.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Polish/index.html">Polish</a></td><td class="dd-field-def">The language spoken by the member/individual is Polish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Portuguese/index.html">Portuguese</a></td><td class="dd-field-def">The language spoken by the member/individual is Portuguese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Punjabi/index.html">Punjabi</a></td><td class="dd-field-def">The language spoken by the member/individual is Punjabi.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Quechua/index.html">Quechua</a></td><td class="dd-field-def">The language spoken by the member/individual is Quechua.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Romanian/index.html">Romanian</a></td><td class="dd-field-def">The language spoken by the member/individual is Romanian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Romany/index.html">Romany</a></td><td class="dd-field-def">The language spoken by the member/individual is Romany.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Russian/index.html">Russian</a></td><td class="dd-field-def">The language spoken by the member/individual is Russian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Sami/index.html">Sami</a></td><td class="dd-field-def">The language spoken by the member/individual is Sami.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Samoan/index.html">Samoan</a></td><td class="dd-field-def">The language spoken by the member/individual is Samoan.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Sangho/index.html">Sangho</a></td><td class="dd-field-def">The language spoken by the member/individual is Sangho.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Sanskrit/index.html">Sanskrit</a></td><td class="dd-field-def">The language spoken by the member/individual is Sanskrit.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Sardinian/index.html">Sardinian</a></td><td class="dd-field-def">The language spoken by the member/individual is Sardinian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Scots&#32;Gaelic/index.html">Scots Gaelic</a></td><td class="dd-field-def">The language spoken by the member/individual is Scots Gaelic.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Serbian/index.html">Serbian</a></td><td class="dd-field-def">The language spoken by the member/individual is Serbian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Serbo-Croatian/index.html">Serbo-Croatian</a></td><td class="dd-field-def">The language spoken by the member/individual is Serbo-Croatian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Sesotho/index.html">Sesotho</a></td><td class="dd-field-def">The language spoken by the member/individual is Sesotho.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Setswana/index.html">Setswana</a></td><td class="dd-field-def">The language spoken by the member/individual is Setswana.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Shan/index.html">Shan</a></td><td class="dd-field-def">The language spoken by the member/individual is Shan.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Shona/index.html">Shona</a></td><td class="dd-field-def">The language spoken by the member/individual is Shona.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Sindhi/index.html">Sindhi</a></td><td class="dd-field-def">The language spoken by the member/individual is Sindhi.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Sinhalese/index.html">Sinhalese</a></td><td class="dd-field-def">The language spoken by the member/individual is Sinhalese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Siswati/index.html">Siswati</a></td><td class="dd-field-def">The language spoken by the member/individual is Siswati.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Slovak/index.html">Slovak</a></td><td class="dd-field-def">The language spoken by the member/individual is Slovak.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Slovenian/index.html">Slovenian</a></td><td class="dd-field-def">The language spoken by the member/individual is Slovenian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Somali/index.html">Somali</a></td><td class="dd-field-def">The language spoken by the member/individual is Somali.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Southern&#32;Ndebele/index.html">Southern Ndebele</a></td><td class="dd-field-def">The language spoken by the member/individual is Southern Ndebele.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Spanish/index.html">Spanish</a></td><td class="dd-field-def">The language spoken by the member/individual is Spanish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Sundanese/index.html">Sundanese</a></td><td class="dd-field-def">The language spoken by the member/individual is Sundanese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Swahili/index.html">Swahili</a></td><td class="dd-field-def">The language spoken by the member/individual is Swahili.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Swedish/index.html">Swedish</a></td><td class="dd-field-def">The language spoken by the member/individual is Swedish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Syriac/index.html">Syriac</a></td><td class="dd-field-def">The language spoken by the member/individual is Syriac.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Tagalog/index.html">Tagalog</a></td><td class="dd-field-def">The language spoken by the member/individual is Tagalog.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Tahitian/index.html">Tahitian</a></td><td class="dd-field-def">The language spoken by the member/individual is Tahitian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Tajik/index.html">Tajik</a></td><td class="dd-field-def">The language spoken by the member/individual is Tajik.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Tamil/index.html">Tamil</a></td><td class="dd-field-def">The language spoken by the member/individual is Tamil.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Tatar/index.html">Tatar</a></td><td class="dd-field-def">The language spoken by the member/individual is Tatar.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Telugu/index.html">Telugu</a></td><td class="dd-field-def">The language spoken by the member/individual is Telugu.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Thai/index.html">Thai</a></td><td class="dd-field-def">The language spoken by the member/individual is Thai.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Tibetan/index.html">Tibetan</a></td><td class="dd-field-def">The language spoken by the member/individual is Tibetan.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Tigrinya/index.html">Tigrinya</a></td><td class="dd-field-def">The language spoken by the member/individual is Tigrinya.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Tongan/index.html">Tongan</a></td><td class="dd-field-def">The language spoken by the member/individual is Tongan.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Tsonga/index.html">Tsonga</a></td><td class="dd-field-def">The language spoken by the member/individual is Tsonga.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Turkish/index.html">Turkish</a></td><td class="dd-field-def">The language spoken by the member/individual is Turkish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Turkmen/index.html">Turkmen</a></td><td class="dd-field-def">The language spoken by the member/individual is Turkmen.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Twi/index.html">Twi</a></td><td class="dd-field-def">The language spoken by the member/individual is Twi.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Uigur/index.html">Uigur</a></td><td class="dd-field-def">The language spoken by the member/individual is Uigur.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Ukrainian/index.html">Ukrainian</a></td><td class="dd-field-def">The language spoken by the member/individual is Ukrainian.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Urdu/index.html">Urdu</a></td><td class="dd-field-def">The language spoken by the member/individual is Urdu.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Uzbek/index.html">Uzbek</a></td><td class="dd-field-def">The language spoken by the member/individual is Uzbek.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Vietnamese/index.html">Vietnamese</a></td><td class="dd-field-def">The language spoken by the member/individual is Vietnamese.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Volapuk/index.html">Volapuk</a></td><td class="dd-field-def">The language spoken by the member/individual is Volapuk.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Welsh/index.html">Welsh</a></td><td class="dd-field-def">The language spoken by the member/individual is Welsh.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Wolof/index.html">Wolof</a></td><td class="dd-field-def">The language spoken by the member/individual is Wolof.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Xhosa/index.html">Xhosa</a></td><td class="dd-field-def">The language spoken by the member/individual is Xhosa.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Yiddish/index.html">Yiddish</a></td><td class="dd-field-def">The language spoken by the member/individual is Yiddish.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Yoruba/index.html">Yoruba</a></td><td class="dd-field-def">The language spoken by the member/individual is Yoruba.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Zhuang/index.html">Zhuang</a></td><td class="dd-field-def">The language spoken by the member/individual is Zhuang.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr><tr><td><a href="../../lookups/Languages/Zulu/index.html">Zulu</a></td><td class="dd-field-def">The language spoken by the member/individual is Zulu.</td><td class="dd-col-usage"><span class="dd-usage-badge dd-usage-badge-na">&mdash;</span></td></tr></tbody></table></div></div>
+      <div class="dd-page-generated"><a href="../../about/terms/index.html" target="_blank">Terms and Definitions</a><span>Generated May 4, 2026</span></div>
+    </div>
+  </div>
+
+  <!-- Search modal -->
+  <div class="search-modal-overlay" id="searchOverlay">
+    <div class="search-modal" id="searchModal">
+      <div id="search"></div>
+      <div class="dd-search-welcome visible" id="ddSearchWelcome">
+        <div class="dd-search-welcome-icon">🔍</div>
+        <p id="ddSearchWelcomeText">Search across all Data Dictionary resources, fields and lookup values.</p>
+        <p class="dd-search-hint">Press <kbd>Esc</kbd> to close</p>
+      </div>
+      <div class="dd-search-empty" id="ddSearchEmpty">No results found. Try a different search term or filter.</div>
+    </div>
+  </div>
+  <template id="searchFiltersTemplate">
+    <div class="dd-search-meta">
+      <div class="dd-search-filters" id="ddSearchFilters">
+        <button class="dd-search-filter-pill" data-version="">All</button>
+        <button class="dd-search-filter-pill" data-version="1.7">DD 1.7</button>
+        <button class="dd-search-filter-pill active" data-version="2.0">DD 2.0</button>
+        <button class="dd-search-filter-pill" data-version="2.1">DD 2.1</button>
+      </div>
+      <div class="dd-search-count" id="ddSearchCount"></div>
+    </div>
+  </template>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 <a href="https://reso.org">Real Estate Standards Organization (RESO)</a>. All rights reserved.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="https://github.com/RESOStandards/reso-data-dictionary-documentation">Source</a> &middot;
+      <a href="https://www.reso.org/eula/">Terms of Use</a>
+    </p>
+  </footer>
+
+  <script src="../../../assets/dd.js"></script>
+</body>
+</html>

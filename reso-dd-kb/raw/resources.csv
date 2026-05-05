@@ -1,0 +1,42 @@
+ResourceName,Description,FieldCount,RevisedDate,SourceURL
+Association,Fields pertaining to the local real estate trade association.,45,8/5/2024,https://dd.reso.org/DD2.0/Association/
+Caravan,"Fields and lookups for the date, time, location and other particulars about caravan events.",33,2/3/2021,https://dd.reso.org/DD2.0/Caravan/
+CaravanStop,"Stops along a caravan tour, connecting Caravan records to Open House records.",25,2/3/2021,https://dd.reso.org/DD2.0/CaravanStop/
+ContactListingNotes,Notes about a given listing from interactions between the contact and member within a consumer portal.,10,5/24/2017,https://dd.reso.org/DD2.0/ContactListingNotes/
+ContactListings,Maintains the relationship between contacts and members around listings in consumer portals.,22,9/26/2017,https://dd.reso.org/DD2.0/ContactListings/
+Contacts,Information on client and other contacts of the member.,91,9/24/2015,https://dd.reso.org/DD2.0/Contacts/
+EntityEvent,"An event log offering an alternative to timestamps, providing an OData-compliant logical timestamp methodology.",4,6/20/2019,https://dd.reso.org/DD2.0/EntityEvent/
+Field,Metadata about available fields on a given server in a predictable and user-friendly format.,4,12/8/2021,https://dd.reso.org/DD2.0/Field/
+HistoryTransactional,"A transactional history of the listing, showing before and after values of field changes.",23,9/24/2015,https://dd.reso.org/DD2.0/HistoryTransactional/
+InternetTracking,A standard data set for recording and transfer of event-related information of real estate products.,59,9/1/2017,https://dd.reso.org/DD2.0/InternetTracking/
+InternetTrackingSummary,"Sum of specific tracking events over a period of time, such as listings viewed or shared.",27,4/21/2021,https://dd.reso.org/DD2.0/InternetTrackingSummary/
+LockOrBox,"Lockbox, smart lock and showing agent information.",44,7/25/2019,https://dd.reso.org/DD2.0/LockOrBox/
+Lookup,Metadata about lookups (enumerations) available on a given server.,6,2/2/2022,https://dd.reso.org/DD2.0/Lookup/
+Media,"Photos, virtual tours, documents, supplements and other media related to listings.",41,8/27/2015,https://dd.reso.org/DD2.0/Media/
+Member,"Roster of agents, brokers, appraisers, assistants, affiliates and other MLS/association members.",87,7/25/2019,https://dd.reso.org/DD2.0/Member/
+MemberAssociation,Joining information relating Member and Association records to each other.,31,9/7/2023,https://dd.reso.org/DD2.0/MemberAssociation/
+MemberStateLicense,Supports members that hold multiple state licenses.,10,6/17/2021,https://dd.reso.org/DD2.0/MemberStateLicense/
+OUID,"Organization Unique Identifier (UOI), a common ID system for organizations that exchange real estate data.",46,9/1/2017,https://dd.reso.org/DD2.0/OUID/
+Office,Roster of offices who are members of the MLS and/or association.,73,8/5/2024,https://dd.reso.org/DD2.0/Office/
+OfficeAssociation,Joining information relating Office and Association records to each other.,23,7/25/2019,https://dd.reso.org/DD2.0/OfficeAssociation/
+OfficeCorporateLicense,Supports offices that hold multiple state licenses.,10,6/17/2021,https://dd.reso.org/DD2.0/OfficeCorporateLicense/
+OpenHouse,Fields commonly used to record an open house event.,33,8/8/2013,https://dd.reso.org/DD2.0/OpenHouse/
+OtherPhone,"Additional phone numbers for contacts or members, with type information.",10,4/4/2023,https://dd.reso.org/DD2.0/OtherPhone/
+Property,Fields commonly used in a Multiple Listing Service (MLS) listing.,652,9/10/2019,https://dd.reso.org/DD2.0/Property/
+PropertyGreenVerification,Multiple performance ratings applied to a property listing.,15,5/24/2017,https://dd.reso.org/DD2.0/PropertyGreenVerification/
+PropertyPowerProduction,"Different means of producing power on a property, such as solar and wind systems.",12,6/30/2022,https://dd.reso.org/DD2.0/PropertyPowerProduction/
+PropertyPowerStorage,Different means of storing power on a property.,6,1/19/2023,https://dd.reso.org/DD2.0/PropertyPowerStorage/
+PropertyRooms,Detailed information about separate rooms in a property.,19,8/18/2023,https://dd.reso.org/DD2.0/PropertyRooms/
+PropertyUnitTypes,Unit type details for residential income and multifamily properties.,17,5/24/2017,https://dd.reso.org/DD2.0/PropertyUnitTypes/
+Prospecting,Automatic email connecting Contacts and SavedSearch resources to send results matching saved search criteria.,31,5/2/2017,https://dd.reso.org/DD2.0/Prospecting/
+Queue,Events that have occurred with records in other resources.,16,5/12/2018,https://dd.reso.org/DD2.0/Queue/
+Rules,Business and system rules transmitted from host to client application.,28,5/12/2018,https://dd.reso.org/DD2.0/Rules/
+SavedSearch,Saved search criteria and related data.,27,8/28/2019,https://dd.reso.org/DD2.0/SavedSearch/
+Showing,,44,6/16/2022,https://dd.reso.org/DD2.0/Showing/
+ShowingAppointment,"Fields associated with showing appointments, including method, date, time and more.",12,6/16/2022,https://dd.reso.org/DD2.0/ShowingAppointment/
+ShowingAvailability,"Fields associated with property availability for showings, including method, dates and duration.",12,6/16/2022,https://dd.reso.org/DD2.0/ShowingAvailability/
+ShowingRequest,"Fields associated with showing requests, including method, date, time and more.",17,6/16/2022,https://dd.reso.org/DD2.0/ShowingRequest/
+SocialMedia,"Social media accounts for members, offices, contacts and other entities.",10,3/27/2026,https://dd.reso.org/DD2.0/SocialMedia/
+TeamMembers,Fields tying Member records to related Teams records.,21,9/24/2015,https://dd.reso.org/DD2.0/TeamMembers/
+Teams,Name and other information about teams of members who work together.,45,9/24/2015,https://dd.reso.org/DD2.0/Teams/
+TransactionManagement,Tracking different types of transactions such as listing for sale or listing for lease.,4,2/24/2022,https://dd.reso.org/DD2.0/TransactionManagement/
