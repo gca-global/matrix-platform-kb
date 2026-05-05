@@ -3,11 +3,17 @@
 Knowledge base for the **RESO Data Dictionary 2.0**, built from a verifiable
 local mirror of [`dd.reso.org/DD2.0/`](https://dd.reso.org/DD2.0/).
 
-This directory is being rebuilt from scratch in three phases. **All
-three phases (Phase 1: mirror + structured extraction, Phase 2: FK
-correlation, Phase 2.5: satellite / 2NF audit, Phase 3: DBML
-generation) are complete.** The canonical model lives in
-`wiki/dbml/canonical.dbml` and `wiki/dbml/lookups.dbml`.
+This directory is the canonical knowledge base for the RESO DD 2.0
+data model used by this project. **All four phases (Phase 1: mirror +
+structured extraction, Phase 2: FK correlation, Phase 2.5: satellite /
+2NF audit, Phase 3: DBML generation, Phase 4: agent-consumption docs)
+are complete.**
+
+If you are an LLM coding agent reading this repo to learn the data
+model, start at [`USAGE.md`](USAGE.md) and then drill into
+[`wiki/agent-docs/_index.md`](wiki/agent-docs/_index.md). The
+canonical schema lives in [`wiki/dbml/canonical.dbml`](wiki/dbml/canonical.dbml)
+and [`wiki/dbml/lookups.dbml`](wiki/dbml/lookups.dbml).
 
 ## Why a rebuild
 
@@ -51,11 +57,19 @@ scripts/
   04_merge_satellites.py             # Phase 2.5: merge -> satellites.csv
 
   05_emit_dbml.py                    # Phase 3: CSVs -> wiki/dbml/*.dbml
+  06_emit_agent_docs.py              # Phase 4: CSVs + DBML -> wiki/agent-docs/**
+
+USAGE.md                 # human-curated guide for LLM agents consuming the model
 
 wiki/
   dbml/
     canonical.dbml       # 41 tables + Refs (high+medium FKs only)
     lookups.dbml         # 99 Enum blocks for SV lookups (+ MV/open notes)
+  agent-docs/
+    _index.md            # generated index, links to every page
+    lookups.md           # generated; 222 anchored lookup sections
+    relationships.md     # generated; committed Refs + detected signals + low-conf
+    resources/<snake>.md # generated; one per resource (41 files)
 
 raw/                     # structured extraction
   # Phase 1 outputs
@@ -107,6 +121,12 @@ python3 scripts/04_merge_satellites.py
 python3 scripts/05_emit_dbml.py
 # Writes wiki/dbml/canonical.dbml and wiki/dbml/lookups.dbml.
 # Six hard-fail verification gates run inside the script.
+
+# Phase 4: agent-consumption docs (cheap; ~10s).
+python3 scripts/06_emit_agent_docs.py
+# Rewrites wiki/agent-docs/**: _index.md, lookups.md, relationships.md,
+# and one per-resource page in resources/<snake>.md.
+# Five hard-fail verification gates run inside the script.
 ```
 
 ## Phase plan
@@ -117,6 +137,7 @@ python3 scripts/05_emit_dbml.py
 | 2 | FK correlation analysis from Definition prose + type + name -> `raw/relationships.csv` | done |
 | 2.5 | Satellite / duplicate detection (2NF audit) -> `raw/satellites.csv` | done |
 | 3 | DBML build consuming `raw/relationships.csv` + `raw/satellites.csv` -> `wiki/dbml/*.dbml` | done |
+| 4 | Agent-consumption docs (markdown for LLM coding agents) -> `wiki/agent-docs/**` + `USAGE.md` | done |
 
 See [`methodology.md`](methodology.md) for the per-phase methodology
 and [`AGENTS.md`](AGENTS.md) for the rules an LLM agent must follow

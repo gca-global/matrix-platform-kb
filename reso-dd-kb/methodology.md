@@ -801,3 +801,132 @@ precision over recall and remains 100 % derived from prose evidence.
   the script, not in a CSV - because resource PKs do not change in
   RESO DD 2.0).
 - No JSON Schema, no Avro, no SQL DDL. DBML only.
+
+# Methodology - Phase 4 (agent-consumption docs)
+
+## What Phase 4 does
+
+Phase 4 adds an agent-consumption layer on top of the Phase-1/2/2.5/3
+artifacts so that any coding agent (Lovable, Cursor, Copilot, ...)
+reading this directory cold can answer "which table / field / enum
+value should I use?" without having to parse CSVs or DBML themselves.
+
+Outputs:
+
+- `USAGE.md` (single human-curated narrative entry doc, stable across
+  refreshes).
+- `wiki/agent-docs/_index.md` (generated index of the 41 resources +
+  pointers to `lookups.md` / `relationships.md`).
+- `wiki/agent-docs/resources/<snake>.md` (41 generated per-resource
+  pages with fields, FKs, satellite-audit notes).
+- `wiki/agent-docs/lookups.md` (single generated file, 222 sections).
+- `wiki/agent-docs/relationships.md` (single generated file:
+  committed Refs parsed from `canonical.dbml`, plus Phase-2 detected
+  signals, polymorphic FKs, inverse 1:N, low-confidence).
+
+## Why a separate generated layer rather than just the DBML
+
+DBML is great for tooling but verbose for an LLM. The agent docs are
+markdown, table-shaped, deterministic, and grep-friendly. The DBML and
+the CSVs remain the source of truth; the agent docs are a derived view
+optimised for "an LLM is reading you cold".
+
+## Dependency chain
+
+```
+mirror/                          (Phase 1)
+  -> raw/*.csv                   (Phase 1/2/2.5)
+  -> wiki/dbml/*.dbml            (Phase 3)
+  -> wiki/agent-docs/**          (Phase 4)
+```
+
+Phase 4 does NOT modify any earlier-phase output and does NOT make
+any schema decisions of its own (`PK_OVERRIDES` is duplicated from
+`scripts/05_emit_dbml.py` so the docs cite the same chosen PK).
+
+## Page templates
+
+### Per-resource (`resources/<snake>.md`)
+
+| Section                             | Source                                                |
+|-------------------------------------|-------------------------------------------------------|
+| H1 + 1-line summary                 | `raw/resources.csv` (`Description`)                   |
+| PK + override note                  | `PK_OVERRIDES` dict + `raw/fields.csv`                |
+| Fields table                        | `raw/fields.csv` + `raw/field_definitions.csv` + `raw/satellites.csv` |
+| Foreign keys OUT                    | `wiki/dbml/canonical.dbml` (parsed Refs)              |
+| Foreign keys IN                     | `wiki/dbml/canonical.dbml` (parsed Refs)              |
+| Inverse 1:N                         | `raw/relationships.csv` (`fk_kind=collection_typed`)  |
+| Polymorphic FKs                     | `raw/relationships.csv` (`notes=polymorphic`)         |
+| Phase 2.5 satellite audit           | `raw/satellites.csv`                                  |
+
+The fields table flags column shows: `pk`, `-> target.col` (committed
+FK), `[REVIEW]`, `[dropped: satellite of <fk>]`, `[Resource]` /
+`[Collection]`. Dropped columns ARE listed (with the marker) so the
+agent sees what RESO defines but the canonical model omits.
+
+### `lookups.md`
+
+One TOC table + one anchored section per lookup with kind
+(`closed-SV` / `closed-MV` / `open`), source name, value count,
+referenced columns, and the full value table
+(`StandardValue | LegacyODataValue | Definition`).
+
+### `relationships.md`
+
+Four sections:
+1. **Committed Refs (in DBML)** - parsed from `wiki/dbml/canonical.dbml`.
+   This is the source of truth for "what FKs exist in the canonical
+   model".
+2. **Phase-2 detected signals** - wider net from `raw/relationships.csv`;
+   includes `resource_typed` rows that Phase 3 anchored to a scalar
+   sibling (and therefore folded into a single committed Ref).
+3. **Polymorphic FKs** - `notes=polymorphic`.
+4. **Inverse 1:N** - `fk_kind=collection_typed`.
+5. **Low-confidence** - shown for transparency; NOT in DBML.
+
+## Naming and anchors
+
+All identifiers in agent-docs are snake_case (matches the DBML).
+Markdown headings use snake_case so GFM anchors are stable across
+refreshes (e.g. `## property_type` -> `#property_type`). The fields
+table on a resource page deep-links lookups via
+`[../lookups.md#<snake_lookup_name>]`.
+
+## Verification gates
+
+`scripts/06_emit_agent_docs.py` runs five hard-fail gates before exit:
+
+1. One resource page per row in `resources.csv` (count match).
+2. Every Enum referenced in `canonical.dbml` has a section in
+   `lookups.md`.
+3. Every internal markdown link from emitted pages resolves to a
+   declared file or a declared anchor in this output set.
+4. Every `(host, candidate_satellite)` row in `satellites.csv` with
+   recommendation in `{drop_from_host, review}` is listed on its
+   host's resource page (transparency gate; the dropped column is
+   not silently hidden).
+5. `_index.md` links every emitted page exactly once.
+
+## Sizes (as of the first emission)
+
+| File                                | Bytes / lines      |
+|-------------------------------------|--------------------|
+| `USAGE.md`                          | ~9 KB              |
+| `wiki/agent-docs/_index.md`         | ~7 KB              |
+| `wiki/agent-docs/lookups.md`        | ~470 KB / 6,682 lines |
+| `wiki/agent-docs/relationships.md`  | ~28 KB / 261 lines |
+| `wiki/agent-docs/resources/*.md`    | 41 files; 1.3 KB to 18 KB; `property.md` is the largest at 8.4 KB |
+
+`lookups.md` is the only large file. We chose a single file rather
+than per-lookup files because (a) consuming agents grep / CMD-F
+faster within one file, (b) GFM anchors keep deep-linking from
+resource pages stable, and (c) 470 KB is comparable to
+`canonical.dbml` (270 KB) and well within an LLM's read budget.
+
+## What Phase 4 does NOT do
+
+- No write under `mirror/`, `_meta/`, `raw/`, or `wiki/dbml/`.
+- No FK detection or schema decisions of its own.
+- No project-specific opinions. `reso-dd-kb/` documents the RESO DD
+  2.0 model only; "we always use ListAgentKey for the showing agent"
+  type rules belong in the consuming project's docs.

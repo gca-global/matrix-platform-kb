@@ -20,6 +20,7 @@ commit:
 | 2 | `raw/fields.csv`, `raw/field_definitions.csv` | `raw/relationships.csv` |
 | 2.5 | `raw/relationships.csv`, `raw/fields.csv`, `raw/field_definitions.csv` | `raw/satellites.csv` |
 | 3 | `raw/relationships.csv`, reviewed `raw/satellites.csv`, `raw/*.csv` | `wiki/dbml/*.dbml` |
+| 4 | `raw/*.csv`, `wiki/dbml/canonical.dbml` | `wiki/agent-docs/**` |
 
 A Phase-N script must not read inputs from Phase >N (no time travel).
 A Phase-N script must not modify outputs of Phase <N (no rewriting
@@ -43,6 +44,8 @@ upstream).
 | `raw/satellites.csv` | `scripts/04_merge_satellites.py` | No. Re-run 04. |
 | `wiki/dbml/canonical.dbml` | `scripts/05_emit_dbml.py` | No. Re-run 05. |
 | `wiki/dbml/lookups.dbml` | `scripts/05_emit_dbml.py` | No. Re-run 05. |
+| `wiki/agent-docs/**` | `scripts/06_emit_agent_docs.py` | No. Re-run 06. |
+| `USAGE.md` | humans + LLM agents (with review) | Yes (stable across refreshes). |
 | `scripts/**` | humans + LLM agents (with review) | Yes. |
 | `README.md`, `AGENTS.md`, `methodology.md` | humans + LLM agents (with review) | Yes. |
 
@@ -157,6 +160,32 @@ See `methodology.md` -> "Methodology - Phase 3" for the type-mapping
 table, FK / column-drop / review policies, and the regression diff
 against the previous iteration.
 
+## Phase 4 outputs (now present)
+
+The following files were added in Phase 4 (agent-consumption docs).
+They are derived from Phase 1 + Phase 2 + Phase 2.5 + Phase 3 outputs
+and rebuilt by re-running `06_emit_agent_docs.py`; do not hand-edit.
+
+- `wiki/agent-docs/_index.md` - top-level index with the 41 resources
+  table and pointers to `lookups.md` / `relationships.md`.
+- `wiki/agent-docs/resources/<snake>.md` - one per resource: header,
+  PK, fields table (with `pk`/`fk -> ...`/`[REVIEW]`/`[dropped]`/
+  `[Resource]`/`[Collection]` flags), FKs OUT, FKs IN, inverse 1:N,
+  polymorphic FKs, Phase-2.5 satellite audit table.
+- `wiki/agent-docs/lookups.md` - 222 lookups in one file, alphabetical
+  TOC + per-lookup section with kind (closed-SV / closed-MV / open),
+  host columns, and value table.
+- `wiki/agent-docs/relationships.md` - committed Refs (parsed from
+  `wiki/dbml/canonical.dbml` - source of truth), Phase-2 detected
+  signals (wider net), polymorphic FKs, inverse 1:N, low-confidence.
+
+`USAGE.md` (at the root of `reso-dd-kb/`) is the human-curated narrative
+entry point that orients a consuming agent before it dives into
+`wiki/agent-docs/**`. It is stable across refreshes.
+
+See `methodology.md` -> "Methodology - Phase 4" for the page templates,
+verification gates, and refresh workflow.
+
 ## What this directory does NOT contain
 
 - No alias map of any kind. The `RESOURCE_ALIASES` map from the
@@ -167,3 +196,6 @@ against the previous iteration.
 - No xlsx file. If a cross-check is needed later, re-download from
   RESO and put it under a clearly-labelled `_xchk/` folder, never
   `raw/`.
+- No project-specific opinions. `reso-dd-kb/` is RESO DD 2.0 only;
+  consumer-project rules ("we always use ListAgentKey for the
+  showing agent", etc.) live in the consuming project's docs.
