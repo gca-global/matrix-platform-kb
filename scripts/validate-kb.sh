@@ -274,7 +274,7 @@ echo ""
 # ---------------------------------------------------------------
 echo "--- Check 7: canonical-processes freshness ---"
 
-CP="$DOCS_DIR/data-models/canonical-processes"
+CP="$DOCS_DIR/business-processes/canonical-processes"
 CP_CITATIONS="$CP/raw/citations.csv"
 CP_COVERAGE="$CP/raw/coverage.csv"
 CP_INDEX="$CP/wiki/agent-docs/_index.md"

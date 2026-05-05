@@ -14,16 +14,16 @@ canonical state-machine semantics RESO DD implies.
 
 ## Boundary with reso-dd-kb
 
-[`reso-dd-kb/AGENTS.md`](../reso-dd-kb/AGENTS.md) is "RESO DD 2.0
+[`reso-dd-kb/AGENTS.md`](../../data-models/reso-dd-kb/AGENTS.md) is "RESO DD 2.0
 only". Process narratives are opinionated (which transitions are
 valid, who triggers them, what fields must change), so they live
 HERE. This subtree READS from
-`../reso-dd-kb/raw/{resources,fields,lookups,lookup_values}.csv` and
-NEVER writes anywhere under `../reso-dd-kb/`.
+`../../data-models/reso-dd-kb/raw/{resources,fields,lookups,lookup_values}.csv` and
+NEVER writes anywhere under `../../data-models/reso-dd-kb/`.
 
 ## Boundary with `docs/business-processes/`
 
-[`docs/business-processes/`](../../business-processes/index.md) is
+[`docs/business-processes/`](../index.md) is
 Sharp-SIR-flavoured (PROSPECT / AGREEMENT SIGNED / etc., no RESO
 citations). It describes the actual operational flow at Sharp SIR.
 
@@ -43,9 +43,9 @@ commit:
 
 | Phase | Reads | Writes |
 |---|---|---|
-| Author | `../reso-dd-kb/raw/...csv` (consult-only) | `processes/*.md` (HAND-EDITED) |
-| Validate | `processes/*.md`, `../reso-dd-kb/raw/{resources,fields,lookup_values}.csv` | `raw/citations.csv` |
-| Emit | `raw/citations.csv`, `processes/*.md`, `../reso-dd-kb/raw/...` | `wiki/agent-docs/{_index,state_machines}.md`, `raw/coverage.csv` |
+| Author | `../../data-models/reso-dd-kb/raw/...csv` (consult-only) | `processes/*.md` (HAND-EDITED) |
+| Validate | `processes/*.md`, `../../data-models/reso-dd-kb/raw/{resources,fields,lookup_values}.csv` | `raw/citations.csv` |
+| Emit | `raw/citations.csv`, `processes/*.md`, `../../data-models/reso-dd-kb/raw/...` | `wiki/agent-docs/{_index,state_machines}.md`, `raw/coverage.csv` |
 
 A Phase-N script must not read inputs from Phase >N (no time travel).
 A Phase-N script must not modify outputs of Phase <N (no rewriting
@@ -80,7 +80,7 @@ Allowed prefixes: `Resource:`, `Field:`, `LookupValue:`. Anything
 else is a hard error. The validator parses ONLY this block to build
 `raw/citations.csv` and to enforce the three reference gates.
 
-In-prose markdown links to `../reso-dd-kb/...` are encouraged for
+In-prose markdown links to `../../data-models/reso-dd-kb/...` are encouraged for
 readability but are NOT validated by `01_validate_citations.py` -
 authors must keep them in sync with the citation block by hand.
 
@@ -99,11 +99,11 @@ Use `flowchart` only for sub-process call-graphs.
 
 Hard-fail gates (script exits non-zero on any breach):
 
-1. Every cited `Resource: X` exists in `../reso-dd-kb/raw/resources.csv`.
-2. Every cited `Field: X.Y` exists in `../reso-dd-kb/raw/fields.csv`
+1. Every cited `Resource: X` exists in `../../data-models/reso-dd-kb/raw/resources.csv`.
+2. Every cited `Field: X.Y` exists in `../../data-models/reso-dd-kb/raw/fields.csv`
    for the matching `ResourceName=X`, `StandardName=Y`.
 3. Every cited `LookupValue: L.V` exists in
-   `../reso-dd-kb/raw/lookup_values.csv` for the matching
+   `../../data-models/reso-dd-kb/raw/lookup_values.csv` for the matching
    `LookupName=L`, `StandardValue=V`.
 4. Every process file has exactly one `<!-- reso-citations -->` block.
 5. Every process file has at least one `stateDiagram-v2` mermaid
@@ -134,4 +134,4 @@ So each refresh produces a small, reviewable diff in git.
   RESO baseline. Sharp-SIR, affiliate brokerages, etc. keep their own
   process docs that map TO this baseline.
 - No alias maps for source-system field names (Dash/Qobrix/SIR). That
-  belongs in [`../source-mappings/`](../source-mappings/AGENTS.md).
+  belongs in [`source-mappings/`](../../data-models/source-mappings/AGENTS.md).

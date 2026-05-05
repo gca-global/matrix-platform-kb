@@ -6,7 +6,7 @@ canonical MLS business processes.
 Reads:
   raw/citations.csv (produced by 01_validate_citations.py)
   processes/*.md
-  ../reso-dd-kb/raw/{resources,fields,lookup_values}.csv
+  ../../data-models/reso-dd-kb/raw/{resources,fields,lookup_values}.csv
 
 Writes:
   wiki/agent-docs/_index.md
@@ -33,7 +33,7 @@ from collections import defaultdict
 from pathlib import Path
 
 KB_ROOT = Path(__file__).resolve().parent.parent
-RESO_RAW = KB_ROOT.parent / "reso-dd-kb" / "raw"
+RESO_RAW = KB_ROOT.parent.parent / "data-models" / "reso-dd-kb" / "raw"
 PROCESSES_DIR = KB_ROOT / "processes"
 CITATIONS_CSV = KB_ROOT / "raw" / "citations.csv"
 WIKI_DIR = KB_ROOT / "wiki" / "agent-docs"

@@ -8,7 +8,7 @@ attached to a `Property`, `Member`, `Office`, `OpenHouse`, etc.
 
 This is the canonical baseline. Project flavours (CDN, watermarking
 policy, twilight-conversion vendor) belong in
-[`docs/business-processes/`](../../../business-processes/index.md).
+[`docs/business-processes/`](../../index.md).
 
 ## Scope
 

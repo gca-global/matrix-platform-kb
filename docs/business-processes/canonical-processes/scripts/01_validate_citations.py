@@ -5,9 +5,9 @@ processes/*.md file.
 
 Reads:
   processes/*.md
-  ../reso-dd-kb/raw/resources.csv
-  ../reso-dd-kb/raw/fields.csv
-  ../reso-dd-kb/raw/lookup_values.csv
+  ../../data-models/reso-dd-kb/raw/resources.csv
+  ../../data-models/reso-dd-kb/raw/fields.csv
+  ../../data-models/reso-dd-kb/raw/lookup_values.csv
 
 Writes:
   raw/citations.csv
@@ -39,7 +39,7 @@ import sys
 from pathlib import Path
 
 KB_ROOT = Path(__file__).resolve().parent.parent
-RESO_RAW = KB_ROOT.parent / "reso-dd-kb" / "raw"
+RESO_RAW = KB_ROOT.parent.parent / "data-models" / "reso-dd-kb" / "raw"
 PROCESSES_DIR = KB_ROOT / "processes"
 OUT_CSV = KB_ROOT / "raw" / "citations.csv"
 

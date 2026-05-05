@@ -6,7 +6,7 @@ team header) and `TeamMembers` (the per-member roster).
 
 This is the canonical baseline. Project flavours (compensation
 splits, internal team-policy templates, marketing brand identity)
-belong in [`docs/business-processes/`](../../../business-processes/index.md).
+belong in [`docs/business-processes/`](../../index.md).
 
 ## Scope
 

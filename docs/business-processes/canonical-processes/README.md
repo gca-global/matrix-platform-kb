@@ -4,7 +4,7 @@ The vendor-neutral, RESO-aligned baseline of MLS business processes.
 
 ## Why this exists
 
-[`reso-dd-kb/`](../reso-dd-kb/USAGE.md) is the canonical RESO DD 2.0
+[`reso-dd-kb/`](../../data-models/reso-dd-kb/USAGE.md) is the canonical RESO DD 2.0
 data model - 41 resources, 1,745 fields, 222 lookups. It tells you
 what `Property.StandardStatus = "Pending"` means as a value, but not
 what TRANSITIONS in or out of that state, what TRIGGERS them, or
@@ -17,7 +17,7 @@ validated citations.
 Canonical means:
 
 - Vendor-neutral. No "Anna sends an email" - that lives in
-  [`docs/business-processes/`](../../business-processes/index.md).
+  [`docs/business-processes/`](../index.md).
 - RESO-grounded. Every state, every field, every transition is
   pinned to a real entry in `reso-dd-kb/raw/{resources,fields,
   lookup_values}.csv` via the citation block.
@@ -95,8 +95,8 @@ LLM agent must follow when working in this subtree, see
 ## Anchored in harness engineering
 
 This subsystem mirrors the methodology established by
-[`../reso-dd-kb/`](../reso-dd-kb/AGENTS.md) and
-[`../source-mappings/`](../source-mappings/AGENTS.md):
+[`reso-dd-kb/`](../../data-models/reso-dd-kb/AGENTS.md) and
+[`source-mappings/`](../../data-models/source-mappings/AGENTS.md):
 
 - Phase-gated pipeline (Author -> Validate -> Emit).
 - Hand-edited markdown is the source of truth; everything else is

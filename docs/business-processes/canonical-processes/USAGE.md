@@ -30,7 +30,7 @@ adapter) that changes a record's state.
    - The fields you must update atomically with the status change.
    - Side effects on other resources (showings, contacts, media,
      transactions).
-3. Cross-check with [`../reso-dd-kb/wiki/agent-docs/resources/<snake>.md`](../reso-dd-kb/wiki/agent-docs/_index.md)
+3. Cross-check with [`reso-dd-kb/wiki/agent-docs/resources/<snake>.md`](../../data-models/reso-dd-kb/wiki/agent-docs/_index.md)
    for the canonical field definition.
 4. If the transition you need is NOT in the table, raise an issue -
    adding undocumented transitions silently is forbidden.
@@ -86,18 +86,18 @@ produces zero-byte diffs.
 
 ## What this directory does NOT replace
 
-- [`../reso-dd-kb/`](../reso-dd-kb/USAGE.md) - the canonical RESO
+- [`reso-dd-kb/`](../../data-models/reso-dd-kb/USAGE.md) - the canonical RESO
   data model itself. Read that for "what does RESO say about field
   X". This chapter cites those entries; it does not redefine them.
-- [`../source-mappings/`](../source-mappings/USAGE.md) - the
+- [`source-mappings/`](../../data-models/source-mappings/USAGE.md) - the
   Dash/Qobrix/SIR -> RESO field mapping. That subtree handles
   inbound/outbound name correspondence; this subtree handles
   state-machine semantics.
-- [`../../business-processes/`](../../business-processes/index.md) -
+- [`docs/business-processes/`](../index.md) -
   Sharp-SIR's actual operational flow with project-specific stage
   names and human roles. Sharp SIR's flow maps INTO the canonical
   baseline here, but the SIR-flavoured docs stay where they are.
-- [`../platform-extensions.md`](../platform-extensions.md) - governs
+- [`platform-extensions.md`](../../data-models/platform-extensions.md) - governs
   `x_sm_*` extensions. If a process needs a state RESO doesn't model,
   surface it as an extension there first; it must not appear in this
   chapter's citation block until adopted.

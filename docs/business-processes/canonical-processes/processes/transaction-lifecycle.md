@@ -11,7 +11,7 @@ back-office TM/escrow system, it is the record that ties an MLS
 listing to a financial event for syndication. Project-flavour
 back-office TM (Sharp-SIR commission ledger, escrow milestones,
 DA / closing-statement workflow) belongs in
-[`docs/business-processes/`](../../../business-processes/index.md).
+[`docs/business-processes/`](../../index.md).
 
 ## Scope
 
@@ -67,7 +67,7 @@ transaction record itself - the close-out is observed via the linked
 `HistoryTransactional` row. Project flavours that need a
 "transaction is closed" boolean MUST encode it as an `x_sm_*`
 extension under the
-[`source-mappings/`](../../source-mappings/README.md) layer.
+[`source-mappings/`](../../../data-models/source-mappings/README.md) layer.
 
 ## Property close-out path (`Pending` -> `Closed`)
 

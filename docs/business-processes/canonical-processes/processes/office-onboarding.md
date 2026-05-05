@@ -7,7 +7,7 @@ and `OUID` (the federation-level Organization Unique Identifier).
 
 This is the canonical baseline. Project flavours (e.g. franchise
 sponsorship paperwork, branding setup, trust-account opening) belong
-in [`docs/business-processes/`](../../../business-processes/index.md);
+in [`docs/business-processes/`](../../index.md);
 they MUST map onto the canonical states defined here.
 
 ## Scope

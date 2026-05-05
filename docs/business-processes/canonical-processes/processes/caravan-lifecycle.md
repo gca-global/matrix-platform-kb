@@ -7,7 +7,7 @@ header) and `CaravanStop` (the per-stop ordered list).
 
 This is the canonical baseline. Project flavours (e.g. lunch,
 carpool routing, post-caravan polling) belong in
-[`docs/business-processes/`](../../../business-processes/index.md).
+[`docs/business-processes/`](../../index.md).
 
 ## Scope
 

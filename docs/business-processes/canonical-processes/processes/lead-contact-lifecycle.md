@@ -7,7 +7,7 @@ Five resources collaborate: `Contacts`, `SavedSearch`, `Prospecting`,
 
 This is the canonical baseline. Project flavours (e.g. Sharp-SIR's
 "prospect / pipeline / closed" stages) belong in
-[`docs/business-processes/`](../../../business-processes/index.md);
+[`docs/business-processes/`](../../index.md);
 they MUST map onto the canonical states defined here.
 
 ## Scope

@@ -7,7 +7,7 @@ vocabulary. Three resources collaborate: `Member`,
 
 This is the canonical baseline. Project flavours (e.g. Sharp-SIR's
 "sponsorship -> orientation -> first listing" stages) belong in
-[`docs/business-processes/`](../../../business-processes/index.md);
+[`docs/business-processes/`](../../index.md);
 they MUST map onto the canonical states defined here.
 
 ## Scope

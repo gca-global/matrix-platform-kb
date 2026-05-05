@@ -7,7 +7,7 @@ RESO DD 2.0 vocabulary.
 This is the canonical baseline. Project-specific flavours (e.g.
 Sharp-SIR exclusive vs. open-listing nuances, agreement-signed
 checkpoints, lead-doc emails) belong in
-[`../../../business-processes/`](../../../business-processes/index.md);
+[`docs/business-processes/`](../../index.md);
 they MUST map their stages onto the states defined here.
 
 ## Scope
@@ -134,7 +134,7 @@ with `StandardStatus` using the suggested values:
 Project-specific extensions (e.g. `Pending Continue To Show`,
 `Pending Taking Backups`) are NOT canonical here; record them in the
 project flavour under
-[`docs/business-processes/`](../../../business-processes/index.md).
+[`docs/business-processes/`](../../index.md).
 
 ## Decision points
 
@@ -180,7 +180,7 @@ project flavour under
 ## Non-goals
 
 - No opinion on commission terms (those live as `x_sm_commission_pct`
-  in the [`source-mappings/`](../../source-mappings/README.md) layer).
+  in the [`source-mappings/`](../../../data-models/source-mappings/README.md) layer).
 - No opinion on `ListingAgreement` enumerations beyond the controlled
   RESO list; project flavours pick which subset to allow.
 - No opinion on photo-min counts or remark length; those are
