@@ -9,7 +9,8 @@
 | Document | What It Contains | Role |
 |----------|-----------------|------|
 | [qobrix-api-summary.md](qobrix-api-summary.md) | All 83 Qobrix API resource groups and 149 schemas | Reference: current CRM capabilities to replicate |
-| [reso-dd-fields-summary.md](reso-dd-fields-summary.md) | RESO DD 2.0 resource names, key fields, and lookup categories | Canonical: the standard Sharp Matrix builds on |
+| [`../../reso-dd-kb/`](../../reso-dd-kb/) | **Canonical RESO DD 2.0 model** — verified mirror of `dd.reso.org/DD2.0/`, 41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource docs. Start at `reso-dd-kb/USAGE.md`. | Canonical: the standard Sharp Matrix builds on |
+| [reso-dd-fields-summary.md](reso-dd-fields-summary.md) | REDIRECT → `reso-dd-kb/wiki/agent-docs/_index.md` | Compatibility stub |
 
 ## Source Repositories
 
@@ -80,8 +81,7 @@ These projects exist in `SharpMatrix` but should be decommissioned per Matrix-CI
 
 | File | Where | Role in Sharp Matrix |
 |------|-------|---------------------|
-| `reso dd/RESO_Data_Dictionary_2.0.xlsx` | Fields + Lookups + Version sheets | **Canonical** — full field definitions and lookup values for the platform data layer |
-| `reso dd/RESO_Data_Dictionary_1.7.xlsx` | Previous DD version | Reference for backward compatibility |
+| `reso-dd-kb/` | Mirror + raw CSVs + DBML + agent-docs (markdown) | **Canonical** — full RESO DD 2.0 corpus (41 resources, 1,745 fields, 222 lookups, 3,683 lookup values), built from a verified mirror of `dd.reso.org/DD2.0/`. Start at `reso-dd-kb/USAGE.md`. |
 | `qobrix/qobrix_openapi.yaml` | 68,000+ lines OpenAPI 3.0 spec | **Migration source** — current CRM API, use for data migration and capability reference |
 | `dash/BlankForm_*.docx` | 6 SIR/Anywhere.com form templates | **Reference** — broker-facing field requirements from Sotheby's International Realty |
 

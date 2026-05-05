@@ -104,11 +104,12 @@ Supabase (CDL + Auth)  ◄──►  Databricks (DWH + ETL)  ◄──►  MLS /
 | Section | Contents |
 |---|---|
 | **[Platform](docs/platform/)** | App template, tech stack, dual-Supabase architecture, MLS datamart |
-| **[Data Models](docs/data-models/)** | Dash field reference, RESO interop mapping, ETL pipeline schema |
+| **[RESO DD KB](reso-dd-kb/)** | **Canonical RESO DD 2.0 model** — verified mirror of `dd.reso.org/DD2.0/`, 41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource markdown. **All RESO DD lookups for the platform start here.** |
+| **[Data Models](docs/data-models/)** | Dash field reference, Dash↔RESO mapping, CDL schema, ETL pipeline, `x_sm_*` extension governance |
 | **[Business Processes](docs/business-processes/)** | Listing pipeline, sales pipeline, lead qualification workflows |
 | **[Product Specs](docs/product-specs/)** | UI specs — dashboards, forms, Kanban boards |
 | **[Vision](docs/vision/)** | Digital strategy 2026–2028, AI sales model |
-| **[References](docs/references/)** | API catalogs, field summaries, integration endpoints |
+| **[References](docs/references/)** | API catalogs, integration endpoints |
 | **[Zoe AI KB](docs/zoe-ai-assistant-kb/)** | Zoe's knowledge base — 15 docs covering all apps, workflows, troubleshooting, RAG-ready |
 
 ### Repository Structure
@@ -126,11 +127,14 @@ docs/
   vision/                    ← Digital strategy 2026-2028, AI sales model
   references/                ← API catalogs, field summaries
   zoe-ai-assistant-kb/       ← Zoe assistant knowledge base
+reso-dd-kb/                  ← Canonical RESO DD 2.0 model (mirror, raw CSVs, DBML, agent-docs)
+  USAGE.md                   ← LLM consumption guide — start here for any RESO question
+  wiki/dbml/canonical.dbml   ← 41-table DBML schema with FKs
+  wiki/agent-docs/           ← Per-resource markdown reference
 dash/                        ← SIR/Anywhere.com listing forms (DOCX)
 qobrix/                      ← Qobrix OpenAPI spec (YAML)
-reso dd/                     ← RESO Data Dictionary spreadsheets (XLSX)
 vision/                      ← Strategy PDFs and architecture diagrams
-current busienss practice/   ← Operational checklists (XLSX)
+current-business-practice/   ← Operational checklists (XLSX)
 ```
 
 ### Key Concepts

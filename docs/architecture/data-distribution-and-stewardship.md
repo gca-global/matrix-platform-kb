@@ -465,4 +465,4 @@ Phase-2.5 extends `listing-merge` to:
 | Phase-2 intelligence layer (semantic + recsys + MCP) | [intelligence-layer.md](intelligence-layer.md) |
 | Personalization spec (visitor-side recsys, user axis) | [product-specs/personalization.md](../product-specs/personalization.md) |
 | Ecosystem channels (which channels exist) | [platform/ecosystem-architecture.md](../platform/ecosystem-architecture.md) |
-| RESO canonical schema for the data being distributed | [data-models/reso-canonical-schema.md](../data-models/reso-canonical-schema.md) |
+| RESO canonical schema for the data being distributed | [`reso-dd-kb/wiki/dbml/canonical.dbml`](../../reso-dd-kb/wiki/dbml/canonical.dbml) |

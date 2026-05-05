@@ -96,6 +96,181 @@ def first_sentence(text: str, max_len: int = 240) -> str:
     return s
 
 
+def derive_purpose(
+    field: dict,
+    role: str,
+    *,
+    host_table: str = "",
+    target_table: str = "",
+    target_col: str = "",
+    fk_origin_field: str = "",
+    lookup_kind_str: str = "",
+    n_lookup_values: int = 0,
+    inverse_target_table: str = "",
+) -> str:
+    """Auto-derive a single 'when to use' sentence for one field row, from
+    its Phase-3 role + datatype + lookup + status. The output is a stable,
+    deterministic phrase an LLM agent can act on without reading the
+    Definition prose. role is one of:
+        pk | fk | polymorphic | resource_typed | collection_typed |
+        dropped | scalar
+    """
+    cname = field["StandardName"]
+    simple = field.get("SimpleDataType", "")
+    status = (field.get("Status") or "").strip()
+    deprecated = status and status.lower() != "active"
+
+    if role == "pk":
+        base = (
+            f"Unique key for this resource. Use as the FK target whenever "
+            f"another resource references `{host_table}`."
+        )
+    elif role == "fk" and target_table:
+        base = (
+            f"Foreign key -> `{target_table}.{target_col}`. Set this to the "
+            f"`{target_table}`'s `{target_col}` to link this row to its "
+            f"parent `{target_table}`."
+        )
+    elif role == "polymorphic":
+        base = (
+            "Polymorphic key. Resolve the target resource at write time "
+            "from the row's context (see Definition); store the chosen "
+            "target's PK in this column."
+        )
+    elif role == "resource_typed":
+        base = (
+            "Logical reference to another resource; not stored as a scalar "
+            "column in DBML. Look at the sibling `*Key` / `*Id` field on "
+            "this resource for where the actual FK value lives."
+        )
+    elif role == "collection_typed":
+        if inverse_target_table:
+            base = (
+                f"Inverse 1:N: read as 'all `{inverse_target_table}` rows "
+                f"that point at this `{host_table}` row'. Not stored as a "
+                "column; the FK lives on the child side."
+            )
+        else:
+            base = (
+                "Inverse 1:N collection; the FK is declared on the child "
+                "resource, not here."
+            )
+    elif role == "dropped":
+        base = (
+            f"Do not write. Phase-2.5 satellite of `{fk_origin_field}`; the "
+            f"same value lives on the parent resource and is reachable via "
+            f"the `{fk_origin_field}` FK."
+        )
+    else:
+        if lookup_kind_str == "closed-SV":
+            base = (
+                f"Pick exactly one of {n_lookup_values} values from the "
+                "lookup (closed list)."
+                if n_lookup_values
+                else "Pick exactly one value from the lookup."
+            )
+        elif lookup_kind_str == "closed-MV":
+            base = (
+                f"Pick one or more of {n_lookup_values} values from the "
+                "lookup (closed list)."
+                if n_lookup_values
+                else "Pick one or more values from the lookup."
+            )
+        elif lookup_kind_str == "open":
+            base = (
+                "Free-form string; the lookup is jurisdiction-defined "
+                "(no closed value list)."
+            )
+        elif simple == "Boolean" and cname.endswith("YN"):
+            base = "Nullable boolean flag (true / false / null = unknown)."
+        elif simple == "Boolean":
+            base = "Boolean."
+        elif simple == "Date":
+            base = "Date (YYYY-MM-DD)."
+        elif simple == "Timestamp":
+            base = "ISO-8601 timestamp (UTC)."
+        elif simple == "Number":
+            prec = (field.get("MaxPrecision") or "").strip()
+            if prec and prec.isdigit() and int(prec) > 0:
+                base = f"Numeric, up to {prec} decimal place(s)."
+            else:
+                base = "Numeric (integer)."
+        elif simple == "String":
+            ml = (field.get("MaxLength") or "").strip()
+            if ml and ml.isdigit():
+                base = f"Free-form text, up to {ml} characters."
+            else:
+                base = "Free-form text."
+        else:
+            base = simple or "Field."
+
+    if deprecated:
+        base = f"DEPRECATED ({status}). " + base
+
+    pt = (field.get("PropertyTypes") or "").strip()
+    if pt and host_table == "property":
+        base += f" Applies to property types: {pt}."
+
+    return base
+
+
+def disambiguation_clusters(rfields: list[dict]) -> list[dict]:
+    """Detect sibling field clusters that an LLM agent commonly confuses
+    (`*Key` vs `*Id`, `*Total` vs `*Full` / `*Half`, `*YN` vs its
+    non-YN companion). Returns a list of clusters, each with `title`
+    and `rows` (list of (name, field_dict) tuples), in deterministic
+    order. Detection is purely structural (no manual list)."""
+    by_name = {f["StandardName"]: f for f in rfields}
+    clusters: list[dict] = []
+    seen_pairs: set[frozenset[str]] = set()
+
+    def add(title: str, names: list[str]) -> None:
+        # Filter out names not on this resource and dedupe (preserve order).
+        present = [n for n in names if n in by_name]
+        if len(present) < 2:
+            return
+        key = frozenset(present)
+        if key in seen_pairs:
+            return
+        seen_pairs.add(key)
+        clusters.append(
+            {
+                "title": title,
+                "rows": [(n, by_name[n]) for n in present],
+            }
+        )
+
+    # *Key / *Id pairs (the most commonly confused cluster: which one is
+    # the system PK, which one is the upstream identifier).
+    for name in sorted(by_name):
+        if name.endswith("Key"):
+            base = name[:-3]
+            id_name = base + "Id"
+            if id_name in by_name:
+                add(f"`{name}` vs `{id_name}`", [name, id_name])
+
+    # *Total / *Full / *Half triples (bathrooms, bedrooms, ...).
+    for name in sorted(by_name):
+        if name.endswith("Total"):
+            base = name[:-5]
+            full = base + "Full"
+            half = base + "Half"
+            if full in by_name or half in by_name:
+                add(
+                    f"`{name}` vs `{full}` / `{half}`",
+                    [n for n in (name, full, half) if n in by_name],
+                )
+
+    # *YN paired with its non-YN companion of the same base name.
+    for name in sorted(by_name):
+        if name.endswith("YN"):
+            companion = name[:-2]
+            if companion and companion in by_name:
+                add(f"`{name}` vs `{companion}`", [name, companion])
+
+    return clusters
+
+
 def must_exist(path: Path) -> None:
     if not path.exists():
         print(f"FAIL: required input missing: {path}", file=sys.stderr)
@@ -683,6 +858,16 @@ def main() -> int:
     # so the satellite-coverage gate can verify.
     fields_listed_per_resource: dict[str, set[str]] = defaultdict(set)
 
+    # Indexes consumed by the per-row Purpose derivation.
+    poly_set: set[tuple[str, str]] = {
+        (r["host_resource"], r["host_field"])
+        for r in poly
+    }
+    inverse_target_for: dict[tuple[str, str], str] = {
+        (r["host_resource"], r["host_field"]): r["target_resource"]
+        for r in inverse
+    }
+
     for res in resources:
         rname = res["ResourceName"]
         snake_table = snake(rname)
@@ -779,37 +964,96 @@ def main() -> int:
         L.append("## Fields")
         L.append("")
         L.append(
-            "Columns in their original `dd.reso.org` page order. The `flags` "
-            "column shows: `pk`, `fk -> target.col` (committed FK), "
-            "`[REVIEW]` (Phase 2.5 satellite audit flagged for review), "
-            "`[dropped]` (omitted from the canonical DBML; satellite of "
-            "the named FK), `[Resource]` / `[Collection]` (no scalar "
-            "column in DBML; FK companion - see Refs/inverse-1:N below)."
+            "Columns in their original `dd.reso.org` page order. "
+            "**Definition** is the verbatim RESO DD prose (full text, not "
+            "truncated). **Purpose (when to use)** is auto-derived from the "
+            "field's role + datatype + lookup + status and tells you, in "
+            "one sentence, what to write into this column. The `Flags` "
+            "column shows: `pk`, `fk -> target.col` (committed FK in "
+            "`canonical.dbml`), `[REVIEW]` (Phase 2.5 satellite audit "
+            "flagged for review), `[dropped]` (omitted from the canonical "
+            "DBML; satellite of the named FK), `[Resource]` / "
+            "`[Collection]` (no scalar column in DBML; FK companion - see "
+            "Refs / inverse-1:N below)."
         )
         L.append("")
-        L.append("| Field | DBML name | Type | Lookup | Description | Flags |")
-        L.append("|---|---|---|---|---|---|")
+        L.append(
+            "| Field | DBML name | Type | Lookup | Definition | "
+            "Purpose (when to use) | Flags |"
+        )
+        L.append("|---|---|---|---|---|---|---|")
         for f in rfields:
             cname = f["StandardName"]
             scol = snake(cname)
             fields_listed_per_resource[rname].add(cname)
             simple = f["SimpleDataType"]
             lookup = f["Lookup"]
-            d = first_sentence(defs.get((rname, cname), ""), 160)
-            flags: list[str] = []
+            # Full Definition prose, collapsed to a single logical line so
+            # it survives a markdown table cell. Pipes escaped.
+            full_def = md_escape_pipe(collapse_ws(defs.get((rname, cname), "")))
+
+            # Determine the field's role for Purpose derivation. The order
+            # mirrors the flag-precedence already used below: pk > dropped
+            # > polymorphic > committed FK > Resource/Collection-typed >
+            # plain scalar.
+            fk_arrows = fk_flag.get((rname, cname), [])
+            target_table = ""
+            target_col = ""
+            fk_origin_field = ""
             if cname == pk:
+                role = "pk"
+            elif (rname, cname) in drop_set:
+                role = "dropped"
+                fk_origin_field = sat_fk_for.get((rname, cname), ("", "", ""))[0]
+            elif (rname, cname) in poly_set:
+                role = "polymorphic"
+            elif fk_arrows:
+                role = "fk"
+                # First arrow is "-> tt.tc"; parse it.
+                first = fk_arrows[0]
+                m = re.match(r"->\s*(\S+)\.(\S+)", first)
+                if m:
+                    target_table, target_col = m.group(1), m.group(2)
+            elif simple == "Resource":
+                role = "resource_typed"
+            elif simple == "Collection":
+                role = "collection_typed"
+            else:
+                role = "scalar"
+
+            inv_target = ""
+            if role == "collection_typed":
+                inv_target = snake(inverse_target_for.get((rname, cname), ""))
+
+            lookup_kind_str = lookup_kind(lookup) if lookup else ""
+            n_lookup_values = len(lookup_values_by_name.get(lookup, []))
+
+            purpose = derive_purpose(
+                f,
+                role,
+                host_table=snake_table,
+                target_table=target_table,
+                target_col=target_col,
+                fk_origin_field=fk_origin_field,
+                lookup_kind_str=lookup_kind_str,
+                n_lookup_values=n_lookup_values,
+                inverse_target_table=inv_target,
+            )
+
+            flags: list[str] = []
+            if role == "pk":
                 flags.append("`pk`")
-            for arrow in fk_flag.get((rname, cname), []):
+            for arrow in fk_arrows:
                 flags.append(f"`{arrow}`")
             if simple == "Resource":
                 flags.append("`[Resource]`")
             elif simple == "Collection":
                 flags.append("`[Collection]`")
-            if (rname, cname) in drop_set:
-                fk_origin = sat_fk_for.get((rname, cname), ("", "", ""))[0]
-                flags.append(f"`[dropped: satellite of {snake(fk_origin)}]`")
+            if role == "dropped":
+                flags.append(f"`[dropped: satellite of {snake(fk_origin_field)}]`")
             if (rname, cname) in review_reason:
-                flags.append(f"`[REVIEW]`")
+                flags.append("`[REVIEW]`")
+
             lookup_cell = (
                 f"[`{snake(lookup)}`](../lookups.md#{snake(lookup)})"
                 if lookup
@@ -817,14 +1061,32 @@ def main() -> int:
             )
             type_cell = simple
             if lookup and simple == "String List, Single":
-                type_cell = f"enum"
+                type_cell = "enum"
             elif lookup and simple == "String List, Multi":
                 type_cell = "varchar (multi)"
             L.append(
                 f"| `{cname}` | `{scol}` | {type_cell} | {lookup_cell} | "
-                f"{md_escape_pipe(d)} | {' '.join(flags)} |"
+                f"{full_def} | {md_escape_pipe(purpose)} | {' '.join(flags)} |"
             )
         L.append("")
+
+        # ---- Field disambiguation callout -----------------------------
+        clusters = disambiguation_clusters(rfields)
+        if clusters:
+            L.append("## Field disambiguation")
+            L.append("")
+            L.append(
+                "Sibling field clusters that an LLM agent commonly confuses. "
+                "Auto-detected from name shape; resolve which is which by "
+                "reading each row's full Definition above."
+            )
+            L.append("")
+            for c in clusters:
+                L.append(f"- **{c['title']}**:")
+                for n, fobj in c["rows"]:
+                    short = first_sentence(defs.get((rname, n), ""), 200)
+                    L.append(f"  - `{n}` - {md_escape_pipe(short)}")
+            L.append("")
 
         # ---- FKs out (from parsed DBML Refs) -----------------------
         out_refs = sorted(refs_by_host_table.get(snake_table, []))

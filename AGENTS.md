@@ -159,8 +159,8 @@ docs/
 ├── data-models/
 │   ├── index.md                      ← Data models chapter index (Dash-first hierarchy)
 │   ├── dash-data-model.md           ← Dash/Anywhere.com practical data model (START HERE)
-│   ├── reso-dd-overview.md           ← RESO DD 2.0 — interop standard for syndication
-│   ├── reso-canonical-schema.md      ← Which RESO resources/fields map to Dash
+│   ├── reso-dd-overview.md           ← REDIRECT → reso-dd-kb/ (canonical RESO source)
+│   ├── reso-canonical-schema.md      ← REDIRECT → reso-dd-kb/wiki/dbml/canonical.dbml
 │   ├── platform-extensions.md        ← All x_sm_* fields not in Dash or RESO DD
 │   ├── cdl-schema.md            ← Common Data Layer for Sharp Matrix apps (cross-app data; today: listings + ingestion + MLS Sync control plane)
 │   ├── etl-pipeline.md              ← Bronze/Silver/Gold ETL pipeline architecture
@@ -168,6 +168,13 @@ docs/
 │   ├── reso-web-api.md              ← RESO Web API (OData 4.0) endpoint reference
 │   ├── qobrix-data-model.md          ← Qobrix CRM reference & migration source
 │   └── property-field-mapping.md     ← Field mapping: Dash ↔ RESO ↔ Qobrix ↔ SIR
+├── ../reso-dd-kb/                    ← CANONICAL RESO DD 2.0 MODEL (top-level dir)
+│   ├── USAGE.md                      ← LLM consumption guide — start here for any RESO question
+│   ├── wiki/agent-docs/_index.md     ← Resource catalogue (41 resources, domain-grouped)
+│   ├── wiki/agent-docs/resources/    ← Per-resource markdown (fields, FKs, lookups, Purpose)
+│   ├── wiki/agent-docs/lookups.md    ← All 222 lookups + value tables
+│   ├── wiki/agent-docs/relationships.md  ← FK relationships and inverse 1:N
+│   └── wiki/dbml/canonical.dbml      ← 41-table DBML schema with FKs
 ├── business-processes/
 │   ├── index.md                      ← Business processes chapter index
 │   ├── listing-pipeline.md           ← Seller-side pipeline (8 stages)
@@ -188,7 +195,7 @@ docs/
 ├── references/
 │   ├── index.md                      ← References chapter index
 │   ├── qobrix-api-summary.md         ← Qobrix OpenAPI resource catalog
-│   └── reso-dd-fields-summary.md     ← RESO DD 2.0 field & lookup summary
+│   └── reso-dd-fields-summary.md     ← REDIRECT → reso-dd-kb/wiki/agent-docs/_index.md
 scripts/
 └── validate-kb.sh                    ← Mechanical KB validation (links, refs, IDs, staleness)
 ```
@@ -232,13 +239,14 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 | See how systems connect                       | `docs/ARCHITECTURE.md`                            |
 | See Dash field names for app development       | `docs/data-models/dash-data-model.md`             |
 | Map a property field across systems            | `docs/data-models/property-field-mapping.md`      |
-| See which RESO fields map to Dash              | `docs/data-models/reso-canonical-schema.md`       |
+| Look up any RESO DD 2.0 resource / field / lookup | `reso-dd-kb/USAGE.md` (then `reso-dd-kb/wiki/agent-docs/_index.md`) |
+| See the canonical RESO DBML schema             | `reso-dd-kb/wiki/dbml/canonical.dbml`             |
+| See per-resource RESO field reference (with Purpose / FKs / lookups) | `reso-dd-kb/wiki/agent-docs/resources/<snake>.md` |
 | Find or add a platform extension (x_sm_*)     | `docs/data-models/platform-extensions.md`         |
 | See the CDL schema (cross-app data layer; properties + ingestion + MLS Sync) | `docs/data-models/cdl-schema.md`              |
 | Understand the ETL pipeline (Bronze→Gold)     | `docs/data-models/etl-pipeline.md`                |
 | Use the RESO Web API (OData)                  | `docs/data-models/reso-web-api.md`                |
 | Understand Qobrix entities & migration        | `docs/data-models/qobrix-data-model.md`           |
-| Understand RESO DD 2.0 (interop standard)      | `docs/data-models/reso-dd-overview.md`            |
 | Understand auth, roles, permissions, RLS       | `docs/platform/security-model.md`                 |
 | Understand ES256 JWT migration from HS256      | `docs/architecture/decisions/ADR-011.md`          |
 | See SSO Edge Function API contracts            | `docs/platform/sso-edge-functions.md`             |
@@ -266,7 +274,7 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 | Build Client Portal, Contact Center, Marketing | `docs/product-specs/client-portal.md`, etc.      |
 | Use user personas for UX                     | `docs/product-specs/personas.md`                  |
 | Look up Qobrix API endpoints                  | `docs/references/qobrix-api-summary.md`           |
-| Look up RESO standard field names             | `docs/references/reso-dd-fields-summary.md`       |
+| Look up RESO standard field names             | `reso-dd-kb/wiki/agent-docs/_index.md` (canonical) |
 
 ## Source Repos & Files
 
@@ -284,7 +292,6 @@ If you are the Zoe AI assistant providing end-user or 2nd-line support, read:
 | `vision/Sarp SIR Platform-2026-02-18-125014.mmd` | Mermaid | Platform ecosystem architecture diagram |
 | `vision/AI-driven-model-upravleniya-prodazhami.pdf` | PDF | 16-slide AI-driven sales model |
 | `qobrix/qobrix_openapi.yaml` | YAML | Full Qobrix OpenAPI 3.0 spec (68K lines) |
-| `reso dd/RESO_Data_Dictionary_2.0.xlsx` | XLSX | RESO DD 2.0 (Fields + Lookups) |
-| `reso dd/RESO_Data_Dictionary_1.7.xlsx` | XLSX | RESO DD 1.7 (historical reference) |
+| `reso-dd-kb/` | Markdown + CSV + DBML | **Canonical RESO DD 2.0 model** — verified mirror of `dd.reso.org/DD2.0/`, 41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource docs. Start at `reso-dd-kb/USAGE.md`. |
 | `dash/BlankForm_*.docx` | DOCX | SIR/Anywhere.com listing forms (6 types) |
-| `current busienss practice/*.xlsx` | XLSX | Listing checklists 2024–2026 |
+| `current-business-practice/*.xlsx` | XLSX | Listing checklists 2024–2026 |

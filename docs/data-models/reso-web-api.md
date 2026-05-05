@@ -184,5 +184,5 @@ async function fetchResoProperties(filter: string): Promise<Property[]> {
 |-----|-----|
 | ETL pipeline that produces this data | [etl-pipeline.md](etl-pipeline.md) |
 | MLS 2.0 datamart overview | [mls-datamart.md](../platform/mls-datamart.md) |
-| RESO DD canonical schema | [reso-canonical-schema.md](reso-canonical-schema.md) |
+| RESO DD canonical schema | [`reso-dd-kb/wiki/dbml/canonical.dbml`](../../reso-dd-kb/wiki/dbml/canonical.dbml) (per-resource: [`reso-dd-kb/wiki/agent-docs/resources/`](../../reso-dd-kb/wiki/agent-docs/resources/)) |
 | How new apps should access data (Supabase) | [app-template.md](../platform/app-template.md) |

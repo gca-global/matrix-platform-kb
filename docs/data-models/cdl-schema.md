@@ -419,7 +419,7 @@ budget + tuning playbook.
 | ADR — dedicated CDL project | [ADR-012](../architecture/decisions/ADR-012.md) |
 | ADR — single owning repo | [ADR-013](../architecture/decisions/ADR-013.md) |
 | ADR — ingestion pipeline + status note on the actual implementation | [ADR-014](../architecture/decisions/ADR-014.md) |
-| RESO canonical fields | [reso-canonical-schema.md](reso-canonical-schema.md) |
+| RESO canonical fields | [`reso-dd-kb/wiki/agent-docs/_index.md`](../../reso-dd-kb/wiki/agent-docs/_index.md) |
 | Platform extensions (`x_sm_*`) | [platform-extensions.md](platform-extensions.md) |
 | Read-path perf budgets | [read-path-performance.md](read-path-performance.md) |
 | Dash projection map | [dash-data-model.md](dash-data-model.md) |

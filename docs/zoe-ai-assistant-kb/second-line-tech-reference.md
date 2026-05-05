@@ -281,7 +281,7 @@ All Supabase tables use RLS policies enforced by JWT claims. Key RLS helper func
 | CDL schema (cross-app data layer — listings + control plane + EFs) | `docs/data-models/cdl-schema.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/cdl-schema.md) |
 | Dash data model | `docs/data-models/dash-data-model.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/dash-data-model.md) |
 | Platform extensions (x_sm_*) | `docs/data-models/platform-extensions.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/platform-extensions.md) |
-| RESO canonical schema | `docs/data-models/reso-canonical-schema.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/reso-canonical-schema.md) |
+| RESO canonical schema | `reso-dd-kb/wiki/dbml/canonical.dbml` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/reso-dd-kb/wiki/dbml/canonical.dbml) |
 | Field mapping (Dash ↔ RESO ↔ Qobrix) | `docs/data-models/property-field-mapping.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/property-field-mapping.md) |
 | Data quality | `docs/data-models/data-quality.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/data-quality.md) |
 

@@ -31,9 +31,10 @@
 
 | Document | What It Contains |
 |----------|-----------------|
-| [dash-data-model.md](dash-data-model.md) | **Start here** — Dash/Anywhere.com practical field reference: 50+ fields, 30+ feature groups, media, agent/office |
-| [reso-dd-overview.md](reso-dd-overview.md) | RESO DD 2.0 interop standard: resources, fields, lookups |
-| [reso-canonical-schema.md](reso-canonical-schema.md) | Which RESO resources Sharp Matrix uses, with Dash field mappings |
+| [dash-data-model.md](dash-data-model.md) | **Start here for Dash field names** — Dash/Anywhere.com practical field reference: 50+ fields, 30+ feature groups, media, agent/office |
+| [`../../reso-dd-kb/USAGE.md`](../../reso-dd-kb/USAGE.md) | **Start here for any RESO DD 2.0 question** — canonical model: 41 resources, 1,745 fields, 222 lookups, DBML schema |
+| [reso-dd-overview.md](reso-dd-overview.md) | REDIRECT → `reso-dd-kb/` (kept for inbound link compatibility) |
+| [reso-canonical-schema.md](reso-canonical-schema.md) | REDIRECT → `reso-dd-kb/wiki/dbml/canonical.dbml` (kept for inbound link compatibility) |
 | [platform-extensions.md](platform-extensions.md) | All `x_sm_*` fields not in Dash or RESO DD |
 | [cdl-schema.md](cdl-schema.md) | **CDL Schema** — Common Data Layer. Canonical listing tables (`properties`, `properties_published`, `property_media`), `cdl_staging.*`, MLS Sync control plane, the **8 RESO resource tables** (members/offices/contacts/open_houses/showings/history_transactional/internet_tracking_events/teams), the **stewardship layer** (`locked_fields` + `cdl_lock_field`/`cdl_unlock_field` RPCs), **source-of-record + lifecycle** taxonomy (`mls_sources.kind`, `lifecycle_state`, `property_lifecycle_events`), **SIR brand markers** (`x_sm_is_sir_branded`, `x_sm_sir_office_id`, `x_sm_sir_designation`), the **Phase-1 `v_dash_*` projection layer**, **Phase-2 pgvector placeholders**, and the 8 CDL Edge Functions. |
 | [read-path-performance.md](read-path-performance.md) | **Read-path performance contract** — `properties_published` indexes, statistics, autovacuum tuning, `listings-search` keyset pagination + ETag/Cache-Control + estimated counts, p50/p95/p99 budgets. |
@@ -76,5 +77,5 @@ AI Services ────────┘
 When building any new feature:
 1. **Start with Dash data model** — find the practical field name in [dash-data-model.md](dash-data-model.md)
 2. **Check platform extensions** — if no Dash field exists, check [platform-extensions.md](platform-extensions.md)
-3. **If neither exists** — propose a new `x_sm_*` extension following the governance in [reso-canonical-schema.md](reso-canonical-schema.md)
+3. **If neither exists** — propose a new `x_sm_*` extension following the governance in [platform-extensions.md](platform-extensions.md). Confirm the field is genuinely missing from RESO DD by checking [`reso-dd-kb/wiki/agent-docs/_index.md`](../../reso-dd-kb/wiki/agent-docs/_index.md).
 4. **For syndication** — use the RESO mapping column in dash-data-model.md to find the interop name
