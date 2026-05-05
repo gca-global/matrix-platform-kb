@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-05T06:21:04+00:00",
+  "generated_at": "2026-05-05T20:53:14+00:00",
   "upstream": "https://dd.reso.org",
   "entries": [
     {
@@ -12565,7 +12565,8 @@
       "path": "DD2.0/index.html",
       "status": 200,
       "bytes": 57319,
-      "sha256": "b55010bcaad9dd141f7951327565eca8a04fbb8a286130a9aa1fbbc17213f51b"
+      "sha256": "b55010bcaad9dd141f7951327565eca8a04fbb8a286130a9aa1fbbc17213f51b",
+      "crawl_log_status": 304
     },
     {
       "url": "https://dd.reso.org/DD2.0/lookups/AOR/index.html",
@@ -34314,8 +34315,7 @@
       "path": "DD2.0/lookups/PowerProductionType/Photovoltaics/index.html",
       "status": 200,
       "bytes": 48258,
-      "sha256": "15edc22995115191e3772d5cd548f773e0a53b175170c0c2fa2ff3539bbfb220",
-      "crawl_log_status": 503
+      "sha256": "15edc22995115191e3772d5cd548f773e0a53b175170c0c2fa2ff3539bbfb220"
     },
     {
       "url": "https://dd.reso.org/DD2.0/lookups/PowerProductionType/Wind/index.html",
