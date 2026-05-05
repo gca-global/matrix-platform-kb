@@ -365,6 +365,39 @@ fi
 echo ""
 
 # ---------------------------------------------------------------
+# Check 9: CDL seed corpus freshness vs reso-dd-kb raw CSVs
+# ---------------------------------------------------------------
+echo "--- Check 9: CDL seed corpus freshness ---"
+
+RDD_RAW="$DOCS_DIR/data-models/reso-dd-kb/raw"
+CDL_SEED="$DOCS_DIR/data-models/reso-dd-kb/wiki/cdl/reso_full_corpus.sql"
+CDL_EMIT="$DOCS_DIR/data-models/reso-dd-kb/scripts/07_emit_cdl_seed.py"
+
+if [ -f "$CDL_EMIT" ]; then
+    if [ ! -f "$CDL_SEED" ]; then
+        warn "cdl seed missing: run docs/data-models/reso-dd-kb/scripts/07_emit_cdl_seed.py"
+    else
+        stale=0
+        for upstream in "$RDD_RAW/resources.csv" "$RDD_RAW/fields.csv" \
+                        "$RDD_RAW/field_definitions.csv" "$RDD_RAW/lookup_values.csv"; do
+            [ -f "$upstream" ] || continue
+            if [ "$upstream" -nt "$CDL_SEED" ]; then
+                warn "cdl seed: $(basename "$upstream") newer than reso_full_corpus.sql - re-run scripts/07_emit_cdl_seed.py"
+                stale=1
+                break
+            fi
+        done
+        if [ "$stale" -eq 0 ]; then
+            row_count=$(grep -c '^  (' "$CDL_SEED" 2>/dev/null || echo 0)
+            ok "cdl seed present ($row_count VALUES rows; fresh vs raw/{resources,fields,field_definitions,lookup_values}.csv)"
+        fi
+    fi
+else
+    warn "cdl seed emit script missing at $CDL_EMIT"
+fi
+echo ""
+
+# ---------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------
 echo "=== Validation Summary ==="
