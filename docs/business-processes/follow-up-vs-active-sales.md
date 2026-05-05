@@ -1,6 +1,14 @@
 # Follow-up vs Active Sales: The Boundary
 
-> Two distinct processes in one system with a clear trigger for transition
+> Two distinct processes in one system with a clear trigger for transition.
+>
+> **Canonical baseline**: the Follow-up / Active boundary maps onto the
+> canonical [`Contacts.ContactType`](canonical-processes/processes/lead-contact-lifecycle.md)
+> transition `Prospect / Ready to Buy -> Buyer` (or, on the seller side,
+> `... -> Seller`), and the trigger is a successful first
+> [`Showing`](canonical-processes/processes/showing-lifecycle.md). The
+> `ContactStatus = On Vacation` value covers the canonical "pause
+> nurturing" state for follow-up contacts.
 
 ## The Two Processes
 

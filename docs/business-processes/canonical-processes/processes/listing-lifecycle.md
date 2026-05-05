@@ -4,6 +4,16 @@ The end-to-end state machine of a `Property` listing as it moves
 from intake to closed (or terminal non-close), expressed entirely in
 RESO DD 2.0 vocabulary.
 
+> **Integration links** (other layers documenting this resource):
+>
+> - Source mapping (Dash / Qobrix / SIR -> RESO `Property`):
+>   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md)
+> - Sharp-SIR flavour pipeline:
+>   [`../../listing-pipeline.md`](../../listing-pipeline.md),
+>   [`../../listing-checklist.md`](../../listing-checklist.md)
+> - One-stop integrated view:
+>   [`../../../integration/wiki/agent-docs/by_resource/property.md`](../../../integration/wiki/agent-docs/by_resource/property.md)
+
 This is the canonical baseline. Project-specific flavours (e.g.
 Sharp-SIR exclusive vs. open-listing nuances, agreement-signed
 checkpoints, lead-doc emails) belong in

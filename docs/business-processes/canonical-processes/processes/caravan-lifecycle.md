@@ -5,6 +5,18 @@ populated with stops, run, and retired, expressed in RESO DD 2.0
 vocabulary. Two resources collaborate: `Caravan` (the tour
 header) and `CaravanStop` (the per-stop ordered list).
 
+> **Integration links**:
+>
+> - Source mapping: `Caravan` and `CaravanStop` are not yet in
+>   scope of the 6-resource Layer-2 curated set; cross-reference
+>   organizing offices via
+>   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/office.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/office.md).
+> - Sharp-SIR flavour: brokerage caravans appear inside
+>   [`../../listing-pipeline.md`](../../listing-pipeline.md) (Active
+>   Listing stage marketing tasks).
+> - One-stop integrated view (per organizing office):
+>   [`../../../integration/wiki/agent-docs/by_resource/office.md`](../../../integration/wiki/agent-docs/by_resource/office.md)
+
 This is the canonical baseline. Project flavours (e.g. lunch,
 carpool routing, post-caravan polling) belong in
 [`docs/business-processes/`](../../index.md).

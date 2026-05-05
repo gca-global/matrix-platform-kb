@@ -3,6 +3,17 @@
 The state machine of an `OpenHouse` event from scheduling through
 the event itself to retirement.
 
+> **Integration links**:
+>
+> - Source mapping: `OpenHouse` is not yet in scope of the 6-resource
+>   Layer-2 curated set; cross-reference the linked listing via
+>   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md).
+> - Sharp-SIR flavour: open houses appear inside
+>   [`../../listing-pipeline.md`](../../listing-pipeline.md) (Active
+>   Listing stage marketing tasks).
+> - One-stop integrated view (per linked listing):
+>   [`../../../integration/wiki/agent-docs/by_resource/property.md`](../../../integration/wiki/agent-docs/by_resource/property.md)
+
 This is the canonical baseline. Project flavours (e.g. brokerage
 caravans, themed twilight tours, agent-only previews) MUST map onto
 the canonical states defined here.

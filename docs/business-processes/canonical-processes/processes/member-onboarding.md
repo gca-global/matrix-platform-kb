@@ -5,6 +5,16 @@ member and then into retirement, expressed in RESO DD 2.0
 vocabulary. Three resources collaborate: `Member`,
 `MemberAssociation`, `MemberStateLicense`.
 
+> **Integration links**:
+>
+> - Source mapping (Dash / Qobrix / SIR -> RESO `Member`):
+>   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/member.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/member.md)
+> - Sharp-SIR flavour: no project-flavour SOP yet — promote one
+>   under `docs/business-processes/` when Sharp-SIR codifies its
+>   onboarding steps; meanwhile the canonical baseline IS the SOP.
+> - One-stop integrated view:
+>   [`../../../integration/wiki/agent-docs/by_resource/member.md`](../../../integration/wiki/agent-docs/by_resource/member.md)
+
 This is the canonical baseline. Project flavours (e.g. Sharp-SIR's
 "sponsorship -> orientation -> first listing" stages) belong in
 [`docs/business-processes/`](../../index.md);

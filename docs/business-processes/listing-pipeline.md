@@ -1,6 +1,15 @@
 # Seller-Side Pipeline (Listing Pipeline)
 
-> 8-stage Kanban workflow for managing property listings from prospect to close
+> 8-stage Kanban workflow for managing property listings from prospect to close.
+>
+> **Canonical baseline**: this Sharp-SIR pipeline maps onto the vendor-neutral
+> RESO state machine documented in
+> [`canonical-processes/processes/listing-lifecycle.md`](canonical-processes/processes/listing-lifecycle.md)
+> (`Property.StandardStatus` / `MlsStatus` transitions). Every stage below
+> MUST resolve to one of the canonical states; new states / transitions go
+> through `x_sm_*` extensions in
+> [`../data-models/source-mappings/`](../data-models/source-mappings/USAGE.md),
+> never as a fork of the canonical process.
 
 ## Pipeline Overview
 

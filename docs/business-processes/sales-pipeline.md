@@ -1,6 +1,18 @@
 # Buyer-Side Pipeline (Sales Pipeline)
 
-> 8-stage Kanban workflow for managing buyer deals from qualification to close
+> 8-stage Kanban workflow for managing buyer deals from qualification to close.
+>
+> **Canonical baseline**: this Sharp-SIR pipeline maps onto two canonical
+> RESO state machines:
+>
+> - [`canonical-processes/processes/lead-contact-lifecycle.md`](canonical-processes/processes/lead-contact-lifecycle.md) for
+>   the Qualification / Demand Research / Solution-Viewing stages
+>   (`Contacts.ContactType` and `Contacts.ContactStatus` transitions).
+> - [`canonical-processes/processes/transaction-lifecycle.md`](canonical-processes/processes/transaction-lifecycle.md) for
+>   the Deal Signing / Payment / Closed stages (`TransactionManagement` +
+>   `Property.StandardStatus = Pending -> Closed`).
+>
+> Every stage below MUST resolve to one of the canonical states.
 
 ## Pipeline Overview
 

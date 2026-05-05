@@ -324,6 +324,47 @@ fi
 echo ""
 
 # ---------------------------------------------------------------
+# Check 8: integration (Layer 5) freshness vs Layer 1-3 indexes
+# ---------------------------------------------------------------
+echo "--- Check 8: integration freshness ---"
+
+INT="$DOCS_DIR/integration"
+INT_INDEX="$INT/wiki/agent-docs/_index.md"
+INT_BY_RES="$INT/wiki/agent-docs/by_resource"
+INT_CSV="$INT/raw/integration_index.csv"
+
+# Source-of-record indexes Layer 5 joins on.
+RDD_INDEX="$DOCS_DIR/data-models/reso-dd-kb/wiki/agent-docs/_index.md"
+SM_ALIGN_DIR="$DOCS_DIR/data-models/source-mappings/raw"
+CP_CITATIONS_LOCAL="$DOCS_DIR/business-processes/canonical-processes/raw/citations.csv"
+
+if [ -d "$INT" ] && [ -f "$INT/scripts/01_emit_resource_views.py" ]; then
+    page_count=$(find "$INT_BY_RES" -maxdepth 1 -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
+
+    if [ ! -f "$INT_INDEX" ] || [ ! -f "$INT_CSV" ] || [ "$page_count" -eq 0 ]; then
+        warn "integration: outputs missing (run scripts/01_emit_resource_views.py)"
+    else
+        # Cross-chapter freshness: every upstream index newer than
+        # any integration output is a stale-output warning.
+        for upstream in "$RDD_INDEX" "$CP_CITATIONS_LOCAL" "$SM_ALIGN_DIR"/alignment_*.csv; do
+            [ -f "$upstream" ] || continue
+            for downstream in "$INT_INDEX" "$INT_CSV" "$INT_BY_RES"/*.md; do
+                [ -f "$downstream" ] || continue
+                if [ "$upstream" -nt "$downstream" ]; then
+                    warn "integration: $(basename "$upstream") newer than $(basename "$downstream") - re-run docs/integration/scripts/01_emit_resource_views.py"
+                    break 2
+                fi
+            done
+        done
+    fi
+
+    ok "integration present ($page_count per-resource page(s); cross-chapter freshness checked vs reso-dd-kb, source-mappings, canonical-processes)"
+else
+    warn "integration expected at $INT but emit script missing"
+fi
+echo ""
+
+# ---------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------
 echo "=== Validation Summary ==="

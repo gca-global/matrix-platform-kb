@@ -32,6 +32,7 @@ For new-app auth issues (401/400/403), see `docs/platform/new-app-auth-troublesh
 | `docs/data-models/reso-dd-kb/` | `docs/data-models/reso-dd-kb/AGENTS.md` — phase boundaries, file ownership, mirror politeness, determinism, verification gates |
 | `docs/data-models/source-mappings/` | `docs/data-models/source-mappings/AGENTS.md` — phase boundaries, file ownership, hard-fail join gates, determinism |
 | `docs/business-processes/canonical-processes/` | `docs/business-processes/canonical-processes/AGENTS.md` — phase boundaries, citation contract, mermaid contract, 5 hard-fail gates |
+| `docs/integration/` | `docs/integration/AGENTS.md` — generated per-resource cross-cutting views joining Layers 1–4; emit-only, no hand-edits under `wiki/agent-docs/` |
 
 ## Knowledge Base Structure
 
@@ -54,6 +55,8 @@ docs/                                   ← KB knowledge layer (system of record
 │   └── …
 ├── business-processes/                ← Sharp-SIR pipeline + canonical RESO-aligned process catalogue
 │   └── canonical-processes/           ← Vendor-neutral RESO state machines (sibling to Sharp-SIR flavour)
+├── integration/                       ← Layer 5: per-resource cross-cutting views (generated)
+├── INTEGRATION.md                     ← Master "how the layers compose" navigation aid
 ├── exec-plans/                        ← Active / completed execution plans, tech-debt tracker
 ├── product-specs/                     ← Broker dashboard, forms, Kanban, personas
 ├── references/                        ← API catalogs, integration endpoints
@@ -82,6 +85,9 @@ scripts/
 | When editing source-mappings (local rules) | `docs/data-models/source-mappings/AGENTS.md` |
 | Look up canonical RESO-aligned MLS process | `docs/business-processes/canonical-processes/USAGE.md` |
 | When editing canonical-processes (local rules) | `docs/business-processes/canonical-processes/AGENTS.md` |
+| Understand how the four layers compose (data → mapping → canonical process → flavour) | `docs/INTEGRATION.md` |
+| Get a one-stop view of "everything about resource X" | `docs/integration/wiki/agent-docs/by_resource/<resource>.md` (start at `docs/integration/wiki/agent-docs/_index.md`) |
+| When editing integration/ (local rules) | `docs/integration/AGENTS.md` |
 | Dash fields, field mapping, x_sm_* extensions | `docs/data-models/dash-data-model.md`, `docs/data-models/property-field-mapping.md`, `docs/data-models/platform-extensions.md` |
 | CDL schema / ETL pipeline / RESO Web API | `docs/data-models/cdl-schema.md`, `docs/data-models/etl-pipeline.md`, `docs/data-models/reso-web-api.md` |
 | Auth, roles, permissions, RLS | `docs/platform/security-model.md` |

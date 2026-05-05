@@ -6,6 +6,16 @@ expressed in RESO DD 2.0 vocabulary. One resource: `Media`. The
 `Media` resource is shared - the same row schema describes media
 attached to a `Property`, `Member`, `Office`, `OpenHouse`, etc.
 
+> **Integration links**:
+>
+> - Source mapping (Dash / Qobrix / SIR -> RESO `Media`):
+>   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/media.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/media.md)
+> - Sharp-SIR flavour: media steps appear inside
+>   [`../../listing-checklist.md`](../../listing-checklist.md) (the
+>   marketing checklist).
+> - One-stop integrated view:
+>   [`../../../integration/wiki/agent-docs/by_resource/media.md`](../../../integration/wiki/agent-docs/by_resource/media.md)
+
 This is the canonical baseline. Project flavours (CDN, watermarking
 policy, twilight-conversion vendor) belong in
 [`docs/business-processes/`](../../index.md).

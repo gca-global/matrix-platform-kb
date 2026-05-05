@@ -1,6 +1,15 @@
 # Lead Qualification: MQL → SQL
 
-> From raw lead to qualified opportunity with clear criteria and documented disqualification
+> From raw lead to qualified opportunity with clear criteria and documented disqualification.
+>
+> **Canonical baseline**: the MQL / SQL / Active / Nurturing / Disqualified
+> states map onto the canonical
+> [`Contacts.ContactType`](canonical-processes/processes/lead-contact-lifecycle.md)
+> machine (`Lead -> Prospect -> Ready to Buy -> Buyer`, with `Other` for
+> disqualified). The auto-search nurturing pool maps onto
+> [`Prospecting`](canonical-processes/processes/lead-contact-lifecycle.md)
+> (`ActiveYN` / `ClientActivatedYN`). Sharp-SIR-specific BANT criteria stay
+> here; the underlying state vocabulary is canonical.
 
 ## Lead Qualification Path
 

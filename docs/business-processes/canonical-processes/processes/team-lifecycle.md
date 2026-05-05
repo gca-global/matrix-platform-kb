@@ -4,6 +4,16 @@ How a real-estate team is formed, populated, and retired, expressed
 in RESO DD 2.0 vocabulary. Two resources collaborate: `Teams` (the
 team header) and `TeamMembers` (the per-member roster).
 
+> **Integration links**:
+>
+> - Source mapping (Dash / Qobrix / SIR -> RESO `Teams`):
+>   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/teams.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/teams.md)
+> - Sharp-SIR flavour: no project-flavour SOP yet — promote one
+>   under `docs/business-processes/` when Sharp-SIR codifies team
+>   roles, splits, and impersonation rules.
+> - One-stop integrated view:
+>   [`../../../integration/wiki/agent-docs/by_resource/teams.md`](../../../integration/wiki/agent-docs/by_resource/teams.md)
+
 This is the canonical baseline. Project flavours (compensation
 splits, internal team-policy templates, marketing brand identity)
 belong in [`docs/business-processes/`](../../index.md).

@@ -5,6 +5,16 @@ inactive contact, expressed entirely in RESO DD 2.0 vocabulary.
 Five resources collaborate: `Contacts`, `SavedSearch`, `Prospecting`,
 `ContactListings`, `ContactListingNotes`.
 
+> **Integration links**:
+>
+> - Source mapping (Dash / Qobrix / SIR -> RESO `Contacts`):
+>   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/contacts.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/contacts.md)
+> - Sharp-SIR flavour:
+>   [`../../lead-qualification.md`](../../lead-qualification.md) and
+>   [`../../follow-up-vs-active-sales.md`](../../follow-up-vs-active-sales.md)
+> - One-stop integrated view:
+>   [`../../../integration/wiki/agent-docs/by_resource/contacts.md`](../../../integration/wiki/agent-docs/by_resource/contacts.md)
+
 This is the canonical baseline. Project flavours (e.g. Sharp-SIR's
 "prospect / pipeline / closed" stages) belong in
 [`docs/business-processes/`](../../index.md);

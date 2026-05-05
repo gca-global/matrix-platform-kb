@@ -6,6 +6,18 @@ state changes. Two resources cooperate: `TransactionManagement` (the
 lightweight transaction header) and `HistoryTransactional` (the
 universal change log).
 
+> **Integration links**:
+>
+> - Source mapping (close-edge fields land on `Property` -> RESO):
+>   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md)
+> - Sharp-SIR flavour:
+>   [`../../sales-pipeline.md`](../../sales-pipeline.md) (Deal Signing
+>   / Payment / Closed stages) and
+>   [`../../listing-pipeline.md`](../../listing-pipeline.md)
+>   (SOLD / AGENT COMMISSION / CLOSED stages).
+> - One-stop integrated view:
+>   [`../../../integration/wiki/agent-docs/by_resource/property.md`](../../../integration/wiki/agent-docs/by_resource/property.md)
+
 The "transaction" in RESO DD is intentionally minimal - it is NOT a
 back-office TM/escrow system, it is the record that ties an MLS
 listing to a financial event for syndication. Project-flavour

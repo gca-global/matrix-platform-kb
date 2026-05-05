@@ -5,6 +5,17 @@ and beyond, expressed in RESO DD 2.0 vocabulary. Four resources
 collaborate: `Office`, `OfficeAssociation`, `OfficeCorporateLicense`,
 and `OUID` (the federation-level Organization Unique Identifier).
 
+> **Integration links**:
+>
+> - Source mapping (Dash / Qobrix / SIR -> RESO `Office`):
+>   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/office.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/office.md)
+> - Sharp-SIR flavour: no project-flavour SOP yet — promote one
+>   under `docs/business-processes/` when Sharp-SIR codifies its
+>   office onboarding (franchise sponsorship, trust-account opening);
+>   meanwhile the canonical baseline IS the SOP.
+> - One-stop integrated view:
+>   [`../../../integration/wiki/agent-docs/by_resource/office.md`](../../../integration/wiki/agent-docs/by_resource/office.md)
+
 This is the canonical baseline. Project flavours (e.g. franchise
 sponsorship paperwork, branding setup, trust-account opening) belong
 in [`docs/business-processes/`](../../index.md);

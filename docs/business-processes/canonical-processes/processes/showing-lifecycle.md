@@ -5,6 +5,21 @@ agent's request through scheduling, the showing event itself, and
 the lockbox audit trail. RESO DD models this with five distinct
 resources, each with its own state.
 
+> **Integration links**:
+>
+> - Source mapping: not yet in scope (Showing / ShowingRequest /
+>   ShowingAppointment / ShowingAvailability / LockOrBox are not
+>   in the 6-resource Layer-2 curated set; promote via
+>   [`../../../data-models/source-mappings/`](../../../data-models/source-mappings/USAGE.md)
+>   when project scope expands).
+> - Sharp-SIR flavour: showings appear inside
+>   [`../../sales-pipeline.md`](../../sales-pipeline.md) (Solution /
+>   Viewing stage) and
+>   [`../../follow-up-vs-active-sales.md`](../../follow-up-vs-active-sales.md)
+>   (the first-showing trigger).
+> - One-stop integrated view (per linked listing):
+>   [`../../../integration/wiki/agent-docs/by_resource/property.md`](../../../integration/wiki/agent-docs/by_resource/property.md)
+
 ## Scope
 
 In scope:

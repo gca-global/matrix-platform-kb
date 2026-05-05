@@ -3,10 +3,19 @@
 > Source: `raw/current-business-practice/Listing procedure check list January 2024.xlsx`
 > Three parallel checklists for broker, marketing, and finance roles.
 >
-> **Sharp Matrix target**: These checklists document the current manual processes that
+ > **Sharp Matrix target**: These checklists document the current manual processes that
 > the Sharp Matrix Pipeline, Marketing App, and Matrix Financial Management will digitize and automate.
 > Each step maps to a workflow stage in the platform. Field names referenced here
 > correspond to RESO DD standard names — see [property-field-mapping.md](../data-models/property-field-mapping.md).
+>
+> **Canonical baseline**: every checklist step MUST be expressible against
+> the canonical RESO state machines. Listing-section steps map onto
+> [`canonical-processes/processes/listing-lifecycle.md`](canonical-processes/processes/listing-lifecycle.md)
+> (intake -> Coming Soon / Active transition); media steps onto
+> [`canonical-processes/processes/media-lifecycle.md`](canonical-processes/processes/media-lifecycle.md)
+> (`MediaStatus` and `Permission`); commission / financial steps onto
+> [`canonical-processes/processes/transaction-lifecycle.md`](canonical-processes/processes/transaction-lifecycle.md)
+> (`TransactionManagement`).
 
 ## Broker Checklist
 

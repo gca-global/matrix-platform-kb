@@ -4,6 +4,11 @@
 > Each chapter is self-contained. Start here, then navigate to the chapter you need.
 >
 > **For Lovable**: Before building any app, read `platform/app-template.md` first.
+>
+> **For RESO-aligned navigation**: read [`INTEGRATION.md`](INTEGRATION.md) for the layered stack
+> (Layer 1 RESO data model → Layer 2 source mappings → Layer 3 canonical state machines →
+> Layer 4 Sharp-SIR flavour → Layer 5 cross-cutting per-resource views). Then jump into the
+> chapter you need.
 
 ## Chapter 0: Platform Overview
 
@@ -63,6 +68,7 @@ Dash/Anywhere.com as the practical core data model. RESO DD 2.0 as interop stand
 |----------|-------------|
 | [dash-data-model.md](data-models/dash-data-model.md) | **Start here for Dash field names** — Dash/Anywhere.com practical field reference (50+ fields, 30+ features, media) |
 | [data-models/reso-dd-kb/USAGE.md](data-models/reso-dd-kb/USAGE.md) | **Start here for any RESO DD 2.0 question** — canonical model, 41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource docs |
+| [data-models/source-mappings/USAGE.md](data-models/source-mappings/USAGE.md) | **Cross-source mapping** — bridge Dash / Qobrix / SIR to RESO DD: 96 curated rows across 6 resources, `x_sm_*` extension governance, 5 hard-fail join gates |
 | [reso-dd-overview.md](data-models/reso-dd-overview.md) | REDIRECT → `data-models/reso-dd-kb/` (kept for inbound link compatibility) |
 | [reso-canonical-schema.md](data-models/reso-canonical-schema.md) | REDIRECT → `data-models/reso-dd-kb/` (kept for inbound link compatibility) |
 | [platform-extensions.md](data-models/platform-extensions.md) | All 28 `x_sm_*` extensions: fields and lookup values not in RESO DD |
@@ -81,11 +87,24 @@ Current operational workflows, pipelines, qualification rules, and checklists.
 
 | Document | Description |
 |----------|-------------|
-| [listing-pipeline.md](business-processes/listing-pipeline.md) | Seller-side pipeline: 8 stages from Prospect to Closed |
-| [sales-pipeline.md](business-processes/sales-pipeline.md) | Buyer-side pipeline: 8 stages from Qualification to Closed |
-| [lead-qualification.md](business-processes/lead-qualification.md) | MQL → SQL path with BANT criteria |
-| [follow-up-vs-active-sales.md](business-processes/follow-up-vs-active-sales.md) | Nurturing vs active deal boundary & triggers |
-| [listing-checklist.md](business-processes/listing-checklist.md) | Operational checklists: broker, marketing, finance |
+| [business-processes/canonical-processes/USAGE.md](business-processes/canonical-processes/USAGE.md) | **Canonical baseline (vendor-neutral, RESO-aligned)** — 10 process docs (Listing, Showing, OpenHouse, Lead-Contact, Transaction, Member/Office/Team onboarding, Caravan, Media) with mermaid state diagrams, transition tables, and machine-validated RESO citations (709 citations) |
+| [listing-pipeline.md](business-processes/listing-pipeline.md) | Seller-side pipeline: 8 stages from Prospect to Closed (Sharp-SIR flavour, maps onto canonical `Property.StandardStatus`) |
+| [sales-pipeline.md](business-processes/sales-pipeline.md) | Buyer-side pipeline: 8 stages from Qualification to Closed (Sharp-SIR flavour, maps onto canonical `Contacts` + `TransactionManagement`) |
+| [lead-qualification.md](business-processes/lead-qualification.md) | MQL → SQL path with BANT criteria (Sharp-SIR flavour, maps onto canonical `Contacts.ContactType`) |
+| [follow-up-vs-active-sales.md](business-processes/follow-up-vs-active-sales.md) | Nurturing vs active deal boundary & triggers (Sharp-SIR flavour, maps onto canonical `Contacts.ContactType` + `Showing`) |
+| [listing-checklist.md](business-processes/listing-checklist.md) | Operational checklists: broker, marketing, finance (Sharp-SIR flavour) |
+
+## Chapter 4.5: Integration views (Layer 5 cross-cutting)
+
+Per-resource one-stop pages joining Layer 1 (canonical RESO), Layer 2 (source mappings),
+Layer 3 (canonical state machines), and Layer 4 (Sharp-SIR flavour). Generated, deterministic,
+zero-hand-edits under `wiki/agent-docs/`.
+
+| Document | Description |
+|----------|-------------|
+| [INTEGRATION.md](INTEGRATION.md) | **Master layer-cake** — how the four substantive layers compose, decision tables for picking the right layer, harness-engineering invariants |
+| [integration/USAGE.md](integration/USAGE.md) | Task-oriented entry points: "show me everything about resource X", re-emit instructions |
+| [integration/wiki/agent-docs/_index.md](integration/wiki/agent-docs/_index.md) | Generated catalogue of 26 per-resource integrated views with layer-coverage matrix |
 
 ## Chapter 5: Product Specifications
 
