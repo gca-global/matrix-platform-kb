@@ -1,0 +1,3 @@
+reso_field,reso_definition,reso_lookup,reso_data_type,is_extension,dash_form,dash_label,qobrix_schema,qobrix_path,sir_label,value_mapping_json,confidence,has_dash,has_qobrix,has_sir,notes
+OfficeKey,"A system unique identifier. Specifically, in aggregation systems, the key is the system unique identifier from the system where the record was just retrieved. This may be identical to the related xxxId identifier, but the key is guaranteed unique for this record set.",,String,false,Residential_Sale,Listing Office,,,,,high,yes,no,no,Qobrix has no Branch schema; CDL keys this from Property.office or Agent.agency.
+OfficeName,The legal name of the brokerage.,,String,false,Residential_Sale,Listing Office,,,,,medium,yes,no,no,

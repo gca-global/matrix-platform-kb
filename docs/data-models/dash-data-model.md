@@ -7,6 +7,14 @@
 > Use these field names in your Supabase tables. The RESO column shows the
 > interoperability name used for syndication and the RESO Web API.
 
+> **Field-by-field mapping to RESO DD lives in [`source-mappings/wiki/agent-docs/by_source/dash.md`](source-mappings/wiki/agent-docs/by_source/dash.md).**
+> That page is auto-generated from `raw/dash/*.docx` + the curated `mapping_curated.csv`
+> and is gate-validated against canonical RESO every regen. This page (the one
+> you are reading) is narrative orientation about Dash itself — what it is, why
+> we use it, the lifecycle. For Property-by-Property field correspondences see
+> the by_source page above; for the cross-source view of one RESO resource
+> see [`source-mappings/wiki/agent-docs/by_resource/`](source-mappings/wiki/agent-docs/by_resource/).
+
 ## Status: Primary bidirectional channel (SIR affiliate contract)
 
 **Sharp Matrix** is the technology platform (CRM + FM + HR + MLS modules) powering **Sharp SIR**, a Sotheby's International Realty affiliate under the **Anywhere Brands / Anywhere.com** network. Sharp SIR currently operates in Cyprus, Hungary, and Kazakhstan (more markets planned). That makes Dash the **primary, bidirectional data channel** for the CDL — distinct from any generic syndication target:

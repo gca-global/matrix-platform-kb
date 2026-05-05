@@ -1,0 +1,13 @@
+reso_field,reso_definition,reso_lookup,reso_data_type,is_extension,dash_form,dash_label,qobrix_schema,qobrix_path,sir_label,value_mapping_json,confidence,has_dash,has_qobrix,has_sir,notes
+Birthdate,"The month, day and year of the contact's birthday.",,Date,false,Person,Birth Date,Contact,birthdate,,,high,yes,yes,no,
+ContactKey,"A system unique identifier. Specifically, in aggregation systems, the ContactKey is the system unique identifier from the system that the record was retrieved. This may be identical to the related xxxId.",,String,false,,,Contact,id,,,high,no,yes,no,
+Email,The preferred email address of the contact.,,String,false,,,Contact,email,E-mail,,high,no,yes,yes,
+FirstName,The first name of the contact.,,String,false,Person,First Name,Contact,first_name,Name of the Seller (as per the agreement),,medium,yes,yes,yes,
+HomeCountry,The country abbreviation in a postal address.,Country,"String List, Single",false,Person,Country,Contact,country,Country of origin/ residence,,high,yes,yes,yes,
+HomePhone,North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. International numbers should be preceded by a plus symbol.,,String,false,,,Contact,phone_2,,,low,no,yes,no,
+Language,The languages spoken by the contact.,Languages,"String List, Multi",false,,,Contact,preferred_language,,,high,no,yes,no,
+LastName,The last name of the contact.,,String,false,Person,Last Name,Contact,last_name,,,high,yes,yes,no,
+MobilePhone,North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. International numbers should be preceded by a plus symbol.,,String,false,,,Contact,phone,Telephone,,medium,no,yes,yes,"Qobrix has phone, phone_2, phone_3 - all unlabelled; CDL maps phone -> MobilePhone by convention."
+PreferredAddress,"A list of the address options (i.e., Home, Work and Other) used to determine the address preferred by the client.",PreferredAddress,"String List, Single",false,Person,Address Line 1,,,,,high,yes,no,no,
+x_sm_lead_source,,,,true,,,,,"Source of contact (personal, introducer, company)",,high,no,no,yes,Qobrix Contact has no native lead-source field; SIR is the source of record. RESO has Property.LeadSource but Contacts only has Source via different path; promote to extension.
+x_sm_preferred_communication,,,,true,,,,,Preferred method of communication,,high,no,no,yes,

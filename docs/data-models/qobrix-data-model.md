@@ -7,6 +7,14 @@
 >
 > **Decommission status**: Qobrix is being **decommissioned as the MLS source** once Atlas (`matrix-atlas-mls`) and `matrix-pipeline` CRM cover Cyprus listing creation. New listings authored in Atlas / `matrix-pipeline` use `source_id = matrix-internal` (`kind = 'internal'`); the `qobrix` source row will get `sunset_at` set at cutover. RESO DD 2.0 remains the canonical data layer — Qobrix is a migration source, not a permanent contract.
 
+> **Field-by-field mapping to RESO DD lives in [`source-mappings/wiki/agent-docs/by_source/qobrix.md`](source-mappings/wiki/agent-docs/by_source/qobrix.md).**
+> That page is auto-generated from `raw/qobrix/qobrix_openapi.yaml` + the curated
+> `mapping_curated.csv` and is gate-validated against canonical RESO every regen.
+> This page (the one you are reading) is narrative orientation: what Qobrix is,
+> why we use it, decommission strategy. For schema-by-schema field correspondences
+> see the by_source page above; for the cross-source view of one RESO resource see
+> [`source-mappings/wiki/agent-docs/by_resource/`](source-mappings/wiki/agent-docs/by_resource/).
+
 ## Overview
 
 Qobrix is the legacy CRM Sharp SIR uses today for Cyprus brokers. The Sharp Matrix Platform replicates and extends its capabilities through purpose-built apps (`matrix-pipeline` CRM, `matrix-atlas-mls`, `matrix-comms`, `matrix-client-connect`, etc.), all sharing the RESO DD canonical data layer. The Qobrix API documentation serves as a reference for what the platform must support during and after the migration. The API is RESTful (JSON), uses UUID identifiers, and supports search expressions, pagination, and resource expansion.

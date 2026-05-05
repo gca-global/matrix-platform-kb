@@ -223,6 +223,53 @@ fi
 echo ""
 
 # ---------------------------------------------------------------
+# Check 6: source-mappings generated artifacts fresher than inputs
+# ---------------------------------------------------------------
+echo "--- Check 6: source-mappings freshness ---"
+
+SM="$DOCS_DIR/data-models/source-mappings"
+SM_CURATED="$SM/raw/mapping_curated.csv"
+SM_DASH_INV="$SM/raw/dash_inventory.csv"
+SM_QOBRIX_INV="$SM/raw/qobrix_inventory.csv"
+SM_CBP_INV="$SM/raw/cbp_inventory.csv"
+SM_INDEX="$SM/wiki/agent-docs/_index.md"
+
+if [ -d "$SM" ] && [ -f "$SM_CURATED" ]; then
+    # Per-resource alignment freshness vs corresponding by_resource doc.
+    for res in property member office contacts teams media; do
+        align="$SM/raw/alignment_$res.csv"
+        doc="$SM/wiki/agent-docs/by_resource/$res.md"
+        if [ -f "$align" ] && [ -f "$doc" ] && [ "$align" -nt "$doc" ]; then
+            warn "source-mappings: alignment_$res.csv newer than by_resource/$res.md - re-run scripts/05_emit_mapping_docs.py"
+        fi
+    done
+
+    # Curated CSV vs inventories: if any inventory is newer than the
+    # curated CSV, upstream sources changed and the curator should
+    # review whether new rows are needed.
+    for inv in "$SM_DASH_INV" "$SM_QOBRIX_INV" "$SM_CBP_INV"; do
+        if [ -f "$inv" ] && [ "$inv" -nt "$SM_CURATED" ]; then
+            warn "source-mappings: $(basename "$inv") newer than mapping_curated.csv - upstream changed; review curated rows for new/removed labels"
+        fi
+    done
+
+    # Index freshness vs alignments.
+    if [ -f "$SM_INDEX" ]; then
+        for align in "$SM"/raw/alignment_*.csv; do
+            [ -f "$align" ] || continue
+            if [ "$align" -nt "$SM_INDEX" ]; then
+                warn "source-mappings: $(basename "$align") newer than wiki/agent-docs/_index.md - re-run scripts/05_emit_mapping_docs.py"
+            fi
+        done
+    fi
+
+    ok "source-mappings present (curated + alignments + emitted markdown checked for freshness)"
+else
+    warn "source-mappings expected at $SM but key files missing (raw/mapping_curated.csv)"
+fi
+echo ""
+
+# ---------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------
 echo "=== Validation Summary ==="

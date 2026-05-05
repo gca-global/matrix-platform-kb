@@ -1,0 +1,8 @@
+reso_field,reso_definition,reso_lookup,reso_data_type,is_extension,dash_form,dash_label,qobrix_schema,qobrix_path,sir_label,value_mapping_json,confidence,has_dash,has_qobrix,has_sir,notes
+TeamDescription,A description or marketing information about the team.,,String,false,,,Group,description,,,high,no,yes,no,
+TeamEmail,The email address of the team.,,String,false,Team,Email,,,,,high,yes,no,no,
+TeamKey,"A system unique identifier. Specifically, in aggregation systems, the TeamKey is the system unique identifier from the system where the record was retrieved.",,String,false,,,Group,id,,,high,no,yes,no,
+TeamName,"The name under which the team operates. If a business, this may be a DBA (doing business as).",,String,false,Team,Team Name,Group,name,,,high,yes,yes,no,
+TeamOfficePhone,North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. International numbers should be preceded by a plus symbol.,,String,false,Team,Phone,,,,,high,yes,no,no,
+TeamStatus,"Determines whether the account is active, inactive or under disciplinary action.",TeamStatus,"String List, Single",false,,,Group,trashed,,,medium,no,yes,no,trashed=null implies Active.
+x_sm_team_type,,,,true,Team,Team Type,,,,,high,yes,no,no,RESO Teams resource has no canonical TeamType field.
