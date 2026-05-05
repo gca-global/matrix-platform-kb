@@ -1,0 +1,227 @@
+host_resource,host_field,host_field_type,target_resource,target_field,fk_kind,confidence,evidence,notes
+Association,AssociationMember,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Association,AssociationNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:AssociationNationalAssociation->Association,
+Association,AssociationSocialMedia,Collection,SocialMedia,SocialMediaKey,collection_typed,medium,type:collection_typed:SourceResource=SocialMedia,inverse_one_to_many
+Association,ExecutiveOfficerMemberKey,String,Member,MemberKey,name_shape,low,name:tail_stem:ExecutiveOfficerMember->Member,
+Association,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+Association,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Association,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+CaravanStop,CaravanKey,String,Caravan,CaravanKey,prose,high,"prose:P3b:""foreign key referencing the primary key of the Caravan Resource"" | name:exact_stem:Caravan->Caravan",
+CaravanStop,StopKey,String,CaravanStop,,prose,medium,"prose:P3:""foreign key to the CaravanStop Resource""",
+CaravanStop,StopShowingAgentKey,String,Member,MemberKey,prose,medium,"prose:P2:""foreign key relating to the MemberKey of the Member Resource""",
+ContactListingNotes,Contact,Resource,Contacts,,resource_typed,medium,type:resource_typed:SourceResource=Contacts,
+ContactListingNotes,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+ContactListingNotes,Listing,Resource,Property,,resource_typed,medium,type:resource_typed:SourceResource=Property,
+ContactListings,Contact,Resource,Contacts,,resource_typed,medium,type:resource_typed:SourceResource=Contacts,
+ContactListings,ContactKey,String,Contacts,,prose,medium,"prose:P3:""foreign key relating to the Contacts Resource""",
+ContactListings,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+ContactListings,Listing,Resource,Property,,resource_typed,medium,type:resource_typed:SourceResource=Property,
+ContactListings,ListingNotes,Collection,ContactListingNotes,ContactListingNotesKey,collection_typed,medium,type:collection_typed:SourceResource=ContactListingNotes,inverse_one_to_many
+Contacts,ContactsOtherPhone,Collection,OtherPhone,OtherPhoneKey,collection_typed,medium,type:collection_typed:SourceResource=OtherPhone,inverse_one_to_many
+Contacts,ContactsSocialMedia,Collection,SocialMedia,SocialMediaKey,collection_typed,medium,type:collection_typed:SourceResource=SocialMedia,inverse_one_to_many
+Contacts,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+Contacts,Media,Collection,Media,MediaKey,collection_typed,medium,type:collection_typed:SourceResource=Media,inverse_one_to_many
+Contacts,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Contacts,OriginatingSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+Contacts,OwnerMember,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Contacts,OwnerMemberID,String,Member,MemberKey,name_shape,low,name:tail_stem:OwnerMember->Member,
+Contacts,OwnerMemberKey,String,Member,MemberKey,prose,high,"prose:P1:""foreign key relating to the Member resource's MemberKey"" | name:tail_stem:OwnerMember->Member",
+Contacts,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Contacts,SourceSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+HistoryTransactional,ChangedByMemberID,String,Member,MemberKey,name_shape,low,name:tail_stem:ChangedByMember->Member,
+HistoryTransactional,ChangedByMemberKey,String,Member,MemberKey,prose,high,"prose:P1:""foreign key relating to the Member resource's MemberKey"" | name:tail_stem:ChangedByMember->Member",
+HistoryTransactional,FieldKey,String,Field,FieldKey,name_shape,low,name:exact_stem:Field->Field,
+HistoryTransactional,OriginatingSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+HistoryTransactional,ResourceRecordKey,String,,,prose,medium,"prose:P5:""foreign key from the resource selected in the ResourceName field""",polymorphic
+HistoryTransactional,SourceSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+InternetTracking,ActorOriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+InternetTracking,ActorSourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+InternetTracking,EventOriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+InternetTracking,EventSourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+InternetTracking,ObjectOriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+InternetTracking,ObjectSourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+LockOrBox,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+LockOrBox,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+LockOrBox,ShowingAgent,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+LockOrBox,ShowingOffice,Resource,Office,OfficeKey,resource_typed,medium,type:resource_typed:SourceResource=Office,
+LockOrBox,ShowingOfficeId,String,Office,OfficeKey,name_shape,low,name:tail_stem:ShowingOffice->Office,
+LockOrBox,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Media,ChangedByMember,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Media,ChangedByMemberID,String,Member,MemberKey,name_shape,low,name:tail_stem:ChangedByMember->Member,
+Media,ChangedByMemberKey,String,Member,MemberKey,prose,high,"prose:P1:""foreign key relating to the Member Resource's MemberKey"" | name:tail_stem:ChangedByMember->Member",
+Media,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+Media,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Media,ResourceRecordKey,String,,,prose,medium,"prose:P5:""foreign key from the resource selected in the ResourceName field""",polymorphic
+Media,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Media,SourceSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+Member,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+Member,Media,Collection,Media,MediaKey,collection_typed,medium,type:collection_typed:SourceResource=Media,inverse_one_to_many
+Member,MemberNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:MemberNationalAssociation->Association,
+Member,MemberOtherPhone,Collection,OtherPhone,OtherPhoneKey,collection_typed,medium,type:collection_typed:SourceResource=OtherPhone,inverse_one_to_many
+Member,MemberSocialMedia,Collection,SocialMedia,SocialMediaKey,collection_typed,medium,type:collection_typed:SourceResource=SocialMedia,inverse_one_to_many
+Member,Office,Resource,Office,OfficeKey,resource_typed,medium,type:resource_typed:SourceResource=Office,
+Member,OfficeKey,String,Office,OfficeKey,prose,high,"prose:P1:""foreign key relating to the Office Resource's OfficeKey"" | name:exact_stem:Office->Office",
+Member,OfficeNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:OfficeNationalAssociation->Association,
+Member,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Member,OriginatingSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+Member,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Member,SourceSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+MemberAssociation,Association,Resource,Association,AssociationKey,resource_typed,medium,type:resource_typed:SourceResource=Association,
+MemberAssociation,AssociationKey,String,Association,AssociationKey,name_shape,low,name:exact_stem:Association->Association,
+MemberAssociation,AssociationNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:AssociationNationalAssociation->Association,
+MemberAssociation,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+MemberAssociation,Member,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+MemberAssociation,MemberKey,String,Member,MemberKey,name_shape,low,name:exact_stem:Member->Member,
+MemberAssociation,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+MemberAssociation,OriginatingSystemMemberKey,String,Member,MemberKey,name_shape,low,name:tail_stem:OriginatingSystemMember->Member,
+MemberAssociation,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+MemberAssociation,SourceSystemMemberKey,String,Member,MemberKey,name_shape,low,name:tail_stem:SourceSystemMember->Member,
+MemberStateLicense,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+MemberStateLicense,Member,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+MemberStateLicense,MemberKey,String,Member,MemberKey,name_shape,low,name:exact_stem:Member->Member,
+OUID,ChangedByMember,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+OUID,ChangedByMemberID,String,Member,MemberKey,name_shape,low,name:tail_stem:ChangedByMember->Member,
+OUID,ChangedByMemberKey,String,Member,MemberKey,prose,high,"prose:P1:""foreign key relating to the Member Resource's MemberKey"" | name:tail_stem:ChangedByMember->Member",
+OUID,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+OUID,Media,Collection,Media,MediaKey,collection_typed,medium,type:collection_typed:SourceResource=Media,inverse_one_to_many
+OUID,OrganizationNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:OrganizationNationalAssociation->Association,
+OUID,OrganizationSocialMedia,Collection,SocialMedia,SocialMediaKey,collection_typed,medium,type:collection_typed:SourceResource=SocialMedia,inverse_one_to_many
+Office,BillingOfficeKey,String,Office,OfficeKey,name_shape,low,name:tail_stem:BillingOffice->Office,
+Office,FranchiseNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:FranchiseNationalAssociation->Association,
+Office,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+Office,MainOffice,Resource,Office,OfficeKey,resource_typed,medium,type:resource_typed:SourceResource=Office,
+Office,MainOfficeKey,String,Office,OfficeKey,prose,high,"prose:P4:""self-referencing foreign key relating to this resource's OfficeKey"" | name:tail_stem:MainOffice->Office",
+Office,Media,Collection,Media,MediaKey,collection_typed,medium,type:collection_typed:SourceResource=Media,inverse_one_to_many
+Office,OfficeBroker,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Office,OfficeBrokerKey,String,Member,MemberKey,prose,medium,"prose:P1:""foreign key relating to the Member resource's MemberKey""",
+Office,OfficeBrokerNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:OfficeBrokerNationalAssociation->Association,
+Office,OfficeManager,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Office,OfficeManagerKey,String,Member,MemberKey,prose,medium,"prose:P1:""foreign key relating to the Member Resource's MemberKey""",
+Office,OfficeNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:OfficeNationalAssociation->Association,
+Office,OfficeSocialMedia,Collection,SocialMedia,SocialMediaKey,collection_typed,medium,type:collection_typed:SourceResource=SocialMedia,inverse_one_to_many
+Office,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Office,OriginatingSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+Office,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Office,SourceSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+OfficeAssociation,Association,Resource,Association,AssociationKey,resource_typed,medium,type:resource_typed:SourceResource=Association,
+OfficeAssociation,AssociationKey,String,Association,AssociationKey,name_shape,low,name:exact_stem:Association->Association,
+OfficeAssociation,AssociationNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:AssociationNationalAssociation->Association,
+OfficeAssociation,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+OfficeAssociation,Office,Resource,Office,OfficeKey,resource_typed,medium,type:resource_typed:SourceResource=Office,
+OfficeAssociation,OfficeKey,String,Office,OfficeKey,prose,high,"prose:P1:""foreign key relating to the Office Resource's OfficeKey"" | name:exact_stem:Office->Office",
+OfficeAssociation,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+OfficeAssociation,OriginatingSystemMemberKey,String,Member,MemberKey,name_shape,low,name:tail_stem:OriginatingSystemMember->Member,
+OfficeAssociation,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+OfficeAssociation,SourceSystemMemberKey,String,Member,MemberKey,name_shape,low,name:tail_stem:SourceSystemMember->Member,
+OfficeCorporateLicense,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+OfficeCorporateLicense,Office,Resource,Office,OfficeKey,resource_typed,medium,type:resource_typed:SourceResource=Office,
+OfficeCorporateLicense,OfficeKey,String,Office,OfficeKey,prose,high,"prose:P1:""foreign key relating to the Office resource's OfficeKey"" | name:exact_stem:Office->Office",
+OpenHouse,ListingKey,String,,,prose,medium,"prose:P5:""foreign key from the resource selected in the ResourceName field""",polymorphic
+OpenHouse,ShowingAgentKey,String,Member,MemberKey,prose,medium,"prose:P1:""foreign key relating to the Member Resource's MemberKey""",
+OtherPhone,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+OtherPhone,ResourceRecordKey,String,,,prose,medium,"prose:P5:""foreign key from the resource selected in the ResourceName field""",polymorphic
+Property,BuyerAgent,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Property,BuyerAgentKey,String,Member,MemberKey,prose,medium,"prose:P1:""foreign key relating to the Member Resource's MemberKey""",
+Property,BuyerAgentNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:BuyerAgentNationalAssociation->Association,
+Property,BuyerOffice,Resource,Office,OfficeKey,resource_typed,medium,type:resource_typed:SourceResource=Office,
+Property,BuyerOfficeKey,String,Office,OfficeKey,prose,high,"prose:P1:""foreign key relating to the Office Resource's OfficeKey"" | name:tail_stem:BuyerOffice->Office",
+Property,BuyerOfficeNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:BuyerOfficeNationalAssociation->Association,
+Property,BuyerTeam,Resource,Teams,,resource_typed,medium,type:resource_typed:SourceResource=Teams,
+Property,BuyerTeamKey,String,Teams,TeamKey,prose,medium,"prose:P1:""foreign key relating to the Teams Resource's TeamKey""",
+Property,CoBuyerAgent,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Property,CoBuyerAgentKey,String,Member,MemberKey,prose,medium,"prose:P1:""foreign key relating to the Member Resource's MemberKey""",
+Property,CoBuyerAgentNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:CoBuyerAgentNationalAssociation->Association,
+Property,CoBuyerOffice,Resource,Office,OfficeKey,resource_typed,medium,type:resource_typed:SourceResource=Office,
+Property,CoBuyerOfficeKey,String,Office,OfficeKey,prose,high,"prose:P1:""foreign key relating to the Office Resource's OfficeKey"" | name:tail_stem:CoBuyerOffice->Office",
+Property,CoBuyerOfficeNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:CoBuyerOfficeNationalAssociation->Association,
+Property,CoListAgent,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Property,CoListAgentKey,String,Member,MemberKey,prose,medium,"prose:P1:""foreign key relating to the Member Resource's MemberKey""",
+Property,CoListAgentNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:CoListAgentNationalAssociation->Association,
+Property,CoListOffice,Resource,Office,OfficeKey,resource_typed,medium,type:resource_typed:SourceResource=Office,
+Property,CoListOfficeKey,String,Office,OfficeKey,prose,high,"prose:P1:""foreign key relating to the Office Resource's OfficeKey"" | name:tail_stem:CoListOffice->Office",
+Property,CoListOfficeNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:CoListOfficeNationalAssociation->Association,
+Property,GreenBuildingVerification,Collection,PropertyGreenVerification,,collection_typed,medium,type:collection_typed:SourceResource=PropertyGreenVerification,inverse_one_to_many
+Property,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+Property,ListAgent,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Property,ListAgentKey,String,Member,MemberKey,prose,medium,"prose:P1:""foreign key relating to the Member Resource's MemberKey""",
+Property,ListAgentNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:ListAgentNationalAssociation->Association,
+Property,ListOffice,Resource,Office,OfficeKey,resource_typed,medium,type:resource_typed:SourceResource=Office,
+Property,ListOfficeKey,String,Office,OfficeKey,prose,high,"prose:P1:""foreign key relating to the Office Resource's OfficeKey"" | name:tail_stem:ListOffice->Office",
+Property,ListOfficeNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:ListOfficeNationalAssociation->Association,
+Property,ListTeam,Resource,Teams,,resource_typed,medium,type:resource_typed:SourceResource=Teams,
+Property,ListTeamKey,String,Teams,TeamKey,prose,medium,"prose:P1:""foreign key relating to the Teams Resource's TeamKey""",
+Property,Media,Collection,Media,MediaKey,collection_typed,medium,type:collection_typed:SourceResource=Media,inverse_one_to_many
+Property,OpenHouse,Collection,OpenHouse,OpenHouseKey,collection_typed,medium,type:collection_typed:SourceResource=OpenHouse,inverse_one_to_many
+Property,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Property,OriginatingSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+Property,PowerProduction,Collection,PropertyPowerProduction,,collection_typed,medium,type:collection_typed:SourceResource=PropertyPowerProduction,inverse_one_to_many
+Property,Rooms,Collection,PropertyRooms,,collection_typed,medium,type:collection_typed:SourceResource=PropertyRooms,inverse_one_to_many
+Property,SocialMedia,Collection,SocialMedia,SocialMediaKey,collection_typed,medium,type:collection_typed:SourceResource=SocialMedia,inverse_one_to_many
+Property,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Property,SourceSystemID,String,OUID,OrganizationUniqueId,prose,medium,"prose:P6:""OUID Resource's OrganizationUniqueId""",
+Property,UnitTypes,Collection,PropertyUnitTypes,,collection_typed,medium,type:collection_typed:SourceResource=PropertyUnitTypes,inverse_one_to_many
+Property,UniversalPropertyId,String,Property,,name_shape,low,name:tail_stem:UniversalProperty->Property,
+PropertyGreenVerification,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+PropertyGreenVerification,Listing,Resource,Property,,resource_typed,medium,type:resource_typed:SourceResource=Property,
+PropertyGreenVerification,ListingKey,String,Property,SourceSystemKey,prose,medium,"prose:P6:""Property Resource's SourceSystemKey""",
+PropertyPowerProduction,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+PropertyPowerProduction,Listing,Resource,Property,,resource_typed,medium,type:resource_typed:SourceResource=Property,
+PropertyPowerProduction,ListingKey,String,Property,SourceSystemKey,prose,medium,"prose:P6:""Property Resource's SourceSystemKey"" | prose:P3:""foreign key relating to the Property Resource""",
+PropertyRooms,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+PropertyRooms,Listing,Resource,Property,,resource_typed,medium,type:resource_typed:SourceResource=Property,
+PropertyRooms,ListingKey,String,Property,SourceSystemKey,prose,medium,"prose:P6:""Property Resource's SourceSystemKey"" | prose:P3:""foreign key relating to the Property resource""",
+PropertyUnitTypes,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+PropertyUnitTypes,Listing,Resource,Property,,resource_typed,medium,type:resource_typed:SourceResource=Property,
+PropertyUnitTypes,ListingKey,String,Property,SourceSystemKey,prose,medium,"prose:P6:""Property Resource's SourceSystemKey"" | prose:P3:""foreign key relating to the Property Resource""",
+Prospecting,ContactKey,String,Contacts,,prose,medium,"prose:P3:""foreign key relating to the Contacts Resource""",
+Prospecting,OwnerMemberID,String,Member,MemberKey,name_shape,low,name:tail_stem:OwnerMember->Member,
+Prospecting,OwnerMemberKey,String,Member,MemberKey,prose,high,"prose:P1:""foreign key relating to the Member Resource's MemberKey"" | name:tail_stem:OwnerMember->Member",
+Prospecting,SavedSearchKey,String,SavedSearch,SavedSearchKey,prose,high,"prose:P3:""foreign key relating to the SavedSearch Resource"" | name:exact_stem:SavedSearch->SavedSearch",
+Queue,ResourceRecordKey,String,,,prose,medium,"prose:P5:""foreign key from the resource selected in the ResourceName field""",polymorphic
+Rules,FieldKey,String,Field,FieldKey,name_shape,low,name:exact_stem:Field->Field,
+Rules,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+Rules,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Rules,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+SavedSearch,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+SavedSearch,Member,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+SavedSearch,MemberKey,String,Member,MemberKey,prose,high,"prose:P1:""foreign key relating to the Member Resource's MemberKey"" | name:exact_stem:Member->Member",
+SavedSearch,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+SavedSearch,OriginatingSystemMemberKey,String,Member,MemberKey,name_shape,low,name:tail_stem:OriginatingSystemMember->Member,
+SavedSearch,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Showing,AgentOriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Showing,AgentSourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Showing,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+Showing,Listing,Resource,Property,,resource_typed,medium,type:resource_typed:SourceResource=Property,
+Showing,ListingOriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Showing,ListingSourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Showing,Media,Collection,Media,MediaKey,collection_typed,medium,type:collection_typed:SourceResource=Media,inverse_one_to_many
+Showing,ShowingAgent,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Showing,ShowingAgentKey,String,Member,MemberKey,prose,medium,"prose:P1:""foreign key relating to the Member Resource's MemberKey""",
+Showing,ShowingOriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Showing,ShowingSourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Showing,SocialMedia,Collection,SocialMedia,SocialMediaKey,collection_typed,medium,type:collection_typed:SourceResource=SocialMedia,inverse_one_to_many
+ShowingAppointment,ShowingAgentKey,String,Member,MemberKey,prose,medium,"prose:P2:""foreign key relating to the Member Key of the Member Resource""",
+ShowingAppointment,ShowingId,String,Showing,ShowingKey,name_shape,low,name:exact_stem:Showing->Showing,
+ShowingAppointment,ShowingKey,String,Showing,ShowingKey,name_shape,low,name:exact_stem:Showing->Showing,
+ShowingAvailability,ShowingId,String,Showing,ShowingKey,name_shape,low,name:exact_stem:Showing->Showing,
+ShowingAvailability,ShowingKey,String,Showing,ShowingKey,name_shape,low,name:exact_stem:Showing->Showing,
+ShowingAvailability,UniversalPropertyId,String,Property,,name_shape,low,name:tail_stem:UniversalProperty->Property,
+ShowingRequest,ShowingAgentKey,String,Member,MemberKey,prose,medium,"prose:P2:""foreign key relating to the MemberKey of the Member Resource""",
+ShowingRequest,ShowingId,String,Showing,ShowingKey,name_shape,low,name:exact_stem:Showing->Showing,
+ShowingRequest,ShowingKey,String,Showing,ShowingKey,name_shape,low,name:exact_stem:Showing->Showing,
+SocialMedia,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+SocialMedia,ResourceRecordKey,String,,,prose,medium,"prose:P5:""foreign key from the resource selected in the ResourceName field""",polymorphic
+TeamMembers,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+TeamMembers,Member,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+TeamMembers,MemberKey,String,Member,MemberKey,prose,high,"prose:P1:""foreign key relating to the Member Resource's MemberKey"" | name:exact_stem:Member->Member",
+TeamMembers,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+TeamMembers,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+TeamMembers,TeamKey,String,Teams,,prose,medium,"prose:P7:""foreign key referencing the Teams Resource's primary key""",
+TeamMembers,TeamMemberNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:TeamMemberNationalAssociation->Association,
+Teams,HistoryTransactional,Collection,HistoryTransactional,HistoryTransactionalKey,collection_typed,medium,type:collection_typed:SourceResource=HistoryTransactional,inverse_one_to_many
+Teams,Media,Collection,Media,MediaKey,collection_typed,medium,type:collection_typed:SourceResource=Media,inverse_one_to_many
+Teams,OriginatingSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Teams,SourceSystem,Resource,OUID,,resource_typed,medium,type:resource_typed:SourceResource=OUID,
+Teams,TeamLead,Resource,Member,MemberKey,resource_typed,medium,type:resource_typed:SourceResource=Member,
+Teams,TeamLeadNationalAssociationId,String,Association,AssociationKey,name_shape,low,name:tail_stem:TeamLeadNationalAssociation->Association,
+Teams,TeamsSocialMedia,Collection,SocialMedia,SocialMediaKey,collection_typed,medium,type:collection_typed:SourceResource=SocialMedia,inverse_one_to_many

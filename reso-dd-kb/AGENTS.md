@@ -31,7 +31,11 @@ upstream).
 |---|---|---|
 | `mirror/**` | `scripts/01_mirror.sh` | No. Re-mirror to refresh. |
 | `_meta/**` | `scripts/01_mirror.sh` + `scripts/_emit_manifest.py` | No. |
-| `raw/**` | `scripts/02_parse_mirror.py` (Phase 1) and the Phase 2 / 2.5 scripts | No. Re-run the owning script. |
+| `raw/resources.csv`, `raw/fields.csv`, `raw/field_definitions.csv`, `raw/lookups.csv`, `raw/lookup_values.csv` | `scripts/02_parse_mirror.py` | No. Re-run 02. |
+| `raw/_signals_definition.csv` | `scripts/03a_extract_definition_signals.py` | No. Re-run 03a. |
+| `raw/_signals_type.csv` | `scripts/03b_extract_type_signals.py` | No. Re-run 03b. |
+| `raw/_signals_name.csv` | `scripts/03c_extract_name_signals.py` | No. Re-run 03c. |
+| `raw/relationships.csv` | `scripts/03_merge_signals.py` | No. Re-run 03. |
 | `scripts/**` | humans + LLM agents (with review) | Yes. |
 | `README.md`, `AGENTS.md`, `methodology.md` | humans + LLM agents (with review) | Yes. |
 
@@ -73,13 +77,39 @@ Required gates (Phase 1):
 If a gate breaks, fix the parser (or re-mirror the missing pages).
 Do NOT relax the gate.
 
+## Phase 2 outputs (now present)
+
+The following files were added in Phase 2 (FK correlation analysis).
+They are derived from the Phase 1 CSVs and rebuilt by re-running
+`03*.py`; do not hand-edit.
+
+- `raw/_signals_definition.csv` - one row per Definition-prose FK
+  pattern hit (P1 / P2 / P3 / P3b / P4 / P5 / P6 / P7).
+- `raw/_signals_type.csv` - one row per `Resource`- or
+  `Collection`-typed field, with the `SourceResource` cell.
+- `raw/_signals_name.csv` - one row per `*Key` / `*Id` field whose
+  stem matches a known resource (with PK-collision and
+  `OriginatingSystem<X>Key` host-pattern suppression applied).
+- `raw/relationships.csv` - the merged, scored deliverable. One row
+  per `(host_resource, host_field, target_resource)` triple, with
+  evidence verbatim and a `confidence in {high, medium, low}`.
+
+See `methodology.md` -> "Methodology - Phase 2" for the patterns,
+scoring rules, and spot-check results.
+
+Phase 3 (DBML build) is the only consumer permitted to read
+`raw/relationships.csv`. Phase 2.5 (satellite audit) reads it too,
+but Phase 2.5's output (`raw/satellites.csv`) lives in its own commit.
+
 ## What this directory does NOT contain (yet)
 
 - No `wiki/dbml/*.dbml` (Phase 3 output).
-- No `raw/relationships.csv` (Phase 2 output).
 - No `raw/satellites.csv` (Phase 2.5 output).
 - No alias map of any kind. The `RESOURCE_ALIASES` map from the
-  previous iteration is intentionally not carried over.
+  previous iteration is intentionally not carried over - role
+  aliases (`ListAgent -> Member`, `OriginatingSystem -> OUID`,
+  etc.) are surfaced through the Definition-prose signal and the
+  `SourceResource` cell instead.
 - No xlsx file. If a cross-check is needed later, re-download from
   RESO and put it under a clearly-labelled `_xchk/` folder, never
   `raw/`.

@@ -1,0 +1,59 @@
+host_resource,host_field,pattern_id,target_resource,target_field,matched,notes
+CaravanStop,CaravanKey,P3b,Caravan,,foreign key referencing the primary key of the Caravan Resource,medium;column_is_pk_of_target
+CaravanStop,StopKey,P3,CaravanStop,,foreign key to the CaravanStop Resource,medium;column_inferred
+CaravanStop,StopShowingAgentKey,P2,Member,MemberKey,foreign key relating to the MemberKey of the Member Resource,strong
+ContactListings,ContactKey,P3,Contacts,,foreign key relating to the Contacts Resource,medium;column_inferred
+Contacts,OriginatingSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+Contacts,OwnerMemberKey,P1,Member,MemberKey,foreign key relating to the Member resource's MemberKey,strong
+Contacts,SourceSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+HistoryTransactional,ChangedByMemberKey,P1,Member,MemberKey,foreign key relating to the Member resource's MemberKey,strong
+HistoryTransactional,OriginatingSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+HistoryTransactional,ResourceRecordKey,P5,,,foreign key from the resource selected in the ResourceName field,medium;polymorphic_via_ResourceName
+HistoryTransactional,SourceSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+Media,ChangedByMemberKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+Media,ResourceRecordKey,P5,,,foreign key from the resource selected in the ResourceName field,medium;polymorphic_via_ResourceName
+Media,SourceSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+Member,OfficeKey,P1,Office,OfficeKey,foreign key relating to the Office Resource's OfficeKey,strong
+Member,OriginatingSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+Member,SourceSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+OUID,ChangedByMemberKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+Office,MainOfficeKey,P4,Office,OfficeKey,self-referencing foreign key relating to this resource's OfficeKey,strong;self_referencing
+Office,OfficeBrokerKey,P1,Member,MemberKey,foreign key relating to the Member resource's MemberKey,strong
+Office,OfficeManagerKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+Office,OriginatingSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+Office,SourceSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+OfficeAssociation,OfficeKey,P1,Office,OfficeKey,foreign key relating to the Office Resource's OfficeKey,strong
+OfficeCorporateLicense,OfficeKey,P1,Office,OfficeKey,foreign key relating to the Office resource's OfficeKey,strong
+OpenHouse,ListingKey,P5,,,foreign key from the resource selected in the ResourceName field,medium;polymorphic_via_ResourceName
+OpenHouse,ShowingAgentKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+OtherPhone,ResourceRecordKey,P5,,,foreign key from the resource selected in the ResourceName field,medium;polymorphic_via_ResourceName
+Property,BuyerAgentKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+Property,BuyerOfficeKey,P1,Office,OfficeKey,foreign key relating to the Office Resource's OfficeKey,strong
+Property,BuyerTeamKey,P1,Teams,TeamKey,foreign key relating to the Teams Resource's TeamKey,strong
+Property,CoBuyerAgentKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+Property,CoBuyerOfficeKey,P1,Office,OfficeKey,foreign key relating to the Office Resource's OfficeKey,strong
+Property,CoListAgentKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+Property,CoListOfficeKey,P1,Office,OfficeKey,foreign key relating to the Office Resource's OfficeKey,strong
+Property,ListAgentKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+Property,ListOfficeKey,P1,Office,OfficeKey,foreign key relating to the Office Resource's OfficeKey,strong
+Property,ListTeamKey,P1,Teams,TeamKey,foreign key relating to the Teams Resource's TeamKey,strong
+Property,OriginatingSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+Property,SourceSystemID,P6,OUID,OrganizationUniqueId,OUID Resource's OrganizationUniqueId,strong;possessive_no_fk_word
+PropertyGreenVerification,ListingKey,P6,Property,SourceSystemKey,Property Resource's SourceSystemKey,strong;possessive_no_fk_word
+PropertyPowerProduction,ListingKey,P3,Property,,foreign key relating to the Property Resource,medium;column_inferred
+PropertyPowerProduction,ListingKey,P6,Property,SourceSystemKey,Property Resource's SourceSystemKey,strong;possessive_no_fk_word;refines_P3
+PropertyRooms,ListingKey,P3,Property,,foreign key relating to the Property resource,medium;column_inferred
+PropertyRooms,ListingKey,P6,Property,SourceSystemKey,Property Resource's SourceSystemKey,strong;possessive_no_fk_word;refines_P3
+PropertyUnitTypes,ListingKey,P3,Property,,foreign key relating to the Property Resource,medium;column_inferred
+PropertyUnitTypes,ListingKey,P6,Property,SourceSystemKey,Property Resource's SourceSystemKey,strong;possessive_no_fk_word;refines_P3
+Prospecting,ContactKey,P3,Contacts,,foreign key relating to the Contacts Resource,medium;column_inferred
+Prospecting,OwnerMemberKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+Prospecting,SavedSearchKey,P3,SavedSearch,,foreign key relating to the SavedSearch Resource,medium;column_inferred
+Queue,ResourceRecordKey,P5,,,foreign key from the resource selected in the ResourceName field,medium;polymorphic_via_ResourceName
+SavedSearch,MemberKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+Showing,ShowingAgentKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+ShowingAppointment,ShowingAgentKey,P2,Member,MemberKey,foreign key relating to the Member Key of the Member Resource,strong
+ShowingRequest,ShowingAgentKey,P2,Member,MemberKey,foreign key relating to the MemberKey of the Member Resource,strong
+SocialMedia,ResourceRecordKey,P5,,,foreign key from the resource selected in the ResourceName field,medium;polymorphic_via_ResourceName
+TeamMembers,MemberKey,P1,Member,MemberKey,foreign key relating to the Member Resource's MemberKey,strong
+TeamMembers,TeamKey,P7,Teams,,foreign key referencing the Teams Resource's primary key,medium;column_is_pk_of_target
