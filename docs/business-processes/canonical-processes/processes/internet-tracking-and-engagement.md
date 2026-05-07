@@ -206,6 +206,99 @@ Within a window, increment the count fields as events are observed:
 - No opinion on identity stitching between anonymous impressions
   and authenticated `Contacts`/`Member` records.
 
+## Atlas implementation
+
+Implementation contract for builders (human or AI) wiring the
+engagement dashboard into Atlas.
+
+### Provisioning status
+
+| Resource | Status | CDL table | `mls-sync` resource key | Backend gap |
+|---|---|---|---|---|
+| `InternetTracking` | Ship reads now | `public.internet_tracking_events` (note trailing `_events`) | `tracking` (ingestion only — no Atlas write path) | a separate consumer-facing `/track` ingestion EF for new events from the Atlas client |
+| `InternetTrackingSummary` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.internet_tracking_summary`; add `tracking_summary` mapper |
+| `EntityEvent` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.entity_event`; add `entity_event` mapper |
+
+The "Engagement roll-ups" and "Per-listing drill-down" sections
+of `/mls/insights` ship behind a clear "Coming soon — CDL
+backend pending" empty state until the summary and entity-event
+tables land. The "Live event stream" section ships now against
+`public.internet_tracking_events`.
+
+### Reads
+
+`InternetTracking` reads via the anonymous CDL client (anon
+SELECT is allowed):
+
+```ts
+const { data, error } = await cdlAnonClient
+  .from('internet_tracking_events')
+  .select('*')
+  .order('event_timestamp', { ascending: false })
+  .range(from, to);
+```
+
+For paged list views use `useCdlTablePage` from
+`src/hooks/useMlsData.ts` (`table: 'internet_tracking_events'`).
+
+The `mls-sync` `list-resource` action also exposes `tracking`
+for admin-scoped reads filtered by tenant
+`originating_system_name`.
+
+### Writes — Atlas-side event capture
+
+`mls-sync` `tracking` is an INGESTION mapper (RESO -> CDL); it
+is not the Atlas-side write path for new client events. The
+Atlas surface needs a separate write-side `/track` Edge Function
+(not yet built) that:
+
+- accepts a single event from the Atlas client (Detailed View,
+  Photo Gallery, Virtual Tour, Favorited, Share, …);
+- enforces the canonical idempotency tuple
+  `(EventOriginatingSystemName, OriginatingSystemEventKey)` —
+  see this doc's "Idempotency contract" section;
+- writes one row to `public.internet_tracking_events` and
+  emits the corresponding `EntityEvent` (once provisioned).
+
+Until that EF exists, do NOT POST events from Atlas. Browsing
+the existing event stream (read path above) is fine.
+
+### Tables and columns
+
+`public.internet_tracking_events` (post-Wave-3 strict schema):
+
+- PK: `id` (uuid). Tenant scope: `originating_system_name`.
+- RESO fields: `event_key`, `event_type`, `event_timestamp`,
+  `event_reported_timestamp`, `event_description`,
+  `event_label`, `event_source`, `actor_type`, `actor_key`,
+  `actor_email`, `device_type`, `object_type`, `object_key`,
+  `object_url`, `referring_url`, `session_id`, `user_agent`,
+  `originating_system_event_key`, `source_system_event_key`,
+  plus the originating-system metadata fields cited.
+- Append-only: this resource is `appendOnly: true` in
+  `SYNC_RESOURCES`; the EF refuses non-`system_admin` writes
+  through `upsert-resource` / `delete-resource` on this table.
+
+Hard prohibitions on the data plane (do NOT reintroduce):
+`source_id`, `x_*`, `is_visible`, `is_deleted`, `deleted_at`,
+`content_hash`, `locked_fields`, `raw`.
+
+### History emission contract
+
+`InternetTracking` events do NOT emit
+`public.history_transactional` rows — they are themselves the
+audit stream for consumer-side activity.
+`public.history_transactional` covers row-state changes on
+canonical resources; `public.internet_tracking_events` covers
+consumer events. The two streams are complementary and live
+side-by-side; see
+[`history-and-audit-log.md`](history-and-audit-log.md) for the
+state-change side.
+
+When `EntityEvent` lands, its rows MAY be cross-referenced by
+`HistoryTransactional.EntityEventSequence` to give logical-time
+ordering across both streams.
+
 <!-- reso-citations
 Resource: InternetTracking
 Resource: InternetTrackingSummary

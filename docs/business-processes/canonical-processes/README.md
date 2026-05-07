@@ -46,6 +46,13 @@ are the only hand-edited files. Validation enforces 5 hard-fail
 gates. Emit is deterministic - re-runs with no narrative change
 produce zero-byte diffs.
 
+Each process doc closes with an `## Atlas implementation` section
+that names the CDL tables, columns, `mls-sync` resource keys, and
+provisioning status the implementing surface needs. The canonical
+model itself is unchanged; this is a builder-facing checklist so
+Atlas (or any RESO consumer) wires reads and writes against the
+right tables and edge-function actions.
+
 ## In-scope processes
 
 | Process | Doc | Primary RESO resources | Primary status lookup(s) |

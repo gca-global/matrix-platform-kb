@@ -176,6 +176,131 @@ A downstream consumer MUST be able to:
 - No opinion on whether `ChangeType` may be extended with custom
   values — the canonical baseline cites only RESO-published values.
 
+## Atlas implementation
+
+Implementation contract for builders (human or AI) wiring the
+audit-log explorer (`/mls/history`) and the embeddable
+`RecentActivity` panel into Atlas.
+
+### Provisioning status
+
+| Resource | Status | CDL table | `mls-sync` resource key |
+|---|---|---|---|
+| `HistoryTransactional` | Ship now (read-only) | `public.history_transactional` | `history` (read via `list-resource`; append-only writes only by `system_admin`) |
+
+### Reads
+
+The viewer is READ-ONLY. There are two read paths:
+
+```ts
+// 1. Anonymous tenant-scoped read (preferred for the embeddable
+//    RecentActivity panel and most filtered views).
+const { data, error } = await cdlAnonClient
+  .from('history_transactional')
+  .select('*')
+  .eq('resource_name', 'Property')
+  .eq('resource_record_key', listingKey)
+  .order('entity_event_sequence', { ascending: false, nullsFirst: false })
+  .order('modification_timestamp', { ascending: false })
+  .limit(10);
+
+// 2. Admin-scoped read via the EF (used by the global /mls/history
+//    explorer when the operator wants free-text search across the
+//    fields below).
+await invokeCdl('mls-sync', {
+  action: 'list-resource',
+  resource: 'history',
+  q: searchTerm,                 // searches resource_name,
+                                 // resource_record_id, field_name,
+                                 // change_type
+  page,
+  pageSize,
+});
+```
+
+Sort key per the canonical contract: `entity_event_sequence DESC`
+when populated, fallback to `modification_timestamp DESC`. Use
+the two-`order` pattern above so PostgREST emits the right SQL.
+
+### Writes
+
+Atlas writes nothing here directly. Every other canonical
+process that mutates a tracked resource MUST emit one or more
+`history_transactional` rows server-side, in the same
+transaction as its `upsert-resource` / `delete-resource` call.
+This is a producer-side guarantee, not an audit-viewer
+responsibility.
+
+The `mls-sync` EF refuses `upsert-resource` and
+`delete-resource` against `resource: 'history'` for non-
+`system_admin` callers; the table is `appendOnly: true` in
+`SYNC_RESOURCES`.
+
+### Embeddable panel — `RecentActivity` component contract
+
+The same panel used by `/mls/history`'s right inspector is also
+embedded into every record-detail page. The component prop
+shape (vendor-neutral, so any builder reproduces the same
+contract):
+
+```tsx
+<RecentActivity
+  resourceName="Property"             // RESO ResourceName lookup
+  resourceRecordKey={listingKey}      // parent row PK
+  limit={10}                           // optional, default 10
+/>
+```
+
+Rendering rules (hard requirements):
+
+- Sort: `entity_event_sequence DESC`, fallback
+  `modification_timestamp DESC`.
+- Each row shows `change_type` as a status pill via
+  `<ResoLookupValue lookup="ChangeType" value={r.change_type} />`.
+  Unknown values render as `Unknown: <raw>` (forward
+  compatibility).
+- For field-level rows (no `change_type`): show
+  `field_name` (resolved through `<ResoFieldLabel>` when
+  `field_key` matches a known field), then a side-by-side
+  `previous_value` / `new_value` diff.
+- `changed_by_member_key` resolves to a Member chip when
+  possible; otherwise render the raw key.
+- The panel is read-only — no edit/delete actions.
+
+### Tables and columns
+
+`public.history_transactional` (post-Wave-3 strict schema):
+
+- PK: `id`. Tenant scope: `originating_system_name`. The
+  legacy `source_id` column was dropped in Wave-3.
+- RESO fields: `resource_name`, `resource_record_key`,
+  `resource_record_id`, `class_name`, `change_type`,
+  `changed_by_member_key`, `changed_by_member_id`, `field_key`,
+  `field_name`, `previous_value`, `new_value`,
+  `entity_event_sequence`, `modification_timestamp`,
+  `originating_system_history_key`, `source_system_history_key`,
+  plus the originating-system metadata fields cited.
+
+Hard prohibitions on the data plane (do NOT reintroduce):
+`source_id`, `x_*`, `is_visible`, `is_deleted`, `deleted_at`,
+`content_hash`, `locked_fields`, `raw`.
+
+### Producer history scopes — quick reference
+
+| Producer process | `ResourceName` | `ResourceRecordKey` |
+|---|---|---|
+| [`listing-lifecycle.md`](listing-lifecycle.md) | `Property` | `Property.ListingKey` |
+| [`transaction-lifecycle.md`](transaction-lifecycle.md) | `Property` | `Property.ListingKey` |
+| [`media-lifecycle.md`](media-lifecycle.md) | `Property` | parent `Property.ListingKey` |
+| [`open-house-lifecycle.md`](open-house-lifecycle.md) | `Property` | `Property.ListingKey` |
+| [`showing-lifecycle.md`](showing-lifecycle.md) | `Property` | `Property.ListingKey` |
+| [`member-lifecycle.md`](member-lifecycle.md) | `Member` | `Member.MemberKey` |
+| [`office-lifecycle.md`](office-lifecycle.md) | `Office` | `Office.OfficeKey` |
+| [`team-lifecycle.md`](team-lifecycle.md) | `Member` | `Member.MemberKey` |
+| [`property-detail-attachment-lifecycle.md`](property-detail-attachment-lifecycle.md) | `Property` | parent `Property.ListingKey` |
+| [`prospecting-and-saved-search-delivery.md`](prospecting-and-saved-search-delivery.md) | `Contacts` | `Contacts.ContactKey` |
+| [`lead-contact-lifecycle.md`](lead-contact-lifecycle.md) | `Contacts` | `Contacts.ContactKey` |
+
 <!-- reso-citations
 Resource: HistoryTransactional
 Resource: Member

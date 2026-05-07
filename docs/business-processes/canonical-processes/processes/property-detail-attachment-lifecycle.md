@@ -215,6 +215,143 @@ Closed RESO lookup. Canonical baseline cites:
 - No opinion on capture UI ordering — project flavour.
 - No opinion on retention policy after parent retirement.
 
+## Atlas implementation
+
+This is the implementation contract for builders (human or AI)
+wiring this canonical process into Atlas. It does NOT change the
+canonical model — every resource and field cited below is already
+in the citations block. Atlas filenames are descriptive, not
+authoritative; the canonical contract is the resource keys, table
+names, and column names. If a file moves, the contract does not.
+
+The "do not build" call-out below applies only to the Atlas UI.
+The canonical citations stay; the resource is real in RESO DD 2.0.
+Atlas just does not surface it.
+
+### Provisioning status
+
+Three buckets:
+
+| Resource | Status | CDL table | `mls-sync` resource key | Backend gap |
+|---|---|---|---|---|
+| `PropertyRooms` | Ship now | `public.property_rooms` | `rooms` | none |
+| `PropertyUnitTypes` | Ship now | `public.property_unit_types` | `unit_types` | none |
+| `PropertyGreenVerification` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.property_green_verification`; add `green_verification` mapper to `SYNC_RESOURCES` in `mls-sync` |
+| `PropertyPowerStorage` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.property_power_storage`; add `power_storage` mapper to `SYNC_RESOURCES` |
+| `PropertyPowerProduction` | Do not build | retired | retired | the table was dropped by `20260504080000_pr1_5_pr1_6_drop_teams_and_power_production.sql` and the mapper was removed from `SYNC_RESOURCES`. Atlas MUST NOT show a tab for this resource. |
+
+For "Coming Soon" resources, ship the UI behind a clear empty
+state ("Coming soon — CDL backend pending") and stub the data
+hooks; do not call PostgREST or `mls-sync` for them.
+
+### Reads
+
+Use the anonymous CDL client directly — RLS allows anon SELECT on
+the provisioned child tables:
+
+```ts
+import { cdlAnonClient } from '@/integrations/supabase/cdlClient';
+
+const { data, error } = await cdlAnonClient
+  .from('property_rooms')           // or 'property_unit_types'
+  .select('*')
+  .eq('listing_key', listingKey)
+  .order('modification_timestamp', { ascending: false });
+```
+
+For paged list views (any explorer-style table), use
+`useCdlTablePage` from `src/hooks/useMlsData.ts`.
+
+The `mls-sync` `list-resource` action is also wired for `rooms`
+and `unit_types`, but it does NOT accept a parent `listing_key`
+filter — it scopes only by tenant `originating_system_name`. For
+parent-scoped reads, prefer `cdlAnonClient` with `.eq('listing_key', ...)`.
+
+### Writes
+
+Always through the CDL Edge Function, never through PostgREST
+directly. Resource key is the logical key (e.g. `rooms`), not the
+table name (e.g. `property_rooms`).
+
+```ts
+import { invokeCdl } from '@/lib/edge-functions';
+
+await invokeCdl('mls-sync', {
+  action: 'upsert-resource',
+  resource: 'rooms',                 // 'unit_types' for the sibling tab
+  row: {
+    // include `id` to update; omit to insert.
+    listing_key: listingKey,
+    room_type: 'Bedroom',
+    room_level: 'Second',
+    room_length: 12,
+    room_width: 14,
+    room_length_width_units: 'Feet',
+    modification_timestamp: new Date().toISOString(),
+  },
+});
+
+await invokeCdl('mls-sync', {
+  action: 'delete-resource',
+  resource: 'rooms',
+  id: rowId,
+  hard: true,                        // tables here have no soft-delete
+});
+```
+
+The EF strips `created_at`, `updated_at`, `locked_fields`, and
+`content_hash` from the payload; mints a synthetic source key on
+insert if needed; pins `originating_system_name` to the caller's
+tenant; and refuses cross-tenant writes. Hard delete is
+permitted only to `system_admin` callers.
+
+### Tables and columns
+
+`public.property_rooms` (post-Wave-1 strict schema):
+
+- PKs / FKs: `id` (uuid), `room_key` (RESO RoomKey),
+  `listing_key` (RESO ListingKey, FK to `Property.listing_key`),
+  `originating_system_name` + `originating_system_room_key`
+  (tenant-scoped uniqueness).
+- RESO fields: `room_type`, `room_level`, `room_dimensions`,
+  `room_length`, `room_width`, `room_area`, `room_features`,
+  `room_description`, `modification_timestamp`,
+  `original_entry_timestamp`.
+
+`public.property_unit_types` (post-Wave-1 strict schema):
+
+- PKs / FKs: `id`, `unit_type_key`, `listing_key`,
+  `originating_system_name` + `originating_system_unit_type_key`.
+- RESO fields: `unit_type_type`, `unit_type_beds_total`,
+  `unit_type_baths_total`, `unit_type_units_total`,
+  `unit_type_actual_rent`, `unit_type_total_rent`,
+  `unit_type_description`, `unit_type_furnished`,
+  `unit_type_garage_spaces`, `modification_timestamp`,
+  `original_entry_timestamp`.
+
+Hard prohibitions on the data plane (do NOT reintroduce — these
+were retired in the Strict-RESO sweep):
+`source_id`, `x_*`, `is_visible`, `is_deleted`, `deleted_at`,
+`content_hash`, `locked_fields`, `locked_field_names`, `raw`.
+
+### History emission contract
+
+Every successful insert / update / delete on a child row MUST
+write a `public.history_transactional` row scoped to the parent
+property:
+
+- `ResourceName = 'Property'`
+- `ResourceRecordKey = Property.ListingKey`
+- `ChangeType` follows the canonical
+  [`history-and-audit-log.md`](history-and-audit-log.md)
+  contract; for child-row mutations the producer typically uses
+  field-level rows (no `ChangeType`, with `FieldName` /
+  `FieldKey` / `PreviousValue` / `NewValue`).
+
+This emission is the producer's responsibility (the `mls-sync`
+EF, in the same transaction as the upsert/delete). The Atlas
+caller does NOT call a separate emit-history RPC.
+
 <!-- reso-citations
 Resource: PropertyRooms
 Resource: PropertyUnitTypes

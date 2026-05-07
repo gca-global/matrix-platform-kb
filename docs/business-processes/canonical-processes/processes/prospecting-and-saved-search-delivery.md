@@ -199,6 +199,72 @@ stateDiagram-v2
 - No opinion on bounce/suppression policy.
 - No opinion on the consumer portal UX.
 
+## Atlas implementation
+
+Implementation contract for builders (human or AI) wiring this
+canonical process into Atlas. The canonical model is unchanged;
+this section just names the wiring.
+
+### Provisioning status
+
+Every resource in this process is unprovisioned in CDL today.
+
+| Resource | Status | CDL table | `mls-sync` resource key | Backend gap |
+|---|---|---|---|---|
+| `SavedSearch` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.saved_search`; add `saved_search` mapper to `SYNC_RESOURCES` |
+| `Prospecting` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.prospecting`; add `prospecting` mapper |
+| `ContactListings` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.contact_listings`; add `contact_listings` mapper |
+| `ContactListingNotes` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.contact_listing_notes`; add `contact_listing_notes` mapper |
+
+Ship the routes (`/mls/saved-searches`,
+`/mls/contacts/:contactKey/prospecting`,
+`/mls/contacts/:contactKey/portal`) behind a clear
+"Coming soon — CDL backend pending" empty state. Do NOT call
+PostgREST or `mls-sync` for these resources today. Stub the data
+hooks (`useSavedSearch*`, `useProspecting*`,
+`useContactListings*`) so the UI lights up automatically when
+the migrations land.
+
+The parent `Contacts` resource IS provisioned (`public.contacts`),
+but it carries PII and has no anon SELECT policy — read it via
+`invokeCdl('mls-sync', { action: 'list-resource', resource: 'contacts', ... })`
+in the Coming-Soon empty state if the page needs to confirm the
+contact exists.
+
+### Reads (once provisioned)
+
+For non-PII resources, paged via `useCdlTablePage` from
+`src/hooks/useMlsData.ts`. For per-contact lookups, use
+`cdlAnonClient.from('prospecting').select('*').eq('contact_key', contactKey)`.
+
+### Writes (once provisioned)
+
+Always through `invokeCdl('mls-sync', { action, resource, row|id })`.
+Resource keys MUST match the new `SYNC_RESOURCES` mapper names
+(`saved_search`, `prospecting`, `contact_listings`,
+`contact_listing_notes`) — do not invent table names.
+
+`ContactListingNotes` is append-only by canonical contract; the
+EF MUST refuse `delete-resource` on this resource for
+non-`system_admin` callers.
+
+### History emission contract
+
+Every successful insert / update / delete on these resources
+MUST write a `public.history_transactional` row scoped to the
+parent contact:
+
+- `ResourceName = 'Contacts'`
+- `ResourceRecordKey = Contacts.ContactKey`
+
+Per [`history-and-audit-log.md`](history-and-audit-log.md), the
+producer (the `mls-sync` EF) emits this in the same transaction
+as the upsert/delete. The Atlas caller does NOT emit it.
+
+When `Prospecting.ActiveYN` flips false, the EF MUST also
+require `ReasonActiveOrDisabled` and record it as the field-level
+audit value for that history row.
+
 <!-- reso-citations
 Resource: SavedSearch
 Resource: Prospecting

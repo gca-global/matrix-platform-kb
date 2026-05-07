@@ -163,6 +163,76 @@ A canonical consumer of RESO metadata MUST:
 - No opinion on consumer notification channels.
 - No opinion on schema diff tooling.
 
+## Atlas implementation
+
+Implementation contract for builders (human or AI) wiring the
+metadata catalogue (`/mls/admin/metadata`) into Atlas.
+
+### Provisioning status
+
+Both resources are unprovisioned in CDL today.
+
+| Resource | Status | CDL table | `mls-sync` resource key | Backend gap |
+|---|---|---|---|---|
+| `Field` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.field`; add `field` mapper to `SYNC_RESOURCES` |
+| `Lookup` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.lookup`; add `lookup` mapper |
+
+Ship the `/mls/admin/metadata` route behind a clear "Coming
+soon — CDL backend pending" empty state. The catalogue is
+operator-visibility only; it does NOT replace any runtime path
+described below.
+
+### Existing runtime metadata path (do not displace)
+
+`<ResoFieldLabel>` and `<ResoLookupValue>` already source their
+labels and tooltips from the `reso-dd-descriptions` Edge
+Function (CDL project). That cache will continue to serve Atlas
+labels regardless of whether `public.field` / `public.lookup`
+exist:
+
+```ts
+import { invokeCdl } from '@/lib/edge-functions';
+
+const result = await invokeCdl('reso-dd-descriptions', {
+  // payload shape per src/hooks/useResoDdDescriptions.ts
+});
+```
+
+When `public.field` / `public.lookup` land, the catalogue page
+adds operator visibility and a "Refresh metadata cache" button
+that invalidates the in-app cache. It does NOT replace the EF.
+
+### Reads (once provisioned)
+
+For paged catalogue browsing, use `useCdlTablePage` from
+`src/hooks/useMlsData.ts` with `table: 'field'` or
+`table: 'lookup'`. Group the Lookups tab by `lookup_name` in the
+view layer.
+
+### Writes
+
+The catalogue is READ-ONLY in Atlas. The `mls-sync` EF MUST
+refuse `upsert-resource` and `delete-resource` for non-
+`system_admin` callers on `field` / `lookup` — these are
+producer-side governance surfaces, not operator-editable.
+
+### History emission contract
+
+When the producer transitions a `Field` or `Lookup` row from
+`Published` -> `Deprecated` -> `Retired`, it MUST write a
+`public.history_transactional` row scoped to the metadata
+resource:
+
+- `ResourceName = 'Field'` or `'Lookup'`
+- `ResourceRecordKey = field_key` or `lookup_key`
+- `ChangeType = 'Deleted'` on retirement; field-level rows
+  (no `ChangeType`) for any other lifecycle metadata mutations.
+
+Per [`history-and-audit-log.md`](history-and-audit-log.md), the
+producer EF emits this row in the same transaction as the
+metadata mutation. The Atlas catalogue page does not call the
+emit path itself.
+
 <!-- reso-citations
 Resource: Field
 Resource: Lookup
