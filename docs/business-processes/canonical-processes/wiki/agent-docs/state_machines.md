@@ -40,6 +40,76 @@ stateDiagram-v2
     [*] --> [*]: stop removed before caravan start
 ```
 
+## Field and lookup metadata publication (canonical, RESO DD 2.0)
+
+Source: [`processes/field-and-lookup-metadata-publication.md`](../../processes/field-and-lookup-metadata-publication.md)
+
+### Diagram 1
+
+```mermaid
+stateDiagram-v2
+    [*] --> Published: row inserted with FieldKey,<br/>FieldName, ResourceName,<br/>ModificationTimestamp
+    Published --> Deprecated: producer announces deprecation<br/>(consumers warned, mappings frozen)
+    Deprecated --> Retired: deprecation window elapsed,<br/>field removed from $metadata
+    Retired --> [*]: row archived (audit-only)
+    Published --> Retired: emergency removal<br/>(security / compliance)
+```
+
+### Diagram 2
+
+```mermaid
+stateDiagram-v2
+    [*] --> Published: row inserted with LookupKey,<br/>LookupName, LookupValue,<br/>StandardLookupValue, ModificationTimestamp
+    Published --> Deprecated: producer announces deprecation<br/>(consumers warned)
+    Deprecated --> Retired: deprecation window elapsed,<br/>code removed from $metadata
+    Retired --> [*]: row archived (audit-only)
+    Published --> Retired: emergency removal
+```
+
+## History and audit log (canonical, RESO DD 2.0)
+
+Source: [`processes/history-and-audit-log.md`](../../processes/history-and-audit-log.md)
+
+```mermaid
+stateDiagram-v2
+    [*] --> Recorded: row inserted with<br/>HistoryTransactionalKey, ChangeType,<br/>ResourceName, ResourceRecordKey,<br/>FieldName, PreviousValue, NewValue
+    Recorded --> Replayed: downstream consumer ingests<br/>(idempotency key honoured)
+    Recorded --> [*]: row archived per retention policy
+    Replayed --> [*]: row archived per retention policy
+```
+
+## Internet tracking and engagement (canonical, RESO DD 2.0)
+
+Source: [`processes/internet-tracking-and-engagement.md`](../../processes/internet-tracking-and-engagement.md)
+
+### Diagram 1
+
+```mermaid
+stateDiagram-v2
+    [*] --> Captured: row inserted with EventKey,<br/>EventType, EventTimestamp,<br/>actor + object identifiers
+    Captured --> Reported: EventReportedTimestamp set<br/>(downstream consumer ack)
+    Captured --> [*]: row archived per retention policy
+    Reported --> [*]: row archived per retention policy
+```
+
+### Diagram 2
+
+```mermaid
+stateDiagram-v2
+    [*] --> Recorded: row inserted with<br/>ResourceName + ResourceRecordKey + EntityEventSequence
+    Recorded --> [*]: superseded by next sequence number
+```
+
+### Diagram 3
+
+```mermaid
+stateDiagram-v2
+    [*] --> Open: row inserted at StartTimestamp<br/>(window opened)
+    Open --> Closed: EndTimestamp set,<br/>counts frozen
+    Closed --> [*]: row archived per retention policy
+    Open --> [*]: window abandoned (no events captured)
+```
+
 ## Lead-Contact lifecycle (canonical, RESO DD 2.0)
 
 Source: [`processes/lead-contact-lifecycle.md`](../../processes/lead-contact-lifecycle.md)
@@ -331,6 +401,116 @@ stateDiagram-v2
       Ended is terminal; rescheduling
       means a NEW OpenHouse row.
     end note
+```
+
+## Property detail attachment lifecycle (canonical, RESO DD 2.0)
+
+Source: [`processes/property-detail-attachment-lifecycle.md`](../../processes/property-detail-attachment-lifecycle.md)
+
+### Diagram 1
+
+```mermaid
+stateDiagram-v2
+    [*] --> InProcess: green verification booked,<br/>body + metric chosen
+    InProcess --> Complete: rating issued,<br/>verification body confirmed
+    Complete --> [*]: certification archived (parent retired)
+    InProcess --> [*]: verification abandoned
+```
+
+### Diagram 2
+
+```mermaid
+stateDiagram-v2
+    [*] --> Captured: PropertyRooms row inserted<br/>(RoomKey, ListingKey, RoomType)
+    Captured --> Captured: room dimensions or features updated
+    Captured --> [*]: room removed from listing
+```
+
+### Diagram 3
+
+```mermaid
+stateDiagram-v2
+    [*] --> Defined: UnitTypeKey + ListingKey + UnitTypeType
+    Defined --> Defined: rents, counts, or ProForma updated
+    Defined --> [*]: unit class retired from listing
+```
+
+### Diagram 4
+
+```mermaid
+stateDiagram-v2
+    [*] --> Installed: PowerProductionKey + ListingKey + PowerProductionType
+    Installed --> Installed: annual yield or ownership updated
+    Installed --> [*]: equipment removed
+```
+
+### Diagram 5
+
+```mermaid
+stateDiagram-v2
+    [*] --> Installed: PowerStorageKey + PowerStorageType
+    Installed --> Installed: capacity refreshed (NameplateCapacity)
+    Installed --> [*]: storage retired
+```
+
+## Prospecting and saved-search delivery (canonical, RESO DD 2.0)
+
+Source: [`processes/prospecting-and-saved-search-delivery.md`](../../processes/prospecting-and-saved-search-delivery.md)
+
+### Diagram 1
+
+```mermaid
+stateDiagram-v2
+    [*] --> Active: Prospecting row inserted<br/>(SavedSearchKey, ContactKey, ScheduleType)
+    Active --> Inactive: ActiveYN flipped to false<br/>(client paused, reason captured)
+    Inactive --> Active: ActiveYN flipped to true<br/>(NextSendTimestamp recomputed)
+    Active --> [*]: Prospecting row deleted
+    Inactive --> [*]: Prospecting row deleted
+```
+
+### Diagram 2
+
+```mermaid
+stateDiagram-v2
+    [*] --> Scheduled: NextSendTimestamp set per ScheduleType
+    Scheduled --> Sent: matching listings dispatched<br/>(ContactListings rows upserted)
+    Sent --> Scheduled: NextSendTimestamp advanced<br/>(per ScheduleType cadence)
+    Sent --> [*]: ActiveYN flipped to false
+    Scheduled --> [*]: ActiveYN flipped to false
+```
+
+### Diagram 3
+
+```mermaid
+stateDiagram-v2
+    [*] --> Defined: SavedSearchKey + MemberKey + SearchQuery
+    Defined --> Defined: query revised<br/>(SearchQuery / SearchQueryHumanReadable updated)
+    Defined --> [*]: row deleted (no consumers)
+```
+
+### Diagram 4
+
+```mermaid
+stateDiagram-v2
+    [*] --> Sent: ContactListings row upserted<br/>by Prospecting delivery
+    Sent --> Viewed: ListingViewedYN flipped to true
+    Sent --> Discard: ContactListingPreference set to Discard
+    Sent --> Favorite: ContactListingPreference set to Favorite
+    Sent --> Possibility: ContactListingPreference set to Possibility
+    Viewed --> Favorite: contact upgrades preference
+    Viewed --> Discard: contact discards
+    Favorite --> Discard: contact downgrades
+    Possibility --> Favorite: contact upgrades
+    Possibility --> Discard: contact discards
+    Discard --> [*]: row archived (project-flavoured)
+```
+
+### Diagram 5
+
+```mermaid
+stateDiagram-v2
+    [*] --> Recorded: row inserted with NoteContents + NotedBy
+    Recorded --> [*]: row archived (project-flavoured)
 ```
 
 ## Showing lifecycle (canonical, RESO DD 2.0)

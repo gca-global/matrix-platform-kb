@@ -31,7 +31,7 @@ Canonical means:
 Author phase                 Validate phase           Emit phase
 
 processes/*.md          -->  +
-  (10 hand-written)          +-> 01_validate_citations.py -> raw/citations.csv
+  (15 hand-written)          +-> 01_validate_citations.py -> raw/citations.csv
                              +
 reso-dd-kb/raw/{resources,   +
   fields,lookup_values}.csv  +
@@ -41,7 +41,7 @@ reso-dd-kb/raw/{resources,   +
 ```
 
 Three phases (Author / Validate / Emit) are strictly ordered; later
-scripts never write to earlier-phase outputs. The 10 process docs
+scripts never write to earlier-phase outputs. The 15 process docs
 are the only hand-edited files. Validation enforces 5 hard-fail
 gates. Emit is deterministic - re-runs with no narrative change
 produce zero-byte diffs.
@@ -60,14 +60,20 @@ produce zero-byte diffs.
 | Team lifecycle | [`processes/team-lifecycle.md`](processes/team-lifecycle.md) | `Teams`, `TeamMembers` | `TeamStatus` |
 | Caravan lifecycle | [`processes/caravan-lifecycle.md`](processes/caravan-lifecycle.md) | `Caravan`, `CaravanStop`, `OpenHouse` | `CaravanStatus` |
 | Media lifecycle | [`processes/media-lifecycle.md`](processes/media-lifecycle.md) | `Media` | `MediaType`, `MediaCategory` |
+| Property detail attachment lifecycle | [`processes/property-detail-attachment-lifecycle.md`](processes/property-detail-attachment-lifecycle.md) | `PropertyRooms`, `PropertyUnitTypes`, `PropertyGreenVerification`, `PropertyPowerProduction`, `PropertyPowerStorage` | `GreenVerificationStatus`, `RoomType`, `UnitTypeType`, `PowerProductionType`, `PowerStorageType` |
+| Prospecting and saved-search delivery | [`processes/prospecting-and-saved-search-delivery.md`](processes/prospecting-and-saved-search-delivery.md) | `SavedSearch`, `Prospecting`, `ContactListings`, `ContactListingNotes` | `Prospecting.ActiveYN`, `ScheduleType`, `SearchQueryType`, `ContactListingPreference` |
+| Internet tracking and engagement | [`processes/internet-tracking-and-engagement.md`](processes/internet-tracking-and-engagement.md) | `InternetTracking`, `InternetTrackingSummary`, `EntityEvent` | `EventType`, `ActorType`, `DeviceType`, `ObjectType`, `TrackingType` |
+| History and audit log | [`processes/history-and-audit-log.md`](processes/history-and-audit-log.md) | `HistoryTransactional` | `ChangeType`, `ResourceName` |
+| Field and lookup metadata publication | [`processes/field-and-lookup-metadata-publication.md`](processes/field-and-lookup-metadata-publication.md) | `Field`, `Lookup` | (no closed status; lifecycle = `Published` -> `Deprecated` -> `Retired`) |
 
-`ShowingAppointment`, `Prospecting`, `Rules`, `Queue`,
-`InternetTracking`, and other resources play supporting roles inside
-the above flows but do not warrant their own dedicated process page
-yet.
+`ShowingAppointment`, `Rules`, and `Queue` play supporting roles
+inside the above flows but do not warrant their own dedicated
+process page yet.
 
-Out of scope (future plans): saved-search subscription billing,
-RESO Web API auth flow, Rules/Queue replay semantics.
+Out of scope (future plans): license renewal, association
+lifecycle, Rules/Queue replay semantics, contact channel
+verification, RESO Web API auth flow, saved-search subscription
+billing.
 
 ## Quick start
 
