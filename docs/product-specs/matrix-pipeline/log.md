@@ -78,3 +78,18 @@ Bash bug in the frontmatter-delimiter check (`grep -qx '---'` was parsed as an o
 - log.md prefix consistency ✓
 
 All checks green. Ready for PR.
+
+## [2026-05-26] divergence | branding: 'Matrix Pipeline 2.0' UI string
+
+User-facing application name is rendered as **Matrix Pipeline 2.0** in all sidebar, page title, document title, and login screen strings. Canonical identifier `matrix-pipeline` is preserved in:
+
+- repo / package id
+- KB subtree path (`docs/product-specs/matrix-pipeline/`)
+- `wiki/*` front-matter and cross-refs
+- `processCoverage.ts` `ownedBy: 'matrix-pipeline'` registry value
+- SSO Console client_id (`matrix-pipeline`)
+- Edge Function namespacing (`pipeline:*` scopes)
+
+Rationale: branding decision by product owner; canonical naming is preserved to keep the KB ↔ implementation join stable. No effect on data model, RESO compliance, scope, or three-Supabase boundaries.
+
+Tracked in: [wiki/architecture.md#escape-hatch](wiki/architecture.md#escape-hatch) (new "Branding divergence" row).

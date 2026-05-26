@@ -197,13 +197,14 @@ Source: raw/context-v2.md §11.5.
 
 ## Allowed deviations (escape hatch) {#escape-hatch}
 
-Three explicit deviations from canonical RESO DD 2.0 are accepted at this BRD release:
+Four explicit deviations from canonical RESO DD 2.0 (three structural + one cosmetic) are accepted at this BRD release:
 
 | Deviation | Canonical alternative | Reason | Status |
 |---|---|---|---|
 | **`OpenHouse` excluded from CRM scope** | Canonical `OpenHouse` (RESO DD 2.0) | Public open-house format is not used in agency practice; invitation-only showings via the Showing chain (optionally grouped in `Caravan`) | Accepted (see [wiki/entities.md#showing-chain](entities.md#showing-chain), [wiki/entities.md#caravan](entities.md#caravan)) |
 | **CRM-internal ERP-lite subsystem Deal Commercialization, GCI, and Commission Engine** — app-private state in CRM app DB for forecast GCI, cost attribution, and broker compensation | Canonical `TransactionManagement` + `HistoryTransactional` + external Finance ERP ([wiki/integration.md#finance-erp-commission](integration.md#finance-erp-commission), [wiki/integration.md#finance-erp-payments](integration.md#finance-erp-payments)) | Canonical RESO has no deal-level P&L / commission ledger resources (transaction-lifecycle Non-goals); `matrix-fm` is entity-level; external Finance ERP remains system of record for actual money flow. The subsystem ([wiki/commission-engine.md](commission-engine.md)) is a forecast + rule engine advisory tool for the sales broker | Accepted. Deliverable: ADR `ADR-XXX: CRM Internal Commission Engine for Sales Brokers` (status TODO) |
 | **`Referral` as a self-standing CRM entity** ([wiki/entities.md#referral](entities.md#referral)) — referrer ↔ referee `Contacts` link + `OwnerMemberKey` + referral type + outcome + close date | Canonical RESO DD 2.0 has no `Referral` resource. Alternative via `Contacts ↔ Contacts` + `Contacts.LeadSource=Referral` considered and rejected | Luxury referral economy in HNWI/UHNWI requires structured tracking (referral type, outcome, close date, commission attribution to the referrer) — impossible through only the `LeadSource` lookup or `Contacts ↔ Contacts` relationships which carry no typed fields for attribution / outcome tracking | Accepted. Deliverable: ADR `ADR-XXX: CRM Referral Entity for Luxury Segment` (status TODO); the [wiki/overview.md#reso-policy](overview.md#reso-policy) policy explicitly exempts `Referral` from the no-custom-entities rule |
+| **Branding divergence: UI string "Matrix Pipeline 2.0"** | Canonical product identifier `matrix-pipeline` | Product-owner branding decision; canonical identifier preserved everywhere except user-facing UI strings (sidebar, page titles, login screen). No effect on data model, RESO compliance, scope, three-Supabase boundaries, or KB ↔ implementation joins. | Accepted ([log.md](../log.md) 2026-05-26). No ADR required (cosmetic, reversible by single PR). |
 
 If new deviations arise later (e.g. an attribute absent from RESO DD 2.0 but critical for luxury), they must be:
 
