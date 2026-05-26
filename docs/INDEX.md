@@ -112,6 +112,7 @@ UI/UX specs for dashboards, forms, and Kanban views that the system must impleme
 
 | Document | Description |
 |----------|-------------|
+| [product-specs/matrix-pipeline/INDEX.md](product-specs/matrix-pipeline/INDEX.md) | **`matrix-pipeline` CRM LLM Wiki** — compact Karpathy-pattern wiki for the Sharp SIR luxury sales CRM. 8 wiki pages (overview / architecture / entities / processes / requirements / ai / integration / commission-engine) + `phases.md` 8-week atomic build plan (Lovable + Cursor swimlanes) + `raw/context-v2.md` (immutable BRD). Strictly canonical RESO DD 2.0 with two documented escape-hatch deviations: `Referral` entity + CRM-internal Commission Engine. |
 | [sir-listing-forms.md](product-specs/sir-listing-forms.md) | SIR/Anywhere.com form field specs (reference for Sharp Matrix forms) |
 | [broker-dashboard.md](product-specs/broker-dashboard.md) | AI-powered broker dashboard with auto-prioritization |
 | [manager-kanban.md](product-specs/manager-kanban.md) | Manager Kanban & pipeline views |

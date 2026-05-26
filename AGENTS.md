@@ -33,6 +33,7 @@ For new-app auth issues (401/400/403), see `docs/platform/new-app-auth-troublesh
 | `docs/data-models/source-mappings/` | `docs/data-models/source-mappings/AGENTS.md` — phase boundaries, file ownership, hard-fail join gates, determinism |
 | `docs/business-processes/canonical-processes/` | `docs/business-processes/canonical-processes/AGENTS.md` — phase boundaries, citation contract, mermaid contract, 5 hard-fail gates |
 | `docs/integration/` | `docs/integration/AGENTS.md` — generated per-resource cross-cutting views joining Layers 1–4; emit-only, no hand-edits under `wiki/agent-docs/` |
+| `docs/product-specs/matrix-pipeline/` | `docs/product-specs/matrix-pipeline/AGENTS.md` — `matrix-pipeline` CRM LLM Wiki (Karpathy 3-layer pattern): immutable `raw/context-v2.md` BRD + 8 wiki pages + schema layer + `phases.md` 8-week build plan; `scripts/wiki-lint.sh` enforces frontmatter / orphan-anchors / FR-coverage / split-rule / log-format contracts |
 
 ## Knowledge Base Structure
 
@@ -101,6 +102,7 @@ scripts/
 | Validate KB structure and links | `scripts/validate-kb.sh` |
 | Listing / sales / lead-qual workflow | `docs/business-processes/listing-pipeline.md`, `docs/business-processes/sales-pipeline.md`, `docs/business-processes/lead-qualification.md` |
 | Broker dashboard / listing forms / personas | `docs/product-specs/broker-dashboard.md`, `docs/product-specs/sir-listing-forms.md`, `docs/product-specs/personas.md` |
+| Build the `matrix-pipeline` CRM (BRD, entities, FRs, AI, Commission Engine, 8-week plan) | `docs/product-specs/matrix-pipeline/INDEX.md` (start here), then `docs/product-specs/matrix-pipeline/wiki/<page>.md` + `phases.md` |
 | Qobrix API reference | `docs/references/qobrix-api-summary.md` |
 | New app can't auth (401/400/403) | `docs/platform/new-app-auth-troubleshooting.md` |
 
