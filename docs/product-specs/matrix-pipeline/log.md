@@ -105,3 +105,7 @@ Constraint: CRM app DB **reads** the role configuration via the standard SSO cli
 This is a permitted deviation from `wiki/architecture.md#app-private-state` invariant ("all app-private state lives in CRM app DB only"). The deviation is narrow: it affects exactly one table (`role_configurations`) and its access is read-only.
 
 Tracked in: [wiki/architecture.md#escape-hatch](wiki/architecture.md#escape-hatch) (new "role_configurations co-location" row) + [wiki/architecture.md#app-private-state](wiki/architecture.md#app-private-state) (inline Exception bullet).
+
+## [2026-05-26] phase-checkpoint | Week 0 — KB published, branding + role_configurations divergences accepted
+
+KB subtree merged to `main`. Two escape-hatch divergences accepted up-front (branding, role_configurations co-location). Ready for Lovable Phase 0a (Atlas-drift cleanup + scope-boundary enforcement).
