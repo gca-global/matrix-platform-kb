@@ -165,10 +165,11 @@ Not canonical RESO and not cross-app:
 - `Activity` (calls, tasks, follow-ups — CRM workflow state; extended markup for cost attribution — see [wiki/requirements.md#fr-act-activities](requirements.md#fr-act-activities) FR-ACT-10).
 - `Document` references (document metadata; files live in external systems).
 - Pipeline-state UI cache (5-stage funnel as UI/UX projection — see [wiki/overview.md#pipeline](overview.md#pipeline)).
-- Drafts, app-specific lookup tables, `role_configurations`.
+- Drafts, app-specific lookup tables.
 - Any UI preferences, view configs, caches.
 - **Deal Commercialization, GCI, and Commission Engine state** ([wiki/commission-engine.md](commission-engine.md)) — operational deal costs, commission rates and rules, computed per-deal P&L and broker compensation. Detailed app-private data model (`DealCostEvent` / `CostRateCard` / `CommissionRule` / `DealPnL` / `BrokerCompensation`), formulas, and FRs are designed in Lovable; the project-flavour deviation is recorded in the [#escape-hatch](#escape-hatch).
 - **`Referral`** ([wiki/entities.md#referral](entities.md#referral)) — referrer ↔ referee link with type, outcome, close date. Project-flavour entity outside canonical RESO DD 2.0 (see [#escape-hatch](#escape-hatch)). Stored app-private in CRM app DB; references canonical `Contacts.ContactKey` in CDL via a CRM-app-DB → CDL FK reference (a logical pointer, not a canonical relationship).
+- **Exception**: `role_configurations` (CRM role → permission-keys mapping) is co-located with SSO permission keys in the SSO project, not the CRM app DB. CRM reads only, via `ssoClient`. See [#escape-hatch](#escape-hatch) ("role_configurations co-location" row) and [log.md](../log.md) [2026-05-26].
 
 Source: raw/context-v2.md §5a.6.
 
@@ -197,7 +198,7 @@ Source: raw/context-v2.md §11.5.
 
 ## Allowed deviations (escape hatch) {#escape-hatch}
 
-Four explicit deviations from canonical RESO DD 2.0 (three structural + one cosmetic) are accepted at this BRD release:
+Five explicit deviations from canonical RESO DD 2.0 (three structural + one cosmetic + one storage-location) are accepted at this BRD release:
 
 | Deviation | Canonical alternative | Reason | Status |
 |---|---|---|---|
@@ -205,6 +206,7 @@ Four explicit deviations from canonical RESO DD 2.0 (three structural + one cosm
 | **CRM-internal ERP-lite subsystem Deal Commercialization, GCI, and Commission Engine** — app-private state in CRM app DB for forecast GCI, cost attribution, and broker compensation | Canonical `TransactionManagement` + `HistoryTransactional` + external Finance ERP ([wiki/integration.md#finance-erp-commission](integration.md#finance-erp-commission), [wiki/integration.md#finance-erp-payments](integration.md#finance-erp-payments)) | Canonical RESO has no deal-level P&L / commission ledger resources (transaction-lifecycle Non-goals); `matrix-fm` is entity-level; external Finance ERP remains system of record for actual money flow. The subsystem ([wiki/commission-engine.md](commission-engine.md)) is a forecast + rule engine advisory tool for the sales broker | Accepted. Deliverable: ADR `ADR-XXX: CRM Internal Commission Engine for Sales Brokers` (status TODO) |
 | **`Referral` as a self-standing CRM entity** ([wiki/entities.md#referral](entities.md#referral)) — referrer ↔ referee `Contacts` link + `OwnerMemberKey` + referral type + outcome + close date | Canonical RESO DD 2.0 has no `Referral` resource. Alternative via `Contacts ↔ Contacts` + `Contacts.LeadSource=Referral` considered and rejected | Luxury referral economy in HNWI/UHNWI requires structured tracking (referral type, outcome, close date, commission attribution to the referrer) — impossible through only the `LeadSource` lookup or `Contacts ↔ Contacts` relationships which carry no typed fields for attribution / outcome tracking | Accepted. Deliverable: ADR `ADR-XXX: CRM Referral Entity for Luxury Segment` (status TODO); the [wiki/overview.md#reso-policy](overview.md#reso-policy) policy explicitly exempts `Referral` from the no-custom-entities rule |
 | **Branding divergence: UI string "Matrix Pipeline 2.0"** | Canonical product identifier `matrix-pipeline` | Product-owner branding decision; canonical identifier preserved everywhere except user-facing UI strings (sidebar, page titles, login screen). No effect on data model, RESO compliance, scope, three-Supabase boundaries, or KB ↔ implementation joins. | Accepted ([log.md](../log.md) 2026-05-26). No ADR required (cosmetic, reversible by single PR). |
+| **`role_configurations` co-located with SSO permission keys (SSO project)** | Per [#app-private-state](#app-private-state), app-private state lives in CRM app DB only | SSO Console is the write authority for permission keys + role mappings; mirroring into CRM app DB would create a two-source-of-truth problem. CRM reads only, via `ssoClient` under SSO JWT. | Accepted ([log.md](../log.md) 2026-05-26). No ADR required (read-only consumer pattern; behaviorally indistinguishable from a CRM-app-DB mirror). |
 
 If new deviations arise later (e.g. an attribute absent from RESO DD 2.0 but critical for luxury), they must be:
 

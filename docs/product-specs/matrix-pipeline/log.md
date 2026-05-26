@@ -93,3 +93,15 @@ User-facing application name is rendered as **Matrix Pipeline 2.0** in all sideb
 Rationale: branding decision by product owner; canonical naming is preserved to keep the KB ↔ implementation join stable. No effect on data model, RESO compliance, scope, or three-Supabase boundaries.
 
 Tracked in: [wiki/architecture.md#escape-hatch](wiki/architecture.md#escape-hatch) (new "Branding divergence" row).
+
+## [2026-05-26] divergence | role_configurations storage in SSO project
+
+`role_configurations` (CRM role → permission-keys mapping consumed by `ProtectedRoute` and `RoleConfigPanel`) is co-located with SSO permission keys in the SSO project (`xgubaguglsnokjyudgvc`) rather than in the CRM app DB.
+
+Rationale: source of truth for permission keys and role-to-key mappings is the SSO Console, which writes to the SSO project. Mirroring `role_configurations` into the CRM app DB would create a two-source-of-truth problem and require a sync EF for no behavioral gain.
+
+Constraint: CRM app DB **reads** the role configuration via the standard SSO client (`ssoClient` / `ssoAuthedClient`) under the user's SSO JWT. No writes to `role_configurations` from CRM app code.
+
+This is a permitted deviation from `wiki/architecture.md#app-private-state` invariant ("all app-private state lives in CRM app DB only"). The deviation is narrow: it affects exactly one table (`role_configurations`) and its access is read-only.
+
+Tracked in: [wiki/architecture.md#escape-hatch](wiki/architecture.md#escape-hatch) (new "role_configurations co-location" row) + [wiki/architecture.md#app-private-state](wiki/architecture.md#app-private-state) (inline Exception bullet).
