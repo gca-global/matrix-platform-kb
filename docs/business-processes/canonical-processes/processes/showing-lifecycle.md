@@ -12,11 +12,12 @@ resources, each with its own state.
 >   in the 6-resource Layer-2 curated set; promote via
 >   [`../../../data-models/source-mappings/`](../../../data-models/source-mappings/USAGE.md)
 >   when project scope expands).
-> - Sharp-SIR flavour: showings appear inside
->   [`../../sales-pipeline.md`](../../sales-pipeline.md) (Solution /
->   Viewing stage) and
->   [`../../follow-up-vs-active-sales.md`](../../follow-up-vs-active-sales.md)
->   (the first-showing trigger).
+> - Sharp-SIR flavour: showings are codified in the CRM Sales
+>   Module (Solution / Viewing stage) and the
+>   Contact-Relationship process (first-showing trigger). See
+>   [`product-specs/matrix-pipeline/wiki/integration.md#sales-module`](../../../product-specs/matrix-pipeline/wiki/integration.md#sales-module)
+>   and
+>   [`product-specs/matrix-pipeline/wiki/processes.md#contact-relationship`](../../../product-specs/matrix-pipeline/wiki/processes.md#contact-relationship).
 > - One-stop integrated view (per linked listing):
 >   [`../../../integration/wiki/agent-docs/by_resource/property.md`](../../../integration/wiki/agent-docs/by_resource/property.md)
 

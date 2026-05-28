@@ -161,7 +161,7 @@ All apps are built by **Lovable** from the **App Builder Template** (`matrix-app
 
 | Type | Live | In Progress | Planned | Supabase Tables |
 |------|------|-------------|---------|----------------|
-| **CDL-Connected** | Agency Portal, Client Connect, Meeting Hub, Matrix Comms, Website CMS | Matrix Pipeline, Contact Mgmt, Integration Mgmt | Broker App, Manager App, Client Portal, Marketing App | Shared RESO tables: `property`, `member`, `contacts`, `media` |
+| **CDL-Connected** | Agency Portal, Client Connect, Meeting Hub, Matrix Comms, Website CMS | Matrix Pipeline 2.0 (consolidates broker / manager / contact-center / listing-coordinator workflows), Integration Mgmt | Client Portal, Marketing App | Shared RESO tables: `property`, `member`, `contacts`, `media`, `saved_search`, `showing_appointment`, `transaction_management`, … |
 | **Domain-Specific** | SSO Console | HRMS, Matrix FM, ITSM, Notification Mgmt | Admin Console, BI Dashboard | Own tables: `employees`, `vacations`, `financial_entries`, `service_desk_tickets`, etc. |
 
 All apps share: SSO auth, dual-Supabase architecture, 5-level scope, CRUD permissions, shadcn/ui.
@@ -239,32 +239,33 @@ Legacy pipeline (Databricks)     → Gold sync → Supabase CDL (being phased ou
 
 ### Listing Creation Flow (Target State)
 ```
-Broker (Broker App / matrix-pipeline CRM)
-    → cdl-write EF → Supabase CDL (source_id=matrix-internal, lifecycle_state=Draft)
-    → cdl-listing-lifecycle EF (submitForReview → approve → publish)
-    → Realtime → Manager App, Client Portal see updates instantly
+Listing Coordinator / Broker (matrix-pipeline 2.0)
+    → cdl-write EF → Supabase CDL (source_id=matrix-internal, lifecycle_state=Draft, Property.StandardStatus=Coming Soon)
+    → cdl-listing-lifecycle EF (submitForReview → approve → publish; canonical Property.StandardStatus transitions)
+    → Realtime → matrix-pipeline (manager-role view), Client Portal see updates instantly
     → Sync → Databricks (analytics/BI)
     → dash-export EF (bidirectional) → Anywhere Dash via v_dash_properties (SIR-affiliate primary contract)
     → Push (secondary) → RESO Web API (3rd parties), Zillow, partner portals
-    → AI Copilot monitors: DOM, viewings, conversions
+    → AI Copilot (FR-AI-MX / DM in matrix-pipeline) monitors: DOM, Showing events, ContactType graduation
 ```
 
 ### Lead Processing Flow
 ```
 Ads/Website/Referral → API Gateway → Marketing Platform → Contact Center
-    → Supabase CDL (RESO Contacts table)
-    → AI/ML (scoring, qualification, Next Best Action)
-    → Assignment to broker via Manager App
+    → Supabase CDL (canonical RESO Contacts table)
+    → FR-AI-LQ (matrix-pipeline AI Lead Qualification, broker confirms)
+    → ContactType graduation: Lead → Prospect → Ready-to-Buy
+    → Assignment to broker via matrix-pipeline (manager-role intervention surface)
 ```
 
 ### O365 Integration Flows
 
-**Email (read + attach to opportunity):**
+**Email (read + attach to `Activity` / `TransactionManagement` row):**
 ```
-Broker App → email-messages Edge Function → Microsoft Graph API (/me/messages)
+matrix-pipeline (broker role) → ms-graph-proxy Edge Function (email-messages) → Microsoft Graph API (/me/messages)
     → Exchange Online (broker's mailbox, delegated access)
     → Broker selects email → email-attach Edge Function
-    → Snapshot stored in Supabase CDL (opportunity_emails table)
+    → Snapshot stored in CRM app DB and linked to canonical Activity / TransactionManagement row
 ```
 
 **Calendar (CRM ↔ Outlook sync):**

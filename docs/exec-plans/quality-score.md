@@ -74,14 +74,14 @@ Based on the scores above, the highest-impact improvements are:
 | P1 | KB CI validation | D | B | Deploy `scripts/validate-kb.sh` in GitHub Actions |
 | P2 | CDL contract testing | C | B | Automated schema diff on migration PRs |
 | P2 | SSO Edge Function tests | C | B | Integration tests with mock JWTs |
-| P2 | ES256 key import | — | — | Complete [ADR-011](architecture/decisions/ADR-011.md); eliminates dual-token workaround |
+| P2 | ES256 key import | — | — | Complete [ADR-011](../architecture/decisions/ADR-011.md); eliminates dual-token workaround |
 | P3 | ETL log retention | — | — | Add log rotation to CDC pipeline scripts |
 
 ## Cross-Reference
 
 | For | See |
 |-----|-----|
-| Technical debt details | [exec-plans/tech-debt-tracker.md](exec-plans/tech-debt-tracker.md) |
-| Testing strategy | [platform/testing-strategy.md](platform/testing-strategy.md) |
-| Golden principles | [GOLDEN_PRINCIPLES.md](GOLDEN_PRINCIPLES.md) |
-| KB methodology | [platform/kb-methodology.md](platform/kb-methodology.md) |
+| Technical debt details | [tech-debt-tracker.md](tech-debt-tracker.md) |
+| Testing strategy | [../platform/testing-strategy.md](../platform/testing-strategy.md) |
+| Golden principles | [../platform/golden-principles.md](../platform/golden-principles.md) |
+| KB methodology | [../platform/kb-methodology.md](../platform/kb-methodology.md) |

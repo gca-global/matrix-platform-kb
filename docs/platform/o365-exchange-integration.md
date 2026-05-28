@@ -425,5 +425,6 @@ ALTER TABLE calendar_events
 | SSO OAuth flow (separate from O365 OAuth) | [app-template.md](app-template.md) §Dual-Supabase Architecture |
 | Security model and RLS patterns | [security-model.md](security-model.md) |
 | Edge Function API catalog | [api-contracts.md](api-contracts.md) |
-| Sales pipeline stages | [sales-pipeline.md](../business-processes/sales-pipeline.md) |
+| Canonical Lead-Contact + Transaction lifecycles | [canonical-processes/](../business-processes/canonical-processes/USAGE.md) |
+| CRM (Pipeline 2.0) materialisation of those lifecycles | [product-specs/matrix-pipeline/wiki/processes.md](../product-specs/matrix-pipeline/wiki/processes.md) |
 | SM Pipeline codebase | `/home/bitnami/matrix-pipeline` |

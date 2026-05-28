@@ -84,4 +84,4 @@ external context.
 | Known technical debt | [tech-debt-tracker.md](tech-debt-tracker.md) |
 | Architecture decisions | [ADR index](../architecture/decisions/index.md) |
 | KB methodology | [kb-methodology.md](../platform/kb-methodology.md) |
-| Quality grades by domain | [QUALITY_SCORE.md](../QUALITY_SCORE.md) |
+| Quality grades by domain | [quality-score.md](quality-score.md) |

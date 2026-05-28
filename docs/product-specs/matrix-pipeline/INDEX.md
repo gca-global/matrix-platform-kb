@@ -15,6 +15,7 @@
 | [`wiki/ai.md`](wiki/ai.md) | AI Copilot — 14 features + implementation plan | §9.13, §9.14 |
 | [`wiki/integration.md`](wiki/integration.md) | External integrations: Listing Module, Contract system, Finance ERP, SSO, CDL | §10 |
 | [`wiki/commission-engine.md`](wiki/commission-engine.md) | CRM-internal ERP-lite for sales-broker P&L + reconciliation | §9.15 |
+| [`cdl-crud-contract.md`](cdl-crud-contract.md) | Lovable CDL CRUD contract — 5 recipe shapes + 6 commandments. Canonical copy synced from `mem://infrastructure/lovable-cdl-crud-contract.md` | (operational) |
 | [`phases.md`](phases.md) | 8-week atomic build plan (Lovable + Cursor swimlanes) | (plan) |
 | [`raw/context-v2.md`](raw/context-v2.md) | Immutable BRD (read for provenance only) | — |
 | [`log.md`](log.md) | Chronological append-only log | — |
@@ -118,6 +119,19 @@
 - `#finance-erp-payments` — Payment events reconciliation (§10.10)
 - `#sso` — Identity, roles, groups, scope claims
 - `#cdl` — CRM-as-CDL-client pattern + dedicated EFs
+
+### CDL CRUD contract ([`cdl-crud-contract.md`](cdl-crud-contract.md))
+
+- `#two-clients` — `ssoClient` / `cdlClient` / `appClient` setup
+- `#read-a` — direct PostgREST on CDL (anon SELECT `qual=true` tables)
+- `#read-b` — `listings-search` EF (broker-scope, properties)
+- `#read-c` — per-resource Pipeline read EFs (planned, placeholder)
+- `#write-a` — CRM app DB writes (default for everything today)
+- `#write-b` — per-resource Pipeline write EFs (planned, placeholder)
+- `#commandments` — the six rules Lovable always applies
+- `#quick-reference` — recipe per RESO resource
+- `#ef-ship-checklist` — what to update when a platform EF lands
+- `#anti-patterns` — code patterns Lovable refuses to generate
 
 ### Commission Engine ([`wiki/commission-engine.md`](wiki/commission-engine.md))
 

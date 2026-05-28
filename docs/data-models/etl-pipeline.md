@@ -170,7 +170,7 @@ Via `scripts/run_pipeline.sh`:
 
 ## Gold → Supabase CDL Sync
 
-The gold layer data syncs to Supabase CDL tables that Matrix Apps query. CDL-Connected apps (Broker App, Manager App, etc.) read from these RESO-named Supabase tables directly using the standard Supabase client + React Query pattern described in [app-template.md](../platform/app-template.md).
+The gold layer data syncs to Supabase CDL tables that Matrix Apps query. CDL-Connected apps (matrix-pipeline 2.0, Client Portal, Marketing App, etc.) read from these RESO-named Supabase tables directly using the standard Supabase client + React Query pattern described in [app-template.md](../platform/app-template.md).
 
 ## Future: After Qobrix Decommission
 

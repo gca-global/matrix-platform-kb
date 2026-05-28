@@ -51,5 +51,5 @@ Campaign creation, audience segmentation, email/portal/social distribution, and 
 
 | For | See |
 |-----|-----|
-| Listing stages and publish flow | [listing-pipeline.md](../business-processes/listing-pipeline.md) |
+| Canonical Listing lifecycle (publish flow + StandardStatus transitions) | [canonical-processes/processes/listing-lifecycle.md](../business-processes/canonical-processes/processes/listing-lifecycle.md) |
 | App catalog and platform apps | [app-catalog.md](../platform/app-catalog.md) |

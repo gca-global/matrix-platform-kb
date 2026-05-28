@@ -8,8 +8,9 @@ team header) and `TeamMembers` (the per-member roster).
 >
 > - Source mapping (Dash / Qobrix / SIR -> RESO `Teams`):
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/teams.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/teams.md)
-> - Sharp-SIR flavour: no project-flavour SOP yet — promote one
->   under `docs/business-processes/` when Sharp-SIR codifies team
+> - Sharp-SIR flavour: no project-flavour SOP yet — the CRM
+>   materialisation (if any) belongs in
+>   `product-specs/matrix-pipeline/` when Sharp-SIR codifies team
 >   roles, splits, and impersonation rules.
 > - One-stop integrated view:
 >   [`../../../integration/wiki/agent-docs/by_resource/teams.md`](../../../integration/wiki/agent-docs/by_resource/teams.md)

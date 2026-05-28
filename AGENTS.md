@@ -38,12 +38,12 @@ For new-app auth issues (401/400/403), see `docs/platform/new-app-auth-troublesh
 ## Knowledge Base Structure
 
 ```
-AGENTS.md                              ← This file (TOC, ~110 lines)
+AGENTS.md                              ← This file (TOC)
 README.md
 docs/                                   ← KB knowledge layer (system of record)
-├── INDEX.md  ARCHITECTURE.md  GOLDEN_PRINCIPLES.md  QUALITY_SCORE.md
-├── platform/                          ← App template, security, ops, compliance, app-catalog, ecosystem
-├── architecture/                      ← Intelligence layer, data distribution, ADRs
+├── index.md                           ← Master KB index (start here)
+├── platform/                          ← App template, security, ops, compliance, app-catalog, ecosystem, golden-principles
+├── architecture/                      ← overview.md, intelligence layer, data distribution, ADRs
 ├── data-models/
 │   ├── index.md                       ← Data models chapter index (Dash-first hierarchy)
 │   ├── dash-data-model.md             ← Dash/Anywhere.com practical field reference
@@ -54,15 +54,17 @@ docs/                                   ← KB knowledge layer (system of record
 │   ├── property-field-mapping.md      ← Dash ↔ RESO ↔ Qobrix ↔ SIR
 │   ├── platform-extensions.md         ← x_sm_* fields not in Dash or RESO DD
 │   └── …
-├── business-processes/                ← Sharp-SIR pipeline + canonical RESO-aligned process catalogue
-│   └── canonical-processes/           ← Vendor-neutral RESO state machines (sibling to Sharp-SIR flavour)
-├── integration/                       ← Layer 5: per-resource cross-cutting views (generated)
-├── INTEGRATION.md                     ← Master "how the layers compose" navigation aid
-├── exec-plans/                        ← Active / completed execution plans, tech-debt tracker
-├── product-specs/                     ← Broker dashboard, forms, Kanban, personas
+├── business-processes/                ← Canonical RESO-aligned process catalogue (vendor-neutral)
+│   └── canonical-processes/           ← 10 RESO state machines (system of record)
+├── integration/                       ← Layer 5: overview.md + per-resource cross-cutting views (generated)
+├── product-specs/
+│   ├── matrix-pipeline/               ← SINGLE SOURCE OF TRUTH for CRM (LLM Wiki + BRD + phases)
+│   ├── client-portal.md, marketing-platform.md, sir-listing-forms.md, personalization.md
+│   └── index.md
+├── exec-plans/                        ← index.md, quality-score.md, tech-debt-tracker, active/completed plans
 ├── references/                        ← API catalogs, integration endpoints
 ├── vision/                            ← Digital strategy 2026-2028, AI sales model
-└── zoe-ai-assistant-kb/               ← Zoe RAG knowledge base
+└── zoe-ai-assistant-kb/               ← Zoe AI Assistant RAG knowledge base + ragchat-webhook-spec.md
 raw/                                    ← Hand-supplied source artifacts
 ├── dash/                              ← 6 SIR DOCX listing forms
 ├── qobrix/qobrix_openapi.yaml         ← Qobrix OpenAPI 3.0 spec
@@ -78,7 +80,7 @@ scripts/
 |---|---|
 | Build a new Matrix App (start here) | `docs/platform/app-template.md` |
 | Platform / ecosystem / app catalog | `docs/platform/index.md`, `docs/platform/ecosystem-architecture.md`, `docs/platform/app-catalog.md` |
-| Strategy, design philosophy, architecture | `docs/vision/digital-strategy-2026-2028.md`, `docs/vision/core-beliefs.md`, `docs/ARCHITECTURE.md` |
+| Strategy, design philosophy, architecture | `docs/vision/digital-strategy-2026-2028.md`, `docs/vision/core-beliefs.md`, `docs/architecture/overview.md` |
 | Look up any RESO DD 2.0 resource / field / lookup | `docs/data-models/reso-dd-kb/USAGE.md` |
 | When editing inside reso-dd-kb (local rules) | `docs/data-models/reso-dd-kb/AGENTS.md` |
 | Canonical RESO DBML / per-resource reference | `docs/data-models/reso-dd-kb/wiki/dbml/canonical.dbml`, `docs/data-models/reso-dd-kb/wiki/agent-docs/resources/<snake>.md` |
@@ -86,7 +88,7 @@ scripts/
 | When editing source-mappings (local rules) | `docs/data-models/source-mappings/AGENTS.md` |
 | Look up canonical RESO-aligned MLS process | `docs/business-processes/canonical-processes/USAGE.md` |
 | When editing canonical-processes (local rules) | `docs/business-processes/canonical-processes/AGENTS.md` |
-| Understand how the four layers compose (data → mapping → canonical process → flavour) | `docs/INTEGRATION.md` |
+| Understand how the three layers compose (data → mapping → canonical process) | `docs/integration/overview.md` |
 | Get a one-stop view of "everything about resource X" | `docs/integration/wiki/agent-docs/by_resource/<resource>.md` (start at `docs/integration/wiki/agent-docs/_index.md`) |
 | When editing integration/ (local rules) | `docs/integration/AGENTS.md` |
 | Dash fields, field mapping, x_sm_* extensions | `docs/data-models/dash-data-model.md`, `docs/data-models/property-field-mapping.md`, `docs/data-models/platform-extensions.md` |
@@ -98,17 +100,17 @@ scripts/
 | Phase-2 AI / Phase-2.5 stewardship roadmaps | `docs/architecture/intelligence-layer.md`, `docs/architecture/data-distribution-and-stewardship.md` |
 | Alignment audit / drift / KB methodology | `docs/platform/alignment-audit-playbook.md`, `docs/platform/kb-methodology.md` |
 | GDPR, data retention, DSARs | `docs/platform/compliance.md` |
-| Engineering invariants, quality grades, exec plans, tech debt | `docs/GOLDEN_PRINCIPLES.md`, `docs/QUALITY_SCORE.md`, `docs/exec-plans/index.md`, `docs/exec-plans/tech-debt-tracker.md` |
+| Engineering invariants, quality grades, exec plans, tech debt | `docs/platform/golden-principles.md`, `docs/exec-plans/quality-score.md`, `docs/exec-plans/index.md`, `docs/exec-plans/tech-debt-tracker.md` |
 | Validate KB structure and links | `scripts/validate-kb.sh` |
-| Listing / sales / lead-qual workflow | `docs/business-processes/listing-pipeline.md`, `docs/business-processes/sales-pipeline.md`, `docs/business-processes/lead-qualification.md` |
-| Broker dashboard / listing forms / personas | `docs/product-specs/broker-dashboard.md`, `docs/product-specs/sir-listing-forms.md`, `docs/product-specs/personas.md` |
-| Build the `matrix-pipeline` CRM (BRD, entities, FRs, AI, Commission Engine, 8-week plan) | `docs/product-specs/matrix-pipeline/INDEX.md` (start here), then `docs/product-specs/matrix-pipeline/wiki/<page>.md` + `phases.md` |
+| Listing / sales / lead-qual / showing / transaction workflow | `docs/business-processes/canonical-processes/USAGE.md` (canonical, RESO-aligned) |
+| Build the `matrix-pipeline` CRM (BRD, entities, FRs, AI, Commission Engine, 8-week plan, CDL CRUD contract) | `docs/product-specs/matrix-pipeline/INDEX.md` (start here), then `docs/product-specs/matrix-pipeline/wiki/<page>.md` + `phases.md` + `cdl-crud-contract.md` |
+| Listing form fields, Portal, Marketing, Personalization specs | `docs/product-specs/sir-listing-forms.md`, `docs/product-specs/client-portal.md`, `docs/product-specs/marketing-platform.md`, `docs/product-specs/personalization.md` |
 | Qobrix API reference | `docs/references/qobrix-api-summary.md` |
 | New app can't auth (401/400/403) | `docs/platform/new-app-auth-troubleshooting.md` |
 
 ## For Zoe AI Assistant (1st & 2nd Line Support)
 
-Start at `docs/zoe-ai-assistant-kb/index.md`. For end-user questions, navigate to the relevant app article (`portal.md`, `client-connect.md`, `pipeline.md`, `hrms.md`, `itsm.md`, `financial-management.md`, `comms.md`, `meeting-hub.md`, `platform-sso-auth.md`). For 2nd-line technical questions, see `docs/zoe-ai-assistant-kb/second-line-tech-reference.md`. To author a new article, follow `docs/zoe-ai-assistant-kb/kb-generation-guide.md`.
+Start at `docs/zoe-ai-assistant-kb/index.md`. For end-user questions, navigate to the relevant app article (`portal.md`, `client-connect.md`, `pipeline.md`, `hrms.md`, `itsm.md`, `financial-management.md`, `comms.md`, `meeting-hub.md`, `platform-sso-auth.md`). For 2nd-line technical questions, see `docs/zoe-ai-assistant-kb/second-line-tech-reference.md`. To author a new article, follow `docs/zoe-ai-assistant-kb/kb-generation-guide.md`. The Zoe RAG-chat webhook contract lives at `docs/zoe-ai-assistant-kb/ragchat-webhook-spec.md`.
 
 ## Source Repos & Files
 

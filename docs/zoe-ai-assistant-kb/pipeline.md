@@ -1,8 +1,9 @@
 # Sharp Matrix Pipeline — 1st Line Support Knowledge Base
 
-> **App name:** Matrix Pipeline
+> **App name:** Matrix Pipeline (matrix-pipeline 2.0)
 > **URL:** [https://intranet.sharpsir.group/matrix-pipeline/](https://intranet.sharpsir.group/matrix-pipeline/)
-> **Purpose:** Manage sales leads, deal pipeline, contacts, MLS property data, Microsoft 365 email/calendar, opportunity reviews, and call center workflows.
+> **Canonical product spec (single source of truth for behaviour):** [`docs/product-specs/matrix-pipeline/`](../product-specs/matrix-pipeline/INDEX.md) — `wiki/` + `phases.md` + `cdl-crud-contract.md`. The app is built strictly on canonical RESO DD 2.0 with two documented escape hatches (`Referral` entity + Commission Engine ERP-lite); CRM workflow vocabulary in this support doc maps 1:1 to canonical RESO resources (`Contacts`, `SavedSearch`, `ShowingAppointment`, `TransactionManagement`, etc.).
+> **Purpose:** Manage canonical `Contacts` (with `ContactType` graduation: Lead → Prospect → Ready-to-Buy → Buyer/Seller), the canonical 5-stage funnel projection over `(Contacts × SavedSearch)` (Qualification → Matching → Viewing → Contracting → Payment), `Showing` chain, `TransactionManagement`, MLS `Property` data via the CDL, Microsoft 365 email/calendar, and call-center contact verification.
 > **Users:** Brokers, Sales Managers, Call Center Staff, Admins
 
 ---
@@ -260,19 +261,19 @@ You want to send a curated list of properties to a buyer.
 
 ---
 
-## Pipeline Stages
+## Pipeline Stages — canonical 5-stage funnel projection
 
-Opportunities progress through stages. Stages can be customized by your admin in Settings → Pipeline, but the default stages are:
+The five stages are the **canonical matrix-pipeline 2.0 funnel** — a UI/UX projection of canonical RESO state over `(Contacts × SavedSearch)` pairs (one card per parallel buyer intent per contact). Stages are auto-derived from CDL + app state per FR-FNL-01..06; they are **not** stored as a `pipeline_stages` table. See [`product-specs/matrix-pipeline/wiki/overview.md#pipeline`](../product-specs/matrix-pipeline/wiki/overview.md#pipeline) for the canonical definition.
 
-| Stage | What It Means |
-|-------|---------------|
-| **Qualification** | Evaluating if the deal is viable — confirming budget, timeline, and client motivation |
-| **Matching** | Finding suitable properties for the client based on their criteria |
-| **Viewing** | Client is viewing properties — scheduling and conducting showings |
-| **Contracting** | Terms agreed, contracts being prepared and signed |
-| **Payment** | Payments being processed, deal approaching completion |
+| Stage | Canonical trigger | What It Means |
+|---|---|---|
+| **Qualification** | `Contacts.ContactType ∈ Lead, Prospect`; `SavedSearch` exists | Evaluating if the deal is viable — confirming budget, timeline, and client motivation; FR-AI-LQ may pre-fill |
+| **Matching** | `ContactListings` rows linked; FR-AI-MX matches generated | Finding suitable `Property` rows for the client; Curated List or `Caravan` may be created |
+| **Viewing** | `ShowingAppointment` / `Showing` rows exist | Client is viewing properties — canonical 5-resource Showing chain in flight |
+| **Contracting** | `TransactionManagement` row open; offer `OfferAmount` set | Terms agreed, contracts being prepared and signed |
+| **Payment** | `TransactionManagement.status` heading toward `Closed` | Payments being processed, deal approaching `Closed` |
 
-After the final stage, the deal is marked as **Won** (successfully closed) or **Lost** (did not proceed).
+After the final stage, the deal is marked as **Won** (`TransactionManagement.status = Closed`, `HistoryTransactional` audit row emitted) or **Lost** (`TransactionManagement.status = Withdrawn` / `Rejected`).
 
 ## Deal Statuses
 

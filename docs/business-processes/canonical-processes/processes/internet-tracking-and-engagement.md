@@ -13,9 +13,9 @@ fact rows), `InternetTrackingSummary` (period roll-ups), and
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/internet_tracking.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/internet_tracking.md),
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/internet_tracking_summary.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/internet_tracking_summary.md),
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/entity_event.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/entity_event.md).
-> - Sharp-SIR flavour: no project SOP yet — promote one under
->   `docs/business-processes/` when SIR codifies analytics
->   warehousing, retention, and consent semantics.
+> - Sharp-SIR flavour: no project SOP yet — the CRM materialisation
+>   (if any) belongs in `product-specs/matrix-pipeline/` when SIR
+>   codifies analytics warehousing, retention, and consent semantics.
 
 This is the canonical baseline. Project flavours (analytics
 warehouse choice, retention windows, GDPR consent flows) belong in

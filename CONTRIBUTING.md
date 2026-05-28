@@ -4,7 +4,7 @@
 
 1. Create the markdown file in the appropriate `docs/` subdirectory
 2. Add the file to the chapter `index.md`
-3. Add the file to `docs/INDEX.md`
+3. Add the file to `docs/index.md`
 4. Add the file to `AGENTS.md` (tree structure + task navigation table if applicable)
 5. Add cross-references to related documents
 

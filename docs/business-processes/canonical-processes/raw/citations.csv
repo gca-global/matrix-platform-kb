@@ -59,68 +59,68 @@ caravan-lifecycle.md,Resource,Caravan,203
 caravan-lifecycle.md,Resource,CaravanStop,204
 caravan-lifecycle.md,Resource,OpenHouse,205
 caravan-lifecycle.md,Resource,Property,206
-field-and-lookup-metadata-publication.md,Field,Field.FieldKey,240
-field-and-lookup-metadata-publication.md,Field,Field.FieldName,241
-field-and-lookup-metadata-publication.md,Field,Field.ModificationTimestamp,243
-field-and-lookup-metadata-publication.md,Field,Field.ResourceName,242
-field-and-lookup-metadata-publication.md,Field,HistoryTransactional.ChangeType,253
-field-and-lookup-metadata-publication.md,Field,HistoryTransactional.FieldKey,250
-field-and-lookup-metadata-publication.md,Field,HistoryTransactional.FieldName,251
-field-and-lookup-metadata-publication.md,Field,HistoryTransactional.ResourceName,252
-field-and-lookup-metadata-publication.md,Field,Lookup.LegacyODataValue,248
-field-and-lookup-metadata-publication.md,Field,Lookup.LookupKey,244
-field-and-lookup-metadata-publication.md,Field,Lookup.LookupName,245
-field-and-lookup-metadata-publication.md,Field,Lookup.LookupValue,246
-field-and-lookup-metadata-publication.md,Field,Lookup.ModificationTimestamp,249
-field-and-lookup-metadata-publication.md,Field,Lookup.StandardLookupValue,247
-field-and-lookup-metadata-publication.md,LookupValue,ChangeType.Deleted,254
-field-and-lookup-metadata-publication.md,Resource,Field,237
-field-and-lookup-metadata-publication.md,Resource,HistoryTransactional,239
-field-and-lookup-metadata-publication.md,Resource,Lookup,238
-history-and-audit-log.md,Field,HistoryTransactional.ChangeType,316
-history-and-audit-log.md,Field,HistoryTransactional.ChangedByMemberID,318
-history-and-audit-log.md,Field,HistoryTransactional.ChangedByMemberKey,317
-history-and-audit-log.md,Field,HistoryTransactional.ClassName,315
-history-and-audit-log.md,Field,HistoryTransactional.EntityEventSequence,323
-history-and-audit-log.md,Field,HistoryTransactional.FieldKey,319
-history-and-audit-log.md,Field,HistoryTransactional.FieldName,320
-history-and-audit-log.md,Field,HistoryTransactional.HistoryTransactionalKey,311
-history-and-audit-log.md,Field,HistoryTransactional.ModificationTimestamp,330
-history-and-audit-log.md,Field,HistoryTransactional.NewValue,322
-history-and-audit-log.md,Field,HistoryTransactional.OriginatingSystemHistoryKey,326
-history-and-audit-log.md,Field,HistoryTransactional.OriginatingSystemID,325
-history-and-audit-log.md,Field,HistoryTransactional.OriginatingSystemName,324
-history-and-audit-log.md,Field,HistoryTransactional.PreviousValue,321
-history-and-audit-log.md,Field,HistoryTransactional.ResourceName,312
-history-and-audit-log.md,Field,HistoryTransactional.ResourceRecordID,314
-history-and-audit-log.md,Field,HistoryTransactional.ResourceRecordKey,313
-history-and-audit-log.md,Field,HistoryTransactional.SourceSystemHistoryKey,329
-history-and-audit-log.md,Field,HistoryTransactional.SourceSystemID,328
-history-and-audit-log.md,Field,HistoryTransactional.SourceSystemName,327
-history-and-audit-log.md,LookupValue,ChangeType.Active,332
-history-and-audit-log.md,LookupValue,ChangeType.Active Under Contract,333
-history-and-audit-log.md,LookupValue,ChangeType.Back On Market,341
-history-and-audit-log.md,LookupValue,ChangeType.Canceled,339
-history-and-audit-log.md,LookupValue,ChangeType.Closed,335
-history-and-audit-log.md,LookupValue,ChangeType.Coming Soon,336
-history-and-audit-log.md,LookupValue,ChangeType.Deleted,343
-history-and-audit-log.md,LookupValue,ChangeType.Expired,340
-history-and-audit-log.md,LookupValue,ChangeType.Hold,337
-history-and-audit-log.md,LookupValue,ChangeType.New Listing,331
-history-and-audit-log.md,LookupValue,ChangeType.Pending,334
-history-and-audit-log.md,LookupValue,ChangeType.Price Change,342
-history-and-audit-log.md,LookupValue,ChangeType.Withdrawn,338
-history-and-audit-log.md,LookupValue,ResourceName.Association,348
-history-and-audit-log.md,LookupValue,ResourceName.Contacts,347
-history-and-audit-log.md,LookupValue,ResourceName.Member,345
-history-and-audit-log.md,LookupValue,ResourceName.Office,346
-history-and-audit-log.md,LookupValue,ResourceName.Property,344
-history-and-audit-log.md,Resource,Contacts,309
-history-and-audit-log.md,Resource,Field,310
-history-and-audit-log.md,Resource,HistoryTransactional,305
-history-and-audit-log.md,Resource,Member,306
-history-and-audit-log.md,Resource,Office,307
-history-and-audit-log.md,Resource,Property,308
+field-and-lookup-metadata-publication.md,Field,Field.FieldKey,241
+field-and-lookup-metadata-publication.md,Field,Field.FieldName,242
+field-and-lookup-metadata-publication.md,Field,Field.ModificationTimestamp,244
+field-and-lookup-metadata-publication.md,Field,Field.ResourceName,243
+field-and-lookup-metadata-publication.md,Field,HistoryTransactional.ChangeType,254
+field-and-lookup-metadata-publication.md,Field,HistoryTransactional.FieldKey,251
+field-and-lookup-metadata-publication.md,Field,HistoryTransactional.FieldName,252
+field-and-lookup-metadata-publication.md,Field,HistoryTransactional.ResourceName,253
+field-and-lookup-metadata-publication.md,Field,Lookup.LegacyODataValue,249
+field-and-lookup-metadata-publication.md,Field,Lookup.LookupKey,245
+field-and-lookup-metadata-publication.md,Field,Lookup.LookupName,246
+field-and-lookup-metadata-publication.md,Field,Lookup.LookupValue,247
+field-and-lookup-metadata-publication.md,Field,Lookup.ModificationTimestamp,250
+field-and-lookup-metadata-publication.md,Field,Lookup.StandardLookupValue,248
+field-and-lookup-metadata-publication.md,LookupValue,ChangeType.Deleted,255
+field-and-lookup-metadata-publication.md,Resource,Field,238
+field-and-lookup-metadata-publication.md,Resource,HistoryTransactional,240
+field-and-lookup-metadata-publication.md,Resource,Lookup,239
+history-and-audit-log.md,Field,HistoryTransactional.ChangeType,317
+history-and-audit-log.md,Field,HistoryTransactional.ChangedByMemberID,319
+history-and-audit-log.md,Field,HistoryTransactional.ChangedByMemberKey,318
+history-and-audit-log.md,Field,HistoryTransactional.ClassName,316
+history-and-audit-log.md,Field,HistoryTransactional.EntityEventSequence,324
+history-and-audit-log.md,Field,HistoryTransactional.FieldKey,320
+history-and-audit-log.md,Field,HistoryTransactional.FieldName,321
+history-and-audit-log.md,Field,HistoryTransactional.HistoryTransactionalKey,312
+history-and-audit-log.md,Field,HistoryTransactional.ModificationTimestamp,331
+history-and-audit-log.md,Field,HistoryTransactional.NewValue,323
+history-and-audit-log.md,Field,HistoryTransactional.OriginatingSystemHistoryKey,327
+history-and-audit-log.md,Field,HistoryTransactional.OriginatingSystemID,326
+history-and-audit-log.md,Field,HistoryTransactional.OriginatingSystemName,325
+history-and-audit-log.md,Field,HistoryTransactional.PreviousValue,322
+history-and-audit-log.md,Field,HistoryTransactional.ResourceName,313
+history-and-audit-log.md,Field,HistoryTransactional.ResourceRecordID,315
+history-and-audit-log.md,Field,HistoryTransactional.ResourceRecordKey,314
+history-and-audit-log.md,Field,HistoryTransactional.SourceSystemHistoryKey,330
+history-and-audit-log.md,Field,HistoryTransactional.SourceSystemID,329
+history-and-audit-log.md,Field,HistoryTransactional.SourceSystemName,328
+history-and-audit-log.md,LookupValue,ChangeType.Active,333
+history-and-audit-log.md,LookupValue,ChangeType.Active Under Contract,334
+history-and-audit-log.md,LookupValue,ChangeType.Back On Market,342
+history-and-audit-log.md,LookupValue,ChangeType.Canceled,340
+history-and-audit-log.md,LookupValue,ChangeType.Closed,336
+history-and-audit-log.md,LookupValue,ChangeType.Coming Soon,337
+history-and-audit-log.md,LookupValue,ChangeType.Deleted,344
+history-and-audit-log.md,LookupValue,ChangeType.Expired,341
+history-and-audit-log.md,LookupValue,ChangeType.Hold,338
+history-and-audit-log.md,LookupValue,ChangeType.New Listing,332
+history-and-audit-log.md,LookupValue,ChangeType.Pending,335
+history-and-audit-log.md,LookupValue,ChangeType.Price Change,343
+history-and-audit-log.md,LookupValue,ChangeType.Withdrawn,339
+history-and-audit-log.md,LookupValue,ResourceName.Association,349
+history-and-audit-log.md,LookupValue,ResourceName.Contacts,348
+history-and-audit-log.md,LookupValue,ResourceName.Member,346
+history-and-audit-log.md,LookupValue,ResourceName.Office,347
+history-and-audit-log.md,LookupValue,ResourceName.Property,345
+history-and-audit-log.md,Resource,Contacts,310
+history-and-audit-log.md,Resource,Field,311
+history-and-audit-log.md,Resource,HistoryTransactional,306
+history-and-audit-log.md,Resource,Member,307
+history-and-audit-log.md,Resource,Office,308
+history-and-audit-log.md,Resource,Property,309
 internet-tracking-and-engagement.md,Field,EntityEvent.EntityEventSequence,377
 internet-tracking-and-engagement.md,Field,EntityEvent.ResourceName,374
 internet-tracking-and-engagement.md,Field,EntityEvent.ResourceRecordKey,375
@@ -243,202 +243,202 @@ internet-tracking-and-engagement.md,LookupValue,TrackingType.OUID,419
 internet-tracking-and-engagement.md,Resource,EntityEvent,305
 internet-tracking-and-engagement.md,Resource,InternetTracking,303
 internet-tracking-and-engagement.md,Resource,InternetTrackingSummary,304
-lead-contact-lifecycle.md,Field,ContactListingNotes.Contact,349
-lead-contact-lifecycle.md,Field,ContactListingNotes.ContactKey,350
-lead-contact-lifecycle.md,Field,ContactListingNotes.ContactListingNotesKey,348
-lead-contact-lifecycle.md,Field,ContactListingNotes.Listing,351
-lead-contact-lifecycle.md,Field,ContactListingNotes.ListingId,352
-lead-contact-lifecycle.md,Field,ContactListingNotes.ListingKey,353
-lead-contact-lifecycle.md,Field,ContactListingNotes.ModificationTimestamp,356
-lead-contact-lifecycle.md,Field,ContactListingNotes.NoteContents,354
-lead-contact-lifecycle.md,Field,ContactListingNotes.NotedBy,355
-lead-contact-lifecycle.md,Field,ContactListings.AgentNotesUnreadYN,341
-lead-contact-lifecycle.md,Field,ContactListings.ClassName,347
-lead-contact-lifecycle.md,Field,ContactListings.Contact,330
-lead-contact-lifecycle.md,Field,ContactListings.ContactKey,331
-lead-contact-lifecycle.md,Field,ContactListings.ContactListingPreference,335
-lead-contact-lifecycle.md,Field,ContactListings.ContactListingsKey,329
-lead-contact-lifecycle.md,Field,ContactListings.ContactNotesUnreadYN,342
-lead-contact-lifecycle.md,Field,ContactListings.DirectEmailYN,336
-lead-contact-lifecycle.md,Field,ContactListings.LastAgentNoteTimestamp,339
-lead-contact-lifecycle.md,Field,ContactListings.LastContactNoteTimestamp,340
-lead-contact-lifecycle.md,Field,ContactListings.Listing,332
-lead-contact-lifecycle.md,Field,ContactListings.ListingId,333
-lead-contact-lifecycle.md,Field,ContactListings.ListingKey,334
-lead-contact-lifecycle.md,Field,ContactListings.ListingModificationTimestamp,345
-lead-contact-lifecycle.md,Field,ContactListings.ListingNotes,344
-lead-contact-lifecycle.md,Field,ContactListings.ListingSentTimestamp,337
-lead-contact-lifecycle.md,Field,ContactListings.ListingViewedYN,338
-lead-contact-lifecycle.md,Field,ContactListings.PortalLastVisitedTimestamp,343
-lead-contact-lifecycle.md,Field,ContactListings.ResourceName,346
-lead-contact-lifecycle.md,Field,Contacts.ContactKey,273
-lead-contact-lifecycle.md,Field,Contacts.ContactLoginId,274
-lead-contact-lifecycle.md,Field,Contacts.ContactStatus,275
-lead-contact-lifecycle.md,Field,Contacts.ContactType,276
-lead-contact-lifecycle.md,Field,Contacts.Email,279
-lead-contact-lifecycle.md,Field,Contacts.FirstName,277
-lead-contact-lifecycle.md,Field,Contacts.LastName,278
-lead-contact-lifecycle.md,Field,Contacts.LeadSource,281
-lead-contact-lifecycle.md,Field,Contacts.MobilePhone,280
-lead-contact-lifecycle.md,Field,Contacts.ModificationTimestamp,288
-lead-contact-lifecycle.md,Field,Contacts.OriginalEntryTimestamp,287
-lead-contact-lifecycle.md,Field,Contacts.OriginatingSystemContactKey,289
-lead-contact-lifecycle.md,Field,Contacts.OwnerMember,283
-lead-contact-lifecycle.md,Field,Contacts.OwnerMemberKey,284
-lead-contact-lifecycle.md,Field,Contacts.PreferredAddress,285
-lead-contact-lifecycle.md,Field,Contacts.PreferredPhone,286
-lead-contact-lifecycle.md,Field,Contacts.ReferredBy,282
-lead-contact-lifecycle.md,Field,Contacts.ReverseProspectingEnabledYN,291
-lead-contact-lifecycle.md,Field,Contacts.SourceSystemContactKey,290
-lead-contact-lifecycle.md,Field,Prospecting.ActiveYN,311
-lead-contact-lifecycle.md,Field,Prospecting.BccEmailList,322
-lead-contact-lifecycle.md,Field,Prospecting.BccMeYN,323
-lead-contact-lifecycle.md,Field,Prospecting.CcEmailList,321
-lead-contact-lifecycle.md,Field,Prospecting.ClientActivatedYN,312
-lead-contact-lifecycle.md,Field,Prospecting.ConciergeNotificationsYN,325
-lead-contact-lifecycle.md,Field,Prospecting.ConciergeYN,324
-lead-contact-lifecycle.md,Field,Prospecting.Contact,305
-lead-contact-lifecycle.md,Field,Prospecting.ContactKey,306
-lead-contact-lifecycle.md,Field,Prospecting.DailySchedule,314
-lead-contact-lifecycle.md,Field,Prospecting.LastNewChangedTimestamp,326
-lead-contact-lifecycle.md,Field,Prospecting.LastViewedTimestamp,327
-lead-contact-lifecycle.md,Field,Prospecting.MessageNew,317
-lead-contact-lifecycle.md,Field,Prospecting.MessageRevise,318
-lead-contact-lifecycle.md,Field,Prospecting.MessageUpdate,319
-lead-contact-lifecycle.md,Field,Prospecting.NextSendTimestamp,315
-lead-contact-lifecycle.md,Field,Prospecting.OwnerMember,307
-lead-contact-lifecycle.md,Field,Prospecting.OwnerMemberKey,308
-lead-contact-lifecycle.md,Field,Prospecting.ProspectingKey,304
-lead-contact-lifecycle.md,Field,Prospecting.ReasonActiveOrDisabled,328
-lead-contact-lifecycle.md,Field,Prospecting.SavedSearch,309
-lead-contact-lifecycle.md,Field,Prospecting.SavedSearchKey,310
-lead-contact-lifecycle.md,Field,Prospecting.ScheduleType,313
-lead-contact-lifecycle.md,Field,Prospecting.Subject,316
-lead-contact-lifecycle.md,Field,Prospecting.ToEmailList,320
-lead-contact-lifecycle.md,Field,SavedSearch.ClassName,303
-lead-contact-lifecycle.md,Field,SavedSearch.Member,298
-lead-contact-lifecycle.md,Field,SavedSearch.MemberKey,299
-lead-contact-lifecycle.md,Field,SavedSearch.MemberMlsId,300
-lead-contact-lifecycle.md,Field,SavedSearch.ResourceName,302
-lead-contact-lifecycle.md,Field,SavedSearch.SavedSearchDescription,294
-lead-contact-lifecycle.md,Field,SavedSearch.SavedSearchKey,292
-lead-contact-lifecycle.md,Field,SavedSearch.SavedSearchName,293
-lead-contact-lifecycle.md,Field,SavedSearch.SavedSearchType,301
-lead-contact-lifecycle.md,Field,SavedSearch.SearchQuery,295
-lead-contact-lifecycle.md,Field,SavedSearch.SearchQueryHumanReadable,297
-lead-contact-lifecycle.md,Field,SavedSearch.SearchQueryType,296
-lead-contact-lifecycle.md,LookupValue,ContactListingPreference.Discard,371
-lead-contact-lifecycle.md,LookupValue,ContactListingPreference.Favorite,369
-lead-contact-lifecycle.md,LookupValue,ContactListingPreference.Possibility,370
-lead-contact-lifecycle.md,LookupValue,ContactStatus.Active,357
-lead-contact-lifecycle.md,LookupValue,ContactStatus.Deleted,360
-lead-contact-lifecycle.md,LookupValue,ContactStatus.Inactive,359
-lead-contact-lifecycle.md,LookupValue,ContactStatus.On Vacation,358
-lead-contact-lifecycle.md,LookupValue,ContactType.Buyer,364
-lead-contact-lifecycle.md,LookupValue,ContactType.Landlord,367
-lead-contact-lifecycle.md,LookupValue,ContactType.Lead,361
-lead-contact-lifecycle.md,LookupValue,ContactType.Other,368
-lead-contact-lifecycle.md,LookupValue,ContactType.Prospect,362
-lead-contact-lifecycle.md,LookupValue,ContactType.Ready to Buy,363
-lead-contact-lifecycle.md,LookupValue,ContactType.Seller,365
-lead-contact-lifecycle.md,LookupValue,ContactType.Tenant,366
-lead-contact-lifecycle.md,LookupValue,ScheduleType.ASAP,372
-lead-contact-lifecycle.md,LookupValue,ScheduleType.Daily,373
-lead-contact-lifecycle.md,LookupValue,ScheduleType.Monthly,374
-lead-contact-lifecycle.md,LookupValue,SearchQueryType.$filter,375
-lead-contact-lifecycle.md,LookupValue,SearchQueryType.DMQL2,376
-lead-contact-lifecycle.md,Resource,ContactListingNotes,272
-lead-contact-lifecycle.md,Resource,ContactListings,271
-lead-contact-lifecycle.md,Resource,Contacts,268
-lead-contact-lifecycle.md,Resource,Prospecting,270
-lead-contact-lifecycle.md,Resource,SavedSearch,269
-listing-lifecycle.md,Field,HistoryTransactional.ChangeType,343
-listing-lifecycle.md,Field,HistoryTransactional.ChangedByMemberKey,344
-listing-lifecycle.md,Field,HistoryTransactional.FieldName,340
-listing-lifecycle.md,Field,HistoryTransactional.NewValue,342
-listing-lifecycle.md,Field,HistoryTransactional.PreviousValue,341
-listing-lifecycle.md,Field,HistoryTransactional.ResourceName,338
-listing-lifecycle.md,Field,HistoryTransactional.ResourceRecordKey,339
-listing-lifecycle.md,Field,Property.CancellationDate,327
-listing-lifecycle.md,Field,Property.CloseDate,321
-listing-lifecycle.md,Field,Property.CoListAgentKey,335
-listing-lifecycle.md,Field,Property.ContractStatusChangeDate,324
-listing-lifecycle.md,Field,Property.DevelopmentStatus,368
-listing-lifecycle.md,Field,Property.DocumentStatus,369
-listing-lifecycle.md,Field,Property.ExpirationDate,328
-listing-lifecycle.md,Field,Property.ListAgentKey,333
-listing-lifecycle.md,Field,Property.ListOfficeKey,334
-listing-lifecycle.md,Field,Property.ListPrice,315
-listing-lifecycle.md,Field,Property.ListingAgreement,336
-listing-lifecycle.md,Field,Property.ListingContractDate,318
-listing-lifecycle.md,Field,Property.ListingId,311
-listing-lifecycle.md,Field,Property.ListingKey,312
-listing-lifecycle.md,Field,Property.MajorChangeTimestamp,330
-listing-lifecycle.md,Field,Property.MajorChangeType,329
-listing-lifecycle.md,Field,Property.Media,337
-listing-lifecycle.md,Field,Property.MlsStatus,314
-listing-lifecycle.md,Field,Property.ModificationTimestamp,332
-listing-lifecycle.md,Field,Property.OffMarketDate,320
-listing-lifecycle.md,Field,Property.OnMarketDate,319
-listing-lifecycle.md,Field,Property.OriginalListPrice,316
-listing-lifecycle.md,Field,Property.PendingTimestamp,322
-listing-lifecycle.md,Field,Property.PreviousListPrice,317
-listing-lifecycle.md,Field,Property.PriceChangeTimestamp,331
-listing-lifecycle.md,Field,Property.PurchaseContractDate,323
-listing-lifecycle.md,Field,Property.StandardStatus,313
-listing-lifecycle.md,Field,Property.StatusChangeTimestamp,325
-listing-lifecycle.md,Field,Property.WithdrawnDate,326
-listing-lifecycle.md,LookupValue,ChangeType.Active,357
-listing-lifecycle.md,LookupValue,ChangeType.Active Under Contract,360
-listing-lifecycle.md,LookupValue,ChangeType.Back On Market,366
-listing-lifecycle.md,LookupValue,ChangeType.Canceled,364
-listing-lifecycle.md,LookupValue,ChangeType.Closed,361
-listing-lifecycle.md,LookupValue,ChangeType.Coming Soon,358
-listing-lifecycle.md,LookupValue,ChangeType.Expired,365
-listing-lifecycle.md,LookupValue,ChangeType.Hold,362
-listing-lifecycle.md,LookupValue,ChangeType.New Listing,356
-listing-lifecycle.md,LookupValue,ChangeType.Pending,359
-listing-lifecycle.md,LookupValue,ChangeType.Price Change,367
-listing-lifecycle.md,LookupValue,ChangeType.Withdrawn,363
-listing-lifecycle.md,LookupValue,DevelopmentStatus.Completed,377
-listing-lifecycle.md,LookupValue,DevelopmentStatus.Finished Lot(s),375
-listing-lifecycle.md,LookupValue,DevelopmentStatus.Other,378
-listing-lifecycle.md,LookupValue,DevelopmentStatus.Proposed,370
-listing-lifecycle.md,LookupValue,DevelopmentStatus.Raw Land,371
-listing-lifecycle.md,LookupValue,DevelopmentStatus.Rough Grade,372
-listing-lifecycle.md,LookupValue,DevelopmentStatus.See Remarks,379
-listing-lifecycle.md,LookupValue,DevelopmentStatus.Site Plan Approved,374
-listing-lifecycle.md,LookupValue,DevelopmentStatus.Site Plan Filed,373
-listing-lifecycle.md,LookupValue,DevelopmentStatus.Under Construction,376
-listing-lifecycle.md,LookupValue,DocumentStatus.Accepted,386
-listing-lifecycle.md,LookupValue,DocumentStatus.Archived,393
-listing-lifecycle.md,LookupValue,DocumentStatus.Changed,394
-listing-lifecycle.md,LookupValue,DocumentStatus.Countered,387
-listing-lifecycle.md,LookupValue,DocumentStatus.Deleted,395
-listing-lifecycle.md,LookupValue,DocumentStatus.Delivered,385
-listing-lifecycle.md,LookupValue,DocumentStatus.Finalized,391
-listing-lifecycle.md,LookupValue,DocumentStatus.In Escrow,390
-listing-lifecycle.md,LookupValue,DocumentStatus.Missing,382
-listing-lifecycle.md,LookupValue,DocumentStatus.Optional,381
-listing-lifecycle.md,LookupValue,DocumentStatus.Published,392
-listing-lifecycle.md,LookupValue,DocumentStatus.Received,384
-listing-lifecycle.md,LookupValue,DocumentStatus.Rejected,388
-listing-lifecycle.md,LookupValue,DocumentStatus.Required,380
-listing-lifecycle.md,LookupValue,DocumentStatus.Signed,389
-listing-lifecycle.md,LookupValue,DocumentStatus.Submitted,383
-listing-lifecycle.md,LookupValue,StandardStatus.Active,347
-listing-lifecycle.md,LookupValue,StandardStatus.Active Under Contract,348
-listing-lifecycle.md,LookupValue,StandardStatus.Canceled,353
-listing-lifecycle.md,LookupValue,StandardStatus.Closed,350
-listing-lifecycle.md,LookupValue,StandardStatus.Coming Soon,346
-listing-lifecycle.md,LookupValue,StandardStatus.Delete,355
-listing-lifecycle.md,LookupValue,StandardStatus.Expired,354
-listing-lifecycle.md,LookupValue,StandardStatus.Hold,351
-listing-lifecycle.md,LookupValue,StandardStatus.Incomplete,345
-listing-lifecycle.md,LookupValue,StandardStatus.Pending,349
-listing-lifecycle.md,LookupValue,StandardStatus.Withdrawn,352
-listing-lifecycle.md,Resource,HistoryTransactional,310
-listing-lifecycle.md,Resource,Property,309
+lead-contact-lifecycle.md,Field,ContactListingNotes.Contact,351
+lead-contact-lifecycle.md,Field,ContactListingNotes.ContactKey,352
+lead-contact-lifecycle.md,Field,ContactListingNotes.ContactListingNotesKey,350
+lead-contact-lifecycle.md,Field,ContactListingNotes.Listing,353
+lead-contact-lifecycle.md,Field,ContactListingNotes.ListingId,354
+lead-contact-lifecycle.md,Field,ContactListingNotes.ListingKey,355
+lead-contact-lifecycle.md,Field,ContactListingNotes.ModificationTimestamp,358
+lead-contact-lifecycle.md,Field,ContactListingNotes.NoteContents,356
+lead-contact-lifecycle.md,Field,ContactListingNotes.NotedBy,357
+lead-contact-lifecycle.md,Field,ContactListings.AgentNotesUnreadYN,343
+lead-contact-lifecycle.md,Field,ContactListings.ClassName,349
+lead-contact-lifecycle.md,Field,ContactListings.Contact,332
+lead-contact-lifecycle.md,Field,ContactListings.ContactKey,333
+lead-contact-lifecycle.md,Field,ContactListings.ContactListingPreference,337
+lead-contact-lifecycle.md,Field,ContactListings.ContactListingsKey,331
+lead-contact-lifecycle.md,Field,ContactListings.ContactNotesUnreadYN,344
+lead-contact-lifecycle.md,Field,ContactListings.DirectEmailYN,338
+lead-contact-lifecycle.md,Field,ContactListings.LastAgentNoteTimestamp,341
+lead-contact-lifecycle.md,Field,ContactListings.LastContactNoteTimestamp,342
+lead-contact-lifecycle.md,Field,ContactListings.Listing,334
+lead-contact-lifecycle.md,Field,ContactListings.ListingId,335
+lead-contact-lifecycle.md,Field,ContactListings.ListingKey,336
+lead-contact-lifecycle.md,Field,ContactListings.ListingModificationTimestamp,347
+lead-contact-lifecycle.md,Field,ContactListings.ListingNotes,346
+lead-contact-lifecycle.md,Field,ContactListings.ListingSentTimestamp,339
+lead-contact-lifecycle.md,Field,ContactListings.ListingViewedYN,340
+lead-contact-lifecycle.md,Field,ContactListings.PortalLastVisitedTimestamp,345
+lead-contact-lifecycle.md,Field,ContactListings.ResourceName,348
+lead-contact-lifecycle.md,Field,Contacts.ContactKey,275
+lead-contact-lifecycle.md,Field,Contacts.ContactLoginId,276
+lead-contact-lifecycle.md,Field,Contacts.ContactStatus,277
+lead-contact-lifecycle.md,Field,Contacts.ContactType,278
+lead-contact-lifecycle.md,Field,Contacts.Email,281
+lead-contact-lifecycle.md,Field,Contacts.FirstName,279
+lead-contact-lifecycle.md,Field,Contacts.LastName,280
+lead-contact-lifecycle.md,Field,Contacts.LeadSource,283
+lead-contact-lifecycle.md,Field,Contacts.MobilePhone,282
+lead-contact-lifecycle.md,Field,Contacts.ModificationTimestamp,290
+lead-contact-lifecycle.md,Field,Contacts.OriginalEntryTimestamp,289
+lead-contact-lifecycle.md,Field,Contacts.OriginatingSystemContactKey,291
+lead-contact-lifecycle.md,Field,Contacts.OwnerMember,285
+lead-contact-lifecycle.md,Field,Contacts.OwnerMemberKey,286
+lead-contact-lifecycle.md,Field,Contacts.PreferredAddress,287
+lead-contact-lifecycle.md,Field,Contacts.PreferredPhone,288
+lead-contact-lifecycle.md,Field,Contacts.ReferredBy,284
+lead-contact-lifecycle.md,Field,Contacts.ReverseProspectingEnabledYN,293
+lead-contact-lifecycle.md,Field,Contacts.SourceSystemContactKey,292
+lead-contact-lifecycle.md,Field,Prospecting.ActiveYN,313
+lead-contact-lifecycle.md,Field,Prospecting.BccEmailList,324
+lead-contact-lifecycle.md,Field,Prospecting.BccMeYN,325
+lead-contact-lifecycle.md,Field,Prospecting.CcEmailList,323
+lead-contact-lifecycle.md,Field,Prospecting.ClientActivatedYN,314
+lead-contact-lifecycle.md,Field,Prospecting.ConciergeNotificationsYN,327
+lead-contact-lifecycle.md,Field,Prospecting.ConciergeYN,326
+lead-contact-lifecycle.md,Field,Prospecting.Contact,307
+lead-contact-lifecycle.md,Field,Prospecting.ContactKey,308
+lead-contact-lifecycle.md,Field,Prospecting.DailySchedule,316
+lead-contact-lifecycle.md,Field,Prospecting.LastNewChangedTimestamp,328
+lead-contact-lifecycle.md,Field,Prospecting.LastViewedTimestamp,329
+lead-contact-lifecycle.md,Field,Prospecting.MessageNew,319
+lead-contact-lifecycle.md,Field,Prospecting.MessageRevise,320
+lead-contact-lifecycle.md,Field,Prospecting.MessageUpdate,321
+lead-contact-lifecycle.md,Field,Prospecting.NextSendTimestamp,317
+lead-contact-lifecycle.md,Field,Prospecting.OwnerMember,309
+lead-contact-lifecycle.md,Field,Prospecting.OwnerMemberKey,310
+lead-contact-lifecycle.md,Field,Prospecting.ProspectingKey,306
+lead-contact-lifecycle.md,Field,Prospecting.ReasonActiveOrDisabled,330
+lead-contact-lifecycle.md,Field,Prospecting.SavedSearch,311
+lead-contact-lifecycle.md,Field,Prospecting.SavedSearchKey,312
+lead-contact-lifecycle.md,Field,Prospecting.ScheduleType,315
+lead-contact-lifecycle.md,Field,Prospecting.Subject,318
+lead-contact-lifecycle.md,Field,Prospecting.ToEmailList,322
+lead-contact-lifecycle.md,Field,SavedSearch.ClassName,305
+lead-contact-lifecycle.md,Field,SavedSearch.Member,300
+lead-contact-lifecycle.md,Field,SavedSearch.MemberKey,301
+lead-contact-lifecycle.md,Field,SavedSearch.MemberMlsId,302
+lead-contact-lifecycle.md,Field,SavedSearch.ResourceName,304
+lead-contact-lifecycle.md,Field,SavedSearch.SavedSearchDescription,296
+lead-contact-lifecycle.md,Field,SavedSearch.SavedSearchKey,294
+lead-contact-lifecycle.md,Field,SavedSearch.SavedSearchName,295
+lead-contact-lifecycle.md,Field,SavedSearch.SavedSearchType,303
+lead-contact-lifecycle.md,Field,SavedSearch.SearchQuery,297
+lead-contact-lifecycle.md,Field,SavedSearch.SearchQueryHumanReadable,299
+lead-contact-lifecycle.md,Field,SavedSearch.SearchQueryType,298
+lead-contact-lifecycle.md,LookupValue,ContactListingPreference.Discard,373
+lead-contact-lifecycle.md,LookupValue,ContactListingPreference.Favorite,371
+lead-contact-lifecycle.md,LookupValue,ContactListingPreference.Possibility,372
+lead-contact-lifecycle.md,LookupValue,ContactStatus.Active,359
+lead-contact-lifecycle.md,LookupValue,ContactStatus.Deleted,362
+lead-contact-lifecycle.md,LookupValue,ContactStatus.Inactive,361
+lead-contact-lifecycle.md,LookupValue,ContactStatus.On Vacation,360
+lead-contact-lifecycle.md,LookupValue,ContactType.Buyer,366
+lead-contact-lifecycle.md,LookupValue,ContactType.Landlord,369
+lead-contact-lifecycle.md,LookupValue,ContactType.Lead,363
+lead-contact-lifecycle.md,LookupValue,ContactType.Other,370
+lead-contact-lifecycle.md,LookupValue,ContactType.Prospect,364
+lead-contact-lifecycle.md,LookupValue,ContactType.Ready to Buy,365
+lead-contact-lifecycle.md,LookupValue,ContactType.Seller,367
+lead-contact-lifecycle.md,LookupValue,ContactType.Tenant,368
+lead-contact-lifecycle.md,LookupValue,ScheduleType.ASAP,374
+lead-contact-lifecycle.md,LookupValue,ScheduleType.Daily,375
+lead-contact-lifecycle.md,LookupValue,ScheduleType.Monthly,376
+lead-contact-lifecycle.md,LookupValue,SearchQueryType.$filter,377
+lead-contact-lifecycle.md,LookupValue,SearchQueryType.DMQL2,378
+lead-contact-lifecycle.md,Resource,ContactListingNotes,274
+lead-contact-lifecycle.md,Resource,ContactListings,273
+lead-contact-lifecycle.md,Resource,Contacts,270
+lead-contact-lifecycle.md,Resource,Prospecting,272
+lead-contact-lifecycle.md,Resource,SavedSearch,271
+listing-lifecycle.md,Field,HistoryTransactional.ChangeType,345
+listing-lifecycle.md,Field,HistoryTransactional.ChangedByMemberKey,346
+listing-lifecycle.md,Field,HistoryTransactional.FieldName,342
+listing-lifecycle.md,Field,HistoryTransactional.NewValue,344
+listing-lifecycle.md,Field,HistoryTransactional.PreviousValue,343
+listing-lifecycle.md,Field,HistoryTransactional.ResourceName,340
+listing-lifecycle.md,Field,HistoryTransactional.ResourceRecordKey,341
+listing-lifecycle.md,Field,Property.CancellationDate,329
+listing-lifecycle.md,Field,Property.CloseDate,323
+listing-lifecycle.md,Field,Property.CoListAgentKey,337
+listing-lifecycle.md,Field,Property.ContractStatusChangeDate,326
+listing-lifecycle.md,Field,Property.DevelopmentStatus,370
+listing-lifecycle.md,Field,Property.DocumentStatus,371
+listing-lifecycle.md,Field,Property.ExpirationDate,330
+listing-lifecycle.md,Field,Property.ListAgentKey,335
+listing-lifecycle.md,Field,Property.ListOfficeKey,336
+listing-lifecycle.md,Field,Property.ListPrice,317
+listing-lifecycle.md,Field,Property.ListingAgreement,338
+listing-lifecycle.md,Field,Property.ListingContractDate,320
+listing-lifecycle.md,Field,Property.ListingId,313
+listing-lifecycle.md,Field,Property.ListingKey,314
+listing-lifecycle.md,Field,Property.MajorChangeTimestamp,332
+listing-lifecycle.md,Field,Property.MajorChangeType,331
+listing-lifecycle.md,Field,Property.Media,339
+listing-lifecycle.md,Field,Property.MlsStatus,316
+listing-lifecycle.md,Field,Property.ModificationTimestamp,334
+listing-lifecycle.md,Field,Property.OffMarketDate,322
+listing-lifecycle.md,Field,Property.OnMarketDate,321
+listing-lifecycle.md,Field,Property.OriginalListPrice,318
+listing-lifecycle.md,Field,Property.PendingTimestamp,324
+listing-lifecycle.md,Field,Property.PreviousListPrice,319
+listing-lifecycle.md,Field,Property.PriceChangeTimestamp,333
+listing-lifecycle.md,Field,Property.PurchaseContractDate,325
+listing-lifecycle.md,Field,Property.StandardStatus,315
+listing-lifecycle.md,Field,Property.StatusChangeTimestamp,327
+listing-lifecycle.md,Field,Property.WithdrawnDate,328
+listing-lifecycle.md,LookupValue,ChangeType.Active,359
+listing-lifecycle.md,LookupValue,ChangeType.Active Under Contract,362
+listing-lifecycle.md,LookupValue,ChangeType.Back On Market,368
+listing-lifecycle.md,LookupValue,ChangeType.Canceled,366
+listing-lifecycle.md,LookupValue,ChangeType.Closed,363
+listing-lifecycle.md,LookupValue,ChangeType.Coming Soon,360
+listing-lifecycle.md,LookupValue,ChangeType.Expired,367
+listing-lifecycle.md,LookupValue,ChangeType.Hold,364
+listing-lifecycle.md,LookupValue,ChangeType.New Listing,358
+listing-lifecycle.md,LookupValue,ChangeType.Pending,361
+listing-lifecycle.md,LookupValue,ChangeType.Price Change,369
+listing-lifecycle.md,LookupValue,ChangeType.Withdrawn,365
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Completed,379
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Finished Lot(s),377
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Other,380
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Proposed,372
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Raw Land,373
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Rough Grade,374
+listing-lifecycle.md,LookupValue,DevelopmentStatus.See Remarks,381
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Site Plan Approved,376
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Site Plan Filed,375
+listing-lifecycle.md,LookupValue,DevelopmentStatus.Under Construction,378
+listing-lifecycle.md,LookupValue,DocumentStatus.Accepted,388
+listing-lifecycle.md,LookupValue,DocumentStatus.Archived,395
+listing-lifecycle.md,LookupValue,DocumentStatus.Changed,396
+listing-lifecycle.md,LookupValue,DocumentStatus.Countered,389
+listing-lifecycle.md,LookupValue,DocumentStatus.Deleted,397
+listing-lifecycle.md,LookupValue,DocumentStatus.Delivered,387
+listing-lifecycle.md,LookupValue,DocumentStatus.Finalized,393
+listing-lifecycle.md,LookupValue,DocumentStatus.In Escrow,392
+listing-lifecycle.md,LookupValue,DocumentStatus.Missing,384
+listing-lifecycle.md,LookupValue,DocumentStatus.Optional,383
+listing-lifecycle.md,LookupValue,DocumentStatus.Published,394
+listing-lifecycle.md,LookupValue,DocumentStatus.Received,386
+listing-lifecycle.md,LookupValue,DocumentStatus.Rejected,390
+listing-lifecycle.md,LookupValue,DocumentStatus.Required,382
+listing-lifecycle.md,LookupValue,DocumentStatus.Signed,391
+listing-lifecycle.md,LookupValue,DocumentStatus.Submitted,385
+listing-lifecycle.md,LookupValue,StandardStatus.Active,349
+listing-lifecycle.md,LookupValue,StandardStatus.Active Under Contract,350
+listing-lifecycle.md,LookupValue,StandardStatus.Canceled,355
+listing-lifecycle.md,LookupValue,StandardStatus.Closed,352
+listing-lifecycle.md,LookupValue,StandardStatus.Coming Soon,348
+listing-lifecycle.md,LookupValue,StandardStatus.Delete,357
+listing-lifecycle.md,LookupValue,StandardStatus.Expired,356
+listing-lifecycle.md,LookupValue,StandardStatus.Hold,353
+listing-lifecycle.md,LookupValue,StandardStatus.Incomplete,347
+listing-lifecycle.md,LookupValue,StandardStatus.Pending,351
+listing-lifecycle.md,LookupValue,StandardStatus.Withdrawn,354
+listing-lifecycle.md,Resource,HistoryTransactional,312
+listing-lifecycle.md,Resource,Property,311
 media-lifecycle.md,Field,Media.ChangedByMember,277
 media-lifecycle.md,Field,Media.ChangedByMemberKey,278
 media-lifecycle.md,Field,Media.ClassName,267
@@ -509,166 +509,166 @@ media-lifecycle.md,LookupValue,Permission.Private,322
 media-lifecycle.md,LookupValue,Permission.Public,316
 media-lifecycle.md,LookupValue,Permission.VOW,318
 media-lifecycle.md,Resource,Media,253
-member-onboarding.md,Field,Member.MemberEmail,217
-member-onboarding.md,Field,Member.MemberFirstName,214
-member-onboarding.md,Field,Member.MemberFullName,216
-member-onboarding.md,Field,Member.MemberIsAssistantTo,223
-member-onboarding.md,Field,Member.MemberKey,212
-member-onboarding.md,Field,Member.MemberLastName,215
-member-onboarding.md,Field,Member.MemberMlsAccessYN,221
-member-onboarding.md,Field,Member.MemberMlsId,213
-member-onboarding.md,Field,Member.MemberMobilePhone,218
-member-onboarding.md,Field,Member.MemberPrimaryAorId,222
-member-onboarding.md,Field,Member.MemberStateLicense,224
-member-onboarding.md,Field,Member.MemberStateLicenseExpirationDate,227
-member-onboarding.md,Field,Member.MemberStateLicenseState,225
-member-onboarding.md,Field,Member.MemberStateLicenseType,226
-member-onboarding.md,Field,Member.MemberStatus,219
-member-onboarding.md,Field,Member.MemberType,220
-member-onboarding.md,Field,Member.ModificationTimestamp,232
-member-onboarding.md,Field,Member.Office,230
-member-onboarding.md,Field,Member.OfficeKey,228
-member-onboarding.md,Field,Member.OfficeMlsId,229
-member-onboarding.md,Field,Member.OriginalEntryTimestamp,231
-member-onboarding.md,Field,Member.OriginatingSystemMemberKey,233
-member-onboarding.md,Field,Member.SourceSystemMemberKey,234
-member-onboarding.md,Field,MemberAssociation.AssociationKey,235
-member-onboarding.md,Field,MemberAssociation.AssociationMlsId,236
-member-onboarding.md,Field,MemberAssociation.AssociationNationalAssociationId,237
-member-onboarding.md,Field,MemberAssociation.Member,238
-member-onboarding.md,Field,MemberAssociation.MemberAssociationBillStatus,246
-member-onboarding.md,Field,MemberAssociation.MemberAssociationBillStatusDescription,247
-member-onboarding.md,Field,MemberAssociation.MemberAssociationDuesPaidDate,245
-member-onboarding.md,Field,MemberAssociation.MemberAssociationJoinDate,243
-member-onboarding.md,Field,MemberAssociation.MemberAssociationOrientationDate,244
-member-onboarding.md,Field,MemberAssociation.MemberAssociationPrimaryIndicator,248
-member-onboarding.md,Field,MemberAssociation.MemberAssociationStatus,241
-member-onboarding.md,Field,MemberAssociation.MemberAssociationStatusDate,242
-member-onboarding.md,Field,MemberAssociation.MemberKey,239
-member-onboarding.md,Field,MemberAssociation.MemberLocalDuesWaivedYN,249
-member-onboarding.md,Field,MemberAssociation.MemberMlsId,240
-member-onboarding.md,Field,MemberAssociation.MemberNationalDuesWaivedYN,251
-member-onboarding.md,Field,MemberAssociation.MemberStatelDuesWaivedYN,250
-member-onboarding.md,Field,MemberAssociation.ModificationTimestamp,252
-member-onboarding.md,Field,MemberStateLicense.Member,254
-member-onboarding.md,Field,MemberStateLicense.MemberKey,255
-member-onboarding.md,Field,MemberStateLicense.MemberMlsId,256
-member-onboarding.md,Field,MemberStateLicense.MemberStateLicense,257
-member-onboarding.md,Field,MemberStateLicense.MemberStateLicenseExpirationDate,260
-member-onboarding.md,Field,MemberStateLicense.MemberStateLicenseKey,253
-member-onboarding.md,Field,MemberStateLicense.MemberStateLicenseState,258
-member-onboarding.md,Field,MemberStateLicense.MemberStateLicenseType,259
-member-onboarding.md,Field,MemberStateLicense.ModificationTimestamp,261
-member-onboarding.md,LookupValue,MemberAssociationBillStatus.Billed,286
-member-onboarding.md,LookupValue,MemberAssociationBillStatus.Not Billed,287
-member-onboarding.md,LookupValue,MemberAssociationBillStatus.Paid,288
-member-onboarding.md,LookupValue,MemberStateLicenseType.Appraiser,285
-member-onboarding.md,LookupValue,MemberStateLicenseType.Broker,284
-member-onboarding.md,LookupValue,MemberStateLicenseType.Salesperson,283
-member-onboarding.md,LookupValue,MemberStatus.Active,262
-member-onboarding.md,LookupValue,MemberStatus.Inactive,263
-member-onboarding.md,LookupValue,MemberType.Affiliate,279
-member-onboarding.md,LookupValue,MemberType.Assistant,273
-member-onboarding.md,LookupValue,MemberType.Association Staff,280
-member-onboarding.md,LookupValue,MemberType.Designated REALTOR Appraiser,268
-member-onboarding.md,LookupValue,MemberType.Designated REALTOR Participant,267
-member-onboarding.md,LookupValue,MemberType.Leasing Agent,278
-member-onboarding.md,LookupValue,MemberType.Licensed Assistant,274
-member-onboarding.md,LookupValue,MemberType.MLS Only Appraiser,272
-member-onboarding.md,LookupValue,MemberType.MLS Only Broker,270
-member-onboarding.md,LookupValue,MemberType.MLS Only Broker Associate,271
-member-onboarding.md,LookupValue,MemberType.MLS Only Salesperson,269
-member-onboarding.md,LookupValue,MemberType.MLS Staff,281
-member-onboarding.md,LookupValue,MemberType.Non Member/Vendor,282
-member-onboarding.md,LookupValue,MemberType.Office Manager,276
-member-onboarding.md,LookupValue,MemberType.Photographer,277
-member-onboarding.md,LookupValue,MemberType.REALTOR Appraiser,266
-member-onboarding.md,LookupValue,MemberType.REALTOR Broker Associate,265
-member-onboarding.md,LookupValue,MemberType.REALTOR Salesperson,264
-member-onboarding.md,LookupValue,MemberType.Unlicensed Assistant,275
-member-onboarding.md,Resource,Member,209
-member-onboarding.md,Resource,MemberAssociation,210
-member-onboarding.md,Resource,MemberStateLicense,211
-office-onboarding.md,Field,OUID.OrganizationContactEmail,297
-office-onboarding.md,Field,OUID.OrganizationContactFirstName,295
-office-onboarding.md,Field,OUID.OrganizationContactLastName,296
-office-onboarding.md,Field,OUID.OrganizationContactPhone,298
-office-onboarding.md,Field,OUID.OrganizationMemberCount,299
-office-onboarding.md,Field,OUID.OrganizationMlsCode,300
-office-onboarding.md,Field,OUID.OrganizationMlsVendorOuid,301
-office-onboarding.md,Field,OUID.OrganizationName,289
-office-onboarding.md,Field,OUID.OrganizationStateLicense,293
-office-onboarding.md,Field,OUID.OrganizationStateLicenseState,294
-office-onboarding.md,Field,OUID.OrganizationStatus,291
-office-onboarding.md,Field,OUID.OrganizationStatusChangeTimestamp,292
-office-onboarding.md,Field,OUID.OrganizationType,290
-office-onboarding.md,Field,OUID.OrganizationUniqueId,287
-office-onboarding.md,Field,OUID.OrganizationUniqueIdKey,288
-office-onboarding.md,Field,Office.MainOffice,257
-office-onboarding.md,Field,Office.MainOfficeKey,258
-office-onboarding.md,Field,Office.MainOfficeMlsId,259
-office-onboarding.md,Field,Office.ModificationTimestamp,263
-office-onboarding.md,Field,Office.NumberOfBranches,260
-office-onboarding.md,Field,Office.OfficeBranchType,248
-office-onboarding.md,Field,Office.OfficeBroker,252
-office-onboarding.md,Field,Office.OfficeBrokerKey,250
-office-onboarding.md,Field,Office.OfficeBrokerMlsId,251
-office-onboarding.md,Field,Office.OfficeCorporateLicense,261
-office-onboarding.md,Field,Office.OfficeKey,244
-office-onboarding.md,Field,Office.OfficeManager,253
-office-onboarding.md,Field,Office.OfficeManagerKey,254
-office-onboarding.md,Field,Office.OfficeMlsId,245
-office-onboarding.md,Field,Office.OfficeName,246
-office-onboarding.md,Field,Office.OfficeNationalAssociationId,256
-office-onboarding.md,Field,Office.OfficePrimaryAorId,255
-office-onboarding.md,Field,Office.OfficeStatus,247
-office-onboarding.md,Field,Office.OfficeType,249
-office-onboarding.md,Field,Office.OriginalEntryTimestamp,262
-office-onboarding.md,Field,Office.OriginatingSystemOfficeKey,264
-office-onboarding.md,Field,Office.SourceSystemOfficeKey,265
-office-onboarding.md,Field,OfficeAssociation.AssociationKey,266
-office-onboarding.md,Field,OfficeAssociation.AssociationMlsId,267
-office-onboarding.md,Field,OfficeAssociation.AssociationNationalAssociationId,268
-office-onboarding.md,Field,OfficeAssociation.BillStatus,275
-office-onboarding.md,Field,OfficeAssociation.JoinDate,274
-office-onboarding.md,Field,OfficeAssociation.ModificationTimestamp,277
-office-onboarding.md,Field,OfficeAssociation.Office,269
-office-onboarding.md,Field,OfficeAssociation.OfficeAssociationPrimaryIndicator,276
-office-onboarding.md,Field,OfficeAssociation.OfficeAssociationStatus,272
-office-onboarding.md,Field,OfficeAssociation.OfficeAssociationStatusDate,273
-office-onboarding.md,Field,OfficeAssociation.OfficeKey,270
-office-onboarding.md,Field,OfficeAssociation.OfficeMlsId,271
-office-onboarding.md,Field,OfficeCorporateLicense.ModificationTimestamp,286
-office-onboarding.md,Field,OfficeCorporateLicense.Office,279
-office-onboarding.md,Field,OfficeCorporateLicense.OfficeCorporateLicense,282
-office-onboarding.md,Field,OfficeCorporateLicense.OfficeCorporateLicenseExpirationDate,285
-office-onboarding.md,Field,OfficeCorporateLicense.OfficeCorporateLicenseKey,278
-office-onboarding.md,Field,OfficeCorporateLicense.OfficeCorporateLicenseState,283
-office-onboarding.md,Field,OfficeCorporateLicense.OfficeCorporateLicenseType,284
-office-onboarding.md,Field,OfficeCorporateLicense.OfficeKey,280
-office-onboarding.md,Field,OfficeCorporateLicense.OfficeMlsId,281
-office-onboarding.md,LookupValue,OfficeBranchType.Branch,306
-office-onboarding.md,LookupValue,OfficeBranchType.Main,305
-office-onboarding.md,LookupValue,OfficeBranchType.Stand Alone,304
-office-onboarding.md,LookupValue,OfficeCorporateLicenseType.Appraiser,319
-office-onboarding.md,LookupValue,OfficeCorporateLicenseType.Broker,318
-office-onboarding.md,LookupValue,OfficeStatus.Active,302
-office-onboarding.md,LookupValue,OfficeStatus.Inactive,303
-office-onboarding.md,LookupValue,OfficeType.Affiliate,313
-office-onboarding.md,LookupValue,OfficeType.Appraiser,314
-office-onboarding.md,LookupValue,OfficeType.Association,315
-office-onboarding.md,LookupValue,OfficeType.MLS,316
-office-onboarding.md,LookupValue,OfficeType.MLS Only Branch,312
-office-onboarding.md,LookupValue,OfficeType.MLS Only Firm,310
-office-onboarding.md,LookupValue,OfficeType.MLS Only Office,311
-office-onboarding.md,LookupValue,OfficeType.Non Member/Vendor,317
-office-onboarding.md,LookupValue,OfficeType.Realtor Branch Office,309
-office-onboarding.md,LookupValue,OfficeType.Realtor Firm,307
-office-onboarding.md,LookupValue,OfficeType.Realtor Office,308
-office-onboarding.md,Resource,OUID,243
-office-onboarding.md,Resource,Office,240
-office-onboarding.md,Resource,OfficeAssociation,241
-office-onboarding.md,Resource,OfficeCorporateLicense,242
+member-onboarding.md,Field,Member.MemberEmail,218
+member-onboarding.md,Field,Member.MemberFirstName,215
+member-onboarding.md,Field,Member.MemberFullName,217
+member-onboarding.md,Field,Member.MemberIsAssistantTo,224
+member-onboarding.md,Field,Member.MemberKey,213
+member-onboarding.md,Field,Member.MemberLastName,216
+member-onboarding.md,Field,Member.MemberMlsAccessYN,222
+member-onboarding.md,Field,Member.MemberMlsId,214
+member-onboarding.md,Field,Member.MemberMobilePhone,219
+member-onboarding.md,Field,Member.MemberPrimaryAorId,223
+member-onboarding.md,Field,Member.MemberStateLicense,225
+member-onboarding.md,Field,Member.MemberStateLicenseExpirationDate,228
+member-onboarding.md,Field,Member.MemberStateLicenseState,226
+member-onboarding.md,Field,Member.MemberStateLicenseType,227
+member-onboarding.md,Field,Member.MemberStatus,220
+member-onboarding.md,Field,Member.MemberType,221
+member-onboarding.md,Field,Member.ModificationTimestamp,233
+member-onboarding.md,Field,Member.Office,231
+member-onboarding.md,Field,Member.OfficeKey,229
+member-onboarding.md,Field,Member.OfficeMlsId,230
+member-onboarding.md,Field,Member.OriginalEntryTimestamp,232
+member-onboarding.md,Field,Member.OriginatingSystemMemberKey,234
+member-onboarding.md,Field,Member.SourceSystemMemberKey,235
+member-onboarding.md,Field,MemberAssociation.AssociationKey,236
+member-onboarding.md,Field,MemberAssociation.AssociationMlsId,237
+member-onboarding.md,Field,MemberAssociation.AssociationNationalAssociationId,238
+member-onboarding.md,Field,MemberAssociation.Member,239
+member-onboarding.md,Field,MemberAssociation.MemberAssociationBillStatus,247
+member-onboarding.md,Field,MemberAssociation.MemberAssociationBillStatusDescription,248
+member-onboarding.md,Field,MemberAssociation.MemberAssociationDuesPaidDate,246
+member-onboarding.md,Field,MemberAssociation.MemberAssociationJoinDate,244
+member-onboarding.md,Field,MemberAssociation.MemberAssociationOrientationDate,245
+member-onboarding.md,Field,MemberAssociation.MemberAssociationPrimaryIndicator,249
+member-onboarding.md,Field,MemberAssociation.MemberAssociationStatus,242
+member-onboarding.md,Field,MemberAssociation.MemberAssociationStatusDate,243
+member-onboarding.md,Field,MemberAssociation.MemberKey,240
+member-onboarding.md,Field,MemberAssociation.MemberLocalDuesWaivedYN,250
+member-onboarding.md,Field,MemberAssociation.MemberMlsId,241
+member-onboarding.md,Field,MemberAssociation.MemberNationalDuesWaivedYN,252
+member-onboarding.md,Field,MemberAssociation.MemberStatelDuesWaivedYN,251
+member-onboarding.md,Field,MemberAssociation.ModificationTimestamp,253
+member-onboarding.md,Field,MemberStateLicense.Member,255
+member-onboarding.md,Field,MemberStateLicense.MemberKey,256
+member-onboarding.md,Field,MemberStateLicense.MemberMlsId,257
+member-onboarding.md,Field,MemberStateLicense.MemberStateLicense,258
+member-onboarding.md,Field,MemberStateLicense.MemberStateLicenseExpirationDate,261
+member-onboarding.md,Field,MemberStateLicense.MemberStateLicenseKey,254
+member-onboarding.md,Field,MemberStateLicense.MemberStateLicenseState,259
+member-onboarding.md,Field,MemberStateLicense.MemberStateLicenseType,260
+member-onboarding.md,Field,MemberStateLicense.ModificationTimestamp,262
+member-onboarding.md,LookupValue,MemberAssociationBillStatus.Billed,287
+member-onboarding.md,LookupValue,MemberAssociationBillStatus.Not Billed,288
+member-onboarding.md,LookupValue,MemberAssociationBillStatus.Paid,289
+member-onboarding.md,LookupValue,MemberStateLicenseType.Appraiser,286
+member-onboarding.md,LookupValue,MemberStateLicenseType.Broker,285
+member-onboarding.md,LookupValue,MemberStateLicenseType.Salesperson,284
+member-onboarding.md,LookupValue,MemberStatus.Active,263
+member-onboarding.md,LookupValue,MemberStatus.Inactive,264
+member-onboarding.md,LookupValue,MemberType.Affiliate,280
+member-onboarding.md,LookupValue,MemberType.Assistant,274
+member-onboarding.md,LookupValue,MemberType.Association Staff,281
+member-onboarding.md,LookupValue,MemberType.Designated REALTOR Appraiser,269
+member-onboarding.md,LookupValue,MemberType.Designated REALTOR Participant,268
+member-onboarding.md,LookupValue,MemberType.Leasing Agent,279
+member-onboarding.md,LookupValue,MemberType.Licensed Assistant,275
+member-onboarding.md,LookupValue,MemberType.MLS Only Appraiser,273
+member-onboarding.md,LookupValue,MemberType.MLS Only Broker,271
+member-onboarding.md,LookupValue,MemberType.MLS Only Broker Associate,272
+member-onboarding.md,LookupValue,MemberType.MLS Only Salesperson,270
+member-onboarding.md,LookupValue,MemberType.MLS Staff,282
+member-onboarding.md,LookupValue,MemberType.Non Member/Vendor,283
+member-onboarding.md,LookupValue,MemberType.Office Manager,277
+member-onboarding.md,LookupValue,MemberType.Photographer,278
+member-onboarding.md,LookupValue,MemberType.REALTOR Appraiser,267
+member-onboarding.md,LookupValue,MemberType.REALTOR Broker Associate,266
+member-onboarding.md,LookupValue,MemberType.REALTOR Salesperson,265
+member-onboarding.md,LookupValue,MemberType.Unlicensed Assistant,276
+member-onboarding.md,Resource,Member,210
+member-onboarding.md,Resource,MemberAssociation,211
+member-onboarding.md,Resource,MemberStateLicense,212
+office-onboarding.md,Field,OUID.OrganizationContactEmail,298
+office-onboarding.md,Field,OUID.OrganizationContactFirstName,296
+office-onboarding.md,Field,OUID.OrganizationContactLastName,297
+office-onboarding.md,Field,OUID.OrganizationContactPhone,299
+office-onboarding.md,Field,OUID.OrganizationMemberCount,300
+office-onboarding.md,Field,OUID.OrganizationMlsCode,301
+office-onboarding.md,Field,OUID.OrganizationMlsVendorOuid,302
+office-onboarding.md,Field,OUID.OrganizationName,290
+office-onboarding.md,Field,OUID.OrganizationStateLicense,294
+office-onboarding.md,Field,OUID.OrganizationStateLicenseState,295
+office-onboarding.md,Field,OUID.OrganizationStatus,292
+office-onboarding.md,Field,OUID.OrganizationStatusChangeTimestamp,293
+office-onboarding.md,Field,OUID.OrganizationType,291
+office-onboarding.md,Field,OUID.OrganizationUniqueId,288
+office-onboarding.md,Field,OUID.OrganizationUniqueIdKey,289
+office-onboarding.md,Field,Office.MainOffice,258
+office-onboarding.md,Field,Office.MainOfficeKey,259
+office-onboarding.md,Field,Office.MainOfficeMlsId,260
+office-onboarding.md,Field,Office.ModificationTimestamp,264
+office-onboarding.md,Field,Office.NumberOfBranches,261
+office-onboarding.md,Field,Office.OfficeBranchType,249
+office-onboarding.md,Field,Office.OfficeBroker,253
+office-onboarding.md,Field,Office.OfficeBrokerKey,251
+office-onboarding.md,Field,Office.OfficeBrokerMlsId,252
+office-onboarding.md,Field,Office.OfficeCorporateLicense,262
+office-onboarding.md,Field,Office.OfficeKey,245
+office-onboarding.md,Field,Office.OfficeManager,254
+office-onboarding.md,Field,Office.OfficeManagerKey,255
+office-onboarding.md,Field,Office.OfficeMlsId,246
+office-onboarding.md,Field,Office.OfficeName,247
+office-onboarding.md,Field,Office.OfficeNationalAssociationId,257
+office-onboarding.md,Field,Office.OfficePrimaryAorId,256
+office-onboarding.md,Field,Office.OfficeStatus,248
+office-onboarding.md,Field,Office.OfficeType,250
+office-onboarding.md,Field,Office.OriginalEntryTimestamp,263
+office-onboarding.md,Field,Office.OriginatingSystemOfficeKey,265
+office-onboarding.md,Field,Office.SourceSystemOfficeKey,266
+office-onboarding.md,Field,OfficeAssociation.AssociationKey,267
+office-onboarding.md,Field,OfficeAssociation.AssociationMlsId,268
+office-onboarding.md,Field,OfficeAssociation.AssociationNationalAssociationId,269
+office-onboarding.md,Field,OfficeAssociation.BillStatus,276
+office-onboarding.md,Field,OfficeAssociation.JoinDate,275
+office-onboarding.md,Field,OfficeAssociation.ModificationTimestamp,278
+office-onboarding.md,Field,OfficeAssociation.Office,270
+office-onboarding.md,Field,OfficeAssociation.OfficeAssociationPrimaryIndicator,277
+office-onboarding.md,Field,OfficeAssociation.OfficeAssociationStatus,273
+office-onboarding.md,Field,OfficeAssociation.OfficeAssociationStatusDate,274
+office-onboarding.md,Field,OfficeAssociation.OfficeKey,271
+office-onboarding.md,Field,OfficeAssociation.OfficeMlsId,272
+office-onboarding.md,Field,OfficeCorporateLicense.ModificationTimestamp,287
+office-onboarding.md,Field,OfficeCorporateLicense.Office,280
+office-onboarding.md,Field,OfficeCorporateLicense.OfficeCorporateLicense,283
+office-onboarding.md,Field,OfficeCorporateLicense.OfficeCorporateLicenseExpirationDate,286
+office-onboarding.md,Field,OfficeCorporateLicense.OfficeCorporateLicenseKey,279
+office-onboarding.md,Field,OfficeCorporateLicense.OfficeCorporateLicenseState,284
+office-onboarding.md,Field,OfficeCorporateLicense.OfficeCorporateLicenseType,285
+office-onboarding.md,Field,OfficeCorporateLicense.OfficeKey,281
+office-onboarding.md,Field,OfficeCorporateLicense.OfficeMlsId,282
+office-onboarding.md,LookupValue,OfficeBranchType.Branch,307
+office-onboarding.md,LookupValue,OfficeBranchType.Main,306
+office-onboarding.md,LookupValue,OfficeBranchType.Stand Alone,305
+office-onboarding.md,LookupValue,OfficeCorporateLicenseType.Appraiser,320
+office-onboarding.md,LookupValue,OfficeCorporateLicenseType.Broker,319
+office-onboarding.md,LookupValue,OfficeStatus.Active,303
+office-onboarding.md,LookupValue,OfficeStatus.Inactive,304
+office-onboarding.md,LookupValue,OfficeType.Affiliate,314
+office-onboarding.md,LookupValue,OfficeType.Appraiser,315
+office-onboarding.md,LookupValue,OfficeType.Association,316
+office-onboarding.md,LookupValue,OfficeType.MLS,317
+office-onboarding.md,LookupValue,OfficeType.MLS Only Branch,313
+office-onboarding.md,LookupValue,OfficeType.MLS Only Firm,311
+office-onboarding.md,LookupValue,OfficeType.MLS Only Office,312
+office-onboarding.md,LookupValue,OfficeType.Non Member/Vendor,318
+office-onboarding.md,LookupValue,OfficeType.Realtor Branch Office,310
+office-onboarding.md,LookupValue,OfficeType.Realtor Firm,308
+office-onboarding.md,LookupValue,OfficeType.Realtor Office,309
+office-onboarding.md,Resource,OUID,244
+office-onboarding.md,Resource,Office,241
+office-onboarding.md,Resource,OfficeAssociation,242
+office-onboarding.md,Resource,OfficeCorporateLicense,243
 open-house-lifecycle.md,Field,OpenHouse.AppointmentRequiredYN,163
 open-house-lifecycle.md,Field,OpenHouse.Listing,168
 open-house-lifecycle.md,Field,OpenHouse.ListingId,166
@@ -705,349 +705,349 @@ open-house-lifecycle.md,LookupValue,OpenHouseType.Office,185
 open-house-lifecycle.md,LookupValue,OpenHouseType.Public,183
 open-house-lifecycle.md,Resource,OpenHouse,152
 open-house-lifecycle.md,Resource,Property,153
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenBuildingVerificationKey,393
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenBuildingVerificationType,396
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationBody,397
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationMetric,398
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationRating,399
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationSource,400
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationStatus,401
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationURL,402
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationVersion,403
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationYear,404
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.ListingId,395
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.ListingKey,394
-property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.ModificationTimestamp,405
-property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.ListingId,408
-property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.ListingKey,407
-property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.ModificationTimestamp,415
-property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionAnnual,411
-property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionAnnualStatus,412
-property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionKey,406
-property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionOwnership,413
-property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionSize,410
-property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionType,409
-property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionYearInstall,414
-property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.DateOfInstallation,419
-property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.InformationSource,420
-property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.ModificationTimestamp,421
-property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.NameplateCapacity,418
-property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.PowerStorageKey,416
-property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.PowerStorageType,417
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.BedroomClosetType,376
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.ListingId,363
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.ListingKey,362
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.ModificationTimestamp,377
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomArea,369
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomAreaSource,371
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomAreaUnits,370
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomDescription,365
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomDimensions,375
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomFeatures,366
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomKey,361
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomLength,367
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomLengthWidthSource,372
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomLengthWidthUnits,373
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomLevel,374
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomType,364
-property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomWidth,368
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.ListingId,380
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.ListingKey,379
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.ModificationTimestamp,392
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeActualRent,385
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeBathsTotal,384
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeBedsTotal,383
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeDescription,391
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeFurnished,388
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeGarageAttachedYN,389
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeGarageSpaces,390
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeKey,378
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeProForma,387
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeTotalRent,386
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeType,381
-property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeUnitsTotal,382
-property-detail-attachment-lifecycle.md,LookupValue,GreenVerificationStatus.Complete,423
-property-detail-attachment-lifecycle.md,LookupValue,GreenVerificationStatus.In Process,422
-property-detail-attachment-lifecycle.md,LookupValue,PowerProductionType.Photovoltaics,424
-property-detail-attachment-lifecycle.md,LookupValue,PowerProductionType.Wind,425
-property-detail-attachment-lifecycle.md,LookupValue,PowerStorageType.Lead Acid Battery,428
-property-detail-attachment-lifecycle.md,LookupValue,PowerStorageType.Lithium Ion Battery,426
-property-detail-attachment-lifecycle.md,LookupValue,PowerStorageType.Lithium Iron Phosphate,427
-property-detail-attachment-lifecycle.md,LookupValue,PowerStorageType.Other,429
-property-detail-attachment-lifecycle.md,LookupValue,PowerStorageType.Unknown,430
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Bathroom,442
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Bedroom,436
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Bedroom 1,438
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Den,434
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Exercise Room,447
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Family Room,432
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Game Room,444
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Great Room,433
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Gym,446
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Kitchen,439
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Laundry,440
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Library,435
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Living Room,431
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Master Bathroom,443
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Master Bedroom,437
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Media Room,445
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Office,449
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Sauna,448
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Utility Room,441
-property-detail-attachment-lifecycle.md,LookupValue,RoomType.Workshop,450
-property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.1 Bedroom,452
-property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.2 Bedroom,453
-property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.3 Bedroom,454
-property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.4 Bedroom Or More,455
-property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Apartments,458
-property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Efficiency,459
-property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Loft,457
-property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Manager's Unit,460
-property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Penthouse,456
-property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Studio,451
-property-detail-attachment-lifecycle.md,Resource,PropertyGreenVerification,358
-property-detail-attachment-lifecycle.md,Resource,PropertyPowerProduction,359
-property-detail-attachment-lifecycle.md,Resource,PropertyPowerStorage,360
-property-detail-attachment-lifecycle.md,Resource,PropertyRooms,356
-property-detail-attachment-lifecycle.md,Resource,PropertyUnitTypes,357
-prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.ContactKey,338
-prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.ContactListingNotesKey,337
-prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.ListingId,340
-prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.ListingKey,339
-prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.ModificationTimestamp,343
-prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.NoteContents,341
-prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.NotedBy,342
-prospecting-and-saved-search-delivery.md,Field,ContactListings.AgentNotesUnreadYN,333
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ClassName,324
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ContactKey,319
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ContactListingPreference,325
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ContactListingsKey,318
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ContactLoginId,320
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ContactNotesUnreadYN,334
-prospecting-and-saved-search-delivery.md,Field,ContactListings.DirectEmailYN,326
-prospecting-and-saved-search-delivery.md,Field,ContactListings.LastAgentNoteTimestamp,331
-prospecting-and-saved-search-delivery.md,Field,ContactListings.LastContactNoteTimestamp,332
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingId,322
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingKey,321
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingModificationTimestamp,329
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingNotes,335
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingSentTimestamp,327
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingViewedYN,328
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ModificationTimestamp,336
-prospecting-and-saved-search-delivery.md,Field,ContactListings.PortalLastVisitedTimestamp,330
-prospecting-and-saved-search-delivery.md,Field,ContactListings.ResourceName,323
-prospecting-and-saved-search-delivery.md,Field,Prospecting.ActiveYN,297
-prospecting-and-saved-search-delivery.md,Field,Prospecting.BccEmailList,314
-prospecting-and-saved-search-delivery.md,Field,Prospecting.BccMeYN,315
-prospecting-and-saved-search-delivery.md,Field,Prospecting.CcEmailList,313
-prospecting-and-saved-search-delivery.md,Field,Prospecting.ClientActivatedYN,298
-prospecting-and-saved-search-delivery.md,Field,Prospecting.ConciergeNotificationsYN,300
-prospecting-and-saved-search-delivery.md,Field,Prospecting.ConciergeYN,299
-prospecting-and-saved-search-delivery.md,Field,Prospecting.ContactKey,294
-prospecting-and-saved-search-delivery.md,Field,Prospecting.DailySchedule,302
-prospecting-and-saved-search-delivery.md,Field,Prospecting.DisplayTemplateID,316
-prospecting-and-saved-search-delivery.md,Field,Prospecting.Language,311
-prospecting-and-saved-search-delivery.md,Field,Prospecting.LastNewChangedTimestamp,304
-prospecting-and-saved-search-delivery.md,Field,Prospecting.LastViewedTimestamp,305
-prospecting-and-saved-search-delivery.md,Field,Prospecting.MessageNew,308
-prospecting-and-saved-search-delivery.md,Field,Prospecting.MessageRevise,309
-prospecting-and-saved-search-delivery.md,Field,Prospecting.MessageUpdate,310
-prospecting-and-saved-search-delivery.md,Field,Prospecting.ModificationTimestamp,317
-prospecting-and-saved-search-delivery.md,Field,Prospecting.NextSendTimestamp,303
-prospecting-and-saved-search-delivery.md,Field,Prospecting.OwnerMemberID,296
-prospecting-and-saved-search-delivery.md,Field,Prospecting.OwnerMemberKey,295
-prospecting-and-saved-search-delivery.md,Field,Prospecting.ProspectingKey,292
-prospecting-and-saved-search-delivery.md,Field,Prospecting.ReasonActiveOrDisabled,306
-prospecting-and-saved-search-delivery.md,Field,Prospecting.SavedSearchKey,293
-prospecting-and-saved-search-delivery.md,Field,Prospecting.ScheduleType,301
-prospecting-and-saved-search-delivery.md,Field,Prospecting.Subject,307
-prospecting-and-saved-search-delivery.md,Field,Prospecting.ToEmailList,312
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.ClassName,283
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.MemberKey,284
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.MemberMlsId,285
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.ModificationTimestamp,287
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.OriginalEntryTimestamp,286
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.OriginatingSystemKey,288
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.OriginatingSystemName,289
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.ResourceName,282
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SavedSearchDescription,275
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SavedSearchKey,273
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SavedSearchName,274
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SavedSearchType,276
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SearchQuery,277
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SearchQueryExceptionDetails,280
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SearchQueryExceptions,279
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SearchQueryHumanReadable,278
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SearchQueryType,281
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SourceSystemKey,290
-prospecting-and-saved-search-delivery.md,Field,SavedSearch.SourceSystemName,291
-prospecting-and-saved-search-delivery.md,LookupValue,ContactListingPreference.Discard,349
-prospecting-and-saved-search-delivery.md,LookupValue,ContactListingPreference.Favorite,350
-prospecting-and-saved-search-delivery.md,LookupValue,ContactListingPreference.Possibility,351
-prospecting-and-saved-search-delivery.md,LookupValue,ScheduleType.ASAP,344
-prospecting-and-saved-search-delivery.md,LookupValue,ScheduleType.Daily,345
-prospecting-and-saved-search-delivery.md,LookupValue,ScheduleType.Monthly,346
-prospecting-and-saved-search-delivery.md,LookupValue,SearchQueryType.$filter,347
-prospecting-and-saved-search-delivery.md,LookupValue,SearchQueryType.DMQL2,348
-prospecting-and-saved-search-delivery.md,Resource,ContactListingNotes,272
-prospecting-and-saved-search-delivery.md,Resource,ContactListings,271
-prospecting-and-saved-search-delivery.md,Resource,Prospecting,270
-prospecting-and-saved-search-delivery.md,Resource,SavedSearch,269
-showing-lifecycle.md,Field,LockOrBox.KeyOrCredentialId,309
-showing-lifecycle.md,Field,LockOrBox.ListingAddress1,315
-showing-lifecycle.md,Field,LockOrBox.ListingCity,316
-showing-lifecycle.md,Field,LockOrBox.ListingId,313
-showing-lifecycle.md,Field,LockOrBox.ListingKey,314
-showing-lifecycle.md,Field,LockOrBox.ListingPostalCode,317
-showing-lifecycle.md,Field,LockOrBox.LockOrBoxAccessTimestamp,311
-showing-lifecycle.md,Field,LockOrBox.LockOrBoxAccessType,312
-showing-lifecycle.md,Field,LockOrBox.LockOrBoxId,308
-showing-lifecycle.md,Field,LockOrBox.LockOrBoxInstalledTimestamp,310
-showing-lifecycle.md,Field,LockOrBox.LockOrBoxKey,307
-showing-lifecycle.md,Field,LockOrBox.Notes,325
-showing-lifecycle.md,Field,LockOrBox.ShowingAgent,318
-showing-lifecycle.md,Field,LockOrBox.ShowingAgentEmail,322
-showing-lifecycle.md,Field,LockOrBox.ShowingAgentFullName,320
-showing-lifecycle.md,Field,LockOrBox.ShowingAgentId,319
-showing-lifecycle.md,Field,LockOrBox.ShowingAgentMlsId,321
-showing-lifecycle.md,Field,LockOrBox.ShowingAgentPhone,323
-showing-lifecycle.md,Field,LockOrBox.ShowingOffice,324
-showing-lifecycle.md,Field,Showing.ListingId,305
-showing-lifecycle.md,Field,Showing.ListingKey,306
-showing-lifecycle.md,Field,Showing.OriginalEntryTimestamp,297
-showing-lifecycle.md,Field,Showing.ShowingAgent,299
-showing-lifecycle.md,Field,Showing.ShowingAgentKey,300
-showing-lifecycle.md,Field,Showing.ShowingAgentMlsID,301
-showing-lifecycle.md,Field,Showing.ShowingAllowed,298
-showing-lifecycle.md,Field,Showing.ShowingEndTimestamp,295
-showing-lifecycle.md,Field,Showing.ShowingId,293
-showing-lifecycle.md,Field,Showing.ShowingKey,292
-showing-lifecycle.md,Field,Showing.ShowingRequestedTimestamp,296
-showing-lifecycle.md,Field,Showing.ShowingStartTimestamp,294
-showing-lifecycle.md,Field,Showing.ShowingStatus,304
-showing-lifecycle.md,Field,Showing.ShowingTimeZone,302
-showing-lifecycle.md,Field,Showing.ShowingUrl,303
-showing-lifecycle.md,Field,ShowingAppointment.ShowingAgentKey,290
-showing-lifecycle.md,Field,ShowingAppointment.ShowingAgentMlsId,291
-showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentDate,285
-showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentEndTime,287
-showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentId,282
-showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentKey,281
-showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentMethod,288
-showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentStartTime,286
-showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentStatus,289
-showing-lifecycle.md,Field,ShowingAppointment.ShowingId,283
-showing-lifecycle.md,Field,ShowingAppointment.ShowingKey,284
-showing-lifecycle.md,Field,ShowingAvailability.ShowingAvailabilityKey,256
-showing-lifecycle.md,Field,ShowingAvailability.ShowingAvailableEndTime,259
-showing-lifecycle.md,Field,ShowingAvailability.ShowingAvailableStartTime,258
-showing-lifecycle.md,Field,ShowingAvailability.ShowingDate,257
-showing-lifecycle.md,Field,ShowingAvailability.ShowingId,265
-showing-lifecycle.md,Field,ShowingAvailability.ShowingKey,266
-showing-lifecycle.md,Field,ShowingAvailability.ShowingMaximumDuration,261
-showing-lifecycle.md,Field,ShowingAvailability.ShowingMethod,262
-showing-lifecycle.md,Field,ShowingAvailability.ShowingMinimumDuration,260
-showing-lifecycle.md,Field,ShowingAvailability.UniqueOrganizationIdentifier,264
-showing-lifecycle.md,Field,ShowingAvailability.UniversalPropertyId,263
-showing-lifecycle.md,Field,ShowingRequest.ShowingAgentKey,279
-showing-lifecycle.md,Field,ShowingRequest.ShowingAgentMlsId,280
-showing-lifecycle.md,Field,ShowingRequest.ShowingId,269
-showing-lifecycle.md,Field,ShowingRequest.ShowingKey,270
-showing-lifecycle.md,Field,ShowingRequest.ShowingMethodRequest,275
-showing-lifecycle.md,Field,ShowingRequest.ShowingRequestDate,271
-showing-lifecycle.md,Field,ShowingRequest.ShowingRequestDuration,274
-showing-lifecycle.md,Field,ShowingRequest.ShowingRequestEndTime,273
-showing-lifecycle.md,Field,ShowingRequest.ShowingRequestId,268
-showing-lifecycle.md,Field,ShowingRequest.ShowingRequestKey,267
-showing-lifecycle.md,Field,ShowingRequest.ShowingRequestNotes,278
-showing-lifecycle.md,Field,ShowingRequest.ShowingRequestStartTime,272
-showing-lifecycle.md,Field,ShowingRequest.ShowingRequestType,276
-showing-lifecycle.md,Field,ShowingRequest.ShowingRequestor,277
-showing-lifecycle.md,LookupValue,LockOrBoxAccessType.App,354
-showing-lifecycle.md,LookupValue,LockOrBoxAccessType.Card,353
-showing-lifecycle.md,LookupValue,LockOrBoxAccessType.Code,352
-showing-lifecycle.md,LookupValue,ShowingAppointmentMethod.In-Person,336
-showing-lifecycle.md,LookupValue,ShowingAppointmentMethod.Other,338
-showing-lifecycle.md,LookupValue,ShowingAppointmentMethod.Virtual,337
-showing-lifecycle.md,LookupValue,ShowingAppointmentStatus.Cancelled,329
-showing-lifecycle.md,LookupValue,ShowingAppointmentStatus.Confirmed,327
-showing-lifecycle.md,LookupValue,ShowingAppointmentStatus.Denied,328
-showing-lifecycle.md,LookupValue,ShowingAppointmentStatus.Pending,326
-showing-lifecycle.md,LookupValue,ShowingMethod.In-Person,330
-showing-lifecycle.md,LookupValue,ShowingMethod.Other,332
-showing-lifecycle.md,LookupValue,ShowingMethod.Virtual,331
-showing-lifecycle.md,LookupValue,ShowingMethodRequest.In-Person,333
-showing-lifecycle.md,LookupValue,ShowingMethodRequest.Other,335
-showing-lifecycle.md,LookupValue,ShowingMethodRequest.Virtual,334
-showing-lifecycle.md,LookupValue,ShowingRequestType.Broker Preview,343
-showing-lifecycle.md,LookupValue,ShowingRequestType.Broker Price Opinion,344
-showing-lifecycle.md,LookupValue,ShowingRequestType.First,339
-showing-lifecycle.md,LookupValue,ShowingRequestType.Inspection,341
-showing-lifecycle.md,LookupValue,ShowingRequestType.Second,340
-showing-lifecycle.md,LookupValue,ShowingRequestType.Walk-through,342
-showing-lifecycle.md,LookupValue,ShowingRequestor.Agent,345
-showing-lifecycle.md,LookupValue,ShowingRequestor.Consumer,346
-showing-lifecycle.md,LookupValue,ShowingRequestor.Owner,347
-showing-lifecycle.md,LookupValue,ShowingStatus.Accepting Requests,348
-showing-lifecycle.md,LookupValue,ShowingStatus.No Showings,350
-showing-lifecycle.md,LookupValue,ShowingStatus.On Hold,349
-showing-lifecycle.md,LookupValue,ShowingStatus.Restricted Showings,351
-showing-lifecycle.md,Resource,LockOrBox,255
-showing-lifecycle.md,Resource,Showing,254
-showing-lifecycle.md,Resource,ShowingAppointment,253
-showing-lifecycle.md,Resource,ShowingAvailability,251
-showing-lifecycle.md,Resource,ShowingRequest,252
-team-lifecycle.md,Field,TeamMembers.Member,182
-team-lifecycle.md,Field,TeamMembers.MemberKey,183
-team-lifecycle.md,Field,TeamMembers.MemberLoginId,185
-team-lifecycle.md,Field,TeamMembers.MemberMlsId,184
-team-lifecycle.md,Field,TeamMembers.ModificationTimestamp,191
-team-lifecycle.md,Field,TeamMembers.OriginalEntryTimestamp,190
-team-lifecycle.md,Field,TeamMembers.OriginatingSystemKey,192
-team-lifecycle.md,Field,TeamMembers.SourceSystemKey,193
-team-lifecycle.md,Field,TeamMembers.TeamImpersonationLevel,189
-team-lifecycle.md,Field,TeamMembers.TeamKey,181
-team-lifecycle.md,Field,TeamMembers.TeamMemberKey,180
-team-lifecycle.md,Field,TeamMembers.TeamMemberNationalAssociationId,188
-team-lifecycle.md,Field,TeamMembers.TeamMemberStateLicense,187
-team-lifecycle.md,Field,TeamMembers.TeamMemberType,186
-team-lifecycle.md,Field,Teams.ModificationTimestamp,177
-team-lifecycle.md,Field,Teams.OriginalEntryTimestamp,176
-team-lifecycle.md,Field,Teams.OriginatingSystemKey,178
-team-lifecycle.md,Field,Teams.SourceSystemKey,179
-team-lifecycle.md,Field,Teams.TeamAddress1,172
-team-lifecycle.md,Field,Teams.TeamCity,173
-team-lifecycle.md,Field,Teams.TeamDescription,159
-team-lifecycle.md,Field,Teams.TeamEmail,168
-team-lifecycle.md,Field,Teams.TeamKey,157
-team-lifecycle.md,Field,Teams.TeamLead,161
-team-lifecycle.md,Field,Teams.TeamLeadKey,162
-team-lifecycle.md,Field,Teams.TeamLeadLoginId,164
-team-lifecycle.md,Field,Teams.TeamLeadMlsId,163
-team-lifecycle.md,Field,Teams.TeamLeadNationalAssociationId,167
-team-lifecycle.md,Field,Teams.TeamLeadStateLicense,165
-team-lifecycle.md,Field,Teams.TeamLeadStateLicenseState,166
-team-lifecycle.md,Field,Teams.TeamMobilePhone,169
-team-lifecycle.md,Field,Teams.TeamName,158
-team-lifecycle.md,Field,Teams.TeamOfficePhone,170
-team-lifecycle.md,Field,Teams.TeamPostalCode,175
-team-lifecycle.md,Field,Teams.TeamPreferredPhone,171
-team-lifecycle.md,Field,Teams.TeamStateOrProvince,174
-team-lifecycle.md,Field,Teams.TeamStatus,160
-team-lifecycle.md,LookupValue,TeamMemberType.Administration Assistant,204
-team-lifecycle.md,LookupValue,TeamMemberType.Buyer Agent,199
-team-lifecycle.md,LookupValue,TeamMemberType.Lead Manager,203
-team-lifecycle.md,LookupValue,TeamMemberType.Listing Agent,198
-team-lifecycle.md,LookupValue,TeamMemberType.Marketing Assistant,205
-team-lifecycle.md,LookupValue,TeamMemberType.Operations Manager,201
-team-lifecycle.md,LookupValue,TeamMemberType.Showing Agent,200
-team-lifecycle.md,LookupValue,TeamMemberType.Team Lead,196
-team-lifecycle.md,LookupValue,TeamMemberType.Team Member,197
-team-lifecycle.md,LookupValue,TeamMemberType.Transaction Coordinator,202
-team-lifecycle.md,LookupValue,TeamStatus.Active,194
-team-lifecycle.md,LookupValue,TeamStatus.Inactive,195
-team-lifecycle.md,Resource,TeamMembers,156
-team-lifecycle.md,Resource,Teams,155
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenBuildingVerificationKey,394
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenBuildingVerificationType,397
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationBody,398
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationMetric,399
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationRating,400
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationSource,401
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationStatus,402
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationURL,403
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationVersion,404
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.GreenVerificationYear,405
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.ListingId,396
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.ListingKey,395
+property-detail-attachment-lifecycle.md,Field,PropertyGreenVerification.ModificationTimestamp,406
+property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.ListingId,409
+property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.ListingKey,408
+property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.ModificationTimestamp,416
+property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionAnnual,412
+property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionAnnualStatus,413
+property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionKey,407
+property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionOwnership,414
+property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionSize,411
+property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionType,410
+property-detail-attachment-lifecycle.md,Field,PropertyPowerProduction.PowerProductionYearInstall,415
+property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.DateOfInstallation,420
+property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.InformationSource,421
+property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.ModificationTimestamp,422
+property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.NameplateCapacity,419
+property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.PowerStorageKey,417
+property-detail-attachment-lifecycle.md,Field,PropertyPowerStorage.PowerStorageType,418
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.BedroomClosetType,377
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.ListingId,364
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.ListingKey,363
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.ModificationTimestamp,378
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomArea,370
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomAreaSource,372
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomAreaUnits,371
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomDescription,366
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomDimensions,376
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomFeatures,367
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomKey,362
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomLength,368
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomLengthWidthSource,373
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomLengthWidthUnits,374
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomLevel,375
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomType,365
+property-detail-attachment-lifecycle.md,Field,PropertyRooms.RoomWidth,369
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.ListingId,381
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.ListingKey,380
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.ModificationTimestamp,393
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeActualRent,386
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeBathsTotal,385
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeBedsTotal,384
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeDescription,392
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeFurnished,389
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeGarageAttachedYN,390
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeGarageSpaces,391
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeKey,379
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeProForma,388
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeTotalRent,387
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeType,382
+property-detail-attachment-lifecycle.md,Field,PropertyUnitTypes.UnitTypeUnitsTotal,383
+property-detail-attachment-lifecycle.md,LookupValue,GreenVerificationStatus.Complete,424
+property-detail-attachment-lifecycle.md,LookupValue,GreenVerificationStatus.In Process,423
+property-detail-attachment-lifecycle.md,LookupValue,PowerProductionType.Photovoltaics,425
+property-detail-attachment-lifecycle.md,LookupValue,PowerProductionType.Wind,426
+property-detail-attachment-lifecycle.md,LookupValue,PowerStorageType.Lead Acid Battery,429
+property-detail-attachment-lifecycle.md,LookupValue,PowerStorageType.Lithium Ion Battery,427
+property-detail-attachment-lifecycle.md,LookupValue,PowerStorageType.Lithium Iron Phosphate,428
+property-detail-attachment-lifecycle.md,LookupValue,PowerStorageType.Other,430
+property-detail-attachment-lifecycle.md,LookupValue,PowerStorageType.Unknown,431
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Bathroom,443
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Bedroom,437
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Bedroom 1,439
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Den,435
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Exercise Room,448
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Family Room,433
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Game Room,445
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Great Room,434
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Gym,447
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Kitchen,440
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Laundry,441
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Library,436
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Living Room,432
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Master Bathroom,444
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Master Bedroom,438
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Media Room,446
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Office,450
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Sauna,449
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Utility Room,442
+property-detail-attachment-lifecycle.md,LookupValue,RoomType.Workshop,451
+property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.1 Bedroom,453
+property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.2 Bedroom,454
+property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.3 Bedroom,455
+property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.4 Bedroom Or More,456
+property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Apartments,459
+property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Efficiency,460
+property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Loft,458
+property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Manager's Unit,461
+property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Penthouse,457
+property-detail-attachment-lifecycle.md,LookupValue,UnitTypeType.Studio,452
+property-detail-attachment-lifecycle.md,Resource,PropertyGreenVerification,359
+property-detail-attachment-lifecycle.md,Resource,PropertyPowerProduction,360
+property-detail-attachment-lifecycle.md,Resource,PropertyPowerStorage,361
+property-detail-attachment-lifecycle.md,Resource,PropertyRooms,357
+property-detail-attachment-lifecycle.md,Resource,PropertyUnitTypes,358
+prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.ContactKey,339
+prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.ContactListingNotesKey,338
+prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.ListingId,341
+prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.ListingKey,340
+prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.ModificationTimestamp,344
+prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.NoteContents,342
+prospecting-and-saved-search-delivery.md,Field,ContactListingNotes.NotedBy,343
+prospecting-and-saved-search-delivery.md,Field,ContactListings.AgentNotesUnreadYN,334
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ClassName,325
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ContactKey,320
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ContactListingPreference,326
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ContactListingsKey,319
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ContactLoginId,321
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ContactNotesUnreadYN,335
+prospecting-and-saved-search-delivery.md,Field,ContactListings.DirectEmailYN,327
+prospecting-and-saved-search-delivery.md,Field,ContactListings.LastAgentNoteTimestamp,332
+prospecting-and-saved-search-delivery.md,Field,ContactListings.LastContactNoteTimestamp,333
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingId,323
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingKey,322
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingModificationTimestamp,330
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingNotes,336
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingSentTimestamp,328
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ListingViewedYN,329
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ModificationTimestamp,337
+prospecting-and-saved-search-delivery.md,Field,ContactListings.PortalLastVisitedTimestamp,331
+prospecting-and-saved-search-delivery.md,Field,ContactListings.ResourceName,324
+prospecting-and-saved-search-delivery.md,Field,Prospecting.ActiveYN,298
+prospecting-and-saved-search-delivery.md,Field,Prospecting.BccEmailList,315
+prospecting-and-saved-search-delivery.md,Field,Prospecting.BccMeYN,316
+prospecting-and-saved-search-delivery.md,Field,Prospecting.CcEmailList,314
+prospecting-and-saved-search-delivery.md,Field,Prospecting.ClientActivatedYN,299
+prospecting-and-saved-search-delivery.md,Field,Prospecting.ConciergeNotificationsYN,301
+prospecting-and-saved-search-delivery.md,Field,Prospecting.ConciergeYN,300
+prospecting-and-saved-search-delivery.md,Field,Prospecting.ContactKey,295
+prospecting-and-saved-search-delivery.md,Field,Prospecting.DailySchedule,303
+prospecting-and-saved-search-delivery.md,Field,Prospecting.DisplayTemplateID,317
+prospecting-and-saved-search-delivery.md,Field,Prospecting.Language,312
+prospecting-and-saved-search-delivery.md,Field,Prospecting.LastNewChangedTimestamp,305
+prospecting-and-saved-search-delivery.md,Field,Prospecting.LastViewedTimestamp,306
+prospecting-and-saved-search-delivery.md,Field,Prospecting.MessageNew,309
+prospecting-and-saved-search-delivery.md,Field,Prospecting.MessageRevise,310
+prospecting-and-saved-search-delivery.md,Field,Prospecting.MessageUpdate,311
+prospecting-and-saved-search-delivery.md,Field,Prospecting.ModificationTimestamp,318
+prospecting-and-saved-search-delivery.md,Field,Prospecting.NextSendTimestamp,304
+prospecting-and-saved-search-delivery.md,Field,Prospecting.OwnerMemberID,297
+prospecting-and-saved-search-delivery.md,Field,Prospecting.OwnerMemberKey,296
+prospecting-and-saved-search-delivery.md,Field,Prospecting.ProspectingKey,293
+prospecting-and-saved-search-delivery.md,Field,Prospecting.ReasonActiveOrDisabled,307
+prospecting-and-saved-search-delivery.md,Field,Prospecting.SavedSearchKey,294
+prospecting-and-saved-search-delivery.md,Field,Prospecting.ScheduleType,302
+prospecting-and-saved-search-delivery.md,Field,Prospecting.Subject,308
+prospecting-and-saved-search-delivery.md,Field,Prospecting.ToEmailList,313
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.ClassName,284
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.MemberKey,285
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.MemberMlsId,286
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.ModificationTimestamp,288
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.OriginalEntryTimestamp,287
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.OriginatingSystemKey,289
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.OriginatingSystemName,290
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.ResourceName,283
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SavedSearchDescription,276
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SavedSearchKey,274
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SavedSearchName,275
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SavedSearchType,277
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SearchQuery,278
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SearchQueryExceptionDetails,281
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SearchQueryExceptions,280
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SearchQueryHumanReadable,279
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SearchQueryType,282
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SourceSystemKey,291
+prospecting-and-saved-search-delivery.md,Field,SavedSearch.SourceSystemName,292
+prospecting-and-saved-search-delivery.md,LookupValue,ContactListingPreference.Discard,350
+prospecting-and-saved-search-delivery.md,LookupValue,ContactListingPreference.Favorite,351
+prospecting-and-saved-search-delivery.md,LookupValue,ContactListingPreference.Possibility,352
+prospecting-and-saved-search-delivery.md,LookupValue,ScheduleType.ASAP,345
+prospecting-and-saved-search-delivery.md,LookupValue,ScheduleType.Daily,346
+prospecting-and-saved-search-delivery.md,LookupValue,ScheduleType.Monthly,347
+prospecting-and-saved-search-delivery.md,LookupValue,SearchQueryType.$filter,348
+prospecting-and-saved-search-delivery.md,LookupValue,SearchQueryType.DMQL2,349
+prospecting-and-saved-search-delivery.md,Resource,ContactListingNotes,273
+prospecting-and-saved-search-delivery.md,Resource,ContactListings,272
+prospecting-and-saved-search-delivery.md,Resource,Prospecting,271
+prospecting-and-saved-search-delivery.md,Resource,SavedSearch,270
+showing-lifecycle.md,Field,LockOrBox.KeyOrCredentialId,310
+showing-lifecycle.md,Field,LockOrBox.ListingAddress1,316
+showing-lifecycle.md,Field,LockOrBox.ListingCity,317
+showing-lifecycle.md,Field,LockOrBox.ListingId,314
+showing-lifecycle.md,Field,LockOrBox.ListingKey,315
+showing-lifecycle.md,Field,LockOrBox.ListingPostalCode,318
+showing-lifecycle.md,Field,LockOrBox.LockOrBoxAccessTimestamp,312
+showing-lifecycle.md,Field,LockOrBox.LockOrBoxAccessType,313
+showing-lifecycle.md,Field,LockOrBox.LockOrBoxId,309
+showing-lifecycle.md,Field,LockOrBox.LockOrBoxInstalledTimestamp,311
+showing-lifecycle.md,Field,LockOrBox.LockOrBoxKey,308
+showing-lifecycle.md,Field,LockOrBox.Notes,326
+showing-lifecycle.md,Field,LockOrBox.ShowingAgent,319
+showing-lifecycle.md,Field,LockOrBox.ShowingAgentEmail,323
+showing-lifecycle.md,Field,LockOrBox.ShowingAgentFullName,321
+showing-lifecycle.md,Field,LockOrBox.ShowingAgentId,320
+showing-lifecycle.md,Field,LockOrBox.ShowingAgentMlsId,322
+showing-lifecycle.md,Field,LockOrBox.ShowingAgentPhone,324
+showing-lifecycle.md,Field,LockOrBox.ShowingOffice,325
+showing-lifecycle.md,Field,Showing.ListingId,306
+showing-lifecycle.md,Field,Showing.ListingKey,307
+showing-lifecycle.md,Field,Showing.OriginalEntryTimestamp,298
+showing-lifecycle.md,Field,Showing.ShowingAgent,300
+showing-lifecycle.md,Field,Showing.ShowingAgentKey,301
+showing-lifecycle.md,Field,Showing.ShowingAgentMlsID,302
+showing-lifecycle.md,Field,Showing.ShowingAllowed,299
+showing-lifecycle.md,Field,Showing.ShowingEndTimestamp,296
+showing-lifecycle.md,Field,Showing.ShowingId,294
+showing-lifecycle.md,Field,Showing.ShowingKey,293
+showing-lifecycle.md,Field,Showing.ShowingRequestedTimestamp,297
+showing-lifecycle.md,Field,Showing.ShowingStartTimestamp,295
+showing-lifecycle.md,Field,Showing.ShowingStatus,305
+showing-lifecycle.md,Field,Showing.ShowingTimeZone,303
+showing-lifecycle.md,Field,Showing.ShowingUrl,304
+showing-lifecycle.md,Field,ShowingAppointment.ShowingAgentKey,291
+showing-lifecycle.md,Field,ShowingAppointment.ShowingAgentMlsId,292
+showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentDate,286
+showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentEndTime,288
+showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentId,283
+showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentKey,282
+showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentMethod,289
+showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentStartTime,287
+showing-lifecycle.md,Field,ShowingAppointment.ShowingAppointmentStatus,290
+showing-lifecycle.md,Field,ShowingAppointment.ShowingId,284
+showing-lifecycle.md,Field,ShowingAppointment.ShowingKey,285
+showing-lifecycle.md,Field,ShowingAvailability.ShowingAvailabilityKey,257
+showing-lifecycle.md,Field,ShowingAvailability.ShowingAvailableEndTime,260
+showing-lifecycle.md,Field,ShowingAvailability.ShowingAvailableStartTime,259
+showing-lifecycle.md,Field,ShowingAvailability.ShowingDate,258
+showing-lifecycle.md,Field,ShowingAvailability.ShowingId,266
+showing-lifecycle.md,Field,ShowingAvailability.ShowingKey,267
+showing-lifecycle.md,Field,ShowingAvailability.ShowingMaximumDuration,262
+showing-lifecycle.md,Field,ShowingAvailability.ShowingMethod,263
+showing-lifecycle.md,Field,ShowingAvailability.ShowingMinimumDuration,261
+showing-lifecycle.md,Field,ShowingAvailability.UniqueOrganizationIdentifier,265
+showing-lifecycle.md,Field,ShowingAvailability.UniversalPropertyId,264
+showing-lifecycle.md,Field,ShowingRequest.ShowingAgentKey,280
+showing-lifecycle.md,Field,ShowingRequest.ShowingAgentMlsId,281
+showing-lifecycle.md,Field,ShowingRequest.ShowingId,270
+showing-lifecycle.md,Field,ShowingRequest.ShowingKey,271
+showing-lifecycle.md,Field,ShowingRequest.ShowingMethodRequest,276
+showing-lifecycle.md,Field,ShowingRequest.ShowingRequestDate,272
+showing-lifecycle.md,Field,ShowingRequest.ShowingRequestDuration,275
+showing-lifecycle.md,Field,ShowingRequest.ShowingRequestEndTime,274
+showing-lifecycle.md,Field,ShowingRequest.ShowingRequestId,269
+showing-lifecycle.md,Field,ShowingRequest.ShowingRequestKey,268
+showing-lifecycle.md,Field,ShowingRequest.ShowingRequestNotes,279
+showing-lifecycle.md,Field,ShowingRequest.ShowingRequestStartTime,273
+showing-lifecycle.md,Field,ShowingRequest.ShowingRequestType,277
+showing-lifecycle.md,Field,ShowingRequest.ShowingRequestor,278
+showing-lifecycle.md,LookupValue,LockOrBoxAccessType.App,355
+showing-lifecycle.md,LookupValue,LockOrBoxAccessType.Card,354
+showing-lifecycle.md,LookupValue,LockOrBoxAccessType.Code,353
+showing-lifecycle.md,LookupValue,ShowingAppointmentMethod.In-Person,337
+showing-lifecycle.md,LookupValue,ShowingAppointmentMethod.Other,339
+showing-lifecycle.md,LookupValue,ShowingAppointmentMethod.Virtual,338
+showing-lifecycle.md,LookupValue,ShowingAppointmentStatus.Cancelled,330
+showing-lifecycle.md,LookupValue,ShowingAppointmentStatus.Confirmed,328
+showing-lifecycle.md,LookupValue,ShowingAppointmentStatus.Denied,329
+showing-lifecycle.md,LookupValue,ShowingAppointmentStatus.Pending,327
+showing-lifecycle.md,LookupValue,ShowingMethod.In-Person,331
+showing-lifecycle.md,LookupValue,ShowingMethod.Other,333
+showing-lifecycle.md,LookupValue,ShowingMethod.Virtual,332
+showing-lifecycle.md,LookupValue,ShowingMethodRequest.In-Person,334
+showing-lifecycle.md,LookupValue,ShowingMethodRequest.Other,336
+showing-lifecycle.md,LookupValue,ShowingMethodRequest.Virtual,335
+showing-lifecycle.md,LookupValue,ShowingRequestType.Broker Preview,344
+showing-lifecycle.md,LookupValue,ShowingRequestType.Broker Price Opinion,345
+showing-lifecycle.md,LookupValue,ShowingRequestType.First,340
+showing-lifecycle.md,LookupValue,ShowingRequestType.Inspection,342
+showing-lifecycle.md,LookupValue,ShowingRequestType.Second,341
+showing-lifecycle.md,LookupValue,ShowingRequestType.Walk-through,343
+showing-lifecycle.md,LookupValue,ShowingRequestor.Agent,346
+showing-lifecycle.md,LookupValue,ShowingRequestor.Consumer,347
+showing-lifecycle.md,LookupValue,ShowingRequestor.Owner,348
+showing-lifecycle.md,LookupValue,ShowingStatus.Accepting Requests,349
+showing-lifecycle.md,LookupValue,ShowingStatus.No Showings,351
+showing-lifecycle.md,LookupValue,ShowingStatus.On Hold,350
+showing-lifecycle.md,LookupValue,ShowingStatus.Restricted Showings,352
+showing-lifecycle.md,Resource,LockOrBox,256
+showing-lifecycle.md,Resource,Showing,255
+showing-lifecycle.md,Resource,ShowingAppointment,254
+showing-lifecycle.md,Resource,ShowingAvailability,252
+showing-lifecycle.md,Resource,ShowingRequest,253
+team-lifecycle.md,Field,TeamMembers.Member,183
+team-lifecycle.md,Field,TeamMembers.MemberKey,184
+team-lifecycle.md,Field,TeamMembers.MemberLoginId,186
+team-lifecycle.md,Field,TeamMembers.MemberMlsId,185
+team-lifecycle.md,Field,TeamMembers.ModificationTimestamp,192
+team-lifecycle.md,Field,TeamMembers.OriginalEntryTimestamp,191
+team-lifecycle.md,Field,TeamMembers.OriginatingSystemKey,193
+team-lifecycle.md,Field,TeamMembers.SourceSystemKey,194
+team-lifecycle.md,Field,TeamMembers.TeamImpersonationLevel,190
+team-lifecycle.md,Field,TeamMembers.TeamKey,182
+team-lifecycle.md,Field,TeamMembers.TeamMemberKey,181
+team-lifecycle.md,Field,TeamMembers.TeamMemberNationalAssociationId,189
+team-lifecycle.md,Field,TeamMembers.TeamMemberStateLicense,188
+team-lifecycle.md,Field,TeamMembers.TeamMemberType,187
+team-lifecycle.md,Field,Teams.ModificationTimestamp,178
+team-lifecycle.md,Field,Teams.OriginalEntryTimestamp,177
+team-lifecycle.md,Field,Teams.OriginatingSystemKey,179
+team-lifecycle.md,Field,Teams.SourceSystemKey,180
+team-lifecycle.md,Field,Teams.TeamAddress1,173
+team-lifecycle.md,Field,Teams.TeamCity,174
+team-lifecycle.md,Field,Teams.TeamDescription,160
+team-lifecycle.md,Field,Teams.TeamEmail,169
+team-lifecycle.md,Field,Teams.TeamKey,158
+team-lifecycle.md,Field,Teams.TeamLead,162
+team-lifecycle.md,Field,Teams.TeamLeadKey,163
+team-lifecycle.md,Field,Teams.TeamLeadLoginId,165
+team-lifecycle.md,Field,Teams.TeamLeadMlsId,164
+team-lifecycle.md,Field,Teams.TeamLeadNationalAssociationId,168
+team-lifecycle.md,Field,Teams.TeamLeadStateLicense,166
+team-lifecycle.md,Field,Teams.TeamLeadStateLicenseState,167
+team-lifecycle.md,Field,Teams.TeamMobilePhone,170
+team-lifecycle.md,Field,Teams.TeamName,159
+team-lifecycle.md,Field,Teams.TeamOfficePhone,171
+team-lifecycle.md,Field,Teams.TeamPostalCode,176
+team-lifecycle.md,Field,Teams.TeamPreferredPhone,172
+team-lifecycle.md,Field,Teams.TeamStateOrProvince,175
+team-lifecycle.md,Field,Teams.TeamStatus,161
+team-lifecycle.md,LookupValue,TeamMemberType.Administration Assistant,205
+team-lifecycle.md,LookupValue,TeamMemberType.Buyer Agent,200
+team-lifecycle.md,LookupValue,TeamMemberType.Lead Manager,204
+team-lifecycle.md,LookupValue,TeamMemberType.Listing Agent,199
+team-lifecycle.md,LookupValue,TeamMemberType.Marketing Assistant,206
+team-lifecycle.md,LookupValue,TeamMemberType.Operations Manager,202
+team-lifecycle.md,LookupValue,TeamMemberType.Showing Agent,201
+team-lifecycle.md,LookupValue,TeamMemberType.Team Lead,197
+team-lifecycle.md,LookupValue,TeamMemberType.Team Member,198
+team-lifecycle.md,LookupValue,TeamMemberType.Transaction Coordinator,203
+team-lifecycle.md,LookupValue,TeamStatus.Active,195
+team-lifecycle.md,LookupValue,TeamStatus.Inactive,196
+team-lifecycle.md,Resource,TeamMembers,157
+team-lifecycle.md,Resource,Teams,156
 transaction-lifecycle.md,Field,HistoryTransactional.ChangeType,240
 transaction-lifecycle.md,Field,HistoryTransactional.ChangedByMember,241
 transaction-lifecycle.md,Field,HistoryTransactional.ChangedByMemberID,242

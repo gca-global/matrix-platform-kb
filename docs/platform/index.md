@@ -27,7 +27,7 @@ Sharp Matrix is a **multi-app platform** where every application — from broker
 
 | Type | CDL Usage | Live | In Progress | Planned |
 |------|-----------|------|-------------|---------|
-| **CDL-Connected** | Reads/writes shared RESO tables (`property`, `member`, `contacts`) | Agency Portal, Client Connect, Meeting Hub, Matrix Comms, Website CMS | Matrix Pipeline, Contact Mgmt, Integration Mgmt | Broker App, Manager App, Client Portal, Marketing App |
+| **CDL-Connected** | Reads/writes shared RESO tables (`property`, `member`, `contacts`, `saved_search`, `showing_appointment`, `transaction_management`, …) | Agency Portal, Client Connect, Meeting Hub, Matrix Comms, Website CMS | Matrix Pipeline 2.0 (consolidates broker / manager / contact-center / listing-coordinator workflows), Integration Mgmt | Client Portal, Marketing App |
 | **Domain-Specific** | Uses CDL only for auth/permissions; has own Supabase instance | SSO Console | HRMS, Matrix FM, ITSM, Notification Mgmt | Admin Console, BI Dashboard |
 
 Both types share the same template patterns: dual-Supabase, SSO auth, permissions, RLS, shadcn/ui.

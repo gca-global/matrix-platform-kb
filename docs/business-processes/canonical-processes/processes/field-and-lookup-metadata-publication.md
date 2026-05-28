@@ -12,9 +12,10 @@ exposes.
 > - Source mapping (per resource):
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/field.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/field.md),
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/lookup.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/lookup.md).
-> - Sharp-SIR flavour: no project SOP yet — promote one under
->   `docs/business-processes/` when SIR codifies metadata
->   governance, deprecation windows, and consumer notifications.
+> - Sharp-SIR flavour: no project SOP yet — the CRM materialisation
+>   (if any) belongs in `product-specs/matrix-pipeline/` when SIR
+>   codifies metadata governance, deprecation windows, and consumer
+>   notifications.
 
 This is the canonical baseline. Project flavours (release cadence,
 deprecation windows, governance ownership) belong in

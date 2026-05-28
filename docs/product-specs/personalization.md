@@ -37,7 +37,7 @@ Alpha/beta/gamma/delta weights tuned per market (Cyprus, Hungary, Kazakhstan).
 | Best agent for this listing | Cross-resource cosine vs `members.embedding` | Listing-detail "Talk to specialist" |
 | New matches | Saved search criteria | Push notifications when new listings match |
 
-**Integration points**: Client Portal (auth), Website (anon + auth), Broker App (client recs), MCP server (agent copilots). See [ecosystem-architecture.md](../platform/ecosystem-architecture.md) for channel diagram.
+**Integration points**: Client Portal (auth), Website (anon + auth), matrix-pipeline 2.0 (broker-role client recommendations via FR-AI-MX), MCP server (agent copilots). See [ecosystem-architecture.md](../platform/ecosystem-architecture.md) for channel diagram.
 
 **Cold-start**: New visitors get popularity-based ranking. After 3+ listing views or 1 saved search, switch to semantic + collaborative signals.
 

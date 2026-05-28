@@ -14,9 +14,10 @@ own state machine.
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/prospecting.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/prospecting.md),
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/contact_listings.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/contact_listings.md),
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/contact_listing_notes.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/contact_listing_notes.md).
-> - Sharp-SIR flavour: no project SOP yet — promote one under
->   `docs/business-processes/` when SIR codifies cadence templates,
->   unsubscribe rules, and concierge escalations.
+> - Sharp-SIR flavour: no project SOP yet — the CRM materialisation
+>   (if any) belongs in `product-specs/matrix-pipeline/` when SIR
+>   codifies cadence templates, unsubscribe rules, and concierge
+>   escalations.
 
 This is the canonical baseline. Project flavours (cadence policy,
 template content, deliverability vendor) belong in

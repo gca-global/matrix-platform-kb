@@ -45,7 +45,7 @@ and need to project Qobrix payloads onto canonical RESO storage.
 ## "I'm encoding business-practice rules"
 
 You are implementing a workflow step from the SIR listing checklists
-(or [`../../business-processes/listing-checklist.md`](../../business-processes/listing-checklist.md)).
+(or [`../../business-processes/canonical-processes/processes/listing-lifecycle.md`](../../business-processes/canonical-processes/processes/listing-lifecycle.md)).
 
 1. Open [`wiki/agent-docs/by_source/sir-business-practice.md`](wiki/agent-docs/by_source/sir-business-practice.md).
 2. Each checklist row maps to a RESO field (or a derived signal). The

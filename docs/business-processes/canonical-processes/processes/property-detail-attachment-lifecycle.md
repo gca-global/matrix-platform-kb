@@ -14,8 +14,9 @@ anchored to a parent listing via `ListingKey`.
 >   (`property_rooms.md`, `property_unit_types.md`,
 >   `property_green_verification.md`, `property_power_production.md`,
 >   `property_power_storage.md`).
-> - Sharp-SIR flavour: no project-flavour SOP yet — promote one
->   under `docs/business-processes/` when Sharp-SIR codifies room
+> - Sharp-SIR flavour: no project-flavour SOP yet — the CRM
+>   materialisation (if any) belongs in
+>   `product-specs/matrix-pipeline/` when Sharp-SIR codifies room
 >   capture, EPC ingestion, or PV/storage data entry.
 
 This is the canonical baseline. Project flavours (UI capture order,

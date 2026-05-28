@@ -1,17 +1,22 @@
 # Integration views (Layer 5: per-resource cross-cutting)
 
 The thinnest, most derivative layer of the KB. One page per RESO
-resource, joining Layers 1–4 onto a single screen.
+resource, joining Layers 1-3 onto a single screen.
 
 ## Why this exists
 
-Even with [`INTEGRATION.md`](../INTEGRATION.md) explaining how the
-four substantive layers compose, an agent investigating a single
-resource still has to navigate four chapters. This chapter
+Even with [`overview.md`](overview.md) explaining how the
+three substantive layers compose, an agent investigating a single
+resource still has to navigate three chapters. This chapter
 flattens that into one page per resource: open
 `wiki/agent-docs/by_resource/property.md` and you see the canonical
-RESO definition, the Dash / Qobrix / SIR mappings, the canonical
-state machines, and the Sharp-SIR pipelines that touch `Property`.
+RESO definition, the Dash / Qobrix / SIR mappings, and the canonical
+state machines that touch `Property`.
+
+Project-flavour CRM behaviour (formerly Layer 4 "Sharp-SIR flavour")
+is not included in these views. It lives in
+[`../product-specs/matrix-pipeline/`](../product-specs/matrix-pipeline/INDEX.md)
+and consumes Layers 1-3 by canonical-name reference.
 
 ## How it works (1-script pipeline)
 
@@ -20,11 +25,10 @@ Emit phase
                                  +
 data-models/reso-dd-kb/raw/...   +
 data-models/source-mappings/raw/...+
-business-processes/canonical-    +
-  processes/raw/citations.csv    +-> 01_emit_resource_views.py -> wiki/agent-docs/by_resource/<res>.md
-business-processes/canonical-    +                                + raw/integration_index.csv
-  processes/processes/*.md       +                                + wiki/agent-docs/_index.md
-business-processes/*.md (flavour)+
+business-processes/canonical-    +-> 01_emit_resource_views.py -> wiki/agent-docs/by_resource/<res>.md
+  processes/raw/citations.csv    +                                + raw/integration_index.csv
+business-processes/canonical-    +                                + wiki/agent-docs/_index.md
+  processes/processes/*.md       +
 ```
 
 There is no Author and no Validate phase: this chapter has no
@@ -65,11 +69,9 @@ Every generated page follows the same skeleton:
 4. **Layer 3 — canonical state machines** — list of canonical
    processes citing this resource, each linked to its
    `canonical-processes/processes/<proc>.md`.
-5. **Layer 4 — Sharp-SIR flavour** — hand-encoded mapping of the
-   resource to the Sharp-SIR pipeline / checklist files (per
-   `FLAVOUR_LINKS` in the script).
-6. **Determinism note** — "this page is generated; do NOT
-   hand-edit".
+5. **Determinism note** — "this page is generated; do NOT
+   hand-edit". Project-flavour CRM behaviour lives in
+   `product-specs/matrix-pipeline/`, not here.
 
 ## Quick start
 

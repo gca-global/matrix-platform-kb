@@ -43,7 +43,7 @@ Start with **[AGENTS.md](AGENTS.md)** — the entry point and navigation map for
 1. [AGENTS.md](AGENTS.md) — master navigation
 2. [docs/platform/app-template.md](docs/platform/app-template.md) — how to build Matrix Apps
 3. [docs/data-models/dash-data-model.md](docs/data-models/dash-data-model.md) — practical field reference
-4. [docs/INDEX.md](docs/INDEX.md) — full chapter index
+4. [docs/index.md](docs/index.md) — full chapter index
 
 #### Raw URL Pattern
 
@@ -63,7 +63,7 @@ https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/{path}
 | **Operations Guide** | Explains cross-app workflows — client lifecycle, daily routines by role, data flow between apps |
 | **Platform Expert** | Knows every app, every field, every business process — from Client Connect to Financial Management |
 
-Zoe's knowledge base lives in [`docs/zoe-ai-assistant-kb/`](docs/zoe-ai-assistant-kb/) — 15 structured documents covering all platform apps, designed for RAG retrieval:
+Zoe's knowledge base lives in [`docs/zoe-ai-assistant-kb/`](docs/zoe-ai-assistant-kb/) — structured documents covering all platform apps, designed for RAG retrieval:
 
 | Document | Covers |
 |---|---|
@@ -78,6 +78,7 @@ Zoe's knowledge base lives in [`docs/zoe-ai-assistant-kb/`](docs/zoe-ai-assistan
 | [incident-reporting.md](docs/zoe-ai-assistant-kb/incident-reporting.md) | How to report an incident — severity guide, escalation path |
 | [second-line-tech-reference.md](docs/zoe-ai-assistant-kb/second-line-tech-reference.md) | Architecture deep-dive for 2nd line support analysts |
 | [kb-generation-guide.md](docs/zoe-ai-assistant-kb/kb-generation-guide.md) | How to generate a KB article for any new Matrix app |
+| [ragchat-webhook-spec.md](docs/zoe-ai-assistant-kb/ragchat-webhook-spec.md) | RAG-chat webhook contract (Zoe ingestion) |
 
 ### Platform Overview
 
@@ -105,38 +106,36 @@ Supabase (CDL + Auth)  ◄──►  Databricks (DWH + ETL)  ◄──►  MLS /
 |---|---|
 | **[Platform](docs/platform/)** | App template, tech stack, dual-Supabase architecture, MLS datamart |
 | **[Data Models](docs/data-models/)** | Dash field reference, Dash↔RESO mapping, CDL schema, ETL pipeline, `x_sm_*` extension governance — and **[canonical RESO DD 2.0](docs/data-models/reso-dd-kb/)** (41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource markdown). All RESO DD lookups for the platform start at [`docs/data-models/reso-dd-kb/USAGE.md`](docs/data-models/reso-dd-kb/USAGE.md). |
-| **[Business Processes](docs/business-processes/)** | Listing pipeline, sales pipeline, lead qualification workflows |
-| **[Product Specs](docs/product-specs/)** | UI specs — dashboards, forms, Kanban boards |
+| **[Business Processes](docs/business-processes/)** | Canonical RESO state machines (10 processes) — vendor-neutral |
+| **[Product Specs](docs/product-specs/)** | `matrix-pipeline/` (CRM single-source-of-truth) + Portal / Marketing / Listing-Forms / Personalization specs |
 | **[Vision](docs/vision/)** | Digital strategy 2026–2028, AI sales model |
 | **[References](docs/references/)** | API catalogs, integration endpoints |
-| **[Zoe AI KB](docs/zoe-ai-assistant-kb/)** | Zoe's knowledge base — 15 docs covering all apps, workflows, troubleshooting, RAG-ready |
+| **[Zoe AI KB](docs/zoe-ai-assistant-kb/)** | Zoe's RAG knowledge base — docs covering all apps, workflows, troubleshooting |
 
 ### Repository Structure
 
 Three top-level buckets: `docs/` (KB knowledge layer), `raw/` (hand-supplied source artifacts), `scripts/` (mechanical KB validation).
 
 ```
-AGENTS.md                          ← Entry point for LLMs (~115-line TOC)
+AGENTS.md                          ← Entry point for LLMs (TOC)
 README.md                          ← This file
 docs/                              ← KB knowledge layer (system of record)
-  INDEX.md                         ← Master index with chapter summaries
-  ARCHITECTURE.md                  ← System architecture
-  GOLDEN_PRINCIPLES.md             ← Engineering invariants & taste rules
-  QUALITY_SCORE.md                 ← Domain quality grades
-  platform/                        ← Platform overview, app template, MLS datamart
-  architecture/                    ← Intelligence layer, ADRs, data distribution
+  index.md                         ← Master index with chapter summaries
+  platform/                        ← App template, security, ops, compliance, app-catalog, ecosystem, golden-principles
+  architecture/                    ← overview.md, intelligence layer, ADRs, data distribution
   data-models/                     ← Dash data model, RESO interop, ETL pipeline
     reso-dd-kb/                    ← Canonical RESO DD 2.0 model (mirror, CSVs, DBML, agent-docs)
       AGENTS.md                    ← Subsystem rules (phase boundaries, file ownership)
       USAGE.md                     ← LLM consumption guide — start here for any RESO question
       wiki/dbml/canonical.dbml     ← 41-table DBML schema with FKs
       wiki/agent-docs/             ← Per-resource markdown reference
-  business-processes/              ← Listing pipeline, sales pipeline, lead qualification
-  exec-plans/                      ← Active / completed execution plans, tech-debt tracker
-  product-specs/                   ← UI specs: dashboards, forms, Kanban
+  business-processes/              ← Canonical RESO state machines (10 processes, vendor-neutral)
+  integration/                     ← Layer-5 cross-cutting per-resource views (generated) + overview.md
+  exec-plans/                      ← index.md, quality-score.md, tech-debt-tracker, active/completed
+  product-specs/                   ← matrix-pipeline/ (CRM SOT) + Portal / Marketing / Listing-Forms / Personalization
   vision/                          ← Digital strategy 2026-2028, AI sales model
   references/                      ← API catalogs, field summaries
-  zoe-ai-assistant-kb/             ← Zoe assistant knowledge base
+  zoe-ai-assistant-kb/             ← Zoe RAG support KB + ragchat-webhook-spec.md
 raw/                               ← Hand-supplied source artifacts
   dash/                            ← SIR/Anywhere.com listing forms (DOCX)
   qobrix/                          ← Qobrix OpenAPI spec (YAML)

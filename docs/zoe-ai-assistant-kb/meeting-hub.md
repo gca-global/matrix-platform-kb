@@ -275,7 +275,7 @@ A: It lets you describe a report in plain language, and the AI configures the fi
 |-------|-----------|--------|
 | Voice parsing depends on AI service availability | If voice input fails, enter data manually. Try again later. | Dependency on external AI |
 | Developers/Projects naming can be confusing (listings vs developer projects) | "Listings Viewed" = properties shown; "Developers Viewed" and "Projects Viewed" = developer names and their specific projects | Naming |
-| Broker Dashboard page key not in default role permissions | Admin must explicitly enable the `broker-dashboard` page permission if access is needed | Configuration |
+| Matrix Pipeline page key not in default role permissions | Admin must explicitly enable the `pipeline` page permission if access to the CRM is needed | Configuration |
 | Multi-language input toggle may change keyboard behavior | If your input language settings seem wrong, ask Admin to check Settings → Input Language | Configuration |
 
 ---

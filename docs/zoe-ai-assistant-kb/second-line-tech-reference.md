@@ -65,7 +65,7 @@ Sharp Matrix is built on three platforms:
 
 | Topic | Document | GitHub Raw URL |
 |-------|----------|---------------|
-| Full architecture | `docs/ARCHITECTURE.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/ARCHITECTURE.md) |
+| Full architecture | `docs/architecture/overview.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/architecture/overview.md) |
 | Platform overview | `docs/platform/index.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/index.md) |
 | Ecosystem architecture | `docs/platform/ecosystem-architecture.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/ecosystem-architecture.md) |
 | App catalog (all apps & status) | `docs/platform/app-catalog.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/app-catalog.md) |
@@ -387,11 +387,8 @@ Understanding the business helps qualify incidents correctly.
 
 | Process | Summary | Deep-Dive |
 |---------|---------|-----------|
-| **Listing Pipeline** | Seller-side: 8 stages from Prospect to Closed | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/business-processes/listing-pipeline.md) |
-| **Sales Pipeline** | Buyer-side: 8 stages from Qualification to Closed | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/business-processes/sales-pipeline.md) |
-| **Lead Qualification** | MQL → SQL using BANT criteria | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/business-processes/lead-qualification.md) |
-| **Follow-Up vs Active Sales** | Nurturing vs active deal boundary | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/business-processes/follow-up-vs-active-sales.md) |
-| **Listing Checklist** | Broker, marketing, finance checklists | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/business-processes/listing-checklist.md) |
+| **Canonical RESO processes** (Listing / Showing / OpenHouse / Lead-Contact / Transaction / Member / Office / Team / Caravan / Media lifecycles) | Vendor-neutral RESO state machines | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/business-processes/canonical-processes/USAGE.md) |
+| **Matrix Pipeline 2.0 (CRM)** | Sharp-SIR luxury sales CRM product spec — entities, FRs, AI, phases | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/product-specs/matrix-pipeline/INDEX.md) |
 
 ---
 
@@ -466,5 +463,5 @@ When you receive an escalated incident, follow this decision tree:
 | Supabase Dashboard (Matrix FM) | [https://supabase.com/dashboard/project/retujkznogwplfrbniet](https://supabase.com/dashboard/project/retujkznogwplfrbniet) |
 | SSO Console | [https://intranet.sharpsir.group/sso-console/](https://intranet.sharpsir.group/sso-console/) |
 | Agency Portal | [https://intranet.sharpsir.group/agency-portal/](https://intranet.sharpsir.group/agency-portal/) |
-| Full KB Index | [docs/INDEX.md](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/INDEX.md) |
+| Full KB Index | [docs/index.md](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/index.md) |
 | AGENTS.md (entry point) | [AGENTS.md](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/AGENTS.md) |

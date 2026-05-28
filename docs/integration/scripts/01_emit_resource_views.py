@@ -47,57 +47,6 @@ OUT_BY_RES = KB_ROOT / "wiki" / "agent-docs" / "by_resource"
 OUT_INDEX = KB_ROOT / "wiki" / "agent-docs" / "_index.md"
 OUT_INTEGRATION_CSV = KB_ROOT / "raw" / "integration_index.csv"
 
-# Hand-encoded Sharp-SIR (Layer 4) flavour mapping. Resource ->
-# list of (relative-from-by_resource/, label) tuples.
-FLAVOUR_LINKS: dict[str, list[tuple[str, str]]] = {
-    "Property": [
-        ("../../../../business-processes/listing-pipeline.md", "listing-pipeline.md (seller-side Kanban)"),
-        ("../../../../business-processes/sales-pipeline.md", "sales-pipeline.md (buyer-side Kanban)"),
-        ("../../../../business-processes/listing-checklist.md", "listing-checklist.md (broker / marketing / finance checklists)"),
-    ],
-    "Contacts": [
-        ("../../../../business-processes/lead-qualification.md", "lead-qualification.md (MQL -> SQL)"),
-        ("../../../../business-processes/follow-up-vs-active-sales.md", "follow-up-vs-active-sales.md (Follow-up vs Active boundary)"),
-        ("../../../../business-processes/sales-pipeline.md", "sales-pipeline.md (buyer-side Kanban)"),
-    ],
-    "Showing": [
-        ("../../../../business-processes/sales-pipeline.md", "sales-pipeline.md (Solution / Viewing stage)"),
-        ("../../../../business-processes/follow-up-vs-active-sales.md", "follow-up-vs-active-sales.md (first-showing trigger)"),
-    ],
-    "ShowingRequest": [
-        ("../../../../business-processes/sales-pipeline.md", "sales-pipeline.md (Solution / Viewing stage)"),
-    ],
-    "ShowingAppointment": [
-        ("../../../../business-processes/sales-pipeline.md", "sales-pipeline.md (Solution / Viewing stage)"),
-    ],
-    "ShowingAvailability": [
-        ("../../../../business-processes/listing-pipeline.md", "listing-pipeline.md (Active Listing stage)"),
-    ],
-    "LockOrBox": [
-        ("../../../../business-processes/listing-checklist.md", "listing-checklist.md (broker access / lockbox steps)"),
-    ],
-    "OpenHouse": [
-        ("../../../../business-processes/listing-pipeline.md", "listing-pipeline.md (Active Listing stage marketing tasks)"),
-    ],
-    "Caravan": [
-        ("../../../../business-processes/listing-pipeline.md", "listing-pipeline.md (Active Listing stage marketing tasks)"),
-    ],
-    "CaravanStop": [
-        ("../../../../business-processes/listing-pipeline.md", "listing-pipeline.md (Active Listing stage marketing tasks)"),
-    ],
-    "Media": [
-        ("../../../../business-processes/listing-checklist.md", "listing-checklist.md (marketing checklist)"),
-    ],
-    "TransactionManagement": [
-        ("../../../../business-processes/sales-pipeline.md", "sales-pipeline.md (Deal Signing / Payment / Closed)"),
-        ("../../../../business-processes/listing-pipeline.md", "listing-pipeline.md (SOLD / AGENT COMMISSION / CLOSED)"),
-    ],
-    "HistoryTransactional": [
-        ("../../../../business-processes/listing-pipeline.md", "listing-pipeline.md (every stage transition writes history)"),
-        ("../../../../business-processes/sales-pipeline.md", "sales-pipeline.md (every stage transition writes history)"),
-    ],
-}
-
 # Resources that Layer 2 (source-mappings) covers. Used to compute
 # the Layer-2 link / row-count.
 SM_RESOURCES = ["Property", "Member", "Office", "Contacts", "Teams", "Media"]
@@ -186,7 +135,6 @@ def emit_resource_page(
     sm_link: str,
     processes: list[str],
     titles: dict[str, str],
-    flavour_links: list[tuple[str, str]],
     reso_doc_link: str,
 ) -> str:
     layers_present: list[int] = [1]
@@ -194,8 +142,6 @@ def emit_resource_page(
         layers_present.append(2)
     if processes:
         layers_present.append(3)
-    if flavour_links:
-        layers_present.append(4)
     layer_summary = ", ".join(f"L{i}" for i in layers_present)
 
     lines: list[str] = []
@@ -205,8 +151,7 @@ def emit_resource_page(
         "`docs/integration/scripts/01_emit_resource_views.py`. Do NOT "
         "hand-edit. Re-run after changing any source-of-record "
         "chapter (`reso-dd-kb`, `source-mappings`, "
-        "`canonical-processes`) or any Sharp-SIR flavour mapping in "
-        "the script's `FLAVOUR_LINKS`.\n"
+        "`canonical-processes`).\n"
     )
 
     lines.append("## Summary\n")
@@ -219,8 +164,6 @@ def emit_resource_page(
         lines.append(f"| Source-mapping rows (Layer 2) | {sm_count} |")
     if processes:
         lines.append(f"| Canonical processes citing this (Layer 3) | {len(processes)} |")
-    if flavour_links:
-        lines.append(f"| Sharp-SIR flavour docs (Layer 4) | {len(flavour_links)} |")
     lines.append("")
 
     # Layer 1 - Canonical RESO definition
@@ -277,28 +220,14 @@ def emit_resource_page(
             "if a state machine is needed._\n"
         )
 
-    # Layer 4 - Sharp-SIR flavour
-    lines.append("## Layer 4 - Sharp-SIR flavour\n")
-    if flavour_links:
-        lines.append("Project-flavour pipelines / checklists touching this resource:\n")
-        for href, label in flavour_links:
-            lines.append(f"- [{label}]({href})")
-        lines.append("")
-    else:
-        lines.append(
-            "_No project-flavour SOP yet for this resource. The "
-            "canonical baseline (Layer 3) is currently the SOP. "
-            "Promote a `docs/business-processes/<flavour>.md` doc "
-            "when Sharp-SIR codifies its operational flow and add "
-            "the link to `FLAVOUR_LINKS` in "
-            "`scripts/01_emit_resource_views.py`._\n"
-        )
-
     lines.append("## Determinism\n")
     lines.append(
-        "This page is mechanically derived from the four source-of-"
-        "record chapters. Edits MUST happen in those chapters; this "
-        "page is regenerated by re-running the emit script."
+        "This page is mechanically derived from the three source-of-"
+        "record chapters (Layer 1 RESO DD, Layer 2 source-mappings, "
+        "Layer 3 canonical-processes). Edits MUST happen in those "
+        "chapters; this page is regenerated by re-running the emit "
+        "script. Project-flavour CRM behaviour lives in "
+        "`product-specs/matrix-pipeline/`, not here."
     )
 
     return "\n".join(lines) + "\n"
@@ -318,14 +247,14 @@ def emit_index_page(
     )
     lines.append(
         "Per-resource one-stop pages joining Layer 1 (canonical RESO "
-        "data model), Layer 2 (source mappings), Layer 3 (canonical "
-        "state machines), and Layer 4 (Sharp-SIR flavour). See "
-        "[`../../../INTEGRATION.md`](../../../INTEGRATION.md) for the "
-        "layered architecture.\n"
+        "data model), Layer 2 (source mappings), and Layer 3 "
+        "(canonical state machines). See "
+        "[`../../overview.md`](../../overview.md) for the layered "
+        "architecture.\n"
     )
     lines.append("## Resource catalogue\n")
-    lines.append("| Resource | Layers | RESO fields | Source-mapping rows | Canonical processes | Sharp-SIR docs | Page |")
-    lines.append("|---|---|---|---|---|---|---|")
+    lines.append("| Resource | Layers | RESO fields | Source-mapping rows | Canonical processes | Page |")
+    lines.append("|---|---|---|---|---|---|")
     for r in rows:
         page = f"by_resource/{r['resource'].lower()}.md"
         lines.append(
@@ -334,7 +263,6 @@ def emit_index_page(
             f"| {r['reso_field_count']} "
             f"| {r['sm_row_count'] or '-'} "
             f"| {r['cp_process_count']} "
-            f"| {r['flavour_link_count']} "
             f"| [{r['resource'].lower()}.md]({page}) |"
         )
     lines.append("")
@@ -349,12 +277,8 @@ def emit_index_page(
         f"**{sum(1 for r in rows if r['cp_process_count'])}**"
     )
     lines.append(
-        f"- Resources covered by Layer 4 (Sharp-SIR flavour): "
-        f"**{sum(1 for r in rows if r['flavour_link_count'])}**"
-    )
-    lines.append(
-        f"- Resources covered by all four layers: "
-        f"**{sum(1 for r in rows if r['layers'] == 'L1, L2, L3, L4')}**"
+        f"- Resources covered by all three layers: "
+        f"**{sum(1 for r in rows if r['layers'] == 'L1, L2, L3')}**"
     )
     lines.append("")
     return "\n".join(lines) + "\n"
@@ -395,7 +319,6 @@ def main() -> int:
         sm_count = sm_counts.get(resource)
         sm_link = sm_by_resource_path(resource) if resource in sm_counts else ""
         processes = cp_map.get(resource, [])
-        flavour_links = FLAVOUR_LINKS.get(resource, [])
         reso_doc_link = reso_resource_doc_path(resource)
 
         page = emit_resource_page(
@@ -406,7 +329,6 @@ def main() -> int:
             sm_link=sm_link,
             processes=processes,
             titles=titles,
-            flavour_links=flavour_links,
             reso_doc_link=reso_doc_link,
         )
         out = OUT_BY_RES / f"{resource.lower()}.md"
@@ -418,8 +340,6 @@ def main() -> int:
             layers.append("L2")
         if processes:
             layers.append("L3")
-        if flavour_links:
-            layers.append("L4")
         rows_for_index.append(
             {
                 "resource": resource,
@@ -427,7 +347,6 @@ def main() -> int:
                 "reso_field_count": field_counts.get(resource, 0),
                 "sm_row_count": sm_count or 0,
                 "cp_process_count": len(processes),
-                "flavour_link_count": len(flavour_links),
             }
         )
 
@@ -455,7 +374,6 @@ def main() -> int:
                 "reso_field_count",
                 "sm_row_count",
                 "cp_process_count",
-                "flavour_link_count",
             ],
             quoting=csv.QUOTE_MINIMAL,
         )

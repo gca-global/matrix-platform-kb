@@ -12,18 +12,20 @@ Sharp Sotheby's International Realty launches a comprehensive digital transforma
 
 ## Target State (by December 2028)
 
+> **Funnel terminology**: this strategy uses the canonical `Contacts.ContactType` graduation (Lead → Prospect → Ready-to-Buy → Buyer/Seller) and the matrix-pipeline 5-stage funnel projection (Qualification → Matching → Viewing → Contracting → Payment) — see [`product-specs/matrix-pipeline/wiki/overview.md#pipeline`](../product-specs/matrix-pipeline/wiki/overview.md#pipeline). Generic industry MQL/SQL labels are not used.
+
 | Metric | Current State | Target State | Growth |
 |--------|--------------|-------------|--------|
 | Process automation | 20-30% | 90%+ | +200-350% |
-| Lead conversion (lead → MQL) | 35% | 60% | +71% |
-| MQL → SQL conversion | 70% | 90% | +29% |
-| Sales cycle | 90-150 days | 50-60 days | -44% |
+| Contact graduation (Lead → Prospect) | 35% | 60% | +71% |
+| Contact graduation (Prospect → Ready-to-Buy) | 70% | 90% | +29% |
+| Sales cycle (Qualification → Payment) | 90-150 days | 50-60 days | -44% |
 | Deals per manager/month | 5 | 15 | +200% |
 | Lead processing time | 4 hours | 30 min | -87.5% |
 | Client LTV | €67K | €115K | +72% |
 | Deals per client | 1.4 | 1.8 | +29% |
-| SQL → Proposal | 50% | 75% | +50% |
-| SQL → Closed Deal | 10% | 26% | +160% |
+| Funnel conversion (Qualification → Contracting) | 50% | 75% | +50% |
+| Funnel conversion (Qualification → Payment) | 10% | 26% | +160% |
 | CTR (marketing) | 0.8% | 3.2% | +300% |
 | Website traffic | 5K/month | 20K/month | +300% |
 | Email open rate | 8% | 22% | +175% |
@@ -63,13 +65,13 @@ Sharp Sotheby's International Realty launches a comprehensive digital transforma
 Direct contact/Recommendation → Assign senior broker → Meeting/Video tour → Exclusive proposals → Deal support → Contract preparation → Deal closed
 
 **HNWI Clients** (8 steps):
-First contact (site/recommendations) → Assign specialist → Consultations/Video tour → Identify needs → Qualification MQL → SQL → Personal proposals → Negotiations & contract → Deal closed
+First contact (site/recommendations) → Assign specialist → Consultations/Video tour → Identify needs → ContactType: Lead → Prospect → Personal proposals (Matching) → Negotiations & contract (Contracting) → Deal closed (Payment)
 
 **Standard Clients** (10 steps):
-First contact (site/ads/recommendations) → Lead capture → Greeting/Guides → Assign specialist → Online consultations → Needs analysis → MQL → SQL → Personal proposals → Negotiations → Deal closed
+First contact (site/ads/recommendations) → Lead capture → Greeting/Guides → Assign specialist → Online consultations → Needs analysis → ContactType: Lead → Prospect → Personal proposals (Matching → Viewing) → Negotiations (Contracting) → Deal closed (Payment)
 
 **Mass Market** (8 steps):
-First contact (site/ads/social) → Auto-qualification → Automated mailings → Personalized proposals → Purchase readiness assessment → MQL → SQL → Consultations/Proposals → Deal closed
+First contact (site/ads/social) → Auto-qualification (FR-AI-LQ) → Automated mailings → Personalized proposals → Purchase readiness assessment → ContactType: Lead → Prospect → Consultations/Proposals (Matching) → Deal closed (Payment)
 
 ## Digital Marketing Maturity Model
 
@@ -79,21 +81,21 @@ First contact (site/ads/social) → Auto-qualification → Automated mailings �
 | Effectiveness (CTR) | <1% | 1-2% | 2-3% | 3%+ |
 | Email opens | <10% | 10-15% | 15-20% | 20%+ |
 | Engagement | <6/10 | 6-8/10 | 8-9/10 | 9-10/10 |
-| Lead capture → MQL | 2% | 3% | 4% | 5% |
-| MQL → SQL | 25% | 35% | 50% | 60% |
-| SQL → Deal | 60% | 70% | 80% | 90% |
+| Lead capture → Lead (`ContactType`) | 2% | 3% | 4% | 5% |
+| Lead → Prospect (`ContactType` graduation) | 25% | 35% | 50% | 60% |
+| Funnel: Qualification → Payment | 60% | 70% | 80% | 90% |
 
 ## Sales & Productivity Efficiency Model
 
 | Metric | Basic | Developing | Advanced | Expert |
 |--------|-------|-----------|----------|--------|
-| Sales cycle (SQL → cash) | 120-150 days | 90-110 days | 70-80 days | 50-60 days |
+| Sales cycle (Qualification → Payment) | 120-150 days | 90-110 days | 70-80 days | 50-60 days |
 | Deals per manager/month | <5 | 5-8 | 8-12 | 12+ |
 | Lead processing time | 4 hours | 2 hours | 1 hour | 30 min |
 | Client LTV | €67K | €78K | €93K | €115K |
-| SQL → Proposal | 40% | 50% | 65% | 75% |
-| Proposal → Closed | 15% | 20% | 28% | 35% |
-| SQL → Closed | 6% | 10% | 18% | 26% |
+| Qualification → Contracting | 40% | 50% | 65% | 75% |
+| Contracting → Payment | 15% | 20% | 28% | 35% |
+| Qualification → Payment (full funnel) | 6% | 10% | 18% | 26% |
 
 ## Channel Strategy by Market
 

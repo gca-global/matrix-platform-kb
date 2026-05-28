@@ -11,9 +11,10 @@ and how the audit stream is replayed downstream.
 >
 > - Source mapping (Dash / Qobrix / SIR -> RESO HistoryTransactional):
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/history_transactional.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/history_transactional.md).
-> - Sharp-SIR flavour: no project SOP yet — promote one under
->   `docs/business-processes/` when SIR codifies retention,
->   replay tooling, and operator UX for the audit stream.
+> - Sharp-SIR flavour: no project SOP yet — the CRM materialisation
+>   (if any) belongs in `product-specs/matrix-pipeline/` when SIR
+>   codifies retention, replay tooling, and operator UX for the audit
+>   stream.
 
 This is the canonical baseline. Project flavours (retention,
 ownership, replay tooling) belong in

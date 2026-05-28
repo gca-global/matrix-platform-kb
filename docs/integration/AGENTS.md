@@ -21,9 +21,12 @@ This chapter is purely DERIVATIVE:
   and `wiki/agent-docs/by_resource/*.md` (Layer 2 system of record).
 - Reads from `../business-processes/canonical-processes/raw/citations.csv`
   and `processes/*.md` (Layer 3 system of record).
-- Reads from `../business-processes/*.md` (Layer 4 Sharp-SIR
-  flavour) for forward links.
 - NEVER writes anywhere outside this chapter.
+
+Project-flavour CRM behaviour (formerly Layer 4 "Sharp-SIR flavour")
+lives in `../product-specs/matrix-pipeline/`, not here. The Layer-5
+integration views are pure RESO-canonical and do not link forward
+into product specs.
 
 If a fact is wrong on an integration page, the fix MUST be made
 in the source-of-record chapter, not here.
@@ -32,7 +35,7 @@ in the source-of-record chapter, not here.
 
 | Phase | Reads | Writes |
 |---|---|---|
-| Emit | All four layers' CSVs and indexes | `wiki/agent-docs/by_resource/<res>.md`, `raw/integration_index.csv` |
+| Emit | All three layers' CSVs and indexes | `wiki/agent-docs/by_resource/<res>.md`, `raw/integration_index.csv` |
 
 There is no Author phase and no Validate phase: every byte of
 output is mechanically derived. The "validation" is determinism
@@ -74,5 +77,5 @@ was regenerated, this chapter MUST be re-emitted before commit.
 - New layer (e.g. a "channel-distribution" view) -> add a new
   reader inside the script, not a new file under `wiki/agent-docs/`.
 
-See [`../INTEGRATION.md`](../INTEGRATION.md) for the layered
+See [`overview.md`](overview.md) for the layered
 architecture this chapter sits on top of.

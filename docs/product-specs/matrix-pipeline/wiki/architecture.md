@@ -178,8 +178,9 @@ Source: raw/context-v2.md §5a.6.
 - CDL schema: [`../../data-models/cdl-schema.md`](../../../data-models/cdl-schema.md)
 - Three-project architecture + EF contracts: [`../../platform/app-template.md`](../../../platform/app-template.md)
 - RLS / identity / Third-Party Auth: [`../../platform/security-model.md`](../../../platform/security-model.md)
-- ADRs: ADR-011 (ES256), ADR-012 (CDL Third-Party Auth), ADR-013 (CDL/SSO ownership; CDL not linked to Lovable), ADR-014 (CDL as-built vs original 18-table design).
+- ADRs: ADR-011 (ES256), ADR-012 (CDL Third-Party Auth), ADR-013 (CDL/SSO ownership; CDL not linked to Lovable), ADR-014 (CDL as-built vs original 18-table design), ADR-015 (CDL Pipeline EF surface — Proposed).
 - Stewardship / source taxonomy: [`../../architecture/data-distribution-and-stewardship.md`](../../../architecture/data-distribution-and-stewardship.md).
+- Pipeline-specific CDL CRUD recipes (Lovable-facing): [`../cdl-crud-contract.md`](../cdl-crud-contract.md). Live reachability matrix iteration copy: `mem://infrastructure/cdl-coverage.md`.
 
 Source: raw/context-v2.md §5a.7.
 

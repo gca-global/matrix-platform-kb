@@ -114,7 +114,7 @@ Demo: log in as a power-user, see an empty SidebarLayout with the seven main rou
 - (~1 h) Define permission keys for every sidebar page: `pipeline:contacts:read|write`, `pipeline:saved-searches:read|write`, … Cite [wiki/overview.md#personas](wiki/overview.md#personas).
 - (~1 h) Refresh `wiki/architecture.md#live-cdl-state` via MCP — confirm Phase 1 table list, row counts, RLS flags. Bump `last_updated`. (Weekly recurring Cursor task; this is the first run.)
 - (~2 h) **Publish this LLM Wiki PR** — the wiki itself, `phases.md`, `scripts/wiki-lint.sh`. DoD: PR review passes, branch `matrix-pipeline-wiki` merged into `main`.
-- (~1 h) Add an entry in `matrix-platform-kb/docs/INDEX.md` (chapter row) + a row in `matrix-platform-kb/AGENTS.md` (Subsystem AGENTS.md table) pointing here.
+- (~1 h) Add an entry in `matrix-platform-kb/docs/index.md` (chapter row) + a row in `matrix-platform-kb/AGENTS.md` (Subsystem AGENTS.md table) pointing here.
 - (~1 h) Verify SSO `Member.MemberAlternateId = sso.user_id` mapping for every active power user — manual MCP query. File mismatches into a Week 1 Cursor task.
 - (~1 h) Schedule the daily MCP refresh of `wiki/architecture.md#live-cdl-state` (cron in the Cursor agent skill or simple Friday note).
 - (Stretch ~2 h) Draft ADR placeholders: `ADR-XXX-crm-referral-entity.md`, `ADR-XXX-crm-commission-engine.md` — section stubs only, full bodies in Week 7.

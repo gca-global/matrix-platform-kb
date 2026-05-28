@@ -8,9 +8,9 @@ the event itself to retirement.
 > - Source mapping: `OpenHouse` is not yet in scope of the 6-resource
 >   Layer-2 curated set; cross-reference the linked listing via
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md).
-> - Sharp-SIR flavour: open houses appear inside
->   [`../../listing-pipeline.md`](../../listing-pipeline.md) (Active
->   Listing stage marketing tasks).
+> - Sharp-SIR flavour: open houses are codified in the CRM Listing
+>   Module (Active Listing stage marketing tasks). See
+>   [`product-specs/matrix-pipeline/wiki/integration.md#listing-module`](../../../product-specs/matrix-pipeline/wiki/integration.md#listing-module).
 > - One-stop integrated view (per linked listing):
 >   [`../../../integration/wiki/agent-docs/by_resource/property.md`](../../../integration/wiki/agent-docs/by_resource/property.md)
 

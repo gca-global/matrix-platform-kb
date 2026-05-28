@@ -11,13 +11,13 @@ AI Copilot exists to free the broker from routine so they can focus on what only
 ## Three Key Ideas
 
 ### 1. Two Representations of the Sales Process
-- **Kanban board** for managers: control pipeline, forecast revenue, analyze team performance
-- **AI Brokerage Copilot** for brokers: client card + Next Best Action, automated matching, document generation
+- **matrix-pipeline CRM** (5-stage funnel projection: Qualification → Matching → Viewing → Contracting → Payment) for managers and brokers: real-time funnel state + Commission Engine ERP-lite for revenue forecasting and team performance — see [`product-specs/matrix-pipeline/wiki/overview.md#pipeline`](../product-specs/matrix-pipeline/wiki/overview.md#pipeline)
+- **AI Brokerage Copilot** for brokers (FR-AI-LQ / MX / SC / DM in matrix-pipeline): client card + Next Best Action, automated matching, document generation
 
-### 2. Clear Boundary Between Follow-up and Active Sales
-- Follow-up (nurturing): before the first meeting/showing — weekly/monthly cadence
-- Active Sales: after the first meeting/showing — daily cadence toward closing
-- The **first personal meeting or showing** is the trigger that moves a lead from nurturing into active sales
+### 2. Clear Boundary Between Nurturing and Active Sales
+- Nurturing (`ContactType ∈ Lead, Prospect`): before the first `Showing` event — weekly/monthly cadence
+- Active sales (`ContactType ∈ Ready-to-Buy, Buyer/Seller`): after the first `Showing` event — daily cadence toward `TransactionManagement`
+- The **first `Showing` event** is the canonical trigger that graduates `Contacts.ContactType` from Prospect into Ready-to-Buy (see [`canonical-processes/processes/showing-lifecycle.md`](../business-processes/canonical-processes/processes/showing-lifecycle.md))
 
 ### 3. AI Copilot at the Heart of the System
 - Analyzes context and determines stage automatically

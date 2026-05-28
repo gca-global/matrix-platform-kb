@@ -60,4 +60,4 @@ Self-service portal for authenticated buyers and sellers to browse curated prope
 |-----|-----|
 | Personalization and recommendations | [personalization.md](personalization.md) |
 | App build patterns, auth, RLS | [app-template.md](../platform/app-template.md) |
-| Buyer-side pipeline stages | [sales-pipeline.md](../business-processes/sales-pipeline.md) |
+| Canonical Lead-Contact lifecycle (buyer journey) | [canonical-processes/processes/lead-contact-lifecycle.md](../business-processes/canonical-processes/processes/lead-contact-lifecycle.md) |

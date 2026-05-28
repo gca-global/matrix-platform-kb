@@ -208,7 +208,7 @@ Matrix Pipeline is the central CRM and deal management tool. It connects to the 
 | Time | Action | App |
 |------|--------|-----|
 | **Start of day** | Open Agency Portal — check pipeline value, recent activity | Portal |
-| **Morning** | Open Pipeline — review Kanban board, check deal stage updates | Pipeline |
+| **Morning** | Open Pipeline — review the canonical 5-stage funnel board (Qualification → Matching → Viewing → Contracting → Payment), check deal stage updates | Pipeline |
 | **After client calls** | Update opportunity details, move deals to next stage | Pipeline |
 | **After meetings** | Record meeting in Meeting Hub, link follow-up tasks in Pipeline | Meeting Hub + Pipeline |
 | **New prospect** | Register lead in Pipeline or Client Connect | Pipeline / Client Connect |
@@ -307,7 +307,7 @@ Zoe can assist with any Sharp Matrix app. Here are examples of what to ask:
 
 ### Navigation and How-To
 - "How do I register a new client?" → Client Connect walkthrough
-- "Where is my pipeline Kanban?" → Matrix Pipeline navigation
+- "Where is my 5-stage funnel board?" → Matrix Pipeline navigation
 - "How do I check my leave balance?" → HRMS vacation guidance
 - "How do I submit monthly reporting?" → Matrix FM step-by-step
 - "How do I create an IT ticket?" → ITSM request process

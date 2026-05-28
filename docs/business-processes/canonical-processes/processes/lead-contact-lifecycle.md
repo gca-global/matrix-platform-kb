@@ -9,9 +9,11 @@ Five resources collaborate: `Contacts`, `SavedSearch`, `Prospecting`,
 >
 > - Source mapping (Dash / Qobrix / SIR -> RESO `Contacts`):
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/contacts.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/contacts.md)
-> - Sharp-SIR flavour:
->   [`../../lead-qualification.md`](../../lead-qualification.md) and
->   [`../../follow-up-vs-active-sales.md`](../../follow-up-vs-active-sales.md)
+> - Sharp-SIR flavour: materialised by the CRM Contact-Relationship
+>   process
+>   ([`product-specs/matrix-pipeline/wiki/processes.md#contact-relationship`](../../../product-specs/matrix-pipeline/wiki/processes.md#contact-relationship))
+>   + the FR-CON-* and FR-FNL-* requirements
+>   ([`product-specs/matrix-pipeline/wiki/requirements.md`](../../../product-specs/matrix-pipeline/wiki/requirements.md))
 > - One-stop integrated view:
 >   [`../../../integration/wiki/agent-docs/by_resource/contacts.md`](../../../integration/wiki/agent-docs/by_resource/contacts.md)
 

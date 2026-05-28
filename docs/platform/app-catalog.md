@@ -46,12 +46,12 @@
 
 | # | Component | KB Name | Type | Primary Users |
 |---|-----------|---------|------|---------------|
-| 19 | Broker Daily Dashboard & AI Copilot | **Broker App** | App (CDL-Connected) | Brokers, Agents |
-| 20 | Manager Kanban & Analytics | **Manager App** | App (CDL-Connected) | Sales Managers, Team Leads |
-| 21 | Buyer/Seller Self-Service | **Client Portal** | App (CDL-Connected) | Buyers, Sellers |
-| 22 | Campaign & Marketing Automation | **Marketing App** | App (CDL-Connected) | Marketing Team |
-| 23 | Leadership KPI Dashboards | **BI Dashboard** | App | Leadership (CDSO, CDTO) |
-| 24 | Platform Configuration | **Admin Console** | App | System Admins |
+| 19 | Buyer/Seller Self-Service | **Client Portal** | App (CDL-Connected) | Buyers, Sellers |
+| 20 | Campaign & Marketing Automation | **Marketing App** | App (CDL-Connected) | Marketing Team |
+| 21 | Leadership KPI Dashboards | **BI Dashboard** | App | Leadership (CDSO, CDTO) |
+| 22 | Platform Configuration | **Admin Console** | App | System Admins |
+
+> **Consolidation note**: the previously-planned **Broker App** (daily dashboard + AI copilot) and **Manager App** (Kanban + analytics) are **consolidated into matrix-pipeline 2.0** as a single CRM serving both broker and manager personas (see [`product-specs/matrix-pipeline/wiki/personas`](../product-specs/matrix-pipeline/wiki/overview.md#personas) and [`phases.md`](../product-specs/matrix-pipeline/phases.md)). The canonical 5-stage funnel projection (Qualification → Matching → Viewing → Contracting → Payment) replaces both the old broker daily-dashboard view and the old manager Kanban as a single funnel-state UI projection.
 
 ---
 
@@ -187,44 +187,38 @@
 ## App Details — In Progress
 
 ### Pipeline Management (Matrix Pipeline)
-**Status**: In Progress
+**Status**: In Progress (rebuild on the matrix-pipeline 2.0 spec)
+**Spec (single source of truth)**: [`product-specs/matrix-pipeline/`](../product-specs/matrix-pipeline/INDEX.md) — wiki + phases + cdl-crud-contract
 **Users**: Brokers, Sales Managers, Call Center Staff, Listing Coordinators, Marketing, Finance
-**RESO Resources**: Property, Media, Contacts, Member, Office
-**App Type**: CDL-Connected
-**Supabase Instance**: `mydojctcewxrbwjckuyz` (Matrix Pipeline app DB)
+**RESO Resources** (canonical, strict DD 2.0): `Property`, `Media`, `Contacts`, `Member`, `Office`, `OUID`, `Teams`, `TeamMembers`, `SavedSearch`, `Prospecting`, `Activity`, `ContactListings`, `ContactListingPreference`, `ContactListingNotes`, `ShowingAvailability`, `ShowingRequest`, `ShowingAppointment`, `Showing`, `LockOrBox`, `Caravan`, `CaravanStop`, `TransactionManagement`, `HistoryTransactional`, `Document`, `Field`, `Lookup`, `OpenHouse`, `InternetTracking`, `PropertyDetailAttachment`, plus a documented project-flavour `Referral` entity (one of two escape hatches).
+**App Type**: CDL-Connected (canonical reads + writes via dedicated CDL EFs under SSO JWT)
+**Supabase Instance**: `mydojctcewxrbwjckuyz` (CRM app DB — app-private state only: drafts, workflow cache, Commission Engine ERP-lite tables)
 **Repo**: `/home/bitnami/matrix-pipeline`
-**Key Features** (target):
-- Lead capture and management with webhook ingestion from external sources
-- Sales pipeline with Kanban board and drag-and-drop stage management
-- Opportunity detail with contacts, properties, tasks, timeline, and email linking
-- Opportunity review workflow for manager oversight
-- Comprehensive contact management with relationship tracking
-- Microsoft 365 email integration (read inbox, link emails to deals)
-- Microsoft 365 calendar integration (events linked to opportunities)
-- MLS property data browsing and linking to pipeline opportunities
-- Call center module with contact verification and MLS duplicate checking
-- Shared property lists via public token links for client sharing
-- AI-powered data entry: voice transcription and opportunity info parsing
-- Semantic search and Humatic AI matching
-- Date-based reminders for contact follow-ups
-- Notification system with real-time updates
-- CDL write proxy for app settings and role configurations
-- Role-based permissions via `role_configurations` (app_id: `smpipeline`)
-- Revenue forecasting with probability-weighted calculations
+**Key Features** (target — see [`wiki/requirements.md`](../product-specs/matrix-pipeline/wiki/requirements.md) FR-CON / PC / COM / CFL / FNL / PROS / ACT / SHOW / CARA / CL / TM / CMM / DOC / REF / REP and [`phases.md`](../product-specs/matrix-pipeline/phases.md)):
+- Canonical `Contacts` lifecycle with `ContactType` graduation (Lead → Prospect → Ready-to-Buy → Buyer/Seller) — FR-CON
+- Multiple parallel commercial intents per contact via canonical `SavedSearch` + `Prospecting` — FR-PC
+- Canonical 5-stage funnel projection over `(Contacts × SavedSearch)` (Qualification / Matching / Viewing / Contracting / Payment) — FR-FNL-01..06; **no `pipeline_stages` table**, the projection is a view over canonical CDL state
+- Activity / task / follow-up management — FR-ACT
+- Canonical 5-resource `Showing` chain (`ShowingAvailability` → `ShowingRequest` → `ShowingAppointment` → `Showing` → `LockOrBox`) — FR-SHOW
+- Curated luxury tours via `Caravan` + `CaravanStop` — FR-CARA
+- Client engagement via `ContactListings` + `ContactListingPreference` + `ContactListingNotes` — FR-CL
+- Offers and transactions via canonical `TransactionManagement` + `HistoryTransactional` audit — FR-TM
+- **Commission Engine ERP-lite** (second project-flavour escape hatch, app-private only): per-deal cost attribution via `Activity` tagging, GCI forecasting per FR-FNL-12 precedence (`OfferAmount` (a) > `SavedSearch` budget mid-point (b)), broker compensation rule engine, reconciliation against external Finance ERP — see [`wiki/commission-engine.md`](../product-specs/matrix-pipeline/wiki/commission-engine.md)
+- AI Brokerage Copilot — FR-AI-LQ Lead Qualification, FR-AI-MX Match Explanation, FR-AI-SC Showing Coach, FR-AI-DM Deal Margin Coach (each shipped as a small LLM-wrapper EF; see [`wiki/ai.md`](../product-specs/matrix-pipeline/wiki/ai.md))
+- O365 email + calendar integration linked to `Activity` and `ShowingAppointment` rows
+- Listing Module integration via canonical `Property` + `Property.StandardStatus` push events — see [`wiki/integration.md#listing-module`](../product-specs/matrix-pipeline/wiki/integration.md#listing-module)
+- Role-based permissions via SSO `role_configurations` (app_id: `smpipeline`)
 
-### Contact Management
-**Status**: In Progress
-**Users**: Brokers, Sales Managers, Contact Center, Welcome Team
-**RESO Resources**: Contacts, Member
-**App Type**: CDL-Connected
-**Key Features** (target):
-- Comprehensive contact lifecycle management
-- Omnichannel inbox (Email, Telegram, WhatsApp, Voice)
-- Lead qualification (Raw → MQL → SQL)
-- Automated routing and assignment
-- Communication logging and history
-- Contact deduplication across sources
-- Segmentation and tagging
+### Contact Management → consolidated into matrix-pipeline 2.0
+**Status**: target-state contact management folds into matrix-pipeline 2.0 (FR-CON cluster). The deployed `Contact Management` app remains a transitional surface; new development goes into matrix-pipeline.
+**Spec**: see [`product-specs/matrix-pipeline/wiki/requirements.md#fr-con-contacts`](../product-specs/matrix-pipeline/wiki/requirements.md#fr-con-contacts).
+**RESO Resources** (canonical): `Contacts`, `Member`, `OUID`, plus AI-driven enrichment via FR-AI-LQ.
+**Key target capabilities** (post-consolidation):
+- Canonical `Contacts` lifecycle with `ContactType` graduation (Lead → Prospect → Ready-to-Buy → Buyer/Seller); no MQL/SQL labels
+- FR-AI-LQ inbound qualification + routing (broker confirms, writes via `cdl-contacts-write`)
+- Communication logging in `Activity` (canonical resource)
+- Canonical contact deduplication via `Contacts.MatchKey` heuristics + admin merge tools
+- Segmentation via canonical `ContactType` + `SavedSearch` parameters (no app-private tags layer)
 
 ### ITSM (IT Service & Asset Management)
 **Status**: In Progress
@@ -321,31 +315,24 @@
 
 ## App Details — Planned
 
-### Broker App
-**Users**: Brokers and agents
-**RESO Resources**: Property, Contacts, Member, ShowingAppointment, Media
-**O365 Dependency**: Exchange Online (Mail.Read, Calendars.ReadWrite via Microsoft Graph API)
-**Key Features**:
-- Personal daily dashboard with auto-prioritized actions
-- AI Copilot with Next Best Action per client
-- Client cards with activity history
-- Follow-up management (zero tolerance for missed)
-- Property matching and Curated List generation
-- Document generation (PDF brochures)
-- Exchange email integration: read inbox, attach emails to opportunities
-- Outlook calendar sync with free/busy conflict detection
+### Broker App and Manager App → consolidated into matrix-pipeline 2.0
 
-### Manager App
-**Users**: Sales managers, team leads
-**RESO Resources**: Property, Contacts, Member, Office, Teams
-**O365 Dependency**: Exchange Online (Calendars.ReadWrite, Mail.Read via Microsoft Graph API)
-**Key Features**:
-- Dual Kanban: seller-side (listings) + buyer-side (sales) pipelines
-- Revenue forecast with probability-weighted calculations
-- Team productivity metrics and broker comparisons
-- Intervention tools: reassign, add tasks, comment
-- Real-time pipeline monitoring with trouble spot detection
-- Team calendar overview and email audit on opportunities
+The previously-planned **Broker App** (broker daily dashboard + AI copilot) and **Manager App** (manager Kanban + analytics) are **superseded by the matrix-pipeline 2.0 product spec**, which consolidates broker, manager, contact-center, and listing-coordinator workflows into one CRM with role-based views over the same canonical 5-stage funnel projection (Qualification → Matching → Viewing → Contracting → Payment).
+
+**Single source of truth**: [`product-specs/matrix-pipeline/`](../product-specs/matrix-pipeline/INDEX.md) (wiki + phases + cdl-crud-contract).
+
+Capabilities previously listed under Broker App (personal dashboard, Next Best Action, Curated List generation, follow-up management, O365 integration) are realised in matrix-pipeline as:
+- Broker home view = role-filtered canonical 5-stage funnel projection per `Member` ([`wiki/overview.md#pipeline`](../product-specs/matrix-pipeline/wiki/overview.md#pipeline))
+- AI Copilot = FR-AI-LQ / MX / SC / DM clusters in [`wiki/ai.md`](../product-specs/matrix-pipeline/wiki/ai.md)
+- Curated Lists = canonical `Caravan` + `CaravanStop` + `ContactListings` ([`wiki/requirements.md#fr-cara`](../product-specs/matrix-pipeline/wiki/requirements.md#fr-cara-caravans), [`wiki/requirements.md#fr-cl`](../product-specs/matrix-pipeline/wiki/requirements.md#fr-cl-contact-listings))
+- Follow-up management = canonical `Activity` + reminders ([`wiki/requirements.md#fr-act`](../product-specs/matrix-pipeline/wiki/requirements.md#fr-act-activities))
+- O365 integration = matrix-pipeline integration cluster ([`wiki/integration.md#o365`](../product-specs/matrix-pipeline/wiki/integration.md))
+
+Capabilities previously listed under Manager App (revenue forecast, team productivity, intervention tools, pipeline monitoring) are realised in matrix-pipeline as:
+- Revenue forecast = Commission Engine ERP-lite forecast precedence (FR-FNL-12 + FR-TM-13) — see [`wiki/commission-engine.md`](../product-specs/matrix-pipeline/wiki/commission-engine.md)
+- Team productivity / broker comparisons = canonical reports over `Member` × `TransactionManagement` × `Activity` (FR-REP cluster)
+- Intervention tools = canonical `Member` reassignment on `Contacts.OwnerMemberKey`, `Activity` creation, `HistoryTransactional` audit
+- Real-time monitoring = view over canonical funnel state; no separate Kanban materialisation
 
 ### Client Portal
 **Users**: Buyers and sellers (authenticated)
@@ -387,29 +374,42 @@
 
 ## RESO Resource Usage Matrix
 
-| RESO Resource | Pipeline Mgmt | Contact Mgmt | Broker App | Manager App | Client Portal | Marketing | Finance | AI Services |
-|--------------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Property | R/W | — | R/W | R | R | R | R | R |
-| Contacts | R | R/W | R/W | R | R (own) | R/W | R | R |
-| Member | R | R | R | R/W | — | R | R | R |
-| Office | R | — | R | R/W | — | R | R | R |
-| Teams | — | — | R | R/W | — | — | — | R |
-| Media | R/W | — | R/W | R | R | R/W | — | R |
-| ShowingAppointment | R | — | R/W | R | R/W | — | — | R |
-| OpenHouse | R/W | — | R | R | R | R/W | — | R |
-| HistoryTransactional | R | — | R | R | — | R | R | R |
-| Prospecting | — | R/W | R/W | R | — | R/W | — | R |
+> Matrix Pipeline = matrix-pipeline 2.0 (consolidates broker, manager, contact-center, and listing-coordinator workflows). Authoritative resource matrix in [`product-specs/matrix-pipeline/cdl-crud-contract.md`](../product-specs/matrix-pipeline/cdl-crud-contract.md).
+
+| RESO Resource | Matrix Pipeline | Client Portal | Marketing | Finance | AI Services |
+|---|:---:|:---:|:---:|:---:|:---:|
+| `Property` | R/W (via Listing Module push) | R | R | R | R |
+| `Contacts` | R/W | R (own) | R/W | R | R |
+| `Member` | R/W | — | R | R | R |
+| `Office`, `OUID` | R/W | — | R | R | R |
+| `Teams`, `TeamMembers` | R/W | — | — | — | R |
+| `Media` | R/W | R | R/W | — | R |
+| `ShowingAvailability` / `Request` / `Appointment` / `Showing` / `LockOrBox` | R/W | R/W (own) | — | — | R |
+| `Caravan`, `CaravanStop` | R/W | R (own) | — | — | R |
+| `ContactListings`, `ContactListingPreference`, `ContactListingNotes` | R/W | R (own) | R | — | R |
+| `SavedSearch`, `Prospecting` | R/W | R (own) | R/W | — | R |
+| `Activity` | R/W | — | R | — | R |
+| `OpenHouse` | R/W | R | R/W | — | R |
+| `TransactionManagement` | R/W | R (own) | — | R | R |
+| `HistoryTransactional` | R/W (emit) | — | R | R | R |
+| `Document` | R/W | R (own) | — | R | R |
+| `InternetTracking` | R | — | R/W | — | R |
+| `PropertyDetailAttachment` | R | R | R/W | — | R |
+| `Field`, `Lookup` (metadata) | R | R | R | R | R |
+| `Referral` (project-flavour escape hatch) | R/W | — | — | R | R |
 
 R = Read, W = Write, R/W = Read and Write
 
 ## O365 Integration Matrix
 
-| Capability | Broker App | Manager App | Other Apps |
-|-----------|:---:|:---:|:---:|
+> O365 integration is a matrix-pipeline 2.0 capability cluster ([`wiki/integration.md#o365`](../product-specs/matrix-pipeline/wiki/integration.md)). All capabilities below are role-filtered inside the same matrix-pipeline app — there is no separate Broker / Manager app surface.
+
+| Capability | Matrix Pipeline (broker role) | Matrix Pipeline (manager role) | Other Apps |
+|---|:---:|:---:|:---:|
 | Exchange email read (own mailbox) | ✓ | — | — |
-| Attach email to opportunity | ✓ | — | — |
+| Attach email to `Activity` / `TransactionManagement` row | ✓ | — | — |
 | View attached emails (team) | ✓ (own) | ✓ (team) | — |
-| Outlook calendar sync (own) | ✓ | — | — |
+| Outlook calendar sync (own) → `ShowingAppointment` / `Activity` | ✓ | — | — |
 | Team calendar view | — | ✓ | — |
 | Free/busy conflict detection | ✓ | ✓ | — |
 

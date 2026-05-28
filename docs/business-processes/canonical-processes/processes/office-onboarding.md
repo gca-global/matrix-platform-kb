@@ -9,8 +9,9 @@ and `OUID` (the federation-level Organization Unique Identifier).
 >
 > - Source mapping (Dash / Qobrix / SIR -> RESO `Office`):
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/office.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/office.md)
-> - Sharp-SIR flavour: no project-flavour SOP yet — promote one
->   under `docs/business-processes/` when Sharp-SIR codifies its
+> - Sharp-SIR flavour: no project-flavour SOP yet — the CRM
+>   materialisation (if any) belongs in
+>   `product-specs/matrix-pipeline/` when Sharp-SIR codifies its
 >   office onboarding (franchise sponsorship, trust-account opening);
 >   meanwhile the canonical baseline IS the SOP.
 > - One-stop integrated view:

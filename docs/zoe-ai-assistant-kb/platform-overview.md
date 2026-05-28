@@ -103,7 +103,7 @@ Your first week is about getting comfortable with the platform. Here is a day-by
 ### Day 2 — Learn Your Primary App
 - **Brokers / Sales staff**: Open **Client Connect** and register a test client (or your first real one). Then open **Meeting Hub** and record a test appointment.
 - **Call Center / MLS Staff**: Open **Client Connect** → Client Verification. Familiarize yourself with the verification queue, MLS duplicate checking, and the approve/reject/return workflow.
-- **Sales Managers**: Explore the **Agency Portal** stats dashboard. Then open **Matrix Pipeline** to see your team's deal Kanban. Check **Opportunity Reviews** for deals needing your attention.
+- **Sales Managers**: Explore the **Agency Portal** stats dashboard. Then open **Matrix Pipeline** to see your team's canonical 5-stage funnel projection (Qualification → Matching → Viewing → Contracting → Payment). Check **Opportunity Reviews** for deals needing your attention.
 - **HR staff**: Open **HRMS** → Personnel section. Browse the employee directory, org structure, and leave management.
 - **Finance staff**: Open **Matrix FM** → Monthly Reporting. Select your entity and explore the financial grid layout.
 - **IT staff**: Open **ITSM** → SD Queue. Explore ticket workflows, asset management, and the classification tree.

@@ -23,13 +23,13 @@ email decisions, and meeting notes must be captured in the repo to be actionable
 **Why it fails**: Agents cannot access external context. Decisions that live
 outside the repo are invisible and will be contradicted or duplicated.
 
-**Enforcement**: Doc-gardening reviews (see [kb-methodology.md](platform/kb-methodology.md)).
+**Enforcement**: Doc-gardening reviews (see [kb-methodology.md](kb-methodology.md)).
 The `validate-kb.sh` script flags docs that haven't been updated in 90+ days.
 
 ### P2. Progressive disclosure — start small, drill down
 
 **Rule**: Agents start with `AGENTS.md` (the map), then navigate to
-`INDEX.md` → chapter index → specific doc. Never front-load an agent with the
+`docs/index.md` → chapter index → specific doc. Never front-load an agent with the
 entire KB.
 
 **Why it fails**: Context is a scarce resource. A giant instruction dump crowds
@@ -47,7 +47,7 @@ app. Check `docs/data-models/` before writing code that touches shared data.
 **Why it fails**: Inconsistent field names between apps break joins, reports,
 and syndication. One field, one canonical name everywhere.
 
-**Enforcement**: Data contracts ([data-contracts.md](data-models/data-contracts.md)).
+**Enforcement**: Data contracts ([data-contracts.md](../data-models/data-contracts.md)).
 CDL schema diff on migration PRs (planned).
 
 ### P4. Business processes define behavior
@@ -98,7 +98,7 @@ CDL PostgREST. Do not juggle "Supabase native tokens" or
 **Why it works**: CDL is configured with Supabase **Third-Party Auth**
 pointing at the SSO JWKS URL + issuer. PostgREST verifies the SSO token
 directly. This supersedes the earlier two-token dance. See
-[ADR-012](architecture/decisions/ADR-012.md).
+[ADR-012](../architecture/decisions/ADR-012.md).
 
 **Enforcement**: `buildCdlClient()` in `dataLayerClient.ts` forwards the
 SSO access token. Do not re-introduce native-token plumbing.
@@ -184,8 +184,8 @@ gates admin UI behind `isAdmin` (which excludes `global`).
 | `org_admin` | All records + admin | **Yes** |
 | `system_admin` | Cross-tenant + admin | **Yes** |
 
-**Ref**: [app-template.md § Pitfall 5](platform/app-template.md#5-dont-conflate-scope-with-admin-privileges),
-[security-model.md](platform/security-model.md)
+**Ref**: [app-template.md § Pitfall 5](app-template.md#5-dont-conflate-scope-with-admin-privileges),
+[security-model.md](security-model.md)
 
 ### S2. Use `get_my_tenant_id()` on CDL, not `get_current_tenant_id()`
 
@@ -197,7 +197,7 @@ Legacy apps and some token types lack this claim → tenant isolation breaks.
 
 **Enforcement**: RLS migration template.
 
-**Ref**: [app-template.md § Pitfall 6](platform/app-template.md#6-use-get_my_tenant_id-not-get_current_tenant_id-on-cdl)
+**Ref**: [app-template.md § Pitfall 6](app-template.md#6-use-get_my_tenant_id-not-get_current_tenant_id-on-cdl)
 
 ---
 
@@ -238,8 +238,8 @@ the next Lovable publish. Prompts create a versioned audit trail.
 **Enforcement**: Prompts stored in project prompt archives
 (e.g., `matrix-testing-suite/hrms-uat/prompts/`).
 
-**Ref**: [operations.md § Lovable App Maintenance](platform/operations.md),
-[app-template.md § Lovable-Managed Apps](platform/app-template.md)
+**Ref**: [operations.md § Lovable App Maintenance](operations.md),
+[app-template.md § Lovable-Managed Apps](app-template.md)
 
 ### L2. Direct edits are reserved for infrastructure
 
@@ -290,7 +290,7 @@ assume they exist.
 `matrix-platform-foundation/supabase/cdl/`. User display name
 lookups go through `resolve-users` (SSO EF) + `useUserDisplay` React
 hook, never SQL joins. See ADR-012 and
-[cdl-schema.md](data-models/cdl-schema.md).
+[cdl-schema.md](../data-models/cdl-schema.md).
 
 ### P9. Ingestion always flows: source → staging → merge → published
 
@@ -328,9 +328,9 @@ ingestion is on the roadmap; when added it should write to
 
 | For | See |
 |-----|-----|
-| Quality grades by domain | [QUALITY_SCORE.md](QUALITY_SCORE.md) |
-| Technical debt tracker | [exec-plans/tech-debt-tracker.md](exec-plans/tech-debt-tracker.md) |
-| Security model details | [platform/security-model.md](platform/security-model.md) |
-| App template & pitfalls | [platform/app-template.md](platform/app-template.md) |
-| Core beliefs (business) | [vision/core-beliefs.md](vision/core-beliefs.md) |
-| KB methodology | [platform/kb-methodology.md](platform/kb-methodology.md) |
+| Quality grades by domain | [../exec-plans/quality-score.md](../exec-plans/quality-score.md) |
+| Technical debt tracker | [../exec-plans/tech-debt-tracker.md](../exec-plans/tech-debt-tracker.md) |
+| Security model details | [security-model.md](security-model.md) |
+| App template & pitfalls | [app-template.md](app-template.md) |
+| Core beliefs (business) | [../vision/core-beliefs.md](../vision/core-beliefs.md) |
+| KB methodology | [kb-methodology.md](kb-methodology.md) |

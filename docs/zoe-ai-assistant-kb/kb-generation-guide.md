@@ -269,7 +269,7 @@ Before finalizing, verify:
 After creating the article:
 
 1. **Update the index:** Add the new article to `docs/zoe-ai-assistant-kb/index.md`.
-2. **Update the main index:** Add a row to the Chapter 7 table in `docs/INDEX.md`.
+2. **Update the main index:** Add a row to the Chapter 7 table in `docs/index.md`.
 3. **Update AGENTS.md:** Add the article path to the "For Zoe AI Assistant" section.
 4. **Update platform-overview.md:** Add the app to the "App-Specific Support Articles" table.
 

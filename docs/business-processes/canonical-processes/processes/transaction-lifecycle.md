@@ -10,11 +10,11 @@ universal change log).
 >
 > - Source mapping (close-edge fields land on `Property` -> RESO):
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md)
-> - Sharp-SIR flavour:
->   [`../../sales-pipeline.md`](../../sales-pipeline.md) (Deal Signing
->   / Payment / Closed stages) and
->   [`../../listing-pipeline.md`](../../listing-pipeline.md)
->   (SOLD / AGENT COMMISSION / CLOSED stages).
+> - Sharp-SIR flavour: materialised by the CRM Offer-to-Closing
+>   process
+>   ([`product-specs/matrix-pipeline/wiki/processes.md#offer-to-closing`](../../../product-specs/matrix-pipeline/wiki/processes.md#offer-to-closing))
+>   + Commission Engine
+>   ([`product-specs/matrix-pipeline/wiki/commission-engine.md`](../../../product-specs/matrix-pipeline/wiki/commission-engine.md)).
 > - One-stop integrated view:
 >   [`../../../integration/wiki/agent-docs/by_resource/property.md`](../../../integration/wiki/agent-docs/by_resource/property.md)
 

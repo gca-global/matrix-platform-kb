@@ -209,5 +209,6 @@ CDL (`ofzcokolkeejgqfjaszq`) is the system-of-record for canonical RESO resource
 - **Reads**: filtered listings via `cdlClient.functions.invoke('listings-search', …)`; anon snapshot via `.from('properties_published').select(...)` (RLS-enabled view); PII tables (`contacts`, `showings`) only through CDL EFs with scope check.
 - **Writes**: through dedicated CDL EFs (`verify_jwt=false`, EF verifies SSO JWT and checks scope). CRM-specific write-EFs are added per resource as needed; a generic `cdl-write` EF is not yet built in the platform template.
 - **CDL access gate**: any CDL table with RLS disabled MUST be accessed only via CDL EFs (see [wiki/architecture.md#compliance-gates](architecture.md#compliance-gates) CDL access gate).
+- **Pipeline-specific CRUD recipes** (the concrete Lovable-facing instantiation of this pattern): [`../cdl-crud-contract.md`](../cdl-crud-contract.md) — 5 recipe shapes (READ-A/B/C, WRITE-A/B), 6 commandments, per-resource quick reference. See also the live reachability matrix in the iteration copy at `mem://infrastructure/cdl-coverage.md`.
 
 Source: raw/context-v2.md §5a.3, §5a.4.

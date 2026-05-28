@@ -82,7 +82,7 @@ These are the principles the audit exists to restore. They are the
 > **Harness-engineering link**: these invariants play the role of the
 > [*golden principles*][harness] that recurring cleanup agents enforce.
 > After each merged stage, promote the new invariant into
-> [`GOLDEN_PRINCIPLES.md`](../GOLDEN_PRINCIPLES.md) so it defends itself
+> [`golden-principles.md`](golden-principles.md) so it defends itself
 > mechanically forever after.
 
 ---
@@ -293,7 +293,7 @@ defend with a single lint or migration trigger.
 ## Constraints — what the audit never does
 
 - Do **not** refactor authentication / authorization unless explicitly in scope.
-  (SSO and CDL RLS are governed by [GOLDEN_PRINCIPLES.md §T, §S, §P8](../GOLDEN_PRINCIPLES.md).)
+  (SSO and CDL RLS are governed by [golden-principles.md §T, §S, §P8](golden-principles.md).)
 - Do **not** change security posture (RLS policies, CORS origins, auth
   policies, service-role distribution) without flagging it as a *separate*
   ADR-worthy decision.
@@ -317,14 +317,14 @@ defend with a single lint or migration trigger.
 
 After each merged stage:
 
-1. **Update [`GOLDEN_PRINCIPLES.md`](../GOLDEN_PRINCIPLES.md)** with the
+1. **Update [`golden-principles.md`](golden-principles.md)** with the
    new invariant in the `Rule / Why it fails / Enforcement` format.
 2. **Install the enforcement** that makes regression mechanically
    detectable (custom lint, migration trigger, CI query, schema-diff
    check). Custom lint error messages should *inject remediation
    instructions* so the next agent knows how to fix the violation —
    per harness-engineering practice.
-3. **Update [`QUALITY_SCORE.md`](../QUALITY_SCORE.md)** for the affected
+3. **Update [`../exec-plans/quality-score.md`](../exec-plans/quality-score.md)** for the affected
    domain (A–D grade).
 4. **Update or create the app's entry** in
    [`docs/exec-plans/tech-debt-tracker.md`](../exec-plans/tech-debt-tracker.md)
@@ -340,7 +340,7 @@ After each merged stage:
 
 When this playbook is invoked, the agent:
 
-1. **Reads** this file, [`GOLDEN_PRINCIPLES.md`](../GOLDEN_PRINCIPLES.md),
+1. **Reads** this file, [`golden-principles.md`](golden-principles.md),
    the relevant app's entry in
    [`app-catalog.md`](app-catalog.md), and any ADRs linked from there.
 2. **Gathers evidence** per the protocol above and pastes receipts.
@@ -406,8 +406,8 @@ stage, perform the playbook's *Post-merge hygiene* checklist.
 
 | For | See |
 |-----|-----|
-| Engineering invariants this audit defends | [GOLDEN_PRINCIPLES.md](../GOLDEN_PRINCIPLES.md) |
-| Quality grades by domain (before / after) | [QUALITY_SCORE.md](../QUALITY_SCORE.md) |
+| Engineering invariants this audit defends | [golden-principles.md](golden-principles.md) |
+| Quality grades by domain (before / after) | [../exec-plans/quality-score.md](../exec-plans/quality-score.md) |
 | Execution-plan format | [exec-plans/index.md](../exec-plans/index.md) |
 | Known debt tracker | [exec-plans/tech-debt-tracker.md](../exec-plans/tech-debt-tracker.md) |
 | App inventory + ownership | [app-catalog.md](app-catalog.md) |

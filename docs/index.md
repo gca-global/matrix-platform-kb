@@ -5,10 +5,10 @@
 >
 > **For Lovable**: Before building any app, read `platform/app-template.md` first.
 >
-> **For RESO-aligned navigation**: read [`INTEGRATION.md`](INTEGRATION.md) for the layered stack
+> **For RESO-aligned navigation**: read [`integration/overview.md`](integration/overview.md) for the layered stack
 > (Layer 1 RESO data model → Layer 2 source mappings → Layer 3 canonical state machines →
-> Layer 4 Sharp-SIR flavour → Layer 5 cross-cutting per-resource views). Then jump into the
-> chapter you need.
+> Layer 5 cross-cutting per-resource views). Project-flavour CRM behaviour lives in
+> [`product-specs/matrix-pipeline/`](product-specs/matrix-pipeline/INDEX.md) — not in this layer cake.
 
 ## Chapter 0: Platform Overview
 
@@ -45,8 +45,8 @@ Engineering invariants, quality tracking, execution plans, and validation — st
 
 | Document | Description |
 |----------|-------------|
-| [GOLDEN_PRINCIPLES.md](GOLDEN_PRINCIPLES.md) | Engineering invariants and taste rules — token, scope, client, and Lovable maintenance rules |
-| [QUALITY_SCORE.md](QUALITY_SCORE.md) | Domain quality grades (A-D) across docs, tests, reliability, architecture |
+| [platform/golden-principles.md](platform/golden-principles.md) | Engineering invariants and taste rules — token, scope, client, and Lovable maintenance rules |
+| [exec-plans/quality-score.md](exec-plans/quality-score.md) | Domain quality grades (A-D) across docs, tests, reliability, architecture |
 | [exec-plans/index.md](exec-plans/index.md) | Execution plan format, lifecycle, and usage guide |
 | [exec-plans/tech-debt-tracker.md](exec-plans/tech-debt-tracker.md) | Known technical debt by domain with severity and ownership |
 
@@ -56,7 +56,7 @@ Three-platform architecture: Supabase (CDL), Databricks (DWH), Lovable (app buil
 
 | Document | Description |
 |----------|-------------|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Technology map, three-platform architecture, dual-Supabase, data flow |
+| [architecture/overview.md](architecture/overview.md) | Technology map, three-platform architecture, dual-Supabase, data flow |
 | [architecture/intelligence-layer.md](architecture/intelligence-layer.md) | **Phase-2 roadmap** — semantic + algebraic search, recsys, MCP server, syndication channels. Phase-1 → Phase-2 contract (pgvector + embeddings + `marketing_metadata`). |
 | [architecture/data-distribution-and-stewardship.md](architecture/data-distribution-and-stewardship.md) | **Phase-2.5 roadmap** — source-of-record & listing lifecycle, channel distribution rules, multi-source merge precedence, field-level overrides (data stewardship). Four source kinds: `internal` (matrix-internal — target state), `legacy-internal` (Qobrix CY — sunsetting), `brand-network` (Anywhere Dash — bidirectional SIR-affiliate primary; covers HU + KZ inbound today), `external` (developers, partner brokerages). Phase-1 → Phase-2.5 contract (`mls_sources.kind` + `is_sunsetting` + `sunset_at` + `lifecycle_state` + `property_lifecycle_events` + `locked_fields` + `property_field_overrides` + `cdl_lock_field` RPCs). |
 
@@ -83,39 +83,34 @@ Dash/Anywhere.com as the practical core data model. RESO DD 2.0 as interop stand
 
 ## Chapter 4: Business Processes
 
-Current operational workflows, pipelines, qualification rules, and checklists.
+Canonical, RESO-aligned business process state machines. Project-flavour CRM behaviour lives in [`product-specs/matrix-pipeline/`](product-specs/matrix-pipeline/INDEX.md).
 
 | Document | Description |
 |----------|-------------|
 | [business-processes/canonical-processes/USAGE.md](business-processes/canonical-processes/USAGE.md) | **Canonical baseline (vendor-neutral, RESO-aligned)** — 10 process docs (Listing, Showing, OpenHouse, Lead-Contact, Transaction, Member/Office/Team onboarding, Caravan, Media) with mermaid state diagrams, transition tables, and machine-validated RESO citations (709 citations) |
-| [listing-pipeline.md](business-processes/listing-pipeline.md) | Seller-side pipeline: 8 stages from Prospect to Closed (Sharp-SIR flavour, maps onto canonical `Property.StandardStatus`) |
-| [sales-pipeline.md](business-processes/sales-pipeline.md) | Buyer-side pipeline: 8 stages from Qualification to Closed (Sharp-SIR flavour, maps onto canonical `Contacts` + `TransactionManagement`) |
-| [lead-qualification.md](business-processes/lead-qualification.md) | MQL → SQL path with BANT criteria (Sharp-SIR flavour, maps onto canonical `Contacts.ContactType`) |
-| [follow-up-vs-active-sales.md](business-processes/follow-up-vs-active-sales.md) | Nurturing vs active deal boundary & triggers (Sharp-SIR flavour, maps onto canonical `Contacts.ContactType` + `Showing`) |
-| [listing-checklist.md](business-processes/listing-checklist.md) | Operational checklists: broker, marketing, finance (Sharp-SIR flavour) |
 
 ## Chapter 4.5: Integration views (Layer 5 cross-cutting)
 
 Per-resource one-stop pages joining Layer 1 (canonical RESO), Layer 2 (source mappings),
-Layer 3 (canonical state machines), and Layer 4 (Sharp-SIR flavour). Generated, deterministic,
-zero-hand-edits under `wiki/agent-docs/`.
+and Layer 3 (canonical state machines). Generated, deterministic, zero-hand-edits under `wiki/agent-docs/`.
 
 | Document | Description |
 |----------|-------------|
-| [INTEGRATION.md](INTEGRATION.md) | **Master layer-cake** — how the four substantive layers compose, decision tables for picking the right layer, harness-engineering invariants |
+| [integration/overview.md](integration/overview.md) | **Master layer-cake** — how the three substantive layers compose, decision tables for picking the right layer, harness-engineering invariants |
 | [integration/USAGE.md](integration/USAGE.md) | Task-oriented entry points: "show me everything about resource X", re-emit instructions |
-| [integration/wiki/agent-docs/_index.md](integration/wiki/agent-docs/_index.md) | Generated catalogue of 26 per-resource integrated views with layer-coverage matrix |
+| [integration/wiki/agent-docs/_index.md](integration/wiki/agent-docs/_index.md) | Generated catalogue of 36 per-resource integrated views with layer-coverage matrix |
 
 ## Chapter 5: Product Specifications
 
-UI/UX specs for dashboards, forms, and Kanban views that the system must implement.
+Per-app product specs. The `matrix-pipeline/` subtree is the single source of truth for the CRM (canonical RESO DD 2.0 strict + two documented escape hatches: `Referral` entity + Commission Engine ERP-lite). Other rows describe distinct apps.
 
 | Document | Description |
 |----------|-------------|
-| [product-specs/matrix-pipeline/INDEX.md](product-specs/matrix-pipeline/INDEX.md) | **`matrix-pipeline` CRM LLM Wiki** — compact Karpathy-pattern wiki for the Sharp SIR luxury sales CRM. 8 wiki pages (overview / architecture / entities / processes / requirements / ai / integration / commission-engine) + `phases.md` 8-week atomic build plan (Lovable + Cursor swimlanes) + `raw/context-v2.md` (immutable BRD). Strictly canonical RESO DD 2.0 with two documented escape-hatch deviations: `Referral` entity + CRM-internal Commission Engine. |
-| [sir-listing-forms.md](product-specs/sir-listing-forms.md) | SIR/Anywhere.com form field specs (reference for Sharp Matrix forms) |
-| [broker-dashboard.md](product-specs/broker-dashboard.md) | AI-powered broker dashboard with auto-prioritization |
-| [manager-kanban.md](product-specs/manager-kanban.md) | Manager Kanban & pipeline views |
+| [product-specs/matrix-pipeline/INDEX.md](product-specs/matrix-pipeline/INDEX.md) | **`matrix-pipeline` CRM LLM Wiki** — compact Karpathy-pattern wiki for the Sharp SIR luxury sales CRM. 8 wiki pages (overview / architecture / entities / processes / requirements / ai / integration / commission-engine) + `phases.md` 8-week atomic build plan (Lovable + Cursor swimlanes) + `raw/context-v2.md` (immutable BRD) + `cdl-crud-contract.md`. Strictly canonical RESO DD 2.0 with two documented escape-hatch deviations: `Referral` entity + CRM-internal Commission Engine. **Single source of truth for CRM**. |
+| [product-specs/sir-listing-forms.md](product-specs/sir-listing-forms.md) | SIR/Anywhere.com form field specs (reference for Listing Module field mapping) |
+| [product-specs/client-portal.md](product-specs/client-portal.md) | Matrix Portal — buyer/seller self-service spec |
+| [product-specs/marketing-platform.md](product-specs/marketing-platform.md) | Matrix Marketing — campaign management spec |
+| [product-specs/personalization.md](product-specs/personalization.md) | Personalization & recommendation engine (Phase-4 cross-app feature) |
 
 ## Chapter 6: References
 
@@ -148,6 +143,7 @@ RAG-optimized support documentation for the Zoe AI assistant — 1st line suppor
 | [zoe-ai-assistant-kb/platform-sso-auth.md](zoe-ai-assistant-kb/platform-sso-auth.md) | SSO & Auth — login, roles, permissions, scope, SSO Console, user management |
 | [zoe-ai-assistant-kb/second-line-tech-reference.md](zoe-ai-assistant-kb/second-line-tech-reference.md) | 2nd Line Support — technology overview, architecture, links to deep-dive docs |
 | [zoe-ai-assistant-kb/kb-generation-guide.md](zoe-ai-assistant-kb/kb-generation-guide.md) | How to generate a support KB article for any new Matrix app |
+| [zoe-ai-assistant-kb/ragchat-webhook-spec.md](zoe-ai-assistant-kb/ragchat-webhook-spec.md) | RAG-chat webhook spec (Zoe AI ingestion contract) |
 
 ---
 

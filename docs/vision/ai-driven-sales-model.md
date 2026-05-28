@@ -20,8 +20,8 @@ The model unifies traditional sales processes with AI technologies for maximum b
 
 | View | User | What They See |
 |------|------|---------------|
-| **Kanban Board** (for managers) | Sales Manager | Seller-side pipeline (listings), Buyer-side pipeline (buyers), matching control, revenue forecast, broker performance |
-| **AI Brokerage Copilot** (for brokers) | Broker | Client card with Next Best Action, matching suggestions, stage-aware recommendations, automated routine tasks |
+| **matrix-pipeline CRM** (for managers) | Sales Manager | Canonical 5-stage funnel projection (Qualification → Matching → Viewing → Contracting → Payment) over `(Contacts × SavedSearch)`, Listing Module read-side, Commission Engine ERP-lite forecast, broker performance — see [`product-specs/matrix-pipeline/wiki/overview.md#pipeline`](../product-specs/matrix-pipeline/wiki/overview.md#pipeline) |
+| **AI Brokerage Copilot** (for brokers) | Broker | `Contacts` card with Next Best Action, FR-AI-MX matching suggestions, stage-aware FR-AI-SC showing coach, FR-AI-DM deal margin coach — see [`product-specs/matrix-pipeline/wiki/ai.md`](../product-specs/matrix-pipeline/wiki/ai.md) |
 
 ---
 
@@ -39,10 +39,10 @@ Long-term leads (timeline >12 months) do NOT pollute the active sales forecast. 
 
 ### Key Metrics
 - Revenue (actual vs plan)
-- Number of Closed Won deals
-- Average commission check
-- Sales cycle length (days)
-- Conversion: MQL → Closed Won
+- Number of `TransactionManagement` rows in `Closed` status (canonical RESO terminal)
+- Average commission check (forecast GCI per FR-FNL-12, see [`matrix-pipeline/wiki/commission-engine.md`](../product-specs/matrix-pipeline/wiki/commission-engine.md))
+- Sales cycle length (days, Qualification → Payment)
+- Funnel conversion: Qualification → Payment (full canonical 5-stage funnel)
 
 ---
 
@@ -50,18 +50,19 @@ Long-term leads (timeline >12 months) do NOT pollute the active sales forecast. 
 
 Listings = the seller-side process. This element forms the inventory for the buyer-side.
 
-### Seller-Side Kanban Stages
+### Seller-Side: canonical `Property.StandardStatus` lifecycle
 
-| Stage | Tasks | Artifacts |
-|-------|-------|-----------|
-| 1. PROSPECT | Find potential sellers, first contact, present services | Contact info, initial property assessment |
-| 2. CONTACTED | Detailed market consultation, demonstrate expertise and case studies | Service presentation, comparative market analysis |
-| 3. AGREEMENT SIGNED | Prepare listing, professional photoshoot, legal review | Signed agreement, listing with photos and description |
-| 4. ACTIVE LISTING | Organize showings, collect buyer feedback, adjust strategy | Showing reports, buyer feedback, change history |
-| 5. SOLD | Negotiate final price, coordinate with lawyers, close deal | Signed purchase contract, payment confirmation |
-| 6. AGENT COMMISSION PAYMENT | Complete work documentation, confirm payment receipt, calculate and transfer commission | Completed work act, commission payment confirmation |
-| 7. CLOSED WON | Final deal closure, archive documents, record success | Full document package, final report |
-| 8. LISTING WITHDRAWN | Remove property from sale per seller initiative, document reason | Reason (changed mind, sold independently, unsatisfied with service), reactivation possibility |
+Listing-side workflow is the canonical RESO listing lifecycle (see [`canonical-processes/processes/listing-lifecycle.md`](../business-processes/canonical-processes/processes/listing-lifecycle.md)). Stages are values of canonical `Property.StandardStatus`:
+
+| `StandardStatus` | Tasks | Canonical Artifacts |
+|---|---|---|
+| `Coming Soon` | Find potential sellers, first contact, present services, professional photoshoot, legal review | `Contacts` row, signed listing agreement, `Property` + `Media` rows |
+| `Active` | Organize showings, collect buyer feedback, adjust strategy | `Showing` events, `Activity` notes, `HistoryTransactional` audit |
+| `Active Under Contract` / `Pending` | Negotiate final price, coordinate with lawyers | `TransactionManagement` row with `OfferAmount` |
+| `Closed` | Final deal closure, commission attribution, archive | Closed `TransactionManagement`, Commission Engine `BrokerCompensation` row, full document package |
+| `Withdrawn` | Remove property from sale per seller initiative, document reason | `HistoryTransactional` row with reason; reactivation via canonical re-listing |
+
+Sharp-SIR-specific stage names (PROSPECT / CONTACTED / AGREEMENT SIGNED / SOLD / AGENT COMMISSION PAYMENT / CLOSED WON / LISTING WITHDRAWN) used in older docs are not part of the canonical model. The matrix-pipeline product spec materialises every stage transition as a `Property.StandardStatus` change emitting a `HistoryTransactional` audit row — see [`canonical-processes/processes/listing-lifecycle.md`](../business-processes/canonical-processes/processes/listing-lifecycle.md).
 
 ### Bi-Directional Matching
 
@@ -196,44 +197,45 @@ Name: Maria Ivanova | Property: Villa, Paphos | Price: €850K | Mandate: Exclus
 NEXT BEST ACTION: Organize showing and prepare professional presentation
 Sale probability in 90 days: 40% → 60%
 
-Pipeline: Prospect → Contacted → Agreement Signed (in progress) → Active Listing → Sold
+Listing pipeline: `Property.StandardStatus`: Coming Soon → Active (in progress) → Active Under Contract → Closed
 ```
 
 ### Example: Working with a Buyer
 
 ```
 Name: Ivan Petrov | Budget: €500K | Location: Limassol | Timeline: 3-6 months
-NEXT BEST ACTION: Schedule showing, from identified suitable properties
+NEXT BEST ACTION: Schedule showing, from identified suitable properties (FR-AI-MX matches)
 Deal probability: 15% → 35%
 
-Pipeline: Contact Verified → Needs (in process) → Showings → Decision → Closing
+Funnel: Qualification (Contacts.ContactType = Prospect) → Matching (in process) → Viewing → Contracting → Payment
 ```
 
 ### Next Best Actions by Stage
 
-#### Seller-Side (Listings)
-| Stage | Recommended Actions | Impact |
-|-------|-------------------|--------|
-| PROSPECT | Search potential sellers, first contact, present services | +15-20% |
-| CONTACTED | Detailed consultation, demonstrate expertise | +20-25% |
-| AGREEMENT SIGNED | Prepare listing, professional photoshoot, legal review | +25-30% |
-| ACTIVE LISTING | Organize showings, collect feedback, adjust strategy, match with buyers | +25-40% |
-| SOLD | Negotiate price, coordinate lawyers, close deal | +40-50% |
-| AGENT COMMISSION | Complete documentation, confirm payment | +40-50% |
-| CLOSED WON | Archive documents, final report, request review | +40-50% |
-| LISTING WITHDRAWN | Document reason, analyze failure, plan reactivation | +10-20% |
+#### Seller-Side (canonical `Property.StandardStatus`)
 
-#### Buyer-Side (Purchases)
+See [`canonical-processes/processes/listing-lifecycle.md`](../business-processes/canonical-processes/processes/listing-lifecycle.md) for the full state machine; CRM materialisation in [`product-specs/matrix-pipeline/wiki/integration.md#listing-module`](../product-specs/matrix-pipeline/wiki/integration.md#listing-module).
+
+| `StandardStatus` | Recommended Actions | Impact |
+|---|---|---|
+| `Coming Soon` | Find potential sellers, sign listing agreement, photoshoot, legal review | +15-30% |
+| `Active` | Organize `Showing` events, collect feedback, FR-AI-MX matching, adjust strategy | +25-40% |
+| `Active Under Contract` / `Pending` | Negotiate price, finalise `TransactionManagement.OfferAmount`, coordinate lawyers | +40-50% |
+| `Closed` | Commission attribution (Commission Engine), archive documents, request review | +45-50% |
+| `Withdrawn` | Document reason in `HistoryTransactional`, analyse, plan reactivation | +10-20% |
+
+#### Buyer-Side (canonical 5-stage funnel projection)
+
+See [`product-specs/matrix-pipeline/wiki/overview.md#pipeline`](../product-specs/matrix-pipeline/wiki/overview.md#pipeline) (FR-FNL-01..06) for the canonical funnel; cards are `(Contacts × SavedSearch)` pairs.
+
 | Stage | Recommended Actions | Impact |
-|-------|-------------------|--------|
-| QUALIFICATION | Create opportunity from lead, initial assessment | +10-20% |
-| DEMAND RESEARCH | Discovery call, budget analysis, auto property selection | +20-30% |
-| SOLUTION/VIEWING | Create Curated List, plan showings, generate PDF brochure | +15-30% |
-| DECISION MAKING | Discuss final options, address objections, involve team | +20-35% |
-| DEAL SIGNING | Prepare contract, coordinate legal services | +30-40% |
-| PAYMENT PROCESS | Control financial transactions, final price corrections | +25-45% |
-| CLOSED WON | Fix final price, document successful closing | +45-50% |
-| CLOSED LOST | Analyze loss reason, document competitor, plan re-contact | +10-20% |
+|---|---|---|
+| **Qualification** | FR-AI-LQ inbound enrichment, draft `Contacts` + `SavedSearch.SearchQuery`, broker confirms | +10-30% |
+| **Matching** | FR-AI-MX matches `Property` → `SavedSearch`, generate Curated List + PDF brochure, share via `ContactListings` | +15-30% |
+| **Viewing** | Schedule `ShowingAppointment`, FR-AI-SC showing coach, capture `ContactListingNotes` per stop | +20-35% |
+| **Contracting** | Open `TransactionManagement` row, negotiate `OfferAmount`, FR-AI-DM deal margin coach, coordinate legal services | +30-45% |
+| **Payment** | Coordinate financial transactions, finalise `TransactionManagement.status = Closed`, archive `Document`s | +45-50% |
+| **Closed Lost** | Set `TransactionManagement.status = Withdrawn` / `Rejected`, emit `HistoryTransactional`, analyse loss, plan re-engagement | +10-20% |
 
 ---
 

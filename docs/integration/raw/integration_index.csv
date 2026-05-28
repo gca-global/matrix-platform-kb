@@ -1,27 +1,37 @@
-resource,layers,reso_field_count,sm_row_count,cp_process_count,flavour_link_count
-Caravan,"L1, L3, L4",33,0,1,1
-CaravanStop,"L1, L3, L4",25,0,1,1
-ContactListingNotes,"L1, L3",10,0,1,0
-ContactListings,"L1, L3",22,0,1,0
-Contacts,"L1, L2, L3, L4",91,12,1,3
-HistoryTransactional,"L1, L3, L4",23,0,2,2
-LockOrBox,"L1, L3, L4",44,0,1,1
-Media,"L1, L2, L3, L4",41,6,1,1
-Member,"L1, L2, L3",87,11,1,0
-MemberAssociation,"L1, L3",31,0,1,0
-MemberStateLicense,"L1, L3",10,0,1,0
-OUID,"L1, L3",46,0,1,0
-Office,"L1, L2, L3",73,2,1,0
-OfficeAssociation,"L1, L3",23,0,1,0
-OfficeCorporateLicense,"L1, L3",10,0,1,0
-OpenHouse,"L1, L3, L4",33,0,2,1
-Property,"L1, L2, L3, L4",652,58,4,3
-Prospecting,"L1, L3",31,0,1,0
-SavedSearch,"L1, L3",27,0,1,0
-Showing,"L1, L3, L4",44,0,1,2
-ShowingAppointment,"L1, L3, L4",12,0,1,1
-ShowingAvailability,"L1, L3, L4",12,0,1,1
-ShowingRequest,"L1, L3, L4",17,0,1,1
-TeamMembers,"L1, L3",21,0,1,0
-Teams,"L1, L2, L3",45,7,1,0
-TransactionManagement,"L1, L3, L4",4,0,1,2
+resource,layers,reso_field_count,sm_row_count,cp_process_count
+Caravan,"L1, L3",33,0,1
+CaravanStop,"L1, L3",25,0,1
+ContactListingNotes,"L1, L3",10,0,2
+ContactListings,"L1, L3",22,0,2
+Contacts,"L1, L2, L3",91,12,2
+EntityEvent,"L1, L3",4,0,1
+Field,"L1, L3",4,0,2
+HistoryTransactional,"L1, L3",23,0,4
+InternetTracking,"L1, L3",59,0,1
+InternetTrackingSummary,"L1, L3",27,0,1
+LockOrBox,"L1, L3",44,0,1
+Lookup,"L1, L3",6,0,1
+Media,"L1, L2, L3",41,6,1
+Member,"L1, L2, L3",87,11,2
+MemberAssociation,"L1, L3",31,0,1
+MemberStateLicense,"L1, L3",10,0,1
+OUID,"L1, L3",46,0,1
+Office,"L1, L2, L3",73,2,2
+OfficeAssociation,"L1, L3",23,0,1
+OfficeCorporateLicense,"L1, L3",10,0,1
+OpenHouse,"L1, L3",33,0,2
+Property,"L1, L2, L3",652,58,5
+PropertyGreenVerification,"L1, L3",15,0,1
+PropertyPowerProduction,"L1, L3",12,0,1
+PropertyPowerStorage,"L1, L3",6,0,1
+PropertyRooms,"L1, L3",19,0,1
+PropertyUnitTypes,"L1, L3",17,0,1
+Prospecting,"L1, L3",31,0,2
+SavedSearch,"L1, L3",27,0,2
+Showing,"L1, L3",44,0,1
+ShowingAppointment,"L1, L3",12,0,1
+ShowingAvailability,"L1, L3",12,0,1
+ShowingRequest,"L1, L3",17,0,1
+TeamMembers,"L1, L3",21,0,1
+Teams,"L1, L2, L3",45,7,1
+TransactionManagement,"L1, L3",4,0,1

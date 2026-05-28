@@ -1,8 +1,8 @@
 # System Architecture
 
 > Technology map for the Sharp Matrix Platform.
-> For app-building patterns, see [platform/app-template.md](platform/app-template.md).
-> For the full ecosystem diagram, see [platform/ecosystem-architecture.md](platform/ecosystem-architecture.md).
+> For app-building patterns, see [../platform/app-template.md](../platform/app-template.md).
+> For the full ecosystem diagram, see [../platform/ecosystem-architecture.md](../platform/ecosystem-architecture.md).
 
 ## Three-Platform Architecture
 
@@ -52,7 +52,7 @@ Sharp Matrix is built on three platforms, each chosen for what it does best:
 | **Domain-Specific** | Only uses CDL for auth/permissions | Own domain tables (e.g., `employees`, `vacations`, `financial_entries`, `service_desk_tickets`) | SSO Console | HRMS, Matrix FM, ITSM, Notification Mgmt |
 
 Both types use the same template: dual-Supabase, SSO auth, 5-level scope, CRUD permissions, shadcn/ui.
-See [app-template.md](platform/app-template.md) for full details.
+See [app-template.md](../platform/app-template.md) for full details.
 
 ## Supabase Topology (ADR-012 / ADR-013)
 
@@ -114,7 +114,7 @@ Ingress Channels                       Egress Channels
       └───────────────────────────────────────────────┘
 ```
 
-Qobrix is decommissioned. Dash flips from pull to push. Managed ingress/egress channels replace ad-hoc integrations. See [mls-datamart.md](platform/mls-datamart.md) for full channel taxonomy.
+Qobrix is decommissioned. Dash flips from pull to push. Managed ingress/egress channels replace ad-hoc integrations. See [mls-datamart.md](../platform/mls-datamart.md) for full channel taxonomy.
 
 ## Supabase Instances
 

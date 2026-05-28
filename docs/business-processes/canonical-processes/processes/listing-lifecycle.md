@@ -8,9 +8,11 @@ RESO DD 2.0 vocabulary.
 >
 > - Source mapping (Dash / Qobrix / SIR -> RESO `Property`):
 >   [`../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md`](../../../data-models/source-mappings/wiki/agent-docs/by_resource/property.md)
-> - Sharp-SIR flavour pipeline:
->   [`../../listing-pipeline.md`](../../listing-pipeline.md),
->   [`../../listing-checklist.md`](../../listing-checklist.md)
+> - Sharp-SIR flavour pipeline: materialised by the CRM Listing
+>   Module
+>   ([`product-specs/matrix-pipeline/wiki/integration.md#listing-module`](../../../product-specs/matrix-pipeline/wiki/integration.md#listing-module))
+>   and the FR-LST-* requirements
+>   ([`product-specs/matrix-pipeline/wiki/requirements.md`](../../../product-specs/matrix-pipeline/wiki/requirements.md))
 > - One-stop integrated view:
 >   [`../../../integration/wiki/agent-docs/by_resource/property.md`](../../../integration/wiki/agent-docs/by_resource/property.md)
 

@@ -201,20 +201,22 @@ GET /api/v2/contacts?field[]=first_name&field[]=last_name
 
 Qobrix provides capabilities that the Sharp Matrix Platform must match or exceed:
 
-| Qobrix Capability | Sharp Matrix Target App | Notes |
-|-------------------|------------------------|-------|
-| Property CRUD + search | Broker App | Enhanced with RESO-standard fields and AI-powered search |
-| Contact management | Broker App, Client Portal | Split across agent-facing and client self-service apps |
-| Deal pipeline (Opportunities) | Broker App, Manager App | Pipeline tracking with analytics |
-| Task management | Broker App | Follow-ups, reminders, action plans |
-| Property viewings | Broker App, Client Portal | Scheduling with client-facing booking |
-| Media management | Broker App, Marketing App | Photo/video/virtual tour management |
-| Campaigns & marketing | Marketing App | Syndication, email campaigns, SMM |
-| Email correspondence | Broker App | Exchange Online read via Graph API; attach to opportunities. Replaces Qobrix internal email module. |
-| Meeting scheduling | Broker App | Outlook calendar sync via Graph API; replaces Qobrix Meetings/Calls. |
-| Dashboards & reporting | Manager App | Enhanced with BI/analytics layer |
+| Qobrix Capability | Sharp Matrix Target App | Canonical mapping |
+|---|---|---|
+| Property CRUD + search | matrix-pipeline (Listing Module integration) | Canonical RESO `Property` + `Property.StandardStatus`; AI-powered search via `listings-search` EF |
+| Contact management | matrix-pipeline (FR-CON cluster), Client Portal | Canonical RESO `Contacts` with `ContactType` graduation (Lead → Prospect → Ready-to-Buy → Buyer/Seller); split across agent-facing matrix-pipeline and client self-service Client Portal |
+| Deal pipeline (Opportunities) | matrix-pipeline (FR-FNL + FR-TM clusters) | Canonical 5-stage funnel projection over `(Contacts × SavedSearch)` (Qualification → Matching → Viewing → Contracting → Payment) + canonical `TransactionManagement` for offers/closing |
+| Task management | matrix-pipeline (FR-ACT cluster) | Canonical RESO `Activity` with reminders and follow-up scheduling |
+| Property viewings | matrix-pipeline (FR-SHOW cluster), Client Portal | Canonical 5-resource Showing chain (`ShowingAvailability` → `ShowingRequest` → `ShowingAppointment` → `Showing` → `LockOrBox`) |
+| Media management | matrix-pipeline (Listing Module integration), Marketing App | Canonical RESO `Media` (photos / video / virtual tours) |
+| Campaigns & marketing | Marketing App | Syndication, email campaigns, SMM (separate app) |
+| Email correspondence | matrix-pipeline (broker role, O365 integration cluster) | `ms-graph-proxy` EF (email-messages / email-attach); attach to canonical `Activity` / `TransactionManagement` rows. Replaces Qobrix internal email module. |
+| Meeting scheduling | matrix-pipeline (broker role, O365 integration cluster) | Outlook calendar sync via `ms-graph-proxy` (calendar-events / calendar-sync) → canonical `ShowingAppointment` / `Activity` rows; replaces Qobrix Meetings/Calls. |
+| Dashboards & reporting | matrix-pipeline (manager role, FR-REP cluster) + BI Dashboard | Manager-role view over canonical state + Commission Engine ERP-lite forecast; BI Dashboard for leadership KPIs |
 | Workflow automation | All apps | Platform-level workflow engine |
 | API integrations (feeds, portals) | Integration Layer | API Gateway with RESO-compliant endpoints |
+
+> **Consolidation note**: capabilities previously mapped to separate "Broker App" / "Manager App" rows are consolidated into matrix-pipeline 2.0. See [`product-specs/matrix-pipeline/`](../product-specs/matrix-pipeline/INDEX.md) for the canonical product spec.
 
 ## Full API Resource List
 

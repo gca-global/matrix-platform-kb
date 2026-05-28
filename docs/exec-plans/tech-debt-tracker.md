@@ -50,7 +50,7 @@ Last reviewed: 2026-04-14
 | ID | Description | Severity | Owner | Status |
 |----|-------------|----------|-------|--------|
 | DEBT-KB-001 | No CI pipeline validating KB structure, cross-links, or freshness | P2 | CDTO | Open — `scripts/validate-kb.sh` being created |
-| DEBT-KB-002 | `ARCHITECTURE.md` app list slightly out of date (doesn't list all 11 live apps) | P3 | CDTO | Open |
+| DEBT-KB-002 | `architecture/overview.md` app list slightly out of date (doesn't list all 11 live apps) | P3 | CDTO | Open |
 
 ## Resolved Debt
 
@@ -65,6 +65,6 @@ Last reviewed: 2026-04-14
 | For | See |
 |-----|-----|
 | Execution plans | [exec-plans/index.md](index.md) |
-| Quality grades | [QUALITY_SCORE.md](../QUALITY_SCORE.md) |
+| Quality grades | [quality-score.md](quality-score.md) |
 | Architecture decisions | [ADR index](../architecture/decisions/index.md) |
 | Testing strategy | [testing-strategy.md](../platform/testing-strategy.md) |

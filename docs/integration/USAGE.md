@@ -9,8 +9,8 @@
   - The canonical RESO definition (Layer 1).
   - The Dash / Qobrix / SIR mappings (Layer 2).
   - The canonical state machines (Layer 3).
-  - The Sharp-SIR project flavour pipelines (Layer 4).
   - Outbound links to each system-of-record document.
+  - (Project-flavour CRM behaviour lives in `product-specs/matrix-pipeline/`, not in the layer cake.)
 
 ## Quick tasks
 
@@ -68,7 +68,7 @@ generated files is a hard error in
 
 ## See also
 
-- [`../INTEGRATION.md`](../INTEGRATION.md) - the master
+- [`overview.md`](overview.md) - the master
   layer-cake explaining how Layers 1–5 compose.
 - [`../data-models/reso-dd-kb/USAGE.md`](../data-models/reso-dd-kb/USAGE.md)
   - Layer 1.
@@ -76,5 +76,5 @@ generated files is a hard error in
   - Layer 2.
 - [`../business-processes/canonical-processes/USAGE.md`](../business-processes/canonical-processes/USAGE.md)
   - Layer 3.
-- [`../business-processes/index.md`](../business-processes/index.md)
-  - Layer 4 (Sharp-SIR flavour).
+- [`../product-specs/matrix-pipeline/INDEX.md`](../product-specs/matrix-pipeline/INDEX.md)
+  - Sharp-SIR CRM product spec (consumes Layers 1-3, not part of the layer cake).
