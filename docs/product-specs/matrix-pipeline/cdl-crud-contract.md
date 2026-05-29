@@ -41,10 +41,21 @@ const ssoJwt = await getSsoAccessToken();
 | Client | Project | Use for |
 |---|---|---|
 | `ssoClient` | `xgubaguglsnokjyudgvc` (SSO) | identity, roles, permissions, `useUserDisplay`, `resolve-users` EF |
-| `cdlClient` | `ofzcokolkeejgqfjaszq` (CDL) | reads of canonical RESO resources via PostgREST under SSO JWT; writes via dedicated EFs |
+| `cdlClient` | `ofzcokolkeejgqfjaszq` (CDL) | **reads** of allow-listed public canonical resources via direct PostgREST (anon SELECT policy, `qual = true`); **scoped/PII reads + all writes** via dedicated Pipeline EFs (SSO JWT auto-injected by `invokeCdl`) |
 | `appClient` | per-app DB (Lovable-managed) | every CRM app-private resource + every Phase-1-4 write that does not yet have a Pipeline EF |
 
-The **same SSO JWT** is the bearer for all three. CDL verifies it via Supabase Third-Party Auth ([`../../architecture/decisions/ADR-012.md`](../../architecture/decisions/ADR-012.md)). Pipeline **never** holds the CDL service-role key.
+The **same SSO JWT** is the bearer for SSO and for every CDL **EF** call. CDL verifies it via Supabase Third-Party Auth ([`../../architecture/decisions/ADR-012.md`](../../architecture/decisions/ADR-012.md)). Pipeline **never** holds the CDL service-role key.
+
+## Access-mechanism decision rule (Supabase-grounded) {#access-rule}
+
+This is the one rule that decides *how* any given CDL resource is reached. It is grounded in Supabase's own guidance, not invented here:
+
+- **Supabase Data API + RLS is the default for reads.** Per [Securing your API](https://supabase.com/docs/guides/api/securing-your-api): "The data APIs are designed to work with Postgres Row Level Security… Any table you create in the `public` schema will be accessible via the Supabase Data API. To restrict access, enable RLS." So **public, non-sensitive** canonical tables that carry an anon `SELECT` policy (`qual = true`) are read **directly via PostgREST** on `cdlClient` (the anon key is sufficient — no identity needed for global reference data). This is the READ-A allow-list.
+- **Send the JWT (or use an EF) the moment a read is identity-scoped.** Cross-project identity is carried by the **SSO JWT via Third-Party Auth** ([Third-party auth](https://supabase.com/docs/guides/auth/third-party/overview): the API "will trust JWTs issued by the provider"; requires asymmetric signing — our SSO ES256). In this architecture, identity-scoped and **PII** reads (`contacts`, `contact_listings`, `contact_listing_notes`) do **not** use JWT-scoped PostgREST — they go through a **Pipeline EF** (READ-C), because Supabase's [*"Enforce additional rules on each request"*](https://supabase.com/docs/guides/api/securing-your-api) guidance applies: "Using Row Level Security policies may not always be adequate" (PII, service-role-only RLS, server-side checks) → put it behind an Edge Function.
+- **All canonical writes go through an EF.** Browsers never write CDL PostgREST directly; writes use `invokeCdl` (service-role inside the EF, SSO-JWT-scoped authz, emits `HistoryTransactional`). This is WRITE-B; until the EF ships, queue in the app-DB `*_pending` table (WRITE-A fallback).
+- **Never** read an **RLS-disabled** table directly (e.g. `contact_listings` today) — Supabase warns such tables are "accessible to the public using the anon role"; that is a CDL access-gate violation. Use the EF. And **never** use the CDL service-role key in app code.
+
+Decision in one line: **public reference data → anon PostgREST; identity-scoped or PII → Pipeline EF; any write → Pipeline EF.** When in doubt, use the EF.
 
 ## Per-resource recipes — five shapes, no others
 
