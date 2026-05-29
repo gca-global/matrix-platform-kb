@@ -193,7 +193,9 @@
 **RESO Resources** (canonical, strict DD 2.0): `Property`, `Media`, `Contacts`, `Member`, `Office`, `OUID`, `Teams`, `TeamMembers`, `SavedSearch`, `Prospecting`, `Activity`, `ContactListings`, `ContactListingPreference`, `ContactListingNotes`, `ShowingAvailability`, `ShowingRequest`, `ShowingAppointment`, `Showing`, `LockOrBox`, `Caravan`, `CaravanStop`, `TransactionManagement`, `HistoryTransactional`, `Document`, `Field`, `Lookup`, `OpenHouse`, `InternetTracking`, `PropertyDetailAttachment`, plus a documented project-flavour `Referral` entity (one of two escape hatches).
 **App Type**: CDL-Connected (canonical reads + writes via dedicated CDL EFs under SSO JWT)
 **Supabase Instance**: `mydojctcewxrbwjckuyz` (CRM app DB — app-private state only: drafts, workflow cache, Commission Engine ERP-lite tables)
-**Repo**: `/home/bitnami/matrix-pipeline`
+**Repo**: `sharpsir-group/matrix-pipeline-2-0` (GitHub, Lovable-managed) — local checkout `/home/bitnami/matrix-pipeline-2-0`. Supersedes the retired `sharpsir-group/smpipeline` repo (old local checkout `/home/bitnami/matrix-pipeline` has been removed).
+**Production path**: `https://intranet.sharpsir.group/pipeline/` (Apache htdocs `/opt/bitnami/apache/htdocs/pipeline`).
+**Deploy**: auto-deployed by `github-watcher` on push to `main` (config key `sharpsir-group/matrix-pipeline-2-0`, secret `WEBHOOK_SECRET_PIPELINE`, base path patched to `/pipeline/`).
 **Key Features** (target — see [`wiki/requirements.md`](../product-specs/matrix-pipeline/wiki/requirements.md) FR-CON / PC / COM / CFL / FNL / PROS / ACT / SHOW / CARA / CL / TM / CMM / DOC / REF / REP and [`phases.md`](../product-specs/matrix-pipeline/phases.md)):
 - Canonical `Contacts` lifecycle with `ContactType` graduation (Lead → Prospect → Ready-to-Buy → Buyer/Seller) — FR-CON
 - Multiple parallel commercial intents per contact via canonical `SavedSearch` + `Prospecting` — FR-PC
