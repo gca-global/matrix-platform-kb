@@ -88,12 +88,20 @@ Canonical RESO resources and infrastructure tables already in CDL and available 
 | Member | `public.members` | 129 | ✓ enabled |
 | Office | `public.offices` | 59 | ✓ enabled |
 | Contacts | `public.contacts` (PII) | 45 073 | ✓ enabled |
-| ContactListings | `public.contact_listings` (junction Contacts × Property) | **24 979** | ⚠️ disabled |
-| ContactListingNotes | `public.contact_listing_notes` | 0 | ⚠️ disabled |
+| ContactListings | `public.contact_listings` (junction Contacts × Property) | **24 979** | ✓ enabled (2026-05-29, service-role-only) |
+| ContactListingNotes | `public.contact_listing_notes` | 0+ | ✓ enabled (2026-05-29, service-role-only) |
 | HistoryTransactional | `public.history_transactional` (append-only) | 0 | ✓ enabled |
 | OpenHouse | `public.open_houses` (excluded from CRM scope — see [#escape-hatch](#escape-hatch)) | 0 | ✓ enabled |
 | ShowingAppointment | `public.showings` | 0 | ✓ enabled |
 | InternetTracking | `public.internet_tracking_events` | 0 | ✓ enabled |
+| SavedSearch | `public.saved_search` | 0 | ✓ enabled (2026-05-29) |
+| Prospecting | `public.prospecting` (PII) | 0 | ✓ enabled (service-role-only) |
+| ShowingAvailability | `public.showing_availability` | 0 | ✓ enabled (2026-05-29) |
+| ShowingRequest | `public.showing_request` | 0 | ✓ enabled (2026-05-29) |
+| Showing (recorded fact) | `public.showing` (≠ `public.showings`) | 0 | ✓ enabled (2026-05-29) |
+| LockOrBox | `public.lock_or_box` | 0 | ✓ enabled (service-role-only) |
+| Caravan / CaravanStop | `public.caravan` / `public.caravan_stop` | 0 | ✓ enabled (2026-05-29) |
+| TransactionManagement | `public.transaction_management` (canonical 4 fields; economics app-private) | 0 | ✓ enabled (2026-05-29) |
 
 ### RESO DD metadata (served to FE for tooltips/dropdowns)
 
@@ -130,33 +138,33 @@ Source: live state via `user-supabase-cdl` MCP (`list_tables` + introspection 20
 
 ### KB drift (flagged for platform team)
 
-> **Drift — Teams**: `cdl-schema.md` (266–283) lists `public.teams` as part of the Phase 1 8-table expansion. As of 2026-05-18, `public.teams` is **absent** in live CDL; see [#phase-2-migration](#phase-2-migration). KB doc needs update.
+> **Drift — Teams** ✅ RESOLVED 2026-05-29: `cdl-schema.md` now reflects the PR1.5 DROP of `public.teams`. Pipeline derives team identity from SSO groups (ADR-015 #5 Option B).
 
-> **Drift — contact tables**: `cdl-schema.md` Phase 1 expansion (Apr 2026) does **not** list `public.contact_listings` and `public.contact_listing_notes`. As of 2026-05-18, both are present in live CDL (`contact_listings` 24 979 rows, `contact_listing_notes` 0) with **RLS disabled**. KB doc needs update.
+> **Drift — contact tables** ✅ RESOLVED 2026-05-29: `public.contact_listings` + `public.contact_listing_notes` are now documented in `cdl-schema.md` (Phase-2 expansion), adopted into the foundation repo (`20260529161000`), re-modeled to canonical RESO, and **RLS-enabled** (service-role-only). The gate violation is closed.
 
-> **Security advisory (MCP critical)**: 14 `public.*` tables + 3 `cdl_staging.*` tables have **RLS disabled** — the anon key has full read/write access. Among the critical ones: `public.properties`, `public.property_media`, `public.contact_listings`, `public.contact_listing_notes`, `public.property_field_overrides`, `public.mls_*`, `public.ingest_audit`. The PII table `public.contacts` has RLS enabled. **Particular focus**: `public.contact_listings` (24 979 rows) and `public.contact_listing_notes` carry per-client engagement data (preference, sent/viewed timestamps, notes) — by platform architecture (`security-model.md` Pattern B), these tables must have RLS with tenant isolation and scope-aware filtering. RLS-disabled means the anon key has full access to all-broker, all-client engagement history. **This RLS-disabled state is a temporary development-phase condition, not the target architecture** — the target is RLS **enabled** with Pattern B (tenant isolation + scope-aware filtering) on all these tables before production sign-off. Pattern-B rollout is tracked as **S1 backlog** for the platform team and **gates production** (see [phases.md](../phases.md) risk R2). During the dev process the disabled state is an accepted transitional posture; in the interim, the CDL EF scope check is the access-control mechanism and CRM as a CDL client **MUST** go through it (CDL EFs with scope check) for all such tables — part of the `matrix-platform-foundation/supabase-cdl/` contract (see also [#compliance-gates](#compliance-gates) CDL access gate). The EF gate remains the canonical access path even after Pattern-B RLS lands.
+> **Security advisory** ✅ contact-engagement tables RESOLVED 2026-05-29: `public.contact_listings` (24 979 rows) and `public.contact_listing_notes` now have RLS **enabled** service-role-only (anon/authenticated access revoked); reads go through `cdl-contact-listings-read`, writes through `cdl-write`. The broader RLS-disabled set on ingestion-side tables (`public.properties`, `public.property_media`, `public.property_field_overrides`, `public.mls_*`, `public.ingest_audit`, `cdl_staging.*`) remains a known transitional posture tracked as **S1 backlog** for the platform team (Pattern B); the CDL EF scope check is the access-control mechanism for those in the interim. The EF gate remains the canonical access path even after Pattern-B RLS lands.
 
-> **Naming drift advisory (three-layer mismatch)**: The canonical RESO DD 2.0 resource is `ShowingAppointment`; `cdl-schema.md` planned the table as `public.showing_appointments`; live CDL contains `public.showings`. All three layers diverge in naming for one resource. CRM development must use `public.showings` as the actual CDL table for `ShowingAppointment`. A separate RESO `Showing` resource (recorded fact of a showing, vs. the appointment) is planned as a separate table in CDL Phase 2+ (see [#phase-2-migration](#phase-2-migration)). Until migration, the distinction between `ShowingAppointment` and `Showing` is implemented in the CRM app DB. `cdl-schema.md` needs update: `public.showing_appointments` → `public.showings` in the Phase 1 expansion table. Flagged for the platform team.
+> **Naming drift advisory** ✅ RESOLVED 2026-05-29: `cdl-schema.md` now names the ShowingAppointment table `public.showings` (Phase-1) and documents the separate RESO `Showing` recorded-fact table as `public.showing` (Phase-2, `20260529160000`). The two are distinct CDL tables — `public.showings` = ShowingAppointment (booked slot), `public.showing` = Showing (recorded fact). Do not conflate.
 
-## Planned for CDL migration (Phase 2+) {#phase-2-migration}
+## CDL migration status (Phase 2) {#phase-2-migration}
 
-Canonical RESO resources **not in live CDL** as of 2026-05-18; the BRD treats them as **subject to migration into CDL** as their canonical home. Until migration, CRM holds them in its own Lovable-managed app DB.
+Canonical RESO resources and their CDL landing status. **9 of these landed in CDL on 2026-05-29** (migrations `20260529160000` + `20260529161000`, ADR-016). Each now writes through `cdl-write` and reads via PostgREST/EF; the CRM app DB keeps only the `*_pending` fallback + deal economics.
 
-| Canonical RESO resource | Migration target | Where it lives today |
+| Canonical RESO resource | CDL table | Status |
 |---|---|---|
-| Teams | CDL Phase 2+ | CRM app DB (Lovable-managed) |
-| TeamMembers | CDL Phase 2+ | CRM app DB (Lovable-managed) |
-| OUID | CDL Phase 2+ | TBD |
-| SavedSearch | CDL Phase 2+ | CRM app DB (Lovable-managed) |
-| Prospecting | CDL Phase 2+ | CRM app DB (Lovable-managed) |
-| ShowingAvailability | CDL Phase 2+ | CRM app DB (Lovable-managed) |
-| ShowingRequest | CDL Phase 2+ | CRM app DB (Lovable-managed) |
-| Showing (separate from ShowingAppointment) | CDL Phase 2+ | CRM app DB (Lovable-managed) |
-| LockOrBox | CDL Phase 2+ | CRM app DB (Lovable-managed) |
-| Caravan, CaravanStop | CDL Phase 2+ | CRM app DB (Lovable-managed) |
-| TransactionManagement | CDL Phase 2+ | CRM app DB (Lovable-managed) |
+| SavedSearch | `public.saved_search` | ✅ landed 2026-05-29 |
+| Prospecting | `public.prospecting` | ✅ landed 2026-05-29 (PII) |
+| ShowingAvailability | `public.showing_availability` | ✅ landed 2026-05-29 |
+| ShowingRequest | `public.showing_request` | ✅ landed 2026-05-29 |
+| Showing (separate from ShowingAppointment) | `public.showing` | ✅ landed 2026-05-29 |
+| LockOrBox | `public.lock_or_box` | ✅ landed 2026-05-29 |
+| Caravan, CaravanStop | `public.caravan`, `public.caravan_stop` | ✅ landed 2026-05-29 |
+| TransactionManagement | `public.transaction_management` | ✅ landed 2026-05-29 (canonical 4 fields; economics app-private) |
+| Teams | — | Derived from SSO groups (ADR-015 #5 Option B) — not re-introduced to CDL |
+| TeamMembers | — | Derived from SSO groups (Option B) |
+| OUID | — | Deferred; derive from SSO/`offices` until a canonical need arises |
 
-Source: live MCP vs canonical RESO entity list. Exact migration schedule is out of BRD scope; see KB roadmap (ADR-014). As migrations land, the corresponding FRs / BRs switch from CRM app DB to CDL without semantic change.
+Source: migrations `20260529160000` + `20260529161000`; ADR-016. As FRs build against these, they target CDL directly (no semantic change).
 
 ## App-private state (always CRM app DB, never CDL) {#app-private-state}
 
@@ -178,7 +186,7 @@ Source: raw/context-v2.md §5a.6.
 - CDL schema: [`../../data-models/cdl-schema.md`](../../../data-models/cdl-schema.md)
 - Three-project architecture + EF contracts: [`../../platform/app-template.md`](../../../platform/app-template.md)
 - RLS / identity / Third-Party Auth: [`../../platform/security-model.md`](../../../platform/security-model.md)
-- ADRs: ADR-011 (ES256), ADR-012 (CDL Third-Party Auth), ADR-013 (CDL/SSO ownership; CDL not linked to Lovable), ADR-014 (CDL as-built vs original 18-table design), ADR-015 (CDL Pipeline EF surface — Proposed).
+- ADRs: ADR-011 (ES256), ADR-012 (CDL Third-Party Auth), ADR-013 (CDL/SSO ownership; CDL not linked to Lovable), ADR-014 (CDL as-built vs original 18-table design), ADR-015 (CDL Pipeline EF surface — Proposed), ADR-016 (canonical-into-CDL acceleration — 9 tables + contact_listings re-model + `cdl-write` dispatcher — Accepted 2026-05-29).
 - Stewardship / source taxonomy: [`../../architecture/data-distribution-and-stewardship.md`](../../../architecture/data-distribution-and-stewardship.md).
 - Pipeline-specific CDL CRUD recipes (Lovable-facing): [`../cdl-crud-contract.md`](../cdl-crud-contract.md). Live reachability matrix iteration copy: `mem://infrastructure/cdl-coverage.md`.
 
@@ -192,7 +200,7 @@ Source: raw/context-v2.md §5a.7.
 - **Roster gate**: business roster and org-model (canonical RESO `Member` / `Office` / `OUID` / `Teams` / `TeamMembers`) are sourced **only from CDL**; no parallel org-tables in CRM app DB. User identity (SSO account, roles, groups, scope claims, permissions) is a **separate domain in SSO** (`xgubaguglsnokjyudgvc`), not duplicating the canonical roster: SSO answers "can this user log in and what are they allowed to do?", CDL answers "who is this user in the brokerage's business roster?" (canonical FK targets `OwnerMemberKey` / `ListAgentKey` / `BuyerAgentKey` etc.). Mapping: SSO `user_id` ↔ `Member.MemberKey` via canonical `Member.MemberAlternateId` or an explicit mapping in the SSO Console; SSO group ↔ `Teams.TeamKey` (mapping in SSO Console). See [#identity-boundary](#identity-boundary).
 - **Integration gate**: contracts and **actual** payments / commission ledger are **not** first-class CRM data entities. External systems (contract management + Finance ERP) are the sole source of truth for legally significant records; CRM observes them via webhooks and mirrors via `Property.StandardStatus` + `HistoryTransactional`. Permitted deviation: forecast GCI, commission rule engine, per-deal P&L are stored in CRM app-private tables of the [wiki/commission-engine.md](commission-engine.md) subsystem as an advisory tool for the sales broker, with an explicit reconciliation pattern against the actual ledger in external Finance ERP. See [#escape-hatch](#escape-hatch).
 - **AI gate**: AI features read and update exclusively canonical resources. Introducing "AI-only" fields not mapped to RESO DD 2.0 is forbidden.
-- **CDL access gate**: for any CDL table with RLS disabled, CRM **MUST** go through dedicated CDL EFs with SSO JWT scope check — not via direct anon/authenticated PostgREST. Until table-level RLS is enabled per Pattern B (`security-model.md`), the CDL EF is the only access-control mechanism. Direct PostgREST access from the CRM app layer is forbidden. Applies to all 17 RLS-disabled tables (see [#live-cdl-state](#live-cdl-state) Security advisory): `public.properties`, `public.property_media`, `public.contact_listings`, `public.contact_listing_notes`, `public.property_field_overrides`, `public.mls_*`, `public.ingest_audit`, `cdl_staging.*`. **Particularly controlled** tables with engagement / PII: `public.contact_listings` (24 979 rows) and `public.contact_listing_notes` — client engagement history; gate violation leaks the entire agency client base.
+- **CDL access gate**: for any CDL table with RLS disabled, CRM **MUST** go through dedicated CDL EFs with SSO JWT scope check — not via direct anon/authenticated PostgREST. Until table-level RLS is enabled per Pattern B (`security-model.md`), the CDL EF is the only access-control mechanism. Direct PostgREST access from the CRM app layer is forbidden. **2026-05-29:** `public.contact_listings` + `public.contact_listing_notes` are now RLS-enabled (service-role-only) and reached via `cdl-contact-listings-read` / `cdl-write` — the engagement-data violation is closed. The gate still applies to the remaining RLS-disabled ingestion-side tables: `public.properties`, `public.property_media`, `public.property_field_overrides`, `public.mls_*`, `public.ingest_audit`, `cdl_staging.*` (S1 backlog, Pattern B).
 - **Pipeline gate**: the 5-stage pipeline is **not** stored as a table. The stage is derived from canonical state ([wiki/overview.md#pipeline](overview.md#pipeline)). Any implementation that materializes `pipeline_stages` as a stand-alone table violates compliance.
 
 Source: raw/context-v2.md §11.5.

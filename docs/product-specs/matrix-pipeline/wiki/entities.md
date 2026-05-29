@@ -57,7 +57,7 @@ Source: raw/context-v2.md §5, §9.1, §9.4.
 
 ## ContactListings {#contact-listings}
 
-**RESO resource**: `ContactListings` (junction Contacts × Property). **Write authority**: CRM. **Physical store**: CDL (`public.contact_listings`, **RLS DISABLED** — 24 979 live rows; access only via CDL EFs with scope check until Pattern B rollout — see [wiki/architecture.md#compliance-gates](architecture.md#compliance-gates) CDL access gate).
+**RESO resource**: `ContactListings` (junction Contacts × Property). **Write authority**: CRM via `cdl-write` (`resource: 'contact_listings'`). **Physical store**: CDL (`public.contact_listings`, **RLS enabled service-role-only since 2026-05-29** — 24 979 live rows re-modeled to canonical RESO; read via `cdl-contact-listings-read`, write via `cdl-write` — see [wiki/architecture.md#compliance-gates](architecture.md#compliance-gates) CDL access gate). Note: live `relationship` column holds listing provenance (`Seller`/`Developer`), not buyer-engagement preference (ADR-016).
 
 Per-listing engagement Contact ↔ property: `ContactListingPreference` (Favorite / Possibility / Discard), `ListingViewedYN`, `ListingSentTimestamp`, `PortalLastVisitedTimestamp`, unread flags, channel (email / WhatsApp / Manual / Portal / SMS). Multiple `ContactListings` for one Contact = interactions across different properties, possibly in the context of parallel intents (different SavedSearches).
 
@@ -71,7 +71,7 @@ Source: raw/context-v2.md §5, §9.8.
 
 ## ContactListingNotes {#contact-listing-notes}
 
-**RESO resource**: `ContactListingNotes`. **Write authority**: CRM. **Physical store**: CDL (`public.contact_listing_notes`, **RLS DISABLED**, 0 live rows; same EF-only gate as ContactListings).
+**RESO resource**: `ContactListingNotes`. **Write authority**: CRM via `cdl-write` (`resource: 'contact_listing_notes'`). **Physical store**: CDL (`public.contact_listing_notes`, **RLS enabled service-role-only since 2026-05-29**; canonical RESO shape; read via `cdl-contact-listings-read` op `notes`; same EF-only gate as ContactListings).
 
 Notes on a Contact × Property pair: content, author (Agent / Contact), timestamps. Used for broker observations, client feedback after a showing, decision reasons (incl. Discard reason and Closed Lost reason).
 

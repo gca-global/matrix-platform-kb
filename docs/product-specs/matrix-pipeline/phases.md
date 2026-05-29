@@ -10,6 +10,8 @@ tags: [phases]
 
 > Eight weeks from kickoff to a staging prototype with business power users. Two swimlanes: **Lovable** (app UI + CRM app DB) and **Cursor** (CDL + SSO + wiki + Edge Functions on the platform side). Every task is atomic — about one hour of focused work — and cites the wiki anchor that backs the requirement. Implementation MUST stay grounded in the wiki; any deviation requires the [wiki/architecture.md#escape-hatch](wiki/architecture.md#escape-hatch) justification block. Cite all consulted wiki anchors in the PR description.
 
+> **Platform pre-work landed 2026-05-29 (ADR-016 / outcome O-CDL-CANON).** The Cursor-swimlane CDL write surface is **already deployed** ahead of Week 1: the 9 canonical CRM tables exist in CDL, `contact_listings`/`contact_listing_notes` are re-modeled + RLS-enabled, and three EFs are live — `cdl-write` (generic insert/update/upsert/soft-delete + `HistoryTransactional` emit), `cdl-contacts-read`, `cdl-contact-listings-read`. Where a week task below says "build `cdl-contacts-write` EF", read it as **"wire the UI to `cdl-write` with `resource: 'contacts'`"** — the EF already exists. The per-resource write EFs (`cdl-*-write`) are superseded by the single `cdl-write` dispatcher. See [cdl-crud-contract.md](cdl-crud-contract.md) Recipe WRITE-B.
+
 ## TOC
 
 - [#governance](#governance) — atomicity rule, DoD, swimlanes, KB-first, budget

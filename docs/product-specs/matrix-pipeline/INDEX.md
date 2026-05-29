@@ -16,6 +16,7 @@
 | [`wiki/integration.md`](wiki/integration.md) | External integrations: Listing Module, Contract system, Finance ERP, SSO, CDL | §10 |
 | [`wiki/commission-engine.md`](wiki/commission-engine.md) | CRM-internal ERP-lite for sales-broker P&L + reconciliation | §9.15 |
 | [`cdl-crud-contract.md`](cdl-crud-contract.md) | Lovable CDL CRUD contract — 5 recipe shapes + 6 commandments. Canonical copy synced from `mem://infrastructure/lovable-cdl-crud-contract.md` | (operational) |
+| [`roadmap.md`](roadmap.md) | **Outcome-based roadmap + agent coordination surface** — `O-*` milestones keyed to KPI groups + FR clusters; read/update before any structural change | (coordination) |
 | [`phases.md`](phases.md) | 8-week atomic build plan (Lovable + Cursor swimlanes) | (plan) |
 | [`raw/context-v2.md`](raw/context-v2.md) | Immutable BRD (read for provenance only) | — |
 | [`log.md`](log.md) | Chronological append-only log | — |

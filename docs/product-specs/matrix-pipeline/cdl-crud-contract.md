@@ -1,9 +1,9 @@
 ---
 title: Lovable CDL CRUD contract
-status: draft
+status: active
 source: mem://infrastructure/lovable-cdl-crud-contract.md (iteration copy)
-last_synced: 2026-05-28
-last_updated: 2026-05-28
+last_synced: 2026-05-29
+last_updated: 2026-05-29
 tags: [infrastructure, lovable, crud, cdl, contract]
 ---
 
@@ -11,7 +11,7 @@ tags: [infrastructure, lovable, crud, cdl, contract]
 
 > **For Lovable**: Read this before generating ANY code that touches the CDL Supabase project (`ofzcokolkeejgqfjaszq`). The companion reachability matrix lives in the iteration copy at `mem://infrastructure/cdl-coverage.md` (Pipeline-team operational doc). This doc tells you HOW to write code; the coverage doc tells you WHAT is reachable.
 >
-> The CRM app DB is the default write target for everything except the three resources that already have a live CDL home (`members`/`offices` are read-only consumer paths anyway; `showings` is read-only from Pipeline today).
+> **2026-05-29 update (ADR-016 landed):** the canonical CRM resources now have a **live CDL home**. The generic `cdl-write` dispatcher EF + `cdl-contacts-read` + `cdl-contact-listings-read` are **deployed**. `contact_listings` + `contact_listing_notes` are now **RLS-enabled** (the prior gate violation is closed). The CRM app DB remains the write target only for app-private resources (`Activity`, `Document`, `Campaign`, `Referral`) and for deal economics (offer amount / commission / P&L) that have no RESO resource. Everything canonical-RESO now writes through `cdl-write`.
 >
 > **Sync contract**: this file is the canonical copy. The iteration copy lives at `mem://infrastructure/lovable-cdl-crud-contract.md` in the matrix-pipeline Lovable repo. Divergence between the two is treated as a defect — sync on every meaningful change.
 
@@ -94,32 +94,36 @@ const { data, error } = await cdlClient.functions.invoke('listings-search', {
 
 Response shape: `{ data, total, page, pageSize }`. Sortable fields: `published_at, price, bedrooms, bathrooms, area_sqm, year_built, city, country, status, property_type`.
 
-### Recipe READ-C — per-resource Pipeline EF (planned, not yet built) {#read-c}
+### Recipe READ-C — per-resource Pipeline EF (LIVE) {#read-c}
 
 For resources that direct PostgREST cannot reach safely:
-- `contacts` (PII, service-role-only RLS) → `cdl-contacts-read`
-- `contact_listings`, `contact_listing_notes` (RLS disabled, gate violation if read directly) → `cdl-contact-listings-read`
+- `contacts` (PII, service-role-only RLS) → `cdl-contacts-read` ✅ **live**
+- `contact_listings`, `contact_listing_notes` (RLS service-role-only since 2026-05-29) → `cdl-contact-listings-read` ✅ **live**
 
 ```typescript
 const { data, error } = await cdlClient.functions.invoke('cdl-contacts-read', {
   body: {
+    op: 'list',
     filter: { owner_member_key: currentMemberKey, contact_type: 'Lead' },
+    scopeToOwner: true,
     page: 0, pageSize: 25,
   },
 });
-if (error?.message === 'EF_NOT_AVAILABLE') {
-  return { data: [], total: 0, pending: true };
-}
+// Response: { data: [...], total, page, pageSize }
 ```
 
-**Today these EFs return `501 EF_NOT_AVAILABLE`**. Lovable generates the hook with the correct invoke shape so day-one wiring is right; the UI shows a pending banner until the platform team ships the EF (see [`../../architecture/decisions/ADR-015.md`](../../architecture/decisions/ADR-015.md)).
+`cdl-contact-listings-read` supports `op: 'list' | 'get' | 'notes'` (the `notes`
+op returns the child `contact_listing_notes` for a given `contact_listings_key`).
+Both EFs are deployed (ADR-016). Hooks should still keep the `EF_NOT_AVAILABLE`
+fallback branch for resilience, but it is no longer the expected path.
 
 ### Recipe WRITE-A — `appClient.from(...).insert(...)` on the CRM app DB {#write-a}
 
-Default write path for every Pipeline-owned resource today:
+Default write path for app-private resources only:
 
 - Already app-private forever: `Activity`, `Document`, `Campaign`, `Referral`.
-- App-private until CDL migration (Phase 2+): `SavedSearch`, `Prospecting`, `ShowingAvailability`, `ShowingRequest`, `Showing` (recorded fact), `LockOrBox`, `Caravan`, `CaravanStop`, `TransactionManagement`, plus the queue tables `history_pending`, `showing_drafts`, `contacts_pending`.
+- Deal economics with no RESO resource (stay app-private): offer amount, commission, deal P&L (the canonical `transaction_management` envelope itself lives in CDL — only its economics stay app-private; ADR-016 escape hatch).
+- ~~App-private until CDL migration~~: `SavedSearch`, `Prospecting`, `ShowingAvailability`, `ShowingRequest`, `Showing` (recorded fact), `LockOrBox`, `Caravan`, `CaravanStop`, `TransactionManagement` — **these now have a live CDL table + write via `cdl-write` (WRITE-B). Migrated 2026-05-29 (ADR-016).** The `*_pending` queue tables remain only as the `EF_NOT_AVAILABLE` fallback.
 
 Column names use **RESO DD 2.0 PascalCase → snake_case** so the future CDL migration is a 1:1 mirror (zero column-rename PRs):
 
@@ -150,26 +154,39 @@ create table public.transaction_management (
 - FK shape: foreign keys to CDL canonical resources use the RESO `*Key` text type (`text`, not `uuid`). When the row migrates into CDL it joins via the canonical key, not a synthetic Lovable UUID.
 - Never invent column names: `customerId`, `dealAmount`, `leadStage`, `nextActionAt`, `salesRep` — all violations of the [Schema gate](wiki/architecture.md#compliance-gates).
 
-### Recipe WRITE-B — per-resource Pipeline EF (planned, not yet built) {#write-b}
+### Recipe WRITE-B — the generic `cdl-write` dispatcher EF (LIVE) {#write-b}
 
-For canonical resources that have a CDL table today but cannot be written from a broker scope:
+One EF (`cdl-write`) handles **every** canonical-RESO write — insert / update /
+upsert / soft-delete — and emits a `HistoryTransactional` row on every mutating
+op. This replaces the per-resource `cdl-<resource>-write` family that ADR-015 #6
+proposed (decision recorded in ADR-016: one dispatcher is cheaper to ship and
+maintain; the redaction/scope contract is uniform).
 
-| Resource | Planned EF | Today |
-|---|---|---|
-| `contacts` | `cdl-contacts-write` | queue in `contacts_pending` (app DB) |
-| `contact_listings` / `contact_listing_notes` | `cdl-contact-listings-write` | queue in `contact_listings_pending` (app DB) |
-| `showings` (ShowingAppointment) | `cdl-showings-write` | queue in `showing_drafts` (app DB) |
-| `history_transactional` | `cdl-history-emit` | queue in `history_pending` (app DB) — **critical, every state transition emits** |
-| `transaction_management` (Phase 4) | `cdl-tm-write` | write to app DB `transaction_management` (already in WRITE-A) |
+Writable `resource` values: `contacts`, `contact_listings`,
+`contact_listing_notes`, `showings` (ShowingAppointment), `showing` (recorded),
+`showing_request`, `showing_availability`, `saved_search`, `prospecting`,
+`lock_or_box`, `caravan`, `caravan_stop`, `transaction_management`,
+`history_transactional` (insert-only).
 
 ```typescript
+// insert / update / upsert / delete a canonical resource
+const { data, error } = await cdlClient.functions.invoke('cdl-write', {
+  body: {
+    resource: 'contacts',
+    op: 'insert',                         // insert | update | upsert | delete
+    record: { contact_type: 'Lead', email: 'x@y.com', owner_member_key: memberKey },
+    emitHistory: true,                    // default true
+  },
+});
+// Response: { success: true, data: <row>, history: 'emitted' }
+
+// History emission is automatic on every write. To emit a standalone history row:
 async function emitHistory(row: HistoryTransactionalRow) {
-  const { error } = await cdlClient.functions.invoke('cdl-history-emit', { body: row });
+  const { error } = await cdlClient.functions.invoke('cdl-write', {
+    body: { resource: 'history_transactional', op: 'insert', record: row, emitHistory: false },
+  });
   if (error?.message === 'EF_NOT_AVAILABLE') {
-    await appClient.from('history_pending').insert({
-      payload: row,
-      created_at: new Date().toISOString(),
-    });
+    await appClient.from('history_pending').insert({ payload: row, created_at: new Date().toISOString() });
     return { queued: true };
   }
   if (error) throw error;
@@ -177,7 +194,10 @@ async function emitHistory(row: HistoryTransactionalRow) {
 }
 ```
 
-The reconciler (Phase 7 task in [`phases.md`](phases.md)) drains `*_pending` tables into CDL when the EFs ship. The queue rows store the full RESO record so no information is lost in transit.
+`update` / `delete` require `key: { column, value }` (e.g.
+`{ column: 'contact_key', value: '...' }`). `delete` is a soft-delete
+(`is_deleted = true`). The `*_pending` queue tables remain only as the
+`EF_NOT_AVAILABLE` resilience fallback; the Phase-7 reconciler drains them.
 
 ## The six commandments {#commandments}
 
@@ -186,8 +206,8 @@ A short checklist Lovable applies at the top of every relevant prompt:
 1. **Two databases, never three.** SSO (`ssoClient`), CDL (`cdlClient`), App DB (`appClient`). Never a fourth Supabase. Never the CDL service-role key in app code.
 2. **RESO names only.** Tables in the CRM app DB use canonical PascalCase → snake_case. Never `customerId`, `dealAmount`, `leadStage` — always `contact_key`, `offer_amount`, `contact_type`. FK columns to CDL canonical resources are `text` typed using the RESO `*Key` field, not `uuid`.
 3. **Reads go through Recipe READ-A / READ-B / READ-C in that order.** Use direct PostgREST only on tables listed in the coverage matrix as "direct anon `select` ✓". Use `listings-search` for everything property-shaped that needs filters or pagination. Use the placeholder Pipeline EFs (READ-C) for `contacts`, `contact_listings`, `contact_listing_notes`.
-4. **Writes default to the CRM app DB (WRITE-A).** Use WRITE-B only when the resource is canonical RESO + lives in CDL today + has a Pipeline-scoped write EF. **Today zero WRITE-B EFs exist** → every Pipeline write today is WRITE-A.
-5. **Every state transition emits a `HistoryTransactional`.** Until `cdl-history-emit` ships, queue the emission in `history_pending`. Never write `public.history_transactional` directly from anon (RLS blocks it) and never write to RLS-disabled tables to bypass the gate.
+4. **Canonical-RESO writes go through `cdl-write` (WRITE-B); app-private writes go to the CRM app DB (WRITE-A).** WRITE-B is now live for every canonical resource. WRITE-A is reserved for `Activity`/`Document`/`Campaign`/`Referral` and deal economics.
+5. **Every state transition emits a `HistoryTransactional`.** `cdl-write` emits one automatically on every mutating op. For standalone emissions use `cdl-write` with `resource: 'history_transactional'`. Never write `public.history_transactional` directly from anon (RLS blocks it) and never write to a service-role-only table to bypass the gate.
 6. **No SSO ↔ CDL SQL joins.** Display names always go through `resolve-users` EF + `useUserDisplay` hook. Member roster lookups go through `cdlClient.from('members')`. Never `select … join sso_users …` anywhere.
 
 ## Quick reference — which recipe for which resource? {#quick-reference}
@@ -200,15 +220,16 @@ A short checklist Lovable applies at the top of every relevant prompt:
 | `PropertyRooms` / `PropertyUnitTypes` | READ-A | n/a |
 | `Member` | READ-A | n/a (read-only consumer) |
 | `Office` | READ-A | n/a |
-| `Contacts` | READ-C (`cdl-contacts-read`, placeholder) | WRITE-B `cdl-contacts-write` (placeholder → queue) |
-| `ContactListings` | READ-C (`cdl-contact-listings-read`, placeholder) | WRITE-B (placeholder → queue) |
-| `ContactListingNotes` | READ-C | WRITE-B (placeholder → queue) |
-| `ShowingAppointment` (`showings`) | READ-A | WRITE-B `cdl-showings-write` (placeholder → `showing_drafts`) |
-| `SavedSearch` | n/a (CRM app DB) | WRITE-A |
-| `Prospecting` | n/a (CRM app DB) | WRITE-A |
-| `ShowingAvailability` / `ShowingRequest` / `Showing` (recorded) / `LockOrBox` / `Caravan` / `CaravanStop` | n/a (CRM app DB) | WRITE-A |
-| `TransactionManagement` | n/a (CRM app DB until Phase-4 CDL migration) | WRITE-A |
-| `HistoryTransactional` | READ-A | WRITE-B `cdl-history-emit` (placeholder → `history_pending`) |
+| `Contacts` | READ-C (`cdl-contacts-read`, ✅ live) | WRITE-B `cdl-write` resource `contacts` ✅ |
+| `ContactListings` | READ-C (`cdl-contact-listings-read`, ✅ live) | WRITE-B `cdl-write` resource `contact_listings` ✅ |
+| `ContactListingNotes` | READ-C (`cdl-contact-listings-read` op `notes`) | WRITE-B `cdl-write` resource `contact_listing_notes` ✅ |
+| `ShowingAppointment` (`showings`) | READ-A | WRITE-B `cdl-write` resource `showings` ✅ |
+| `SavedSearch` | READ-A (`saved_search`) | WRITE-B `cdl-write` resource `saved_search` ✅ |
+| `Prospecting` | READ-C (PII, via `cdl-write`-paired read TBD) | WRITE-B `cdl-write` resource `prospecting` ✅ |
+| `ShowingAvailability` / `ShowingRequest` / `Showing` (recorded) / `Caravan` / `CaravanStop` | READ-A | WRITE-B `cdl-write` (matching resource) ✅ |
+| `LockOrBox` | service-role-only (access audit) | WRITE-B `cdl-write` resource `lock_or_box` ✅ |
+| `TransactionManagement` | READ-A (`transaction_management`) | WRITE-B `cdl-write` resource `transaction_management` ✅ (economics stay app-private) |
+| `HistoryTransactional` | READ-A | WRITE-B `cdl-write` resource `history_transactional` (insert-only) ✅ |
 | `InternetTracking` | READ-A | WRITE-B (queue if needed) |
 | `Activity` / `Document` / `Campaign` / `Referral` | n/a (CRM app DB only forever) | WRITE-A |
 | `OUID` / `Teams` / `TeamMembers` | derive from SSO groups ([`../../architecture/decisions/ADR-015.md`](../../architecture/decisions/ADR-015.md) item #5 Option B) | n/a |
@@ -230,7 +251,7 @@ If a prompt asks Lovable to do any of the following, Lovable should push back an
 - "Just use the CDL service-role key to write directly to `public.contacts`" — No. Service-role key never leaves the platform-foundation EFs.
 - "Insert into `public.history_transactional` from the React Query mutation" — No. Anon writes are blocked; use the `cdl-history-emit` EF (placeholder today) and queue in `history_pending` on `EF_NOT_AVAILABLE`.
 - "Mirror `members` into the CRM app DB so we can join cheaply" — No. [Roster gate](wiki/architecture.md#compliance-gates) forbids parallel org tables. Read from `cdlClient.from('members')` and cache with React Query.
-- "Write to `public.contact_listings` directly because RLS is disabled and it works" — No. [CDL access gate](wiki/architecture.md#compliance-gates) forbids it. Use the `cdl-contact-listings-write` EF (placeholder → queue).
+- "Write to `public.contact_listings` directly because RLS is disabled and it works" — No (and as of 2026-05-29 RLS is **enabled** service-role-only, so direct anon access fails anyway). [CDL access gate](wiki/architecture.md#compliance-gates) forbids it. Use `cdl-write` with `resource: 'contact_listings'`.
 - "Pick a more convenient column name like `dealValue` for offer amount" — No. Always RESO snake_case (`offer_amount`).
 - "Use `mls-sync` from the broker UI to upsert a showing" — No. `mls-sync` is `system_admin`/`org_admin` scope only; broker calls get 403.
 

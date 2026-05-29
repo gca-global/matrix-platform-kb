@@ -13,8 +13,9 @@ The Sharp Matrix CRM (`matrix-pipeline`) is the luxury-real-estate sales pipelin
 
 | Audience | Start here |
 |---|---|
-| LLM agent (Lovable, Cursor, etc.) | [`AGENTS.md`](AGENTS.md) → [`INDEX.md`](INDEX.md) |
-| New human reader | this `README.md` → [`wiki/overview.md`](wiki/overview.md) → [`phases.md`](phases.md) |
+| LLM agent (Lovable, Cursor, etc.) | [`AGENTS.md`](AGENTS.md) → [`INDEX.md`](INDEX.md) → [`roadmap.md`](roadmap.md) (coordination) |
+| Anyone asking "where are we / where are we going" | [`roadmap.md`](roadmap.md) — outcome-based journey + per-milestone status |
+| New human reader | this `README.md` → [`wiki/overview.md`](wiki/overview.md) → [`roadmap.md`](roadmap.md) → [`phases.md`](phases.md) |
 | Implementer (a single feature) | [`phases.md`](phases.md) → relevant week → relevant task → wiki anchor cited in the task |
 | Looking for the canonical BRD | [`raw/context-v2.md`](raw/context-v2.md) (immutable — read the wiki first; only open this for provenance) |
 
@@ -25,6 +26,7 @@ matrix-pipeline/
 ├── AGENTS.md            # LLM schema layer — how to read/write this wiki
 ├── INDEX.md             # Catalog of every wiki page + anchor
 ├── README.md            # You are here
+├── roadmap.md           # Outcome-based roadmap + agent coordination surface
 ├── log.md               # Chronological append-only log
 ├── phases.md            # 8-week build plan
 ├── raw/

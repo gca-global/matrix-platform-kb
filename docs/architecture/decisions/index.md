@@ -20,4 +20,5 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-012](ADR-012.md) | Dedicated Matrix CDL Supabase project (separate from SSO) | Accepted |
 | [ADR-013](ADR-013.md) | `matrix-platform-foundation` owns both SSO and CDL projects | Accepted |
 | [ADR-014](ADR-014.md) | Unified MLS ingestion pipeline (sources → staging → merge) | Accepted |
-| [ADR-015](ADR-015.md) | CDL Pipeline EF Surface — broker-scope CRUD for Matrix Pipeline | Proposed |
+| [ADR-015](ADR-015.md) | CDL Pipeline EF Surface — broker-scope CRUD for Matrix Pipeline | Proposed (largely folded into ADR-016) |
+| [ADR-016](ADR-016.md) | Canonical-into-CDL acceleration for matrix-pipeline 2.0 | Accepted |

@@ -233,7 +233,7 @@ In order (see `matrix-platform-foundation/supabase/cdl/migrations/`):
 1. `20260425160712_cdl_ingestion_schema.sql` — `cdl_staging` schema, `properties`, `property_media`, `properties_published`, `field_mappings`, `ingest_audit`, storage bucket `cdl-media`.
 2. `20260425162326_cdl_staging_grants.sql` — schema grants for `service_role` / `authenticated`. Requires `cdl_staging` to be added to PostgREST exposed schemas (one-off project setting).
 3. `20260426120000_cdl_mls_sync_control_plane.sql` — `mls_settings` / `mls_sync_jobs` / `mls_sync_state` / `mls_orchestrator_runs`, `bulk_update_property_media` (+ legacy alias), `schedule_mls_resume`, `cdl_set_updated_at` triggers, RLS on `properties_published`.
-4. `20260426130000_cdl_full_reso_ingestion.sql` — Full RESO ingestion: 8 new resource tables (`members`, `offices`, `contacts`, `open_houses`, `showing_appointments`, `history_transactional`, `internet_tracking`, `teams`), `mls_sources` registry, `cdl_lock_field` / `cdl_unlock_field` stewardship RPCs, `property_field_overrides`.
+4. `20260426130000_cdl_full_reso_ingestion.sql` — Full RESO ingestion: 8 new resource tables (`members`, `offices`, `contacts`, `open_houses`, `showings` [RESO ShowingAppointment], `history_transactional`, `internet_tracking_events`, `teams`), `mls_sources` registry, `cdl_lock_field` / `cdl_unlock_field` stewardship RPCs, `property_field_overrides`. **Note:** `teams` was later DROPPED in `20260504080000` (PR1.5).
 5. `20260426160000_cdl_media_staging.sql` — `cdl_staging.media_staging` table + `public.merge_media_from_staging(uuid, text)` RPC. Phase 1 Best-in-Class.
 6. `20260426170000_cdl_drop_sync_mode.sql` — Drops `public.mls_settings.sync_mode` (legacy engine selector). Deployed AFTER the EF + UI rollout that no longer reads/writes the column.
 
@@ -250,7 +250,7 @@ In order (see `matrix-platform-foundation/supabase/cdl/migrations/`):
 
 - CDL workspace: [`matrix-platform-foundation/supabase/cdl/`](https://github.com/sharpsir-group/matrix-platform-foundation/tree/main/supabase/cdl)
   - `migrations/` — DB schema, RPCs, RLS
-  - `functions/{reso-import,field-mapping-apply,listing-merge,media-import,listing-publish,mls-sync,mls-sync-orchestrator,listings-search}/`
+  - `functions/{reso-import,field-mapping-apply,listing-merge,media-import,listing-publish,mls-sync,mls-sync-orchestrator,listings-search,reso-dd-descriptions,cdl-write,cdl-contacts-read,cdl-contact-listings-read}/`
   - `config.toml` — every EF registered with `verify_jwt = false`
   - `README.md` — operational doc + smoke tests
 - Atlas consumer: `matrix-atlas-mls` at `/home/bitnami/matrix-atlas-mls` (sidebar groups `Overview` / `Application` / `MLS Sync` / `Administration`)
@@ -280,7 +280,7 @@ canonical typed columns + `raw jsonb` (RESO record verbatim) +
 | `public.showings` | ShowingAppointment | Service-role only. |
 | `public.history_transactional` | HistoryTransactional | Append-only audit trail; bounded by `history_transactional_lookback_days`. |
 | `public.internet_tracking_events` | InternetTracking | Append-only events; bounded by `tracking_lookback_days`. |
-| `public.teams` | Teams | Team roster grouping; FK-shape to `members.member_key` via `team_lead_key`. |
+| ~~`public.teams`~~ | Teams | **DROPPED 2026-05-04 (PR1.5, `20260504080000`)** — 0 rows, 0.3% WgtOrg adoption; Cyprus market does not operate as MLS teams. Pipeline derives team identity from SSO groups (ADR-015 #5 Option B). |
 
 ### Stewardship (`locked_fields`)
 
@@ -373,7 +373,7 @@ without a destructive schema rename. See
 | `v_dash_properties` | `properties_published` | `is_visible AND NOT is_deleted AND lifecycle_state='Active'` | anon, authenticated |
 | `v_dash_members` | `members` | `NOT is_deleted` | anon, authenticated |
 | `v_dash_offices` | `offices` | `NOT is_deleted` | anon, authenticated |
-| `v_dash_teams` | `teams` | `NOT is_deleted` | anon, authenticated |
+| ~~`v_dash_teams`~~ | `teams` | — | **DROPPED 2026-05-04 (PR1.5)** alongside `public.teams`. |
 | `v_dash_property_media` | `property_media JOIN properties` | `NOT properties.is_deleted` | anon, authenticated |
 | `v_dash_open_houses` | `open_houses` | `NOT is_deleted` | anon, authenticated |
 | `v_dash_contacts` | `contacts` | `NOT is_deleted` | **service_role only** (PII) |
@@ -398,6 +398,59 @@ The `listings-search` EF added in this phase:
 See [`read-path-performance.md`](read-path-performance.md) for the full
 budget + tuning playbook.
 
+## Phase 2 expansion — Pipeline canonical RESO completeness (May 2026)
+
+Lands the canonical RESO resources the `matrix-pipeline` 2.0 CRM consumes but
+the CDL did not yet hold, plus the re-model of two live-only engagement tables.
+Drivers: [ADR-015](../architecture/decisions/ADR-015.md) (EF surface request) and
+[ADR-016](../architecture/decisions/ADR-016.md) (canonical-into-CDL acceleration).
+
+### 9 new canonical resource tables
+
+`20260529160000_pipeline_canonical_new_tables.sql`. Same hybrid pattern as the
+Phase-1 tables (`id uuid pk` + `source_id` + `unique(source_id, source_*_key)` +
+RESO snake_case typed columns + `raw jsonb` GIN-indexed + `content_hash` +
+soft-delete + `locked_fields jsonb` + `updated_at` trigger). Canonical field
+names verified against `reso-dd-kb/wiki/agent-docs/resources/*.md`.
+
+| Table | RESO Resource | RLS read surface |
+|---|---|---|
+| `public.saved_search` | SavedSearch | `authenticated` SELECT (`is_deleted=false`) |
+| `public.prospecting` | Prospecting | **service_role only** (PII — links Contacts) |
+| `public.showing_availability` | ShowingAvailability | `authenticated` SELECT |
+| `public.showing_request` | ShowingRequest | `authenticated` SELECT |
+| `public.showing` | Showing (recorded fact; **distinct from `public.showings` = ShowingAppointment**) | `authenticated` SELECT |
+| `public.lock_or_box` | LockOrBox | **service_role only** (access audit) |
+| `public.caravan` | Caravan | `authenticated` SELECT |
+| `public.caravan_stop` | CaravanStop | `authenticated` SELECT (polymorphic `stop_*` ref) |
+| `public.transaction_management` | TransactionManagement | `authenticated` SELECT |
+
+`transaction_management` carries **only the 4 canonical RESO fields**
+(`transaction_key`, `transaction_id`, `transaction_type`, `modification_timestamp`).
+Deal offer amount / commission / P&L stay **app-private in the CRM app DB** —
+RESO has no deal-economics resource (ADR-016 escape hatch).
+
+> **Naming caution:** `public.showings` (Phase-1) = RESO **ShowingAppointment**
+> (a booked slot). `public.showing` (Phase-2) = RESO **Showing** (a recorded
+> showing fact). They are different RESO resources; do not conflate.
+
+### Re-model: `contact_listings` + `contact_listing_notes`
+
+`20260529161000_pipeline_contact_listings_remodel.sql`. These two tables existed
+**live-only** (no prior foundation migration), with a non-canonical shape and
+**RLS DISABLED** (~24,979 rows exposed to the anon key — a CDL access-gate
+violation per ADR-015 #4). This migration adopts them into the repo, adds the
+canonical RESO envelope + engagement columns (additive), backfills canonical
+keys, migrates inline `notes` text into child `contact_listing_notes` rows, and
+**enables RLS service_role-only** (revoking anon/authenticated access).
+
+> **Execution finding (ADR-016):** the live `contact_listings.relationship`
+> column holds listing-side **provenance** (`Seller` 15,865 / `Developer` 9,114),
+> NOT the canonical buyer-engagement `ContactListingPreference`
+> (`Favorite`/`Possibility`/`Discard`). The provenance columns are retained;
+> canonical engagement columns are added nullable for forward CRM use. No
+> `relationship → contact_listing_preference` mapping is applied.
+
 ## Migrations index (current)
 
 | # | File | Purpose |
@@ -411,6 +464,10 @@ budget + tuning playbook.
 | 7 | `20260426150000_cdl_dash_views.sql` | 7 `v_dash_*` projection views |
 | 8 | `20260426160000_cdl_media_staging.sql` | `cdl_staging.media_staging` + `merge_media_from_staging` RPC (Phase 1 Best-in-Class) |
 | 9 | `20260426170000_cdl_drop_sync_mode.sql` | Drop legacy `mls_settings.sync_mode` (orchestrator is sole engine) |
+| … | (10–17: lifecycle, descriptions, occupant/owner, detail resources, keyset indexes, PR1 canonical renames) | see `migrations/` dir |
+| 18 | `20260504080000_pr1_5_pr1_6_drop_teams_and_power_production.sql` | DROP `public.teams` + `property_power_production` (PR1.5/1.6) |
+| 19 | `20260529160000_pipeline_canonical_new_tables.sql` | 9 new canonical CRM tables + RLS + grants (ADR-016) |
+| 20 | `20260529161000_pipeline_contact_listings_remodel.sql` | Re-model `contact_listings` + `contact_listing_notes` + backfill + RLS (ADR-016) |
 
 ## Cross-reference
 
@@ -419,6 +476,8 @@ budget + tuning playbook.
 | ADR — dedicated CDL project | [ADR-012](../architecture/decisions/ADR-012.md) |
 | ADR — single owning repo | [ADR-013](../architecture/decisions/ADR-013.md) |
 | ADR — ingestion pipeline + status note on the actual implementation | [ADR-014](../architecture/decisions/ADR-014.md) |
+| ADR — Pipeline EF surface request | [ADR-015](../architecture/decisions/ADR-015.md) |
+| ADR — canonical-into-CDL acceleration (Phase-2 tables, re-model, `cdl-write`) | [ADR-016](../architecture/decisions/ADR-016.md) |
 | RESO canonical fields | [`reso-dd-kb/wiki/agent-docs/_index.md`](reso-dd-kb/wiki/agent-docs/_index.md) |
 | Platform extensions (`x_sm_*`) | [platform-extensions.md](platform-extensions.md) |
 | Read-path perf budgets | [read-path-performance.md](read-path-performance.md) |

@@ -33,7 +33,7 @@ For new-app auth issues (401/400/403), see `docs/platform/new-app-auth-troublesh
 | `docs/data-models/source-mappings/` | `docs/data-models/source-mappings/AGENTS.md` — phase boundaries, file ownership, hard-fail join gates, determinism |
 | `docs/business-processes/canonical-processes/` | `docs/business-processes/canonical-processes/AGENTS.md` — phase boundaries, citation contract, mermaid contract, 5 hard-fail gates |
 | `docs/integration/` | `docs/integration/AGENTS.md` — generated per-resource cross-cutting views joining Layers 1–4; emit-only, no hand-edits under `wiki/agent-docs/` |
-| `docs/product-specs/matrix-pipeline/` | `docs/product-specs/matrix-pipeline/AGENTS.md` — `matrix-pipeline` CRM LLM Wiki (Karpathy 3-layer pattern): immutable `raw/context-v2.md` BRD + 8 wiki pages + schema layer + `phases.md` 8-week build plan; `scripts/wiki-lint.sh` enforces frontmatter / orphan-anchors / FR-coverage / split-rule / log-format contracts |
+| `docs/product-specs/matrix-pipeline/` | `docs/product-specs/matrix-pipeline/AGENTS.md` — `matrix-pipeline` CRM LLM Wiki (Karpathy 3-layer pattern): immutable `raw/context-v2.md` BRD + 8 wiki pages + schema layer + `phases.md` 8-week build plan + `roadmap.md` outcome-based coordination surface; `scripts/wiki-lint.sh` enforces frontmatter / orphan-anchors / FR-coverage / split-rule / log-format contracts. **When working on `matrix-pipeline` KB content, follow the coordination protocol in `docs/product-specs/matrix-pipeline/AGENTS.md` (§"Coordination through roadmap.md") — update `roadmap.md` + append a `roadmap` log entry on any structural change (FR / ADR / migration / EF / wiki page).** |
 
 ## Knowledge Base Structure
 

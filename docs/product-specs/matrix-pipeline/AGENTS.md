@@ -8,17 +8,19 @@
 
 This subtree is the **LLM Wiki for `matrix-pipeline`** (the Sharp Matrix CRM). It exists so Lovable (app + CRM app DB), Cursor (CDL/SSO), and any other agent can load just-the-context-needed for a single task without ingesting the full 2 100-line BRD on every query.
 
-Three layers (Karpathy pattern):
+Three layers + a coordination surface (Karpathy pattern):
 
 | Layer | Lives in | Mutability |
 |---|---|---|
 | Raw | [`raw/context-v2.md`](raw/context-v2.md) | **Immutable** — source of truth, never edited |
 | Wiki | [`wiki/*.md`](wiki/) + [`phases.md`](phases.md) | LLM-maintained; kept in sync with `raw/` |
 | Schema | This file (`AGENTS.md`) + [`INDEX.md`](INDEX.md) + [`log.md`](log.md) | Slowly co-evolves with the wiki |
+| **Coordination surface** | [`roadmap.md`](roadmap.md) | **The durable, outcome-keyed journey view + multi-agent coordination contract.** Read + update it before any structural change (see [#coordination-through-roadmapmd](#coordination-through-roadmapmd)). |
 
 ## How to load context for a query
 
 1. Read [`INDEX.md`](INDEX.md). It catalogs every wiki page + the important H2 anchors. (~150 lines.)
+1.5. **If the task touches an outcome milestone** — i.e. any FR cluster / KPI in [`wiki/overview.md#kpis`](wiki/overview.md#kpis) — open [`roadmap.md`](roadmap.md) first to see the current `status` + `owner_agent` of the matching `O-*` row, and cite that row in your PR.
 2. Drill into the wiki page that owns the anchor, e.g. `wiki/requirements.md#fr-pros-prospecting`.
 3. Follow `relates_to` frontmatter and inline `[wiki/...#anchor]` links only as needed.
 4. **Do not read `raw/context-v2.md` unless investigating provenance** (e.g. "is this claim in the BRD or inferred?"). The raw file is 2 100+ lines; loading it defeats the wiki.
@@ -100,6 +102,27 @@ Actions:
 | `split` | A section was promoted to its own file (per split-later rules) |
 | `phase-checkpoint` | A `phases.md` week completed; demo signed off |
 | `divergence` | A wiki claim was flagged as diverging from `raw/` (escape-hatch) |
+| `roadmap` | An outcome milestone in [`roadmap.md`](roadmap.md) changed status / owner / scope |
+
+## Coordination through roadmap.md {#coordination-through-roadmapmd}
+
+[`roadmap.md`](roadmap.md) is the **single coordination surface** across all
+agents (Lovable / Cursor / platform-team / business). It is **outcome-keyed**:
+milestones (`O-<SLUG>`) map to the product-spec KPI groups
+([`wiki/overview.md#kpis`](wiki/overview.md#kpis)) and the FR clusters that
+deliver them ([`wiki/requirements.md`](wiki/requirements.md)); the calendar
+quarter is only a secondary `target_horizon`.
+
+Contract — **before** any PR that creates/modifies an FR, ADR, schema migration,
+EF, or wiki page affecting an outcome:
+
+1. Read `roadmap.md`; find the matching `O-*` row.
+2. Update that row's `status` + `last_updated` + `owner_agent` + notes.
+3. Append a `roadmap` entry to [`log.md`](log.md).
+4. Cite the `O-*` row in the PR description.
+
+A new milestone with **no backing FR cluster / KPI is a defect** — add the FR
+first. Milestone ids never embed the quarter (`O-<OUTCOME-SLUG>`, not `O-Q3-…`).
 
 ## Lint
 
@@ -123,6 +146,7 @@ Actions:
 | You want to… | Go to |
 |---|---|
 | Understand the project at a glance | [`README.md`](README.md) |
+| See the long-term outcome journey + coordinate a structural change | [`roadmap.md`](roadmap.md) |
 | Catalogue every wiki page + anchor | [`INDEX.md`](INDEX.md) |
 | Know what was changed when | [`log.md`](log.md) |
 | Read the canonical BRD | [`raw/context-v2.md`](raw/context-v2.md) |
