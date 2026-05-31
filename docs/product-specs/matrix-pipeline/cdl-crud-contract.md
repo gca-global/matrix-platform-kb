@@ -196,8 +196,26 @@ async function emitHistory(row: HistoryTransactionalRow) {
 
 `update` / `delete` require `key: { column, value }` (e.g.
 `{ column: 'contact_key', value: '...' }`). `delete` is a soft-delete
-(`is_deleted = true`). The `*_pending` queue tables remain only as the
+(`is_deleted = true`) **only on the Pipeline-authored tables** that carry the
+soft-delete bookkeeping. The `*_pending` queue tables remain only as the
 `EF_NOT_AVAILABLE` resilience fallback; the Phase-7 reconciler drains them.
+
+**Two source envelopes (important for writes).** `cdl-write` keys each resource
+off one of two envelopes, selected by `systemColumn`:
+
+| Envelope | `systemColumn` | natural key | soft-delete | resources |
+|---|---|---|---|---|
+| Pipeline-authored | `source_id` | `(source_id, source_<resource>_key)` | yes (`is_deleted`/`deleted_at`) | `contact_listings`, `contact_listing_notes`, `showing`, `showing_request`, `showing_availability`, `saved_search`, `prospecting`, `lock_or_box`, `caravan`, `caravan_stop`, `transaction_management` |
+| Strict-RESO | `originating_system_name` | `(originating_system_name, originating_system_<resource>_key)` | **no column** | `contacts`, `showings` (ShowingAppointment) |
+
+The strict-RESO tables were hardened by the `strict_reso_wave` migrations
+(`20260515130000+`), which **dropped** `source_id` / `content_hash` /
+`is_deleted` / `deleted_at`. So for `contacts` and `showings`: upserts conflict
+on `(originating_system_name, originating_system_<resource>_key)`, `cdl-write`
+defaults `originating_system_name` to the Pipeline source slug, and **`delete`
+is rejected** (no soft-delete column — hard-deleting PII is a stewardship
+decision, not a default). Callers must never send `source_id`/`is_deleted` for
+these two resources.
 
 ## The six commandments {#commandments}
 

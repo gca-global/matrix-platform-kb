@@ -376,7 +376,7 @@ without a destructive schema rename. See
 | ~~`v_dash_teams`~~ | `teams` | — | **DROPPED 2026-05-04 (PR1.5)** alongside `public.teams`. |
 | `v_dash_property_media` | `property_media JOIN properties` | `NOT properties.is_deleted` | anon, authenticated |
 | `v_dash_open_houses` | `open_houses` | `NOT is_deleted` | anon, authenticated |
-| `v_dash_contacts` | `contacts` | `NOT is_deleted` | **service_role only** (PII) |
+| ~~`v_dash_contacts`~~ | `contacts` | — | **DROPPED** by `strict_reso_wave1` (`20260515130000`). `contacts` was hardened to a pure canonical-RESO table: `source_id` / `content_hash` / `is_deleted` / `deleted_at` were dropped, so it has **no soft-delete column** and is keyed on `(originating_system_name, originating_system_contact_key)`. PII reads go through `cdl-contacts-read`. The same hardening applies to `showings` (RESO ShowingAppointment). |
 
 Phase-1 v_dash_properties is intentionally a minimal slice. Full Dash
 field coverage (`propertyDetails.*`, `days_on_market`, `list_price_usd`,
