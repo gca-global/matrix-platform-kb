@@ -250,7 +250,7 @@ In order (see `matrix-platform-foundation/supabase/cdl/migrations/`):
 
 - CDL workspace: [`matrix-platform-foundation/supabase/cdl/`](https://github.com/sharpsir-group/matrix-platform-foundation/tree/main/supabase/cdl)
   - `migrations/` — DB schema, RPCs, RLS
-  - `functions/{reso-import,field-mapping-apply,listing-merge,media-import,listing-publish,mls-sync,mls-sync-orchestrator,listings-search,reso-dd-descriptions,cdl-write,cdl-contacts-read,cdl-contact-listings-read}/`
+  - `functions/{reso-import,field-mapping-apply,listing-merge,media-import,listing-publish,mls-sync,mls-sync-orchestrator,listings-search,reso-dd-descriptions,cdl-write,cdl-contacts-read,cdl-contact-listings-read,cdl-engagement-read,cdl-read}/`
   - `config.toml` — every EF registered with `verify_jwt = false`
   - `README.md` — operational doc + smoke tests
 - Atlas consumer: `matrix-atlas-mls` at `/home/bitnami/matrix-atlas-mls` (sidebar groups `Overview` / `Application` / `MLS Sync` / `Administration`)
@@ -451,6 +451,45 @@ keys, migrates inline `notes` text into child `contact_listing_notes` rows, and
 > canonical engagement columns are added nullable for forward CRM use. No
 > `relationship → contact_listing_preference` mapping is applied.
 
+### Security fix: `v_property_contacts` (P0 remediation)
+
+`20260530120000_secure_v_property_contacts.sql`. The CDL **security advisor**
+flagged `public.v_property_contacts` as a **SECURITY DEFINER** view that joins
+`contact_listings → contacts` and exposes contact PII
+(`full_name`/`email`/`mobile_phone`/`preferred_phone`). It carried full anon
+grants and bypassed the service-role-only RLS placed on `contact_listings` by
+the re-model above, so anon callers could still read PII through it. The fix:
+set `security_invoker = on` (so the view runs with the caller's rights and the
+underlying RLS applies) and **revoke all from `anon`/`authenticated`**. The
+canonical read path is now the `cdl-contact-listings-read` EF (`op=by-property`),
+which resolves the same join service-role-side behind an SSO JWT scope check.
+
+### Broker-scope read EFs for non-anon CDL tables (2026-05-31)
+
+The `matrix-pipeline` app holds only the CDL **anon** key, so it cannot read
+tables whose RLS SELECT policy targets the `authenticated` role (or is
+service-role-only). Two broker-scope read EFs close that gap (both
+`verify_jwt = false`, custom SSO-JWT verification + scope check, service-role
+inside; mirror `cdl-contacts-read`):
+
+- **`cdl-engagement-read`** — PII-gated engagement reads. Ops: `prospecting-list`
+  (by `contact_key` [+ optional `saved_search_key`]), `saved-search-list`
+  (joins `prospecting → saved_search` for a contact), `saved-search-get`. Needed
+  because `public.prospecting` is **service-role-only** (it carries recipient
+  email lists = PII), so the `prospecting → saved_search` join cannot run on the
+  anon/authenticated client.
+- **`cdl-read`** — generic read for **authenticated-only** operational tables
+  (NOT PII, NOT `lock_or_box`). Body `{ resource, filter, page, pageSize, order }`
+  over a whitelist: `showing_request`, `showings`, `showing`,
+  `showing_availability`, `transaction_management`, `caravan`, `caravan_stop`,
+  `internet_tracking_events`. Per-resource filterable-column allow-lists; applies
+  `is_deleted = false` where the column exists; estimated counts.
+
+These complete the read side for the Pipeline canonical-process surfaces
+(SavedSearch/Prospecting, Showing chain, Transactions, Caravans, Internet
+tracking, and the derived 5-stage `/pipeline` projection). Writes still flow
+through the single `cdl-write` dispatcher (ADR-016).
+
 ## Migrations index (current)
 
 | # | File | Purpose |
@@ -468,6 +507,7 @@ keys, migrates inline `notes` text into child `contact_listing_notes` rows, and
 | 18 | `20260504080000_pr1_5_pr1_6_drop_teams_and_power_production.sql` | DROP `public.teams` + `property_power_production` (PR1.5/1.6) |
 | 19 | `20260529160000_pipeline_canonical_new_tables.sql` | 9 new canonical CRM tables + RLS + grants (ADR-016) |
 | 20 | `20260529161000_pipeline_contact_listings_remodel.sql` | Re-model `contact_listings` + `contact_listing_notes` + backfill + RLS (ADR-016) |
+| 21 | `20260530120000_secure_v_property_contacts.sql` | Secure `v_property_contacts` (SECURITY INVOKER + revoke anon) — P0 PII leak fix (ADR-016) |
 
 ## Cross-reference
 
