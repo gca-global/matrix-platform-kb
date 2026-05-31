@@ -2,7 +2,7 @@
 title: Architecture — Storage, Identity, CDL access, RESO compliance
 status: stable
 source: raw/context-v2.md §5a, §11
-last_updated: 2026-05-26
+last_updated: 2026-05-31
 tags: [architecture]
 ---
 
@@ -13,6 +13,7 @@ tags: [architecture]
 ## TOC
 
 - [#three-supabase](#three-supabase)
+- [#git-sync-handoff](#git-sync-handoff)
 - [#identity-boundary](#identity-boundary)
 - [#cdl-access-pattern](#cdl-access-pattern)
 - [#live-cdl-state](#live-cdl-state)
@@ -36,6 +37,52 @@ tags: [architecture]
 CDL and SSO are owned by the platform team and evolve via `matrix-platform-foundation`; CRM app DB is owned by the CRM team and evolves via Lovable. CRM **never** holds the CDL service-role key and **never** modifies the CDL schema — all CDL changes go through `matrix-platform-foundation/supabase-cdl/`.
 
 Source: raw/context-v2.md §5a.1.
+
+## Cursor working copy: git sync + Lovable handoff {#git-sync-handoff}
+
+Cursor edits this ecosystem locally and **Lovable is the other author** of `matrix-pipeline-2-0`. A local `github-watcher` deploys `matrix-pipeline-2-0` to Apache `/pipeline/` on push to `main` and syncs the GitHub remote (where Lovable pushes) down to the local checkout (see [`../../platform/app-catalog.md`](../../../platform/app-catalog.md)). If the watcher isn't running, the local checkout can fall **behind** the remote — so Cursor must validate freshness before editing and hand work back cleanly so Lovable + the watcher pick it up.
+
+### Pre-flight (before editing any ecosystem repo in Cursor)
+
+1. `git fetch origin`.
+2. If local `main` is **behind** `origin/main` → `git pull --ff-only`.
+3. If the branches have **diverged** → STOP and surface to the user. Never auto-merge, rebase, or force.
+
+### Post-work handoff (when Cursor finishes a change)
+
+Commit + push the affected repo(s) so the watcher deploys and Lovable sees the latest. This intentionally overrides the global "only commit when asked" default **for the matrix-pipeline ecosystem repos**. Work spans **three repos** and **two Supabase projects**; route each change class to the repo that owns its Supabase project:
+
+| Change class | Supabase project | Commit to | Lovable sees it as |
+|---|---|---|---|
+| CDL edge function (`cdl-write`, `cdl-read`, `cdl-engagement-read`, `cdl-contact-listings-read`, …) | CDL `ofzcokolkeejgqfjaszq` | `matrix-platform-foundation/supabase-cdl/functions/` | KB + `docs/cdl-ef-contracts/` (NOT a Lovable migration — CDL is not linked to Lovable, ADR-013) |
+| CDL DB migration / schema / data | CDL `ofzcokolkeejgqfjaszq` | `matrix-platform-foundation/supabase-cdl/migrations/` | KB + `docs/cdl-ef-contracts/` |
+| **App-specific edge function** (correct / modify / add) | app DB `wckwfbbqiupvallmhqbu` | `matrix-pipeline-2-0/supabase/functions/` | **committed EF source in the app repo** |
+| **App-specific Supabase schema / data** | app DB `wckwfbbqiupvallmhqbu` | `matrix-pipeline-2-0/supabase/migrations/` | **committed migration in the app repo** |
+| UI code (`src/**`) | — | `matrix-pipeline-2-0` | committed source (watcher deploys) |
+| KB / docs | — | `matrix-platform-kb` | docs |
+
+Two rules that make the handoff seamless:
+
+- **EF deploys are not source-of-truth.** An MCP `deploy_edge_function` is invisible until the EF source (and any migration) is committed to the repo that owns that Supabase project — `matrix-platform-foundation` for CDL EFs, `matrix-pipeline-2-0/supabase/functions/` for app EFs. Deploy **and** commit.
+- **App-Supabase changes must reach Lovable as migrations.** Cursor does **not** only touch CDL/foundation — it may correct or add app-specific EFs and modify the app-specific Supabase project (`wckwfbbqiupvallmhqbu`). Every such change lands as a committed migration / EF source in `matrix-pipeline-2-0` so Lovable can see it; it is never applied out-of-band. (CDL changes, being outside the app repo and not linked to Lovable, are surfaced via this KB + `docs/cdl-ef-contracts/` instead.)
+
+Git-safety constraints still apply (inherited from the agent system prompt): never force-push, never push to a diverged `main` without user direction, `--ff-only` only.
+
+```mermaid
+flowchart LR
+  Lovable -->|push| Remote["GitHub origin/main"]
+  Remote -->|"github-watcher pull"| Local["Local checkout"]
+  Local -->|"github-watcher build"| Apache["/pipeline deploy"]
+  Cursor -->|"pre-flight: fetch + pull --ff-only"| Local
+  Cursor -->|"app EF + migration + UI: commit + push"| Remote
+  Cursor -->|"CDL EF + migration: commit + push"| Foundation["matrix-platform-foundation"]
+  Foundation -.->|"applies to"| CDL["CDL Supabase (ofzcokolkeejgqfjaszq)"]
+  Remote -.->|"Lovable sees migrations"| AppDB["app Supabase (wckwfbbqiupvallmhqbu)"]
+```
+
+Operative enforcement lives in [`/.cursor/rules/cursor-git-handoff.mdc`](../../../../../.cursor/rules/cursor-git-handoff.mdc); the Lovable-facing mirror is in `matrix-pipeline-2-0/.lovable/instructions.md`.
+
+Source: [`../../platform/app-catalog.md`](../../../platform/app-catalog.md) (github-watcher); ADR-013 (CDL not linked to Lovable).
 
 ## Identity boundary {#identity-boundary}
 

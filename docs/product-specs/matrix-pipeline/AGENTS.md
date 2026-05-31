@@ -8,6 +8,8 @@
 
 This subtree is the **LLM Wiki for `matrix-pipeline`** (the Sharp Matrix CRM). It exists so Lovable (app + CRM app DB), Cursor (CDL/SSO), and any other agent can load just-the-context-needed for a single task without ingesting the full 2 100-line BRD on every query.
 
+> **Working-copy & handoff contract**: Cursor agents MUST validate the local checkout is current before editing (git pre-flight) and commit + push every affected repo on completion (post-work handoff) so Lovable + the `github-watcher` pick up the change — see [`wiki/architecture.md#git-sync-handoff`](wiki/architecture.md#git-sync-handoff). Enforced by [`/.cursor/rules/cursor-git-handoff.mdc`](../../../../.cursor/rules/cursor-git-handoff.mdc).
+
 Three layers + a coordination surface (Karpathy pattern):
 
 | Layer | Lives in | Mutability |
@@ -156,5 +158,6 @@ first. Milestone ids never embed the quarter (`O-<OUTCOME-SLUG>`, not `O-Q3-…`
 | Understand a process | [`wiki/processes.md`](wiki/processes.md) |
 | Understand an integration | [`wiki/integration.md`](wiki/integration.md) |
 | Understand storage / RESO compliance | [`wiki/architecture.md`](wiki/architecture.md) |
+| Sync the Cursor working copy + hand work back to Lovable (git pre-flight + commit/push) | [`wiki/architecture.md#git-sync-handoff`](wiki/architecture.md#git-sync-handoff) |
 | Understand the AI Copilot | [`wiki/ai.md`](wiki/ai.md) |
 | Understand the Commission Engine | [`wiki/commission-engine.md`](wiki/commission-engine.md) |

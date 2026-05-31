@@ -36,6 +36,7 @@
 ### Architecture ([`wiki/architecture.md`](wiki/architecture.md))
 
 - `#three-supabase` — SSO + CDL + CRM app DB
+- `#git-sync-handoff` — Cursor working-copy git sync (pre-flight) + Lovable handoff (post-work commit/push), change-class → Supabase-project → repo mapping
 - `#identity-boundary` — SSO vs CDL Member roster
 - `#cdl-access-pattern` — CRM as CDL client (EFs, never direct PostgREST)
 - `#live-cdl-state` — As-built CDL state (MCP-refreshed)
