@@ -22,3 +22,4 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-014](ADR-014.md) | Unified MLS ingestion pipeline (sources → staging → merge) | Accepted |
 | [ADR-015](ADR-015.md) | CDL Pipeline EF Surface — broker-scope CRUD for Matrix Pipeline | Proposed (largely folded into ADR-016) |
 | [ADR-016](ADR-016.md) | Canonical-into-CDL acceleration for matrix-pipeline 2.0 | Accepted |
+| [ADR-017](ADR-017.md) | Browser SSO token storage — localStorage now, BFF/httpOnly remediation path | Accepted |
