@@ -46,6 +46,17 @@ These implement the OAuth 2.0 + PKCE flow used by all Matrix Apps.
 }
 ```
 
+**Server-managed PKCE (per-app opt-in)** — for public clients flagged
+`sso_applications.server_managed_pkce = true`, `code_verifier` is **optional**:
+the gate requires it only when `!app.server_managed_pkce`. Such clients send no
+`code_challenge` (so the conditional challenge-validation is skipped) and exchange
+on the code alone; authorization rests on the single-use, short-TTL code bound to
+`redirect_uri` + `client_id` + an authenticated SSO session. This makes fresh
+logins survive storage-stripping embedded browsers (Cursor in-IDE webview). The
+flag defaults `false`; only Matrix Pipeline 2.0 is enabled so far. Backward
+compatible — a client still sending challenge+verifier validates as before. See
+[ADR-019](../architecture/decisions/ADR-019.md).
+
 **Response** (`200`):
 ```json
 {
@@ -68,6 +79,8 @@ These implement the OAuth 2.0 + PKCE flow used by all Matrix Apps.
 - The ES256 signing key (`get_vault_secret('sso_es256_signing_key')`) is **cached in module scope** (10 min TTL + in-flight de-dup) and fetched with a short retry. One successful vault load serves the warm instance, so a transient vault blip no longer forces a downgrade. The TTL lets a future key rotation propagate.
 - For apps **without** `jwt_secret_name` (ES256 apps — their DB trusts only the SSO ES256 JWKS, kid via `sso-jwks`), if the ES256 key still cannot be resolved the function **fails closed with HTTP `503 temporarily_unavailable`** instead of silently minting an HS256 token. A downgraded HS256 token would be rejected by the app DB at the PostgREST auth layer (401), producing a confusing post-login 401 storm; a retryable 503 at mint time is the correct failure.
 - For apps **with** `jwt_secret_name` (e.g. `jwt_secret_sso_console` → Sharp Matrix Portal, Appointment Reports/meeting-hub, New Client Registration/client-connect; per-app HRMS/ITSM secrets), behavior is unchanged: they always sign HS256 with their app secret and never touch the ES256 path or the 503 fail-closed branch.
+
+**Issuer (`iss`) — 2026-05-31**: all minted tokens set `iss = https://xgubaguglsnokjyudgvc.supabase.co/auth/v1` (the SSO project's GoTrue issuer URL; was `"matrix-sso"`). This lets own-DB app projects verify SSO ES256 tokens via **Supabase Third-Party Auth** (which matches the token `iss` against a registered URL issuer + JWKS). The MLS app DB (`wckwfbbqiupvallmhqbu`, used by Pipeline / Atlas / Matrix MLS) has this TPA registered. Nothing verifies the old `"matrix-sso"` value — see [ADR-018](../architecture/decisions/ADR-018.md).
 
 ### `oauth-userinfo`
 

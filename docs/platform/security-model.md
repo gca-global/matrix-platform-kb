@@ -109,21 +109,23 @@ The `oauth-token` and `switch-role` Edge Functions implement a **hybrid signing 
 
 | Condition | Algorithm | Key Source | Used By |
 |-----------|-----------|-----------|---------|
-| App has **no** `jwt_secret_name` (uses SSO PostgREST) | **ES256** | Vault secret `sso_es256_signing_key` (JWK with `kid`) | Apps running on SSO instance |
-| App **has** `jwt_secret_name` (own Supabase project) | **HS256** | App-specific secret from vault, or SSO `JWT_SECRET` fallback | Domain-Specific apps (HRMS, FM, ITSM) |
-| ES256 key unavailable in vault | **HS256** | SSO `JWT_SECRET` env var | Fallback only |
+| App has **no** `jwt_secret_name` (own DB trusts SSO via TPA, or uses SSO PostgREST) | **ES256** | Vault secret `sso_es256_signing_key` (JWK with `kid`) | Apps verifying via the SSO JWKS |
+| App **has** `jwt_secret_name` (own Supabase project, not yet on TPA) | **HS256** | App-specific secret from vault, or SSO `JWT_SECRET` fallback | Domain-Specific apps (HRMS, FM, ITSM) |
+| ES256 key unavailable in vault (ES256 apps) | **fail closed `503`** | — | No silent HS256 downgrade — see ADR-011 (2026-05-31) |
 
-**Why hybrid**: Each Supabase project's PostgREST only trusts keys registered in that project. The ES256 standby key is imported into the SSO project. Domain-Specific apps with their own Supabase projects still need HS256 tokens signed with their project's legacy JWT secret until those projects also import the shared ES256 key.
+**Why hybrid**: Each Supabase project's PostgREST only trusts keys registered in that project. The ES256 signing key (`dab1e43f`) is a standby key in the SSO project and is served at the SSO `/auth/v1/.well-known/jwks.json`. An **own-DB app** makes its PostgREST trust SSO ES256 tokens by registering **Supabase Third-Party Auth** against that JWKS + the SSO issuer URL (see [ADR-018](../architecture/decisions/ADR-018.md)) — no key import, no secret sharing. Apps not yet on TPA stay on HS256 (`jwt_secret_name` set), signed with their project's legacy secret.
+
+> **Issuer (2026-05-31)**: SSO tokens set `iss = https://xgubaguglsnokjyudgvc.supabase.co/auth/v1` (was `"matrix-sso"`). Supabase TPA matches the token `iss` to a registered URL issuer, so the bare string could not be used. Nothing verifies the old value — see ADR-018's audit.
 
 ### Migration Path to Full ES256
 
 1. **Done**: ES256 key pair generated and stored in SSO vault (`sso_es256_signing_key`)
 2. **Done**: ES256 public key imported as standby key in SSO project (`xgubaguglsnokjyudgvc`)
-3. **Done**: `oauth-token` and `switch-role` sign with ES256 for SSO-direct apps
-4. **Next**: Import ES256 public key into each app's Supabase project as standby key
-5. **Next**: Update Edge Functions to sign ES256 for all apps (remove `jwt_secret_name` gate)
-6. **Next**: Promote ES256 to "current" key in all projects, retire HS256 secrets
-7. **Final**: Remove HS256 fallback code from Edge Functions
+3. **Done**: `oauth-token` / `switch-role` / `switch-tenant` sign ES256 (key cached + retried; **fail-closed `503`** for ES256 apps instead of HS256 downgrade — ADR-011)
+4. **Done (2026-05-31)**: SSO mints `iss` = SSO issuer URL; **Third-Party Auth registered on the MLS app DB** (`wckwfbbqiupvallmhqbu`) so Pipeline / Atlas / Matrix MLS verify ES256 natively via PostgREST — [ADR-018](../architecture/decisions/ADR-018.md)
+5. **Next**: Register the same TPA on each remaining own-DB app project (HRMS, ITSM, FM), then drop their `jwt_secret_name` (ES256)
+6. **Next**: Promote ES256 to "current" key in all projects, retire HS256 legacy keys
+7. **Final**: Remove HS256 signing code from Edge Functions
 
 ### Token Verification Order (in `switch-role`)
 
@@ -423,6 +425,27 @@ Apps use `role_configurations.pages` to control which pages each role can access
 2. Use `canPerformAction('action-key')` in component logic
 3. Configure which roles can perform this action in `role_configurations`
 
+## OAuth 2.1 + PKCE posture
+
+All Matrix Apps are **public OAuth clients** and authenticate with OAuth 2.1 +
+PKCE (`code_challenge` S256). The `code_verifier` is the client-side defense
+against authorization-code interception.
+
+**Server-managed PKCE (opt-in per app — [ADR-019](../architecture/decisions/ADR-019.md)).**
+Apps flagged `sso_applications.server_managed_pkce = true` exchange the
+authorization code **without** a client `code_verifier`. This is required for
+first-party apps that must log in inside **storage-stripping embedded browsers**
+(e.g. the Cursor in-IDE webview), which drop `sessionStorage` *and* `localStorage`
+across the cross-origin OAuth redirect and therefore cannot carry a verifier.
+
+For opted-in apps the client-side PKCE code-interception protection and the
+client-side CSRF `state` check are replaced by the server-side protections that
+remain on `oauth-token`: **single-use** codes, **short TTL** (10 min), strict
+**`redirect_uri` allowlist** match, **`client_id` binding**, and a valid
+authenticated **SSO session**. This is the confidential-client/BFF posture for
+first-party clients only; the flag defaults `false` and MUST stay `false` for any
+third-party / lower-trust client, which keeps full client-side PKCE.
+
 ## Security Hardening Backlog
 
 > Tracked findings from Supabase security linter and platform audit (April 2026).
@@ -458,6 +481,7 @@ Apps use `role_configurations.pages` to control which pages each role can access
 | ~~C4~~ | sso_applications anonymous read exposes all columns | 2026-04-09 | Migration 041: restricted anon to display columns only |
 | ~~C5~~ | ES256 JWT signing for SSO instance | 2026-04-09 | ADR-011: ES256 key generated, vault stored, standby imported, Edge Functions updated |
 | ~~C6~~ | HRMS edge functions used old `rw_global`/`rw_org` permission model | 2026-04-13 | Migrated `employee-sync`, `hrms-ad-admin`, `hrms-sync-permissions` to scope-based checks (`scope.id` from JWT claims). Dropped `sso_user_permissions` cache table. `hrms-sync-permissions` rewritten to be stateless. |
+| ~~C7~~ | Fresh login looped in storage-stripping embedded browsers (Cursor webview) — orphaned PKCE verifier | 2026-05-31 | ADR-019: server-managed PKCE opt-in (`sso_applications.server_managed_pkce`); `oauth-token` requires `code_verifier` only when not flagged. Enabled for Matrix Pipeline 2.0. |
 
 ## Cross-Reference
 

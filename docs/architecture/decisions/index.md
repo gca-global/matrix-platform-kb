@@ -23,3 +23,5 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-015](ADR-015.md) | CDL Pipeline EF Surface — broker-scope CRUD for Matrix Pipeline | Proposed (largely folded into ADR-016) |
 | [ADR-016](ADR-016.md) | Canonical-into-CDL acceleration for matrix-pipeline 2.0 | Accepted |
 | [ADR-017](ADR-017.md) | Browser SSO token storage — localStorage now, BFF/httpOnly remediation path | Accepted |
+| [ADR-018](ADR-018.md) | SSO issuer URL + Supabase Third-Party Auth for own-DB apps (ES256 completion) | Accepted |
+| [ADR-019](ADR-019.md) | Server-managed PKCE for first-party public clients (webview-proof login) | Accepted |

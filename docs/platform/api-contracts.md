@@ -22,6 +22,17 @@ The full OpenAPI specification lives in `matrix-platform-foundation/openapi.yaml
 | oauth-revoke | `/oauth-revoke` | POST | Bearer | Revoke refresh token |
 | oauth-userinfo | `/oauth-userinfo` | GET | Bearer | Fetch user info with JWT claims |
 
+**`oauth-token` PKCE contract.** Public clients normally MUST send a
+`code_verifier` (PKCE). Apps flagged `sso_applications.server_managed_pkce = true`
+are exempt: `oauth-token` authorizes the `authorization_code` exchange **without**
+a `code_verifier`, relying on the single-use, short-TTL code bound to
+`redirect_uri` + `client_id` + an authenticated SSO session. This **server-managed
+PKCE** mode (default `false`, opt-in per app) exists so fresh logins survive
+storage-stripping embedded browsers (e.g. the Cursor in-IDE webview). The
+challenge-validation step stays conditional on a stored `code_challenge`, so the
+change is backward compatible — a client that still sends challenge+verifier is
+validated exactly as before. See [ADR-019](../architecture/decisions/ADR-019.md).
+
 ### Admin (8 functions)
 
 | Name | Path | Method(s) | Auth | Purpose |
