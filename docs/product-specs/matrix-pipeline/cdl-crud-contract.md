@@ -228,7 +228,7 @@ A short checklist Lovable applies at the top of every relevant prompt:
 | `Prospecting` | READ-C (PII, via `cdl-write`-paired read TBD) | WRITE-B `cdl-write` resource `prospecting` ✅ |
 | `ShowingAvailability` / `ShowingRequest` / `Showing` (recorded) / `Caravan` / `CaravanStop` | READ-A | WRITE-B `cdl-write` (matching resource) ✅ |
 | `LockOrBox` | service-role-only (access audit) | WRITE-B `cdl-write` resource `lock_or_box` ✅ |
-| `TransactionManagement` | READ-A (`transaction_management`) | WRITE-B `cdl-write` resource `transaction_management` ✅ (economics stay app-private) |
+| `TransactionManagement` | READ-A (`transaction_management`) | WRITE-B `cdl-write` resource `transaction_management` ✅ (economics stay app-private). **Authoring split:** offer-side types (`PurchaseOffer`/`LeaseOffer`/`Other`) authored by Pipeline; listing-side types (`ListingForSale`/`ListingForLease`) authored by Atlas (`matrix-atlas-mls` *Listing Transactions*). Same table, no per-app partition. |
 | `HistoryTransactional` | READ-A | WRITE-B `cdl-write` resource `history_transactional` (insert-only) ✅ |
 | `InternetTracking` | READ-A | WRITE-B (queue if needed) |
 | `Activity` / `Document` / `Campaign` / `Referral` | n/a (CRM app DB only forever) | WRITE-A |

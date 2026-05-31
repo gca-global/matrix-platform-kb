@@ -145,6 +145,8 @@ Source: raw/context-v2.md §5, §9.7a.
 
 Canonical resource for offers and transactions: `TransactionType` (PurchaseOffer / LeaseOffer / ListingForSale / ListingForLease / Other). Lifecycle (Draft → Submitted → Countered → Accepted → Rejected / Withdrawn / Expired) is expressed through `HistoryTransactional` rows + `Property.StandardStatus` transitions.
 
+> **Ownership split (2026-05-31):** the **offer-side** `TransactionType` values (`PurchaseOffer` / `LeaseOffer` / `Other`) are authored by this CRM (Pipeline). The **listing-side** values (`ListingForSale` / `ListingForLease`) are authored by **Atlas** (`matrix-atlas-mls`), which owns the listing lifecycle — see its *Listing Transactions* surface. Both apps write the same CDL `transaction_management` table via `cdl-write`; there is no per-app partition on the table itself, only an authoring-surface convention.
+
 The TM card carries the **forecast P&L block** from the Commission Engine subsystem ([wiki/commission-engine.md](commission-engine.md)) — forecast GCI, attributed costs, net margin, per-broker compensation; after deal close, the **variance** (actual − forecast) computed from reconciliation with the external Finance ERP (FR-TM-13).
 
 `OfferAmount` is the **preferred forecast base** when populated (FR-FNL-12 precedence (a)): switching from `SavedSearch` budget mid-point (b) → `OfferAmount` (a) emits `HistoryTransactional` row (`MajorChangeType = Forecast base change`, `ChangeType = SavedSearch budget → OfferAmount`).
