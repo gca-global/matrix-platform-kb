@@ -64,6 +64,11 @@ These implement the OAuth 2.0 + PKCE flow used by all Matrix Apps.
 - Persists `active_scope`, `active_crud`, `active_team_ids` to `auth.users.raw_app_meta_data` (enables CDL RLS fallback)
 - Stores token in `sso_access_tokens` table
 
+**Signing reliability (ES256-or-fail-closed)** — applies to all JWT-minting functions (`oauth-token`, `switch-role`, `switch-tenant`):
+- The ES256 signing key (`get_vault_secret('sso_es256_signing_key')`) is **cached in module scope** (10 min TTL + in-flight de-dup) and fetched with a short retry. One successful vault load serves the warm instance, so a transient vault blip no longer forces a downgrade. The TTL lets a future key rotation propagate.
+- For apps **without** `jwt_secret_name` (ES256 apps — their DB trusts only the SSO ES256 JWKS, kid via `sso-jwks`), if the ES256 key still cannot be resolved the function **fails closed with HTTP `503 temporarily_unavailable`** instead of silently minting an HS256 token. A downgraded HS256 token would be rejected by the app DB at the PostgREST auth layer (401), producing a confusing post-login 401 storm; a retryable 503 at mint time is the correct failure.
+- For apps **with** `jwt_secret_name` (e.g. `jwt_secret_sso_console` → Sharp Matrix Portal, Appointment Reports/meeting-hub, New Client Registration/client-connect; per-app HRMS/ITSM secrets), behavior is unchanged: they always sign HS256 with their app secret and never touch the ES256 path or the 503 fail-closed branch.
+
 ### `oauth-userinfo`
 
 | Field | Value |
