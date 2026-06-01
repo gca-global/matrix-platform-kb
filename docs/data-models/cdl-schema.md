@@ -159,7 +159,12 @@ Append-only log: `(fn, source_id, job_id, caller_sub, payload_summary, result, c
 
 ## Edge functions (CDL project, all `verify_jwt: false`)
 
-All EFs verify `Authorization: Bearer <SSO JWT>` themselves (HS256 first via `SSO_JWT_SECRET` / `JWT_SECRET`, JWKS ES256/RS256 fallback via `SSO_JWKS_URL`) and check `scope` ∈ `SSO_ALLOWED_SCOPES` (default `system_admin,org_admin`; `listings-search` defaults to a broader allow-list via `SSO_LISTINGS_SCOPES`).
+All EFs verify `Authorization: Bearer <SSO JWT>` themselves (HS256 first via `SSO_JWT_SECRET` / `JWT_SECRET`, JWKS ES256/RS256 fallback via `SSO_JWKS_URL`) and check `scope` against an allow-list. Two allow-lists exist:
+
+- **Admin EFs** (`mls-sync`, `mls-sync-orchestrator`, the 5 pipeline stages, `listing-publish`, `cdl-write`, …) use `SSO_ALLOWED_SCOPES` (default `system_admin,org_admin`) — set project-wide to `system_admin,org_admin`.
+- **Broker-scope read EFs** (`cdl-contacts-read`, `cdl-contact-listings-read`, `cdl-engagement-read`, `cdl-read`) use their **own** `SSO_READ_SCOPES` (default `self,team,global,org_admin,system_admin`) so a Broker (`self`) session can read. This is deliberately decoupled from the shared `SSO_ALLOWED_SCOPES` (which stays admin-only so the admin EFs are not widened). Mirrors how `listings-search` uses `SSO_LISTINGS_SCOPES`. Leave `SSO_READ_SCOPES` unset to keep the broad default.
+
+> **Owner-clamp deferred (accepted residual risk):** the PII read EFs (`cdl-contacts-read`, `cdl-contact-listings-read`, `cdl-engagement-read`) currently return **org-wide** rows for any allowed scope — no per-`owner_member_key` clamp. The `scopeToOwner` path exists but is inert because there is **no SSO-user → `member_key` mapping**: `members` are keyed on legacy Cyprus/Qobrix emails while SSO logins are Azure AD staff, and the JWT carries no `member_key`. Enforcing real owner-clamp requires first building that identity mapping (member_key claim or mapping table). Tracked as a follow-up.
 
 ### Pipeline (6 stages — Phase 1 Best-in-Class, Apr 2026)
 
@@ -223,6 +228,7 @@ Response: `{ data, total, page, pageSize }`. Sortable fields: `published_at, pri
 
 - All admin EFs (`mls-sync`, `mls-sync-orchestrator`, the 5 pipeline EF stages plus the `media-merge` RPC) require `scope` ∈ `SSO_ALLOWED_SCOPES` (default `system_admin,org_admin`).
 - `listings-search` allows `self,team,global,org_admin,system_admin` by default (overridable via `SSO_LISTINGS_SCOPES`).
+- The broker-scope read EFs (`cdl-contacts-read`, `cdl-contact-listings-read`, `cdl-engagement-read`, `cdl-read`) allow `self,team,global,org_admin,system_admin` by default via their own `SSO_READ_SCOPES` (NOT the shared `SSO_ALLOWED_SCOPES`). Do not point these at `SSO_ALLOWED_SCOPES` — that admin-only project value would 403 every Broker session. Owner-clamp is deferred (see Edge-functions note above).
 - The control-plane tables are tenant-scoped: every row carries `tenant_id` extracted from the JWT (`tenant_id` / `tenant.id` / `active_role.tenant_id`). The EFs run as `service_role` and enforce isolation by always filtering on the verified `tenant_id`.
 - `public.properties` / `public.properties_published` / `public.property_media` are **not** tenant-scoped today — they share a single CDL-wide listing dataset keyed by `source_id`. Tenant-vs-source mapping for read access is handled at the EF layer when needed (e.g. `listings-search` can be filtered to `filters.sourceId`). Multi-tenant scoping of the canonical listings tables remains an open item if/when distinct tenants run distinct MLS feeds against the same CDL.
 
