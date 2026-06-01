@@ -476,6 +476,22 @@ SSO server's single-use enforcement is authoritative, and the client marks a cod
 the exchange. Burning pre-flight previously poisoned benign React remounts with a
 false "this sign-in link has already been used" error.
 
+**Bounded authorization-code replay window (2026-06-01 — [ADR-019](../architecture/decisions/ADR-019.md)).**
+Strict single-use still broke fresh login in browsers that *reload* the callback and
+**cancel** the winning exchange before its response is read (the Lovable preview's
+`callback_lovable_sha` reload storm; React StrictMode / prefetch double-submits) —
+the code is spent server-side but the tokens die with the torn-down fetch. `oauth-token`
+now grants a **bounded same-client replay window** (`REPLAY_WINDOW_MS = 60_000`): on
+first consumption it records `consumed_at` and caches the issued access + refresh token
+on the code row, and a re-presentation of the **same** code by the **same** `client_id`
++ `redirect_uri` within the window **re-delivers the identical tokens** (no new session,
+no refresh-token rotation, no new credential). All bindings above are still enforced on
+the replay path; outside the window the code is fully spent and the cached tokens are
+nulled (`sso_clear_expired_authcode_tokens()`). This is a bounded (≤60 s),
+security-reviewed relaxation of strict single-use, risk-equivalent to the code's own
+in-transit value extended by the window. Consumption is also now recorded **after** a
+successful mint, so a transient signing/storage error no longer burns the code.
+
 **Identity claims in the access token / PII-at-rest (2026).** To eliminate the
 post-login `oauth-userinfo` round-trip, the `oauth-token` JWT now embeds identity
 claims (`email`, `email_verified`, `name`, `picture`) alongside the role/scope
