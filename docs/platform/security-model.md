@@ -438,13 +438,30 @@ first-party apps that must log in inside **storage-stripping embedded browsers**
 (e.g. the Cursor in-IDE webview), which drop `sessionStorage` *and* `localStorage`
 across the cross-origin OAuth redirect and therefore cannot carry a verifier.
 
-For opted-in apps the client-side PKCE code-interception protection and the
-client-side CSRF `state` check are replaced by the server-side protections that
-remain on `oauth-token`: **single-use** codes, **short TTL** (10 min), strict
-**`redirect_uri` allowlist** match, **`client_id` binding**, and a valid
-authenticated **SSO session**. This is the confidential-client/BFF posture for
-first-party clients only; the flag defaults `false` and MUST stay `false` for any
-third-party / lower-trust client, which keeps full client-side PKCE.
+For opted-in apps the client-side PKCE code-interception protection is replaced by
+the server-side protections that remain on `oauth-token`: **single-use** codes,
+**short TTL** (10 min), strict **`redirect_uri` allowlist** match, **`client_id`
+binding** (enforced in `oauth-token` as of 2026-06-01 — previously documented here
+but not implemented; a spec/impl drift now closed), and a valid authenticated
+**SSO session**.
+
+The client-side CSRF `state` check, however, is **not** replaced by an equivalent
+server-side `state` check: a sound `state` defense needs a client-held secret that
+the storage-stripping webview cannot keep, so a server-side comparison of the
+URL-supplied `state` would be a placebo. The loss is therefore an **accepted
+residual risk for first-party public clients**, bounded by the bindings above plus
+the authorize-step app-access gate (the attacker must be an *authorized* SSO user)
+and an all-authenticated-employee population. The durable fix is the
+[ADR-017](../architecture/decisions/ADR-017.md) BFF / HttpOnly-cookie direction.
+This is the confidential-client/BFF posture for first-party clients only; the flag
+defaults `false` and MUST stay `false` for any third-party / lower-trust client,
+which keeps full client-side PKCE.
+
+The app-side single-use guard in `AuthCallback.tsx` is **belt-and-suspenders**: the
+SSO server's single-use enforcement is authoritative, and the client marks a code
+"used" only **after a terminal outcome** (success or terminal failure), never before
+the exchange. Burning pre-flight previously poisoned benign React remounts with a
+false "this sign-in link has already been used" error.
 
 ## Security Hardening Backlog
 
