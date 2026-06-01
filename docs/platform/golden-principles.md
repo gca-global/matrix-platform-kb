@@ -98,10 +98,22 @@ CDL PostgREST. Do not juggle "Supabase native tokens" or
 **Why it works**: CDL is configured with Supabase **Third-Party Auth**
 pointing at the SSO JWKS URL + issuer. PostgREST verifies the SSO token
 directly. This supersedes the earlier two-token dance. See
-[ADR-012](../architecture/decisions/ADR-012.md).
+[ADR-012](../architecture/decisions/ADR-012.md) and
+[ADR-018](../architecture/decisions/ADR-018.md).
 
-**Enforcement**: `buildCdlClient()` in `dataLayerClient.ts` forwards the
-SSO access token. Do not re-introduce native-token plumbing.
+> **Confirmed live (2026-06-01).** CDL TPA was actually empty until this date
+> (the principle was aspirational — direct SSO-JWT reads returned `PGRST301`).
+> TPA is now registered on CDL (`ofzcokolkeejgqfjaszq`); `resolved_jwks`
+> includes the signing `kid dab1e43f`. Public-reference CDL tables (`members`,
+> `offices`, `open_houses`, `showings`, plus the already-split
+> `properties_published`/`history_transactional`) now carry **both** anon and
+> `authenticated` SELECT policies (`qual = true`), so an SSO ES256 token reads
+> them via RLS. PII tables (`contacts`, `contact_listings`) stay
+> `service_role`-only behind Edge Functions.
+
+**Enforcement**: the per-request `accessToken` hook (`postgrestAccessToken` in
+`matrix-sso.ts`, shared by the App DB / SSO / CDL clients) forwards a fresh SSO
+access token. Do not re-introduce native-token plumbing.
 
 ### T2. CDL RLS helpers are JWT-only (no `app_metadata` fallback)
 
@@ -205,21 +217,29 @@ Legacy apps and some token types lack this claim → tenant isolation breaks.
 
 ### C1. Use the correct Supabase client for each table
 
-**Rule**: Not all tables are accessible with all client types. The SSO JWT is
-not recognized by CDL PostgREST (causes `PGRST301`), so tables with
-auth-dependent RLS need the authenticated client while tables with anon policies
-can use the anon client.
+**Rule**: All three projects (SSO, App DB, CDL) now verify the SSO ES256 JWT
+the same way — SSO via the GoTrue standby key, App DB + CDL via Third-Party Auth
+rooted at the SSO JWKS (`kid dab1e43f`). So sending the SSO token to any of them
+is valid as of 2026-06-01 (it no longer causes `PGRST301`). Client choice is now
+about **whether identity/scope is needed**, not about token compatibility: use
+the anon client for genuinely public reference reads (no identity), and the
+authenticated client when RLS keys on `auth.jwt()` claims.
 
 | Table | Client | Reason |
 |-------|--------|--------|
-| `sso_tenants` | `createAnonDataLayerClient()` | Has anon SELECT policy for active tenants |
-| `sso_roles` | `createDataLayerClient()` | RLS requires `authenticated` role |
-| `sso_role_configurations` | `createDataLayerClient()` | RLS requires auth for SELECT |
-| `app_settings` | `createAnonDataLayerClient()` | Has anon SELECT policy |
-| App-specific tables | `supabase` (app client) | App DB with RLS via SSO JWT or native token |
+| `sso_tenants` | anon (`ssoClient`) | Has anon SELECT policy for active tenants (branding) |
+| `sso_roles` | authed (`ssoAuthedClient`) | RLS requires `authenticated` role |
+| `app_settings` | authed (`ssoAuthedClient`) | RLS keys on tenant / `rw_global` |
+| `role_configurations` (App DB) | `supabase` (app client) | App DB, RLS via SSO JWT; SELECT is public/`true` |
+| CDL `members`/`offices`/`open_houses`/`showings`/`properties_published` | `cdlAnonClient` (public) or `cdlAuthedClient` (scope-filtered) | anon + authenticated SELECT (`qual=true`) |
+| CDL `contacts`/`contact_listings` (PII) | `invokeCdl` EF only | `service_role`-only RLS; never a browser client |
 
-**Why it fails**: Using the wrong client causes `PGRST301` errors or empty
-results depending on the RLS policy.
+**Why it fails**: Using a client that omits identity on an RLS table returns
+**empty results** (the `authenticated` policy never matches under the anon role)
+— this is what made CDL `members` return `[]` for an SSO token before the
+`authenticated` SELECT policies were added. Sending an **expired** bearer to any
+PostgREST is a hard `401`; the shared `postgrestAccessToken` hook refreshes on
+expiry and falls back to anon to avoid that cascade.
 
 **Enforcement**: Code review. Documented per-table in Lovable prompts.
 

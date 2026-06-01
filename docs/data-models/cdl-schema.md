@@ -470,11 +470,27 @@ underlying RLS applies) and **revoke all from `anon`/`authenticated`**. The
 canonical read path is now the `cdl-contact-listings-read` EF (`op=by-property`),
 which resolves the same join service-role-side behind an SSO JWT scope check.
 
+### CDL Third-Party Auth + authenticated reference reads (2026-06-01)
+
+CDL is now registered for Supabase **Third-Party Auth** against the SSO JWKS
+(see [ADR-018](../architecture/decisions/ADR-018.md)), so CDL PostgREST verifies
+an SSO ES256 token directly (was `PGRST301`). The public-reference tables
+`members`, `offices`, `open_houses`, `showings` were broadened from anon-only to
+**`{anon, authenticated}` SELECT** (`qual = true`) — migration
+`20260601190000_tpa_authed_reference_reads.sql` — mirroring the existing
+`properties_published` (`pp_anon_read` / `pp_authed_read`) and
+`history_transactional` split. This is additive (no new exposure: anon already
+read these as public RESO reference data) and lets a logged-in caller read them
+with either the anon key (`cdlAnonClient`) or the SSO JWT (`cdlAuthedClient`).
+**PII tables (`contacts`, `contact_listings`) remain `service_role`-only behind
+EFs** — TPA does **not** open them to the browser. Owner-clamp is still deferred
+(see the Edge-functions note above).
+
 ### Broker-scope read EFs for non-anon CDL tables (2026-05-31)
 
-The `matrix-pipeline` app holds only the CDL **anon** key, so it cannot read
-tables whose RLS SELECT policy targets the `authenticated` role (or is
-service-role-only). Two broker-scope read EFs close that gap (both
+Even with TPA live, two classes of data stay on EFs: **PII / service-role-only**
+tables, and joins that touch them. `matrix-pipeline` reads those through the
+broker-scope read EFs below (both
 `verify_jwt = false`, custom SSO-JWT verification + scope check, service-role
 inside; mirror `cdl-contacts-read`):
 

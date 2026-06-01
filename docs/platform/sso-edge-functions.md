@@ -322,5 +322,33 @@ See [ADR-007](../architecture/decisions/ADR-007.md) for the Edge Function archit
 | JWT claims structure | [security-model.md](security-model.md#jwt-claims-structure) |
 | ES256 signing logic | [security-model.md](security-model.md#jwt-signing--es256-target--hs256-legacy) |
 | ES256 migration plan | [ADR-011](../architecture/decisions/ADR-011.md) |
+| Unified TPA / key-rotation runbook | [ADR-018](../architecture/decisions/ADR-018.md) |
 | App-side auth hooks | [app-template.md](app-template.md#auth-hooks) |
 | Full app auth flow | [app-template.md](app-template.md#sso-auth-flow) |
+
+## Health probe — catch JWT-verification regressions
+
+`~/tmp/sso_health_probe.mjs` mints a short-lived ES256 token (in-memory, from the
+`sso_es256_signing_key` vault secret) and asserts `200` across the whole unified
+verification surface, so a broken TPA registration, an un-reloaded Data API, or a
+botched key rotation is caught immediately (it would show `PGRST301` on PostgREST
+or `401` on an EF):
+
+| Target | What it proves |
+|---|---|
+| SSO `sso_roles` (PostgREST) | SSO verifies its own ES256 via the GoTrue standby key |
+| App DB `role_configurations` (PostgREST) | App DB Third-Party Auth → SSO JWKS |
+| CDL `members` (PostgREST) | CDL Third-Party Auth → SSO JWKS (ADR-018, 2026-06-01) |
+| CDL `cdl-contacts-read` (EF) | CDL EF in-code signature verification |
+| SSO `admin-ad-users` (EF) | SSO admin EF ES256 signature gate (`_shared/admin.ts`) |
+
+```bash
+# anon + service-role keys come from `supabase projects api-keys`
+SR="$SSO_SERVICE_ROLE_KEY" \
+  SSO_ANON=… CDL_ANON=… APP_ANON=… \
+  node ~/tmp/sso_health_probe.mjs    # exit 0 = ALL PASS, 1 = a regression
+```
+
+> `oauth-userinfo` is deliberately **not** probed: its ES256 path is inert and it
+> only succeeds via an opaque-token DB lookup, so a hand-minted token 401s by
+> design. Run this probe after any TPA / JWKS / signing-key change.
