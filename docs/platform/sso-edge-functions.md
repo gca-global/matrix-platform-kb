@@ -76,7 +76,7 @@ compatible — a client still sending challenge+verifier validates as before. Se
 **Side effects** (all **deferred** off the synchronous mint path via `EdgeRuntime.waitUntil` — they do not block the token response):
 - Persists `active_scope`, `active_crud`, `active_team_ids` to `auth.users.raw_app_meta_data`. This is now a **fallback only**: the SSO-DB RLS helpers (`sso_get_active_scope`, `sso_get_crud`, `sso_get_current_team_ids`) read `request.jwt.claims` **first** and only consult `raw_app_meta_data` when the claim is absent — and the minted JWT always carries those claims, so deferring this write does not affect RLS for freshly-minted tokens.
 - Backfills `tenant_id` / `azure_object_id` into `user_metadata` when missing.
-- Stores token in `sso_access_tokens` table (synchronous; not deferred).
+- Stores token in `sso_access_tokens` table (synchronous; not deferred). ⚠️ The enriched JWT (~3.4 KB) exceeds the btree row-size limit (2704 bytes), so `sso_access_tokens.token` is indexed with a **hash** index (`idx_access_tokens_token_hash`, equality lookups only) plus a `md5(token)` **unique** guard — NOT a plain/unique btree on the raw token. Re-adding a btree index on the raw `token` column will break every login/refresh. (migration `20260601143000_fix_sso_access_tokens_token_index_for_enriched_jwt`.)
 
 **Token-mint performance**: `getUserById` and `loadDefaultSettings` are fetched **once** per request and the independent reads (permissions, groups, roles, teams, attributes) run in `Promise.all` (previously serial, with a duplicate `getUserById`). See [performance.md](performance.md#sso-login-latency-auth-critical-path).
 
