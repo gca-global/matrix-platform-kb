@@ -241,6 +241,19 @@ All functions are `STABLE` with `SET search_path = public` for security and perf
 > "Supabase native token" path. That code is gone on the new CDL
 > project. Per-app DBs may still read `app_metadata` if they choose,
 > but this is not required and not the recommended pattern.
+>
+> **SSO-project helpers (`sso_get_active_scope`, `sso_get_crud`,
+> `sso_get_current_team_ids`) — JWT-first, `app_metadata` fallback (2026).**
+> Unlike the CDL helpers, the SSO project's own helpers retain a
+> `raw_app_meta_data` fallback, but they read `request.jwt.claims` **first**
+> (`scope.id` / `scope` / `crud` / `team_ids`) and only consult `app_metadata`
+> when the claim is absent. Because every token minted by `oauth-token`,
+> `switch-role`, and `switch-tenant` now carries those claims, the fallback is
+> belt-and-suspenders for legacy/opaque tokens only. Consequently `oauth-token`
+> persists `active_scope` / `active_crud` / `active_team_ids` to `app_metadata`
+> **asynchronously** (`EdgeRuntime.waitUntil`) off the token-mint critical path —
+> a deferred write cannot affect RLS for the freshly-minted token, since the
+> helpers resolve those values from the JWT it already carries.
 
 ### SQL Implementations
 
@@ -462,6 +475,23 @@ SSO server's single-use enforcement is authoritative, and the client marks a cod
 "used" only **after a terminal outcome** (success or terminal failure), never before
 the exchange. Burning pre-flight previously poisoned benign React remounts with a
 false "this sign-in link has already been used" error.
+
+**Identity claims in the access token / PII-at-rest (2026).** To eliminate the
+post-login `oauth-userinfo` round-trip, the `oauth-token` JWT now embeds identity
+claims (`email`, `email_verified`, `name`, `picture`) alongside the role/scope
+claims it already carried. Since apps persist the access token in `localStorage`,
+this marginally increases PII-at-rest. **No new control is weakened**: the same
+token already exposed role, tenant, team, and permission claims, and the exposure is
+bounded by the *same* XSS threat already accepted under
+[ADR-017](../architecture/decisions/ADR-017.md). The durable mitigation is the
+same BFF / HttpOnly-cookie direction below.
+
+**BFF intentionally deferred.** This change set (JWT enrichment + login-path
+simplification) deliberately does **not** adopt the BFF / HttpOnly-cookie posture of
+[ADR-017](../architecture/decisions/ADR-017.md). BFF is the only step that would
+*raise* the security posture (removing tokens from `localStorage` entirely) and it
+remains the tracked future security-upgrade initiative — it is out of scope here,
+which keeps this change "same security level, faster + simpler."
 
 ## Security Hardening Backlog
 

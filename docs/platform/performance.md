@@ -35,6 +35,21 @@
 | JSON serialization | 1-2 ms |
 | **Total p99** | **≤ 20 ms** ✓ |
 
+## SSO login latency (auth critical path)
+
+The OAuth login chain is a separate hot path from CDL reads and now has its own budget. A single login traverses `oauth-authorize → oauth-token → (optional) oauth-userinfo`.
+
+| Surface | Budget (p99, warm) | Notes |
+|---|---|---|
+| `oauth-token` exchange (`authorization_code`, warm instance) | **≤ 300 ms** | Mints + ES256-signs the JWT. Independent DB reads (permissions, groups, roles, teams, attributes) run in `Promise.all`; `getUserById` + `loadDefaultSettings` are fetched once each. |
+| `oauth-token` refresh | **≤ 300 ms** | Same resolution path as the initial grant. |
+| `oauth-userinfo` | **≤ 250 ms** | **No longer on the login critical path** — the enriched JWT carries the full profile, so first-party apps hydrate from claims and call userinfo only in the background / for not-yet-migrated apps. |
+| **Code → first authenticated paint** | **≤ 800 ms** | From the client receiving `?code=` to rendering the authenticated shell. Dropping the blocking post-login `oauth-userinfo` round-trip removes one EF hop from this path. |
+
+**What changed (2026):** the JWT issued by `oauth-token` now embeds the full consumed profile (`email`, `email_verified`, `name`, `picture`, `sso_role`, `scope`, `crud`, `available_roles`, `organization`, `teams`, `allowed_apps`, `tenant_id`, `uoi`, `org_name`, `groups`, `permissions`, `member_type`, `act_as_roles`). The shared `matrix-apps-template` decodes these claims (`decodeUserFromToken`) on login instead of blocking on `oauth-userinfo`. Non-critical metadata backfills (`tenant_id`, `azure_object_id`, `app_metadata` active-role claims) are deferred off the mint path via `EdgeRuntime.waitUntil` and are excluded from the budget above. `oauth-userinfo`'s response shape is **unchanged** and remains the source of truth (background refresh + apps that have not synced the template). See [sso-edge-functions.md](sso-edge-functions.md) and [api-contracts.md](api-contracts.md).
+
+**Instrumentation:** quantify before/after by logging wall-clock around the `oauth-token` resolution block and the client's `code → setUser` span. Track `oauth-token` p99 via `histogram_quantile(0.99, …)` on the EF logs, the same way `listings-search` is monitored.
+
 ## Index strategy on `public.properties_published`
 
 The hot read table is `properties_published`. The index strategy that achieves the budget above is documented in

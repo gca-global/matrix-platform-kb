@@ -19,8 +19,8 @@ The full OpenAPI specification lives in `matrix-platform-foundation/openapi.yaml
 | oauth-token | `/oauth-token` | POST | None | Exchange auth code for JWT |
 | oauth-callback | `/oauth-callback` | GET | None | OAuth callback handler |
 | oauth-login | `/oauth-login` | POST | None | Direct login (username/password) |
-| oauth-revoke | `/oauth-revoke` | POST | Bearer | Revoke refresh token |
-| oauth-userinfo | `/oauth-userinfo` | GET | Bearer | Fetch user info with JWT claims |
+| oauth-revoke | `/oauth-revoke` | POST | client_id + token (RFC 7009) | Revoke refresh token (`verify_jwt: false`; no SSO/Supabase JWT required) |
+| oauth-userinfo | `/oauth-userinfo` | GET | Bearer | Fetch user info with JWT claims (**optional on login** — see note) |
 
 **`oauth-token` PKCE contract.** Public clients normally MUST send a
 `code_verifier` (PKCE). Apps flagged `sso_applications.server_managed_pkce = true`
@@ -32,6 +32,19 @@ storage-stripping embedded browsers (e.g. the Cursor in-IDE webview). The
 challenge-validation step stays conditional on a stored `code_challenge`, so the
 change is backward compatible — a client that still sends challenge+verifier is
 validated exactly as before. See [ADR-019](../architecture/decisions/ADR-019.md).
+
+**`oauth-token` enriched JWT / `oauth-userinfo` optional on login (2026).** The
+access token minted by `oauth-token` now embeds the full consumed profile
+(`email`, `email_verified`, `name`, `picture`, `sso_role`, `scope`, `crud`,
+`available_roles`, `organization`, `teams`, `allowed_apps`, `tenant_id`, `uoi`,
+`org_name`, `groups`, `permissions`, `member_type`, `act_as_roles`). First-party
+apps (via the shared `matrix-apps-template`) decode these claims on login instead
+of making a second `oauth-userinfo` round-trip, removing one Edge-Function hop from
+the login critical path. **`oauth-userinfo`'s response shape is frozen and remains
+the source of truth** — it is still called for background freshness and by apps
+that have not synced the template, so this is fully backward compatible. See
+[sso-edge-functions.md](sso-edge-functions.md) and
+[performance.md](performance.md#sso-login-latency-auth-critical-path).
 
 ### Admin (8 functions)
 

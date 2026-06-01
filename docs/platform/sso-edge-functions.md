@@ -71,9 +71,14 @@ compatible — a client still sending challenge+verifier validates as before. Se
 }
 ```
 
-**Side effects**:
-- Persists `active_scope`, `active_crud`, `active_team_ids` to `auth.users.raw_app_meta_data` (enables CDL RLS fallback)
-- Stores token in `sso_access_tokens` table
+**Embedded JWT claims (2026 — login round-trip elimination)**: the minted access token now carries the **full consumed profile** so first-party apps can hydrate the user from the signed JWT without a second `oauth-userinfo` call. In addition to the role/scope/org claims it already carried (`sso_role`, `scope`, `crud`, `active_scope`, `organization`, `teams`, `allowed_apps`, `uoi`, `org_name`, `team_ids`, `groups`, `permissions`, `member_type`, `act_as_roles`, `attrs`), it now also includes: `email`, `email_verified`, `name`, `picture`, `available_roles`, and `tenant_id`. These are ES256-signed (equivalent trust to the userinfo response). The shared `matrix-apps-template` decodes them via `decodeUserFromToken` on login. Apps that have not synced the template keep calling `oauth-userinfo` and keep working. (See [performance.md](performance.md#sso-login-latency-auth-critical-path).)
+
+**Side effects** (all **deferred** off the synchronous mint path via `EdgeRuntime.waitUntil` — they do not block the token response):
+- Persists `active_scope`, `active_crud`, `active_team_ids` to `auth.users.raw_app_meta_data`. This is now a **fallback only**: the SSO-DB RLS helpers (`sso_get_active_scope`, `sso_get_crud`, `sso_get_current_team_ids`) read `request.jwt.claims` **first** and only consult `raw_app_meta_data` when the claim is absent — and the minted JWT always carries those claims, so deferring this write does not affect RLS for freshly-minted tokens.
+- Backfills `tenant_id` / `azure_object_id` into `user_metadata` when missing.
+- Stores token in `sso_access_tokens` table (synchronous; not deferred).
+
+**Token-mint performance**: `getUserById` and `loadDefaultSettings` are fetched **once** per request and the independent reads (permissions, groups, roles, teams, attributes) run in `Promise.all` (previously serial, with a duplicate `getUserById`). See [performance.md](performance.md#sso-login-latency-auth-critical-path).
 
 **Signing reliability (ES256-or-fail-closed)** — applies to all JWT-minting functions (`oauth-token`, `switch-role`, `switch-tenant`):
 - The ES256 signing key (`get_vault_secret('sso_es256_signing_key')`) is **cached in module scope** (10 min TTL + in-flight de-dup) and fetched with a short retry. One successful vault load serves the warm instance, so a transient vault blip no longer forces a downgrade. The TTL lets a future key rotation propagate.
@@ -91,18 +96,35 @@ compatible — a client still sending challenge+verifier validates as before. Se
 | `verify_jwt` | `false` |
 | Purpose | Returns current user info and role claims |
 
+**Optional on the login path (2026)**: because `oauth-token` now embeds the full
+profile in the JWT, first-party apps no longer call this on login — the shared
+template hydrates from claims and calls `oauth-userinfo` only in the **background**
+(freshness refresh) and for not-yet-migrated apps. **The response shape below is
+frozen** — existing apps hydrate their entire user (incl. `act_as_roles`,
+`member_type`, `permissions`, `groups`, `tenant_id`) from it. New JWT claims are
+additive; userinfo fields are never renamed or removed.
+
+**Token verification order** (incoming bearer): ES256 (cached vault key) → HS256
+(`JWT_SECRET` / app secret) → opaque-token lookup (`sso_access_tokens`). The ES256
+signature is now verified (previously an ES256 token fell through to the opaque DB
+lookup with no signature check — KB gap H4, closed).
+
 **Response** (`200`):
 ```json
 {
   "sub": "<user_uuid>",
   "email": "user@sharpsir.group",
+  "email_verified": true,
   "sso_role": { "id": "<uuid>", "name": "Sales Manager" },
   "scope": { "id": "team", "name": "Team" },
   "crud": "crud",
   "organization": { "id": "<tenant_uuid>", "name": "Sharp Sotheby's" },
   "teams": [{ "id": "<uuid>", "name": "Dubai Sales" }],
   "allowed_apps": [{ "id": "client_id", "name": "Pipeline Management" }],
-  "available_roles": [{ "uuid": "<uuid>", "name": "Sales Manager", "scope": "team", "is_primary": true }]
+  "available_roles": [{ "uuid": "<uuid>", "name": "Sales Manager", "scope": "team", "is_primary": true }],
+  "tenant_id": "<tenant_uuid>",
+  "member_type": "Broker",
+  "act_as_roles": []
 }
 ```
 
@@ -129,9 +151,14 @@ compatible — a client still sending challenge+verifier validates as before. Se
 | Field | Value |
 |-------|-------|
 | Method | `POST` |
-| Auth | `Bearer <SSO JWT>` |
-| `verify_jwt` | `true` |
-| Purpose | Revokes access token and associated refresh token |
+| Auth | `client_id` + the refresh token itself (RFC 7009) |
+| `verify_jwt` | `false` |
+| Purpose | Revokes a refresh token. Authenticated by `client_id` (+ `client_secret` for confidential clients) and the token value — no SSO/Supabase JWT required. |
+
+> **2026 fix**: `oauth-revoke` was previously `verify_jwt: true`, which forced the
+> caller to hold a live Supabase session token just to log out. Per RFC 7009 and
+> the rest of the OAuth surface it now runs `verify_jwt: false` and validates the
+> client + token internally. Resolves the documented contradiction in this doc.
 
 ## Role Management
 
@@ -278,7 +305,9 @@ All SSO-facing functions use `verify_jwt: false` with custom JWT verification in
 2. `verify_jwt: true` causes Supabase to reject the request **before** your code runs if the JWT isn't a valid Supabase native token
 3. Functions need to accept tokens from multiple sources (ES256, app HS256, SSO HS256, opaque)
 
-**Exceptions**: `oauth-revoke`, `admin-set-password`, `generate-sso-token`, `validate-sso-token`, `get-users-with-emails`, `check-privileges` use `verify_jwt: true` (accept Supabase native tokens only).
+**Exceptions** (`verify_jwt: true` — accept Supabase native tokens only): `admin-set-password`, `generate-sso-token`, `validate-sso-token`, `get-users-with-emails`.
+
+> **2026 fix**: `oauth-revoke`, `resolve-users`, and `check-privileges` were moved to `verify_jwt: false` (added explicitly to `config.toml`). They accept **custom SSO tokens** (or, for revoke, client-credentials + token) and verify internally, so gating them with the platform JWT check was incorrect — it rejected valid ES256 SSO tokens / forced a live Supabase session for logout. This closes the documented `verify_jwt` contradiction.
 
 See [ADR-007](../architecture/decisions/ADR-007.md) for the Edge Function architecture decision.
 
