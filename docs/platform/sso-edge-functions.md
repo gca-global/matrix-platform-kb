@@ -243,6 +243,10 @@ lookup with no signature check — KB gap H4, closed).
 
 All admin functions require `org_admin` or `system_admin` scope.
 
+**Token verification (`_shared/admin.ts` — `requireAdmin` / `requireAdminOrOrgAdmin` / `requireUserManagement`)**: ES256 (public vault key) → HS256 (app-specific via `jwt_secret_name`, else `JWT_SECRET`) → Supabase-native (`auth.getUser`) fallback. There is **no** opaque-token DB fallback here (unlike `oauth-userinfo`), so the signature path must actually verify.
+
+> **2026-06-01 fix — admin EFs 401'd for ES256 apps (e.g. Matrix Pipeline 2.0).** The shared admin helper previously ran an **HS256-only** `jwtVerify`. ES256 SSO tokens (apps with no `jwt_secret_name`) failed it, fell through to `auth.getUser()` (which rejects custom tokens), and returned **401** — most visibly on the Pipeline **AD Employees** page (`admin-ad-users`). HRMS was unaffected because it uses an HS256 app secret (`jwt_secret_smhrms`). Fix: add ES256-first verification mirroring `oauth-userinfo`, **deriving the PUBLIC JWK (drop `d`)** before `importJWK`. Importing the stored *private* JWK as-is yields a sign-only key that `jwtVerify` cannot use (it would throw and silently downgrade to HS256). All 9 admin EFs that import `_shared/admin.ts` (`admin-ad-users`, `admin-users`, `admin-roles`, `admin-apps`, `admin-groups`, `admin-permissions`, `admin-privileges`, `admin-dashboard`, `admin-microsoft-auth`) were redeployed (`verify_jwt=false`). Verified: a minted `rw_global`/`global`-scope ES256 token → `admin-ad-users` 200 (was 401). Note `admin-dashboard` also had a stale `./_shared` import path corrected to `../_shared`. **Related latent issue (not fixed here):** `oauth-userinfo`'s ES256 path imports the private JWK too, so it is effectively inert and only succeeds via its opaque-token DB fallback — it should adopt the same public-key derivation (follow-up).
+
 | Function | Method | Purpose |
 |----------|--------|---------|
 | `admin-users` | `GET/POST/PATCH/DELETE` | CRUD for SSO users (list, create, update, delete, reset password) |
