@@ -1,7 +1,7 @@
 # Sharp Matrix Platform — App Catalog
 
 > All applications and platform components in the Sharp Matrix ecosystem, with current delivery status.
-> Last updated: April 2026
+> Last updated: June 2026
 >
 > **Development model**: Most Matrix business apps are **Lovable-managed projects** — changes flow through structured Lovable prompts, not direct code edits. SSO/CDL Edge Functions and database migrations are managed directly. See [app-template.md — Lovable-Managed Apps](app-template.md#lovable-managed-apps--development--maintenance-model) for details.
 >
@@ -41,6 +41,9 @@
 | 16 | Financial Management | **Matrix FM** | App (Domain-Specific) | Finance Team, Entity Managers, Senior Mgmt |
 | 17 | Integration Management for External MLS and Portals | **Integration Management** | App / Service | Data Engineers, Admins |
 | 18 | Notification Management | **Notification Management** | App / Service | All internal users, Admins |
+| 18a | Matrix Stardom | **Matrix Stardom** | App (internal / design + MLS tooling) | Product, engineering |
+
+> **Matrix Stardom** — `sharpsir-group/matrix-stardom`, Lovable-managed Matrix app shell. Auto-deployed by `github-watcher` on push to `main` (config key `sharpsir-group/matrix-stardom`, secret env `WEBHOOK_SECRET_STARDOM`, Apache path `/stardom/`). Production URL: `https://intranet.sharpsir.group/stardom/`. Ensure the OAuth app’s redirect URIs in the SSO Console include `https://intranet.sharpsir.group/stardom/auth/callback` (and Lovable preview URIs if used).
 
 ### Planned
 
