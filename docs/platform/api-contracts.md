@@ -52,7 +52,7 @@ that have not synced the template, so this is fully backward compatible. See
 |------|------|------------|------|---------|
 | admin-users | `/admin-users` | GET, POST, PATCH, DELETE | Bearer (admin) | User CRUD |
 | admin-roles | `/admin-roles` | GET, POST, PATCH, DELETE | Bearer (admin) | Role management |
-| admin-apps | `/admin-apps` | GET, POST, PATCH, DELETE | Bearer (admin) | App registration |
+| admin-apps | `/admin-apps` | GET, POST, PATCH, DELETE | Bearer (admin) | App registration; PUT also accepts `server_managed_pkce` (ADR-019) and `client_id` (atomic rename via `sso_rename_client_id` RPC — 409 on collision, 404 on missing) |
 | admin-permissions | `/admin-permissions` | GET, POST, DELETE | Bearer (admin) | Permission grants |
 | admin-groups | `/admin-groups` | GET, POST, PATCH, DELETE | Bearer (admin) | Group management |
 | admin-dashboard | `/admin-dashboard` | GET | Bearer (admin) | Stats, activity feed |

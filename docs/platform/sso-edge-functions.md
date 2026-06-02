@@ -259,6 +259,10 @@ All admin functions require `org_admin` or `system_admin` scope.
 | `admin-privileges` | `GET/POST/PATCH` | Manage privilege escalation and delegation |
 | `check-permissions` | `POST` | Check if a user has a specific permission for an app |
 
+> **2026-06-02 — `admin-apps` PUT gained two fields** (redeployed `verify_jwt: false`):
+> - **`server_managed_pkce`** (boolean): read in the GET single/list selects and written in PUT (`updateData.server_managed_pkce = !!server_managed_pkce`). Surfaced as the **Server-managed PKCE** toggle in the Console Edit Application dialog (public clients only). See [ADR-019](../architecture/decisions/ADR-019.md).
+> - **`client_id`** (string): a changed `client_id` is **not** a plain column update (it is FK-referenced by `sso_access_tokens` / `sso_authorization_codes` `ON UPDATE NO ACTION`). The PUT handler fetches the current `client_id` and, if different, calls the `public.sso_rename_client_id(p_old, p_new)` RPC, which runs `SET CONSTRAINTS … DEFERRED` and repoints children + parent atomically (migration `20260602170000_client_id_rename_support` made both FKs `DEFERRABLE INITIALLY IMMEDIATE`). Error mapping: `23505 → 409 client_id_in_use`, `22023 → 400 invalid_request`, `P0002 → 404 not_found`. **Operational caveat:** a renamed app cannot authenticate until its `VITE_SSO_CLIENT_ID` is updated and it is rebuilt/redeployed (the Console dialog warns + requires confirmation).
+
 ## Identity & Directory
 
 | Function | Method | Purpose |
