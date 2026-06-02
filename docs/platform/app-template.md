@@ -29,7 +29,7 @@ Before building, determine which type of app you're creating:
 - UI framework (shadcn/ui + Tailwind + Sharp design system)
 - Data fetching (Supabase client + React Query)
 - Routing (React Router v6 + ProtectedRoute)
-- i18n (i18next EN/RU)
+- i18n (i18next EN/RU/HU + CDL-backed tenant terminology overrides)
 
 ## Tech Stack
 
@@ -40,7 +40,7 @@ Before building, determine which type of app you're creating:
 | Design | Sharp design system: Navy palette, Playfair Display (headings) + Inter (body) |
 | Data | `@supabase/supabase-js` v2 + TanStack Query (React Query) |
 | Auth | Custom SSO (OAuth 2.0 + PKCE) via Supabase Edge Functions, ES256 JWT signing ([ADR-011](../architecture/decisions/ADR-011.md)) |
-| i18n | i18next (EN/RU) |
+| i18n | i18next (EN/RU/HU) + CDL terminology overrides ([ADR-020](../architecture/decisions/ADR-020.md)) |
 | Routing | React Router v6 with `ProtectedRoute` guards |
 
 ## Dual-Supabase Architecture
@@ -403,8 +403,31 @@ function MyComponent() {
 }
 ```
 
-Supported languages: English (`en`), Russian (`ru`).
-Language detected from `localStorage` or browser `navigator.language`.
+Supported languages: English (`en`), Russian (`ru`), Hungarian (`hu`).
+Language detected from `localStorage` or browser `navigator.language`. To add a
+locale, import its `locales/<lng>.json` (mirroring every key in `en.json`), add
+it to `resources` + `supportedLngs` in `src/i18n/index.ts`, and add an entry to
+the `LanguageToggle` + Settings language `Select`.
+
+### Static chrome vs. tenant-configurable terminology
+
+Two complementary layers cover UI strings:
+
+1. **Static chrome** — buttons, generic labels, fixed copy — lives in the
+   file-based `en/ru/hu.json` and is translated at build time via `t('…')`.
+2. **Tenant-configurable terminology** — the business *nouns* a tenant may want
+   to rename or translate (e.g. "Transaction" → "Contract", "Property" →
+   "Listing") — is resolved at runtime from the **CDL** description corpus
+   (`reso_field_descriptions`, project `ofzcokolkeejgqfjaszq`) via the
+   `reso-dd-descriptions` EF. CDL-connected apps render these through
+   `<ResoFieldLabel>` / `<ResoLookupValue>` (RESO keys) and a `Term`/`useTerm`
+   helper (curated `App.<Term>` UI nouns). A tenant admin edits the label **and**
+   its EN/RU/HU translations side by side in Settings → "Translations & Labels",
+   which writes per-tenant override rows via the `mls-sync` resource
+   `reso_label_override`. Internal identifiers (`pageKey`, route, RESO `field`,
+   EF `resource`) and the data model are never affected — only the display label.
+   See [ADR-020](../architecture/decisions/ADR-020.md) and
+   [`docs/data-models/reso-dd-descriptions.md`](../data-models/reso-dd-descriptions.md).
 
 ## Lovable-Managed Apps — Development & Maintenance Model
 

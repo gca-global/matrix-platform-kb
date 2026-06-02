@@ -149,7 +149,8 @@ Emission is mandatory for:
 - any `TransactionManagement` lifecycle event (Draft / Submitted / Countered / Accepted / Rejected / Withdrawn / Expired);
 - any `Property.StandardStatus` transition (triggered by a push event or external webhook);
 - any forecast-base switch in the Commission Engine ([wiki/commission-engine.md](commission-engine.md)) — `SavedSearch` budget mid-point ↔ `TransactionManagement.OfferAmount` (FR-FNL-12);
-- any create / outcome update of a `Referral` row ([wiki/processes.md#referral-lifecycle](processes.md#referral-lifecycle), FR-REF-07, FR-REF-08).
+- any create / outcome update of a `Referral` row ([wiki/processes.md#referral-lifecycle](processes.md#referral-lifecycle), FR-REF-07, FR-REF-08);
+- any per-tenant **UI label/terminology override** write (the `mls-sync` resource `reso_label_override` — see [ADR-020](../../../architecture/decisions/ADR-020.md) and [wiki/architecture.md#escape-hatch](architecture.md#escape-hatch)). The audit row uses `ResourceName = ResoLabelOverride`, `field_name = <corpus key>` (e.g. `App.Transaction`, `Resource.Property`, `Lookup.ContactType`), `field_key = <key>@<locale>`, and `ChangeType ∈ {Created, Updated, Deleted}`; `originating_system_name` is the tenant's source id. This is a UI-presentation audit and does **not** mutate any canonical RESO record — the data model is untouched.
 
 Source: raw/context-v2.md §10.7.
 

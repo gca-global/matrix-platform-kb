@@ -25,3 +25,4 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-017](ADR-017.md) | Browser SSO token storage — localStorage now, BFF/httpOnly remediation path | Accepted |
 | [ADR-018](ADR-018.md) | SSO issuer URL + Supabase Third-Party Auth for own-DB apps (ES256 completion) | Accepted |
 | [ADR-019](ADR-019.md) | Server-managed PKCE for first-party public clients (webview-proof login) | Accepted |
+| [ADR-020](ADR-020.md) | Per-tenant, per-locale UI label/terminology overrides (tenant_key axis + `App.*` namespace + Hungarian) | Accepted |
