@@ -21,7 +21,7 @@
 |----------|------|---------------|
 | **Supabase** | CDL & system of record | SSO instance (auth/permissions) + App DB instances (per app) |
 | **Databricks** | DWH & ETL engine | Bronze/Silver/Gold pipeline, CDC, analytics |
-| **Lovable** | App builder | `matrix-apps-template`, builds all Matrix Apps |
+| **Lovable** | App builder | `matrix-apps-template-2-1`, builds all Matrix Apps |
 
 ## Full Platform Diagram
 
@@ -157,7 +157,7 @@ Company-controlled digital properties.
 
 ### Matrix Apps (Application Layer)
 
-All apps are built by **Lovable** from the **App Builder Template** (`matrix-apps-template`). Two categories:
+All apps are built by **Lovable** from the **App Builder Template** (`matrix-apps-template-2-1`; the prior `matrix-apps-template` is obsolete). Two categories:
 
 | Type | Live | In Progress | Planned | Supabase Tables |
 |------|------|-------------|---------|----------------|

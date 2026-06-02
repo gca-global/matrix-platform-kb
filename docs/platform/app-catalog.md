@@ -83,7 +83,7 @@
 
 ### App Builder Template
 **Status**: Done
-**Repo**: `/home/bitnami/matrix-apps-template`
+**Repo**: `/home/bitnami/matrix-apps-template-2-1` (canonical; the prior `/home/bitnami/matrix-apps-template` is obsolete — do not use or update)
 **Key Features**:
 - Vite + React 18 + TypeScript + shadcn/ui starter kit
 - Dual-Supabase architecture (SSO + App DB)

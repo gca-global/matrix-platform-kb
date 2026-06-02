@@ -12,12 +12,12 @@ Sharp Matrix is built on three platforms, each chosen for what it does best:
 |----------|------|-----------|
 | **Supabase** | Common Data Layer (CDL) — system of record for apps | Edge Functions, Realtime, Auth, RLS, Lovable integration |
 | **Databricks** | DWH & ETL engine — data ingestion, transformation, analytics | Medallion architecture (Bronze/Silver/Gold), CDC, SQL analytics |
-| **Lovable** | App builder — builds all Matrix Apps | Rapid UI, native Supabase integration, uses `matrix-apps-template` |
+| **Lovable** | App builder — builds all Matrix Apps | Rapid UI, native Supabase integration, uses `matrix-apps-template-2-1` |
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │  LOVABLE (App Builder)                                               │
-│  matrix-apps-template → Vite + React + TypeScript + shadcn/ui       │
+│  matrix-apps-template-2-1 → Vite + React + TypeScript + shadcn/ui   │
 ├─────────────────────────────────────────────────────────────────────┤
 │  MATRIX APPS                                                         │
 │  Live: Agency Portal │ Client Connect │ Meeting Hub │ Matrix Comms   │
@@ -71,7 +71,7 @@ the SSO-issued ES256 JWT directly to CDL PostgREST. See ADR-012.
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
-| App Builder | Lovable | Builds all Matrix Apps from `matrix-apps-template` |
+| App Builder | Lovable | Builds all Matrix Apps from `matrix-apps-template-2-1` |
 | App Framework | Vite + React 18 + TypeScript | Frontend runtime |
 | UI Components | shadcn/ui + Tailwind CSS | Sharp design system |
 | Data Fetching | TanStack Query + Supabase JS v2 | Cached queries with RLS |

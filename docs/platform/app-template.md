@@ -1,6 +1,6 @@
 # Matrix App Template — How to Build Sharp Matrix Apps
 
-> Source: `/home/bitnami/matrix-apps-template` (starter kit)
+> Source: `/home/bitnami/matrix-apps-template-2-1` (canonical starter kit — GitHub `sharpsir-group/matrix-apps-template-2-1`). The prior `/home/bitnami/matrix-apps-template` is **obsolete**; do not scaffold from or update it.
 > Examples:
 > - `/home/bitnami/matrix-hrms` — Domain-Specific app (HR, 25+ tables)
 > - `/home/bitnami/matrix-pipeline` — CDL-Connected app (CRM, leads, pipeline)
@@ -118,7 +118,7 @@ ADR-012.
 
 Because `mls_*` rows live on a different Supabase project than
 `auth.users`, apps must NOT try to SQL-join listings to SSO users.
-Use the `useUserDisplay` React hook (from `matrix-apps-template`),
+Use the `useUserDisplay` React hook (from `matrix-apps-template-2-1`),
 which batches IDs and calls the `resolve-users` SSO Edge Function.
 
 ### CDL Read & Write Patterns (current)
@@ -539,7 +539,7 @@ Source: `/home/bitnami/matrix-hrms` — a Domain-Specific app built from the tem
 
 ## Key Files Reference
 
-### In `matrix-apps-template`
+### In `matrix-apps-template-2-1`
 
 | File | Purpose |
 |------|---------|
@@ -646,7 +646,7 @@ distributing service-role keys.
 join is impossible across projects and breaks again when CDL moves to
 Lakebase.
 **Correct**: Resolve display names client-side with the `useUserDisplay`
-React hook (from `matrix-apps-template`), which batches IDs through the
+React hook (from `matrix-apps-template-2-1`), which batches IDs through the
 `resolve-users` SSO Edge Function.
 
 ### 6. Don't conflate scope with admin privileges

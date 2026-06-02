@@ -1,6 +1,6 @@
 # Testing Strategy — Unit, Integration, E2E, Contract Testing
 
-> Source: matrix-apps-template, matrix-platform-foundation
+> Source: matrix-apps-template-2-1, matrix-platform-foundation
 >
 > **For Lovable**: This document defines testing requirements for Matrix Apps.
 
@@ -76,11 +76,11 @@ Periodic check that KB references match the codebase:
 
 | Component | Location | Purpose |
 |-----------|----------|---------|
-| Vitest config | `matrix-apps-template/vitest.config.ts` | Unit test runner, coverage thresholds |
-| Playwright config | `matrix-apps-template/playwright.config.ts` | E2E browser tests, base URL, auth state |
+| Vitest config | `matrix-apps-template-2-1/vitest.config.ts` | Unit test runner, coverage thresholds |
+| Playwright config | `matrix-apps-template-2-1/playwright.config.ts` | E2E browser tests, base URL, auth state |
 | CI/CD | GitHub Actions | `test.yml`: `npm run test` (Vitest), `npx playwright test` on PR; block merge on failure |
 
-**Template setup**: Add Vitest + Playwright to `matrix-apps-template`; document in README. New apps inherit config.
+**Template setup**: Add Vitest + Playwright to `matrix-apps-template-2-1`; document in README. New apps inherit config.
 
 ## Cross-Reference
 

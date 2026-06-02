@@ -38,7 +38,7 @@ access token minted by `oauth-token` now embeds the full consumed profile
 (`email`, `email_verified`, `name`, `picture`, `sso_role`, `scope`, `crud`,
 `available_roles`, `organization`, `teams`, `allowed_apps`, `tenant_id`, `uoi`,
 `org_name`, `groups`, `permissions`, `member_type`, `act_as_roles`). First-party
-apps (via the shared `matrix-apps-template`) decode these claims on login instead
+apps (via the shared `matrix-apps-template-2-1`) decode these claims on login instead
 of making a second `oauth-userinfo` round-trip, removing one Edge-Function hop from
 the login critical path. **`oauth-userinfo`'s response shape is frozen and remains
 the source of truth** — it is still called for background freshness and by apps

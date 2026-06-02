@@ -16,7 +16,7 @@ MLS 2.0 is the **production data pipeline** that ingests real estate data from m
 |----------|------|-----------|
 | **Supabase** | Common Data Layer (CDL) — system of record for apps | Edge Functions, Realtime, Auth, RLS, Lovable integration |
 | **Databricks** | DWH & ETL engine — data ingestion and transformation | Medallion architecture, CDC, SQL analytics, scalable compute |
-| **Lovable** | App builder — builds all Matrix Apps | Rapid UI, native Supabase integration, uses `matrix-apps-template` |
+| **Lovable** | App builder — builds all Matrix Apps | Rapid UI, native Supabase integration, uses `matrix-apps-template-2-1` |
 
 > **Why Supabase over Databricks for CDL?** Databricks (with Lakebase) is a strong DWH,
 > but it lacks Edge Functions and has no Lovable integration. Supabase provides the

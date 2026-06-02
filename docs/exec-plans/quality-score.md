@@ -70,7 +70,7 @@ Based on the scores above, the highest-impact improvements are:
 
 | Priority | Domain | Current | Target | Action |
 |----------|--------|---------|--------|--------|
-| P1 | App testing (all apps) | D | C | Add Vitest + Playwright to `matrix-apps-template`; smoke tests for auth flow |
+| P1 | App testing (all apps) | D | C | Add Vitest + Playwright to `matrix-apps-template-2-1`; smoke tests for auth flow |
 | P1 | KB CI validation | D | B | Deploy `scripts/validate-kb.sh` in GitHub Actions |
 | P2 | CDL contract testing | C | B | Automated schema diff on migration PRs |
 | P2 | SSO Edge Function tests | C | B | Integration tests with mock JWTs |

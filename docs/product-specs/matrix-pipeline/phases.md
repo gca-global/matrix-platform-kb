@@ -98,7 +98,7 @@ Demo: log in as a power-user, see an empty SidebarLayout with the seven main rou
 
 ### Lovable {#week-0-lovable}
 
-- (~1 h) Scaffold from `matrix-apps-template`; set `CLIENT_ID`, `BASE_PATH`, project name in `src/lib/matrix-sso.ts`. Cite [wiki/architecture.md#three-supabase](wiki/architecture.md#three-supabase). DoD: `npm run dev` boots in Lovable.
+- (~1 h) Scaffold from `matrix-apps-template-2-1` (the canonical starter kit; the old `matrix-apps-template` is obsolete); set `CLIENT_ID`, `BASE_PATH`, project name in `src/lib/matrix-sso.ts`. Cite [wiki/architecture.md#three-supabase](wiki/architecture.md#three-supabase). DoD: `npm run dev` boots in Lovable.
 - (~1 h) Wire `ssoClient` + `cdlClient` + `appClient` in `src/lib/dataLayerClient.ts`. Three Supabase project IDs from [wiki/architecture.md#three-supabase](wiki/architecture.md#three-supabase). DoD: console.log of each client returns a non-null instance.
 - (~1 h) Implement `ProtectedRoute` + OAuth 2.0 + PKCE callback. Cite [wiki/architecture.md#identity-boundary](wiki/architecture.md#identity-boundary). DoD: a logged-out user is redirected to SSO; a logged-in one lands on `/`.
 - (~1 h) Implement `SidebarLayout` with seven empty routes; role-based section visibility wired but no permission keys yet. Cite [wiki/overview.md#personas](wiki/overview.md#personas).

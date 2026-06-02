@@ -7,7 +7,7 @@
 
 ## What is Sharp Matrix?
 
-Sharp Matrix is a **multi-app platform** where every application — from broker tools to client portals to AI engines — shares a single, consistent data layer. Dash/Anywhere.com provides the practical field definitions used for app development; RESO DD 2.0 serves as the interoperability standard for syndication and external APIs. Apps are built by **Lovable** using the `matrix-apps-template` starter kit and run on **Supabase**.
+Sharp Matrix is a **multi-app platform** where every application — from broker tools to client portals to AI engines — shares a single, consistent data layer. Dash/Anywhere.com provides the practical field definitions used for app development; RESO DD 2.0 serves as the interoperability standard for syndication and external APIs. Apps are built by **Lovable** using the `matrix-apps-template-2-1` starter kit and run on **Supabase**.
 
 ### Core Principle
 

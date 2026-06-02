@@ -16,7 +16,8 @@
 
 | Repo | Path | Purpose |
 |------|------|---------|
-| **matrix-apps-template** | `/home/bitnami/matrix-apps-template` | App starter kit: dual-Supabase, SSO, permissions, RLS, UI conventions |
+| **matrix-apps-template-2-1** | `/home/bitnami/matrix-apps-template-2-1` | **Canonical** app starter kit: dual-Supabase, SSO, permissions, RLS, UI conventions. Always scaffold from / sync to this one. |
+| ~~matrix-apps-template~~ | ~~`/home/bitnami/matrix-apps-template`~~ | **OBSOLETE** — superseded by `matrix-apps-template-2-1`. Do not use or update. |
 | **matrix-hrms** | `/home/bitnami/matrix-hrms` | Working example: Domain-Specific app (25+ tables, 30+ hooks) |
 | **mls_2_0** | `/home/bitnami/mls_2_0` | Data pipeline: Databricks ETL (Bronze/Silver/Gold) + RESO Web API |
 
@@ -92,6 +93,6 @@ These projects exist in `SharpMatrix` but should be decommissioned per Matrix-CI
 | **RESO DD 2.0** | Standard field names, types, lookups for real estate data | Canonical data layer — all CDL-Connected apps use these names |
 | **Qobrix CRM** | Current entity schema, API patterns, workflow capabilities | Migration source + capability reference (being decommissioned) |
 | **SIR / Anywhere.com** | What fields brokers need on listing forms | Field requirements reference — ensures coverage |
-| **matrix-apps-template** | Tech stack, auth flow, permissions, RLS patterns | Blueprint for every Matrix App built by Lovable |
+| **matrix-apps-template-2-1** | Tech stack, auth flow, permissions, RLS patterns | Canonical blueprint for every Matrix App built by Lovable (the prior `matrix-apps-template` is obsolete) |
 | **matrix-hrms** | Real app implementation: domain tables, hooks, workflows | Working example of a Domain-Specific app |
 | **mls_2_0** | Data pipeline, ETL, RESO Web API | Data infrastructure — feeds Supabase CDL |

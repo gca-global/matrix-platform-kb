@@ -1,6 +1,6 @@
 # Operations — CI/CD, Deployment, Monitoring, DR/Backup
 
-> Source: `matrix-platform-foundation`, `mls_2_0`, `matrix-apps-template`
+> Source: `matrix-platform-foundation`, `mls_2_0`, `matrix-apps-template-2-1`
 >
 > **For Lovable**: This document explains how the platform is deployed and operated.
 > You don't need this to build apps, but you need it to deploy and maintain them.

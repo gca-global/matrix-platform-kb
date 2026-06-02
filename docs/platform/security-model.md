@@ -325,7 +325,7 @@ The CDL instance also has legacy helper functions used by older apps (`matrix-cl
 
 ## RLS Policy Patterns
 
-From `matrix-apps-template/supabase/migrations/003_data_model_template.sql`:
+From `matrix-apps-template-2-1/supabase/migrations/003_data_model_template.sql` (canonical starter kit; the old `matrix-apps-template` is obsolete):
 
 | Pattern | Use Case | Logic Summary |
 |---------|----------|---------------|

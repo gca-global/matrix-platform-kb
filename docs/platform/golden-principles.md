@@ -79,8 +79,9 @@ auth model, and UI framework. No per-app forks of shared patterns.
 **Why it fails**: Divergence creates translation layers, auth bugs, and
 user-facing inconsistency across apps.
 
-**Enforcement**: `matrix-apps-template` is the starter kit. ADRs document
-decisions. Code review (agent or human) checks compliance.
+**Enforcement**: `matrix-apps-template-2-1` is the canonical starter kit (the
+prior `matrix-apps-template` is obsolete). ADRs document decisions. Code review
+(agent or human) checks compliance.
 
 ---
 

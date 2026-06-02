@@ -116,7 +116,7 @@ Start at `docs/zoe-ai-assistant-kb/index.md`. For end-user questions, navigate t
 
 | Repo / File | Format | Contents |
 |---|---|---|
-| `/home/bitnami/matrix-apps-template` | React/TS | App template — dual-Supabase, SSO, permissions, RLS, UI |
+| `/home/bitnami/matrix-apps-template-2-1` | React/TS | **Canonical** app template — dual-Supabase, SSO, permissions, RLS, UI. (The prior `matrix-apps-template` is obsolete — do not use.) |
 | `/home/bitnami/matrix-hrms` | React/TS | HRMS app (Domain-Specific) |
 | `/home/bitnami/matrix-pipeline` | React/TS | Pipeline CRM (CDL-Connected) |
 | `/home/bitnami/itsm-2-1` | React/TS | ITSM (Domain-Specific) |
