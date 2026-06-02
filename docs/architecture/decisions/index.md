@@ -26,3 +26,4 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-018](ADR-018.md) | SSO issuer URL + Supabase Third-Party Auth for own-DB apps (ES256 completion) | Accepted |
 | [ADR-019](ADR-019.md) | Server-managed PKCE for first-party public clients (webview-proof login) | Accepted |
 | [ADR-020](ADR-020.md) | Per-tenant, per-locale UI label/terminology overrides (tenant_key axis + `App.*` namespace + Hungarian) | Accepted |
+| [ADR-021](ADR-021.md) | Runtime DB-driven i18n: single bundled English baseline + CDL `app_ui_strings` corpus + `app-i18n` EF (platform standard) | Accepted |

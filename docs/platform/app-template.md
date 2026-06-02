@@ -29,7 +29,7 @@ Before building, determine which type of app you're creating:
 - UI framework (shadcn/ui + Tailwind + Sharp design system)
 - Data fetching (Supabase client + React Query)
 - Routing (React Router v6 + ProtectedRoute)
-- i18n (i18next EN/RU/HU + CDL-backed tenant terminology overrides)
+- i18n (runtime DB-driven via CDL `app-i18n`; single bundled English baseline; CDL-backed tenant terminology overrides)
 
 ## Tech Stack
 
@@ -40,7 +40,7 @@ Before building, determine which type of app you're creating:
 | Design | Sharp design system: Navy palette, Playfair Display (headings) + Inter (body) |
 | Data | `@supabase/supabase-js` v2 + TanStack Query (React Query) |
 | Auth | Custom SSO (OAuth 2.0 + PKCE) via Supabase Edge Functions, ES256 JWT signing ([ADR-011](../architecture/decisions/ADR-011.md)) |
-| i18n | i18next (EN/RU/HU) + CDL terminology overrides ([ADR-020](../architecture/decisions/ADR-020.md)) |
+| i18n | Runtime DB-driven i18next: bundled `en` baseline + CDL `app_ui_strings`/`app-i18n` ([ADR-021](../architecture/decisions/ADR-021.md)) + CDL terminology overrides ([ADR-020](../architecture/decisions/ADR-020.md)) |
 | Routing | React Router v6 with `ProtectedRoute` guards |
 
 ## Dual-Supabase Architecture
@@ -403,31 +403,52 @@ function MyComponent() {
 }
 ```
 
-Supported languages: English (`en`), Russian (`ru`), Hungarian (`hu`).
-Language detected from `localStorage` or browser `navigator.language`. To add a
-locale, import its `locales/<lng>.json` (mirroring every key in `en.json`), add
-it to `resources` + `supportedLngs` in `src/i18n/index.ts`, and add an entry to
-the `LanguageToggle` + Settings language `Select`.
+Call sites are unchanged regardless of how strings are stored: always read UI
+text via `t('namespace.key')`. **How** those strings are loaded is the
+runtime, DB-driven model below ([ADR-021](../architecture/decisions/ADR-021.md)).
 
-### Static chrome vs. tenant-configurable terminology
+### Runtime, DB-driven i18n (platform standard — ADR-021)
 
-Two complementary layers cover UI strings:
+Apps **do not ship a JSON bundle per language**. Instead:
 
-1. **Static chrome** — buttons, generic labels, fixed copy — lives in the
-   file-based `en/ru/hu.json` and is translated at build time via `t('…')`.
-2. **Tenant-configurable terminology** — the business *nouns* a tenant may want
-   to rename or translate (e.g. "Transaction" → "Contract", "Property" →
-   "Listing") — is resolved at runtime from the **CDL** description corpus
-   (`reso_field_descriptions`, project `ofzcokolkeejgqfjaszq`) via the
-   `reso-dd-descriptions` EF. CDL-connected apps render these through
-   `<ResoFieldLabel>` / `<ResoLookupValue>` (RESO keys) and a `Term`/`useTerm`
-   helper (curated `App.<Term>` UI nouns). A tenant admin edits the label **and**
-   its EN/RU/HU translations side by side in Settings → "Translations & Labels",
-   which writes per-tenant override rows via the `mls-sync` resource
-   `reso_label_override`. Internal identifiers (`pageKey`, route, RESO `field`,
-   EF `resource`) and the data model are never affected — only the display label.
-   See [ADR-020](../architecture/decisions/ADR-020.md) and
-   [`docs/data-models/reso-dd-descriptions.md`](../data-models/reso-dd-descriptions.md).
+1. **One bundled English baseline** — `src/i18n/locales/en.json` is the only
+   compiled-in locale. It guarantees first paint and an offline/EF-down fallback
+   (`fallbackLng:'en'`), and never goes blank.
+2. **Every other locale + every per-tenant relabel** (including English relabels)
+   is **runtime data in the CDL** table `public.app_ui_strings` (project
+   `ofzcokolkeejgqfjaszq`), served by the public **`app-i18n`** EF and fetched
+   through a chained i18next backend: `LocalStorageBackend` (instant repeat
+   paint, busted by a corpus `version`) → `HttpBackend` → `app-i18n`.
+3. **Tenant injection** — i18n boots before auth, so `AuthContext` calls
+   `setI18nTenant(tenantId)` after login (and on tenant switch) to load the
+   tenant-merged bundle; the localStorage cache is purged on tenant change so a
+   tenant's overrides can never mask another's.
+
+**Adding a language is data-only**: add the code to `SUPPORTED_LANGUAGES` in
+`src/i18n/index.ts`, then seed its rows in CDL (`scripts/gen_app_ui_strings_seed.mjs`
+flattens your `en.json` into a CDL migration; translate the other locales as
+`app_ui_strings` rows). No new bundle, no redeploy. Set `APP_KEY` in
+`src/i18n/index.ts` to the app's registered key so its corpus is isolated.
+
+The runtime + the Translations & Labels panel ship in
+[`matrix-apps-template-2-1`](../../README.md) — fork them, set `APP_KEY` +
+`SUPPORTED_LANGUAGES`, and seed.
+
+### Two complementary CDL stores: chrome vs. terminology
+
+| Layer | CDL store | Read EF | Write resource (`mls-sync`) | Settings scope |
+|---|---|---|---|---|
+| **Interface text** (chrome: `common`/`nav`/`settings`/`auth`/`sidebar`/`reso.*` UI) | `app_ui_strings` (app-keyed) | `app-i18n` | `app_ui_string` | "Interface text" |
+| **Terminology** (RESO field/resource/lookup nouns + curated `App.*` glossary) | `reso_field_descriptions` (shared, global) | `reso-dd-descriptions` | `reso_label_override` | "Terminology" |
+
+Both are admin-managed from Settings → **"Translations & Labels"** with a full
+pager, side-by-side multi-locale editing, and an add-locale picker. Terminology
+nouns render through `<ResoFieldLabel>` / `<ResoLookupValue>` / `Term`/`useTerm`.
+Internal identifiers (`pageKey`, route, RESO `field`, EF `resource`) and the data
+model are **never** affected — only the per-tenant, per-locale display value.
+See [ADR-021](../architecture/decisions/ADR-021.md),
+[ADR-020](../architecture/decisions/ADR-020.md), and
+[`docs/data-models/reso-dd-descriptions.md`](../data-models/reso-dd-descriptions.md).
 
 ## Lovable-Managed Apps — Development & Maintenance Model
 

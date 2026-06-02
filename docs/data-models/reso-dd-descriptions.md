@@ -5,6 +5,16 @@
 **Consumed by**: `<ResoFieldLabel>` / `<ResoLookupValue>` (RESO keys) and `Term`/`useTerm` (curated `App.*` UI nouns) in CDL-connected apps (matrix-pipeline-2-0 today).
 **Related**: [ADR-020](../architecture/decisions/ADR-020.md), [reso-dd-overview.md](reso-dd-overview.md), [reso-canonical-schema.md](reso-canonical-schema.md), the FE→CDL contract `matrix-pipeline-2-0/docs/cdl-ef-contracts/reso-label-overrides.md`.
 
+> **Sibling store — generic UI chrome:** this corpus covers RESO **terminology**
+> (field/resource/lookup nouns + the curated `App.*` glossary). All other UI
+> strings (chrome: `common`/`nav`/`settings`/`auth`/`sidebar`/`reso.*` UI) live in
+> the sibling CDL table **`public.app_ui_strings`** (app-keyed), served by the
+> **`app-i18n`** EF and written by the `mls-sync` resource `app_ui_string`. That
+> store powers the runtime DB-driven i18n that replaces per-locale JSON bundles.
+> See [ADR-021](../architecture/decisions/ADR-021.md). Both are managed from the
+> same Settings → "Translations & Labels" tab (scopes "Terminology" / "Interface
+> text").
+
 ## Purpose
 
 A single CDL store that serves three purposes at once:
