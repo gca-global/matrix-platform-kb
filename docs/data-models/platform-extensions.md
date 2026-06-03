@@ -44,6 +44,7 @@
 |----------------|-----------|--------|-----------------|---------------|------|
 | x_sm_keyholder_name | String | Property keyholder/representative in Cyprus for absentee owners | Keyholder/Representative in CY | — (custom) | Broker |
 | x_sm_keyholder_contact | String | Keyholder phone/email | Telephone/email of keyholder | — | Broker |
+| x_sm_privacy_level | String | FR-CON privacy classification (Standard / Private / Ultra-confidential) — drives Pipeline PII visibility; not a RESO DD field, not exported to any outbound channel | Privacy | — (custom) | Pipeline (Broker) |
 
 ## Extension Lookup Values — PropertySubType
 
@@ -68,9 +69,9 @@ These are registered as platform-specific lookup values:
 | Category | Count |
 |----------|-------|
 | Extension fields (Property) | 16 |
-| Extension fields (Contact) | 2 |
+| Extension fields (Contact) | 3 |
 | Extension lookup values (PropertySubType) | 10 |
-| **Total extensions** | **28** |
+| **Total extensions** | **29** |
 
 ## Governance Notes
 

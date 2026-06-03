@@ -283,7 +283,7 @@ canonical typed columns + `raw jsonb` (RESO record verbatim) +
 |---|---|---|
 | `public.members` | Member | Roster identities + designations (`x_sm_sir_designation`). |
 | `public.offices` | Office | Companies-via-Office hierarchy (`main_office_key`). |
-| `public.contacts` | Contacts | PII; `service_role`-only RLS (no anon/authenticated SELECT). |
+| `public.contacts` | Contacts | PII; `service_role`-only RLS (no anon/authenticated SELECT). FR-CON attribute columns added `20260603150000`: `company`, `lead_source`, `referred_by`, `reverse_prospecting_enabled_yn`, `notes` (all RESO DD 2.0 Contacts fields) + `x_sm_privacy_level` (extension). **`contact_type` is `text[]`** (RESO multi-value ContactType) since the same migration — was scalar `text`; the PII-scoped `v_property_contacts` view was dropped+recreated around the type change. |
 | `public.open_houses` | OpenHouse | Append-only; no soft-delete sweep. |
 | `public.showings` | ShowingAppointment | Service-role only. |
 | `public.history_transactional` | HistoryTransactional | Append-only audit trail; bounded by `history_transactional_lookback_days`. |
