@@ -122,7 +122,8 @@ Qobrix is decommissioned. Dash flips from pull to push. Managed ingress/egress c
 |------|-----------|------|
 | Sharp Matrix SSO | `xgubaguglsnokjyudgvc` | SSO, Auth, RBAC, Tenants, AD Users (identity only — see ADR-012) |
 | Matrix CDL | `ofzcokolkeejgqfjaszq` | Common Data Layer: shared `mls_*` tables + ingestion control plane (ADR-012/013/014) |
-| Matrix Pipeline | `mydojctcewxrbwjckuyz` | Pipeline CRM (leads, opportunities, contacts) |
+| Matrix Pipeline 2.0 | `kzvhqgpedapzqmwgikrw` | `matrix-pipeline-2-0` CRM app DB (app-private state; canonical CRM data lives in CDL). **Active Pipeline app DB.** |
+| Matrix Pipeline v1 (legacy) | `mydojctcewxrbwjckuyz` | Legacy Pipeline CRM (leads, opportunities) — superseded by Pipeline 2.0; legacy integrations only |
 | Sharp Matrix Sandbox | `tiuansahlsgautkjsajk` | Large scratch / sandbox project — NOT a production app DB |
 | HRMS | `wltuhltnwhudgkkdsvsr` | HR Management (employees, vacations, performance) |
 | ITSM | `irjrcskfcyierdbefrpk` | IT Service & Asset Management (tickets, assets, licenses) |

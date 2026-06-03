@@ -2,7 +2,7 @@
 title: Architecture — Storage, Identity, CDL access, RESO compliance
 status: stable
 source: raw/context-v2.md §5a, §11
-last_updated: 2026-05-31
+last_updated: 2026-06-03
 tags: [architecture]
 ---
 
@@ -32,7 +32,7 @@ tags: [architecture]
 |---|---|---|---|---|
 | **SSO** | `xgubaguglsnokjyudgvc` | `matrix-platform-foundation/supabase/` | No | Identity, JWT (ES256), roles, permissions, tenants, SSO admin EFs |
 | **CDL** | `ofzcokolkeejgqfjaszq` | `matrix-platform-foundation/supabase-cdl/` | **No** | System-of-record for canonical RESO resources (shared business data) |
-| **CRM app DB** | per-app (matrix-pipeline) | CRM team via Lovable | **Yes** | App-private state: workflow, drafts, UI cache, app-local lookups, `role_configurations` |
+| **CRM app DB** | `kzvhqgpedapzqmwgikrw` | CRM team via Lovable | **Yes** | App-private state: workflow, drafts, UI cache, app-local lookups, `role_configurations`, `activities`, `notifications`. (Frontend client → `https://kzvhqgpedapzqmwgikrw.supabase.co`; the legacy v1 project `mydojctcewxrbwjckuyz` is **not** used here.) |
 
 CDL and SSO are owned by the platform team and evolve via `matrix-platform-foundation`; CRM app DB is owned by the CRM team and evolves via Lovable. CRM **never** holds the CDL service-role key and **never** modifies the CDL schema — all CDL changes go through `matrix-platform-foundation/supabase-cdl/`.
 
@@ -56,15 +56,15 @@ Commit + push the affected repo(s) so the watcher deploys and Lovable sees the l
 |---|---|---|---|
 | CDL edge function (`cdl-write`, `cdl-read`, `cdl-engagement-read`, `cdl-contact-listings-read`, …) | CDL `ofzcokolkeejgqfjaszq` | `matrix-platform-foundation/supabase-cdl/functions/` | KB + `docs/cdl-ef-contracts/` (NOT a Lovable migration — CDL is not linked to Lovable, ADR-013) |
 | CDL DB migration / schema / data | CDL `ofzcokolkeejgqfjaszq` | `matrix-platform-foundation/supabase-cdl/migrations/` | KB + `docs/cdl-ef-contracts/` |
-| **App-specific edge function** (correct / modify / add) | app DB `wckwfbbqiupvallmhqbu` | `matrix-pipeline-2-0/supabase/functions/` | **committed EF source in the app repo** |
-| **App-specific Supabase schema / data** | app DB `wckwfbbqiupvallmhqbu` | `matrix-pipeline-2-0/supabase/migrations/` | **committed migration in the app repo** |
+| **App-specific edge function** (correct / modify / add) | app DB `kzvhqgpedapzqmwgikrw` | `matrix-pipeline-2-0/supabase/functions/` | **committed EF source in the app repo** |
+| **App-specific Supabase schema / data** | app DB `kzvhqgpedapzqmwgikrw` | `matrix-pipeline-2-0/supabase/migrations/` | **committed migration in the app repo** |
 | UI code (`src/**`) | — | `matrix-pipeline-2-0` | committed source (watcher deploys) |
 | KB / docs | — | `matrix-platform-kb` | docs |
 
 Two rules that make the handoff seamless:
 
 - **EF deploys are not source-of-truth.** An MCP `deploy_edge_function` is invisible until the EF source (and any migration) is committed to the repo that owns that Supabase project — `matrix-platform-foundation` for CDL EFs, `matrix-pipeline-2-0/supabase/functions/` for app EFs. Deploy **and** commit.
-- **App-Supabase changes must reach Lovable as migrations.** Cursor does **not** only touch CDL/foundation — it may correct or add app-specific EFs and modify the app-specific Supabase project (`wckwfbbqiupvallmhqbu`). Every such change lands as a committed migration / EF source in `matrix-pipeline-2-0` so Lovable can see it; it is never applied out-of-band. (CDL changes, being outside the app repo and not linked to Lovable, are surfaced via this KB + `docs/cdl-ef-contracts/` instead.)
+- **App-Supabase changes must reach Lovable as migrations.** Cursor does **not** only touch CDL/foundation — it may correct or add app-specific EFs and modify the app-specific Supabase project (`kzvhqgpedapzqmwgikrw`). Every such change lands as a committed migration / EF source in `matrix-pipeline-2-0` so Lovable can see it; it is never applied out-of-band. (CDL changes, being outside the app repo and not linked to Lovable, are surfaced via this KB + `docs/cdl-ef-contracts/` instead.)
 
 Git-safety constraints still apply (inherited from the agent system prompt): never force-push, never push to a diverged `main` without user direction, `--ff-only` only.
 
@@ -77,7 +77,7 @@ flowchart LR
   Cursor -->|"app EF + migration + UI: commit + push"| Remote
   Cursor -->|"CDL EF + migration: commit + push"| Foundation["matrix-platform-foundation"]
   Foundation -.->|"applies to"| CDL["CDL Supabase (ofzcokolkeejgqfjaszq)"]
-  Remote -.->|"Lovable sees migrations"| AppDB["app Supabase (wckwfbbqiupvallmhqbu)"]
+  Remote -.->|"Lovable sees migrations"| AppDB["app Supabase (kzvhqgpedapzqmwgikrw)"]
 ```
 
 Operative enforcement lives in [`/.cursor/rules/cursor-git-handoff.mdc`](../../../../../.cursor/rules/cursor-git-handoff.mdc); the Lovable-facing mirror is in `matrix-pipeline-2-0/.lovable/instructions.md`.
@@ -119,7 +119,7 @@ CRM gets all rights and authority for CDL CRUD **as a client app** via canonical
 
 Source: raw/context-v2.md §5a.3.
 
-## CDL as-built (live state, MCP-verified 2026-05-18) {#live-cdl-state}
+## CDL as-built (live state, MCP-verified 2026-06-03) {#live-cdl-state}
 
 Canonical RESO resources and infrastructure tables already in CDL and available to CRM as a client.
 
@@ -134,10 +134,10 @@ Canonical RESO resources and infrastructure tables already in CDL and available 
 | PropertyUnitTypes | `public.property_unit_types` | 0 | ✓ enabled |
 | Member | `public.members` | 129 | ✓ enabled |
 | Office | `public.offices` | 59 | ✓ enabled |
-| Contacts | `public.contacts` (PII) | 45 073 | ✓ enabled |
+| Contacts | `public.contacts` (PII) | 45 108 | ✓ enabled |
 | ContactListings | `public.contact_listings` (junction Contacts × Property) | **24 979** | ✓ enabled (2026-05-29, service-role-only) |
 | ContactListingNotes | `public.contact_listing_notes` | 0+ | ✓ enabled (2026-05-29, service-role-only) |
-| HistoryTransactional | `public.history_transactional` (append-only) | 0 | ✓ enabled |
+| HistoryTransactional | `public.history_transactional` (append-only) | 5 | ✓ enabled |
 | OpenHouse | `public.open_houses` (excluded from CRM scope — see [#escape-hatch](#escape-hatch)) | 0 | ✓ enabled |
 | ShowingAppointment | `public.showings` | 0 | ✓ enabled |
 | InternetTracking | `public.internet_tracking_events` | 0 | ✓ enabled |
@@ -148,7 +148,7 @@ Canonical RESO resources and infrastructure tables already in CDL and available 
 | Showing (recorded fact) | `public.showing` (≠ `public.showings`) | 0 | ✓ enabled (2026-05-29) |
 | LockOrBox | `public.lock_or_box` | 0 | ✓ enabled (service-role-only) |
 | Caravan / CaravanStop | `public.caravan` / `public.caravan_stop` | 0 | ✓ enabled (2026-05-29) |
-| TransactionManagement | `public.transaction_management` (canonical 4 fields; economics app-private) | 0 | ✓ enabled (2026-05-29) |
+| TransactionManagement | `public.transaction_management` (canonical 4 fields; economics app-private) | 1 | ✓ enabled (2026-05-29) |
 
 ### RESO DD metadata (served to FE for tooltips/dropdowns)
 
@@ -181,9 +181,11 @@ Canonical RESO resources and infrastructure tables already in CDL and available 
 | `cdl_staging.listings_mapped` | Mapped staging | 254 916 |
 | `cdl_staging.media_staging` | Media staging | 0 |
 
-Source: live state via `user-supabase-cdl` MCP (`list_tables` + introspection 2026-05-18); `docs/data-models/cdl-schema.md`.
+Source: live state via `user-supabase-cdl` MCP (`list_tables` + introspection 2026-06-03; prior run 2026-05-18); `docs/data-models/cdl-schema.md`. **Deltas since 2026-05-18:** `contacts` 45 073 → 45 108 (+35); `history_transactional` 0 → 5 (Week-1 `HistoryTransactional` emission is now live); `transaction_management` 0 → 1. All other canonical/infra counts and RLS flags unchanged (`properties` RLS still ⚠️ disabled).
 
 ### KB drift (flagged for platform team)
+
+> **Drift — `members` has no `member_alternate_id`** (flagged 2026-06-03): the CDL `public.members` table exposes `member_key`, `originating_system_member_key`, `member_mls_id`, `member_email`, `member_status`, `member_type` (Agent/Staff/Admin/Supervisor) — but **no `member_alternate_id` column**. The [#identity-boundary](#identity-boundary) mapping "SSO `user_id` ↔ `Member.MemberKey` via canonical `Member.MemberAlternateId`" is therefore **not materialized**; the only viable SSO↔roster join today is `member_email` (121/129 members have an email; 107 are `Active`). This is the same gap recorded in [cdl-schema.md](../../../data-models/cdl-schema.md) "Owner-clamp deferred". The `sso-member-roster-lint` EF (Week 1) diffs on email and reports unmapped members so the mapping can be bootstrapped.
 
 > **Drift — Teams** ✅ RESOLVED 2026-05-29: `cdl-schema.md` now reflects the PR1.5 DROP of `public.teams`. Pipeline derives team identity from SSO groups (ADR-015 #5 Option B).
 
@@ -224,7 +226,7 @@ Not canonical RESO and not cross-app:
 - Any UI preferences, view configs, caches.
 - **Deal Commercialization, GCI, and Commission Engine state** ([wiki/commission-engine.md](commission-engine.md)) — operational deal costs, commission rates and rules, computed per-deal P&L and broker compensation. Detailed app-private data model (`DealCostEvent` / `CostRateCard` / `CommissionRule` / `DealPnL` / `BrokerCompensation`), formulas, and FRs are designed in Lovable; the project-flavour deviation is recorded in the [#escape-hatch](#escape-hatch).
 - **`Referral`** ([wiki/entities.md#referral](entities.md#referral)) — referrer ↔ referee link with type, outcome, close date. Project-flavour entity outside canonical RESO DD 2.0 (see [#escape-hatch](#escape-hatch)). Stored app-private in CRM app DB; references canonical `Contacts.ContactKey` in CDL via a CRM-app-DB → CDL FK reference (a logical pointer, not a canonical relationship).
-- **`role_configurations`** (CRM role → permission-keys mapping) lives on the **CRM app DB** (matrix-pipeline's own project `wckwfbbqiupvallmhqbu`), consistent with `#app-private-state`. Pipeline reads it via the **App DB `supabase` client** under the SSO JWT (`useRoleConfig.ts`); its SELECT policy is public/`true` and writes are admin-gated. *(Corrected 2026-06-01 — the earlier [log.md](../log.md) [2026-05-26] "SSO co-location" divergence was inaccurate; the table never lived on SSO. See log.md [2026-06-01].)*
+- **`role_configurations`** (CRM role → permission-keys mapping) lives on the **CRM app DB** (matrix-pipeline's own project `kzvhqgpedapzqmwgikrw`), consistent with `#app-private-state`. Pipeline reads it via the **App DB `supabase` client** under the SSO JWT (`useRoleConfig.ts`); its SELECT policy is public/`true` and writes are admin-gated. *(Corrected 2026-06-01 — the earlier [log.md](../log.md) [2026-05-26] "SSO co-location" divergence was inaccurate; the table never lived on SSO. See log.md [2026-06-01].)*
 
 Source: raw/context-v2.md §5a.6.
 

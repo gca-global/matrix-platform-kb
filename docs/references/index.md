@@ -55,7 +55,8 @@ Supabase projects are split across two organizations:
 | Name | Project ID | Role |
 |------|-----------|------|
 | **Matrix MLS app DB** | `wckwfbbqiupvallmhqbu` | `matrix-mls` application DB (role_configurations, app-local). Org unverified. |
-| **Matrix Pipeline app DB** | `mydojctcewxrbwjckuyz` | Matrix Pipeline CRM application DB. Org unverified. |
+| **Matrix Pipeline 2.0 app DB** | `kzvhqgpedapzqmwgikrw` | `matrix-pipeline-2-0` application DB (app-private: `role_configurations`, `activities`, `notifications`, drafts, workflow cache). Confirmed via `src/integrations/supabase/client.ts`. **This is the active Pipeline app DB.** |
+| **Matrix Pipeline v1 (legacy) app DB** | `mydojctcewxrbwjckuyz` | Legacy Pipeline CRM (leads/opportunities, `smpipeline` era). Superseded by Pipeline 2.0; retained for legacy integrations only (e.g. `lead-webhook`, O365). Org unverified. |
 | **Matrix HRMS app DB** | `wltuhltnwhudgkkdsvsr` | HR Management System (domain-specific app). Org unverified. |
 | **Matrix FM app DB** | `retujkznogwplfrbniet` | Matrix FM (Financial Management) app DB. Org unverified. |
 | **ITSM app DB** | `irjrcskfcyierdbefrpk` | ITSM app DB. Org unverified. |

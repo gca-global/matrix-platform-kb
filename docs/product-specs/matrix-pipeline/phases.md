@@ -2,7 +2,7 @@
 title: matrix-pipeline — 8-week atomic build plan
 status: stable
 source: plan .cursor/plans/llm_wiki_and_phased_build_plan_7ebe41be.plan.md
-last_updated: 2026-05-26
+last_updated: 2026-06-03
 tags: [phases]
 ---
 
@@ -11,6 +11,21 @@ tags: [phases]
 > Eight weeks from kickoff to a staging prototype with business power users. Two swimlanes: **Lovable** (app UI + CRM app DB) and **Cursor** (CDL + SSO + wiki + Edge Functions on the platform side). Every task is atomic — about one hour of focused work — and cites the wiki anchor that backs the requirement. Implementation MUST stay grounded in the wiki; any deviation requires the [wiki/architecture.md#escape-hatch](wiki/architecture.md#escape-hatch) justification block. Cite all consulted wiki anchors in the PR description.
 
 > **Platform pre-work landed 2026-05-29 (ADR-016 / outcome O-CDL-CANON).** The Cursor-swimlane CDL write surface is **already deployed** ahead of Week 1: the 9 canonical CRM tables exist in CDL, `contact_listings`/`contact_listing_notes` are re-modeled + RLS-enabled, and three EFs are live — `cdl-write` (generic insert/update/upsert/soft-delete + `HistoryTransactional` emit), `cdl-contacts-read`, `cdl-contact-listings-read`. Where a week task below says "build `cdl-contacts-write` EF", read it as **"wire the UI to `cdl-write` with `resource: 'contacts'`"** — the EF already exists. The per-resource write EFs (`cdl-*-write`) are superseded by the single `cdl-write` dispatcher. See [cdl-crud-contract.md](cdl-crud-contract.md) Recipe WRITE-B.
+
+## Build status snapshot {#status}
+
+> Reflects the deployed `matrix-pipeline-2-0` codebase as of **2026-06-03** (added during a build review). Tags: **DONE** / **MOSTLY DONE** / **PARTIAL** / **BUILT-NOT-WIRED** / **NOT STARTED**. The per-week sections below carry the same status callout.
+
+- **Week 0 — Foundation**: **DONE**. i18n shipped ahead of plan (DB-driven, [ADR-020](../../architecture/decisions/ADR-020.md) / [ADR-021](../../architecture/decisions/ADR-021.md)). Surfaces beyond this plan are also live: Properties browse + read-only Property detail, AD Employees, Curated Lists (public share links), Settings/admin, Profile.
+- **Week 1 — Contacts**: **DONE** (2026-06-03). *Lovable lane:* Activities (`activities` app-DB table, Pattern B RLS + `useActivities` + `ActivitiesCard`), the bulk CSV import wizard (preview-only stub; commit lands Week 2), and duplicate detection on create; earlier surfaces (list/create/detail, graduation, status, reassign, privacy) remain live. *Cursor lane:* `cdl-write`/`cdl-contacts-read` live, `contacts` RLS Pattern B confirmed, `#live-cdl-state` refreshed, and the `sso-member-roster-lint` EF + daily cron shipped (risk R3); only the optional `Member`+`Office` materialization stretch is deferred.
+- **Week 2 — SavedSearch + Prospecting**: **BUILT-NOT-WIRED → immediate NEXT**. `useProspecting` + `ContactSavedSearches` are complete against the live `cdl-engagement-read` / `cdl-write` EFs but are not mounted on `ContactDetail`, and there is no `/saved-searches` route or reminder surface.
+- **Week 3 — ContactListings + Showings + Caravan**: **PARTIAL**. Showings (5-resource chain) + Caravans live; the `ContactListingsPanel` is built but unmounted (lands with the Week 2 wiring).
+- **Week 4 — Transactions + Referral**: **PARTIAL**. TM list/create/type + property close / back-on-market live; offer lifecycle (counter/accept/sign), forecast P&L, Documents tab, and the entire Referrals surface not built.
+- **Week 5 — Pipeline + Commission**: **PARTIAL**. Pipeline v0 board live (per-contact; Matching signal currently inert); Commission Engine, forecast/variance dashboards, and `/reports` not built.
+- **Week 6 — AI Copilot**: **NOT STARTED**.
+- **Week 7 — Staging hardening**: **NOT STARTED**.
+
+**Immediate next** — surface the Contact engagement loop (Weeks 2-3): mount `ContactSavedSearches` + `ContactListingsPanel` on `ContactDetail`, feed the Prospecting signal into the Pipeline board, and add a broker-wide `/saved-searches` page. Plan: `contact_engagement_loop`.
 
 ## TOC
 
@@ -92,6 +107,8 @@ The 2-month staging prototype covers the **full BRD**:
 
 ## Week 0 — Foundation {#week-0}
 
+> **Status (2026-06-03): DONE.** Auth + three Supabase clients + SidebarLayout under ProtectedRoute all shipped; i18n delivered ahead of plan (runtime DB-driven, ADR-020/021). Bonus surfaces now live beyond this plan: Properties browse + read-only Property detail, AD Employees, Curated Lists, Settings, Profile.
+
 **Goal**: Lovable-deployed app shell that compiles, authenticates against SSO, talks to all three Supabase projects, renders `SidebarLayout` under `ProtectedRoute`. LLM Wiki published on `matrix-platform-kb` (this PR) so every subsequent task can cite an anchor.
 
 Demo: log in as a power-user, see an empty SidebarLayout with the seven main routes (`/contacts`, `/saved-searches`, `/showings`, `/caravans`, `/transactions`, `/referrals`, `/reports`), all rendering "coming soon" placeholders.
@@ -123,6 +140,8 @@ Demo: log in as a power-user, see an empty SidebarLayout with the seven main rou
 
 ## Week 1 — Contacts & Org Roster {#week-1}
 
+> **Status (2026-06-03): DONE.** All Week 1 tasks shipped. Final pass added: the `activities` app-DB table (Pattern B RLS, migration `20260603115750…`) + `useActivities` + `ActivitiesCard` (open activities, complete, and a "next action" nudge) on the contact detail; the bulk CSV import wizard (`ImportWizard` — upload → map → preview, with commit deferred to Week 2 per FR-PROS-12); and duplicate detection on create (`useContactDuplicateCheck` + `DuplicateConfirmDialog`). Earlier surfaces (list/create/detail, ContactType graduation, status transition, owner reassign, privacy banner) remain live. The Engagement-tab placeholder is addressed next in Weeks 2-3.
+
 **Goal**: a power user can create, edit, and search `Contacts`; Personal / Commercial split honored; ContactType graduation works (Lead → Buyer/Seller/Both); broker reminders surface; `HistoryTransactional` rows emitted for every transition.
 
 Demo: create a Lead, qualify them into a Buyer, edit their personal/commercial fields, see the history log.
@@ -143,15 +162,19 @@ Demo: create a Lead, qualify them into a Buyer, edit their personal/commercial f
 
 ### Cursor {#week-1-cursor}
 
+> **Status (2026-06-03): DONE (core).** `cdl-write` (covers `cdl-contacts-write`) + `cdl-contacts-read` live; `contacts` RLS Pattern B confirmed; `#live-cdl-state` refreshed via MCP (verified 2026-06-03); `FR-CON` audit clean. The `sso-member-roster-lint` EF shipped + scheduled (see below). Only the **stretch** `Member`+`Office` view materialization is deferred.
+
 - (~2 h) **CDL EF `cdl-contacts-write`** on the CDL project, `verify_jwt: false`, ES256 verification, scope checks (`pipeline:contacts:write` for write; `pipeline:contacts:read` for read paths). Upserts `public.contacts`. Emits `HistoryTransactional`. Cite [wiki/integration.md#cdl](wiki/integration.md#cdl) + [wiki/integration.md#history-emission](wiki/integration.md#history-emission).
 - (~1 h) **CDL EF `cdl-contacts-read`**: cursor pagination (per `performance.md`), HTTP cache headers, estimated counts.
-- (~1 h) Live-state refresh of `wiki/architecture.md#live-cdl-state` via MCP (recurring weekly).
+- (~1 h) Live-state refresh of `wiki/architecture.md#live-cdl-state` via MCP (recurring weekly). **✅ Done 2026-06-03** (verified date bumped; deltas: `contacts` +35 → 45 108, `history_transactional` 0 → 5, `transaction_management` 0 → 1).
 - (~1 h) Confirm `public.contacts` RLS Pattern B is on (it is) and verify scope mapping via test JWT.
-- (~1 h) `sso-member-roster-lint` EF (daily): diff `Member` ↔ SSO users; email Cursor + Lovable leads on mismatch.
+- (~1 h) `sso-member-roster-lint` EF (daily): diff `Member` ↔ SSO users; email Cursor + Lovable leads on mismatch. **✅ Shipped 2026-06-03** — EF on SSO (`verify_jwt:false`) + `pg_cron` `sso-member-roster-lint-daily` (06:15 UTC) + `public.sso_member_roster_lint_runs` report table. **Diffs by email, not `MemberAlternateId`** (that column doesn't exist in CDL `members` — see [wiki/architecture.md#identity-boundary](wiki/architecture.md#identity-boundary) drift note). First run: 36/107 active members matched an SSO login by email; 71 active legacy members + 36 SSO users unmapped. Email is **opt-in** (no platform mailer yet → `email_status: skipped_no_provider`); wiring a provider is the only residual sub-task. See [`../../platform/sso-edge-functions.md`](../../platform/sso-edge-functions.md).
 - (~1 h) Add `FR-CON-*` cross-refs to the wiki if any new FR was introduced during Lovable work — none expected, but the audit is mandatory.
 - (Stretch ~2 h) `Member` + `Office` view materialization for high-load list pages, per `performance.md`.
 
 ## Week 2 — SavedSearch + Prospecting {#week-2}
+
+> **Status (2026-06-03): BUILT, NOT YET SURFACED → immediate NEXT.** `useProspecting` (saved_search + prospecting reads/writes via `cdl-engagement-read`/`cdl-write`) and the `ContactSavedSearches` component are complete, but not mounted on `ContactDetail` and there is no `/saved-searches` route or reminder-card surface. Wiring this is the next milestone (plan: `contact_engagement_loop`). Pipeline-derivation v0 exists (see Week 5).
 
 **Goal**: a broker can attach 1..N `SavedSearch` rows to a `Contact`, enable `Prospecting`, and the system actually pings the broker (CRM app reminder + email) for outreach. The pipeline auto-derives "Matching" from `SavedSearch + ContactListings`, including the (b) branch — manual sends without `Prospecting`.
 
@@ -180,6 +203,8 @@ Demo: broker creates a Buyer SavedSearch with criteria + budget, enables Prospec
 - (Stretch ~2 h) `cdl-schema.md` update PR (platform-team task): add `public.contact_listings` + `public.contact_listing_notes` to Phase 1 expansion list.
 
 ## Week 3 — ContactListings + Showing chain + Caravan {#week-3}
+
+> **Status (2026-06-03): PARTIAL.** Showings (5-resource chain, `useShowingChain`) and Caravans (`useCaravans`) are live. ContactListings — `ContactListingsPanel` + `useContactListingsEngagement` — is built but unmounted (lands with the Week 2 wiring). The reusable engagement timeline is only partial (property-side `PropertyEngagementCard` live; contact-side pending).
 
 **Goal**: a broker can send a curated set of listings to a buyer, schedule a single showing or a multi-property caravan, log feedback, and see the engagement timeline on both the Contact and the Property side. Full 5-resource Showing chain wired.
 
@@ -214,6 +239,8 @@ Demo: send 3 listings to a Buyer; the buyer picks two; broker schedules a carava
 
 ## Week 4 — TransactionManagement + Offer-to-Closing + Referral {#week-4}
 
+> **Status (2026-06-03): PARTIAL.** Transactions list/create/type + property close / back-on-market are live (`useTransactions`). NOT built: the full offer lifecycle (counter/accept/sign), the forecast P&L block, the Documents tab, and the entire Referrals surface (`/referrals` is still `coming-soon`).
+
 **Goal**: a broker can capture an offer, walk it through counter / accept / signed / closed (with `HistoryTransactional` at every transition), attach documents, and create a `Referral` row that ties two `Contacts` and a `Member` together with outcome traversal.
 
 Demo: convert a showed Buyer into an offer; counter, accept, push to external contract system; sign; close; record a referral from a prior happy client; see the referral close-the-loop indicator when the referee buys.
@@ -242,6 +269,8 @@ Demo: convert a showed Buyer into an offer; counter, accept, push to external co
 - (Stretch ~2 h) ADR-XXX-crm-referral-entity.md first draft.
 
 ## Week 5 — Pipeline projection + Commission Engine {#week-5}
+
+> **Status (2026-06-03): PARTIAL.** The `/pipeline` v0 board is live (`usePipeline` + `pipelineProjection.ts`), but derives one card per Contact (not per `(Contact × SavedSearch)`) and its Matching signal is currently inert (`prospectingActive: null`) — fixed by the Week 2 wiring. NOT built: the Commission Engine (cost events / rules / deal P&L / compensation), the forecast & variance dashboards, and `/reports`.
 
 **Goal**: a broker sees a Kanban / list view of the canonical 5-stage pipeline auto-derived from CDL + CRM-app-DB state; the Commission Engine ERP-lite forecasts GCI per deal, attributes costs, computes per-broker compensation, and reconciles against Finance ERP actuals.
 
@@ -272,6 +301,8 @@ Demo: open the pipeline view, see every active `(Contacts × SavedSearch)` place
 
 ## Week 6 — AI Copilot {#week-6}
 
+> **Status (2026-06-03): NOT STARTED.** No `/ai` settings page, `aiCall` hook, or LLM-wrapper EFs yet.
+
 **Goal**: ship the **floor** of 4 AI features end-to-end (FR-AI-LQ, FR-AI-MAT, FR-AI-SHOW, FR-AI-MAR) plus stubs for the other 10. Every AI surface honors the human-approval matrix and the data-governance rules in [wiki/ai.md#governance](wiki/ai.md). All AI features run as Lovable app EFs that call an LLM provider with just-in-time context loaded from the wiki + entity rows; no AI-only fields persisted to canonical RESO resources.
 
 Demo: paste an inbound inquiry → AI extracts `Contacts` fields + `SavedSearch.SearchQuery` → broker reviews and accepts; open a Buyer with 3 matched listings → AI explains why; open a scheduled showing → AI suggests 3 talking points; open a TM → "Deal Margin Coach" suggests cost-events to log.
@@ -298,6 +329,8 @@ Demo: paste an inbound inquiry → AI extracts `Contacts` fields + `SavedSearch.
 - (Stretch ~2 h) Two more LLM-wrapper EFs to graduate two stubs in lockstep with Lovable.
 
 ## Week 7 — Staging hardening + Demo prep {#week-7}
+
+> **Status (2026-06-03): NOT STARTED.** No Playwright happy-path suite, seed data set, or RLS Pattern B rollout on the four critical CDL tables yet.
 
 **Goal**: prototype is power-user-ready. RLS Pattern B is on the four critical CDL tables. Playwright E2E covers the happy paths. ADRs land. Demo script reviewed.
 

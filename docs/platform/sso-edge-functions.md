@@ -273,6 +273,20 @@ All admin functions require `org_admin` or `system_admin` scope.
 | `admin-ad-users` | `GET` | Queries Azure AD directory with filtering |
 | `admin-microsoft-auth` | `POST` | Manages Microsoft Graph API tokens for AD integration |
 | `sso-token-exchange` | `POST` | Exchanges external tokens for SSO tokens |
+| `sso-member-roster-lint` | `POST` | Daily lint: diffs SSO `auth.users` ↔ CDL `public.members` (by email) and persists a drift report. `verify_jwt: false`. |
+
+### `sso-member-roster-lint`
+
+Added 2026-06-03 for the matrix-pipeline Week 1 Cursor task (risk **R3** — identity-boundary drift; see [`product-specs/matrix-pipeline/phases.md#week-1-cursor`](../product-specs/matrix-pipeline/phases.md) and [`product-specs/matrix-pipeline/wiki/architecture.md#identity-boundary`](../product-specs/matrix-pipeline/wiki/architecture.md)).
+
+- **Purpose**: surface drift between the SSO identity roster (`auth.users` on `xgubaguglsnokjyudgvc`) and the canonical business roster (CDL `public.members` on `ofzcokolkeejgqfjaszq`) so the SSO-user ↔ `Member` mapping can be built and kept honest.
+- **Join key — email**, not `MemberAlternateId`. CDL `members` has **no `member_alternate_id` column**, so the canonical "SSO `user_id` ↔ `Member.MemberAlternateId`" mapping is not materialized. See [`data-models/cdl-schema.md`](../data-models/cdl-schema.md) "Owner-clamp deferred". The lint diffs normalized email and reports the unmapped roster.
+- **Access model**: SSO users read locally via the service role (`auth.admin.listUsers`); CDL `members` read cross-project via the **CDL anon key** (allowed by the `members_anon_select` RLS policy) — **no CDL service-role key is held** (ADR-013 spirit). This is a platform-foundation governance EF, not an app.
+- **Contract**: `POST /sso-member-roster-lint?triggered_by=scheduled|manual` → `{ ok, run_id, has_mismatch, totals, unmatched_members[], unmatched_sso_users[], email_status }`. Inserts one row into `public.sso_member_roster_lint_runs` (service-role-only RLS).
+- **Auth** (`verify_jwt: false`): the daily cron sends the SSO service_role bearer; manual runs require an SSO admin / `system_admin` JWT. Forged/unsigned `service_role` claims are rejected (the cron path requires either the exact committed bearer or a cryptographically verified `role=service_role`).
+- **Schedule**: `pg_cron` job `sso-member-roster-lint-daily` at `15 6 * * *` UTC (migration `20260603130000_sso_member_roster_lint.sql`).
+- **Email**: opt-in only — there is **no platform mailer yet**. If `ROSTER_LINT_RESEND_KEY` + `ROSTER_LINT_RECIPIENTS` are set, a Resend summary is sent on mismatch; otherwise `email_status = skipped_no_provider` and the run is still persisted. Wiring a mail provider is the remaining sub-task.
+- **First run (2026-06-03)**: 72 SSO users / 107 active members; only **36 matched by email**; 71 active (legacy `QOBRIX_AGENT_*`) members had no SSO login and 36 SSO users had no `Member` — quantifying the R3 drift.
 
 ## AI & Utility
 
