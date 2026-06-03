@@ -43,7 +43,7 @@
 | 18 | Notification Management | **Notification Management** | App / Service | All internal users, Admins |
 | 18a | Matrix Stardom | **Matrix Stardom** | App (internal / design + MLS tooling) | Product, engineering |
 
-> **Matrix Stardom** — `sharpsir-group/matrix-stardom`, Lovable-managed Matrix app shell. Auto-deployed by `github-watcher` on push to `main` (config key `sharpsir-group/matrix-stardom`, secret env `WEBHOOK_SECRET_STARDOM`, Apache path `/stardom/`). Production URL: `https://intranet.sharpsir.group/stardom/`. Ensure the OAuth app’s redirect URIs in the SSO Console include `https://intranet.sharpsir.group/stardom/auth/callback` (and Lovable preview URIs if used).
+> **Matrix Stardom** — `sharpsir-group/matrix-stardom`, Lovable-managed Matrix app shell. Auto-deployed by `github-watcher` on push to `main` (config key `sharpsir-group/matrix-stardom`, secret env `WEBHOOK_SECRET_STARDOM`, Apache path `/stardom/`). Production URL: `https://intranet.sharpsir.group/stardom/`. Ensure the OAuth app’s redirect URIs in the SSO Console include `https://intranet.sharpsir.group/stardom/auth/callback` (and Lovable preview URIs if used). **Intranet-only:** root Apache `htdocs/.htaccess` 301-redirects shareable paths that omit the `/stardom/` prefix (e.g. `/shared-conversation/…` → `/stardom/shared-conversation/…`) — same pattern as Pipeline `/list` → `/pipeline/list`; the Lovable repo stays at `/` with no committed `base`.
 
 ### Planned
 
