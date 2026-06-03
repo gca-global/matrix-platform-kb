@@ -150,6 +150,23 @@ Canonical RESO resources and infrastructure tables already in CDL and available 
 | Caravan / CaravanStop | `public.caravan` / `public.caravan_stop` | 0 | ✓ enabled (2026-05-29) |
 | TransactionManagement | `public.transaction_management` (canonical 4 fields; economics app-private) | 1 | ✓ enabled (2026-05-29) |
 
+### Projection / list views (denormalized read path)
+
+| View | Backed by | Shape | Grants |
+|---|---|---|---|
+| `public.v_members_list` | `members LEFT JOIN offices` | member display/lookup columns + denormalized `office_name` / `office_city` / `office_country` (join on `office_key`, fallback `office_id`) | anon, authenticated |
+| `public.v_offices_list` | `offices` | office display columns + denormalized `agent_count` (members per `office_key`) | anon, authenticated |
+
+Added by `20260603140000_member_office_list_views.sql` (Week 1 Cursor stretch
+#7). Regular `security_invoker` views — RESO-native column names preserved.
+Pipeline `useMembers` / `useOffices` read these with explicit projections (no
+`select *`); `MemberPicker` shows the agent's office without a second fetch +
+client join. Verified live: 129 member rows, 59 office rows, `agent_count`
+populated (top office = 25 agents); only 38/129 members resolve `office_name`
+(legacy Qobrix `office_key` values with no matching office row — upstream data
+sparsity, not a view defect). Supersede the dropped `v_dash_members` /
+`v_dash_offices`.
+
 ### RESO DD metadata (served to FE for tooltips/dropdowns)
 
 | Table | Purpose | Rows |
@@ -188,6 +205,8 @@ Source: live state via `user-supabase-cdl` MCP (`list_tables` + introspection 20
 > **Drift — `members` has no `member_alternate_id`** (flagged 2026-06-03): the CDL `public.members` table exposes `member_key`, `originating_system_member_key`, `member_mls_id`, `member_email`, `member_status`, `member_type` (Agent/Staff/Admin/Supervisor) — but **no `member_alternate_id` column**. The [#identity-boundary](#identity-boundary) mapping "SSO `user_id` ↔ `Member.MemberKey` via canonical `Member.MemberAlternateId`" is therefore **not materialized**; the only viable SSO↔roster join today is `member_email` (121/129 members have an email; 107 are `Active`). This is the same gap recorded in [cdl-schema.md](../../../data-models/cdl-schema.md) "Owner-clamp deferred". The `sso-member-roster-lint` EF (Week 1) diffs on email and reports unmapped members so the mapping can be bootstrapped.
 
 > **Drift — Teams** ✅ RESOLVED 2026-05-29: `cdl-schema.md` now reflects the PR1.5 DROP of `public.teams`. Pipeline derives team identity from SSO groups (ADR-015 #5 Option B).
+
+> **Drift — `v_dash_members` / `v_dash_offices` dropped, no `is_deleted`** ✅ RESOLVED 2026-06-03: the strict-RESO waves hardened `members` / `offices` to pure canonical RESO and **dropped their `is_deleted` columns**, which also removed the soft-delete-filtered `v_dash_members` / `v_dash_offices` views. `cdl-schema.md` now marks both dash views DROPPED. The Pipeline read path uses the new `v_members_list` / `v_offices_list` projection views instead (see [cdl-schema.md](../../../data-models/cdl-schema.md) "Member / office list views"). Readers MUST NOT filter `is_deleted` on members/offices.
 
 > **Drift — contact tables** ✅ RESOLVED 2026-05-29: `public.contact_listings` + `public.contact_listing_notes` are now documented in `cdl-schema.md` (Phase-2 expansion), adopted into the foundation repo (`20260529161000`), re-modeled to canonical RESO, and **RLS-enabled** (service-role-only). The gate violation is closed.
 

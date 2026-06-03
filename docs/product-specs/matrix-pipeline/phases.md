@@ -162,7 +162,7 @@ Demo: create a Lead, qualify them into a Buyer, edit their personal/commercial f
 
 ### Cursor {#week-1-cursor}
 
-> **Status (2026-06-03): DONE (core).** `cdl-write` (covers `cdl-contacts-write`) + `cdl-contacts-read` live; `contacts` RLS Pattern B confirmed; `#live-cdl-state` refreshed via MCP (verified 2026-06-03); `FR-CON` audit clean. The `sso-member-roster-lint` EF shipped + scheduled (see below). Only the **stretch** `Member`+`Office` view materialization is deferred.
+> **Status (2026-06-03): DONE (incl. stretch).** `cdl-write` (covers `cdl-contacts-write`) + `cdl-contacts-read` live; `contacts` RLS Pattern B confirmed; `#live-cdl-state` refreshed via MCP (verified 2026-06-03); `FR-CON` audit clean. The `sso-member-roster-lint` EF shipped + scheduled (see below). The stretch `Member`+`Office` view materialization also landed (`v_members_list` / `v_offices_list`, see below).
 
 - (~2 h) **CDL EF `cdl-contacts-write`** on the CDL project, `verify_jwt: false`, ES256 verification, scope checks (`pipeline:contacts:write` for write; `pipeline:contacts:read` for read paths). Upserts `public.contacts`. Emits `HistoryTransactional`. Cite [wiki/integration.md#cdl](wiki/integration.md#cdl) + [wiki/integration.md#history-emission](wiki/integration.md#history-emission).
 - (~1 h) **CDL EF `cdl-contacts-read`**: cursor pagination (per `performance.md`), HTTP cache headers, estimated counts.
@@ -170,7 +170,7 @@ Demo: create a Lead, qualify them into a Buyer, edit their personal/commercial f
 - (~1 h) Confirm `public.contacts` RLS Pattern B is on (it is) and verify scope mapping via test JWT.
 - (~1 h) `sso-member-roster-lint` EF (daily): diff `Member` ↔ SSO users; email Cursor + Lovable leads on mismatch. **✅ Shipped 2026-06-03** — EF on SSO (`verify_jwt:false`) + `pg_cron` `sso-member-roster-lint-daily` (06:15 UTC) + `public.sso_member_roster_lint_runs` report table. **Diffs by email, not `MemberAlternateId`** (that column doesn't exist in CDL `members` — see [wiki/architecture.md#identity-boundary](wiki/architecture.md#identity-boundary) drift note). First run: 36/107 active members matched an SSO login by email; 71 active legacy members + 36 SSO users unmapped. Email is **opt-in** (no platform mailer yet → `email_status: skipped_no_provider`); wiring a provider is the only residual sub-task. See [`../../platform/sso-edge-functions.md`](../../platform/sso-edge-functions.md).
 - (~1 h) Add `FR-CON-*` cross-refs to the wiki if any new FR was introduced during Lovable work — none expected, but the audit is mandatory.
-- (Stretch ~2 h) `Member` + `Office` view materialization for high-load list pages, per `performance.md`.
+- (Stretch ~2 h) `Member` + `Office` view materialization for high-load list pages, per `performance.md`. **✅ Done 2026-06-03** — CDL migration `20260603140000_member_office_list_views.sql` adds denormalized `security_invoker` views `v_members_list` (office name/city/country pre-joined onto members) + `v_offices_list` (+ `agent_count`). **Regular** views, not matviews (129/59 rows make refresh-staleness pure cost — `performance.md` exit-ramp guidance). Pipeline `useMembers`/`useOffices` repointed with explicit projections (no `select *`); `MemberPicker` shows office without a second offices fetch + client join. Also fixed KB drift: `v_dash_members`/`v_dash_offices` marked DROPPED and `members`/`offices` documented as having no `is_deleted`. See [cdl-schema.md](../../data-models/cdl-schema.md) "Member / office list views".
 
 ## Week 2 — SavedSearch + Prospecting {#week-2}
 

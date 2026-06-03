@@ -379,8 +379,8 @@ without a destructive schema rename. See
 | View | Backed by | Filter | Grants |
 |---|---|---|---|
 | `v_dash_properties` | `properties_published` | `is_visible AND NOT is_deleted AND lifecycle_state='Active'` | anon, authenticated |
-| `v_dash_members` | `members` | `NOT is_deleted` | anon, authenticated |
-| `v_dash_offices` | `offices` | `NOT is_deleted` | anon, authenticated |
+| ~~`v_dash_members`~~ | `members` | — | **DROPPED** by the strict-RESO waves. `members` was hardened to canonical RESO and **no longer has an `is_deleted` column**, so the soft-delete-filtered dash view was removed. The Pipeline read path now uses `v_members_list` (see below). |
+| ~~`v_dash_offices`~~ | `offices` | — | **DROPPED** by the strict-RESO waves. `offices` likewise has **no `is_deleted` column**; superseded by `v_offices_list` (see below). |
 | ~~`v_dash_teams`~~ | `teams` | — | **DROPPED 2026-05-04 (PR1.5)** alongside `public.teams`. |
 | `v_dash_property_media` | `property_media JOIN properties` | `NOT properties.is_deleted` | anon, authenticated |
 | `v_dash_open_houses` | `open_houses` | `NOT is_deleted` | anon, authenticated |
@@ -389,6 +389,35 @@ without a destructive schema rename. See
 Phase-1 v_dash_properties is intentionally a minimal slice. Full Dash
 field coverage (`propertyDetails.*`, `days_on_market`, `list_price_usd`,
 denormalised `office.*`) is deferred to the Phase-2.5 `dash-export` EF.
+
+### Member / office list views (`v_members_list`, `v_offices_list`)
+
+Added by `20260603140000_member_office_list_views.sql` (matrix-pipeline Week 1
+Cursor stretch #7). Denormalized, **projected** read views over `members` /
+`offices` that keep RESO-native snake_case column names so app readers just
+repoint their hooks. These are **regular** views, not `MATERIALIZED` —
+members=129 / offices=59 make matview refresh-staleness pure cost
+(`performance.md` frames matviews as a scale-beyond-Pro exit ramp). Both are
+`security_invoker = true` (RLS evaluated as the caller; base tables already
+grant `anon` SELECT).
+
+| View | Backed by | Shape | Grants |
+|---|---|---|---|
+| `v_members_list` | `members LEFT JOIN offices` | member display/lookup columns **+ denormalized `office_name` / `office_city` / `office_country`** (join on `office_key`, fallback `office_id`). No `is_deleted` (column doesn't exist). | anon, authenticated |
+| `v_offices_list` | `offices` | office display columns **+ denormalized `agent_count`** (correlated count of `members` per `office_key`). | anon, authenticated |
+
+Supersedes the dropped `v_dash_members` / `v_dash_offices`. The Pipeline app
+reads these via `useMembers` / `useOffices` ([`useMlsData.ts`]) with an explicit
+`select=` projection (no `select *`); `MemberPicker` shows the denormalized
+office name without a second offices fetch + client-side key join. Supporting
+base-table indexes: `members(office_key)`, `members(modification_timestamp desc)`,
+`members(member_status)`, `offices(modification_timestamp desc)`. Trigram GIN
+search indexes were intentionally omitted (sub-ms seq-scan ILIKE at this size).
+
+> **Data note:** only ~38/129 members currently resolve an `office_name` —
+> many legacy (Qobrix-imported) `members.office_key` values have no matching
+> `offices` row. This is upstream data sparsity, not a view defect; the join is
+> correct where the office exists.
 
 ### Read-side Edge Function updates (`listings-search`)
 
