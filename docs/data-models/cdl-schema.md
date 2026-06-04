@@ -527,7 +527,14 @@ inside; mirror `cdl-contacts-read`):
 
 - **`cdl-engagement-read`** — PII-gated engagement reads. Ops: `prospecting-list`
   (by `contact_key` [+ optional `saved_search_key`]), `saved-search-list`
-  (joins `prospecting → saved_search` for a contact), `saved-search-get`. Needed
+  (joins `prospecting → saved_search` for a contact), `saved-search-get`,
+  **`prospecting-stale`** (FR-PROS-07 — active subscriptions with no
+  `contact_listings` send in the last `days`, default 14; returns each row's
+  `last_sent_timestamp`), and **`prospecting-due-events`** (recent
+  `history_transactional` rows where `change_type ∈ {'Prospecting reminder due',
+  'Prospecting send'}`, default `sinceDays = 30`; `field_key = prospecting_key`,
+  `resource_record_key = contact_key`). `prospecting-due-events` is the signal the
+  Pipeline app turns into broker touchpoint **Activities** (FR-PROS-09/11). Needed
   because `public.prospecting` is **service-role-only** (it carries recipient
   email lists = PII), so the `prospecting → saved_search` join cannot run on the
   anon/authenticated client.
@@ -543,34 +550,56 @@ These complete the read side for the Pipeline canonical-process surfaces
 tracking, and the derived 5-stage `/pipeline` projection). Writes still flow
 through the single `cdl-write` dispatcher (ADR-016).
 
-### Scheduled jobs (pg_cron) — Prospecting reminder tick (2026-06-04)
+### Scheduled jobs (pg_cron) — Prospecting delivery engine (2026-06-04)
 
-`public.cdl_prospecting_tick()` is the Week-2 Prospecting reminder engine —
-the deliverable phases.md names "`cdl-prospecting-trigger` (scheduled)".
-Scheduled by **`pg_cron` job `cdl-prospecting-tick-hourly`** (`0 * * * *`).
-`SECURITY DEFINER`, transactional, no external I/O. Two steps, both gated on
-`active_yn AND NOT is_deleted AND NOT concierge_yn AND client_activated_yn`:
+`public.cdl_prospecting_run()` is the Week-2 Prospecting **delivery/matching
+engine** (FR-PROS-03) — it supersedes the reminder-only v0 `cdl_prospecting_tick()`
+(now dropped). Scheduled by **`pg_cron` job `cdl-prospecting-run-hourly`**
+(`0 * * * *`; the prior `cdl-prospecting-tick-hourly` job is unscheduled).
+`SECURITY DEFINER`, transactional, no external I/O. Per eligible subscription
+(`active_yn AND NOT is_deleted AND NOT concierge_yn AND client_activated_yn AND
+contact_key IS NOT NULL`):
 
 1. **Initialize** — sets `prospecting.next_send_timestamp = coalesce(created_at, now())`
-   wherever it is `NULL`, so the subscription surfaces in the Pipeline reminder
-   UI (the app inserts Prospecting rows without a `next_send_timestamp`, so
-   without this step the dashboard / `/saved-searches` cards can never fire).
-2. **Emit** — inserts one **contact-scoped** `history_transactional` row
-   (`resource_name = 'Contacts'`, `resource_record_key = contact_key`,
-   `change_type = 'Prospecting reminder due'`, `field_name = 'NextSendTimestamp'`,
-   `field_key = prospecting_key`, `source_system_name = 'matrix-pipeline'`) per
-   **due-onset**, deduped on `field_key + modification_timestamp >= next_send_timestamp`.
+   wherever it is `NULL` (first outreach due immediately).
+2. **Match + send** — when due, reads the structured criteria persisted at
+   **`saved_search.raw->'criteria'`** (written by the Pipeline app; the OData
+   `$filter` in `search_query` stays the canonical contract — `raw.criteria` is
+   its machine-evaluable mirror), evaluates it against **`public.properties`**
+   (`standard_status`, `property_type`, `property_sub_type`, `list_price`,
+   `bedrooms_total`, `bathrooms_total_integer`, `city`) restricted to rows
+   `updated_at > coalesce(last_new_changed_timestamp, '-infinity')`, and inserts
+   one **`contact_listings`** row per NEW match not already delivered to the
+   contact (`listing_sent_timestamp = now()`, `contact_id` resolved from
+   `contacts`, provenance in `raw.delivered_by/prospecting_key/saved_search_key`).
+   It then advances `last_new_changed_timestamp` to the newest matched
+   `updated_at` and emits a contact-scoped `'Prospecting send'`
+   `history_transactional` row (`field_key = prospecting_key`, `new_value` = sent
+   count).
+3. **Remind** — when a due cycle yields **no new matches**, emits one
+   `'Prospecting reminder due'` row per due-onset (deduped on
+   `field_key + modification_timestamp >= next_send_timestamp`) so the broker
+   still gets a touchpoint (FR-PROS-09).
+4. **Advance cadence** — `next_send_timestamp` advances by `ScheduleType` in both
+   branches: `Daily +1d`, `Weekly +7d`, `Monthly +1mo`, `ASAP`/`OnNewMatch` +1h
+   (event-driven re-check), `Custom` +1d (v0). The durable broker reminder is the
+   app-DB **Activity** materialized from the emitted events, so advancing the CDL
+   timestamp here is safe (resolves the v0 no-advance caveat).
 
-**v0 divergence (recorded, escape hatch):** implemented as a SQL function +
-`pg_cron` (mirroring `mls-sync-resume-watchdog`), **not** a Deno EF, because v0
-has no external I/O — the **email channel is deferred** (no platform mailer yet,
-same constraint as `sso-member-roster-lint`) and history emission must be
-transactional. **No cadence auto-advance** in v0 (the canonical
-`NextSendTimestamp`-advance-per-`ScheduleType` lands with the listing-dispatch /
-broker-acknowledge action that does not exist yet); the reminder card persists
-until the broker pauses/unsubscribes. Concierge-held and not-client-activated
-subscriptions are skipped (canonical "Concierge gating"). Test entry point:
-`select * from public.cdl_prospecting_tick();` returns `(initialized, reminders_emitted)`.
+**Dual reminders:** the CDL `history_transactional` row is the immutable audit;
+the Pipeline app reads `cdl-engagement-read` `prospecting-due-events` and
+materializes an app-DB `Activity` per cycle as the broker's completable to-do
+(FR-PROS-09/11). **Email dispatch is deferred** — no platform mailer yet;
+delivery is in-app/portal via the `contact_listings` rows. Concierge-held and
+not-client-activated subscriptions are skipped (canonical "Concierge gating").
+
+**Divergence (recorded, escape hatch):** implemented as a SQL function + `pg_cron`
+(mirroring `mls-sync-resume-watchdog`), **not** a Deno EF — v0 has no external
+I/O (email deferred). `saved_search.raw.criteria` is a deliberate
+structured-criteria mirror of the canonical OData `$filter` so the server engine
+can evaluate matches without an OData parser. Test entry point:
+`select * from public.cdl_prospecting_run();` returns
+`(initialized, sent, reminders_emitted)`.
 
 ## Migrations index (current)
 
@@ -591,7 +620,8 @@ subscriptions are skipped (canonical "Concierge gating"). Test entry point:
 | 20 | `20260529161000_pipeline_contact_listings_remodel.sql` | Re-model `contact_listings` + `contact_listing_notes` + backfill + RLS (ADR-016) |
 | 21 | `20260530120000_secure_v_property_contacts.sql` | Secure `v_property_contacts` (SECURITY INVOKER + revoke anon) — P0 PII leak fix (ADR-016) |
 | … | (22–27: TPA authed reads, tenant label overrides, `app_ui_strings`, member/office list views, contacts FR-CON columns) | see `migrations/` dir |
-| 28 | `20260604080000_cdl_prospecting_tick.sql` | `cdl_prospecting_tick()` + hourly `pg_cron` — Week-2 Prospecting reminder engine (initialize `next_send_timestamp` + emit contact-scoped reminder history) |
+| 28 | `20260604080000_cdl_prospecting_tick.sql` | `cdl_prospecting_tick()` + hourly `pg_cron` — Week-2 Prospecting reminder engine (initialize `next_send_timestamp` + emit contact-scoped reminder history). **Superseded by 29.** |
+| 29 | `20260604120000_cdl_prospecting_run.sql` | `cdl_prospecting_run()` (FR-PROS-03 delivery engine) — matches `public.properties` against `saved_search.raw.criteria`, inserts `contact_listings`, advances `last_new_changed_timestamp` + `next_send_timestamp` per `ScheduleType`, emits `'Prospecting send'` / `'Prospecting reminder due'`. Drops `cdl_prospecting_tick()`, repoints cron to `cdl-prospecting-run-hourly`. |
 
 ## Cross-reference
 

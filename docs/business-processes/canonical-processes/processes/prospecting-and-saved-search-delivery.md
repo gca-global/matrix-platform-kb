@@ -200,6 +200,52 @@ stateDiagram-v2
 - No opinion on bounce/suppression policy.
 - No opinion on the consumer portal UX.
 
+## matrix-pipeline implementation (FR-PROS, Week 2)
+
+The `matrix-pipeline` CRM provisions all four resources in the CDL and runs the
+delivery loop as a scheduled SQL engine. This is the SIR project flavour of the
+canonical baseline above.
+
+- **Engine:** `public.cdl_prospecting_run()` (CDL), hourly via `pg_cron`
+  (`cdl-prospecting-run-hourly`). Per due subscription it matches new/updated
+  `public.properties` against the saved search, inserts `contact_listings`,
+  advances `last_new_changed_timestamp` + `next_send_timestamp`, and emits
+  `'Prospecting send'` / `'Prospecting reminder due'` `HistoryTransactional`
+  rows. Full semantics in
+  [`../../../data-models/cdl-schema.md`](../../../data-models/cdl-schema.md)
+  §"Scheduled jobs". Migration
+  `cdl/migrations/20260604120000_cdl_prospecting_run.sql`.
+- **Structured criteria (divergence):** the matchable criteria are persisted at
+  **`saved_search.raw->'criteria'`** (`{ priceMin, priceMax, propertyType,
+  propertySubType, locations[], bedsMin, bathsMin, standardStatus }`) as a
+  machine-evaluable mirror of the canonical OData `$filter` in `search_query`
+  (still the canonical contract). The app writes it via `cdl-write` (which
+  forwards `raw` verbatim); the engine reads it instead of parsing OData.
+- **`ScheduleType` (platform extension):** the pipeline UI offers
+  `ASAP | Daily | Weekly | Monthly | OnNewMatch | Custom` (the canonical RESO
+  baseline cites only `ASAP/Daily/Monthly`). `Weekly`/`OnNewMatch`/`Custom` are
+  Sharp-Matrix extensions; the engine maps each to a cadence interval.
+- **Dual reminders (FR-PROS-09/11/13):** the CDL `HistoryTransactional` row is
+  the immutable audit; the app additionally materializes an **app-DB `Activity`**
+  (table `public.activities` on the pipeline app DB) per due cycle, read from
+  `cdl-engagement-read` `prospecting-due-events` by the `useProspectingActivitySync`
+  hook (deduped on `(related_resource='Prospecting', related_key=prospecting_key,
+  due_at >= event_ts)`). The open Activity is the broker's completable to-do.
+  Ownership caveat: `activities` RLS forces `owner_id = caller` and the SSO token
+  carries no `member_key`, so the materialized Activity is owned by whoever opens
+  the app — acceptable for the single-brokerage deployment; a member-scoped owner
+  needs a `member_key` claim or a service-role bridge (follow-up).
+- **Stale reports:** client-side stale (FR-PROS-07) via `cdl-engagement-read`
+  `prospecting-stale`; broker-side stale (FR-PROS-12, no completed touchpoint
+  Activity in N days) joined app-side. Surfaced in the `/saved-searches`
+  "Needs attention" section.
+- **SavedSearch-from-CSV (FR-PROS-12):** the contact `ImportWizard` can optionally
+  create an initial `SavedSearch` + `Prospecting` (Daily) per imported contact
+  from mapped criteria columns.
+- **Email deferred:** there is no platform mailer; v0 delivery is in-app/portal
+  via the `contact_listings` rows. Outbound email (e.g. per-broker M365 delegated
+  send) is a later channel.
+
 ## Atlas implementation
 
 Implementation contract for builders (human or AI) wiring this
