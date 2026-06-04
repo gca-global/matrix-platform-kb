@@ -2,7 +2,7 @@
 title: Architecture — Storage, Identity, CDL access, RESO compliance
 status: stable
 source: raw/context-v2.md §5a, §11
-last_updated: 2026-06-03
+last_updated: 2026-06-04
 tags: [architecture]
 ---
 
@@ -119,7 +119,7 @@ CRM gets all rights and authority for CDL CRUD **as a client app** via canonical
 
 Source: raw/context-v2.md §5a.3.
 
-## CDL as-built (live state, MCP-verified 2026-06-03) {#live-cdl-state}
+## CDL as-built (live state, MCP-verified 2026-06-03; targeted delta 2026-06-04: prospecting + history + scheduled jobs) {#live-cdl-state}
 
 Canonical RESO resources and infrastructure tables already in CDL and available to CRM as a client.
 
@@ -137,12 +137,12 @@ Canonical RESO resources and infrastructure tables already in CDL and available 
 | Contacts | `public.contacts` (PII) | 45 108 | ✓ enabled |
 | ContactListings | `public.contact_listings` (junction Contacts × Property) | **24 979** | ✓ enabled (2026-05-29, service-role-only) |
 | ContactListingNotes | `public.contact_listing_notes` | 0+ | ✓ enabled (2026-05-29, service-role-only) |
-| HistoryTransactional | `public.history_transactional` (append-only) | 5 | ✓ enabled |
+| HistoryTransactional | `public.history_transactional` (append-only) | 6 | ✓ enabled |
 | OpenHouse | `public.open_houses` (excluded from CRM scope — see [#escape-hatch](#escape-hatch)) | 0 | ✓ enabled |
 | ShowingAppointment | `public.showings` | 0 | ✓ enabled |
 | InternetTracking | `public.internet_tracking_events` | 0 | ✓ enabled |
 | SavedSearch | `public.saved_search` | 0 | ✓ enabled (2026-05-29) |
-| Prospecting | `public.prospecting` (PII) | 0 | ✓ enabled (service-role-only) |
+| Prospecting | `public.prospecting` (PII) | 1 | ✓ enabled (service-role-only) |
 | ShowingAvailability | `public.showing_availability` | 0 | ✓ enabled (2026-05-29) |
 | ShowingRequest | `public.showing_request` | 0 | ✓ enabled (2026-05-29) |
 | Showing (recorded fact) | `public.showing` (≠ `public.showings`) | 0 | ✓ enabled (2026-05-29) |
@@ -166,6 +166,13 @@ populated (top office = 25 agents); only 38/129 members resolve `office_name`
 (legacy Qobrix `office_key` values with no matching office row — upstream data
 sparsity, not a view defect). Supersede the dropped `v_dash_members` /
 `v_dash_offices`.
+
+### Scheduled jobs (pg_cron)
+
+| Job | Schedule | Runs | Purpose |
+|---|---|---|---|
+| `mls-sync-resume-watchdog` | `* * * * *` | `public.mls_sync_resume_watchdog()` | Resume stale sync jobs + per-tenant scheduled syncs |
+| `cdl-prospecting-tick-hourly` | `0 * * * *` | `public.cdl_prospecting_tick()` | **Week-2 Prospecting reminder engine** — initialize `prospecting.next_send_timestamp` + emit one contact-scoped `'Prospecting reminder due'` `history_transactional` row per due-onset. v0: no email, no cadence auto-advance — see [cdl-schema.md](../../../data-models/cdl-schema.md) "Scheduled jobs". First run 2026-06-04: 1 initialized, 1 reminder emitted. |
 
 ### RESO DD metadata (served to FE for tooltips/dropdowns)
 

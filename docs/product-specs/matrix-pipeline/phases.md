@@ -2,7 +2,7 @@
 title: matrix-pipeline — 8-week atomic build plan
 status: stable
 source: plan .cursor/plans/llm_wiki_and_phased_build_plan_7ebe41be.plan.md
-last_updated: 2026-06-03
+last_updated: 2026-06-04
 tags: [phases]
 ---
 
@@ -14,18 +14,18 @@ tags: [phases]
 
 ## Build status snapshot {#status}
 
-> Reflects the deployed `matrix-pipeline-2-0` codebase as of **2026-06-03** (added during a build review). Tags: **DONE** / **MOSTLY DONE** / **PARTIAL** / **BUILT-NOT-WIRED** / **NOT STARTED**. The per-week sections below carry the same status callout.
+> Reflects the deployed `matrix-pipeline-2-0` codebase as of **2026-06-04** (refreshed after the Week 2 surfacing wiring landed). Tags: **DONE** / **MOSTLY DONE** / **PARTIAL** / **BUILT-NOT-WIRED** / **NOT STARTED**. The per-week sections below carry the same status callout.
 
 - **Week 0 — Foundation**: **DONE**. i18n shipped ahead of plan (DB-driven, [ADR-020](../../architecture/decisions/ADR-020.md) / [ADR-021](../../architecture/decisions/ADR-021.md)). Surfaces beyond this plan are also live: Properties browse + read-only Property detail, AD Employees, Curated Lists (public share links), Settings/admin, Profile.
-- **Week 1 — Contacts**: **DONE** (2026-06-03). *Lovable lane:* Activities (`activities` app-DB table, Pattern B RLS + `useActivities` + `ActivitiesCard`), the bulk CSV import wizard (preview-only stub; commit lands Week 2), and duplicate detection on create; earlier surfaces (list/create/detail, graduation, status, reassign, privacy) remain live. *Cursor lane:* `cdl-write`/`cdl-contacts-read` live, `contacts` RLS Pattern B confirmed, `#live-cdl-state` refreshed, and the `sso-member-roster-lint` EF + daily cron shipped (risk R3); only the optional `Member`+`Office` materialization stretch is deferred.
-- **Week 2 — SavedSearch + Prospecting**: **BUILT-NOT-WIRED → immediate NEXT**. `useProspecting` + `ContactSavedSearches` are complete against the live `cdl-engagement-read` / `cdl-write` EFs but are not mounted on `ContactDetail`, and there is no `/saved-searches` route or reminder surface.
-- **Week 3 — ContactListings + Showings + Caravan**: **PARTIAL**. Showings (5-resource chain) + Caravans live; the `ContactListingsPanel` is built but unmounted (lands with the Week 2 wiring).
+- **Week 1 — Contacts**: **DONE** (2026-06-03). *Lovable lane:* Activities (`activities` app-DB table, Pattern B RLS + `useActivities` + `ActivitiesCard`), the bulk CSV import wizard (commit landed 2026-06-04, see Week 2), and duplicate detection on create; earlier surfaces (list/create/detail, graduation, status, reassign, privacy) remain live. *Cursor lane:* `cdl-write`/`cdl-contacts-read` live, `contacts` RLS Pattern B confirmed, `#live-cdl-state` refreshed, the `sso-member-roster-lint` EF + daily cron shipped (risk R3), and the `Member`+`Office` materialization stretch landed.
+- **Week 2 — SavedSearch + Prospecting**: **DONE** (2026-06-04). *Lovable lane:* `ContactSavedSearches` + `ContactListingsPanel` mounted on the `ContactDetail` Engagement tab; broker-wide `/saved-searches` page (FR-PROS-13 due/upcoming reminder cards); dashboard "Time to contact" reminder cards on `/`; the Matching (b) soft-prompt ("listings sent without active prospecting"); CSV import **commit** (FR-PROS-12, duplicate auto-skip + per-row results); the Prospecting signal now feeds the Pipeline board (see Week 5); `role_configurations` backfill grants the new `saved-searches` page to every role already holding `pipeline`. *Cursor lane:* the prospecting reminder engine shipped — `public.cdl_prospecting_tick()` + hourly `pg_cron` (initializes `next_send_timestamp` so reminders actually fire, emits a contact-scoped reminder per due-onset); `contact_listings` write/read served by `cdl-write` + `cdl-contact-listings-read`; live-state refreshed. Only the **email channel** (stretch) is deferred — no platform mailer yet (same as `sso-member-roster-lint`).
+- **Week 3 — ContactListings + Showings + Caravan**: **MOSTLY DONE**. Showings (5-resource chain) + Caravans live; `ContactListingsPanel` is now **mounted** on `ContactDetail` (send/view/preference/notes engagement). The reusable cross-side engagement timeline is the remaining piece (property-side `PropertyEngagementCard` live; a shared contact+property timeline component pending).
 - **Week 4 — Transactions + Referral**: **PARTIAL**. TM list/create/type + property close / back-on-market live; offer lifecycle (counter/accept/sign), forecast P&L, Documents tab, and the entire Referrals surface not built.
-- **Week 5 — Pipeline + Commission**: **PARTIAL**. Pipeline v0 board live (per-contact; Matching signal currently inert); Commission Engine, forecast/variance dashboards, and `/reports` not built.
+- **Week 5 — Pipeline + Commission**: **PARTIAL**. Pipeline v0 board live (per-contact); the Matching signal is now **wired** (`usePipeline` consumes `useAllProspecting` → `prospectingActive`). Still per-Contact (not per `(Contact × SavedSearch)`); Commission Engine, forecast/variance dashboards, and `/reports` not built.
 - **Week 6 — AI Copilot**: **NOT STARTED**.
 - **Week 7 — Staging hardening**: **NOT STARTED**.
 
-**Immediate next** — surface the Contact engagement loop (Weeks 2-3): mount `ContactSavedSearches` + `ContactListingsPanel` on `ContactDetail`, feed the Prospecting signal into the Pipeline board, and add a broker-wide `/saved-searches` page. Plan: `contact_engagement_loop`.
+**Immediate next** — Week 2 is closed (both lanes). Proceed to **Week 4** (offer lifecycle: counter/accept/sign; forecast P&L; Documents tab; and the entire Referrals surface), which is the largest remaining PARTIAL. The only deferred Week-2 item is the Prospecting **email channel** (stretch) — blocked on a platform mailer, tracked alongside the same gap in `sso-member-roster-lint`.
 
 ## TOC
 
@@ -174,7 +174,7 @@ Demo: create a Lead, qualify them into a Buyer, edit their personal/commercial f
 
 ## Week 2 — SavedSearch + Prospecting {#week-2}
 
-> **Status (2026-06-03): BUILT, NOT YET SURFACED → immediate NEXT.** `useProspecting` (saved_search + prospecting reads/writes via `cdl-engagement-read`/`cdl-write`) and the `ContactSavedSearches` component are complete, but not mounted on `ContactDetail` and there is no `/saved-searches` route or reminder-card surface. Wiring this is the next milestone (plan: `contact_engagement_loop`). Pipeline-derivation v0 exists (see Week 5).
+> **Status (2026-06-04): DONE (both lanes; email stretch deferred).** *Lovable:* `ContactSavedSearches` + `ContactListingsPanel` mounted on the `ContactDetail` Engagement tab; broker-wide `/saved-searches` page with FR-PROS-13 due/upcoming reminder cards; dashboard "Time to contact" cards on `/`; the Matching (b) soft-prompt; CSV import **commit** (FR-PROS-12, duplicate auto-skip + per-row results); Pipeline Matching signal wired (see Week 5); a `role_configurations` backfill granting the `saved-searches` page to every role already holding `pipeline`. *Cursor:* the prospecting reminder engine (`public.cdl_prospecting_tick()` + hourly `pg_cron`) — initializes `next_send_timestamp` (the real gap: the app inserted Prospecting rows without it, so reminders never fired) and emits one contact-scoped `'Prospecting reminder due'` history row per due-onset; `contact_listings` write/read via `cdl-write` + `cdl-contact-listings-read`. **Note — `saved_search`/`prospecting` live in CDL, not the CRM app DB** (the per-week Lovable tasks below say "CRM app DB" — the actual surface is the CDL `cdl-engagement-read`/`cdl-write` EFs; recorded divergence, see the 2026-05-30 remediation in [log.md](log.md)). **Deferred:** the Prospecting **email channel** (stretch) — no platform mailer yet.
 
 **Goal**: a broker can attach 1..N `SavedSearch` rows to a `Contact`, enable `Prospecting`, and the system actually pings the broker (CRM app reminder + email) for outreach. The pipeline auto-derives "Matching" from `SavedSearch + ContactListings`, including the (b) branch — manual sends without `Prospecting`.
 
@@ -195,16 +195,18 @@ Demo: broker creates a Buyer SavedSearch with criteria + budget, enables Prospec
 
 ### Cursor {#week-2-cursor}
 
-- (~2 h) **CDL EF `cdl-prospecting-trigger`** (scheduled): every hour, scan CRM app DB `prospecting` rows where `next_run ≤ now`, emit a reminder event (CRM-app-DB row + email via SSO mailer). DoD: a single broker with three active SS gets three reminders.
-- (~2 h) **CDL EF `cdl-contact-listings-write`**: writes to `public.contact_listings` on the CDL project. Scope: `pipeline:contacts:write` + `pipeline:matching:write`. Scope check is the only access control until Pattern B is on. Cite [wiki/architecture.md#compliance-gates](wiki/architecture.md#compliance-gates).
-- (~1 h) **CDL EF `cdl-contact-listings-read`**: cursor paginated reads.
-- (~1 h) Live-state refresh + KB drift check.
-- (~1 h) Verify `ContactListings` write authority claim with platform team — log any divergence.
-- (Stretch ~2 h) `cdl-schema.md` update PR (platform-team task): add `public.contact_listings` + `public.contact_listing_notes` to Phase 1 expansion list.
+> **Status (2026-06-04): DONE.** The prospecting reminder engine shipped (migration `20260604080000_cdl_prospecting_tick.sql`); `contact_listings` write/read are served by `cdl-write` + `cdl-contact-listings-read` (the per-resource write EF is superseded by the `cdl-write` dispatcher, ADR-016); live-state refreshed; ContactListings write authority confirmed (Pipeline authors via `cdl-write`, service-role inside, scope check is the gate until Pattern B). Email channel (stretch) deferred — no platform mailer (same as `sso-member-roster-lint`).
+
+- (~2 h) **CDL EF `cdl-prospecting-trigger`** (scheduled): every hour, scan `prospecting` rows where `next_send_timestamp ≤ now`, emit a reminder event. DoD: a single broker with active SS gets reminders. **✅ Done 2026-06-04** — shipped as **`public.cdl_prospecting_tick()` SQL function + `pg_cron` job `cdl-prospecting-tick-hourly`** (`0 * * * *`), *not* a Deno EF. **KB-divergence (escape hatch, recorded in [log.md](log.md)):** v0 has no external I/O (email deferred — no platform mailer), the work is pure CDL data manipulation, and the canonical history contract wants the `HistoryTransactional` row in-transaction → a SQL function (mirroring `mls-sync-resume-watchdog`) is the right surface; an EF wraps it when email lands. Step 1 **initializes** NULL `next_send_timestamp` (the real gap — the app inserts Prospecting rows without it, so reminders never fired); Step 2 **emits** one contact-scoped `'Prospecting reminder due'` history row per due-onset (deduped). **No cadence auto-advance** in v0 (lands with listing-dispatch/broker-ack). Concierge / not-client-activated rows skipped. Live-verified: 1 initialized, 1 reminder emitted, idempotent on re-run.
+- (~2 h) **CDL EF `cdl-contact-listings-write`**: writes to `public.contact_listings`. **✅ Satisfied by `cdl-write`** (resource `contact_listings`, ADR-016 dispatcher — the per-resource write EF family is superseded, same as `cdl-contacts-write`). Scope check inside the EF is the only access control until Pattern B.
+- (~1 h) **CDL EF `cdl-contact-listings-read`**: cursor paginated reads. **✅ Live** (deployed in the 2026-05-31 broker-scope read-EF batch).
+- (~1 h) Live-state refresh + KB drift check. **✅ Done 2026-06-04** — targeted delta on [wiki/architecture.md#live-cdl-state](wiki/architecture.md) (`prospecting` 0 → 1, `history_transactional` 5 → 6, new scheduled-jobs table); no drift found.
+- (~1 h) Verify `ContactListings` write authority claim with platform team — log any divergence. **✅ Confirmed** — Pipeline authors `contact_listings` via `cdl-write` (service-role inside, never holds the CDL key); no divergence.
+- (Stretch ~2 h) `cdl-schema.md` update PR (platform-team task): add `public.contact_listings` + `public.contact_listing_notes` to Phase 1 expansion list. *(Already documented in [cdl-schema.md](../../data-models/cdl-schema.md) via the ADR-016 re-model migrations — drift item closed.)*
 
 ## Week 3 — ContactListings + Showing chain + Caravan {#week-3}
 
-> **Status (2026-06-03): PARTIAL.** Showings (5-resource chain, `useShowingChain`) and Caravans (`useCaravans`) are live. ContactListings — `ContactListingsPanel` + `useContactListingsEngagement` — is built but unmounted (lands with the Week 2 wiring). The reusable engagement timeline is only partial (property-side `PropertyEngagementCard` live; contact-side pending).
+> **Status (2026-06-04): MOSTLY DONE.** Showings (5-resource chain, `useShowingChain`) and Caravans (`useCaravans`) are live. ContactListings — `ContactListingsPanel` + `useContactListingsEngagement` — is now **mounted** on `ContactDetail` (2026-06-04) with the Matching (b) soft-prompt. The reusable cross-side engagement timeline is the remaining piece (property-side `PropertyEngagementCard` live; a shared contact+property timeline component pending).
 
 **Goal**: a broker can send a curated set of listings to a buyer, schedule a single showing or a multi-property caravan, log feedback, and see the engagement timeline on both the Contact and the Property side. Full 5-resource Showing chain wired.
 
@@ -270,7 +272,7 @@ Demo: convert a showed Buyer into an offer; counter, accept, push to external co
 
 ## Week 5 — Pipeline projection + Commission Engine {#week-5}
 
-> **Status (2026-06-03): PARTIAL.** The `/pipeline` v0 board is live (`usePipeline` + `pipelineProjection.ts`), but derives one card per Contact (not per `(Contact × SavedSearch)`) and its Matching signal is currently inert (`prospectingActive: null`) — fixed by the Week 2 wiring. NOT built: the Commission Engine (cost events / rules / deal P&L / compensation), the forecast & variance dashboards, and `/reports`.
+> **Status (2026-06-04): PARTIAL.** The `/pipeline` v0 board is live (`usePipeline` + `pipelineProjection.ts`). The Matching signal is now **wired** (2026-06-04): `usePipeline` consumes `useAllProspecting()` and feeds `prospectingActive` into the projection (no longer inert). Still derives one card per Contact (not per `(Contact × SavedSearch)`). NOT built: the Commission Engine (cost events / rules / deal P&L / compensation), the forecast & variance dashboards, and `/reports`.
 
 **Goal**: a broker sees a Kanban / list view of the canonical 5-stage pipeline auto-derived from CDL + CRM-app-DB state; the Commission Engine ERP-lite forecasts GCI per deal, attributes costs, computes per-broker compensation, and reconciles against Finance ERP actuals.
 

@@ -543,6 +543,35 @@ These complete the read side for the Pipeline canonical-process surfaces
 tracking, and the derived 5-stage `/pipeline` projection). Writes still flow
 through the single `cdl-write` dispatcher (ADR-016).
 
+### Scheduled jobs (pg_cron) — Prospecting reminder tick (2026-06-04)
+
+`public.cdl_prospecting_tick()` is the Week-2 Prospecting reminder engine —
+the deliverable phases.md names "`cdl-prospecting-trigger` (scheduled)".
+Scheduled by **`pg_cron` job `cdl-prospecting-tick-hourly`** (`0 * * * *`).
+`SECURITY DEFINER`, transactional, no external I/O. Two steps, both gated on
+`active_yn AND NOT is_deleted AND NOT concierge_yn AND client_activated_yn`:
+
+1. **Initialize** — sets `prospecting.next_send_timestamp = coalesce(created_at, now())`
+   wherever it is `NULL`, so the subscription surfaces in the Pipeline reminder
+   UI (the app inserts Prospecting rows without a `next_send_timestamp`, so
+   without this step the dashboard / `/saved-searches` cards can never fire).
+2. **Emit** — inserts one **contact-scoped** `history_transactional` row
+   (`resource_name = 'Contacts'`, `resource_record_key = contact_key`,
+   `change_type = 'Prospecting reminder due'`, `field_name = 'NextSendTimestamp'`,
+   `field_key = prospecting_key`, `source_system_name = 'matrix-pipeline'`) per
+   **due-onset**, deduped on `field_key + modification_timestamp >= next_send_timestamp`.
+
+**v0 divergence (recorded, escape hatch):** implemented as a SQL function +
+`pg_cron` (mirroring `mls-sync-resume-watchdog`), **not** a Deno EF, because v0
+has no external I/O — the **email channel is deferred** (no platform mailer yet,
+same constraint as `sso-member-roster-lint`) and history emission must be
+transactional. **No cadence auto-advance** in v0 (the canonical
+`NextSendTimestamp`-advance-per-`ScheduleType` lands with the listing-dispatch /
+broker-acknowledge action that does not exist yet); the reminder card persists
+until the broker pauses/unsubscribes. Concierge-held and not-client-activated
+subscriptions are skipped (canonical "Concierge gating"). Test entry point:
+`select * from public.cdl_prospecting_tick();` returns `(initialized, reminders_emitted)`.
+
 ## Migrations index (current)
 
 | # | File | Purpose |
@@ -561,6 +590,8 @@ through the single `cdl-write` dispatcher (ADR-016).
 | 19 | `20260529160000_pipeline_canonical_new_tables.sql` | 9 new canonical CRM tables + RLS + grants (ADR-016) |
 | 20 | `20260529161000_pipeline_contact_listings_remodel.sql` | Re-model `contact_listings` + `contact_listing_notes` + backfill + RLS (ADR-016) |
 | 21 | `20260530120000_secure_v_property_contacts.sql` | Secure `v_property_contacts` (SECURITY INVOKER + revoke anon) — P0 PII leak fix (ADR-016) |
+| … | (22–27: TPA authed reads, tenant label overrides, `app_ui_strings`, member/office list views, contacts FR-CON columns) | see `migrations/` dir |
+| 28 | `20260604080000_cdl_prospecting_tick.sql` | `cdl_prospecting_tick()` + hourly `pg_cron` — Week-2 Prospecting reminder engine (initialize `next_send_timestamp` + emit contact-scoped reminder history) |
 
 ## Cross-reference
 
