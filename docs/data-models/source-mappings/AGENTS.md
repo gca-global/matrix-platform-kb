@@ -75,7 +75,7 @@ Required gates:
 
 1. Every `mapping_curated.csv` row's `reso_field` exists in
    `../reso-dd-kb/raw/fields.csv` for the matching `reso_resource`,
-   OR `is_extension=true` AND `reso_field` starts with `x_sm_`.
+   OR `is_extension=true` AND `reso_field` starts with `x_`.
 2. Every non-empty `dash_label` cited in `mapping_curated.csv` exists
    in `dash_inventory.csv`.
 3. Every non-empty `qobrix_path` cited in `mapping_curated.csv` exists

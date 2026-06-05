@@ -201,7 +201,7 @@ multiple licenses exist.
 - No opinion on background checks, fingerprinting, or onboarding
   forms - project flavour.
 - No opinion on commission-split agreements - project flavour
-  (`x_sm_commission_pct` extension).
+  (`x_commission_pct` extension).
 - No opinion on continuing-education tracking - the canonical
   baseline only requires `MemberStateLicenseExpirationDate` to be
   current.

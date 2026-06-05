@@ -12,7 +12,7 @@
 │  50+ concrete fields, 30+ feature groups, media metadata    │
 │  Derived from the SIR global listing platform brokers use   │
 ├─────────────────────────────────────────────────────────────┤
-│  Layer 2: Platform Extensions (x_sm_*)                      │
+│  Layer 2: Platform Extensions (x_*)                      │
 │  Fields Sharp Matrix needs that Dash does not provide       │
 │  Prefixed, governed, and tracked per app                    │
 ├─────────────────────────────────────────────────────────────┤
@@ -38,8 +38,8 @@
 | [../business-processes/canonical-processes/USAGE.md](../business-processes/canonical-processes/USAGE.md) | **Canonical RESO-aligned MLS process catalogue — start here for state-machine semantics.** 10 process docs with mermaid state diagrams, transition tables, and machine-validated RESO citations. Lives under `docs/business-processes/` because process narratives are opinionated; this row is a forwarding pointer. |
 | [reso-dd-overview.md](reso-dd-overview.md) | REDIRECT → `reso-dd-kb/` (kept for inbound link compatibility) |
 | [reso-canonical-schema.md](reso-canonical-schema.md) | REDIRECT → `reso-dd-kb/wiki/dbml/canonical.dbml` (kept for inbound link compatibility) |
-| [platform-extensions.md](platform-extensions.md) | All `x_sm_*` fields not in Dash or RESO DD |
-| [cdl-schema.md](cdl-schema.md) | **CDL Schema** — Common Data Layer. Canonical listing tables (`properties`, `properties_published`, `property_media`), `cdl_staging.*`, MLS Sync control plane, the **8 RESO resource tables** (members/offices/contacts/open_houses/showings/history_transactional/internet_tracking_events/teams), the **stewardship layer** (`locked_fields` + `cdl_lock_field`/`cdl_unlock_field` RPCs), **source-of-record + lifecycle** taxonomy (`mls_sources.kind`, `lifecycle_state`, `property_lifecycle_events`), **SIR brand markers** (`x_sm_is_sir_branded`, `x_sm_sir_office_id`, `x_sm_sir_designation`), the **Phase-1 `v_dash_*` projection layer**, **Phase-2 pgvector placeholders**, and the 8 CDL Edge Functions. |
+| [platform-extensions.md](platform-extensions.md) | All `x_*` fields not in Dash or RESO DD |
+| [cdl-schema.md](cdl-schema.md) | **CDL Schema** — Common Data Layer. Canonical listing tables (`properties`, `properties_published`, `property_media`), `cdl_staging.*`, MLS Sync control plane, the **8 RESO resource tables** (members/offices/contacts/open_houses/showings/history_transactional/internet_tracking_events/teams), the **stewardship layer** (`locked_fields` + `cdl_lock_field`/`cdl_unlock_field` RPCs), **source-of-record + lifecycle** taxonomy (`mls_sources.kind`, `lifecycle_state`, `property_lifecycle_events`), **SIR brand markers** (`x_is_sir_branded`, `x_sir_office_id`, `x_sir_designation`), the **Phase-1 `v_dash_*` projection layer**, **Phase-2 pgvector placeholders**, and the 8 CDL Edge Functions. |
 | [read-path-performance.md](read-path-performance.md) | **Read-path performance contract** — `properties_published` indexes, statistics, autovacuum tuning, `listings-search` keyset pagination + ETag/Cache-Control + estimated counts, p50/p95/p99 budgets. |
 | [etl-pipeline.md](etl-pipeline.md) | Bronze/Silver/Gold ETL pipeline: how Dash data reaches Supabase |
 | [data-contracts.md](data-contracts.md) | ETL schema contracts: layer boundaries, JSON Schema format, validation |
@@ -72,7 +72,7 @@ Meeting Hub ────────┤
 Matrix Comms ───────┤
 Matrix Pipeline ────┤  (In Progress)
 Contact Management ─┤── All read/write through ──→ RESO DD Canonical Schema
-Integration Mgmt ───┤                              + Platform Extensions (x_sm_*)
+Integration Mgmt ───┤                              + Platform Extensions (x_*)
 Matrix FM ──────────┤
 AI Services ────────┘
 ```
@@ -80,5 +80,5 @@ AI Services ────────┘
 When building any new feature:
 1. **Start with Dash data model** — find the practical field name in [dash-data-model.md](dash-data-model.md)
 2. **Check platform extensions** — if no Dash field exists, check [platform-extensions.md](platform-extensions.md)
-3. **If neither exists** — propose a new `x_sm_*` extension following the governance in [platform-extensions.md](platform-extensions.md). Confirm the field is genuinely missing from RESO DD by checking [reso-dd-kb/wiki/agent-docs/_index.md](reso-dd-kb/wiki/agent-docs/_index.md).
+3. **If neither exists** — propose a new `x_*` extension following the governance in [platform-extensions.md](platform-extensions.md). Confirm the field is genuinely missing from RESO DD by checking [reso-dd-kb/wiki/agent-docs/_index.md](reso-dd-kb/wiki/agent-docs/_index.md).
 4. **For syndication** — use the RESO mapping column in dash-data-model.md to find the interop name

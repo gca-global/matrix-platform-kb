@@ -8,7 +8,7 @@ tags: [overview]
 
 # Overview — `matrix-pipeline` CRM
 
-> The Sharp Matrix CRM is the luxury-real-estate sales pipeline for Sharp SIR in Cyprus, Hungary, and Kazakhstan. It is built **strictly on canonical RESO DD 2.0** (no `x_sm_*` extensions) with two documented project-flavour exceptions: a self-standing `Referral` entity and an internal ERP-lite Commission Engine. Canonical RESO resources live in the **CDL** (platform-managed Supabase project `ofzcokolkeejgqfjaszq`); CRM is a CDL **client** via dedicated CDL Edge Functions under SSO JWT scope.
+> The Sharp Matrix CRM is the luxury-real-estate sales pipeline for Sharp SIR in Cyprus, Hungary, and Kazakhstan. It is built **strictly on canonical RESO DD 2.0** (no `x_*` extensions) with two documented project-flavour exceptions: a self-standing `Referral` entity and an internal ERP-lite Commission Engine. Canonical RESO resources live in the **CDL** (platform-managed Supabase project `ofzcokolkeejgqfjaszq`); CRM is a CDL **client** via dedicated CDL Edge Functions under SSO JWT scope.
 
 ## TOC
 
@@ -202,7 +202,7 @@ Source: raw/context-v2.md §7.
 
 ## RESO DD 2.0 compliance policy {#reso-policy}
 
-- CRM uses **only** canonical RESO resources and canonical RESO lookups for canonical domains (contacts, listings, showings, offers, histories). No project extensions with `x_sm_*` prefix, no rich custom enums, no custom entities duplicating the canonical model.
+- CRM uses **only** canonical RESO resources and canonical RESO lookups for canonical domains (contacts, listings, showings, offers, histories). No project extensions with `x_*` prefix, no rich custom enums, no custom entities duplicating the canonical model.
 - Business concepts absent from canonical RESO as first-class entities (`Lead`, `Opportunity`, `Opportunity Property Interest`, `Offer` as standalone, `Contract`, `Payment Event`) are realized:
   - **Either** through combinations of canonical resources and lookups (Lead → `Contacts.ContactType=Lead`; Opportunity → `(Contacts, SavedSearch)` projection; Offer → `TransactionManagement`; OPI → `ContactListings` + preference);
   - **Or** through `Property.StandardStatus` + `HistoryTransactional` + integration with external systems (Contract → contract management system; Payment → Finance ERP).

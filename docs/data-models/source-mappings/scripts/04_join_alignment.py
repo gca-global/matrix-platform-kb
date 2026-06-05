@@ -25,7 +25,7 @@ Hard-fail gates (exit non-zero on breach; do NOT relax):
 
   1. Every mapping_curated.csv row's reso_field exists in
      reso-dd-kb/raw/fields.csv for the matching reso_resource, OR
-     is_extension=true AND reso_field starts with 'x_sm_'.
+     is_extension=true AND reso_field starts with 'x_'.
   2. Every non-empty dash_label cited in mapping_curated.csv exists
      in dash_inventory.csv.
   3. Every non-empty (qobrix_schema, qobrix_path) pair cited in
@@ -122,11 +122,11 @@ def main() -> int:
         fld = c["reso_field"]
         is_ext = c["is_extension"].strip().lower() == "true"
 
-        # Gate 1: reso_field exists OR is x_sm_ extension
+        # Gate 1: reso_field exists OR is x_ extension (ADR-023; superseded x_sm_)
         if is_ext:
-            if not fld.startswith("x_sm_"):
+            if not fld.startswith("x_"):
                 errors.append(
-                    f"GATE 1 line {i}: extension reso_field {fld!r} must start with 'x_sm_' (resource={res})"
+                    f"GATE 1 line {i}: extension reso_field {fld!r} must start with 'x_' (resource={res})"
                 )
         else:
             if (res, fld) not in reso_fields:

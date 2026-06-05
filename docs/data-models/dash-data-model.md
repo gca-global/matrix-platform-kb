@@ -44,7 +44,7 @@ The CDL `mls_sources` table classifies sources by `kind`:
 
 The Phase-1 v_dash_properties is intentionally a minimal slice — full Dash field coverage (`propertyDetails.*`, `days_on_market`, `list_price_usd`, denormalised `office.*`) is deferred to the Phase-2.5 `dash-export` EF, which assembles the wire-format Dash payload by reading exclusively through these views. The Phase-2.5 `dash-import` EF normalises incoming Dash records into the underlying RESO-keyed tables. See [data-distribution-and-stewardship.md](../architecture/data-distribution-and-stewardship.md) and the `cdl-mls-sync-full-reso` plan.
 
-Storage uses the `x_sm_*` platform-extension prefix (per [platform-extensions.md](platform-extensions.md)); the views alias them to bare Dash names — `properties.x_sm_is_sir_branded` → `is_sir_branded`, `properties.x_sm_sir_office_id` → `sir_office_id`, `members.x_sm_sir_designation` → `designation`.
+Storage uses the `x_*` platform-extension prefix (per [platform-extensions.md](platform-extensions.md)); the views alias them to bare Dash names — `properties.x_is_sir_branded` → `is_sir_branded`, `properties.x_sir_office_id` → `sir_office_id`, `members.x_sir_designation` → `designation`.
 
 **SIR brand markers** carried alongside RESO fields:
 - `properties.is_sir_branded boolean` — listing displays SIR branding on outbound feeds.

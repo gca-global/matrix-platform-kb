@@ -4,7 +4,7 @@
 > Source of truth: [`raw/mapping_curated.csv`](../../../raw/mapping_curated.csv).
 > Canonical RESO definitions: [`reso-dd-kb/wiki/agent-docs/resources/teams.md`](../../../../reso-dd-kb/wiki/agent-docs/resources/teams.md).
 
-**Teams**: 7 rows curated (6 canonical RESO fields, 1 `x_sm_*` extensions). Coverage flags (any-of-three): Dash 4, Qobrix 4, SIR 0.
+**Teams**: 7 rows curated (6 canonical RESO fields, 1 `x_*` extensions). Coverage flags (any-of-three): Dash 4, Qobrix 4, SIR 0.
 
 ## Canonical RESO fields
 
@@ -17,13 +17,13 @@
 | TeamOfficePhone | String |  | Team / Phone |  |  | high |  |
 | TeamStatus | String List, Single | TeamStatus |  | Group/trashed |  | medium | trashed=null implies Active. |
 
-## Extensions (`x_sm_*`)
+## Extensions (`x_*`)
 
 | Extension field | Dash | Qobrix | SIR | Conf. | Notes |
 |---|---|---|---|---|---|
-| x_sm_team_type | Team / Team Type |  |  | high | RESO Teams resource has no canonical TeamType field. |
+| x_team_type | Team / Team Type |  |  | high | RESO Teams resource has no canonical TeamType field. |
 
-> Each `x_sm_*` row above MUST be governed in [`platform-extensions.md`](../../../../platform-extensions.md). Extensions surfaced here are gap signals, not formal adoptions.
+> Each `x_*` row above MUST be governed in [`platform-extensions.md`](../../../../platform-extensions.md). Extensions surfaced here are gap signals, not formal adoptions.
 
 ## Lookup value mappings
 

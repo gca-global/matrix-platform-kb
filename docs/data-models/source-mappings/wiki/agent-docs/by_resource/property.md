@@ -4,7 +4,7 @@
 > Source of truth: [`raw/mapping_curated.csv`](../../../raw/mapping_curated.csv).
 > Canonical RESO definitions: [`reso-dd-kb/wiki/agent-docs/resources/property.md`](../../../../reso-dd-kb/wiki/agent-docs/resources/property.md).
 
-**Property**: 58 rows curated (45 canonical RESO fields, 13 `x_sm_*` extensions). Coverage flags (any-of-three): Dash 19, Qobrix 40, SIR 20.
+**Property**: 58 rows curated (45 canonical RESO fields, 13 `x_*` extensions). Coverage flags (any-of-three): Dash 19, Qobrix 40, SIR 20.
 
 ## Canonical RESO fields
 
@@ -40,7 +40,7 @@
 | PostalCode | String |  | Residential_Sale / Zip/Postal Code | Property/post_code |  | high |  |
 | PreviousListPrice | Number |  |  | Property/previous_list_selling_price |  | medium |  |
 | PrivateRemarks | String |  |  |  | Notice | medium |  |
-| PropertySubType | String List, Single | PropertySubType |  | Property/property_subtype |  | medium | Qobrix subtypes are project-local; partial map to RESO closed list. Studio/Penthouse/etc. lack a RESO PropertySubType slot - covered by x_sm_property_subtype extension instead. |
+| PropertySubType | String List, Single | PropertySubType |  | Property/property_subtype |  | medium | Qobrix subtypes are project-local; partial map to RESO closed list. Studio/Penthouse/etc. lack a RESO PropertySubType slot - covered by x_property_subtype extension instead. |
 | PropertyType | String List, Single | PropertyType |  | Property/property_type |  | medium | Dash form selection encodes type (Residential vs Commercial); Qobrix has explicit field. |
 | PublicRemarks | String |  |  | Property/description |  | high |  |
 | StandardStatus | String List, Single | StandardStatus |  | Property/status |  | medium | Status semantics differ; lookup gate validates RESO targets. |
@@ -56,25 +56,25 @@
 | YearBuilt | Number |  | Residential_Sale / Year Built | Property/construction_year |  | high |  |
 | Zoning | String |  | Residential_Sale / Zoning |  |  | high |  |
 
-## Extensions (`x_sm_*`)
+## Extensions (`x_*`)
 
 | Extension field | Dash | Qobrix | SIR | Conf. | Notes |
 |---|---|---|---|---|---|
-| x_sm_business_transfer_yn |  | Property/business_transfer_or_sale |  | high | Commercial concept (going-concern transfer) absent from RESO Property. |
-| x_sm_commission_pct |  | Property/custom_commission | Commissions % | medium | RESO Property has no native commission %% field (DualOrVariableRateCommissionYN exists but is boolean only). |
-| x_sm_crypto_payment_yn |  |  | Crypto payment is possible (yes/no) | high |  |
-| x_sm_distance_to_beach |  |  | Distance to the beach (m, km)/requested by owner | high | Marketing-significant in coastal markets. |
-| x_sm_documents_with_title_deed |  |  | Documents List for Properties with Title Deed | medium |  |
-| x_sm_documents_without_title_deed |  |  | Documents List for Properties without Title Deed | medium |  |
-| x_sm_excluded_marketing_yn |  |  | Excluded from Marketing resources (portals, promotion) | high |  |
-| x_sm_exclusivity_yn |  | Property/custom_exclusive_listing | Exclusivity (yes/no) | high | RESO ListAgreement has ListAgreement.Exclusivity but Property doesn't; promote to extension on Property. |
-| x_sm_google_maps_point |  |  | Google maps point (or link) | high | Captured separately from Latitude/Longitude when source is a paste-link rather than coords. |
-| x_sm_keyholder_contact |  |  | Telephone/email of keyholder | medium |  |
-| x_sm_keys_in_office_yn |  |  | Keys in the office (yes/no) | high |  |
-| x_sm_seller_bank_preference |  |  | Seller's Banks of prefference | medium |  |
-| x_sm_title_deed_available_yn |  |  | Title deeds availability (yes/no) | high | CY/EU-specific concept absent from RESO; not in Qobrix either - SIR is the source of record. |
+| x_business_transfer_yn |  | Property/business_transfer_or_sale |  | high | Commercial concept (going-concern transfer) absent from RESO Property. |
+| x_commission_pct |  | Property/custom_commission | Commissions % | medium | RESO Property has no native commission %% field (DualOrVariableRateCommissionYN exists but is boolean only). |
+| x_crypto_payment_yn |  |  | Crypto payment is possible (yes/no) | high |  |
+| x_distance_to_beach |  |  | Distance to the beach (m, km)/requested by owner | high | Marketing-significant in coastal markets. |
+| x_documents_with_title_deed |  |  | Documents List for Properties with Title Deed | medium |  |
+| x_documents_without_title_deed |  |  | Documents List for Properties without Title Deed | medium |  |
+| x_excluded_marketing_yn |  |  | Excluded from Marketing resources (portals, promotion) | high |  |
+| x_exclusivity_yn |  | Property/custom_exclusive_listing | Exclusivity (yes/no) | high | RESO ListAgreement has ListAgreement.Exclusivity but Property doesn't; promote to extension on Property. |
+| x_google_maps_point |  |  | Google maps point (or link) | high | Captured separately from Latitude/Longitude when source is a paste-link rather than coords. |
+| x_keyholder_contact |  |  | Telephone/email of keyholder | medium |  |
+| x_keys_in_office_yn |  |  | Keys in the office (yes/no) | high |  |
+| x_seller_bank_preference |  |  | Seller's Banks of prefference | medium |  |
+| x_title_deed_available_yn |  |  | Title deeds availability (yes/no) | high | CY/EU-specific concept absent from RESO; not in Qobrix either - SIR is the source of record. |
 
-> Each `x_sm_*` row above MUST be governed in [`platform-extensions.md`](../../../../platform-extensions.md). Extensions surfaced here are gap signals, not formal adoptions.
+> Each `x_*` row above MUST be governed in [`platform-extensions.md`](../../../../platform-extensions.md). Extensions surfaced here are gap signals, not formal adoptions.
 
 ## Lookup value mappings
 

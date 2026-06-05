@@ -1726,9 +1726,9 @@ Commission ledger ведётся во **внешней финансовой ERP*
 
 Данный раздел фиксирует строгое соответствие модели данных и бизнес-процессов CRM каноническому стандарту RESO Data Dictionary 2.0 и каноническим бизнес-процессам платформы Sharp Matrix. Источники истины — `/home/bitnami/matrix-platform-kb/`.
 
-## 11.1. Политика соответствия (no `x_sm_*` + явные project-flavour exceptions)
+## 11.1. Политика соответствия (no `x_*` + явные project-flavour exceptions)
 
-- CRM использует **только** канонические RESO-ресурсы и канонические RESO lookups для канонических доменов (контакты, листинги, показы, офферы, истории). Никаких проектных расширений с префиксом `x_sm_*`, никаких rich custom enum-ов, никаких custom-сущностей, дублирующих каноническую модель.
+- CRM использует **только** канонические RESO-ресурсы и канонические RESO lookups для канонических доменов (контакты, листинги, показы, офферы, истории). Никаких проектных расширений с префиксом `x_*`, никаких rich custom enum-ов, никаких custom-сущностей, дублирующих каноническую модель.
 - Бизнес-понятия, отсутствующие в каноническом RESO как самостоятельные сущности (`Lead`, `Opportunity`, `Opportunity Property Interest`, `Offer` как стандалон, `Contract`, `Payment Event`), реализуются:
   - **либо** через комбинации канонических ресурсов и lookups (Lead → `Contacts.ContactType=Lead`; Opportunity → `(Contacts, SavedSearch)` projection; Offer → `TransactionManagement`; OPI → `ContactListings`+preference);
   - **либо** через переходы `Property.StandardStatus` + `HistoryTransactional` rows + интеграцию с внешними системами (Contract → contract management система; Payment → финансовая ERP).
@@ -1809,7 +1809,7 @@ flowchart LR
 Если в дальнейшем появятся новые отклонения (например, добавление атрибута, отсутствующего в RESO DD 2.0, но критичного для luxury-сегмента), они должны быть:
 
 1. Обоснованы в ADR в `matrix-platform-kb/docs/architecture/decisions/`.
-2. Зафиксированы в `matrix-platform-kb/docs/data-models/platform-extensions.md` (с префиксом `x_sm_` и причиной).
+2. Зафиксированы в `matrix-platform-kb/docs/data-models/platform-extensions.md` (с префиксом `x_` и причиной).
 3. Перечислены здесь в § 11.6 со ссылкой на ADR и краткой формулировкой.
 4. Сопровождаться планом по обратной отмене (если/когда RESO DD добавит соответствующий канонический атрибут).
 
@@ -1818,7 +1818,7 @@ flowchart LR
 Данный раздел фиксирует структурные изменения BRD, выполненные в рамках двух последовательных проходов рефакторинга:
 
 - **Проход 1** — рефакторинг pipeline и data model (`refactor-pipeline-data-model_965d2ed6.plan.md`): переход от 18 стадий к 5, введение `Opportunity`, удаление `Client Profile`.
-- **Проход 2** — приведение к строгому соответствию RESO DD 2.0 (`reso-compliance-context-md_9834c787.plan.md`): растворение custom-сущностей в канонические RESO-ресурсы, политика no `x_sm_*`.
+- **Проход 2** — приведение к строгому соответствию RESO DD 2.0 (`reso-compliance-context-md_9834c787.plan.md`): растворение custom-сущностей в канонические RESO-ресурсы, политика no `x_*`.
 - **Точечная правка** — удаление `OpenHouse` из scope как не используемого в практике агентства.
 
 ## 12.1. Изменения в модели данных
@@ -1934,7 +1934,7 @@ flowchart LR
 
 Добавлен новый верхнеуровневый раздел, фиксирующий compliance:
 
-- **§ 11.1** политика «no `x_sm_*`».
+- **§ 11.1** политика «no `x_*`».
 - **§ 11.2** карта resource → BRD section (с ссылками на каноническую KB).
 - **§ 11.3** карта канонических бизнес-процессов → BRD section.
 - **§ 11.4** crosswalk-диаграмма «предыдущая BRD-модель → канонический RESO».
@@ -1978,7 +1978,7 @@ flowchart LR
 
 **Two known divergences BRD ↔ CDL canonical (вне scope этой правки, требуют отдельного решения):**
 
-- **§ 11.1 `no x_sm_*` политика** vs CDL использует `x_sm_*` platform extensions (`cdl-schema.md` 322–333, `property_extension_kv` на live CDL). BRD требует отдельного решения: либо переформулировать политику (разрешить платформенные `x_sm_*`), либо оставить как осознанное расхождение CRM UI vs CDL storage.
+- **§ 11.1 `no x_*` политика** vs CDL использует `x_*` platform extensions (`cdl-schema.md` 322–333, `property_extension_kv` на live CDL). BRD требует отдельного решения: либо переформулировать политику (разрешить платформенные `x_*`), либо оставить как осознанное расхождение CRM UI vs CDL storage.
 - **§ 11.6 OpenHouse исключён** из CRM scope vs `public.open_houses` есть в live CDL (RLS enabled). BRD требует отдельного решения: либо вернуть OpenHouse в scope, либо явно зафиксировать «CDL хранит, CRM не использует продуктово».
 
 **Two platform observations (вне scope BRD, передать платформенной команде):**

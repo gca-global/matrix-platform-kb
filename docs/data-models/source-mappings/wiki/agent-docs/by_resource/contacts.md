@@ -4,7 +4,7 @@
 > Source of truth: [`raw/mapping_curated.csv`](../../../raw/mapping_curated.csv).
 > Canonical RESO definitions: [`reso-dd-kb/wiki/agent-docs/resources/contacts.md`](../../../../reso-dd-kb/wiki/agent-docs/resources/contacts.md).
 
-**Contacts**: 12 rows curated (10 canonical RESO fields, 2 `x_sm_*` extensions). Coverage flags (any-of-three): Dash 5, Qobrix 9, SIR 6.
+**Contacts**: 12 rows curated (10 canonical RESO fields, 2 `x_*` extensions). Coverage flags (any-of-three): Dash 5, Qobrix 9, SIR 6.
 
 ## Canonical RESO fields
 
@@ -21,14 +21,14 @@
 | MobilePhone | String |  |  | Contact/phone | Telephone | medium | Qobrix has phone, phone_2, phone_3 - all unlabelled; CDL maps phone -> MobilePhone by convention. |
 | PreferredAddress | String List, Single | PreferredAddress | Person / Address Line 1 |  |  | high |  |
 
-## Extensions (`x_sm_*`)
+## Extensions (`x_*`)
 
 | Extension field | Dash | Qobrix | SIR | Conf. | Notes |
 |---|---|---|---|---|---|
-| x_sm_lead_source |  |  | Source of contact (personal, introducer, company) | high | Qobrix Contact has no native lead-source field; SIR is the source of record. RESO has Property.LeadSource but Contacts only has Source via different path; promote to extension. |
-| x_sm_preferred_communication |  |  | Preferred method of communication | high |  |
+| x_lead_source |  |  | Source of contact (personal, introducer, company) | high | Qobrix Contact has no native lead-source field; SIR is the source of record. RESO has Property.LeadSource but Contacts only has Source via different path; promote to extension. |
+| x_preferred_communication |  |  | Preferred method of communication | high |  |
 
-> Each `x_sm_*` row above MUST be governed in [`platform-extensions.md`](../../../../platform-extensions.md). Extensions surfaced here are gap signals, not formal adoptions.
+> Each `x_*` row above MUST be governed in [`platform-extensions.md`](../../../../platform-extensions.md). Extensions surfaced here are gap signals, not formal adoptions.
 
 ## Lookup value mappings
 

@@ -105,7 +105,7 @@ Supabase (CDL + Auth)  ◄──►  Databricks (DWH + ETL)  ◄──►  MLS /
 | Section | Contents |
 |---|---|
 | **[Platform](docs/platform/)** | App template, tech stack, dual-Supabase architecture, MLS datamart |
-| **[Data Models](docs/data-models/)** | Dash field reference, Dash↔RESO mapping, CDL schema, ETL pipeline, `x_sm_*` extension governance — and **[canonical RESO DD 2.0](docs/data-models/reso-dd-kb/)** (41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource markdown). All RESO DD lookups for the platform start at [`docs/data-models/reso-dd-kb/USAGE.md`](docs/data-models/reso-dd-kb/USAGE.md). |
+| **[Data Models](docs/data-models/)** | Dash field reference, Dash↔RESO mapping, CDL schema, ETL pipeline, `x_*` extension governance — and **[canonical RESO DD 2.0](docs/data-models/reso-dd-kb/)** (41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource markdown). All RESO DD lookups for the platform start at [`docs/data-models/reso-dd-kb/USAGE.md`](docs/data-models/reso-dd-kb/USAGE.md). |
 | **[Business Processes](docs/business-processes/)** | Canonical RESO state machines (10 processes) — vendor-neutral |
 | **[Product Specs](docs/product-specs/)** | `matrix-pipeline/` (CRM single-source-of-truth) + Portal / Marketing / Listing-Forms / Personalization specs |
 | **[Vision](docs/vision/)** | Digital strategy 2026–2028, AI sales model |

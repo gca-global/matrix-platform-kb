@@ -30,7 +30,7 @@ AI Copilot exists to free the broker from routine so they can focus on what only
 ### RESO DD 2.0 is the Canonical Data Layer
 - All apps in the platform read and write using RESO standard field names
 - Qobrix and SIR/Anywhere.com are **reference sources**, not the system of record
-- Fields not in RESO DD get platform extensions with `x_sm_` prefix
+- Fields not in RESO DD get platform extensions with `x_` prefix
 - This ensures data consistency across every app and every market (Cyprus, Hungary, Kazakhstan)
 
 ### Multi-App, Single Data Truth
@@ -49,7 +49,7 @@ AI Copilot exists to free the broker from routine so they can focus on what only
 ### Data First
 - Every business concept must have a clear data model
 - RESO DD 2.0 standard names as the canonical schema for all platform apps
-- Fields not in RESO DD are documented as platform extensions (`x_sm_*` prefix)
+- Fields not in RESO DD are documented as platform extensions (`x_*` prefix)
 - No data lives only in people's heads or chat threads
 
 ### Pipeline Integrity

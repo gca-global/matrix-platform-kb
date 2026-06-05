@@ -18,5 +18,5 @@ and a per-resource markdown reference.
 | the DBML schema | [`reso-dd-kb/wiki/dbml/canonical.dbml`](reso-dd-kb/wiki/dbml/canonical.dbml) |
 
 For Sharp Matrix's project-specific policy on top of RESO DD (which
-resources are used, the `x_sm_*` extension governance), see
+resources are used, the `x_*` extension governance), see
 [`platform-extensions.md`](platform-extensions.md).

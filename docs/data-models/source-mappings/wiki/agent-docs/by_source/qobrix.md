@@ -200,7 +200,7 @@
 | `building_density` | number | _(unmapped)_ |  |  |
 | `building_type` | string | _(unmapped)_ |  |  |
 | `business_transfer_commercial_activity` | string | _(unmapped)_ |  |  |
-| `business_transfer_or_sale` | boolean | `Property.x_sm_business_transfer_yn` | yes | Commercial concept (going-concern transfer) absent from RESO Property. |
+| `business_transfer_or_sale` | boolean | `Property.x_business_transfer_yn` | yes | Commercial concept (going-concern transfer) absent from RESO Property. |
 | `business_transfer_price` | number | _(unmapped)_ |  |  |
 | `cadastral_reference` | string | _(unmapped)_ |  |  |
 | `campaign_id` | string | _(unmapped)_ |  |  |
@@ -236,7 +236,7 @@
 | `custom_bazaraki_registration_block` | integer | _(unmapped)_ |  |  |
 | `custom_bazaraki_registration_number` | integer | _(unmapped)_ |  |  |
 | `custom_bazaraki_url` | string | _(unmapped)_ |  |  |
-| `custom_commission` | number | `Property.x_sm_commission_pct` | yes | RESO Property has no native commission %% field (DualOrVariableRateCommissionYN exists but is boolean only). |
+| `custom_commission` | number | `Property.x_commission_pct` | yes | RESO Property has no native commission %% field (DualOrVariableRateCommissionYN exists but is boolean only). |
 | `custom_common_area_amount` | number | _(unmapped)_ |  |  |
 | `custom_delivery_date` | string | _(unmapped)_ |  |  |
 | `custom_distance_from_airport_amount` | number | _(unmapped)_ |  |  |
@@ -247,7 +247,7 @@
 | `custom_distance_from_shops_amount` | number | _(unmapped)_ |  |  |
 | `custom_distance_from_university_amount` | number | _(unmapped)_ |  |  |
 | `custom_excluded_property` | boolean | _(unmapped)_ |  |  |
-| `custom_exclusive_listing` | boolean | `Property.x_sm_exclusivity_yn` | yes | RESO ListAgreement has ListAgreement.Exclusivity but Property doesn't; promote to extension on Property. |
+| `custom_exclusive_listing` | boolean | `Property.x_exclusivity_yn` | yes | RESO ListAgreement has ListAgreement.Exclusivity but Property doesn't; promote to extension on Property. |
 | `custom_heating` | boolean | _(unmapped)_ |  |  |
 | `custom_loading_bay_amount` | number | _(unmapped)_ |  |  |
 | `custom_presale` | boolean | _(unmapped)_ |  |  |
@@ -363,7 +363,7 @@
 | `private_swimming_pool` | boolean | `Property.PoolPrivateYN` |  |  |
 | `project` | string | _(unmapped)_ |  |  |
 | `property_of_the_month` | boolean | _(unmapped)_ |  |  |
-| `property_subtype` | string | `Property.PropertySubType` |  | Qobrix subtypes are project-local; partial map to RESO closed list. Studio/Penthouse/etc. lack a RESO PropertySubType slot - covered by x_sm_property_subtype extension instead. |
+| `property_subtype` | string | `Property.PropertySubType` |  | Qobrix subtypes are project-local; partial map to RESO closed list. Studio/Penthouse/etc. lack a RESO PropertySubType slot - covered by x_property_subtype extension instead. |
 | `property_type` | string | `Property.PropertyType` |  | Dash form selection encodes type (Residential vs Commercial); Qobrix has explicit field. |
 | `reception` | boolean | _(unmapped)_ |  |  |
 | `ref` | integer | _(unmapped)_ |  |  |

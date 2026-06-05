@@ -4,7 +4,7 @@
 > Source of truth: [`raw/mapping_curated.csv`](../../../raw/mapping_curated.csv).
 > Canonical RESO definitions: [`reso-dd-kb/wiki/agent-docs/resources/media.md`](../../../../reso-dd-kb/wiki/agent-docs/resources/media.md).
 
-**Media**: 6 rows curated (6 canonical RESO fields, 0 `x_sm_*` extensions). Coverage flags (any-of-three): Dash 0, Qobrix 6, SIR 0.
+**Media**: 6 rows curated (6 canonical RESO fields, 0 `x_*` extensions). Coverage flags (any-of-three): Dash 0, Qobrix 6, SIR 0.
 
 ## Canonical RESO fields
 
@@ -17,7 +17,7 @@
 | ResourceName | String List, Single | ResourceName |  | MediaResponse/related_model |  | medium | Qobrix model name (e.g. 'Property') maps directly to the RESO ResourceName lookup value. |
 | ResourceRecordKey | String |  |  | MediaResponse/related_id |  | high | related_model + related_id form the parent pointer; CDL stores related_id under ResourceRecordKey and uses related_model to set ResourceName. |
 
-## Extensions (`x_sm_*`)
+## Extensions (`x_*`)
 
 _No extensions curated for this resource._
 

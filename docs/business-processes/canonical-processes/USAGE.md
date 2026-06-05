@@ -98,6 +98,6 @@ produces zero-byte diffs.
   names and human roles. Sharp SIR's flow maps INTO the canonical
   baseline here, but the SIR-flavoured docs stay where they are.
 - [`platform-extensions.md`](../../data-models/platform-extensions.md) - governs
-  `x_sm_*` extensions. If a process needs a state RESO doesn't model,
+  `x_*` extensions. If a process needs a state RESO doesn't model,
   surface it as an extension there first; it must not appear in this
   chapter's citation block until adopted.

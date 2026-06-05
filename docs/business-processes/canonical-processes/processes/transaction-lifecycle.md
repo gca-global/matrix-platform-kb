@@ -77,7 +77,7 @@ The canonical baseline does NOT define a closed state for the
 transaction record itself - the close-out is observed via the linked
 `Property.StandardStatus = Closed` event and the corresponding
 `HistoryTransactional` row. Project flavours that need a
-"transaction is closed" boolean MUST encode it as an `x_sm_*`
+"transaction is closed" boolean MUST encode it as an `x_*`
 extension under the
 [`source-mappings/`](../../../data-models/source-mappings/README.md) layer.
 

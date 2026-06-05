@@ -282,9 +282,9 @@ CREATE TABLE opportunity_emails (
   attachment_names TEXT[],
   importance TEXT DEFAULT 'normal',
   note TEXT,
-  x_sm_tenant_id UUID,
-  x_sm_created_by UUID,
-  x_sm_modified_at TIMESTAMPTZ DEFAULT now(),
+  x_tenant_id UUID,
+  x_created_by UUID,
+  x_modified_at TIMESTAMPTZ DEFAULT now(),
   UNIQUE(opportunity_id, exchange_message_id)
 );
 ```
@@ -355,10 +355,10 @@ CREATE TABLE broker_meetings (
   outlook_last_synced_at TIMESTAMPTZ,
   status TEXT DEFAULT 'scheduled',  -- 'scheduled' | 'completed' | 'cancelled' | 'no_show'
   outcome_notes TEXT,
-  x_sm_tenant_id UUID,
-  x_sm_created_by UUID,
-  x_sm_created_at TIMESTAMPTZ DEFAULT now(),
-  x_sm_modified_at TIMESTAMPTZ DEFAULT now()
+  x_tenant_id UUID,
+  x_created_by UUID,
+  x_created_at TIMESTAMPTZ DEFAULT now(),
+  x_modified_at TIMESTAMPTZ DEFAULT now()
 );
 ```
 

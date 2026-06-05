@@ -13,4 +13,4 @@
 | lookup value tables and host-column index | [`reso-dd-kb/wiki/agent-docs/lookups.md`](../data-models/reso-dd-kb/wiki/agent-docs/lookups.md) |
 | FK relationships and inverse 1:N | [`reso-dd-kb/wiki/agent-docs/relationships.md`](../data-models/reso-dd-kb/wiki/agent-docs/relationships.md) |
 | the DBML schema | [`reso-dd-kb/wiki/dbml/canonical.dbml`](../data-models/reso-dd-kb/wiki/dbml/canonical.dbml) |
-| Sharp Matrix `x_sm_*` extensions | [`../data-models/platform-extensions.md`](../data-models/platform-extensions.md) |
+| Sharp Matrix `x_*` extensions | [`../data-models/platform-extensions.md`](../data-models/platform-extensions.md) |

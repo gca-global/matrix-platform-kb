@@ -44,7 +44,7 @@ lands eight selective B-tree indexes plus two GIN trigram indexes:
 | `idx_pp_geo` | `(country, city) where is_visible and not is_deleted` | Geo facet |
 | `idx_pp_price` | `(price) where is_visible and not is_deleted` | Sort-by-price + range filter |
 | `idx_pp_source_id_id` | `(source_id, id desc)` | Per-source pagination |
-| `idx_pp_sir_branded` | `(x_sm_is_sir_branded) where x_sm_is_sir_branded` | SIR-only outbound channels |
+| `idx_pp_sir_branded` | `(x_is_sir_branded) where x_is_sir_branded` | SIR-only outbound channels |
 | `idx_pp_title_trgm` | GIN trgm `(title_en)` | Fuzzy free-text |
 | `idx_pp_desc_trgm` | GIN trgm `(description_en)` | Fuzzy free-text |
 

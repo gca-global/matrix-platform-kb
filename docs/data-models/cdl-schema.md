@@ -281,9 +281,9 @@ canonical typed columns + `raw jsonb` (RESO record verbatim) +
 
 | Table | RESO Resource | Notes |
 |---|---|---|
-| `public.members` | Member | Roster identities + designations (`x_sm_sir_designation`). |
+| `public.members` | Member | Roster identities + designations (`x_sir_designation`). |
 | `public.offices` | Office | Companies-via-Office hierarchy (`main_office_key`). |
-| `public.contacts` | Contacts | PII; `service_role`-only RLS (no anon/authenticated SELECT). FR-CON attribute columns added `20260603150000`: `company`, `lead_source`, `referred_by`, `reverse_prospecting_enabled_yn`, `notes` (all RESO DD 2.0 Contacts fields) + `x_sm_privacy_level` (extension). **`contact_type` is `text[]`** (RESO multi-value ContactType) since the same migration — was scalar `text`; the PII-scoped `v_property_contacts` view was dropped+recreated around the type change. |
+| `public.contacts` | Contacts | PII; `service_role`-only RLS (no anon/authenticated SELECT). FR-CON attribute columns added `20260603150000`: `company`, `lead_source`, `referred_by`, `reverse_prospecting_enabled_yn`, `notes` (all RESO DD 2.0 Contacts fields) + `x_privacy_level` (extension). **`contact_type` is `text[]`** (RESO multi-value ContactType) since the same migration — was scalar `text`; the PII-scoped `v_property_contacts` view was dropped+recreated around the type change. |
 | `public.open_houses` | OpenHouse | Append-only; no soft-delete sweep. |
 | `public.showings` | ShowingAppointment | Service-role only. |
 | `public.history_transactional` | HistoryTransactional | Append-only audit trail; bounded by `history_transactional_lookback_days`. |
@@ -329,13 +329,13 @@ remain queryable directly on `properties_published`.
 
 ### SIR brand markers
 
-`x_sm_*` platform-extension prefix per
+`x_*` platform-extension prefix per
 [`platform-extensions.md`](platform-extensions.md):
 
-- `properties.x_sm_is_sir_branded boolean default false`
-- `properties.x_sm_sir_office_id text`
-- `properties_published.x_sm_is_sir_branded`, `x_sm_sir_office_id`
-- `members.x_sm_sir_designation text`
+- `properties.x_is_sir_branded boolean default false`
+- `properties.x_sir_office_id text`
+- `properties_published.x_is_sir_branded`, `x_sir_office_id`
+- `members.x_sir_designation text`
 
 The `v_dash_*` views alias these back to bare Dash names
 (`is_sir_branded`, `sir_office_id`, `designation`).
@@ -510,14 +510,14 @@ stays a thin passthrough (ADR-016):
   genuinely underivable FK pivots (`contact_id`, `property_id`,
   `contact_listing_id`) as fallback safety — the FKs still validate any non-null
   value. **All writers (EF, prospecting engine, future) are fixed at once.**
-- **Buyer-to-showing extension** `x_sm_contact_key` on `showings`, `showing`,
+- **Buyer-to-showing extension** `x_contact_key` on `showings`, `showing`,
   `showing_request` — RESO DD 2.0 has no `ShowingContactKey`, so the buyer
-  Contact is carried as an `x_sm_` platform extension (see
+  Contact is carried as an `x_` platform extension (see
   [ADR-022](../architecture/decisions/ADR-022.md) +
   [platform-extensions.md](platform-extensions.md)). Indexed and added to the
   `cdl-read` filterable allow-lists so the contact-side engagement timeline can
   filter showings by buyer. (The demo's `contact_key` payloads were renamed to
-  `x_sm_contact_key`, not given a bare `contact_key` column.) **Note:** showing
+  `x_contact_key`, not given a bare `contact_key` column.) **Note:** showing
   **appointments** (`public.showings`) link to a listing via the unguarded
   `listing_key` witness, **not** `property_id` — `showings.property_id` is
   guarded by `fn_check_same_source_fk` (`trg_showings_check_property_src`), so a
@@ -670,7 +670,8 @@ can evaluate matches without an OData parser. Test entry point:
 | … | (22–27: TPA authed reads, tenant label overrides, `app_ui_strings`, member/office list views, contacts FR-CON columns) | see `migrations/` dir |
 | 28 | `20260604080000_cdl_prospecting_tick.sql` | `cdl_prospecting_tick()` + hourly `pg_cron` — Week-2 Prospecting reminder engine (initialize `next_send_timestamp` + emit contact-scoped reminder history). **Superseded by 29.** |
 | 29 | `20260604120000_cdl_prospecting_run.sql` | `cdl_prospecting_run()` (FR-PROS-03 delivery engine) — matches `public.properties` against `saved_search.raw.criteria`, inserts `contact_listings`, advances `last_new_changed_timestamp` + `next_send_timestamp` per `ScheduleType`, emits `'Prospecting send'` / `'Prospecting reminder due'`. Drops `cdl_prospecting_tick()`, repoints cron to `cdl-prospecting-run-hourly`. |
-| 30 | `20260605120000_pipeline_week3_write_fixes.sql` | Week-3 write-surface fixes: BEFORE INSERT **legacy-derivation triggers** on `contact_listings` + `contact_listing_notes` (keeps `cdl-write` a passthrough); **buyer-to-showing extension** `x_sm_contact_key` on `showings`/`showing`/`showing_request` ([ADR-022](../architecture/decisions/ADR-022.md)); `showing_availability.listing_key`/`listing_id` witnesses. |
+| 30 | `20260605120000_pipeline_week3_write_fixes.sql` | Week-3 write-surface fixes: BEFORE INSERT **legacy-derivation triggers** on `contact_listings` + `contact_listing_notes` (keeps `cdl-write` a passthrough); **buyer-to-showing extension** (shipped as `x_sm_contact_key`, renamed by 31) on `showings`/`showing`/`showing_request` ([ADR-022](../architecture/decisions/ADR-022.md)); `showing_availability.listing_key`/`listing_id` witnesses. |
+| 31 | `20260605160000_rename_x_sm_extensions_to_x.sql` | **Extension prefix `x_sm_` → `x_`** ([ADR-023](../architecture/decisions/ADR-023.md)): renames the 4 materialized extension columns (`contacts.x_privacy_level`; `x_contact_key` on `showings`/`showing`/`showing_request`) + their indexes. `RENAME COLUMN` preserves data. |
 
 ## Cross-reference
 
@@ -681,9 +682,9 @@ can evaluate matches without an OData parser. Test entry point:
 | ADR — ingestion pipeline + status note on the actual implementation | [ADR-014](../architecture/decisions/ADR-014.md) |
 | ADR — Pipeline EF surface request | [ADR-015](../architecture/decisions/ADR-015.md) |
 | ADR — canonical-into-CDL acceleration (Phase-2 tables, re-model, `cdl-write`) | [ADR-016](../architecture/decisions/ADR-016.md) |
-| ADR — buyer-to-showing linkage (`x_sm_contact_key`) | [ADR-022](../architecture/decisions/ADR-022.md) |
+| ADR — buyer-to-showing linkage (`x_contact_key`) | [ADR-022](../architecture/decisions/ADR-022.md) |
 | RESO canonical fields | [`reso-dd-kb/wiki/agent-docs/_index.md`](reso-dd-kb/wiki/agent-docs/_index.md) |
-| Platform extensions (`x_sm_*`) | [platform-extensions.md](platform-extensions.md) |
+| Platform extensions (`x_*`) | [platform-extensions.md](platform-extensions.md) |
 | Read-path perf budgets | [read-path-performance.md](read-path-performance.md) |
 | Dash projection map | [dash-data-model.md](dash-data-model.md) |
 | Security model (JWT, RLS helpers) | [../platform/security-model.md](../platform/security-model.md) |

@@ -244,7 +244,7 @@ Notes:
   listing has multiple documents, the canonical baseline stores
   per-document state on individual `Media` rows (a `Media` row
   whose `MediaCategory = Document` MAY carry a project-specific
-  `x_sm_doc_status` mirroring this field) and aggregates the
+  `x_doc_status` mirroring this field) and aggregates the
   worst case to `Property.DocumentStatus`.
 - `DocumentStatus` is independent from `StandardStatus` and
   `DevelopmentStatus`: a listing in `StandardStatus = Active` may
@@ -300,7 +300,7 @@ Notes:
 
 ## Non-goals
 
-- No opinion on commission terms (those live as `x_sm_commission_pct`
+- No opinion on commission terms (those live as `x_commission_pct`
   in the [`source-mappings/`](../../../data-models/source-mappings/README.md) layer).
 - No opinion on `ListingAgreement` enumerations beyond the controlled
   RESO list; project flavours pick which subset to allow.

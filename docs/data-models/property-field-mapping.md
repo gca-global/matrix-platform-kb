@@ -8,7 +8,7 @@
 - **All resources covered (Property, Member, Office, Contacts, Teams, Media)**: [`source-mappings/wiki/agent-docs/_index.md`](source-mappings/wiki/agent-docs/_index.md)
 - **Per-source views (Dash / Qobrix / SIR)**: [`source-mappings/wiki/agent-docs/by_source/`](source-mappings/wiki/agent-docs/by_source/)
 - **Lookup value translations** (e.g. Qobrix `mountain_view` -> RESO `View.Mountain(s)`): [`source-mappings/wiki/agent-docs/lookup_value_mappings.md`](source-mappings/wiki/agent-docs/lookup_value_mappings.md)
-- **`x_sm_*` extensions surfaced by gap analysis**: [`source-mappings/wiki/agent-docs/extensions.md`](source-mappings/wiki/agent-docs/extensions.md)
+- **`x_*` extensions surfaced by gap analysis**: [`source-mappings/wiki/agent-docs/extensions.md`](source-mappings/wiki/agent-docs/extensions.md)
 
 ## Why the move
 

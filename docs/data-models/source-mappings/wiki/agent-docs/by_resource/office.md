@@ -4,7 +4,7 @@
 > Source of truth: [`raw/mapping_curated.csv`](../../../raw/mapping_curated.csv).
 > Canonical RESO definitions: [`reso-dd-kb/wiki/agent-docs/resources/office.md`](../../../../reso-dd-kb/wiki/agent-docs/resources/office.md).
 
-**Office**: 2 rows curated (2 canonical RESO fields, 0 `x_sm_*` extensions). Coverage flags (any-of-three): Dash 2, Qobrix 0, SIR 0.
+**Office**: 2 rows curated (2 canonical RESO fields, 0 `x_*` extensions). Coverage flags (any-of-three): Dash 2, Qobrix 0, SIR 0.
 
 ## Canonical RESO fields
 
@@ -13,7 +13,7 @@
 | OfficeKey | String |  | Residential_Sale / Listing Office |  |  | high | Qobrix has no Branch schema; CDL keys this from Property.office or Agent.agency. |
 | OfficeName | String |  | Residential_Sale / Listing Office |  |  | medium |  |
 
-## Extensions (`x_sm_*`)
+## Extensions (`x_*`)
 
 _No extensions curated for this resource._
 

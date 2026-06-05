@@ -4,7 +4,7 @@
 > Source of truth: [`raw/mapping_curated.csv`](../../../raw/mapping_curated.csv).
 > Canonical RESO definitions: [`reso-dd-kb/wiki/agent-docs/resources/member.md`](../../../../reso-dd-kb/wiki/agent-docs/resources/member.md).
 
-**Member**: 11 rows curated (11 canonical RESO fields, 0 `x_sm_*` extensions). Coverage flags (any-of-three): Dash 5, Qobrix 7, SIR 0.
+**Member**: 11 rows curated (11 canonical RESO fields, 0 `x_*` extensions). Coverage flags (any-of-three): Dash 5, Qobrix 7, SIR 0.
 
 ## Canonical RESO fields
 
@@ -22,7 +22,7 @@
 | MemberType | String List, Single | MemberType |  | Agent/agent_type |  | low | Qobrix agent_type is 'agency'/'individual_agent'; RESO MemberType lookup is REALTOR-bureau-specific (REALTOR Salesperson/Broker/etc.) and doesn't fit Cyprus brokerage model. Default to MLS Only Salesperson on import; no value mapping enforced. |
 | OfficeKey | String |  |  | Agent/agency |  | high | Qobrix folds office identity into the Agent's agency field. |
 
-## Extensions (`x_sm_*`)
+## Extensions (`x_*`)
 
 _No extensions curated for this resource._
 

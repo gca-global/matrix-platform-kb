@@ -296,7 +296,7 @@ Explicit deviations from canonical RESO DD 2.0 (structural + cosmetic + a per-te
 If new deviations arise later (e.g. an attribute absent from RESO DD 2.0 but critical for luxury), they must be:
 
 1. Justified by an ADR in `matrix-platform-kb/docs/architecture/decisions/`.
-2. Recorded in `matrix-platform-kb/docs/data-models/platform-extensions.md` (with `x_sm_` prefix and reason).
+2. Recorded in `matrix-platform-kb/docs/data-models/platform-extensions.md` (with `x_` prefix and reason).
 3. Listed here with a reference to the ADR.
 4. Accompanied by a roll-back plan (for when/if RESO DD adds the corresponding canonical attribute).
 

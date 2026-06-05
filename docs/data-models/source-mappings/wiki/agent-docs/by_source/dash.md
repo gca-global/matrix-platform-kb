@@ -354,6 +354,6 @@
 | Team | contact details | Phone | `Teams.TeamOfficePhone` |  |  |
 | Team | team Required Fields are noted with a red checkmark (√) | Active Date | _(unmapped)_ |  |  |
 | Team | team Required Fields are noted with a red checkmark (√) | Team Name | `Teams.TeamName` |  |  |
-| Team | team Required Fields are noted with a red checkmark (√) | Team Type | `Teams.x_sm_team_type` | yes | RESO Teams resource has no canonical TeamType field. |
+| Team | team Required Fields are noted with a red checkmark (√) | Team Type | `Teams.x_team_type` | yes | RESO Teams resource has no canonical TeamType field. |
 
 _Total Dash field rows: 350._

@@ -12,12 +12,12 @@
 | Seller Details | Country of origin/ residence | field | `Contacts.HomeCountry` |  |
 | Seller Details | E-mail | field | `Contacts.Email` |  |
 | Seller Details | Keyholder/Representative in CY | field | _(unmapped)_ |  |
-| Seller Details | Keys in the office (yes/no) | field | `Property.x_sm_keys_in_office_yn` | yes |
+| Seller Details | Keys in the office (yes/no) | field | `Property.x_keys_in_office_yn` | yes |
 | Seller Details | Name of the Seller (as per the agreement) | step | `Contacts.FirstName` |  |
-| Seller Details | Preferred method of communication | field | `Contacts.x_sm_preferred_communication` | yes |
-| Seller Details | Source of contact (personal, introducer, company) | step | `Contacts.x_sm_lead_source` | yes |
+| Seller Details | Preferred method of communication | field | `Contacts.x_preferred_communication` | yes |
+| Seller Details | Source of contact (personal, introducer, company) | step | `Contacts.x_lead_source` | yes |
 | Seller Details | Telephone | field | `Contacts.MobilePhone` |  |
-| Seller Details | Telephone/email of keyholder | field | `Property.x_sm_keyholder_contact` | yes |
+| Seller Details | Telephone/email of keyholder | field | `Property.x_keyholder_contact` | yes |
 | Selling Details | +VAT (yes/no) | step | _(unmapped)_ |  |
 | Selling Details | Additional Extras | field | _(unmapped)_ |  |
 | Selling Details | Address: str, № | step | _(unmapped)_ |  |
@@ -28,7 +28,7 @@
 | Selling Details | Check if Title Deed reflects the property correctly and is in the name of the Client listing. If not update and its says only land, then you need to request a copy of the Building Permit with the approved plans and the Certificate of Final Approval | step | _(unmapped)_ |  |
 | Selling Details | Check-list Data approved by the Seller | step | _(unmapped)_ |  |
 | Selling Details | City, Area of location | step | _(unmapped)_ |  |
-| Selling Details | Commissions % | field | `Property.x_sm_commission_pct` | yes |
+| Selling Details | Commissions % | field | `Property.x_commission_pct` | yes |
 | Selling Details | Contact person | field | _(unmapped)_ |  |
 | Selling Details | Copy of Title Deed | step | _(unmapped)_ |  |
 | Selling Details | Copy of Title Deed to the land on which the property is built | step | _(unmapped)_ |  |
@@ -36,14 +36,14 @@
 | Selling Details | Copy of the Contract of Sale with ALL the attachments | step | _(unmapped)_ |  |
 | Selling Details | Covered Verandas (sq.m.) | field | _(unmapped)_ |  |
 | Selling Details | Covered area (sq.m.) internal area + covered verandas | field | `Property.BuildingAreaTotal` |  |
-| Selling Details | Crypto payment is possible (yes/no) | field | `Property.x_sm_crypto_payment_yn` | yes |
-| Selling Details | Distance to the beach (m, km)/requested by owner | field | `Property.x_sm_distance_to_beach` | yes |
+| Selling Details | Crypto payment is possible (yes/no) | field | `Property.x_crypto_payment_yn` | yes |
+| Selling Details | Distance to the beach (m, km)/requested by owner | field | `Property.x_distance_to_beach` | yes |
 | Selling Details | Document check list for Brokers | step | _(unmapped)_ |  |
-| Selling Details | Documents List for Properties with Title Deed | field | `Property.x_sm_documents_with_title_deed` | yes |
-| Selling Details | Documents List for Properties without Title Deed | field | `Property.x_sm_documents_without_title_deed` | yes |
+| Selling Details | Documents List for Properties with Title Deed | field | `Property.x_documents_with_title_deed` | yes |
+| Selling Details | Documents List for Properties without Title Deed | field | `Property.x_documents_without_title_deed` | yes |
 | Selling Details | Elevator | step | _(unmapped)_ |  |
-| Selling Details | Excluded from Marketing resources (portals, promotion) | field | `Property.x_sm_excluded_marketing_yn` | yes |
-| Selling Details | Exclusivity (yes/no) | field | `Property.x_sm_exclusivity_yn` | yes |
+| Selling Details | Excluded from Marketing resources (portals, promotion) | field | `Property.x_excluded_marketing_yn` | yes |
+| Selling Details | Exclusivity (yes/no) | field | `Property.x_exclusivity_yn` | yes |
 | Selling Details | Furnishing | step | _(unmapped)_ |  |
 | Selling Details | Google maps point (pin the according block) | step | _(unmapped)_ |  |
 | Selling Details | Heating Medium | step | _(unmapped)_ |  |
@@ -65,14 +65,14 @@
 | Selling Details | Property Technical Details | step | _(unmapped)_ |  |
 | Selling Details | Property description (180 words). Paste here or attach a separate file. | step | _(unmapped)_ |  |
 | Selling Details | Roof garden (sq.m.) | field | _(unmapped)_ |  |
-| Selling Details | Seller's Banks of prefference | field | `Property.x_sm_seller_bank_preference` | yes |
+| Selling Details | Seller's Banks of prefference | field | `Property.x_seller_bank_preference` | yes |
 | Selling Details | Separate laundry room | field | _(unmapped)_ |  |
 | Selling Details | Smart home | field | _(unmapped)_ |  |
 | Selling Details | Special notes | field | _(unmapped)_ |  |
 | Selling Details | Store room | field | _(unmapped)_ |  |
 | Selling Details | Suitable for PR | step | _(unmapped)_ |  |
 | Selling Details | Swimming Pool (communal or private, none) | field | _(unmapped)_ |  |
-| Selling Details | Title deeds availability (yes/no) | field | `Property.x_sm_title_deed_available_yn` | yes |
+| Selling Details | Title deeds availability (yes/no) | field | `Property.x_title_deed_available_yn` | yes |
 | Selling Details | Total area (sq.m.) | field | _(unmapped)_ |  |
 | Selling Details | Type of property (Apartment) | field | _(unmapped)_ |  |
 | Selling Details | Uncovered Verandas (sq.m.) | field | _(unmapped)_ |  |
@@ -98,12 +98,12 @@
 | Seller Details | Country of origin/ residence | field | `Contacts.HomeCountry` |  |
 | Seller Details | E-mail | field | `Contacts.Email` |  |
 | Seller Details | Keyholder/Representative in CY | field | _(unmapped)_ |  |
-| Seller Details | Keys in the office (yes/no) | field | `Property.x_sm_keys_in_office_yn` | yes |
+| Seller Details | Keys in the office (yes/no) | field | `Property.x_keys_in_office_yn` | yes |
 | Seller Details | Name of the Seller (as per the agreement) | step | `Contacts.FirstName` |  |
-| Seller Details | Preferred method of communication | field | `Contacts.x_sm_preferred_communication` | yes |
-| Seller Details | Source of contact (personal, introducer, company) | step | `Contacts.x_sm_lead_source` | yes |
+| Seller Details | Preferred method of communication | field | `Contacts.x_preferred_communication` | yes |
+| Seller Details | Source of contact (personal, introducer, company) | step | `Contacts.x_lead_source` | yes |
 | Seller Details | Telephone | field | `Contacts.MobilePhone` |  |
-| Seller Details | Telephone/email of keyholder | field | `Property.x_sm_keyholder_contact` | yes |
+| Seller Details | Telephone/email of keyholder | field | `Property.x_keyholder_contact` | yes |
 | Selling Details | +VAT (yes/no) | step | _(unmapped)_ |  |
 | Selling Details | Additional Extras | field | _(unmapped)_ |  |
 | Selling Details | Address: str, № | step | _(unmapped)_ |  |
@@ -113,7 +113,7 @@
 | Selling Details | Check if Title Deed reflects the property correctly and is in the name of the Client listing. If not update and its says only land, then you need to request a copy of the Building Permit with the approved plans and the Certificate of Final Approval | step | _(unmapped)_ |  |
 | Selling Details | Check-list Data approved by the Seller | step | _(unmapped)_ |  |
 | Selling Details | City, Area of location | step | _(unmapped)_ |  |
-| Selling Details | Commissions % | field | `Property.x_sm_commission_pct` | yes |
+| Selling Details | Commissions % | field | `Property.x_commission_pct` | yes |
 | Selling Details | Contact person | field | _(unmapped)_ |  |
 | Selling Details | Copy of Title Deed | step | _(unmapped)_ |  |
 | Selling Details | Copy of Title Deed to the land on which the property is built | step | _(unmapped)_ |  |
@@ -121,14 +121,14 @@
 | Selling Details | Copy of the Contract of Sale with ALL the attachments | step | _(unmapped)_ |  |
 | Selling Details | Covered Verandas (sq.m.) | field | _(unmapped)_ |  |
 | Selling Details | Covered area (sq.m.) internal area + covered verandas | field | `Property.BuildingAreaTotal` |  |
-| Selling Details | Crypto payment is possible (yes/no) | field | `Property.x_sm_crypto_payment_yn` | yes |
-| Selling Details | Distance to the beach (m, km)/requested by owner | field | `Property.x_sm_distance_to_beach` | yes |
+| Selling Details | Crypto payment is possible (yes/no) | field | `Property.x_crypto_payment_yn` | yes |
+| Selling Details | Distance to the beach (m, km)/requested by owner | field | `Property.x_distance_to_beach` | yes |
 | Selling Details | Document check list for Brokers | step | _(unmapped)_ |  |
-| Selling Details | Documents List for Properties with Title Deed | field | `Property.x_sm_documents_with_title_deed` | yes |
-| Selling Details | Documents List for Properties without Title Deed | field | `Property.x_sm_documents_without_title_deed` | yes |
+| Selling Details | Documents List for Properties with Title Deed | field | `Property.x_documents_with_title_deed` | yes |
+| Selling Details | Documents List for Properties without Title Deed | field | `Property.x_documents_without_title_deed` | yes |
 | Selling Details | Elevator | step | _(unmapped)_ |  |
-| Selling Details | Excluded from Marketing resources (portals, promotion) | field | `Property.x_sm_excluded_marketing_yn` | yes |
-| Selling Details | Exclusivity (yes/no) | field | `Property.x_sm_exclusivity_yn` | yes |
+| Selling Details | Excluded from Marketing resources (portals, promotion) | field | `Property.x_excluded_marketing_yn` | yes |
+| Selling Details | Exclusivity (yes/no) | field | `Property.x_exclusivity_yn` | yes |
 | Selling Details | Furnishing | step | _(unmapped)_ |  |
 | Selling Details | Google maps point (pin the according block) | step | _(unmapped)_ |  |
 | Selling Details | Heating Medium | step | _(unmapped)_ |  |
@@ -150,14 +150,14 @@
 | Selling Details | Property Technical Details | step | _(unmapped)_ |  |
 | Selling Details | Property description (180 words). Paste here or attach a separate file. | step | _(unmapped)_ |  |
 | Selling Details | Roof garden (sq.m.) | field | _(unmapped)_ |  |
-| Selling Details | Seller's Banks of prefference | field | `Property.x_sm_seller_bank_preference` | yes |
+| Selling Details | Seller's Banks of prefference | field | `Property.x_seller_bank_preference` | yes |
 | Selling Details | Separate laundry room | field | _(unmapped)_ |  |
 | Selling Details | Smart home | field | _(unmapped)_ |  |
 | Selling Details | Special notes | field | _(unmapped)_ |  |
 | Selling Details | Store room | field | _(unmapped)_ |  |
 | Selling Details | Suitable for PR | step | _(unmapped)_ |  |
 | Selling Details | Swimming Pool (communal or private, none) | field | _(unmapped)_ |  |
-| Selling Details | Title deeds availability (yes/no) | field | `Property.x_sm_title_deed_available_yn` | yes |
+| Selling Details | Title deeds availability (yes/no) | field | `Property.x_title_deed_available_yn` | yes |
 | Selling Details | Total area (sq.m.) | field | _(unmapped)_ |  |
 | Selling Details | Type of property (House) | field | _(unmapped)_ |  |
 | Selling Details | Uncovered Verandas (sq.m.) | field | _(unmapped)_ |  |
@@ -198,8 +198,8 @@
 | Seller Details | E-mail | field | `Contacts.Email` |  |
 | Seller Details | Keyholder/Representative in CY | field | _(unmapped)_ |  |
 | Seller Details | Name of the Seller (as per the agreement) | step | `Contacts.FirstName` |  |
-| Seller Details | Preferred method of communication | field | `Contacts.x_sm_preferred_communication` | yes |
-| Seller Details | Source of contact (personal, introducer, company) | step | `Contacts.x_sm_lead_source` | yes |
+| Seller Details | Preferred method of communication | field | `Contacts.x_preferred_communication` | yes |
+| Seller Details | Source of contact (personal, introducer, company) | step | `Contacts.x_lead_source` | yes |
 | Seller Details | Telephone | field | `Contacts.MobilePhone` |  |
 | Selling Details | +VAT (yes/no) | step | _(unmapped)_ |  |
 | Selling Details | Abuts Green Area | step | _(unmapped)_ |  |
@@ -212,25 +212,25 @@
 | Selling Details | Check if Title Deed reflects the property correctly and is in the name of the Client listing. If not update and its says only land, then you need to request a copy of the Building Permit with the approved plans and the Certificate of Final Approval | step | _(unmapped)_ |  |
 | Selling Details | Check-list Data approved by the Seller | step | _(unmapped)_ |  |
 | Selling Details | Checking the number in the Land Registry Portal | step | _(unmapped)_ |  |
-| Selling Details | Commissions % | field | `Property.x_sm_commission_pct` | yes |
+| Selling Details | Commissions % | field | `Property.x_commission_pct` | yes |
 | Selling Details | Contact person | field | _(unmapped)_ |  |
 | Selling Details | Copy of Title Deed | step | _(unmapped)_ |  |
 | Selling Details | Copy of Title Deed to the land on which the property is built | step | _(unmapped)_ |  |
 | Selling Details | Copy of the Building Permit with the approved plans and the Certificate of Final Approval(their Lawyers should have this) | step | _(unmapped)_ |  |
 | Selling Details | Copy of the Contract of Sale with ALL the attachments | step | _(unmapped)_ |  |
 | Selling Details | Corner Plot | step | _(unmapped)_ |  |
-| Selling Details | Crypto payment is possible (yes/no) | field | `Property.x_sm_crypto_payment_yn` | yes |
+| Selling Details | Crypto payment is possible (yes/no) | field | `Property.x_crypto_payment_yn` | yes |
 | Selling Details | Description (180 words) or added separately | step | _(unmapped)_ |  |
-| Selling Details | Distance to the beach (m, km)/requested by owner | field | `Property.x_sm_distance_to_beach` | yes |
+| Selling Details | Distance to the beach (m, km)/requested by owner | field | `Property.x_distance_to_beach` | yes |
 | Selling Details | Document check list for Brokers | step | _(unmapped)_ |  |
-| Selling Details | Documents List for Properties with Title Deed | field | `Property.x_sm_documents_with_title_deed` | yes |
-| Selling Details | Documents List for Properties without Title Deed | field | `Property.x_sm_documents_without_title_deed` | yes |
+| Selling Details | Documents List for Properties with Title Deed | field | `Property.x_documents_with_title_deed` | yes |
+| Selling Details | Documents List for Properties without Title Deed | field | `Property.x_documents_without_title_deed` | yes |
 | Selling Details | Electricity | step | _(unmapped)_ |  |
 | Selling Details | Electricity Type (filters) | step | _(unmapped)_ |  |
 | Selling Details | Elevated Area | step | _(unmapped)_ |  |
-| Selling Details | Excluded from Marketing resources (portals, promotion) | field | `Property.x_sm_excluded_marketing_yn` | yes |
-| Selling Details | Exclusivity (yes/no) | field | `Property.x_sm_exclusivity_yn` | yes |
-| Selling Details | Google maps point (or link) | field | `Property.x_sm_google_maps_point` | yes |
+| Selling Details | Excluded from Marketing resources (portals, promotion) | field | `Property.x_excluded_marketing_yn` | yes |
+| Selling Details | Exclusivity (yes/no) | field | `Property.x_exclusivity_yn` | yes |
+| Selling Details | Google maps point (or link) | field | `Property.x_google_maps_point` | yes |
 | Selling Details | Height | step | _(unmapped)_ |  |
 | Selling Details | Introducer fee, if any | step | _(unmapped)_ |  |
 | Selling Details | Key holder | field | _(unmapped)_ |  |
@@ -250,9 +250,9 @@
 | Selling Details | Registration DLS № (from Title Deeds) | step | _(unmapped)_ |  |
 | Selling Details | Right Of Way | step | _(unmapped)_ |  |
 | Selling Details | Sea View | step | _(unmapped)_ |  |
-| Selling Details | Seller's Banks of prefference | field | `Property.x_sm_seller_bank_preference` | yes |
+| Selling Details | Seller's Banks of prefference | field | `Property.x_seller_bank_preference` | yes |
 | Selling Details | Special notes | field | _(unmapped)_ |  |
-| Selling Details | Title deeds availability (yes/no) | field | `Property.x_sm_title_deed_available_yn` | yes |
+| Selling Details | Title deeds availability (yes/no) | field | `Property.x_title_deed_available_yn` | yes |
 | Selling Details | Town Planning Zone | step | _(unmapped)_ |  |
 | Selling Details | VAT expiration date | step | _(unmapped)_ |  |
 | Selling Details | Viewing checklist | step | _(unmapped)_ |  |
@@ -269,12 +269,12 @@
 | Seller Details | Country of origin/ residence | field | `Contacts.HomeCountry` |  |
 | Seller Details | E-mail | field | `Contacts.Email` |  |
 | Seller Details | Keyholder/Representative in CY | field | _(unmapped)_ |  |
-| Seller Details | Keys in the office (yes/no) | field | `Property.x_sm_keys_in_office_yn` | yes |
+| Seller Details | Keys in the office (yes/no) | field | `Property.x_keys_in_office_yn` | yes |
 | Seller Details | Name of the Seller (as per the agreement) | step | `Contacts.FirstName` |  |
-| Seller Details | Preferred method of communication | field | `Contacts.x_sm_preferred_communication` | yes |
-| Seller Details | Source of contact (personal, introducer, company) | step | `Contacts.x_sm_lead_source` | yes |
+| Seller Details | Preferred method of communication | field | `Contacts.x_preferred_communication` | yes |
+| Seller Details | Source of contact (personal, introducer, company) | step | `Contacts.x_lead_source` | yes |
 | Seller Details | Telephone | field | `Contacts.MobilePhone` |  |
-| Seller Details | Telephone/email of keyholder | field | `Property.x_sm_keyholder_contact` | yes |
+| Seller Details | Telephone/email of keyholder | field | `Property.x_keyholder_contact` | yes |
 | Selling Details | +VAT (yes/no) | step | _(unmapped)_ |  |
 | Selling Details | Additional Extras | field | _(unmapped)_ |  |
 | Selling Details | Address: str, № | step | _(unmapped)_ |  |
@@ -285,7 +285,7 @@
 | Selling Details | Check if Title Deed reflects the property correctly and is in the name of the Client listing. If not update and its says only land, then you need to request a copy of the Building Permit with the approved plans and the Certificate of Final Approval | step | _(unmapped)_ |  |
 | Selling Details | Check-list Data approved by the Seller | step | _(unmapped)_ |  |
 | Selling Details | City, Area of location | step | _(unmapped)_ |  |
-| Selling Details | Commissions % | field | `Property.x_sm_commission_pct` | yes |
+| Selling Details | Commissions % | field | `Property.x_commission_pct` | yes |
 | Selling Details | Contact person | field | _(unmapped)_ |  |
 | Selling Details | Copy of Title Deed | step | _(unmapped)_ |  |
 | Selling Details | Copy of Title Deed to the land on which the property is built | step | _(unmapped)_ |  |
@@ -293,14 +293,14 @@
 | Selling Details | Copy of the Contract of Sale with ALL the attachments | step | _(unmapped)_ |  |
 | Selling Details | Covered Verandas (sq.m.) | field | _(unmapped)_ |  |
 | Selling Details | Covered area (sq.m.) internal area + covered verandas | field | `Property.BuildingAreaTotal` |  |
-| Selling Details | Crypto payment is possible (yes/no) | field | `Property.x_sm_crypto_payment_yn` | yes |
-| Selling Details | Distance to the beach (m, km)/requested by owner | field | `Property.x_sm_distance_to_beach` | yes |
+| Selling Details | Crypto payment is possible (yes/no) | field | `Property.x_crypto_payment_yn` | yes |
+| Selling Details | Distance to the beach (m, km)/requested by owner | field | `Property.x_distance_to_beach` | yes |
 | Selling Details | Document check list for Brokers | step | _(unmapped)_ |  |
-| Selling Details | Documents List for Properties with Title Deed | field | `Property.x_sm_documents_with_title_deed` | yes |
-| Selling Details | Documents List for Properties without Title Deed | field | `Property.x_sm_documents_without_title_deed` | yes |
+| Selling Details | Documents List for Properties with Title Deed | field | `Property.x_documents_with_title_deed` | yes |
+| Selling Details | Documents List for Properties without Title Deed | field | `Property.x_documents_without_title_deed` | yes |
 | Selling Details | Elevator | step | _(unmapped)_ |  |
-| Selling Details | Excluded from Marketing resources (portals, promotion) | field | `Property.x_sm_excluded_marketing_yn` | yes |
-| Selling Details | Exclusivity (yes/no) | field | `Property.x_sm_exclusivity_yn` | yes |
+| Selling Details | Excluded from Marketing resources (portals, promotion) | field | `Property.x_excluded_marketing_yn` | yes |
+| Selling Details | Exclusivity (yes/no) | field | `Property.x_exclusivity_yn` | yes |
 | Selling Details | Furnishing | step | _(unmapped)_ |  |
 | Selling Details | Google maps point (pin the according block) | step | _(unmapped)_ |  |
 | Selling Details | Heating Medium | step | _(unmapped)_ |  |
@@ -322,14 +322,14 @@
 | Selling Details | Property Technical Details | step | _(unmapped)_ |  |
 | Selling Details | Property description (180 words). Paste here or attach a separate file. | step | _(unmapped)_ |  |
 | Selling Details | Roof garden (sq.m.) | field | _(unmapped)_ |  |
-| Selling Details | Seller's Banks of prefference | field | `Property.x_sm_seller_bank_preference` | yes |
+| Selling Details | Seller's Banks of prefference | field | `Property.x_seller_bank_preference` | yes |
 | Selling Details | Separate laundry room | field | _(unmapped)_ |  |
 | Selling Details | Smart home | field | _(unmapped)_ |  |
 | Selling Details | Special notes | field | _(unmapped)_ |  |
 | Selling Details | Store room | field | _(unmapped)_ |  |
 | Selling Details | Suitable for PR | step | _(unmapped)_ |  |
 | Selling Details | Swimming Pool (communal or private, none) | field | _(unmapped)_ |  |
-| Selling Details | Title deeds availability (yes/no) | field | `Property.x_sm_title_deed_available_yn` | yes |
+| Selling Details | Title deeds availability (yes/no) | field | `Property.x_title_deed_available_yn` | yes |
 | Selling Details | Total area (sq.m.) | field | _(unmapped)_ |  |
 | Selling Details | Type of property (Apartment) | field | _(unmapped)_ |  |
 | Selling Details | Uncovered Verandas (sq.m.) | field | _(unmapped)_ |  |

@@ -9,5 +9,5 @@ Language,The languages spoken by the contact.,Languages,"String List, Multi",fal
 LastName,The last name of the contact.,,String,false,Person,Last Name,Contact,last_name,,,high,yes,yes,no,
 MobilePhone,North American 10-digit phone numbers should be in the format of ###-###-#### (separated by hyphens). Other conventions should use the common local standard. International numbers should be preceded by a plus symbol.,,String,false,,,Contact,phone,Telephone,,medium,no,yes,yes,"Qobrix has phone, phone_2, phone_3 - all unlabelled; CDL maps phone -> MobilePhone by convention."
 PreferredAddress,"A list of the address options (i.e., Home, Work and Other) used to determine the address preferred by the client.",PreferredAddress,"String List, Single",false,Person,Address Line 1,,,,,high,yes,no,no,
-x_sm_lead_source,,,,true,,,,,"Source of contact (personal, introducer, company)",,high,no,no,yes,Qobrix Contact has no native lead-source field; SIR is the source of record. RESO has Property.LeadSource but Contacts only has Source via different path; promote to extension.
-x_sm_preferred_communication,,,,true,,,,,Preferred method of communication,,high,no,no,yes,
+x_lead_source,,,,true,,,,,"Source of contact (personal, introducer, company)",,high,no,no,yes,Qobrix Contact has no native lead-source field; SIR is the source of record. RESO has Property.LeadSource but Contacts only has Source via different path; promote to extension.
+x_preferred_communication,,,,true,,,,,Preferred method of communication,,high,no,no,yes,

@@ -22,7 +22,7 @@
 
 ## Cross-cutting pages
 
-- [`extensions.md`](extensions.md) - 16 `x_sm_*` extension candidates / adoptions
+- [`extensions.md`](extensions.md) - 16 `x_*` extension candidates / adoptions
 - [`lookup_value_mappings.md`](lookup_value_mappings.md) - 6 curated source -> RESO value translations
 
 ## Pipeline status

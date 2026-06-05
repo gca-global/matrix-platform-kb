@@ -68,10 +68,10 @@ Dash/Anywhere.com as the practical core data model. RESO DD 2.0 as interop stand
 |----------|-------------|
 | [dash-data-model.md](data-models/dash-data-model.md) | **Start here for Dash field names** — Dash/Anywhere.com practical field reference (50+ fields, 30+ features, media) |
 | [data-models/reso-dd-kb/USAGE.md](data-models/reso-dd-kb/USAGE.md) | **Start here for any RESO DD 2.0 question** — canonical model, 41 resources, 1,745 fields, 222 lookups, DBML schema, agent-facing per-resource docs |
-| [data-models/source-mappings/USAGE.md](data-models/source-mappings/USAGE.md) | **Cross-source mapping** — bridge Dash / Qobrix / SIR to RESO DD: 96 curated rows across 6 resources, `x_sm_*` extension governance, 5 hard-fail join gates |
+| [data-models/source-mappings/USAGE.md](data-models/source-mappings/USAGE.md) | **Cross-source mapping** — bridge Dash / Qobrix / SIR to RESO DD: 96 curated rows across 6 resources, `x_*` extension governance, 5 hard-fail join gates |
 | [reso-dd-overview.md](data-models/reso-dd-overview.md) | REDIRECT → `data-models/reso-dd-kb/` (kept for inbound link compatibility) |
 | [reso-canonical-schema.md](data-models/reso-canonical-schema.md) | REDIRECT → `data-models/reso-dd-kb/` (kept for inbound link compatibility) |
-| [platform-extensions.md](data-models/platform-extensions.md) | All 28 `x_sm_*` extensions: fields and lookup values not in RESO DD |
+| [platform-extensions.md](data-models/platform-extensions.md) | All 28 `x_*` extensions: fields and lookup values not in RESO DD |
 | [cdl-schema.md](data-models/cdl-schema.md) | **CDL Schema** — canonical listings + 8 RESO resource tables + stewardship + lifecycle + SIR brand markers + 7 `v_dash_*` projection views + Phase-2 pgvector placeholders |
 | [read-path-performance.md](data-models/read-path-performance.md) | **Read-path performance contract** — `properties_published` indexes, `listings-search` keyset pagination + ETag/Cache-Control + estimated counts + p50/p95/p99 budgets |
 | [etl-pipeline.md](data-models/etl-pipeline.md) | Bronze/Silver/Gold ETL pipeline: table schemas, notebooks, CDC |

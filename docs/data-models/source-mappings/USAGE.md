@@ -12,7 +12,7 @@ to understand which fields exist). Find the RESO target:
 2. Find your Dash field label. The row tells you the RESO resource +
    field name. If marked `Unmapped`, raise an issue - the curator
    needs to add a row to `raw/mapping_curated.csv` (or propose an
-   `x_sm_*` extension via [platform-extensions.md](../platform-extensions.md)).
+   `x_*` extension via [platform-extensions.md](../platform-extensions.md)).
 3. For lookup-typed fields (e.g. `View`, `Furnished`, `Heating`), open
    [`wiki/agent-docs/lookup_value_mappings.md`](wiki/agent-docs/lookup_value_mappings.md)
    to translate Dash's value to the RESO canonical value.
@@ -53,7 +53,7 @@ You are implementing a workflow step from the SIR listing checklists
    data must be present (use this to drive RLS / required-fields rules
    per stage).
 3. Several SIR checklist items don't have RESO equivalents - they
-   surface as `x_sm_*` extensions in
+   surface as `x_*` extensions in
    [`wiki/agent-docs/extensions.md`](wiki/agent-docs/extensions.md).
 
 ## Per-resource deep dive
@@ -90,7 +90,7 @@ produces zero-byte diffs.
 - [`../reso-dd-kb/`](../reso-dd-kb/USAGE.md) - the canonical RESO model
   itself. Read that for "what does RESO say about field X".
 - [`../platform-extensions.md`](../platform-extensions.md) - the
-  governance catalogue for `x_sm_*` extensions. This directory
+  governance catalogue for `x_*` extensions. This directory
   surfaces extension candidates; the catalogue formally adopts them.
 - [`../cdl-schema.md`](../cdl-schema.md) - the actual CDL Postgres
   schema. The mapping defines name correspondences; the CDL doc is

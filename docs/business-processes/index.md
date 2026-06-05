@@ -25,4 +25,4 @@ This chapter is **vendor-neutral and platform-agnostic** — every state and tra
 
 When the CRM needs a stage that cannot be expressed in canonical RESO terms (e.g. the `Referral` entity, the internal Commission Engine), that escape hatch is documented in `matrix-pipeline/wiki/architecture.md#escape-hatch` and never as a fork of the canonical process here.
 
-When the CRM needs a Sharp-SIR-specific field name, that field lives in [`source-mappings/`](../data-models/source-mappings/USAGE.md) as an `x_sm_*` extension, not as a fork of the canonical resource.
+When the CRM needs a Sharp-SIR-specific field name, that field lives in [`source-mappings/`](../data-models/source-mappings/USAGE.md) as an `x_*` extension, not as a fork of the canonical resource.

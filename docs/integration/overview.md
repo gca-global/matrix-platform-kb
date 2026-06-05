@@ -20,7 +20,7 @@ flowchart TB
         L1A["data-models/reso-dd-kb/<br/>RESO DD 2.0 - 41 resources, 1,745 fields, 222 lookups<br/>(canonical, RESO-only, mirror-faithful)"]
     end
     subgraph L2["Layer 2: Source mappings"]
-        L2A["data-models/source-mappings/<br/>Dash / Qobrix / SIR -> RESO DD<br/>(96 curated rows, 6 resources, x_sm_* extensions for gaps)"]
+        L2A["data-models/source-mappings/<br/>Dash / Qobrix / SIR -> RESO DD<br/>(96 curated rows, 6 resources, x_* extensions for gaps)"]
     end
     subgraph L3["Layer 3: Canonical state machines"]
         L3A["business-processes/canonical-processes/<br/>Vendor-neutral RESO state machines<br/>(10 processes, 709 RESO citations, mermaid diagrams)"]
@@ -60,7 +60,7 @@ Use this decision table when navigating the KB:
 |---|---|
 | Looking up a RESO field name / lookup value | Layer 1 — `data-models/reso-dd-kb/USAGE.md` |
 | Finding which Dash field becomes which RESO field | Layer 2 — `data-models/source-mappings/USAGE.md` |
-| Designing an `x_sm_*` extension | Layer 2 — `data-models/source-mappings/USAGE.md` + [`platform-extensions.md`](../data-models/platform-extensions.md) |
+| Designing an `x_*` extension | Layer 2 — `data-models/source-mappings/USAGE.md` + [`platform-extensions.md`](../data-models/platform-extensions.md) |
 | Implementing state-machine logic in Atlas / CDL | Layer 3 — `business-processes/canonical-processes/USAGE.md` |
 | Designing CRM UI / forms / pipeline projections | Not a layer — `product-specs/matrix-pipeline/INDEX.md` |
 | One-stop "everything about resource X" lookup | Layer 5 — `integration/USAGE.md` |
@@ -75,7 +75,7 @@ Take the fact "the listing went under contract".
   `ContractStatusChangeDate` / `StatusChangeTimestamp` updated).
 - **Layer 2** says the Dash field that drives this is
   `propertyStatus = "PEND"` (or its equivalent) and the Qobrix path
-  is `Property.transaction_state`. Mismatches go to `x_sm_*`.
+  is `Property.transaction_state`. Mismatches go to `x_*`.
 - **Layer 3** says the transition is
   `Active -> Pending` (or `Active -> Active Under Contract ->
   Pending`), driven by an "offer accepted" trigger, and emits a
@@ -101,7 +101,7 @@ composable:
 - **Layer 5 is purely derived.** Every byte is generated from
   Layers 1-3; the chapter has no hand-edited content under
   `wiki/agent-docs/`. Re-runs produce zero-byte diffs.
-- **Product specs NEVER edit the layers.** Project-flavour CRM mappings live entirely within `product-specs/matrix-pipeline/` and map ONTO the canonical states by canonical name. New states / transitions specific to the CRM go through `x_sm_*` extensions in Layer 2 (data fields) or through the escape-hatch ADRs (entities like `Referral`).
+- **Product specs NEVER edit the layers.** Project-flavour CRM mappings live entirely within `product-specs/matrix-pipeline/` and map ONTO the canonical states by canonical name. New states / transitions specific to the CRM go through `x_*` extensions in Layer 2 (data fields) or through the escape-hatch ADRs (entities like `Referral`).
 
 ## Phase-gated pipelines per layer
 
@@ -138,7 +138,7 @@ layers are mutually consistent.
 | New content | Add it to |
 |---|---|
 | A new RESO resource that RESO has now standardised | Re-mirror Layer 1 (`reso-dd-kb`); do NOT hand-edit |
-| A new `x_sm_*` field Sharp-SIR needs | Layer 2 (`source-mappings/raw/mapping_curated.csv` + `platform-extensions.md`) |
+| A new `x_*` field Sharp-SIR needs | Layer 2 (`source-mappings/raw/mapping_curated.csv` + `platform-extensions.md`) |
 | A new RESO-aligned business process not in the 10 canonical ones | Layer 3 (`canonical-processes/processes/<new>.md`) — also bump README's in-scope table and re-run pipeline |
 | A new CRM workflow / FR / UI affordance | `product-specs/matrix-pipeline/wiki/` (not part of the layer cake) — anchor every state name to canonical RESO via Layers 1-3 |
 | A new cross-cutting per-resource summary | NEVER hand-edit Layer 5 — extend `integration/scripts/01_emit_resource_views.py` instead |

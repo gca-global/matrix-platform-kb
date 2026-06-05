@@ -4,7 +4,7 @@
 
 ## What this is
 
-The Sharp Matrix CRM (`matrix-pipeline`) is the luxury-real-estate sales pipeline app for Sharp SIR brokers in Cyprus, Hungary, and Kazakhstan. It is built strictly on canonical RESO DD 2.0 (no `x_sm_*` extensions) with two explicit project-flavour exceptions documented in [`wiki/architecture.md#escape-hatch`](wiki/architecture.md#escape-hatch):
+The Sharp Matrix CRM (`matrix-pipeline`) is the luxury-real-estate sales pipeline app for Sharp SIR brokers in Cyprus, Hungary, and Kazakhstan. It is built strictly on canonical RESO DD 2.0 (no `x_*` extensions) with two explicit project-flavour exceptions documented in [`wiki/architecture.md#escape-hatch`](wiki/architecture.md#escape-hatch):
 
 1. **`Referral`** as a self-standing CRM entity (luxury referral economy in HNWI/UHNWI).
 2. **Commission Engine** — CRM-internal ERP-lite for sales-broker P&L forecasting + reconciliation with external Finance ERP.

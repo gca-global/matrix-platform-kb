@@ -52,7 +52,7 @@ docs/                                   ← KB knowledge layer (system of record
 │   ├── cdl-schema.md                  ← Common Data Layer (cross-app data, MLS Sync, lifecycle)
 │   ├── etl-pipeline.md                ← Bronze/Silver/Gold ETL
 │   ├── property-field-mapping.md      ← Dash ↔ RESO ↔ Qobrix ↔ SIR
-│   ├── platform-extensions.md         ← x_sm_* fields not in Dash or RESO DD
+│   ├── platform-extensions.md         ← x_* fields not in Dash or RESO DD
 │   └── …
 ├── business-processes/                ← Canonical RESO-aligned process catalogue (vendor-neutral)
 │   └── canonical-processes/           ← 10 RESO state machines (system of record)
@@ -91,7 +91,7 @@ scripts/
 | Understand how the three layers compose (data → mapping → canonical process) | `docs/integration/overview.md` |
 | Get a one-stop view of "everything about resource X" | `docs/integration/wiki/agent-docs/by_resource/<resource>.md` (start at `docs/integration/wiki/agent-docs/_index.md`) |
 | When editing integration/ (local rules) | `docs/integration/AGENTS.md` |
-| Dash fields, field mapping, x_sm_* extensions | `docs/data-models/dash-data-model.md`, `docs/data-models/property-field-mapping.md`, `docs/data-models/platform-extensions.md` |
+| Dash fields, field mapping, x_* extensions | `docs/data-models/dash-data-model.md`, `docs/data-models/property-field-mapping.md`, `docs/data-models/platform-extensions.md` |
 | CDL schema / ETL pipeline / RESO Web API | `docs/data-models/cdl-schema.md`, `docs/data-models/etl-pipeline.md`, `docs/data-models/reso-web-api.md` |
 | Auth, roles, permissions, RLS | `docs/platform/security-model.md` |
 | ES256 JWT (ADR-011), SSO/CDL Third-Party Auth (ADR-012) | `docs/architecture/decisions/` |

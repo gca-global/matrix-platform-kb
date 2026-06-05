@@ -126,7 +126,7 @@ applications that support delegation.
 - Listings produced by the team are still individually attributed
   to a single `Property.ListAgentKey`; see
   [`listing-lifecycle.md`](listing-lifecycle.md). Any team-wide
-  attribution lives in project-specific `x_sm_*` extensions.
+  attribution lives in project-specific `x_*` extensions.
 - Every `TeamStatus` change AND every `TeamMembers` insert/delete
   emits a `HistoryTransactional` row. Per
   [`transaction-lifecycle.md`](transaction-lifecycle.md), use
