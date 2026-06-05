@@ -684,6 +684,51 @@ can evaluate matches without an OData parser. Test entry point:
 `select * from public.cdl_prospecting_run();` returns
 `(initialized, sent, reminders_emitted)`.
 
+### Lookup value normalization (audit P6, 2026-06-05)
+
+RESO closed-lookup **values** (not just column names) are normalized to canonical
+`StandardValue`s at the `public.properties` / `public.properties_published` write
+choke point. This closes condition 2 of "100% RESO compliance" (every value in a
+closed-lookup column is a real `reso_lookup_value_descriptions.standard_value`).
+
+**Objects** (migrations `20260605180000`–`20260605182000`):
+
+- `public.reso_lookup_value_map (source_id, lookup_name, source_value_lc → standard_value)` —
+  seeded source→`StandardValue` map; `source_id = '*'` applies to all sources. This table
+  is the **authoritative, wired** value map (the generated
+  `source-mappings/.../lookup_value_mappings.md` is doc-only and not consumed at runtime).
+- `public.cdl_normalize_lookup_value(lookup_name, source_id, raw)` — resolution order:
+  source-scoped map → global (`*`) map → case-insensitive corpus match (fixes casing only) →
+  passthrough (unknown values flow through to be caught by the guard).
+- `tg_properties_normalize_lookups()` — **BEFORE INSERT/UPDATE** trigger on both
+  `properties` and `properties_published`. Normalizes `property_type`, `property_sub_type`,
+  `listing_service`, `listing_agreement`, `lot_size_units`, `development_status`, and couples
+  `development_status` `New Construction`/`Existing` → `new_construction_yn` (those two are
+  **not** RESO `DevelopmentStatus` values; both map to `Completed`, the new-vs-resale signal
+  is preserved in `new_construction_yn`). This single choke point covers **both** the ingestion
+  merge path *and* the Atlas `mls-sync upsert-resource` form-write path.
+- `tg_properties_validate_lookups()` — **BEFORE INSERT/UPDATE** guard trigger (fires after the
+  normalize trigger by alphabetical name order) that RAISES on any non-`StandardValue`
+  closed-lookup value. Value-level counterpart to the P1 column-name guard. A genuinely new,
+  unmapped source value is rejected loudly → add a `reso_lookup_value_map` row to admit it.
+
+**Canonical values per column** (post-normalization): `property_type` ∈ {Residential,
+Residential Lease, Commercial Sale, Commercial Lease, Land, Farm, Business Opportunity,
+Residential Income, Manufactured In Park}; `listing_service` ∈ {Entry Only, Full Service,
+Limited Service}; `listing_agreement` ∈ {Exclusive Agency, Exclusive Right To Lease/Sell/With
+Exception, Net, Open, Probate}; `lot_size_units` ∈ {Square Meters, Square Feet, Acres};
+`development_status` ∈ {Proposed, Under Construction, Completed, Raw Land, …}; `property_sub_type`
+= nearest RESO `PropertySubType` (Cyprus local vocabulary mapped lossily — see
+`platform-extensions.md`).
+
+**Design note / divergence from the P6 plan sketch**: the plan sketched wiring the normalizer
+into `cdl_staging.fn_apply_field_mapping`. A trigger on `properties(+_published)` is strictly
+better — it also covers the Atlas form-write path (which never passes through FMA) and composes
+with the guard — so the FMA `text` lookup expressions are left untouched and the hardcoded
+`'SquareMeters'` in `fn_merge_listings` is rendered harmless (the trigger rewrites it). The
+legacy TS mappers in `mls-sync/index.ts` (`mapPropertyClass`/`mapPropertySubType`/`lot_size_units`)
+were also aligned to emit canonical RESO directly as defence-in-depth.
+
 ## Migrations index (current)
 
 | # | File | Purpose |
@@ -707,6 +752,9 @@ can evaluate matches without an OData parser. Test entry point:
 | 29 | `20260604120000_cdl_prospecting_run.sql` | `cdl_prospecting_run()` (FR-PROS-03 delivery engine) — matches `public.properties` against `saved_search.raw.criteria`, inserts `contact_listings`, advances `last_new_changed_timestamp` + `next_send_timestamp` per `ScheduleType`, emits `'Prospecting send'` / `'Prospecting reminder due'`. Drops `cdl_prospecting_tick()`, repoints cron to `cdl-prospecting-run-hourly`. |
 | 30 | `20260605120000_pipeline_week3_write_fixes.sql` | Week-3 write-surface fixes: BEFORE INSERT **legacy-derivation triggers** on `contact_listings` + `contact_listing_notes` (keeps `cdl-write` a passthrough); **buyer-to-showing extension** (shipped as `x_sm_contact_key`, renamed by 31) on `showings`/`showing`/`showing_request` ([ADR-022](../architecture/decisions/ADR-022.md)); `showing_availability.listing_key`/`listing_id` witnesses. |
 | 31 | `20260605160000_rename_x_sm_extensions_to_x.sql` | **Extension prefix `x_sm_` → `x_`** ([ADR-023](../architecture/decisions/ADR-023.md)): renames the 4 materialized extension columns (`contacts.x_privacy_level`; `x_contact_key` on `showings`/`showing`/`showing_request`) + their indexes. `RENAME COLUMN` preserves data. |
+| 32 | `20260605180000_cdl_lookup_value_normalizer.sql` | **P6 lookup-value normalizer**: `reso_lookup_value_map` table + seed, `cdl_normalize_lookup_value()`, and the `tg_properties_normalize_lookups` BEFORE trigger on `properties`(+`_published`). See "Lookup value normalization". |
+| 33 | `20260605181000_cdl_lookup_value_backfill.sql` | **P6 backfill**: normalize existing `properties` + `properties_published` rows (incl. `development_status`→`new_construction_yn` coupling). Idempotent. |
+| 34 | `20260605182000_cdl_lookup_value_guard.sql` | **P6 value guard**: `cdl_assert_canonical_lookup()` + `tg_properties_validate_lookups` BEFORE trigger rejecting any non-`StandardValue` closed-lookup value. |
 
 ## Cross-reference
 

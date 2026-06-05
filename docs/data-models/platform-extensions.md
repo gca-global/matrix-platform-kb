@@ -89,6 +89,18 @@ These are registered as platform-specific lookup values:
 | x_plot | Plot (Building Land) | — | Serviced building plot (distinct from UnimprovedLand) |
 | x_plot_settlement | Plot within Settlement | — | Plot within settlement boundaries (Cyprus zoning) |
 
+> **NOT materialized — superseded by P6 lookup-value normalization (2026-06-05).** These
+> `x_*` PropertySubType extension lookups remain **spec-only**. As of the audit-P6
+> normalization, `public.properties.property_sub_type` stores only canonical RESO
+> `PropertySubType` `StandardValue`s: the Cyprus local vocabulary is mapped to the **nearest
+> RESO value** (e.g. `penthouse`/`studio` → `Apartment`, `mansion_villa`/`bungalow` →
+> `Single Family Residence`, `plot`/`field` → `Unimproved Land`) via
+> `public.reso_lookup_value_map` + the `tg_properties_normalize_lookups` trigger (see
+> `cdl-schema.md#lookup-value-normalization-audit-p6`). This mapping is **lossy by decision**
+> — the local subtype granularity above is intentionally dropped at storage rather than carried
+> as `x_*` extensions. Re-introducing it later (as a separate `x_property_subtype_local` column)
+> would be a governed schema change, not a silent value.
+
 ## Summary Statistics
 
 | Category | Count |

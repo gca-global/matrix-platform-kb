@@ -29,3 +29,4 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-021](ADR-021.md) | Runtime DB-driven i18n: single bundled English baseline + CDL `app_ui_strings` corpus + `app-i18n` EF (platform standard) | Accepted |
 | [ADR-022](ADR-022.md) | Buyer-to-showing linkage as a Sharp Matrix platform extension (`x_contact_key`) | Accepted |
 | [ADR-023](ADR-023.md) | Platform extension prefix `x_` (supersedes `x_sm_`) | Accepted |
+| [ADR-024](ADR-024.md) | CDL lookup-value normalization layer (canonical RESO StandardValues) | Accepted |

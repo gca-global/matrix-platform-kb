@@ -200,6 +200,41 @@ typecheck` is green. Summary of the disposition per finding:
   dropped — drafts are the canonical `Incomplete`, internal-only is the
   `is_visible` flag); the dead `mls_listings_cache` generated type was removed.
 
+### P6 implementation note (2026-06-05) — Lookup-value normalization shipped
+
+P6 (the data-layer gap flagged in #17/#18 above) is implemented end-to-end;
+every closed-lookup **value** stored in `public.properties` / `properties_published`
+is now a real RESO `StandardValue` (verified: 0 non-canonical across both tables).
+
+- **Normalizer (CDL `20260605180000`):** `public.reso_lookup_value_map` (seeded
+  source→`StandardValue` map) + `public.cdl_normalize_lookup_value()` +
+  `tg_properties_normalize_lookups` BEFORE INSERT/UPDATE trigger on `properties`
+  **and** `properties_published`. Normalizes `property_type`, `property_sub_type`,
+  `listing_service`, `listing_agreement`, `lot_size_units`, `development_status`.
+  `New Construction`/`Existing` (not RESO `DevelopmentStatus` values) → `Completed`
+  with the new-vs-resale signal preserved in `new_construction_yn`.
+- **Divergence from the plan sketch:** implemented as a `properties` trigger rather
+  than inside `fn_apply_field_mapping`, because the trigger also covers the Atlas
+  `mls-sync` form-write path (which never passes through FMA) and composes with the
+  guard. The hardcoded `'SquareMeters'` in `fn_merge_listings` is now harmless. The
+  legacy `mls-sync/index.ts` TS mappers were additionally aligned to emit canonical
+  RESO directly (defence-in-depth).
+- **Backfill (CDL `20260605181000`):** normalized all existing rows; idempotent.
+- **Value guard (CDL `20260605182000`):** `tg_properties_validate_lookups` rejects
+  any non-`StandardValue` closed-lookup value on write — the value-level counterpart
+  to P1's column-name guard. New unmapped source values fail loudly (add a
+  `reso_lookup_value_map` row to admit them).
+- **Atlas lock-step flip:** `propertyTypes.ts` enums/types flipped to canonical
+  spaced values (`Full Service`, `Residential Lease`, real RESO `PropertySubType`
+  set, `DevelopmentStatus` minus `New Construction`/`Existing`); `listingKind` +
+  `applyListingKind` ship a **transitional dual-accept** (canonical + legacy
+  PascalCase) for the backfill↔deploy window; `lifecycleKind` derives
+  new_build/resale from `new_construction_yn`; `DataModelPanel` descriptions + EN/RU
+  i18n `reso.*` keys re-keyed to canonical values. `npm run typecheck` green.
+
+This supersedes the P5 note's "must be fixed in ingestion, not here" caveat — it is
+now fixed in the data layer, and the FE matches.
+
 ## Recommendation (playbook Deliverable 3)
 
 Ship **P1 (cdl-write allow-list)** and **P5 listing_kind/media bugs** first:
