@@ -538,12 +538,19 @@ inside; mirror `cdl-contacts-read`):
   because `public.prospecting` is **service-role-only** (it carries recipient
   email lists = PII), so the `prospecting → saved_search` join cannot run on the
   anon/authenticated client.
-- **`cdl-read`** — generic read for **authenticated-only** operational tables
-  (NOT PII, NOT `lock_or_box`). Body `{ resource, filter, page, pageSize, order }`
-  over a whitelist: `showing_request`, `showings`, `showing`,
-  `showing_availability`, `transaction_management`, `caravan`, `caravan_stop`,
-  `internet_tracking_events`. Per-resource filterable-column allow-lists; applies
-  `is_deleted = false` where the column exists; estimated counts.
+- **`cdl-read`** — generic read for operational tables (NOT the PII tables
+  `contacts`/`prospecting`/`contact_listings`, which keep dedicated EFs). Body
+  `{ resource, filter, page, pageSize, order }` over a whitelist: `showing_request`,
+  `showings`, `showing`, `showing_availability`, **`lock_or_box`**,
+  `transaction_management`, `caravan`, `caravan_stop`, `internet_tracking_events`.
+  Per-resource filterable-column allow-lists; applies `is_deleted = false` where the
+  column exists; estimated counts. **`lock_or_box` (RESO access mechanism) is
+  whitelisted as of 2026-06-05** so the Week-3 showing UI can surface how to access a
+  listing (filterable on `listing_key`/`listing_id`/`lock_or_box_key`/`showing_agent_key`).
+  Security trade-off (recorded): this exposes lockbox access metadata to any allowed
+  broker scope (`self,team,…`) — accepted because a showing agent legitimately needs
+  it; the table RLS stays service-role-only and writes stay on `cdl-write`. See
+  [`security-model.md`](../platform/security-model.md) for the broker-scope read posture.
 
 These complete the read side for the Pipeline canonical-process surfaces
 (SavedSearch/Prospecting, Showing chain, Transactions, Caravans, Internet
