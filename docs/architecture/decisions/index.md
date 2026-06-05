@@ -27,3 +27,4 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-019](ADR-019.md) | Server-managed PKCE for first-party public clients (webview-proof login) | Accepted |
 | [ADR-020](ADR-020.md) | Per-tenant, per-locale UI label/terminology overrides (tenant_key axis + `App.*` namespace + Hungarian) | Accepted |
 | [ADR-021](ADR-021.md) | Runtime DB-driven i18n: single bundled English baseline + CDL `app_ui_strings` corpus + `app-i18n` EF (platform standard) | Accepted |
+| [ADR-022](ADR-022.md) | Buyer-to-showing linkage as a Sharp Matrix platform extension (`x_sm_contact_key`) | Accepted |

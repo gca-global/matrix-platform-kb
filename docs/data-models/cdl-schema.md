@@ -488,6 +488,47 @@ keys, migrates inline `notes` text into child `contact_listing_notes` rows, and
 > canonical engagement columns are added nullable for forward CRM use. No
 > `relationship → contact_listing_preference` mapping is applied.
 
+### Week-3 write-surface fixes: legacy-derivation triggers + buyer-to-showing extension
+
+`20260605120000_pipeline_week3_write_fixes.sql`. The live Week-0-3 demo surfaced
+three demo-blocking write failures, all fixed at the DB layer so `cdl-write`
+stays a thin passthrough (ADR-016):
+
+- **Legacy NOT NULL derivation triggers.** The original junction migration
+  (`20260508060000_contact_listings_junction.sql`) left hard NOT NULL pivots on
+  `contact_listings` (`contact_id`, `property_id`, `originating_system_name`,
+  `listing_key`) and `contact_listing_notes` (`contact_listing_id`, `note`). The
+  Pipeline UI sends canonical RESO keys (`contact_key`, `listing_key`/`listing_id`,
+  `note_contents`), not these pivots, so every send-listings / add-note insert
+  400'd. Two **`BEFORE INSERT` triggers** now derive them from the RESO keys
+  (mirroring `cdl_prospecting_run()`): `cdl_contact_listings_derive_legacy()`
+  resolves `contact_id` from `contacts`, `property_id` from `properties`
+  (`listing_id` / `originating_system_key`), and defaults `listing_key` /
+  `originating_system_name` / `resource_name`; `cdl_contact_listing_notes_derive_legacy()`
+  resolves the parent `contact_listing_id` from `(contact_key, listing_key/listing_id)`
+  and mirrors `note := note_contents`. `NOT NULL` is relaxed only on the
+  genuinely underivable FK pivots (`contact_id`, `property_id`,
+  `contact_listing_id`) as fallback safety — the FKs still validate any non-null
+  value. **All writers (EF, prospecting engine, future) are fixed at once.**
+- **Buyer-to-showing extension** `x_sm_contact_key` on `showings`, `showing`,
+  `showing_request` — RESO DD 2.0 has no `ShowingContactKey`, so the buyer
+  Contact is carried as an `x_sm_` platform extension (see
+  [ADR-022](../architecture/decisions/ADR-022.md) +
+  [platform-extensions.md](platform-extensions.md)). Indexed and added to the
+  `cdl-read` filterable allow-lists so the contact-side engagement timeline can
+  filter showings by buyer. (The demo's `contact_key` payloads were renamed to
+  `x_sm_contact_key`, not given a bare `contact_key` column.) **Note:** showing
+  **appointments** (`public.showings`) link to a listing via the unguarded
+  `listing_key` witness, **not** `property_id` — `showings.property_id` is
+  guarded by `fn_check_same_source_fk` (`trg_showings_check_property_src`), so a
+  `matrix-pipeline`-sourced appointment pointing at a `tenant-`-sourced property
+  is rejected as a cross-source FK violation. The app therefore does not write
+  `showings.property_id`; reads filter appointments by `listing_key`.
+- **`showing_availability.listing_key` / `listing_id`** loose-witness columns
+  (mirroring `showing` / `lock_or_box`) so per-listing availability is authored
+  and read by `listing_key` — the canonical table previously linked only via
+  `showing_key`, so per-listing availability reads returned nothing.
+
 ### Security fix: `v_property_contacts` (P0 remediation)
 
 `20260530120000_secure_v_property_contacts.sql`. The CDL **security advisor**
@@ -629,6 +670,7 @@ can evaluate matches without an OData parser. Test entry point:
 | … | (22–27: TPA authed reads, tenant label overrides, `app_ui_strings`, member/office list views, contacts FR-CON columns) | see `migrations/` dir |
 | 28 | `20260604080000_cdl_prospecting_tick.sql` | `cdl_prospecting_tick()` + hourly `pg_cron` — Week-2 Prospecting reminder engine (initialize `next_send_timestamp` + emit contact-scoped reminder history). **Superseded by 29.** |
 | 29 | `20260604120000_cdl_prospecting_run.sql` | `cdl_prospecting_run()` (FR-PROS-03 delivery engine) — matches `public.properties` against `saved_search.raw.criteria`, inserts `contact_listings`, advances `last_new_changed_timestamp` + `next_send_timestamp` per `ScheduleType`, emits `'Prospecting send'` / `'Prospecting reminder due'`. Drops `cdl_prospecting_tick()`, repoints cron to `cdl-prospecting-run-hourly`. |
+| 30 | `20260605120000_pipeline_week3_write_fixes.sql` | Week-3 write-surface fixes: BEFORE INSERT **legacy-derivation triggers** on `contact_listings` + `contact_listing_notes` (keeps `cdl-write` a passthrough); **buyer-to-showing extension** `x_sm_contact_key` on `showings`/`showing`/`showing_request` ([ADR-022](../architecture/decisions/ADR-022.md)); `showing_availability.listing_key`/`listing_id` witnesses. |
 
 ## Cross-reference
 
@@ -639,6 +681,7 @@ can evaluate matches without an OData parser. Test entry point:
 | ADR — ingestion pipeline + status note on the actual implementation | [ADR-014](../architecture/decisions/ADR-014.md) |
 | ADR — Pipeline EF surface request | [ADR-015](../architecture/decisions/ADR-015.md) |
 | ADR — canonical-into-CDL acceleration (Phase-2 tables, re-model, `cdl-write`) | [ADR-016](../architecture/decisions/ADR-016.md) |
+| ADR — buyer-to-showing linkage (`x_sm_contact_key`) | [ADR-022](../architecture/decisions/ADR-022.md) |
 | RESO canonical fields | [`reso-dd-kb/wiki/agent-docs/_index.md`](reso-dd-kb/wiki/agent-docs/_index.md) |
 | Platform extensions (`x_sm_*`) | [platform-extensions.md](platform-extensions.md) |
 | Read-path perf budgets | [read-path-performance.md](read-path-performance.md) |
