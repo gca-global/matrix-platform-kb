@@ -3,6 +3,10 @@
 > Append-only. Entries start with `## [YYYY-MM-DD] <action> | <subject>` so `grep '^## \[' log.md | tail -10` gives the most recent activity.
 > See [`AGENTS.md`](AGENTS.md#logmd-format) for the action vocabulary.
 
+## [2026-06-05] roadmap | Canonical-compliance audit (pipeline + atlas + CDL)
+
+RESO DD 2.0 canonical-compliance audit of `matrix-pipeline-2-0` + `matrix-atlas-mls` + the CDL data model / `cdl-*` / `mls-sync` EFs, instancing [alignment-audit-playbook.md](../../platform/alignment-audit-playbook.md). Report at [canonical-compliance-audit-2026-06.md](canonical-compliance-audit-2026-06.md): verdict (strongly canonical, bounded drift), 22-row findings ledger, RESO-divergence register, and corpus-verified corrections (every field/lookup claim checked against live `reso_field_descriptions` / `reso_lookup_value_descriptions` on `ofzcokolkeejgqfjaszq`). Remediation tiers P0–P5; relates to `O-CDL-CANON` (data-foundation quality). Linked from `phases.md`.
+
 ## [2026-05-26] init | matrix-pipeline LLM Wiki created
 
 Initial subtree under `matrix-platform-kb/docs/product-specs/matrix-pipeline/`. Three-layer pattern instantiated:

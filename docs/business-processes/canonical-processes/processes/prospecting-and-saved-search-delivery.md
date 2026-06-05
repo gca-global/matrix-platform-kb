@@ -221,10 +221,16 @@ canonical baseline above.
   machine-evaluable mirror of the canonical OData `$filter` in `search_query`
   (still the canonical contract). The app writes it via `cdl-write` (which
   forwards `raw` verbatim); the engine reads it instead of parsing OData.
-- **`ScheduleType` (platform extension):** the pipeline UI offers
-  `ASAP | Daily | Weekly | Monthly | OnNewMatch | Custom` (the canonical RESO
-  baseline cites only `ASAP/Daily/Monthly`). `Weekly`/`OnNewMatch`/`Custom` are
-  Sharp-Matrix extensions; the engine maps each to a cadence interval.
+- **`ScheduleType` (canonical + registered lookup extensions):** the canonical
+  RESO `Prospecting.ScheduleType` standard values are **`ASAP` / `Daily` /
+  `Monthly`** (corpus-verified). The pipeline UI additionally offers
+  `Weekly | OnNewMatch | Custom`, which are **registered platform lookup-value
+  extensions** ([platform-extensions.md](../../../data-models/platform-extensions.md)
+  → "Extension Lookup Values — ScheduleType"), not standard RESO values.
+  Semantics: `OnNewMatch` ≈ `ASAP` (deliver immediately on a match); `Weekly`
+  and `Custom` are tenant cadence extensions the engine maps to an interval. A
+  consumer that only understands standard RESO SHOULD treat `OnNewMatch` as
+  `ASAP` and `Weekly`/`Custom` as `Daily`/`Monthly` respectively.
 - **Dual reminders (FR-PROS-09/11/13):** the CDL `HistoryTransactional` row is
   the immutable audit; the app additionally materializes an **app-DB `Activity`**
   (table `public.activities` on the pipeline app DB) per due cycle, read from
@@ -254,37 +260,32 @@ this section just names the wiring.
 
 ### Provisioning status
 
-Every resource in this process is unprovisioned in CDL today.
+> **Live-state correction (audit 2026-06-05).** All four resources are now
+> **provisioned and live** in the CDL (ADR-016 + Week-2 delivery, `phases.md`
+> Week 2 = DONE). The matrix-pipeline CRM authors them through `cdl-write` and
+> reads them through the dedicated EFs; the delivery/matching engine
+> `cdl_prospecting_run()` runs on an hourly `pg_cron`. The earlier
+> "unprovisioned / Coming Soon" table below is superseded.
 
-| Resource | Status | CDL table | `mls-sync` resource key | Backend gap |
-|---|---|---|---|---|
-| `SavedSearch` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.saved_search`; add `saved_search` mapper to `SYNC_RESOURCES` |
-| `Prospecting` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.prospecting`; add `prospecting` mapper |
-| `ContactListings` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.contact_listings`; add `contact_listings` mapper |
-| `ContactListingNotes` | Gate as Coming Soon | not provisioned | none | matrix-platform-foundation: provision `public.contact_listing_notes`; add `contact_listing_notes` mapper |
+| Resource | Status | CDL table | Access path |
+|---|---|---|---|
+| `SavedSearch` | **Provisioned** | `public.saved_search` | write: `cdl-write` (`resource: 'saved_search'`); read: `cdl-engagement-read` |
+| `Prospecting` | **Provisioned** | `public.prospecting` | write: `cdl-write`; read: `cdl-engagement-read` (`prospecting-*` ops); engine: `cdl_prospecting_run()` |
+| `ContactListings` | **Provisioned** | `public.contact_listings` | write: `cdl-write`; read: `cdl-contact-listings-read` |
+| `ContactListingNotes` | **Provisioned** | `public.contact_listing_notes` | write: `cdl-write` (`resource: 'contact_listing_notes'`) |
 
-Ship the routes (`/mls/saved-searches`,
-`/mls/contacts/:contactKey/prospecting`,
-`/mls/contacts/:contactKey/portal`) behind a clear
-"Coming soon — CDL backend pending" empty state. Do NOT call
-PostgREST or `mls-sync` for these resources today. Stub the data
-hooks (`useSavedSearch*`, `useProspecting*`,
-`useContactListings*`) so the UI lights up automatically when
-the migrations land.
+The parent `Contacts` resource is provisioned (`public.contacts`) and carries
+PII (service-role-only RLS, no anon SELECT) — read it via the PII-scoped
+`cdl-contacts-read` EF, never by direct PostgREST.
 
-The parent `Contacts` resource IS provisioned (`public.contacts`),
-but it carries PII and has no anon SELECT policy — read it via
-`invokeCdl('mls-sync', { action: 'list-resource', resource: 'contacts', ... })`
-in the Coming-Soon empty state if the page needs to confirm the
-contact exists.
+### Reads
 
-### Reads (once provisioned)
+Non-PII engagement resources go through `cdl-engagement-read` /
+`cdl-contact-listings-read` (the Pipeline app holds only the CDL anon key and
+cannot read RLS-gated rows directly). PII (`contacts`, `prospecting`) is read
+through its dedicated EF.
 
-For non-PII resources, paged via `useCdlTablePage` from
-`src/hooks/useMlsData.ts`. For per-contact lookups, use
-`cdlAnonClient.from('prospecting').select('*').eq('contact_key', contactKey)`.
-
-### Writes (once provisioned)
+### Writes
 
 Always through `invokeCdl('mls-sync', { action, resource, row|id })`.
 Resource keys MUST match the new `SYNC_RESOURCES` mapper names

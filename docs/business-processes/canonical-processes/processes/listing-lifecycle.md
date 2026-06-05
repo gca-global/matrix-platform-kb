@@ -239,13 +239,16 @@ Notes:
 
 - `DocumentStatus` is single-value: each document carries exactly
   one current state.
-- The field is published on `Property` (RESO carries the document
-  state inline, then references the `Media` payload). When a
-  listing has multiple documents, the canonical baseline stores
-  per-document state on individual `Media` rows (a `Media` row
-  whose `MediaCategory = Document` MAY carry a project-specific
-  `x_doc_status` mirroring this field) and aggregates the
-  worst case to `Property.DocumentStatus`.
+- `DocumentStatus` is a **`Property` field** (corpus-verified:
+  `Property.DocumentStatus`; RESO has **no** `Media.DocumentStatus`).
+  RESO carries the document state inline on `Property`, then references
+  the `Media` payload. When a listing has multiple documents, the
+  canonical baseline aggregates the worst case to `Property.DocumentStatus`.
+  Per-document state on individual `Media` rows is **not canonical** — if a
+  project needs it, it requires a **registered** `x_doc_status` extension
+  ([platform-extensions.md](../../../data-models/platform-extensions.md));
+  it is spec-only today and SHOULD be avoided in favour of the single
+  `Property.DocumentStatus` source.
 - `DocumentStatus` is independent from `StandardStatus` and
   `DevelopmentStatus`: a listing in `StandardStatus = Active` may
   have `DocumentStatus = Missing` (listing-agreement still
@@ -269,8 +272,11 @@ Notes:
 ## Cross-resource interactions
 
 - `Showing` / `ShowingRequest`: only valid while `StandardStatus IN
-  (Active, Coming Soon, Active Under Contract)` and the listing's
-  `ShowingStatus = Accepting Requests`. See
+  (Active, Coming Soon, Active Under Contract)` and the listing-side
+  `Showing.ShowingStatus = Accepting Requests` (corpus-verified:
+  `ShowingStatus` is a **`Showing`** field — there is no
+  `Property.ShowingStatus`; values `Accepting Requests` / `On Hold` /
+  `No Showings` / `Restricted Showings`). See
   [`showing-lifecycle.md`](showing-lifecycle.md).
 - `OpenHouse`: only valid while `StandardStatus = Active`. See
   [`open-house-lifecycle.md`](open-house-lifecycle.md).
@@ -300,8 +306,12 @@ Notes:
 
 ## Non-goals
 
-- No opinion on commission terms (those live as `x_commission_pct`
-  in the [`source-mappings/`](../../../data-models/source-mappings/README.md) layer).
+- No opinion on commission terms. Listing-side buyer-broker
+  compensation is canonical: `Property.BuyerBrokerageCompensation` +
+  `Property.BuyerBrokerageCompensationType` (`CompensationType`: `%` /
+  `$` / `Other` / `See Remarks`). The legacy `x_commission_pct` mirror
+  in the [`source-mappings/`](../../../data-models/source-mappings/README.md)
+  layer is a non-canonical extension and SHOULD migrate to those fields.
 - No opinion on `ListingAgreement` enumerations beyond the controlled
   RESO list; project flavours pick which subset to allow.
 - No opinion on photo-min counts or remark length; those are

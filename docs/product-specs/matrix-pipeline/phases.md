@@ -25,6 +25,8 @@ tags: [phases]
 - **Week 6 — AI Copilot**: **NOT STARTED**.
 - **Week 7 — Staging hardening**: **NOT STARTED**.
 
+> **Canonical-compliance audit (2026-06-05).** A RESO DD 2.0 compliance audit of `matrix-pipeline-2-0` + `matrix-atlas-mls` + the CDL surface — verdict, findings ledger, RESO-divergence register, and corpus-verified corrections — lives at [canonical-compliance-audit-2026-06.md](canonical-compliance-audit-2026-06.md). Remediation tracked there (P0–P5).
+
 **Immediate next** — Week 2 is closed (both lanes). Proceed to **Week 4** (offer lifecycle: counter/accept/sign; forecast P&L; Documents tab; and the entire Referrals surface), which is the largest remaining PARTIAL. The only deferred Week-2 item is the Prospecting **email channel** (stretch) — blocked on a platform mailer, tracked alongside the same gap in `sso-member-roster-lint`.
 
 ## TOC

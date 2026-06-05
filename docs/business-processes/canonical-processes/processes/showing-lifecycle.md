@@ -169,9 +169,10 @@ stateDiagram-v2
 ## Resource 4: `Showing`
 
 A `Showing` row is written ONLY after the showing actually happens
-(or is recorded as missed). The state is `Property.ShowingStatus`
-NOT on this row - listing-side, the `Showing.ShowingStatus` field
-exposes the listing's posture toward future requests:
+(or is recorded as missed). `ShowingStatus` is a **`Showing`** field
+(corpus-verified: there is **no** `Property.ShowingStatus`) — the
+listing-side `Showing.ShowingStatus` exposes the listing's posture
+toward future requests:
 
 `ShowingStatus` lookup values:
 `Accepting Requests`, `On Hold`, `No Showings`, `Restricted Showings`.

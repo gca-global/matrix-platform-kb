@@ -200,8 +200,12 @@ multiple licenses exist.
 
 - No opinion on background checks, fingerprinting, or onboarding
   forms - project flavour.
-- No opinion on commission-split agreements - project flavour
-  (`x_commission_pct` extension).
+- No opinion on commission-split agreements - project flavour. The
+  agent commission split is a **registered** `x_commission_pct`
+  extension ([platform-extensions.md](../../../data-models/platform-extensions.md)):
+  RESO models listing-side *compensation*
+  (`Property.BuyerBrokerageCompensation*`), not an agent's comp split, so
+  there is no canonical home — it lives in the HRMS / source-mappings layer.
 - No opinion on continuing-education tracking - the canonical
   baseline only requires `MemberStateLicenseExpirationDate` to be
   current.

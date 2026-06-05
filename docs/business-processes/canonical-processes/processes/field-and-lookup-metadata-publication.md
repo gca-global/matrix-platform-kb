@@ -217,27 +217,31 @@ refuse `upsert-resource` and `delete-resource` for non-
 `system_admin` callers on `field` / `lookup` — these are
 producer-side governance surfaces, not operator-editable.
 
-### History emission contract
+### History / change tracking contract
 
-When the producer transitions a `Field` or `Lookup` row from
-`Published` -> `Deprecated` -> `Retired`, it MUST write a
-`public.history_transactional` row scoped to the metadata
-resource:
+> **Corpus correction (audit 2026-06):** `HistoryTransactional.ResourceName`
+> is a **closed lookup** whose only values are `Association`, `Contacts`,
+> `Member`, `Office`, `Property` (verified against the live RESO corpus).
+> `Field` and `Lookup` are **not** valid `HistoryTransactional.ResourceName`
+> values, so metadata-row lifecycle changes are **not** auditable through
+> `HistoryTransactional`.
 
-- `ResourceName = 'Field'` or `'Lookup'`
-- `ResourceRecordKey = field_key` or `lookup_key`
-- `ChangeType = 'Deleted'` on retirement; field-level rows
-  (no `ChangeType`) for any other lifecycle metadata mutations.
+Metadata change tracking is therefore done through the metadata resources'
+**own** `ModificationTimestamp`:
 
-Per [`history-and-audit-log.md`](history-and-audit-log.md), the
-producer EF emits this row in the same transaction as the
-metadata mutation. The Atlas catalogue page does not call the
-emit path itself.
+- When the producer transitions a `Field` or `Lookup` row from
+  `Published` -> `Deprecated` -> `Retired`, it MUST bump that row's
+  `Field.ModificationTimestamp` / `Lookup.ModificationTimestamp` (and any
+  producer-side governance column) in the same transaction.
+- Consumers detect metadata changes by polling `ModificationTimestamp` on
+  the `Field` / `Lookup` resources — the standard RESO replication path —
+  not by querying `HistoryTransactional`.
+
+The Atlas catalogue page does not call any emit path itself.
 
 <!-- reso-citations
 Resource: Field
 Resource: Lookup
-Resource: HistoryTransactional
 Field: Field.FieldKey
 Field: Field.FieldName
 Field: Field.ResourceName
@@ -248,9 +252,4 @@ Field: Lookup.LookupValue
 Field: Lookup.StandardLookupValue
 Field: Lookup.LegacyODataValue
 Field: Lookup.ModificationTimestamp
-Field: HistoryTransactional.FieldKey
-Field: HistoryTransactional.FieldName
-Field: HistoryTransactional.ResourceName
-Field: HistoryTransactional.ChangeType
-LookupValue: ChangeType.Deleted
 -->

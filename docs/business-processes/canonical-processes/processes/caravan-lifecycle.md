@@ -142,7 +142,11 @@ appear as stops:
   canonical baseline RECOMMENDS `Active` and (for `Broker`-typed
   caravans) `Coming Soon`.
 - `CaravanAllowedClassNames` (open lookup, multi-value): the set
-  of `Property.ClassName` values eligible. Project-encoded.
+  of property classes eligible, expressed as `Property.PropertyType`
+  values (corpus-verified: RESO has **no** `Property.ClassName` — the
+  property class is `PropertyType`, optionally narrowed by
+  `PropertySubType`; `ClassName` exists only on metadata/history
+  resources). Project-encoded.
 
 A consumer that adds a stop pointing to a listing MUST verify the
 listing's `StandardStatus` and class against these two filters

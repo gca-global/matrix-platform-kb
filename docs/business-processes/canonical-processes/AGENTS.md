@@ -3,10 +3,13 @@
 ## What this directory does
 
 Documents the canonical, vendor-neutral, RESO DD 2.0-aligned MLS
-business processes. Ten process docs (Listing, Showing, OpenHouse,
-Lead-Contact, Transaction, Member/Office/Team onboarding, Caravan,
-Media), each carrying a mermaid state machine, transition tables,
-RESO field/lookup citations, and cross-resource interactions.
+business processes. **15 process docs** (Listing, Showing, OpenHouse,
+Caravan, Media, Lead-Contact, Prospecting/SavedSearch-delivery,
+Transaction, Member onboarding, Office onboarding, Team, Property
+detail-attachment, History/audit-log, Internet-tracking/engagement,
+Field-and-lookup-metadata-publication), each carrying a mermaid state
+machine, transition tables, RESO field/lookup citations, and
+cross-resource interactions.
 
 This is documentation, not code. Consuming applications (Atlas, CDL
 ingestion, syndication adapters) reference these docs to learn the

@@ -79,7 +79,7 @@ being audited) and `ResourceRecordKey` (the parent's PK).
 | [`showing-lifecycle.md`](showing-lifecycle.md) | `Property` | `Property.ListingKey` | Insert / status change of `Showing` rows |
 | [`member-lifecycle.md`](member-lifecycle.md) | `Member` | `Member.MemberKey` | License or status changes |
 | [`office-lifecycle.md`](office-lifecycle.md) | `Office` | `Office.OfficeKey` | Status changes |
-| [`team-lifecycle.md`](team-lifecycle.md) | `Member` (per-team membership tracked under `Member` scope) | `Member.MemberKey` | Team join / leave events (project flavour MAY route them under a custom `ResourceName`; the canonical baseline RECOMMENDS `Member`) |
+| [`team-lifecycle.md`](team-lifecycle.md) | `Office` (a `Team`/`TeamMembers` change maps to its enclosing office) | the team's parent office key (`TeamLeadKey -> Member.OfficeKey`) | Team join / leave events. **Canonical rule:** `Teams`/`TeamMembers` are outside the closed `ResourceName` lookup, so they route to the closest enclosing parent = `Office`, per the mapping in [`transaction-lifecycle.md`](transaction-lifecycle.md). (A `Member`-scoped roster/license change uses `Member`; an office-composition change uses `Office`.) |
 | [`property-detail-attachment-lifecycle.md`](property-detail-attachment-lifecycle.md) | `Property` | parent `Property.ListingKey` | Insert / update / delete of any `PropertyRooms`, `PropertyUnitTypes`, `PropertyGreenVerification`, `PropertyPowerProduction`, `PropertyPowerStorage` row |
 | [`prospecting-and-saved-search-delivery.md`](prospecting-and-saved-search-delivery.md) | `Contacts` | `Contacts.ContactKey` | Insert / update of `Prospecting`, `ContactListings`, `ContactListingNotes` rows |
 | [`lead-contact-lifecycle.md`](lead-contact-lifecycle.md) | `Contacts` | `Contacts.ContactKey` | `ContactStatus` transitions |
@@ -100,6 +100,14 @@ canonical baseline cites:
 | Listing status (per [`listing-lifecycle.md`](listing-lifecycle.md)) | `New Listing`, `Active`, `Active Under Contract`, `Pending`, `Closed`, `Coming Soon`, `Hold`, `Withdrawn`, `Canceled`, `Expired`, `Back On Market` |
 | Field-level mutation | `Price Change` |
 | Tombstone | `Deleted` |
+
+> **Corpus note (audit 2026-06):** `Object Modified` is **not** a
+> `HistoryTransactional.ChangeType` value — it is an
+> **`InternetTracking.EventType`** value (see
+> [`internet-tracking-and-engagement.md`](internet-tracking-and-engagement.md)).
+> Generic "an object changed" engagement events are logged on the tracking
+> path; `HistoryTransactional.ChangeType` is reserved for the lifecycle/field
+> values above.
 
 Producers SHOULD prefer the most specific `ChangeType` available.
 For non-listing resources where no status transition applies, the

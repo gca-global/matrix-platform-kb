@@ -27,6 +27,7 @@
 | x_smart_home | Boolean | Smart home features installed | Smart home | property.smart_home | Broker, Client Portal, Marketing |
 | x_year_renovated | Number | Year of last renovation — RESO only has YearBuilt | Year of renovation | property.year_renovated | Broker, Client Portal |
 | x_extras | String | Free-text additional features not captured elsewhere | Additional Extras | property.extras | Broker |
+| x_property_name | String | Free-text marketing/display title for a listing where it is **not** a building/development name. RESO has no marketing-title field; building/development names SHOULD use canonical `Property.BuildingName` (also `SubdivisionName`/`ParkName`). Materialized on `properties` + `properties_published`; drives `displayTitle.ts` and `listings-search` free-text. Tagged `source='vendor_extension'` in the RESO corpus (`Property.X_PropertyName`). Not exported to outbound RESO/Dash channels. | Property name | property.name | Atlas, Pipeline, Client Portal |
 | x_heating_medium | String List | Specific heating medium (underfloor, fan coil, etc.) — RESO Heating only covers type | Heating Medium | property.heating_medium | Broker, Client Portal |
 
 ### Land & Zoning (Cyprus-specific)
@@ -52,6 +53,24 @@
 |----------------|-----------|--------|-----------------|---------------|------|
 | x_contact_key | String | Buyer `Contact.ContactKey` attached to a Showing / ShowingAppointment / ShowingRequest. RESO DD 2.0 has no `ShowingContactKey` (Showing models the agent + listing, not a buyer contact) — see [ADR-022](../architecture/decisions/ADR-022.md). Loose witness (no FK); indexed; in the `cdl-read` filterable allow-list; not exported to any outbound RESO/Dash channel. | — (custom) | — (custom) | Pipeline (Broker) |
 
+### Member Extensions
+
+| Extension Field | Data Type | Reason | SIR Source Field | Qobrix Source | Apps |
+|----------------|-----------|--------|-----------------|---------------|------|
+| x_commission_pct | Number (%) | Agent commission **split** percentage. RESO models listing-side *compensation* (`Property.BuyerBrokerageCompensation` + `BuyerBrokerageCompensationType`), not an individual member's comp split — there is no RESO Member field for it. Lives in the HRMS / source-mappings layer; not exported to outbound RESO/Dash channels. | Commission % | member.commission_pct | HRMS, Finance |
+
+## Extension Lookup Values — ScheduleType (Prospecting)
+
+RESO `Prospecting.ScheduleType` standard values are `ASAP` / `Daily` /
+`Monthly`. The pipeline prospecting UI offers additional cadences registered as
+platform lookup-value extensions (engine maps each to a cadence interval):
+
+| Lookup Extension | Maps To (standard fallback) | RESO Closest Equivalent | Reason Needed |
+|-----------------|------------------------------|------------------------|---------------|
+| Weekly | `Daily` (digest) | — | Weekly digest cadence not in the RESO closed lookup |
+| OnNewMatch | `ASAP` | `ASAP` | Deliver immediately on a new match (semantically `ASAP`) |
+| Custom | `Monthly` | — | Tenant-defined interval |
+
 ## Extension Lookup Values — PropertySubType
 
 RESO DD 2.0 `PropertySubType` doesn't cover all Cyprus/Mediterranean property types.
@@ -74,13 +93,15 @@ These are registered as platform-specific lookup values:
 
 | Category | Count |
 |----------|-------|
-| Extension fields (Property) | 16 |
+| Extension fields (Property) | 17 |
 | Extension fields (Contact) | 3 |
 | Extension fields (Showing) | 1 |
+| Extension fields (Member) | 1 |
 | Extension lookup values (PropertySubType) | 10 |
-| **Total extensions** | **30** |
+| Extension lookup values (ScheduleType) | 3 |
+| **Total extensions** | **35** |
 
-> Materialized in CDL today (the rest are spec-only): `contacts.x_privacy_level`, and `x_contact_key` on `showings` / `showing` / `showing_request`. All four were renamed from the legacy `x_sm_` prefix by migration `20260605160000_rename_x_sm_extensions_to_x.sql` ([ADR-023](../architecture/decisions/ADR-023.md)).
+> Materialized in CDL today (the rest are spec-only): `properties.x_property_name` (+ `properties_published.x_property_name`, added 2026-06-05 by `20260605170000_add_x_property_name_to_properties_published.sql`), `contacts.x_privacy_level`, and `x_contact_key` on `showings` / `showing` / `showing_request`. The `x_privacy_level` / `x_contact_key` columns were renamed from the legacy `x_sm_` prefix by migration `20260605160000_rename_x_sm_extensions_to_x.sql` ([ADR-023](../architecture/decisions/ADR-023.md)).
 
 ## Governance Notes
 

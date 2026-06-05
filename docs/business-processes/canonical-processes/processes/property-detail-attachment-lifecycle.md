@@ -133,7 +133,14 @@ stateDiagram-v2
 | Update economics | Rent roll refresh | `UnitTypeActualRent`, `UnitTypeTotalRent`, `UnitTypeProForma`, `ModificationTimestamp` |
 | Retire | Class removed from offering | Delete row |
 
-## `PropertyPowerProduction` (on-site generation)
+## `PropertyPowerProduction` (on-site generation) — RETIRED (do not build)
+
+> **Status (audit 2026-06):** this resource was **dropped** by
+> `20260504080000_pr1_5_pr1_6_drop_teams_and_power_production.sql` and removed
+> from `SYNC_RESOURCES`; Atlas MUST NOT show a tab for it (see the resource
+> coverage table below, which marks it `Do not build` / retired). The lifecycle
+> below is retained only as a canonical-semantics reference for any future
+> re-introduction — it is **not** live in the CDL today.
 
 ```mermaid
 stateDiagram-v2

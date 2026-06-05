@@ -59,7 +59,7 @@ stateDiagram-v2
 
 | From | To | Trigger | Required field changes |
 |---|---|---|---|
-| `[*]` | `Active` | License verified, OUID registered, AOR joined, broker designated | `OfficeKey`, `OfficeMlsId`, `OfficeName`, `OfficeBrokerKey`, `OfficeBranchType`, `OfficeType`, `OfficePrimaryAorId`, `OfficeStatus = Active`, `OfficeNationalAssociationId`, address block, `OriginalEntryTimestamp`, `OrganizationUniqueId`, `OfficeCorporateLicense`, `OfficeCorporateLicenseState`, `OfficeCorporateLicenseExpirationDate` |
+| `[*]` | `Active` | License verified, OUID registered, AOR joined, broker designated | **On `Office`:** `OfficeKey`, `OfficeMlsId`, `OfficeName`, `OfficeBrokerKey`, `OfficeBranchType`, `OfficeType`, `OfficePrimaryAorId`, `OfficeStatus = Active`, `OfficeNationalAssociationId`, address block, `OriginalEntryTimestamp`, `OfficeCorporateLicense` (the license-number field on `Office`). **On the `OUID` resource:** `OrganizationUniqueId` (corpus: `OUID.OrganizationUniqueId`, FK'd from `Office`). **On the `OfficeCorporateLicense` resource:** `OfficeCorporateLicenseState`, `OfficeCorporateLicenseExpirationDate`, `OfficeCorporateLicenseType` (corpus: these are `OfficeCorporateLicense.*`, not `Office.*`). |
 | `Active` | `Inactive` | License expired / broker resigned / office closed | `OfficeStatus = Inactive`, `ModificationTimestamp`; cascade `OfficeAssociationStatus` updates; cascade member-side `MemberStatus` if no other office available |
 | `Inactive` | `Active` | Re-licensed AND broker re-designated | `OfficeStatus = Active`, refreshed `OfficeCorporateLicenseExpirationDate` |
 

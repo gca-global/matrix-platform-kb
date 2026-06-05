@@ -70,31 +70,45 @@ Three logical layers, all hosted on `ofzcokolkeejgqfjaszq`:
 
 ### `public.properties` — canonical listings
 
-The canonical, mutable listing row. Multi-source via `(source_id, source_listing_key)` natural key.
+The canonical, mutable listing row.
+
+> **Live-schema correction (audit 2026-06-05).** This table was hardened to
+> canonical RESO DD 2.0 snake_case by the strict-RESO + canonical-rename waves;
+> the early Phase-0 names (`title_en`, `slug`, `address`, `district`, `price`,
+> `currency`, `status`, `bedrooms`, `bathrooms`, `area_sqm`, `description_en`,
+> `listing_agent_key`, `virtual_tour_url`, `source_listing_key`) **no longer
+> exist**. The columns below are verified against the live
+> `information_schema`. The authoritative canonical field set is `reso-dd-kb/`
+> + the `SNAPSHOT_COLS` list in `functions/listing-publish/index.ts`.
 
 | Column | Type | Notes |
 |--------|------|-------|
 | `id` | uuid PK | |
-| `source_id` | text | e.g. `reso-cyprus-1`; FK-shape to `mls_settings.source_id` |
-| `source_listing_key` | text | external system's primary key (RESO `ListingKey`) |
+| `originating_system_name` | text | source/originating system (RESO `OriginatingSystemName`); natural-key component |
 | `content_hash` | text | for change detection in `listing-merge` |
 | `is_visible` | boolean | gates publish |
 | `is_deleted`, `deleted_at` | bool, ts | soft-delete on full sync |
 | `listing_id` | text | RESO `ListingId` (human-friendly) |
-| `title_en`, `slug` | text | display |
-| `address`, `city`, `country`, `postal_code`, `district` | text | location |
+| `unparsed_address`, `city`, `country`, `postal_code`, `city_region` | text | location (`UnparsedAddress` / `City` / `Country` / `PostalCode` / `CityRegion`) |
 | `latitude`, `longitude` | float8 | |
-| `price`, `currency` | numeric, text | |
-| `status` | text | RESO StandardStatus (`Active`, `Pending`, `Closed`, …) |
-| `property_type` | text | RESO PropertyType |
-| `bedrooms`, `bathrooms`, `year_built` | int | |
-| `area_sqm`, `land_area_sqm` | numeric | |
-| `description_en` | text | |
-| `listing_agent_key` | text | RESO `ListAgentKey` |
-| `virtual_tour_url` | text | |
+| `list_price` | numeric | RESO `ListPrice` |
+| `currency_code` | text | RESO `CurrencyCode` |
+| `standard_status` | text | RESO `StandardStatus` (`Active`, `Pending`, `Closed`, …) |
+| `property_type`, `property_sub_type` | text | RESO `PropertyType` / `PropertySubType` |
+| `bedrooms_total` | int | RESO `BedroomsTotal` |
+| `bathrooms_total_integer` | int | RESO `BathroomsTotalInteger` |
+| `living_area`, `lot_size_area` | numeric | RESO `LivingArea` / `LotSizeArea` |
+| `year_built` | int | RESO `YearBuilt` |
+| `public_remarks` | text | RESO `PublicRemarks` |
+| `list_agent_key`, `list_agent_full_name` | text | RESO `ListAgentKey` / `ListAgentFullName` |
+| `virtual_tour_url_unbranded` | text | RESO `VirtualTourURLUnbranded` |
+| `x_property_name` | text | registered extension (ADR-023): free-text display title |
 | `created_at`, `updated_at` | timestamptz | |
 
-Unique constraint: `(source_id, source_listing_key)`.
+The listing row is keyed on the originating-system envelope
+(`originating_system_name` + the RESO `ListingKey`/`originating_system_*_key`),
+not the legacy `(source_id, source_listing_key)` pair. See `reso-dd-kb/` for the
+full canonical field list.
 
 ### `public.property_media` — image / tour / video / floorplan rows
 
@@ -164,6 +178,7 @@ All EFs verify `Authorization: Bearer <SSO JWT>` themselves (HS256 first via `SS
 - **Admin EFs** (`mls-sync`, `mls-sync-orchestrator`, the 5 pipeline stages, `listing-publish`, …) use `SSO_ALLOWED_SCOPES` (default `system_admin,org_admin`) — set project-wide to `system_admin,org_admin`.
 - **Broker-scope read EFs** (`cdl-contacts-read`, `cdl-contact-listings-read`, `cdl-engagement-read`, `cdl-read`) use their **own** `SSO_READ_SCOPES` (default `self,team,global,org_admin,system_admin`) so a Broker (`self`) session can read. This is deliberately decoupled from the shared `SSO_ALLOWED_SCOPES` (which stays admin-only so the admin EFs are not widened). Mirrors how `listings-search` uses `SSO_LISTINGS_SCOPES`. Leave `SSO_READ_SCOPES` unset to keep the broad default.
 - **Broker-scope write EF** (`cdl-write`) uses its **own** `SSO_WRITE_SCOPES` (default `self,team,global,org_admin,system_admin`) so a Broker session can author CRM rows (contacts, showings, prospecting, …). Like the read EFs, it is decoupled from the shared `SSO_ALLOWED_SCOPES`; pointing it there would 403 every non-admin broker write. Leave `SSO_WRITE_SCOPES` unset to keep the broad default. (Authz scoping/owner-clamp is still enforced inside the EF as that mapping lands — see deferred note below.)
+- **Canonical write/read enforcement (audit 2026-06, `cdl-write` v6 / `cdl-read` v6).** `cdl-write` now validates every client-supplied column at the boundary: column names must be RESO snake_case (`/^[a-z][a-z0-9_]*$/` — rejects PascalCase/camelCase), EF-managed plumbing (`id`, `content_hash`, `created_at`, `updated_at`, `is_deleted`, `deleted_at`, `lifecycle_state*`) is rejected, and any `x_`-prefixed column not in the registered set (`x_privacy_level`, `x_contact_key`, `x_property_name`) is rejected with `code: NON_CANONICAL_COLUMN`. `cdl-read` restricts `order.column` to a per-resource allow-list (`filterable` ∪ `defaultOrder` ∪ common audit timestamps). This is the mechanical guard that keeps the write/sort surface canonical — drift becomes a rejected request, not a silent column. New registered extensions MUST be added to `REGISTERED_X_EXTENSIONS` in `cdl-write` **and** [`platform-extensions.md`](platform-extensions.md).
 
 > **Owner-clamp deferred (accepted residual risk):** the PII read EFs (`cdl-contacts-read`, `cdl-contact-listings-read`, `cdl-engagement-read`) currently return **org-wide** rows for any allowed scope — no per-`owner_member_key` clamp. The `scopeToOwner` path exists but is inert because there is **no SSO-user → `member_key` mapping**: `members` are keyed on legacy Cyprus/Qobrix emails while SSO logins are Azure AD staff, and the JWT carries no `member_key`. Enforcing real owner-clamp requires first building that identity mapping (member_key claim or mapping table). Tracked as a follow-up.
 
@@ -281,12 +296,12 @@ canonical typed columns + `raw jsonb` (RESO record verbatim) +
 
 | Table | RESO Resource | Notes |
 |---|---|---|
-| `public.members` | Member | Roster identities + designations (`x_sir_designation`). |
+| `public.members` | Member | Roster identities + designations. (Note: the `x_sir_designation` marker is spec-only — not materialized; see "SIR brand markers".) |
 | `public.offices` | Office | Companies-via-Office hierarchy (`main_office_key`). |
 | `public.contacts` | Contacts | PII; `service_role`-only RLS (no anon/authenticated SELECT). FR-CON attribute columns added `20260603150000`: `company`, `lead_source`, `referred_by`, `reverse_prospecting_enabled_yn`, `notes` (all RESO DD 2.0 Contacts fields) + `x_privacy_level` (extension). **`contact_type` is `text[]`** (RESO multi-value ContactType) since the same migration — was scalar `text`; the PII-scoped `v_property_contacts` view was dropped+recreated around the type change. |
 | `public.open_houses` | OpenHouse | Append-only; no soft-delete sweep. |
 | `public.showings` | ShowingAppointment | Service-role only. |
-| `public.history_transactional` | HistoryTransactional | Append-only audit trail; bounded by `history_transactional_lookback_days`. |
+| `public.history_transactional` | HistoryTransactional | Append-only audit trail; bounded by `history_transactional_lookback_days`. Anon SELECT is granted (classified public **audit-metadata** reference data — see `cdlClient.ts#access-rule`), but the free-text `new_value` / `previous_value` / `raw` columns can carry record PII (e.g. a contact's email when that field changed). **Anon-client reads MUST project an explicit non-PII column allow-list** (`history_transactional_key`, `resource_name`, `resource_record_key`, `change_type`, `entity_event_sequence`, `changed_by_member_key`, `modification_timestamp`, `originating_system_name`) and order by canonical `modification_timestamp`; any consumer that needs `new_value` / `previous_value` must go through an EF. Canonical-compliance audit (2026-06): `matrix-pipeline-2-0/useContactHistory.ts` was fixed to this projection (it previously `select('*')`-ed and ordered by a non-existent `change_timestamp`, silently returning `[]`). |
 | `public.internet_tracking_events` | InternetTracking | Append-only events; bounded by `tracking_lookback_days`. |
 | ~~`public.teams`~~ | Teams | **DROPPED 2026-05-04 (PR1.5, `20260504080000`)** — 0 rows, 0.3% WgtOrg adoption; Cyprus market does not operate as MLS teams. Pipeline derives team identity from SSO groups (ADR-015 #5 Option B). |
 
@@ -327,18 +342,29 @@ audited in `public.property_lifecycle_events` (append-only). The
 Dash-network contract (Active inventory only); other lifecycle states
 remain queryable directly on `properties_published`.
 
-### SIR brand markers
+### SIR brand markers (spec-only — NOT materialized)
 
-`x_*` platform-extension prefix per
+> **Live-state correction (canonical-compliance audit 2026-06-05).** These
+> `x_*` markers were drafted for migration `20260426130000` but are **not
+> present** in the live CDL schema — `information_schema` shows no `x_` columns
+> on `members` and only `x_property_name` on `properties` /
+> `properties_published`. They were removed by the strict-RESO hardening waves
+> (the same waves that dropped `is_deleted` from `members`/`contacts` and the
+> `v_dash_members`/`v_dash_offices`/`v_dash_contacts` views). They are therefore
+> **spec-only** below until/unless re-materialized and registered in
+> [`platform-extensions.md`](platform-extensions.md).
+
+Planned `x_*` platform-extension prefix per
 [`platform-extensions.md`](platform-extensions.md):
 
-- `properties.x_is_sir_branded boolean default false`
-- `properties.x_sir_office_id text`
-- `properties_published.x_is_sir_branded`, `x_sir_office_id`
-- `members.x_sir_designation text`
+- `properties.x_is_sir_branded boolean default false` — *spec-only (not live)*
+- `properties.x_sir_office_id text` — *spec-only (not live)*
+- `properties_published.x_is_sir_branded`, `x_sir_office_id` — *spec-only (not live)*
+- `members.x_sir_designation text` — *spec-only (not live)*
 
-The `v_dash_*` views alias these back to bare Dash names
-(`is_sir_branded`, `sir_office_id`, `designation`).
+If re-materialized, the `v_dash_*` views would alias these back to bare Dash
+names (`is_sir_branded`, `sir_office_id`, `designation`); since the markers are
+not live, no such aliasing exists today.
 
 ### Read-path performance indexes (`properties_published`)
 
@@ -487,6 +513,15 @@ keys, migrates inline `notes` text into child `contact_listing_notes` rows, and
 > (`Favorite`/`Possibility`/`Discard`). The provenance columns are retained;
 > canonical engagement columns are added nullable for forward CRM use. No
 > `relationship → contact_listing_preference` mapping is applied.
+>
+> **Canonical classification (audit 2026-06-05):** `relationship` is a
+> **legacy, non-RESO Qobrix column** — RESO DD 2.0 `ContactListings` has no
+> `relationship` field (verified against the live RESO corpus). It is **not
+> canonical** and must not be treated as such. It remains exposed read-only in
+> the `cdl-contact-listings-read` `FILTERABLE` set (annotated there) for
+> back-compat. **Retirement plan:** drop from `FILTERABLE`, then drop the
+> column, once no consumer filters on it (the canonical CRM path uses
+> `contact_listing_preference`). Tracked as audit finding P0 #3.
 
 ### Week-3 write-surface fixes: legacy-derivation triggers + buyer-to-showing extension
 
@@ -656,7 +691,7 @@ can evaluate matches without an OData parser. Test entry point:
 | 1 | `20260425160712_cdl_ingestion_schema.sql` | Base ingestion schema |
 | 2 | `20260425162326_cdl_staging_grants.sql` | Staging grants |
 | 3 | `20260426120000_cdl_mls_sync_control_plane.sql` | MLS Sync control plane |
-| 4 | `20260426130000_cdl_full_reso_ingestion.sql` | 8 RESO tables + stewardship + lifecycle + SIR markers |
+| 4 | `20260426130000_cdl_full_reso_ingestion.sql` | 8 RESO tables + stewardship + lifecycle (SIR `x_*` markers were drafted here but are NOT live — dropped by the strict-RESO waves; see "SIR brand markers") |
 | 5 | `20260426140000_cdl_properties_published_perf_indexes.sql` | Read-path indexes + autovacuum tuning + `cdl_analyze_published` RPC |
 | 6 | `20260426141000_cdl_phase2_intelligence_foundation.sql` | pgvector + Phase-2 column placeholders |
 | 7 | `20260426150000_cdl_dash_views.sql` | 7 `v_dash_*` projection views |
