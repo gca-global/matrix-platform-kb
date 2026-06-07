@@ -79,10 +79,18 @@ The Home **"Board-approved · Best prompts"** cards mirror the `ConversationCard
 
 | Surface | What it shows |
 |---|---|
-| **Home** (`Index.tsx`) | Ask composer + "Board-approved · Best prompts" (popular approved prompts, main column); sidebar "Most popular" (conversations by reactions), "Latest", "Active in your workspace" |
-| **Dashboards** (Executive / My Team / My Performance) | `DiscussedByTeam` rendered as a **recsys block** (compact horizontal-scroll cards: avatar, title, author + role, recency) instead of a pill strip; `DashboardPromptStarters` renders audience-aware "Most popular" + "Latest" approved prompts that open a new shared conversation (`?ask=…`) |
+| **Home** (`Index.tsx`) | Ask composer + "Board-approved · Best prompts" rendered as **compact starter-style chips** (pill buttons, `BadgeCheck` + title, run-on-click via `askNow` + `increment_prompt_run_count`); sidebar "Most popular" (conversations by reactions), "Latest", "Active in your workspace" |
+| **Dashboards** (Executive / My Team / My Performance) | `DiscussedByTeam` rendered as a **recsys block** that is a **swipeable carousel with bullet/dot pagination** (embla `Carousel`) instead of a raw horizontal-scroll strip; each card shows the peer avatar, title, asker + role, recency; `DashboardPromptStarters` renders audience-aware "Most popular" + "Latest" approved prompts that open a new shared conversation (`?ask=…`) |
 | **AI Lab** (`DesignShowcase.tsx`) | Tabs: Board-approved · Most popular · Latest · Mine · **Automations** · **Stats**; per-card run / endorse / fork / admin approve-archive / admin **Schedule** |
 | **Conversation thread** | "Promote", "Duplicate" (clone thread + messages into a new conversation), owner-only "Delete"; the message-level `ReactionBar` is **identical** to the conversation-card bar (full palette incl. Like/Dislike — `excludeKeys`/`compact` dropped) and `ResponseFeedback`'s separate 👍/👎 + memo is **kept** alongside it (so Like/Dislike may appear twice on AI messages, by request) |
+
+### Digital-peer attribution (Humans x Digital Peers)
+
+Conversation cards, dashboard banners, and the conversation thread use **peer-primary attribution**: the **digital peer that actually responds is the lead avatar** (responder), and the human who started the thread is demoted to an "Asked by [name · job title]" sub-line. This frames Stardom as a *human + digital-peer* collaboration workspace rather than a plain AI chat.
+
+- The sole digital peer today is **Alex · CRM Analyst · Digital Peer** (the RAGChat persona behind `alexPromptLibrary.ts`). Identity lives in a single shared constant `src/lib/digitalPeer.ts` (`{ name, role, kind, avatar }`); the avatar is vendored at `public/peers/alex.png` (from `humaticai.com/ragchat/avatars/…`), with the legacy `Sparkles` + `bg-accent` `AvatarFallback` as the graceful fallback.
+- Applied in `ConversationCard.tsx`, `dashboards/DiscussedByTeam.tsx`, and the assistant bubble in `SharedConversationThread.tsx`.
+- This is intentionally a **single constant, not a registry** — the registry lands with the planned multi-digital-peer workspace (CRM / HR / IT / SDR / SEO / SMM peers).
 
 ## 7. Delivery / deploy pattern
 
