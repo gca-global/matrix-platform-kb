@@ -17,7 +17,7 @@
 |---|---|---|
 | `prompts` | The shared prompt library | `title`, `body`, `description`, `audience` (`executive`/`manager`/`agent`/`discover`/`general`), `topics[]`, `language`, `status` (`proposed`/`approved`/`archived`), `source_conversation_id`, `created_by_*`, `approved_by_*`, `run_count`, `fork_count` |
 | `prompt_endorsements` | Per-user "thumbs up" on a prompt | `prompt_id`, `user_id` (one endorsement per user/prompt) |
-| `prompt_schedules` | Recurring automated runs of a prompt | `prompt_id`, `cadence` (`weekly_sun_evening`/`monthly_end`/`quarter_end`), `enabled`, `timezone`, `next_run_at`, `last_run_at` |
+| `prompt_schedules` | Recurring automated runs of a prompt | `prompt_id`, `cadence` (`weekly_mon_morning`/`monthly_after_end`/`quarter_after_end`), `enabled`, `timezone`, `next_run_at`, `last_run_at` |
 | `prompt_runs` | Execution log for scheduled/manual runs | `prompt_id`, `schedule_id`, `conversation_id`, `status` (`queued`/`running`/`success`/`error`), `triggered_by` (`schedule`/`manual`), `started_at`, `completed_at`, `output_md`, `error` |
 | `shared_conversations` / `shared_messages` | The conversation threads prompts open into | (pre-existing) |
 | `conversation_reactions` | Emoji reactions on conversations / messages | (pre-existing) |
@@ -34,13 +34,13 @@ RLS is permissive + tenant-scoped; all four prompt tables are in the realtime pu
 propose ──► proposed ──(admin approve)──► approved ──(admin archive)──► archived
    ▲            │                              │
    │            └── endorse (any user, toggle) ┘
-   └── "Promote to prompt" from any conversation (sets source_conversation_id)
+   └── "Promote" from any conversation (sets source_conversation_id)
    └── fork (any user → a new proposed prompt; bumps original's fork_count)
 ```
 
 - **Anyone** can propose a prompt, endorse, fork, or promote a conversation into the library.
 - **Admins** (`useActiveRole().isGlobal`) can approve (→ board-approved) and archive.
-- **Promote to prompt** lives in the conversation thread header `…` menu and prefills the propose dialog from the conversation's first user message + title.
+- **Promote** lives in the conversation thread header `…` menu (and the `ConversationCard` `…` menu) and prefills the propose dialog from the conversation's first user message + title. (Renamed from "Promote to prompt" for concision.)
 
 ## 4. Scheduled automations (the engine)
 
@@ -48,9 +48,19 @@ Selected prompts can run on a cadence to produce periodic AI output (e.g. weekly
 
 - **`humaticai-chat` EF** exposes a non-streaming `action: 'run'` that consumes the HumaticAI SSE stream server-side and returns `{ content, thread_id }`.
 - **`prompt-scheduler` EF** (`verify_jwt = false`) processes due `prompt_schedules`: backfills `next_run_at` for new schedules, creates a `shared_conversation` + user/assistant `shared_messages`, calls `humaticai-chat` in run mode, logs a `prompt_runs` row, and advances `next_run_at` via a tz-aware `computeNextRun` helper. Returns `{ processed, succeeded, failed }`.
+- **Cadence timing (all at 07:00 local, DST-safe):** `weekly_mon_morning` fires every **Monday 07:00** (reports the just-closed week); `monthly_after_end` fires on the **1st of the month 07:00** (day after month-end, reports last month); `quarter_after_end` fires on the **1st of the quarter** — Jan/Apr/Jul/Oct **07:00** (day after quarter-end, reports last quarter).
+- **Period context:** before each run the scheduler prepends a `periodPreamble(cadence, now, tz)` line (e.g. `Reporting period: last week, 1 Jun 2026 to 7 Jun 2026.`) to **both** the stored user message and the `humaticai-chat` `message`, so the model anchors on the closed window rather than "today".
 - **Trigger:** `pg_cron` (+`pg_net`) job `prompt-scheduler-hourly` (`0 * * * *`) POSTs to the EF. **Auth uses the public `anon` key, NOT `service_role`** — the EF runs `verify_jwt = false` and uses its own injected `SUPABASE_SERVICE_ROLE_KEY` for DB writes, so the cron only needs to satisfy the API gateway. This keeps the secret out of the committed migration. (See `~/.cursorrules` → verify_jwt guidance.)
 
-The **Automations** tab in the AI Lab manages schedules (cadence, enable/disable, delete); the **Stats** tab shows run history, success rate, and a most-endorsed leaderboard from `prompt_runs` + `prompts`.
+The **Automations** tab in the AI Lab manages schedules (cadence, enable/disable, delete) and has a **"New automation"** button (admin) that opens `ScheduleDialog` in **picker mode**: when no `promptId` is passed the dialog renders a searchable prompt picker sourcing **approved/board prompts plus the user's own non-archived prompts** (so a schedule can be created in-panel, not only from a prompt card). The **Stats** tab shows run history, success rate, and a most-endorsed leaderboard from `prompt_runs` + `prompts`.
+
+### Streaming: sub-turn separation
+
+HumaticAI's RAGChat emits `message_complete` then `new_message` SSE events between content phases when it runs tools (see `matrix-comms/docs/humaticai-widget.md`). Both SSE parsers — the client `consumeSse`/`handleSseEvent` in `src/lib/humaticAi.ts` and the server-side `consumeSseToText`/`handleSseEvent` in `supabase/functions/humaticai-chat/index.ts` — treat those signals as a **sub-turn boundary** via a shared `handleSubTurnBoundary` helper:
+
+- **Plain-text buffers** get a blank line (`\n\n`) appended at the boundary (the client also emits `onDelta('\n\n')` so the live bubble shows the gap immediately), so consecutive sub-turns no longer run together (`"…in parallel."` + `"A key finding…"`).
+- **JSON buffers** keep the existing behavior: they only split into a `HUMATICAI_SEGMENT_SEPARATOR`-joined segment once structurally complete, preserving `json_only` dashboard parsing (`useHumaticaiJson` splits on that marker).
+- Repeated boundary signals are **de-duped** (no-op on an empty / already-`\n\n`-terminated buffer).
 
 ## 5. "Most popular" ranking
 
@@ -62,14 +72,16 @@ score = endorsement_count*3 + run_count*2 + fork_count*2   (tiebreak: updated_at
 
 This feeds the Home "Board-approved · Best prompts" section, the dashboard prompt starters, and the AI Lab "Most popular" tab. The Home sidebar **conversation** "Most popular" card is separate and ranks `shared_conversations` by `reaction_count`.
 
+The Home **"Board-approved · Best prompts"** cards mirror the `ConversationCard` shell (horizontal `flex gap-3`, `h-9 w-9` avatar left, title row with an endorsement badge — ThumbsUp + count — in place of message/view badges, author row, and the description as a `line-clamp-2` preview) while preserving run-on-click (`askNow(p.body)` + best-effort `increment_prompt_run_count`).
+
 ## 6. UI surfaces
 
 | Surface | What it shows |
 |---|---|
 | **Home** (`Index.tsx`) | Ask composer + "Board-approved · Best prompts" (popular approved prompts, main column); sidebar "Most popular" (conversations by reactions), "Latest", "Active in your workspace" |
-| **Dashboards** (Executive / My Team / My Performance) | `DiscussedByTeam` strip kept; `DashboardPromptStarters` renders audience-aware "Most popular" + "Latest" approved prompts that open a new shared conversation (`?ask=…`) |
+| **Dashboards** (Executive / My Team / My Performance) | `DiscussedByTeam` rendered as a **recsys block** (compact horizontal-scroll cards: avatar, title, author + role, recency) instead of a pill strip; `DashboardPromptStarters` renders audience-aware "Most popular" + "Latest" approved prompts that open a new shared conversation (`?ask=…`) |
 | **AI Lab** (`DesignShowcase.tsx`) | Tabs: Board-approved · Most popular · Latest · Mine · **Automations** · **Stats**; per-card run / endorse / fork / admin approve-archive / admin **Schedule** |
-| **Conversation thread** | "Promote to prompt", "Duplicate" (clone thread + messages into a new conversation), owner-only "Delete"; message-level 👍/👎 lives only in `ResponseFeedback` (the message `ReactionBar` excludes `like`) |
+| **Conversation thread** | "Promote", "Duplicate" (clone thread + messages into a new conversation), owner-only "Delete"; the message-level `ReactionBar` is **identical** to the conversation-card bar (full palette incl. Like/Dislike — `excludeKeys`/`compact` dropped) and `ResponseFeedback`'s separate 👍/👎 + memo is **kept** alongside it (so Like/Dislike may appear twice on AI messages, by request) |
 
 ## 7. Delivery / deploy pattern
 
