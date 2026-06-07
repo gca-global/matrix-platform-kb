@@ -10,6 +10,7 @@
 - Auth is Microsoft SSO via the Matrix OAuth flow; AD profile (display name, avatar, job title) is denormalized onto authored rows for cheap display (no SQL joins to `sso_users`).
 - Tenant-scoped: every table carries `tenant_id` and is filtered client-side via `useAuth().tenantId`; realtime subscriptions invalidate React Query caches.
 - Data access is through dedicated React Query hooks (`usePrompts`, `usePromptEndorsements`, `usePromptSchedules`, `usePromptRuns`) — never raw fetch.
+- **User identity for writes:** all user-attributed values (`*_user_id`, `conversation_reactions.user_id`, `prompt_endorsements.user_id`, `ai_response_feedback.user_id`) resolve the SSO subject via `useAuth().userId` = `user.sub ?? user.supabase_user_id` — **never `user.id`** (the SSO user object has no `id` field; `decodeUserFromToken` sets `sub`/`supabase_user_id` only). Reading the nonexistent `user.id` yields `null`, which silently drops the write (e.g. `useReactions.toggle` early-returns on `!userId`). This was the root cause of reactions/endorsements/feedback/notifications not persisting and of `created_by_user_id` landing `null` (hence the name-matching ownership fallback in `ConversationCard`); fixed Jun 2026 by exposing `userId` from `AuthContext`.
 
 ## 2. Data model (app DB `wjsafhylqujwbpqgjjlj`)
 
