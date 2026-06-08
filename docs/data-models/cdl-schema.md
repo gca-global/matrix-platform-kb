@@ -178,7 +178,7 @@ All EFs verify `Authorization: Bearer <SSO JWT>` themselves (HS256 first via `SS
 - **Admin EFs** (`mls-sync`, `mls-sync-orchestrator`, the 5 pipeline stages, `listing-publish`, …) use `SSO_ALLOWED_SCOPES` (default `system_admin,org_admin`) — set project-wide to `system_admin,org_admin`.
 - **Broker-scope read EFs** (`cdl-contacts-read`, `cdl-contact-listings-read`, `cdl-engagement-read`, `cdl-read`) use their **own** `SSO_READ_SCOPES` (default `self,team,global,org_admin,system_admin`) so a Broker (`self`) session can read. This is deliberately decoupled from the shared `SSO_ALLOWED_SCOPES` (which stays admin-only so the admin EFs are not widened). Mirrors how `listings-search` uses `SSO_LISTINGS_SCOPES`. Leave `SSO_READ_SCOPES` unset to keep the broad default.
 - **Broker-scope write EF** (`cdl-write`) uses its **own** `SSO_WRITE_SCOPES` (default `self,team,global,org_admin,system_admin`) so a Broker session can author CRM rows (contacts, showings, prospecting, …). Like the read EFs, it is decoupled from the shared `SSO_ALLOWED_SCOPES`; pointing it there would 403 every non-admin broker write. Leave `SSO_WRITE_SCOPES` unset to keep the broad default. (Authz scoping/owner-clamp is still enforced inside the EF as that mapping lands — see deferred note below.)
-- **Canonical write/read enforcement (audit 2026-06, `cdl-write` v6 / `cdl-read` v6).** `cdl-write` now validates every client-supplied column at the boundary: column names must be RESO snake_case (`/^[a-z][a-z0-9_]*$/` — rejects PascalCase/camelCase), EF-managed plumbing (`id`, `content_hash`, `created_at`, `updated_at`, `is_deleted`, `deleted_at`, `lifecycle_state*`) is rejected, and any `x_`-prefixed column not in the registered set (`x_privacy_level`, `x_contact_key`, `x_property_name`) is rejected with `code: NON_CANONICAL_COLUMN`. `cdl-read` restricts `order.column` to a per-resource allow-list (`filterable` ∪ `defaultOrder` ∪ common audit timestamps). This is the mechanical guard that keeps the write/sort surface canonical — drift becomes a rejected request, not a silent column. New registered extensions MUST be added to `REGISTERED_X_EXTENSIONS` in `cdl-write` **and** [`platform-extensions.md`](platform-extensions.md).
+- **Canonical write/read enforcement (audit 2026-06, `cdl-write` / `cdl-read`; v7 as of 2026-06-08 registers the `referral`/`document` resources).** `cdl-write` now validates every client-supplied column at the boundary: column names must be RESO snake_case (`/^[a-z][a-z0-9_]*$/` — rejects PascalCase/camelCase), EF-managed plumbing (`id`, `content_hash`, `created_at`, `updated_at`, `is_deleted`, `deleted_at`, `lifecycle_state*`) is rejected, and any `x_`-prefixed column not in the registered set (`x_privacy_level`, `x_contact_key`, `x_property_name`) is rejected with `code: NON_CANONICAL_COLUMN`. `cdl-read` restricts `order.column` to a per-resource allow-list (`filterable` ∪ `defaultOrder` ∪ common audit timestamps). This is the mechanical guard that keeps the write/sort surface canonical — drift becomes a rejected request, not a silent column. New registered extensions MUST be added to `REGISTERED_X_EXTENSIONS` in `cdl-write` **and** [`platform-extensions.md`](platform-extensions.md).
 
 > **Owner-clamp deferred (accepted residual risk):** the PII read EFs (`cdl-contacts-read`, `cdl-contact-listings-read`, `cdl-engagement-read`) currently return **org-wide** rows for any allowed scope — no per-`owner_member_key` clamp. The `scopeToOwner` path exists but is inert because there is **no SSO-user → `member_key` mapping**: `members` are keyed on legacy Cyprus/Qobrix emails while SSO logins are Azure AD staff, and the JWT carries no `member_key`. Enforcing real owner-clamp requires first building that identity mapping (member_key claim or mapping table). Tracked as a follow-up.
 
@@ -618,7 +618,9 @@ inside; mirror `cdl-contacts-read`):
   `contacts`/`prospecting`/`contact_listings`, which keep dedicated EFs). Body
   `{ resource, filter, page, pageSize, order }` over a whitelist: `showing_request`,
   `showings`, `showing`, `showing_availability`, **`lock_or_box`**,
-  `transaction_management`, `caravan`, `caravan_stop`, `internet_tracking_events`.
+  `transaction_management`, `caravan`, `caravan_stop`, `internet_tracking_events`,
+  and (added 2026-06-08) the project-flavour CRM resources **`referral`** and
+  **`document`** (see "Week-4: Referral + Document project-flavour resources").
   Per-resource filterable-column allow-lists; applies `is_deleted = false` where the
   column exists; estimated counts. **`lock_or_box` (RESO access mechanism) is
   whitelisted as of 2026-06-05** so the Week-3 showing UI can surface how to access a
@@ -632,6 +634,63 @@ These complete the read side for the Pipeline canonical-process surfaces
 (SavedSearch/Prospecting, Showing chain, Transactions, Caravans, Internet
 tracking, and the derived 5-stage `/pipeline` projection). Writes still flow
 through the single `cdl-write` dispatcher (ADR-016).
+
+### Week-4: Referral + Document project-flavour resources (2026-06-08)
+
+`20260608120000_pipeline_referral_document_tables.sql`. Adds two CRM resources
+the BRD needs (FR-REF Referral, FR-DOC Documents) that have **no RESO DD 2.0
+equivalent** — RESO has no `Referral` resource and only Property-level document
+*flags* (`Property.DocumentsAvailable`/`DocumentsCount`/`DocumentsChangeTimestamp`),
+no standalone `Document` resource. They are therefore **governed project-flavour
+CDL resources** ([ADR-025](../architecture/decisions/ADR-025.md)) — i.e. **new
+resources, not extensions of an existing RESO resource — so they use plain
+canonical snake_case columns and NO `x_` prefix** (the `x_` prefix is only for
+extensions *of* a RESO resource; a wholly-new resource doesn't take one). Same
+hybrid envelope as the Phase-2 tables (`id uuid pk` + `source_id` +
+`unique(source_id, source_*_key)` + `raw jsonb` GIN + `content_hash` + soft-delete
++ `locked_fields` + `updated_at` trigger). `cdl-write` auto-stamps
+`source_id`/`<key>`/`source_<key>` so no derive trigger is needed.
+
+| Table | "Resource" | RLS read surface |
+|---|---|---|
+| `public.referral` | Referral (project-flavour; no RESO equiv) | **service_role only** (PII-adjacent — links referrer/referee Contacts) |
+| `public.document` | Document (project-flavour; no RESO equiv) | **service_role only** (confidentiality-bearing) |
+
+- **`public.referral`** — `referral_key`, `referrer_contact_key`,
+  `referee_contact_key`, `owner_member_key`, `referral_type`
+  (Client/Partner/Broker/Internal), `referral_date`, `outcome`
+  (Open/Closed Won/Closed Lost), `close_date`, + envelope. Read/written via
+  `cdl-read`/`cdl-write` `resource:"referral"`.
+- **`public.document`** — link-only (`storage_url` points at external storage;
+  **files are NOT stored in the CDL**). Generic `related_resource`/`related_key`
+  (so a document attaches to `Contacts` now and to a `TransactionManagement`/offer
+  later **without a schema change**), `document_name`, `category`
+  (KYC/agreement/offer/brochure/NDA/legal/financial/internal note), `version`,
+  `author_member_key`, `confidentiality` (normal/confidential/nda), `document_date`,
+  + envelope. Read/written via `cdl-read`/`cdl-write` `resource:"document"`.
+
+Both are added to the `cdl-write` RESOURCES map (`resourceName` `Referral`/`Document`,
+`hasSoftDelete`) and the `cdl-read` whitelist (`cdl-write` v7 / `cdl-read` v7).
+
+> **Authorization (no SSO permission-key layer for matrix-pipeline).** Unlike the
+> three legacy apps in `sso_app_permissions` (`agency-portal`/`client-connect`/
+> `meeting-hub`), `matrix-pipeline` gates pages via **`role_configurations` page
+> keys** (app DB, `useRoleConfig` + admin fallback) and the CDL read/write EFs gate
+> on **SSO JWT scope** (`self,team,…` via `SSO_READ_SCOPES`/`SSO_WRITE_SCOPES`).
+> Referral access = the `'referrals'` page key (seeded into `role_configurations`);
+> Documents live under the existing `'contacts'` page + an in-app confidentiality
+> threshold. **No `pipeline:referrals:*`/`pipeline:documents:*` rows are added to
+> `sso_app_permissions`** — they would be dead data the app never reads (recorded
+> in [ADR-025](../architecture/decisions/ADR-025.md)).
+
+> **Offer-economics deferral (scope, 2026-06-08).** The offer-negotiation gap
+> (amount/currency/offer+closing dates/terms, the TM↔buyer/property links, offer
+> lifecycle controls, forecast P&L) is **deferred to a later stage**. No `x_` offer
+> columns are added to `transaction_management`; the canonical-minimal Transactions
+> surface is untouched. When resumed it uses canonical `Property.ClosePrice`/
+> `PurchaseContractDate`/`TransactionBrokerCompensation` + `HistoryTransactional`,
+> with `x_` only for the residual negotiation gap. See ADR-025 + the Pipeline
+> `phases.md` Week-4 entry.
 
 ### Scheduled jobs (pg_cron) — Prospecting delivery engine (2026-06-04)
 
@@ -755,6 +814,7 @@ were also aligned to emit canonical RESO directly as defence-in-depth.
 | 32 | `20260605180000_cdl_lookup_value_normalizer.sql` | **P6 lookup-value normalizer**: `reso_lookup_value_map` table + seed, `cdl_normalize_lookup_value()`, and the `tg_properties_normalize_lookups` BEFORE trigger on `properties`(+`_published`). See "Lookup value normalization". |
 | 33 | `20260605181000_cdl_lookup_value_backfill.sql` | **P6 backfill**: normalize existing `properties` + `properties_published` rows (incl. `development_status`→`new_construction_yn` coupling). Idempotent. |
 | 34 | `20260605182000_cdl_lookup_value_guard.sql` | **P6 value guard**: `cdl_assert_canonical_lookup()` + `tg_properties_validate_lookups` BEFORE trigger rejecting any non-`StandardValue` closed-lookup value. |
+| 35 | `20260608120000_pipeline_referral_document_tables.sql` | **Week-4 project-flavour resources** ([ADR-025](../architecture/decisions/ADR-025.md)): `public.referral` + `public.document` (no RESO equivalent; canonical snake_case, no `x_`) with hybrid envelope + soft-delete + service-role-only RLS; added to `cdl-read`/`cdl-write` (v7). No `x_` offer columns (offer-economics deferred). |
 
 ## Cross-reference
 
@@ -766,6 +826,7 @@ were also aligned to emit canonical RESO directly as defence-in-depth.
 | ADR — Pipeline EF surface request | [ADR-015](../architecture/decisions/ADR-015.md) |
 | ADR — canonical-into-CDL acceleration (Phase-2 tables, re-model, `cdl-write`) | [ADR-016](../architecture/decisions/ADR-016.md) |
 | ADR — buyer-to-showing linkage (`x_contact_key`) | [ADR-022](../architecture/decisions/ADR-022.md) |
+| ADR — Referral + Document project-flavour resources (+ offer-economics deferral) | [ADR-025](../architecture/decisions/ADR-025.md) |
 | RESO canonical fields | [`reso-dd-kb/wiki/agent-docs/_index.md`](reso-dd-kb/wiki/agent-docs/_index.md) |
 | Platform extensions (`x_*`) | [platform-extensions.md](platform-extensions.md) |
 | Read-path perf budgets | [read-path-performance.md](read-path-performance.md) |

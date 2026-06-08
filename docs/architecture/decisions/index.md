@@ -30,3 +30,4 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-022](ADR-022.md) | Buyer-to-showing linkage as a Sharp Matrix platform extension (`x_contact_key`) | Accepted |
 | [ADR-023](ADR-023.md) | Platform extension prefix `x_` (supersedes `x_sm_`) | Accepted |
 | [ADR-024](ADR-024.md) | CDL lookup-value normalization layer (canonical RESO StandardValues) | Accepted |
+| [ADR-025](ADR-025.md) | Referral + Document as project-flavour CDL resources; offer-economics deferred (zero-`x_`) | Accepted |

@@ -119,6 +119,8 @@ These are registered as platform-specific lookup values:
 
 - **Regional scope**: Most extensions are Cyprus-specific or Mediterranean-specific. When Sharp Matrix expands to Hungary and Kazakhstan, additional regional extensions may be needed (e.g., Hungarian land registry fields, Kazakh property registration).
 - **Prefix**: The platform extension prefix is `x_` ([ADR-023](../architecture/decisions/ADR-023.md)). It superseded the former vendor-tagged `x_sm_` prefix on 2026-06-05; the four materialized columns were renamed by migration `20260605160000_rename_x_sm_extensions_to_x.sql`. RESO DD 2.0 itself defines no extension prefix — `x_` is the platform's local-field marker and these columns are never emitted to outbound RESO/Dash channels.
+- **Extensions vs. project-flavour resources (`x_` is for fields, not whole resources)**: The `x_` prefix marks an extension **field on an existing RESO resource** (e.g. `x_contact_key` on `ShowingAppointment`). A **wholly new resource that RESO does not model at all** is NOT an extension and takes **no `x_` prefix** — it is a *project-flavour CDL resource* with plain canonical snake_case columns, governed by its own ADR. Live examples: `public.referral` (FR-REF) and `public.document` (FR-DOC), added 2026-06-08 — RESO has no `Referral` resource and only Property-level document *flags*, no `Document` resource ([ADR-025](../architecture/decisions/ADR-025.md)). This mirrors how `saved_search`/`prospecting`/`caravan` were added as resources (not prefixed). Do not "extend" by inventing `x_`-prefixed columns when the right move is a new resource.
+- **Zero speculative `x_` for deferred scope**: When a workstream is deferred (e.g. the 2026-06-08 offer-economics deferral — ADR-025), do **not** pre-add `x_` columns "to be ready". The datamodel stays clean; the extension is introduced only when the feature lands and only for the residual gap with no canonical RESO home.
 - **Retirement**: If a future RESO DD version (e.g., DD 2.1) adds a field that matches an `x_*` extension, the extension should be migrated to the RESO name with a deprecation period.
 - **Naming collisions**: Never reuse a retired extension name for a different purpose.
 
@@ -127,5 +129,6 @@ These are registered as platform-specific lookup values:
 | For | See |
 |-----|-----|
 | Extension governance rules | This file (`platform-extensions.md`) |
+| Project-flavour resources (no `x_`): `referral` / `document` + offer-economics deferral | [ADR-025](../architecture/decisions/ADR-025.md), [cdl-schema.md](cdl-schema.md) ("Week-4: Referral + Document project-flavour resources") |
 | Full field mapping with extensions flagged | [property-field-mapping.md](property-field-mapping.md) |
 | RESO DD 2.0 field reference | [`reso-dd-kb/wiki/agent-docs/_index.md`](reso-dd-kb/wiki/agent-docs/_index.md) |
