@@ -67,7 +67,9 @@ Every Matrix App connects to **two Supabase instances**:
 | `tenants` | Organization/tenant records |
 | `app_settings` | Per-tenant app configuration (JSON) |
 | `sso_user_groups` | Team/group memberships |
-| `sso_role_configurations` | Per-role page and action access lists |
+| `sso_role_configurations` | Per-role page and action access lists (shared across apps; keyed by `(role_id, app_id, tenant_id)`) |
+
+> Role config is stored in the shared SSO table `sso_role_configurations`, whose unique key is `(role_id, app_id, tenant_id)`. Each app MUST define a unique, stable `ROLE_CONFIG_APP_ID` slug (in `src/integrations/supabase/dataLayerClient.ts`) and scope **every** role-config read, upsert (`onConflict: 'role_id,app_id,tenant_id'`), and delete by it. Omitting `app_id` causes "no unique or exclusion constraint matching the ON CONFLICT specification" and/or cross-app contamination (the column defaults to `'hrms'`). See `matrix-hrms` for the reference implementation.
 
 ### App DB Client Setup
 
@@ -357,7 +359,7 @@ Every route uses `ProtectedRoute` with a `requiredPage` key:
 />
 ```
 
-The `requiredPage` key is checked against `role_configurations.pages` for the user's role.
+The `requiredPage` key is checked against the role's `pages` list from `sso_role_configurations` (scoped by the app's `ROLE_CONFIG_APP_ID`) for the user's role.
 
 ### Sidebar Structure
 
