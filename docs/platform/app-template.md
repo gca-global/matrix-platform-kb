@@ -69,7 +69,7 @@ Every Matrix App connects to **two Supabase instances**:
 | `sso_user_groups` | Team/group memberships |
 | `sso_role_configurations` | Per-role page and action access lists (shared across apps; keyed by `(role_id, app_id, tenant_id)`) |
 
-> Role config is stored in the shared SSO table `sso_role_configurations`, whose unique key is `(role_id, app_id, tenant_id)`. Each app MUST define a unique, stable `ROLE_CONFIG_APP_ID` slug (in `src/integrations/supabase/dataLayerClient.ts`) and scope **every** role-config read, upsert (`onConflict: 'role_id,app_id,tenant_id'`), and delete by it. Omitting `app_id` causes "no unique or exclusion constraint matching the ON CONFLICT specification" and/or cross-app contamination (the column defaults to `'hrms'`). See `matrix-hrms` for the reference implementation.
+> Role config is stored in the shared SSO table `sso_role_configurations`, whose unique key is `(role_id, app_id, tenant_id)`. Each app MUST define a unique, stable slug set via `VITE_ROLE_CONFIG_APP_ID` in `.env` (exposed as `ROLE_CONFIG_APP_ID` from `src/integrations/supabase/dataLayerClient.ts`) and scope **every** role-config read, upsert (`onConflict: 'role_id,app_id,tenant_id'`), and delete by it. Omitting `app_id` causes "no unique or exclusion constraint matching the ON CONFLICT specification" and/or cross-app contamination (the column defaults to `'hrms'`). See `matrix-hrms` for the reference implementation.
 
 ### App DB Client Setup
 
