@@ -51,7 +51,7 @@
 
 | Extension Field | Data Type | Reason | SIR Source Field | Qobrix Source | Apps |
 |----------------|-----------|--------|-----------------|---------------|------|
-| x_contact_key | String | Buyer `Contact.ContactKey` attached to a Showing / ShowingAppointment / ShowingRequest. RESO DD 2.0 has no `ShowingContactKey` (Showing models the agent + listing, not a buyer contact) — see [ADR-022](../architecture/decisions/ADR-022.md). Loose witness (no FK); indexed; in the `cdl-read` filterable allow-list; not exported to any outbound RESO/Dash channel. | — (custom) | — (custom) | Pipeline (Broker) |
+| x_contact_key | String | Buyer `Contact.ContactKey` attached to a Showing / ShowingAppointment / ShowingRequest. RESO DD 2.0 has no `ShowingContactKey` (Showing models the agent + listing, not a buyer contact) — see [ADR-022](../architecture/decisions/ADR-022.md). Loose witness (no FK); indexed; in the `cdl-read` filterable allow-list; not exported to any outbound RESO/Dash channel. **Scope:** used only where a process row has NO canonical Contact junction (showings). The **transaction** buyer is NOT modeled with `x_contact_key` — it uses the canonical **`ContactListings`** junction (`contact_key` + `listing_key`) per [ADR-026](../architecture/decisions/ADR-026.md). | — (custom) | — (custom) | Pipeline (Broker) |
 
 ### Member Extensions
 

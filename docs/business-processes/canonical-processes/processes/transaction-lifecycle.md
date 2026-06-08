@@ -17,6 +17,16 @@ universal change log).
 >   ([`product-specs/matrix-pipeline/wiki/commission-engine.md`](../../../product-specs/matrix-pipeline/wiki/commission-engine.md)).
 > - One-stop integrated view:
 >   [`../../../integration/wiki/agent-docs/by_resource/property.md`](../../../integration/wiki/agent-docs/by_resource/property.md)
+> - **Sharp Matrix implementation** (Pipeline owns the Property *transaction
+>   phase*): the close-out edge and the `Pending`/`Closed`/`Back On Market`
+>   transitions below are driven by the governed `cdl-listing-lifecycle` EF
+>   (`acceptOffer` -> `Pending`, `closeDeal` -> `Closed`, `cancelDeal` ->
+>   `Back On Market`), which writes the canonical `Property` close economics,
+>   the buyer `ContactListings` row, a `property_lifecycle_events` audit row,
+>   and the `HistoryTransactional` event. See
+>   [ADR-026](../../../architecture/decisions/ADR-026.md). The buyer is a
+>   `Contact` linked via `ContactListings` — `TransactionManagement` stays the
+>   bare canonical 4-field header.
 
 The "transaction" in RESO DD is intentionally minimal - it is NOT a
 back-office TM/escrow system, it is the record that ties an MLS

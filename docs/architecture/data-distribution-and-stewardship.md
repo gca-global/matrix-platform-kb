@@ -122,7 +122,30 @@ update public.properties
  where lifecycle_state is null and status is not null;
 ```
 
-### Lifecycle EF (Phase-2.5, `cdl-listing-lifecycle`)
+### Lifecycle EF (`cdl-listing-lifecycle`)
+
+> **Status (2026-06-08, ADR-026): the transaction-phase subset is SHIPPED.**
+> The `cdl-listing-lifecycle` EF is deployed on the CDL project with the three
+> transaction-phase actions `acceptOffer` (-> RESO `Pending`), `closeDeal`
+> (-> `Closed`), and `cancelDeal` (-> `Active` / Back On Market) — this is how
+> `matrix-pipeline` exercises its **transaction-phase ownership** of the shared
+> `Property`. The remaining actions (`submitForReview`/`approve`/`publish`/
+> `withdraw`/`expire`/`reactivate`/`archive`) and the cron jobs are still
+> Phase-2.5 (Atlas listing-phase). **Live-schema note:** the shipped EF works
+> against the current `public.properties` shape, which differs from the
+> illustrative DDL below — RESO `ListingKey` is stored as `originating_system_key`
+> (the EF takes a `listing_key` arg = that value), currency is `currency_code`,
+> there is **no `lifecycle_state`/`locked_fields` column** (lifecycle state is
+> derived from `standard_status` + `property_lifecycle_events`; locks live in
+> `property_field_overrides` via `cdl_lock_field`/`cdl_unlock_field`), and the
+> close economics are the canonical `close_price`/`close_date`/
+> `purchase_contract_date`/`contract_status_change_date` columns added by
+> migration `20260608150000`. The buyer is a `Contact` linked via
+> `ContactListings`; the transition timeline is the `HistoryTransactional` event
+> spine (read via `cdl-read` resource `history_transactional`). The
+> source-of-record guard (record-only for `qobrix`/`dash`) is wired but inert
+> until `properties` carry a resolvable `mls_sources` slug (today
+> `originating_system_name` is a tenant id). See [ADR-026](decisions/ADR-026.md).
 
 One EF action per legal transition. Each action:
 

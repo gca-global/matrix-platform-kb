@@ -493,6 +493,24 @@ names verified against `reso-dd-kb/wiki/agent-docs/resources/*.md`.
 Deal offer amount / commission / P&L stay **app-private in the CRM app DB** —
 RESO has no deal-economics resource (ADR-016 escape hatch).
 
+> **Event-sourced transaction model (2026-06-08, [ADR-026](../architecture/decisions/ADR-026.md)).**
+> The transaction is modeled on canonical homes; **no link columns are added to
+> `transaction_management`** (it has zero FKs in RESO). The buyer is a `Contact`
+> linked to the listing via **`ContactListings`** (`contact_key` + `listing_key`);
+> the subject is the shared **`Property`** (Pipeline owns its *transaction phase*);
+> the timeline is the **`HistoryTransactional`** event spine. Pipeline drives the
+> transitions through the governed **`cdl-listing-lifecycle`** EF (`acceptOffer` ->
+> `Pending`, `closeDeal` -> `Closed`, `cancelDeal` -> Back On Market), which writes
+> the canonical close economics on `Property` (`close_price`, `close_date`,
+> `purchase_contract_date`, `contract_status_change_date` — added to `properties`
+> + `properties_published` by migration `20260608150000`), auto-(un)locks escrow
+> fields via `cdl_lock_field`/`cdl_unlock_field` (`property_field_overrides`),
+> appends a `property_lifecycle_events` audit row, and emits a Property-scoped
+> `HistoryTransactional` event (buyer `contact_key` + `transaction_key` in `raw`).
+> The timeline is read via `cdl-read` resource **`history_transactional`** (anchor
+> by `resource_name` + `resource_record_key`). NB: the EF takes a `listing_key`
+> arg = `properties.originating_system_key` (the live column for RESO `ListingKey`).
+
 > **Naming caution:** `public.showings` (Phase-1) = RESO **ShowingAppointment**
 > (a booked slot). `public.showing` (Phase-2) = RESO **Showing** (a recorded
 > showing fact). They are different RESO resources; do not conflate.
@@ -619,8 +637,13 @@ inside; mirror `cdl-contacts-read`):
   `{ resource, filter, page, pageSize, order }` over a whitelist: `showing_request`,
   `showings`, `showing`, `showing_availability`, **`lock_or_box`**,
   `transaction_management`, `caravan`, `caravan_stop`, `internet_tracking_events`,
-  and (added 2026-06-08) the project-flavour CRM resources **`referral`** and
-  **`document`** (see "Week-4: Referral + Document project-flavour resources").
+  the project-flavour CRM resources **`referral`** and **`document`** (added
+  2026-06-08; see "Week-4: Referral + Document project-flavour resources"), and
+  (added 2026-06-08, `cdl-read` v8, [ADR-026](../architecture/decisions/ADR-026.md))
+  **`history_transactional`** — the broker-scope transaction/event timeline read
+  (anchor by `resource_name` + `resource_record_key`; service-role inside returns
+  full rows incl. `new_value`/`raw`, so the anon PII allow-list does not apply on
+  this EF path).
   Per-resource filterable-column allow-lists; applies `is_deleted = false` where the
   column exists; estimated counts. **`lock_or_box` (RESO access mechanism) is
   whitelisted as of 2026-06-05** so the Week-3 showing UI can surface how to access a
@@ -630,10 +653,24 @@ inside; mirror `cdl-contacts-read`):
   it; the table RLS stays service-role-only and writes stay on `cdl-write`. See
   [`security-model.md`](../platform/security-model.md) for the broker-scope read posture.
 
+- **`cdl-listing-lifecycle`** (added 2026-06-08, v1, [ADR-026](../architecture/decisions/ADR-026.md))
+  — Pipeline's **governed transaction-phase write-path** for the shared `Property`.
+  Body `{ action: "acceptOffer"|"closeDeal"|"cancelDeal", listing_key, transaction_key?,
+  contact_key?, close_price?, close_date?, purchase_contract_date?, reason? }`
+  (`listing_key` = `properties.originating_system_key`). Validates the from->to
+  `StandardStatus` transition + per-action scope (`closeDeal`/`cancelDeal` require
+  `org_admin`/`system_admin`); updates `Property` status + close economics;
+  auto-(un)locks escrow fields (`list_price`, `bedrooms_total`,
+  `bathrooms_total_integer`, `living_area`) via `cdl_lock_field`/`cdl_unlock_field`;
+  appends `property_lifecycle_events`; confirms the buyer `ContactListings` row;
+  emits the `HistoryTransactional` event. `verify_jwt=false`; service-role inside.
+
 These complete the read side for the Pipeline canonical-process surfaces
 (SavedSearch/Prospecting, Showing chain, Transactions, Caravans, Internet
-tracking, and the derived 5-stage `/pipeline` projection). Writes still flow
-through the single `cdl-write` dispatcher (ADR-016).
+tracking, and the derived 5-stage `/pipeline` projection). Most writes flow
+through the single `cdl-write` dispatcher (ADR-016); the transaction-phase
+`Property` state machine is the one governed exception via `cdl-listing-lifecycle`
+(ADR-026).
 
 ### Week-4: Referral + Document project-flavour resources (2026-06-08)
 
