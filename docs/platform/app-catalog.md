@@ -27,6 +27,7 @@
 | 10 | AI Assistant for Internal Support | **Zoe AI Assistant** | AI Service | All internal users (multi-role) |
 | 11 | AI Assistant for Blog Generation | **AI Blog Generator** | AI Service | Marketing, Content Managers |
 | 11a | MLS Data Studio (CDL admin) | **Matrix Atlas (`matrix-atlas-mls`)** | App (CDL admin, served at `/mls`) | Data ops, system_admin / org_admin |
+| 11b | Observability & Monitoring | **Nyx Monitoring** | Infrastructure | CORE Team (ops / leadership) |
 
 > **Atlas** is the Lovable-managed CDL admin SPA that drives `mls-sync` / `mls-sync-orchestrator` / `listings-search`. It's the operator UI for the 5-stage ingestion pipeline + the 8 RESO resource toggles + the source-of-record / lifecycle taxonomy + the data-stewardship `locked_fields` surface. See [`cdl-schema.md`](../data-models/cdl-schema.md) and the matrix-atlas-mls repo. Production path: `https://intranet.sharpsir.group/mls/`.
 
@@ -55,6 +56,37 @@
 | 22 | Platform Configuration | **Admin Console** | App | System Admins |
 
 > **Consolidation note**: the previously-planned **Broker App** (daily dashboard + AI copilot) and **Manager App** (Kanban + analytics) are **consolidated into matrix-pipeline 2.0** as a single CRM serving both broker and manager personas (see [`product-specs/matrix-pipeline/wiki/personas`](../product-specs/matrix-pipeline/wiki/overview.md#personas) and [`phases.md`](../product-specs/matrix-pipeline/phases.md)). The canonical 5-stage funnel projection (Qualification → Matching → Viewing → Contracting → Payment) replaces both the old broker daily-dashboard view and the old manager Kanban as a single funnel-state UI projection.
+
+---
+
+## App Access Control (portal tile visibility)
+
+Portal **tile visibility is access-controlled** by the user's `allowed_apps` set (the union of `sso_roles.apps_allowed` across the user's assigned roles, resolved live by `oauth-userinfo`). The Agency Portal launcher (`AppLauncher.tsx`) only renders a `show_in_portal` app when its OAuth `client_id` is in the signed-in user's `allowed_apps` — a strict intersection with **no admin bypass**. Managing access is therefore pure configuration: add a `client_id` to a role's `apps_allowed` (SSO Console → Roles) to grant the tile; remove it to hide it.
+
+### CORE-exclusive apps
+
+Six apps are reserved for the **`CORE Team`** role and are intentionally hidden from every other role:
+
+| App | OAuth `client_id` |
+|---|---|
+| HR Management (HRMS) | `JxeA~kJKxPVvRHLNYjbH9euCaVSUSsEX` |
+| Financial Management (Matrix FM) | `LAmZA9MrZSpJ3NV~a5zyZI8W0.DYscHl` |
+| Management Console | `sso-console-4e9b74a604a83d16` |
+| Matrix Stardom | `372fff71-241c-4130-9f1f-614a3400b2a2` |
+| Matrix Comms | `WSvfGsovutXBHJfQOdL9uPA4TnMIIVrZ` |
+| Nyx Monitoring | `nyx-monitoring-vm-sso-v1` |
+
+### Universal apps (available to all roles)
+
+Three apps are backfilled into **every** role's `apps_allowed` so they stay broadly available. The Portal keeps `show_in_portal=false` (it is the launcher itself, never a tile) but is retained in `apps_allowed` for completeness:
+
+| App | OAuth `client_id` | Tile? |
+|---|---|---|
+| Sharp Matrix Portal | `sharp-matrix-vm-sso-v2-3645cb7d428fbcbc` | No (launcher) |
+| New Client Registration | `matrix-client-connect-vm-sso-v1-1c1de280d958ddbe` | Yes |
+| Appointment Reports | `matrix-meeting-hub-vm-sso-v1-bac504231b61ad12` | Yes |
+
+> Enforcement is **visibility-only**: `oauth-authorize` still gates app launches on the coarse `rw_*` permissions, so `allowed_apps` controls which tiles a user sees rather than hard-blocking deep links. See [security-model.md](security-model.md#portal-app-tile-visibility-allowed_apps).
 
 ---
 
@@ -184,6 +216,18 @@
 - SEO-optimized output
 - Multi-language generation (EN/RU)
 - Integration with Website CMS publishing workflow
+
+### Nyx Monitoring (Observability)
+**Status**: Done
+**Users**: CORE Team (ops / leadership) — CORE-exclusive tile
+**Repo**: `sharpsir-group/nyx-monitoring`
+**URL**: `https://nyx.intranet.sharpsir.group/grafana` (Grafana; own login — opened as a portal link tile, not an OAuth/SSO client)
+**SSO registration**: `sso_applications.client_id = nyx-monitoring-vm-sso-v1` (`client_type=public`, `show_in_portal=true`); not part of the OAuth/PKCE flow.
+**Key Features**:
+- Prometheus + Alertmanager + Grafana + Blackbox/Node exporters on AWS Lightsail
+- HTTP/HTTPS uptime + TLS-cert-expiry probes (30/14/7-day warnings) for production sites and CMDB services
+- CMDB-driven targets; alerts routed to the ITSM webhook, email, and an external watchdog (dead man's switch)
+- Git-provisioned Grafana dashboards — no manual UI state / config drift
 
 ---
 

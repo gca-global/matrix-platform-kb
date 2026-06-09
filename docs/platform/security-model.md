@@ -210,6 +210,22 @@ The `oauth-token` Edge Function produces this JWT payload, consumed by all Matri
 }
 ```
 
+## Portal app-tile visibility (`allowed_apps`)
+
+`allowed_apps` is the union of `sso_roles.apps_allowed` across all of a user's assigned roles, resolved live by `oauth-userinfo` (and embedded in the JWT by `oauth-token`). Each entry's `id` is an application's OAuth `client_id`.
+
+**Enforcement point — Agency Portal launcher.** `AppLauncher.tsx` renders a tile only when an app has `show_in_portal=true` **and** its `client_id` is in the signed-in user's `allowed_apps`:
+
+```
+visible tiles = (sso_applications WHERE show_in_portal = true) ∩ user.allowed_apps
+```
+
+This is a strict intersection with **no admin bypass** — a `system_admin` who lacks an app in `allowed_apps` does not see its tile. Granting/revoking a tile is pure configuration: edit the relevant role's `apps_allowed` (SSO Console → Roles) and the change takes effect on the user's next `oauth-userinfo` fetch (no redeploy).
+
+**Scope of enforcement.** This controls **tile visibility**, not deep-link authorization. `oauth-authorize` still gates the actual app launch on the coarse `rw_*` / `app_access` permissions, so `allowed_apps` is the discoverability/visibility layer rather than a hard per-app launch gate. Apps requiring a hard block must enforce it inside their own `ProtectedRoute` / RLS.
+
+**CORE-exclusive policy.** Six apps (HRMS, Matrix FM, Management Console, Matrix Stardom, Matrix Comms, Nyx Monitoring) are present only in the `CORE Team` role's `apps_allowed`; three apps (Portal, New Client Registration, Appointment Reports) are backfilled into every role. See [app-catalog.md — App Access Control](app-catalog.md#app-access-control-portal-tile-visibility) for the full `client_id` mapping.
+
 ## RLS Helper Functions
 
 All functions are `STABLE` with `SET search_path = public` for security and performance. Wrap calls in `(SELECT func())` in RLS policies for initPlan caching.
