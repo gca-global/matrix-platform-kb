@@ -103,6 +103,7 @@ Three apps are backfilled into **every** role's `apps_allowed` so they stay broa
 - RBAC (role-based access control) with 5-level scope
 - User and group management
 - App registration and permissions
+- Third-Party Auth (App DB) provisioning — one-click **Provision TPA** per app registers the SSO issuer/JWKS on the app's own Supabase project via the Management API (ADR-027)
 - AD user synchronization
 - "Act As" role switching for testing
 

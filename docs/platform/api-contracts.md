@@ -52,7 +52,8 @@ that have not synced the template, so this is fully backward compatible. See
 |------|------|------------|------|---------|
 | admin-users | `/admin-users` | GET, POST, PATCH, DELETE | Bearer (admin) | User CRUD |
 | admin-roles | `/admin-roles` | GET, POST, PATCH, DELETE | Bearer (admin) | Role management |
-| admin-apps | `/admin-apps` | GET, POST, PATCH, DELETE | Bearer (admin) | App registration; PUT also accepts `server_managed_pkce` (ADR-019) and `client_id` (atomic rename via `sso_rename_client_id` RPC — 409 on collision, 404 on missing) |
+| admin-apps | `/admin-apps` | GET, POST, PATCH, DELETE | Bearer (admin) | App registration; PUT also accepts `server_managed_pkce` (ADR-019) and `client_id` (atomic rename via `sso_rename_client_id` RPC — 409 on collision, 404 on missing). Create/update accept `app_supabase_project_ref` (ADR-027) |
+| admin-apps (TPA) | `/admin-apps/{id}/provision-tpa` (POST), `/admin-apps/{id}/tpa` (GET) | Bearer (admin) | Console-managed Third-Party Auth provisioning (ADR-027). POST body `{ project_ref?, reload? }` registers the SSO issuer/JWKS on the app's Supabase project via the Management API using the SSO Vault PAT `sso_supabase_management_pat`; idempotent, `reload` forces DELETE+POST. Sets `tpa_status`/`tpa_provisioned_at`/`tpa_integration_id`/`tpa_last_error` and nulls `jwt_secret_name` on success. Errors: `400 invalid_request` (no ref), `500 pat_not_configured`, `502 provisioning_failed` |
 | admin-permissions | `/admin-permissions` | GET, POST, DELETE | Bearer (admin) | Permission grants |
 | admin-groups | `/admin-groups` | GET, POST, PATCH, DELETE | Bearer (admin) | Group management |
 | admin-dashboard | `/admin-dashboard` | GET | Bearer (admin) | Stats, activity feed |

@@ -98,7 +98,8 @@ A freshly connected App DB project will **not** verify the SSO ES256 token until
 it has a **Third-Party Auth** integration registered against the SSO JWKS +
 issuer (same mechanism the CDL project uses). Without it, every App DB PostgREST
 query returns `401 PGRST301`. The app cannot self-provision this — it is
-per-project Supabase config and must be done once at setup (ADR-018).
+per-project Supabase config and is now done **centrally from the SSO Console**
+(ADR-018 + ADR-027).
 
 Canonical values (SSO project `xgubaguglsnokjyudgvc`):
 
@@ -115,7 +116,25 @@ single-SSO-token + RLS model. The **Third-Party Auth** section is correct, but
 its dashboard UI only lists the named providers and cannot take our Supabase
 issuer (see [supabase/supabase#28743](https://github.com/supabase/supabase/issues/28743)).
 
-The provisioning action is a single Management API call:
+**Provisioned from the SSO Console (recommended, ADR-027).** An admin opens
+the app in the Console (**Applications → app → Third-Party Auth (App DB)**),
+pastes the App DB **project ref**, and clicks **Provision TPA**. The
+`admin-apps` Edge Function reads one platform-held Supabase Management PAT from
+the SSO Vault (`sso_supabase_management_pat`) and makes the Management API call
+below on the app's project. It records the outcome on `sso_applications`:
+
+- `app_supabase_project_ref` — the App DB project ref
+- `tpa_status` — `null | provisioned | failed`
+- `tpa_provisioned_at`, `tpa_integration_id`, `tpa_last_error`
+
+On success it also sets `jwt_secret_name = NULL` so `oauth-token` mints ES256
+(the TPA-trusted alg). Endpoints: `POST /admin-apps/{id}/provision-tpa`
+(`{ project_ref?, reload? }`) and `GET /admin-apps/{id}/tpa`. The app installs
+nothing — a business user just gives their admin the project ref. The Console's
+**Force Data-API reload** toggle re-registers the integration (DELETE + POST) to
+clear a lingering `401 PGRST301` (~60–90s).
+
+The underlying Management API call (what the Console performs):
 
 ```http
 POST https://api.supabase.com/v1/projects/{APP_DB_REF}/config/auth/third-party-auth
@@ -128,26 +147,18 @@ Content-Type: application/json
 }
 ```
 
-Because Lovable has no terminal, the template delivers this as a **one-time
-bootstrap Edge Function** (`bootstrap-tpa`) that calls the Management API from
-inside Lovable using a `ACCOUNT_ACCESS_TOKEN` secret — a **Supabase Personal
-Access Token** generated at Account → Access Tokens
-(`https://supabase.com/dashboard/account/tokens`) — gated by the project's
-auto-injected `service_role` key (no extra token to generate) —
-**invoke once, then delete the function and rotate the PAT**. A non-technical user
-just asks the assistant to "finish connecting SSO"; the assistant runs it. A raw `curl` to the
-same endpoint is the manual fallback. The snippet lives in `.lovable/instructions.md`
-("Third-Party Auth on the App DB (REQUIRED)") and the first-run flow is surfaced
-in `WelcomeSetup.tsx`.
+**Deprecated fallback (pre-ADR-027).** Where the Console is unreachable, the
+template still ships a **one-time bootstrap Edge Function** (`bootstrap-tpa`)
+that calls the Management API from inside Lovable using an `ACCOUNT_ACCESS_TOKEN`
+secret (a **Supabase Personal Access Token**), gated by the project's
+auto-injected `service_role` key — **invoke once, then delete the function and
+rotate the PAT**. Documented (not committed) in `.lovable/instructions.md`. Avoid
+for new apps; prefer the Console action.
 
-If PostgREST still returns `401 PGRST301` after registration, `DELETE` then
-re-`POST` the same integration to force a Data-API reload (~60–90s), then verify
-with a live request carrying a full SSO token.
-
-**Verified working** on the HU app's App DB (`zgiuaghfsiuxtzmfmgpa`): the
-Management API resolved the SSO ES256 keys, and a live logged-in SSO token
-against the App DB returned `404` (table missing), not `401 PGRST301`, confirming
-the token is trusted.
+**Verified working** on the HU app's App DB (`rwgfixcfgviaqonhhqev`): the
+Management API resolved the SSO ES256 keys (integration present with resolved
+JWKS), so a live logged-in SSO token against the App DB is trusted (no
+`401 PGRST301`).
 
 ### CDL Client Setup (for CDL-Connected Apps)
 

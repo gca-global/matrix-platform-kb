@@ -31,3 +31,5 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-023](ADR-023.md) | Platform extension prefix `x_` (supersedes `x_sm_`) | Accepted |
 | [ADR-024](ADR-024.md) | CDL lookup-value normalization layer (canonical RESO StandardValues) | Accepted |
 | [ADR-025](ADR-025.md) | Referral + Document as project-flavour CDL resources; offer-economics deferred (zero-`x_`) | Accepted |
+| [ADR-026](ADR-026.md) | Event-sourced transaction model on canonical homes; Pipeline owns the Property transaction phase | Accepted |
+| [ADR-027](ADR-027.md) | Console-managed Third-Party Auth provisioning for own-DB apps | Accepted |
