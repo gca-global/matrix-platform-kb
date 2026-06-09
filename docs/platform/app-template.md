@@ -69,7 +69,11 @@ Every Matrix App connects to **two Supabase instances**:
 | `sso_user_groups` | Team/group memberships |
 | `sso_role_configurations` | Per-role page and action access lists (shared across apps; keyed by `(role_id, app_id, tenant_id)`) |
 
-> Role config is stored in the shared SSO table `sso_role_configurations`, whose unique key is `(role_id, app_id, tenant_id)`. Each app MUST define a unique, stable slug set via `VITE_ROLE_CONFIG_APP_ID` in `.env` (exposed as `ROLE_CONFIG_APP_ID` from `src/integrations/supabase/dataLayerClient.ts`) and scope **every** role-config read, upsert (`onConflict: 'role_id,app_id,tenant_id'`), and delete by it. Omitting `app_id` causes "no unique or exclusion constraint matching the ON CONFLICT specification" and/or cross-app contamination (the column defaults to `'hrms'`). See `matrix-hrms` for the reference implementation.
+> Role config is stored in the shared SSO table `sso_role_configurations`, whose unique key is `(role_id, app_id, tenant_id)`. Every role-config read, upsert (`onConflict: 'role_id,app_id,tenant_id'`), and delete MUST be scoped by `app_id` (exposed as `ROLE_CONFIG_APP_ID` from `src/integrations/supabase/dataLayerClient.ts`) — omitting it causes "no unique or exclusion constraint matching the ON CONFLICT specification" and/or cross-app contamination.
+>
+> **`app_id` = the app's OAuth client_id.** As of `matrix-apps-template-2-1`, `ROLE_CONFIG_APP_ID` defaults to the app's OAuth client_id (`VITE_SSO_CLIENT_ID`, via `getClientId()`). The client_id is already unique per app and is the identity each app is registered under in SSO, so role config is namespaced automatically with no extra env var — the old `VITE_ROLE_CONFIG_APP_ID` has been removed from the template. Legacy apps (`matrix-hrms` = `'hrms'`) still pin an explicit slug; that is back-compat only and not required for new apps.
+>
+> **Permission model — admin-by-default.** Admin-scope users (`system_admin`, `org_admin`, `global`) always have access; every other role has **no** access until an admin explicitly grants pages/actions in the Role Config panel. The runtime gate (`src/hooks/useRoleConfig.ts`) enforces this (admin scope → full; any other role with no config row → no access), and the `RoleConfigPanel` reflects it (an unconfigured role renders as "None", not "All Pages"). This is a deliberate divergence from the older "empty table = all roles full access, then strict once any row exists" rule that `matrix-hrms` still uses; `matrix-hrms` is left unchanged and aligning it is a separate follow-up.
 
 ### App DB Client Setup
 
@@ -87,6 +91,38 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
 ```
 
 The `accessToken` hook injects the SSO JWT into every request. RLS policies read claims from `current_setting('request.jwt.claims')`.
+
+#### Provision Third-Party Auth on the App DB (REQUIRED)
+
+A freshly connected App DB project will **not** verify the SSO ES256 token until
+it has a **Third-Party Auth** integration registered against the SSO JWKS +
+issuer (same mechanism the CDL project uses). Without it, every App DB PostgREST
+query returns `401 PGRST301`. The app cannot self-provision this — it is
+per-project Supabase config and must be done once at setup (ADR-018).
+
+Canonical values (SSO project `xgubaguglsnokjyudgvc`):
+
+- OIDC Issuer URL: `https://xgubaguglsnokjyudgvc.supabase.co/auth/v1`
+- JWKS URL: `https://xgubaguglsnokjyudgvc.supabase.co/auth/v1/.well-known/jwks.json`
+
+Provision via the Dashboard (**Authentication → Third-Party Auth → Add
+integration**, custom OIDC) or the Management API:
+
+```http
+POST https://api.supabase.com/v1/projects/{APP_DB_REF}/config/auth/third-party-auth
+Authorization: Bearer {SUPABASE_PAT}
+Content-Type: application/json
+
+{
+  "oidc_issuer_url": "https://xgubaguglsnokjyudgvc.supabase.co/auth/v1",
+  "jwks_url": "https://xgubaguglsnokjyudgvc.supabase.co/auth/v1/.well-known/jwks.json"
+}
+```
+
+If PostgREST still returns `401 PGRST301` after registration, `DELETE` then
+re-`POST` the same integration to force a Data-API reload (~60–90s), then verify
+with a live request carrying a full SSO token. The template surfaces this as a
+first-run step in `WelcomeSetup.tsx` and `.lovable/instructions.md`.
 
 ### CDL Client Setup (for CDL-Connected Apps)
 
