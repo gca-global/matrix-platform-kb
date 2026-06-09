@@ -65,7 +65,7 @@ Portal **tile visibility is access-controlled** by the user's `allowed_apps` set
 
 ### CORE-exclusive apps
 
-Seven apps are reserved for the **`CORE Team`** role and are intentionally hidden from every other role:
+Eight apps are reserved for the **`CORE Team`** role and are intentionally hidden from every other role:
 
 | App | OAuth `client_id` |
 |---|---|
@@ -75,7 +75,8 @@ Seven apps are reserved for the **`CORE Team`** role and are intentionally hidde
 | Matrix Stardom | `372fff71-241c-4130-9f1f-614a3400b2a2` |
 | Matrix Comms | `WSvfGsovutXBHJfQOdL9uPA4TnMIIVrZ` |
 | Nyx Monitoring | `nyx-monitoring-vm-sso-v1` |
-| Matrix Analytics | `_NYgDsKEXCi_lczJpgx2R2U8.WxG7pN1` |
+| Matrix Analytics 2.0 | `0c4ad723-0814-4a71-a6e1-63031be4ff5c` |
+| IT Service & Asset Management (ITSM 2.1) | `n~~I~WvqoL3FuQ_nj~G6LClHKED1HsDK` |
 
 ### Universal apps (available to all roles)
 
