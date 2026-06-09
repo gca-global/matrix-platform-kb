@@ -105,8 +105,17 @@ Canonical values (SSO project `xgubaguglsnokjyudgvc`):
 - OIDC Issuer URL: `https://xgubaguglsnokjyudgvc.supabase.co/auth/v1`
 - JWKS URL: `https://xgubaguglsnokjyudgvc.supabase.co/auth/v1/.well-known/jwks.json`
 
-Provision via the Dashboard (**Authentication → Third-Party Auth → Add
-integration**, custom OIDC) or the Management API:
+**What does NOT work.** `config.toml` cannot configure TPA — in the Lovable flow
+it only controls Edge Function `verify_jwt`, and `[auth.third_party.*]` supports
+only the named providers `firebase` / `auth0` / `aws_cognito` (no generic
+issuer/JWKS block). The Dashboard's **Custom OIDC Providers** is also the wrong
+feature: it is a *relying-party login* flow (`signInWithOAuth({ provider:
+'custom:...' })`) that mints a second App-DB session/token and breaks the
+single-SSO-token + RLS model. The **Third-Party Auth** section is correct, but
+its dashboard UI only lists the named providers and cannot take our Supabase
+issuer (see [supabase/supabase#28743](https://github.com/supabase/supabase/issues/28743)).
+
+The provisioning action is a single Management API call:
 
 ```http
 POST https://api.supabase.com/v1/projects/{APP_DB_REF}/config/auth/third-party-auth
@@ -119,10 +128,22 @@ Content-Type: application/json
 }
 ```
 
+Because Lovable has no terminal, the template delivers this as a **one-time
+bootstrap Edge Function** (`bootstrap-tpa`) that calls the Management API from
+inside Lovable using a `SUPABASE_MANAGEMENT_PAT` secret, gated by a setup token —
+**invoke once, then delete the function and rotate the PAT**. A raw `curl` to the
+same endpoint is the manual fallback. The snippet lives in `.lovable/instructions.md`
+("Third-Party Auth on the App DB (REQUIRED)") and the first-run flow is surfaced
+in `WelcomeSetup.tsx`.
+
 If PostgREST still returns `401 PGRST301` after registration, `DELETE` then
 re-`POST` the same integration to force a Data-API reload (~60–90s), then verify
-with a live request carrying a full SSO token. The template surfaces this as a
-first-run step in `WelcomeSetup.tsx` and `.lovable/instructions.md`.
+with a live request carrying a full SSO token.
+
+**Verified working** on the HU app's App DB (`zgiuaghfsiuxtzmfmgpa`): the
+Management API resolved the SSO ES256 keys, and a live logged-in SSO token
+against the App DB returned `404` (table missing), not `401 PGRST301`, confirming
+the token is trusted.
 
 ### CDL Client Setup (for CDL-Connected Apps)
 
