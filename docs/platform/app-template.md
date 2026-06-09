@@ -130,7 +130,7 @@ Content-Type: application/json
 
 Because Lovable has no terminal, the template delivers this as a **one-time
 bootstrap Edge Function** (`bootstrap-tpa`) that calls the Management API from
-inside Lovable using a `SUPABASE_MANAGEMENT_PAT` secret — a **Supabase Personal
+inside Lovable using a `SB_ACCESS_TOKEN` secret — a **Supabase Personal
 Access Token** generated at Account → Access Tokens
 (`https://supabase.com/dashboard/account/tokens`) — gated by the project's
 auto-injected `service_role` key (no extra token to generate) —
