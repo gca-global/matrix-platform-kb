@@ -224,7 +224,7 @@ This is a strict intersection with **no admin bypass** — a `system_admin` who 
 
 **Scope of enforcement.** This controls **tile visibility**, not deep-link authorization. `oauth-authorize` still gates the actual app launch on the coarse `rw_*` / `app_access` permissions, so `allowed_apps` is the discoverability/visibility layer rather than a hard per-app launch gate. Apps requiring a hard block must enforce it inside their own `ProtectedRoute` / RLS.
 
-**CORE-exclusive policy.** Six apps (HRMS, Matrix FM, Management Console, Matrix Stardom, Matrix Comms, Nyx Monitoring) are present only in the `CORE Team` role's `apps_allowed`; three apps (Portal, New Client Registration, Appointment Reports) are backfilled into every role. See [app-catalog.md — App Access Control](app-catalog.md#app-access-control-portal-tile-visibility) for the full `client_id` mapping.
+**CORE-exclusive policy.** Seven apps (HRMS, Matrix FM, Management Console, Matrix Stardom, Matrix Comms, Nyx Monitoring, Matrix Analytics) are present only in the `CORE Team` role's `apps_allowed`; three apps (Portal, New Client Registration, Appointment Reports) are backfilled into every role. See [app-catalog.md — App Access Control](app-catalog.md#app-access-control-portal-tile-visibility) for the full `client_id` mapping.
 
 ## RLS Helper Functions
 
