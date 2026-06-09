@@ -130,8 +130,10 @@ Content-Type: application/json
 
 Because Lovable has no terminal, the template delivers this as a **one-time
 bootstrap Edge Function** (`bootstrap-tpa`) that calls the Management API from
-inside Lovable using a `SUPABASE_MANAGEMENT_PAT` secret, gated by a setup token —
-**invoke once, then delete the function and rotate the PAT**. A raw `curl` to the
+inside Lovable using a `SUPABASE_MANAGEMENT_PAT` secret, gated by the project's
+auto-injected `service_role` key (no extra token to generate) —
+**invoke once, then delete the function and rotate the PAT**. A non-technical user
+just asks the assistant to "finish connecting SSO"; the assistant runs it. A raw `curl` to the
 same endpoint is the manual fallback. The snippet lives in `.lovable/instructions.md`
 ("Third-Party Auth on the App DB (REQUIRED)") and the first-run flow is surfaced
 in `WelcomeSetup.tsx`.
