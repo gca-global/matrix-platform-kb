@@ -59,7 +59,7 @@ Meeting Hub supports four types of appointments:
    - **Client name** (type to search existing clients, or add new)
    - **Outcome** (free-text description of the meeting result)
    - Type-specific fields (see below)
-   - **Client Questionnaire** (buyer appointments only — see below)
+   - **Client Questionnaire** (all appointment types — see below)
    - **Notes** — any interesting details
 4. Click **Submit Report**.
 
@@ -82,14 +82,17 @@ Meeting Hub supports four types of appointments:
 #### Landlord Appointment Fields
 - **Monthly rent** — expected monthly rental income
 
-#### Client Questionnaire (Buyer Appointments Only)
-The questionnaire is only shown for buyer appointments. It includes:
+#### Client Questionnaire (All Appointment Types)
+The questionnaire is shown for all appointment types (Buyer, Seller, Tenant, Landlord). When marked as a first appointment it captures client demographics:
 - Is this the client's first appointment?
+- Age
 - Country of origin
 - Country of residence
 - Occupation
 - Family status
-- Reason to buy — options: Cyprus Permanent Residency Investment, Holiday home, Relocation, Education for children, Tax residency, Other
+- Reason to buy (buyer appointments only) — options: Cyprus Permanent Residency Investment, Holiday home, Relocation, Education for children, Tax residency, Other
+
+These demographic fields feed the **Client Demographics** report and are available as optional columns in the custom Report Builder (see Reports below).
 
 ### Voice Input (AI Form Fill)
 
@@ -154,6 +157,8 @@ Meeting Hub includes a powerful Report Builder:
    - **Developer Report** — developer and project activity
    - **Conversion Funnel** — lead-to-appointment conversion tracking
    - **Outcome Analysis** — success rates and follow-up needs
+   - **Client Interests by Region** — reason for buying broken down by region
+   - **Client Demographics** — age bands, country of origin, occupation and family status of first-meeting clients
 3. Configure filters (date range, broker, type).
 4. View the report.
 5. **Export to Excel** if needed.
@@ -203,7 +208,7 @@ A: Yes. Go to All Appointments, find it, click Edit, make changes, and click Upd
 A: Yes, but be careful — deleted appointments cannot be recovered.
 
 **Q: What is the Client Questionnaire?**
-A: A section on buyer appointment forms where you record client background information: country of origin, residence, occupation, family status, and reason to buy. This data helps with analytics and marketing. The questionnaire is shown for buyer appointments only.
+A: A section on every appointment form (Buyer, Seller, Tenant, Landlord) where you record client demographic information: age, country of origin, country of residence, occupation, and family status (plus reason to buy on buyer appointments). This data helps with analytics and marketing, and powers the Client Demographics report.
 
 **Q: What does "Reservation" mean in a Buyer Showing?**
 A: It indicates whether the client reserved (put a hold on) a property during the showing. If yes, you can also record the contract value.
@@ -326,7 +331,7 @@ Report the issue using the standard incident template — see [How to Report an 
 6. Add **developers visited** and **projects** if applicable.
 7. Set **Reservation**: Yes/No. If Yes, enter the contract value.
 8. Write an **outcome** — this is a free-text field where you describe the result (e.g., "Client interested in sea view apartments, wants second viewing next week").
-9. Fill in the **Client Questionnaire** (buyer appointments only).
+9. Fill in the **Client Questionnaire** (all appointment types) — including age, country, occupation and family status for first meetings.
 10. Add any **notes** about the meeting.
 11. Click **Submit Report**.
 
@@ -397,7 +402,7 @@ Report the issue using the standard incident template — see [How to Report an 
 
 - **Record appointments the same day** — details are freshest right after the meeting. Voice input makes this quick even from your phone.
 - **Always fill in budget** — even an approximate range helps analytics and reports immensely.
-- **Complete the Client Questionnaire on first meetings** — country of origin, occupation, family status, and how they found you provide valuable marketing insights.
+- **Complete the Client Questionnaire on first meetings** — age, country of origin, country of residence, occupation, and family status provide valuable marketing insights and feed the Client Demographics report.
 - **Use the client name autocomplete** — type a few characters and select from the list. This links the appointment to an existing contact.
 - **Check your Dashboard daily** — the stat cards show your current totals. If something looks off, check whether an appointment was saved correctly.
 - **Add developer names for new-build showings** — the "Developers Visited" and "Projects Viewed" fields help track which developments are getting the most interest.
