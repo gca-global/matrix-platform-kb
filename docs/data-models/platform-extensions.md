@@ -53,6 +53,12 @@
 |----------------|-----------|--------|-----------------|---------------|------|
 | x_contact_key | String | Buyer `Contact.ContactKey` attached to a Showing / ShowingAppointment / ShowingRequest. RESO DD 2.0 has no `ShowingContactKey` (Showing models the agent + listing, not a buyer contact) — see [ADR-022](../architecture/decisions/ADR-022.md). Loose witness (no FK); indexed; in the `cdl-read` filterable allow-list; not exported to any outbound RESO/Dash channel. **Scope:** used only where a process row has NO canonical Contact junction (showings). The **transaction** buyer is NOT modeled with `x_contact_key` — it uses the canonical **`ContactListings`** junction (`contact_key` + `listing_key`) per [ADR-026](../architecture/decisions/ADR-026.md). | — (custom) | — (custom) | Pipeline (Broker) |
 
+### Transaction Extensions
+
+| Extension Field | Data Type | Reason | SIR Source Field | Qobrix Source | Apps |
+|----------------|-----------|--------|-----------------|---------------|------|
+| x_transaction_key | String | `TransactionManagement.TransactionKey` attached to a `HistoryTransactional` event so transaction-phase events / documents / commission can be queried by transaction. RESO DD 2.0 defines **no** linkage for `TransactionManagement` (bare 4-field header, zero FKs) and `HistoryTransactional.ResourceName` cannot anchor on it — see [ADR-030](../architecture/decisions/ADR-030.md). Promotes the link out of `HistoryTransactional.raw` (ADR-026 as-built) into a governed, indexed extension. Loose witness (no FK); in the `cdl-read` filterable allow-list; not exported to any outbound RESO/Dash channel. **Scope:** transaction *identity* only — the transaction **buyer** stays canonical via `ContactListings` (`contact_key` + `listing_key`), NOT an `x_` column. | — (custom) | — (custom) | Pipeline (Broker) |
+
 ### Member Extensions
 
 | Extension Field | Data Type | Reason | SIR Source Field | Qobrix Source | Apps |
@@ -108,10 +114,11 @@ These are registered as platform-specific lookup values:
 | Extension fields (Property) | 17 |
 | Extension fields (Contact) | 3 |
 | Extension fields (Showing) | 1 |
+| Extension fields (Transaction) | 1 |
 | Extension fields (Member) | 1 |
 | Extension lookup values (PropertySubType) | 10 |
 | Extension lookup values (ScheduleType) | 3 |
-| **Total extensions** | **35** |
+| **Total extensions** | **36** |
 
 > Materialized in CDL today (the rest are spec-only): `properties.x_property_name` (+ `properties_published.x_property_name`, added 2026-06-05 by `20260605170000_add_x_property_name_to_properties_published.sql`), `contacts.x_privacy_level`, and `x_contact_key` on `showings` / `showing` / `showing_request`. The `x_privacy_level` / `x_contact_key` columns were renamed from the legacy `x_sm_` prefix by migration `20260605160000_rename_x_sm_extensions_to_x.sql` ([ADR-023](../architecture/decisions/ADR-023.md)).
 

@@ -35,3 +35,4 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-027](ADR-027.md) | Console-managed Third-Party Auth provisioning for own-DB apps | Accepted |
 | [ADR-028](ADR-028.md) | CRM-internal Commission Engine (ERP-lite); app-private, per-country rules, role-config + JWT-scope authz, Finance-ERP reconciliation | Accepted |
 | [ADR-029](ADR-029.md) | "Contract agreed" = Pending edge; close = settlement; pipeline stage projection; per-country collection anchor | Accepted |
+| [ADR-030](ADR-030.md) | Promote transaction linkage from `HistoryTransactional.raw` to a governed `x_transaction_key` extension | Proposed |
