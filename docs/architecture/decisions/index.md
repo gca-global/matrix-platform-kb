@@ -33,4 +33,4 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-025](ADR-025.md) | Referral + Document as project-flavour CDL resources; offer-economics deferred (zero-`x_`) | Accepted |
 | [ADR-026](ADR-026.md) | Event-sourced transaction model on canonical homes; Pipeline owns the Property transaction phase | Accepted |
 | [ADR-027](ADR-027.md) | Console-managed Third-Party Auth provisioning for own-DB apps | Accepted |
-| [ADR-028](ADR-028.md) | CRM-internal Commission Engine (ERP-lite); app-private, role-config + JWT-scope authz, Finance-ERP reconciliation | Accepted |
+| [ADR-028](ADR-028.md) | CRM-internal Commission Engine (ERP-lite); app-private, per-country rules, role-config + JWT-scope authz, Finance-ERP reconciliation | Accepted |
