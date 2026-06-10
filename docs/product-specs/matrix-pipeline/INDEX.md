@@ -139,7 +139,7 @@
 
 - `#overview` — Business goal (sales-broker P&L visibility)
 - `#scope` — Inside CRM (forecast + rule) vs outside (Finance ERP for actuals)
-- `#data-model-stub` — Conceptual entities (DealCostEvent, CostRateCard, CommissionRule, DealPnL, BrokerCompensation) — design completed during Phase 5 in Lovable
+- `#data-model-stub` — As-built app-private tables (`deal_cost_event`, `cost_rate_card`, `commission_rule`, `commission_estimate` [conceptual `DealPnL`], `broker_compensation`); shipped Week 5, see ADR-028
 - `#reconciliation` — Variance vs external Finance ERP
 - `#deviation` — Why this is in CRM (escape hatch reference)
 

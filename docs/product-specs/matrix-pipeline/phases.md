@@ -291,6 +291,8 @@ Demo: record a referral from a prior happy client; auto-set the referee's `LeadS
 
 Demo: open the pipeline view, see every active `(Contacts × SavedSearch)` placed in its derived stage, drill into one, see the forecast P&L + per-broker compensation; later, simulate a Finance ERP webhook (actual GCI) and see variance flow back onto the TM card.
 
+> **AS-BUILT (2026-06-10) — read [ADR-028](../../architecture/decisions/ADR-028.md#implementation-status-as-built) + [log.md](log.md) for the shipped state.** Deltas from the plan text below: (1) the per-`transaction_key` **`deal_pnl`** table was **generalized to the per-listing/sales-contract `commission_estimate`** (subject = `listing_key`); (2) the Commission Engine is a **per-country customization** (country-scoped, date-versioned `commission_rule`; **Hungary** published ≡ `FalkMiksa.xlsx`, CY/KZ drafts); (3) the `finance-erp-webhook` emits **`change_type = 'Actual GCI received'`** (there is **no** `major_change_type` column); (4) **the SSO permission keys `pipeline:commission:*` were intentionally NOT implemented** — authz is `role_configurations` page/action keys (`commission:admin`) + CDL JWT scope (ADR-025/ADR-028). The two Finance-ERP EFs are deployed to the Pipeline App DB project `kzvhqgpedapzqmwgikrw`.
+
 ### Lovable {#week-5-lovable}
 
 - (~2 h) `/pipeline` Kanban view: five canonical columns (Qualification / Matching / Showing / Contracting / Closed), each card = one `(Contacts × SavedSearch)`. **No `pipeline_stages` table** — the projection is a view per [wiki/overview.md#pipeline](wiki/overview.md#pipeline) + [FR-FNL-01..06](wiki/requirements.md#fr-fnl-funnel-canonical).

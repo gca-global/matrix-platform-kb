@@ -139,6 +139,8 @@ Every state transition relevant to canonical RESO processes MUST emit a `History
 | `ChangedByMemberKey` | `Member` (if a human initiated) or a system actor |
 | `ChangeSource` | Manual / AI suggested + approved / External webhook (contract system, finance ERP) |
 
+> **Physical mapping (CDL `public.history_transactional`).** The fields above are the *conceptual* RESO payload. The physical CDL table has **`change_type`** (text; RESO DD 2.0 defines only `ChangeType`, **not** a `MajorChangeType` column), `modification_timestamp` (= `ChangeTimestamp`), `entity_event_sequence`, `changed_by_member_key`, `resource_name`, `resource_record_key`, `new_value`/`previous_value`, and a `raw jsonb` envelope. `MajorChangeType` here is a **doc-level grouping concept only** — do NOT write a `major_change_type` column. By platform convention `change_type` carries a **descriptive string** (e.g. `Closed Won`, `Actual GCI received`), not strictly the RESO 13-value closed lookup. `cdl-write` auto-derives the `NOT NULL` `source_history_transactional_key` + `history_transactional_key`, so emitters supply only `resource_name`/`resource_record_key`/`change_type`/`new_value`/`previous_value`/`raw`.
+
 Emission is mandatory for:
 
 - any `Contacts.ContactType` graduation;
@@ -172,7 +174,9 @@ Source: raw/context-v2.md §10.8.
 
 The commission ledger lives in the **external Finance ERP** as the single source of truth for actual money flow (legally significant register of earned and paid commissions, taxes, currency conversion, invoices, bank details). CRM has its own ERP-lite subsystem ([wiki/commission-engine.md](commission-engine.md)) that holds **forecast GCI and the rule engine as an advisory tool** for the sales broker; the two systems are independent and connected via the reconciliation pattern below.
 
-**Pattern**: the external ERP pushes a webhook (e.g. `commission_recorded`) with actual GCI and the final commission split; CRM ingests the actual into the Commission Engine, re-runs compensation derivation, computes variance (forecast vs actual), and on threshold breach emits a `HistoryTransactional` row + an `Activity` notification for the responsible `Member` / sales manager. The concrete handler (events, payload schema, thresholds, ChangeTypes) is designed in Lovable.
+**Pattern**: the external ERP pushes a webhook (e.g. `commission_recorded`) with actual GCI and the final commission split; CRM ingests the actual into the Commission Engine, re-runs compensation derivation, computes variance (forecast vs actual), and on threshold breach emits a `HistoryTransactional` row + an `Activity` notification for the responsible `Member` / sales manager.
+
+**As-built (2026-06-10, [ADR-028](../../../architecture/decisions/ADR-028.md)).** The concrete handler is the Cursor-built **`finance-erp-webhook`** Edge Function on the Pipeline App DB project (`kzvhqgpedapzqmwgikrw`; `verify_jwt=false` + in-code shared-secret auth via `FINANCE_ERP_WEBHOOK_SECRET`, `timingSafeEqual`). It writes `commission_estimate.actual_gci` (keyed by `listing_key` + `transaction_key`), recomputes `variance`, and emits the `HistoryTransactional` row on the linked `Property` via `cdl-write` (`change_type = 'Actual GCI received'`; CRM never holds the CDL service-role key — it authenticates to `cdl-write` with `CDL_INTERNAL_SECRET`, which **must equal** the CDL project's `INTERNAL_RESUME_SECRET`). A companion **`finance-erp-reconcile`** EF (daily `pg_cron`) flags closed transactions still missing `actual_gci`. Contract + env vars: `matrix-pipeline-2-0/supabase/functions/finance-erp-webhook/README.md`.
 
 **Closed Won gating** ([wiki/overview.md#pipeline](overview.md#pipeline)): `Property.StandardStatus = Closed` + full-payment webhook from ERP ([#finance-erp-payments](#finance-erp-payments)) + an existing `TransactionManagement` row + reconciliation in [wiki/commission-engine.md](commission-engine.md) completed.
 
