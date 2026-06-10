@@ -78,8 +78,8 @@ tables / EFs the outcome needs), `target_horizon` (quarter — secondary), `stat
 | id | outcome | delivers | canonical_deps | horizon | status | owner | updated |
 |---|---|---|---|---|---|---|---|
 | `O-INTENT-MATCHING` | Parallel intents + prospecting + curated matching; engagement tracked | BR-09 / BR-18 / BR-19; `FR-SS-*` / `FR-PROS-*` / `FR-CL-*` | `saved_search`, `prospecting`, `contact_listings` | Q3 2026 | planned | Lovable | 2026-05-29 |
-| `O-PIPELINE-PROJECTION` | Transparent 5-stage pipeline derived from canonical state (no stored stage) | BR-03; `FR-FNL-*` | derived (no table) | Q4 2026 | planned | Lovable | 2026-05-29 |
-| `O-COMMISSION-FORECAST` | GCI/commission forecast per deal & stage; 100% deals against a published `CommissionRule` | BR-04; `FR-FNL-12` / `FR-TM-13` + Commission Engine | `transaction_management` + app-private economics | Q4 2026 | planned | Lovable | 2026-05-29 |
+| `O-PIPELINE-PROJECTION` | Transparent 5-stage pipeline derived from canonical state (no stored stage) | BR-03; `FR-FNL-*` | derived (no table) | Q4 2026 | in-progress | Lovable | 2026-06-10 |
+| `O-COMMISSION-FORECAST` | GCI/commission forecast per deal & stage; 100% deals against a published `CommissionRule` | BR-04; `FR-FNL-12` / `FR-TM-13` + Commission Engine | `transaction_management` + app-private economics | Q4 2026 | in-progress | Lovable+Cursor | 2026-06-10 |
 
 ### KPI group: Contracts, commissions, payments
 
@@ -93,7 +93,9 @@ tables / EFs the outcome needs), `target_horizon` (quarter — secondary), `stat
 
 | id | outcome | delivers | canonical_deps | horizon | status | owner | updated |
 |---|---|---|---|---|---|---|---|
-| `O-CLIENT-PRIVACY` | HNWI/UHNWI confidentiality, RLS Pattern B, NDA levels, client-base integrity across team changes | BR-07 / BR-08 / BR-16; `FR-CON` privacy / `FR-DOC-*` | RLS Pattern B on the 4 critical CDL tables | Q1 2027 | planned | platform-team | 2026-05-29 |
+| `O-CLIENT-PRIVACY` | HNWI/UHNWI confidentiality, RLS Pattern B, NDA levels, client-base integrity across team changes | BR-07 / BR-08 / BR-16; `FR-CON` privacy / `FR-DOC-*` | RLS Pattern B on the 4 critical CDL tables | Q1 2027 | planned | platform-team | 2026-06-10 |
+
+> **`O-CLIENT-PRIVACY` note (2026-06-10, verified live on `ofzcokolkeejgqfjaszq`).** Risk **R2** (anon/authenticated exposure of engagement PII) is **already closed**: `contacts`, `contact_listings`, `contact_listing_notes` all have RLS **enabled** with a single `service_role`-only `ALL` policy — direct anon/authenticated access is denied; the `cdl-*` EFs (service-role inside, SSO-JWT scope check) are the only gate. A true owner-scoped **Pattern B** on these tables is **blocked on R3**: `contact_listings`/`contact_listing_notes` have **no `owner_id`/`tenant_id`/owner column** and there is no SSO-user → `member_key` mapping, so the Pattern B `owner_id = get_my_record_id_v2()` clamp cannot be expressed; adding a permissive `authenticated` policy without the clamp would *weaken* the current posture. Pattern B here therefore waits on the `O-ROSTER` / member_key-mapping work (ADR-015 #5), not on a fresh migration.
 
 ### KPI group: Analytics & platform capabilities
 
@@ -143,7 +145,7 @@ timeline
 | `O-LEAD-REACTION` | Contact funnel & lead reaction | `FR-CFL` / `FR-ACT` | [wiki/integration.md#history-emission](wiki/integration.md#history-emission) | — |
 | `O-INTENT-MATCHING` | Pipeline & forecast | `FR-SS` / `FR-PROS` / `FR-CL` | [wiki/entities.md](wiki/entities.md) | ADR-016 |
 | `O-PIPELINE-PROJECTION` | Pipeline & forecast | `FR-FNL` | [wiki/overview.md#pipeline](wiki/overview.md#pipeline) | — |
-| `O-COMMISSION-FORECAST` | Pipeline & forecast | `FR-FNL-12` / `FR-TM-13` | [wiki/commission-engine.md](wiki/commission-engine.md) | — |
+| `O-COMMISSION-FORECAST` | Pipeline & forecast | `FR-FNL-12` / `FR-TM-13` | [wiki/commission-engine.md](wiki/commission-engine.md) | ADR-028 |
 | `O-SHOWING-ENGAGEMENT` | Contracts, commissions, payments | `FR-SHOW` / `FR-CARA` / `FR-CL` | [wiki/architecture.md#phase-2-migration](wiki/architecture.md#phase-2-migration) | ADR-016 |
 | `O-TRANSACTION-CLOSE` | Contracts, commissions, payments | `FR-TM` | [wiki/integration.md](wiki/integration.md) | — |
 | `O-REFERRAL` | Contracts, commissions, payments | `FR-REF` | [wiki/entities.md#referral](wiki/entities.md#referral) | ADR-crm-referral-entity |
@@ -174,6 +176,7 @@ timeline
 
 ## Update history (append-only; mirrors log.md `roadmap` entries — 5 most recent)
 
+- **2026-06-10** — Week-5 kickoff (skip AI/Week-6). `O-PIPELINE-PROJECTION` + `O-COMMISSION-FORECAST` → `in-progress`. **ADR-028** (CRM Commission Engine — app-private ERP-lite; `role_configurations`+JWT-scope authz, **no** `sso_app_permissions`; Finance-ERP reconciliation via `finance-erp-webhook`/`-reconcile`) landed. Verified-live finding on `O-CLIENT-PRIVACY`: R2 already closed (service-role-only RLS on `contacts`/`contact_listings`/`contact_listing_notes`); true Pattern B owner-clamp blocked on R3 (no owner column + no member_key mapping). See log.md.
 - **2026-05-29** — `O-CDL-CANON` → `done`. Both CDL migrations applied to
   `ofzcokolkeejgqfjaszq`; 11 tables RLS-enabled (gate violation on
   `contact_listings`/`contact_listing_notes` closed); `cdl-write` (v2) +
