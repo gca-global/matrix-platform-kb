@@ -98,6 +98,8 @@ flowchart LR
 
 **Closed Won gating** ([wiki/overview.md#pipeline](overview.md#pipeline)): `Property.StandardStatus = Closed` + full-payment webhook from ERP ([wiki/integration.md#finance-erp-payments](integration.md#finance-erp-payments)) + an existing `TransactionManagement` row + reconciliation in this subsystem completed.
 
+**Collection anchor (ADR-029)**: commission **collection opens at the agreement event** (`Property.PurchaseContractDate` set — contract signed / "deal won"), while **reconciliation finalizes at canonical `Closed`** (settlement; `finance-erp-webhook` writes `commission_estimate.actual_gci` at close, unchanged). The anchor is a **per-country `commission_rule` param** (CY: invoice at CoS signing; HU: sikerdíj at final contract; KZ: default — signing-to-registration gap is days). See [ADR-029](../../../architecture/decisions/ADR-029.md).
+
 **What CRM does NOT do**:
 
 - Maintain a legally significant ledger.

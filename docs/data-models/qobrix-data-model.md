@@ -30,7 +30,7 @@ Qobrix is the legacy CRM Sharp SIR uses today for Cyprus brokers. The Sharp Matr
 | Opportunity | HistoryTransactional | Deal/pipeline data; RESO doesn't have a direct "Opportunity" equivalent |
 | Property Viewing | ShowingAppointment | Viewing records; add `outlook_event_id` for Outlook calendar sync |
 | Task | — | No direct RESO equivalent; platform extension needed |
-| Contract | — | No direct RESO equivalent; platform extension needed |
+| Contract | `Property` close fields + `ContactListings` + `Property.ListingAgreement` | Hybrid decomposition per [ADR-029](../architecture/decisions/ADR-029.md): `cos`/`tenancy_agreement` → `PurchaseContractDate`/`CloseDate`/`ClosePrice` + parties → `ContactListings`, commission block → app-private `commission_estimate`; `listing_for_sale`/`listing_for_rent` (mandates) → `ListingAgreement` + `ListingContractDate`; `property_management` + PDFs → ADR-025 `document` |
 | Offer | — | No direct RESO equivalent; platform extension needed |
 | Media | Media | Photo/video/document records |
 | Project | — | Development projects; platform extension needed |
@@ -130,7 +130,9 @@ All follow-up tasks, reminders, and action items.
 
 ### Contracts (Agreements)
 
-Listing agreements, purchase contracts.
+Listing agreements, purchase contracts. One overloaded entity (`contract_type`: `cos`, `tenancy_agreement`, `listing_for_sale`, `listing_for_rent`, `property_management`).
+
+**Status-model caveat** ([ADR-029](../architecture/decisions/ADR-029.md)): `contract_status` terminates at `agreed` (`reserved | cancelled | agreed`) — Qobrix has no settlement state and operationally treated "agreed" as "deal closed". Canonically, **`agreed` maps to the `Pending` edge** (`PurchaseContractDate`), NOT to `Closed`; settlement (final payment + possession) is the `Closed` edge. Conveyance (`title_deed_status`) stays a project-flavour tracker. Cancellation maps deterministically: `date_of_contract IS NULL` → no canonical event; otherwise → `Back On Market`.
 
 ### Offers
 

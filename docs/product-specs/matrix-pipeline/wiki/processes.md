@@ -2,7 +2,7 @@
 title: Business processes
 status: stable
 source: raw/context-v2.md §6, §9.4, §9.11a (referral lifecycle)
-last_updated: 2026-05-26
+last_updated: 2026-06-10
 tags: [process]
 ---
 
@@ -138,6 +138,15 @@ flowchart LR
 - Payment events arrive via webhook from Finance ERP (see [wiki/integration.md#finance-erp-payments](integration.md#finance-erp-payments)) → `Property.StandardStatus` transitions (deposit / partial → Pending; full → Closed) + `HistoryTransactional`.
 - **Closed Won** = `Property.StandardStatus = Closed`, `CloseDate`, `ClosePrice`, `HistoryTransactional` (`ChangeType = Closed`).
 - **Closed Lost** is possible at any stage — `HistoryTransactional` rows record the reason (lost reason); `Property.StandardStatus` returns to Active or transitions to Withdrawn depending on the situation.
+
+### Stage projection & collection anchor (ADR-029)
+
+Per [ADR-029](../../../architecture/decisions/ADR-029.md), the broker-facing funnel stage is a **projection**, not a stored column, and the two "closed" notions are kept distinct:
+
+- Stage **"Closed" (deal won)** = `Property.PurchaseContractDate IS NOT NULL` — fires at contract signing (`acceptOffer` → `Pending`). This matches commercial practice in CY/HU/KZ (commission earned at CoS / adásvételi signing).
+- **"Settled"** (badge/substate) = canonical `Property.StandardStatus = Closed` — fires at settlement (final payment + possession), via `closeDeal`. RESO `CloseDate` means settlement, NOT title-deed registration (CY title deeds may lag years and are tracked project-flavour only).
+- **Commission collection** opens at the agreement event and reconciliation finalizes at canonical `Closed`; the anchor is a per-country rule param in the Commission Engine (see [wiki/commission-engine.md#reconciliation](commission-engine.md#reconciliation)).
+- UI and reports MUST label "Deal won" vs "Settled" explicitly.
 
 Source: raw/context-v2.md §6.5. KB process: [`canonical-processes/processes/transaction-lifecycle.md`](../../../business-processes/canonical-processes/processes/transaction-lifecycle.md).
 
