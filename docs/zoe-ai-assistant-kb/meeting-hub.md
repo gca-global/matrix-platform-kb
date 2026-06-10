@@ -89,7 +89,7 @@ The questionnaire is shown for all appointment types (Buyer, Seller, Tenant, Lan
 - Country of origin
 - Country of residence
 - Occupation
-- Family status
+- Marital status
 - Reason to buy (buyer appointments only) — options: Cyprus Permanent Residency Investment, Holiday home, Relocation, Education for children, Tax residency, Other
 
 These demographic fields feed the **Client Demographics** report and are available as optional columns in the custom Report Builder (see Reports below).
@@ -158,7 +158,7 @@ Meeting Hub includes a powerful Report Builder:
    - **Conversion Funnel** — lead-to-appointment conversion tracking
    - **Outcome Analysis** — success rates and follow-up needs
    - **Client Interests by Region** — reason for buying broken down by region
-   - **Client Demographics** — age bands, country of origin, occupation and family status of first-meeting clients
+   - **Client Demographics** — age bands, country of origin, occupation and marital status of first-meeting clients
 3. Configure filters (date range, broker, type).
 4. View the report.
 5. **Export to Excel** if needed.
@@ -208,7 +208,7 @@ A: Yes. Go to All Appointments, find it, click Edit, make changes, and click Upd
 A: Yes, but be careful — deleted appointments cannot be recovered.
 
 **Q: What is the Client Questionnaire?**
-A: A section on every appointment form (Buyer, Seller, Tenant, Landlord) where you record client demographic information: age, country of origin, country of residence, occupation, and family status (plus reason to buy on buyer appointments). This data helps with analytics and marketing, and powers the Client Demographics report.
+A: A section on every appointment form (Buyer, Seller, Tenant, Landlord) where you record client demographic information: age, country of origin, country of residence, occupation, and marital status (plus reason to buy on buyer appointments). This data helps with analytics and marketing, and powers the Client Demographics report.
 
 **Q: What does "Reservation" mean in a Buyer Showing?**
 A: It indicates whether the client reserved (put a hold on) a property during the showing. If yes, you can also record the contract value.
@@ -331,7 +331,7 @@ Report the issue using the standard incident template — see [How to Report an 
 6. Add **developers visited** and **projects** if applicable.
 7. Set **Reservation**: Yes/No. If Yes, enter the contract value.
 8. Write an **outcome** — this is a free-text field where you describe the result (e.g., "Client interested in sea view apartments, wants second viewing next week").
-9. Fill in the **Client Questionnaire** (all appointment types) — including age, country, occupation and family status for first meetings.
+9. Fill in the **Client Questionnaire** (all appointment types) — including age, country, occupation and marital status for first meetings.
 10. Add any **notes** about the meeting.
 11. Click **Submit Report**.
 
@@ -402,7 +402,7 @@ Report the issue using the standard incident template — see [How to Report an 
 
 - **Record appointments the same day** — details are freshest right after the meeting. Voice input makes this quick even from your phone.
 - **Always fill in budget** — even an approximate range helps analytics and reports immensely.
-- **Complete the Client Questionnaire on first meetings** — age, country of origin, country of residence, occupation, and family status provide valuable marketing insights and feed the Client Demographics report.
+- **Complete the Client Questionnaire on first meetings** — age, country of origin, country of residence, occupation, and marital status provide valuable marketing insights and feed the Client Demographics report.
 - **Use the client name autocomplete** — type a few characters and select from the list. This links the appointment to an existing contact.
 - **Check your Dashboard daily** — the stat cards show your current totals. If something looks off, check whether an appointment was saved correctly.
 - **Add developer names for new-build showings** — the "Developers Visited" and "Projects Viewed" fields help track which developments are getting the most interest.
