@@ -78,8 +78,8 @@ tables / EFs the outcome needs), `target_horizon` (quarter — secondary), `stat
 | id | outcome | delivers | canonical_deps | horizon | status | owner | updated |
 |---|---|---|---|---|---|---|---|
 | `O-INTENT-MATCHING` | Parallel intents + prospecting + curated matching; engagement tracked | BR-09 / BR-18 / BR-19; `FR-SS-*` / `FR-PROS-*` / `FR-CL-*` | `saved_search`, `prospecting`, `contact_listings` | Q3 2026 | planned | Lovable | 2026-05-29 |
-| `O-PIPELINE-PROJECTION` | Transparent 5-stage pipeline derived from canonical state (no stored stage) | BR-03; `FR-FNL-*` | derived (no table) | Q4 2026 | in-progress | Lovable | 2026-06-10 |
-| `O-COMMISSION-FORECAST` | GCI/commission forecast per deal & stage; 100% deals against a published `CommissionRule` | BR-04; `FR-FNL-12` / `FR-TM-13` + Commission Engine | `transaction_management` + app-private economics | Q4 2026 | in-progress | Lovable+Cursor | 2026-06-10 |
+| `O-PIPELINE-PROJECTION` | Transparent 5-stage pipeline derived from canonical state (no stored stage) | BR-03; `FR-FNL-*` | derived (no table) | Q4 2026 | done | Lovable | 2026-06-10 |
+| `O-COMMISSION-FORECAST` | GCI/commission forecast per deal & stage; 100% deals against a published `CommissionRule` | BR-04; `FR-FNL-12` / `FR-TM-13` + Commission Engine | `commission_estimate` + `broker_compensation` + `commission_rule` (app-private) | Q4 2026 | done | Lovable+Cursor | 2026-06-10 |
 
 ### KPI group: Contracts, commissions, payments
 
@@ -176,6 +176,7 @@ timeline
 
 ## Update history (append-only; mirrors log.md `roadmap` entries — 5 most recent)
 
+- **2026-06-10** — Week-5 **functionally complete** (skip AI/Week-6). `O-PIPELINE-PROJECTION` + `O-COMMISSION-FORECAST` → **`done`**. Lovable Prompts 1–5 shipped (per-pair pipeline projection; per-country Commission Engine `commission_estimate`/`broker_compensation`/`commission_rule`/`deal_cost_event` + full **Hungary** waterfall ≡ `FalkMiksa.xlsx` with CY/KZ drafts; dual-currency P&L tab + date-versioned rule admin; variance card; `/reports/forecast` + `/reports/variance` live). Cursor C1 (authz = role-config + JWT scope, no SSO keys), C2 (`finance-erp-webhook` + `finance-erp-reconcile` deployed, app `de1e7b0`; operator sets secrets), C3 (RLS R2 closed / Pattern B gated on R3). **ADR-028 finalized** to as-built. Week-7 hardening (Prompts 6 Playwright / 7 seed / 8 polish+demo) still open. See log.md.
 - **2026-06-10** — Week-5 kickoff (skip AI/Week-6). `O-PIPELINE-PROJECTION` + `O-COMMISSION-FORECAST` → `in-progress`. **ADR-028** (CRM Commission Engine — app-private ERP-lite; `role_configurations`+JWT-scope authz, **no** `sso_app_permissions`; Finance-ERP reconciliation via `finance-erp-webhook`/`-reconcile`) landed. Verified-live finding on `O-CLIENT-PRIVACY`: R2 already closed (service-role-only RLS on `contacts`/`contact_listings`/`contact_listing_notes`); true Pattern B owner-clamp blocked on R3 (no owner column + no member_key mapping). See log.md.
 - **2026-05-29** — `O-CDL-CANON` → `done`. Both CDL migrations applied to
   `ofzcokolkeejgqfjaszq`; 11 tables RLS-enabled (gate violation on

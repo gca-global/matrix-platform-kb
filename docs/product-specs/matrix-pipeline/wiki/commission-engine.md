@@ -2,9 +2,11 @@
 title: Commission Engine — CRM-internal ERP-lite for sales-broker P&L
 status: stable
 source: raw/context-v2.md §9.15, §11.6
-last_updated: 2026-05-26
+last_updated: 2026-06-10
 tags: [commission-engine]
 ---
+
+> **As-built (2026-06-10).** This subsystem is now **implemented** in `matrix-pipeline` Week 5 — see [ADR-028](../../../architecture/decisions/ADR-028.md#implementation-status-as-built) for the shipped artefacts. The design below is preserved as the originating BRD; where it says "designed in Lovable during Phase 5", the **as-built** shape is: app-private tables `commission_estimate` (per **listing/sales-contract**, not per-`transaction_key` — replaces the conceptual `DealPnL`), `broker_compensation`, **country-scoped date-versioned `commission_rule`**, `deal_cost_event`, `cost_rate_card`. The first published jurisdiction is **Hungary**, computed by `src/lib/commission/compute.ts` to match `raw/Deal_Hungary_PL FalkMiksa.xlsx` exactly; Cyprus + Kazakhstan are drafts. Reconciliation runs through the `finance-erp-webhook` + `finance-erp-reconcile` EFs ([#reconciliation](#reconciliation)). Reports live at `/reports/forecast` + `/reports/variance`.
 
 # Commission Engine — CRM-internal ERP-lite for sales-broker P&L
 
@@ -43,21 +45,21 @@ Source: raw/context-v2.md §9.15.
 | Rule engine + admin UI to publish commission rules | ✓ | — |
 | Sales-broker advisory ("pursue / drop / escalate") | ✓ via FR-AI-MAR | — |
 
-## Data-model stub (designed in Lovable) {#data-model-stub}
+## Data model {#data-model-stub}
 
-Detailed schema, formulas, and FRs are designed in Lovable during Phase 5. Conceptual app-private entities cited across the BRD:
+**As-built** app-private tables in the Pipeline App DB (`kzvhqgpedapzqmwgikrw`), Pattern B RLS, authored by Lovable (Prompts 2 + 2b). The conceptual BRD names map as follows:
 
-| Entity | Role | Source-of-truth signal |
+| Table (as-built) | BRD concept | Role |
 |---|---|---|
-| `DealCostEvent` | A single attributed operational cost (legal hours, marketing spend, conference fee, showing logistics, negotiation effort, client-care, research, other) | Created by broker / sales manager / auto-derived from tagged `Activity` rows (see FR-ACT-10) |
-| `CostRateCard` | Reference rates (hourly, fixed, per-event) applied when a `DealCostEvent` doesn't carry a custom amount | Admin UI; rights `managing_partner` / `finance_admin` |
-| `CommissionRule` | Rule type definitions and parameters (PercentOfGCI / TierBased / SplitBased / BaseAndBonus / TeamOverride / Composite) | Admin UI; rights `managing_partner` / `compliance` / `finance_admin` |
-| `DealPnL` (computed view) | Per-`TransactionManagement` aggregate: forecast GCI, attributed costs, net margin | Derived from `TransactionManagement.OfferAmount` (or `SavedSearch` budget mid-point per FR-FNL-12) + `DealCostEvent` rows + applied `CommissionRule` |
-| `BrokerCompensation` (computed view) | Per-`Member` payout breakdown on a given deal | Derived from `DealPnL` + applied `CommissionRule` + linked `TeamMembers` |
+| `deal_cost_event` | `DealCostEvent` | A single attributed operational cost; `cost_category` enum (legal / marketing / conference / showing / negotiation / client_care / research / other + the Prompt-2b additions); manual or auto-derived from a tagged `Activity` (FR-ACT-10); keyed by `listing_key` (+ optional `transaction_key`) |
+| `cost_rate_card` | `CostRateCard` | Reference rates (optionally `country_code`-scoped) applied when a cost event carries no custom amount |
+| `commission_rule` | `CommissionRule` | **Country-scoped, date-versioned** rule: `country_code` (CY/HU/KZ), `rule_type`, `params jsonb` (jurisdiction formula — agency-fee %, VAT, statutory/referral/royalty/corporate-tax, tiers, splits), optional `office_id`/`property_type`, `effective_from`/`effective_to`, `priority`, `published_yn`. Admin UI = `CommissionRuleAdminPanel` gated by the `commission:admin` action key |
+| `commission_estimate` | `DealPnL` (generalized) | Per **listing/sales-contract** estimate (subject = `listing_key`; optional `transaction_key`/`contact_key`): resolved `country_code` + rule, `base_amount`/`base_source`, full waterfall (`gross_commission` → `net_commission` → referral → royalty → costs → gross profit → broker fees → PBT → corporate tax → net profit), `computation jsonb`, dual-currency FX, narrative + overrides; plus `actual_gci`/`variance` written server-side on reconciliation |
+| `broker_compensation` | `BrokerCompensation` | Per-`member_key` payout breakdown (net + gross) on the listing/deal |
 
-All FK references to canonical RESO keys (`TransactionManagementKey`, `PropertyKey`, `MemberKey`) are **logical pointers across projects**, not canonical RESO relationships.
+All references to canonical RESO keys (`listing_key`, `transaction_key`, `member_key`, `contact_key`) are **logical pointers across projects**, not DB foreign keys to CDL; CDL is **read-only** to the engine (broker-scope read EFs). A **rule resolver** picks the applicable `commission_rule` by `country_code` (derived from the listing's CDL attributes), optional `property_type`/`office_id`, today within `[effective_from, effective_to)`, highest `priority`, `published_yn`. The first published jurisdiction is **Hungary** (`compute.ts` ≡ `raw/Deal_Hungary_PL FalkMiksa.xlsx`); CY + KZ are drafts.
 
-Source: raw/context-v2.md §9.15.
+Source: raw/context-v2.md §9.15; [ADR-028](../../../architecture/decisions/ADR-028.md).
 
 ## High-level capabilities {#capabilities}
 
@@ -117,6 +119,6 @@ The external Finance ERP holds the legal ledger of actual money — not the oper
 
 Therefore the BRD accepts an **explicit project-flavour deviation**, scoped to CRM app DB, with a published escape-hatch entry — see [wiki/architecture.md#escape-hatch](architecture.md#escape-hatch).
 
-**Deliverable**: ADR `ADR-XXX: CRM Internal Commission Engine for Sales Brokers` in `matrix-platform-kb/docs/architecture/decisions/` (status TODO).
+**Deliverable** (done): [ADR-028](../../../architecture/decisions/ADR-028.md) — *CRM-internal Commission Engine (ERP-lite); app-private, per-country rules, role-config + JWT-scope authz, Finance-ERP reconciliation* — **Accepted + implemented** (2026-06-10).
 
 Source: raw/context-v2.md §11.6.
