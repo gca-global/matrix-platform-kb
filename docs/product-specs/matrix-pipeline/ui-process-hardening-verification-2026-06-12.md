@@ -25,11 +25,14 @@ Function; all canonical row mutations and `history_transactional` rows were obse
 The single material gap is the **commission waterfall**, which does not compute from
 the Deal P&L UI (blocks the commission-estimate / variance / finance-webhook chain).
 
-> **Remediation complete (2026-06-12)** — the full discrepancy backlog below has been
-> remediated under plan `pipeline_compliance_remediation`. See the
-> [§Remediation status](#remediation-status-2026-06-12) section for the per-finding
-> resolution. Code: `tsc`+`vite build` clean; CDL EFs redeployed (cdl-write v9,
-> cdl-listing-lifecycle v2); HU `commission_rule` de-duplicated to one published row.
+> **Remediation complete + P1 re-validated (2026-06-12)** — the full discrepancy backlog
+> below has been remediated under plan `pipeline_compliance_remediation`, and the P1
+> blocker (F-P6-1 commission waterfall) was **re-validated end-to-end through the staging
+> UI** (waterfall computes + `commission_estimate` persisted, keyed by the property's
+> `originating_system_key`). See [§Remediation status](#remediation-status-2026-06-12)
+> for the per-finding resolution and the runtime re-validation log. Code: `tsc`+`vite build`
+> clean; CDL EFs redeployed (cdl-write v9, cdl-listing-lifecycle v2); HU `commission_rule`
+> de-duplicated to one published row. **Week-7 sign-off gate cleared.**
 
 | Process | UI surface | EF | Verdict |
 |---|---|---|---|
@@ -130,8 +133,38 @@ CDL EFs → `matrix-platform-foundation`; this doc → `matrix-platform-kb`.
 | **F-P5-3** escrow lock | **KB clarification:** escrow is enforced via the EF's `cdl_lock_field`/`cdl_unlock_field` RPCs + status gating, not a stored `x_escrow_locked` column. No schema change. | `cdl-listing-lifecycle` |
 | **F-P4-7** caravan-run contact Activity | unchanged — broker-preview tours are property-only by design (not a defect) | — |
 
-Runtime UI re-validation on a fresh ZZ-UITEST thread is to follow once the git-watcher
-deploys the updated UI to `/pipeline/`.
+### Runtime re-validation (staging UI, post-deploy 2026-06-12)
+
+Re-run through the production UI (`/pipeline/`, Sergey Seregin / System Admin) against
+the watcher-deployed build, asserted via Supabase MCP (app DB `kzvhqgpedapzqmwgikrw`):
+
+- **F-P6-1 — CONFIRMED FIXED end-to-end.** Selected listing **14067** (Active, list
+  price EUR 1,800,000) as the Transactions subject. Deal P&L now resolves the property
+  by `originating_system_key`: the Deal narrative auto-fills **country: CY** and the
+  waterfall renders. With a published CY rule resolving, the full waterfall computed
+  (Gross EUR 72,000 → VAT −15,307 → Net 56,693 → Royalty −4,535 → Gross profit 52,157
+  → Broker fee −18,255 → PBT 33,902) and a `commission_estimate` row persisted, keyed
+  by `listing_key = QOBRIX_58fb319b-…` (i.e. the property's `originating_system_key` —
+  the exact key the old lookup missed) with `base_source=list_price`,
+  `commission_rule_id` set, and stored totals byte-matching the UI. Pre-fix this never
+  computed and wrote nothing.
+- **F-P6-2 — CONFIRMED.** `commission_rule` now has exactly **one** published row
+  (`HU default waterfall`); the two `(v2)` duplicates are unpublished. The new placeholder
+  copy ("No published commission rule resolves for CY. Add one under Country rules.")
+  rendered correctly when no CY rule was published — proving the property/country path
+  resolves and only the rule was absent.
+- **B5 / F-P5-2 — CONFIRMED (UI gating).** With the Active listing 14067 selected,
+  **Cancel deal** is disabled and **Close deal** enabled — the status-gated
+  `CancelDealAction` behaves as designed (cancel only for under-contract deals).
+- Test data created during the run (one temp published CY rule + the resulting
+  `commission_estimate`) was **fully removed**; post-run baseline restored
+  (`commission_estimate` = 0; one published rule = HU). The pre-existing CY/KZ drafts
+  were left untouched.
+
+Remaining backlog items (field-level history detail, provenance stamping, prospecting
+`next_send_timestamp`, note authorship) are code-verified and the CDL EFs are deployed
+(cdl-write v9); they can be exercised in a future golden-thread UI run but are not
+gating — the P1 blocker (F-P6-1) is closed.
 
 ## Test data lifecycle
 
