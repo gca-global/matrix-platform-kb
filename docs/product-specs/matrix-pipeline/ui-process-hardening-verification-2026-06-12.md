@@ -25,6 +25,12 @@ Function; all canonical row mutations and `history_transactional` rows were obse
 The single material gap is the **commission waterfall**, which does not compute from
 the Deal P&L UI (blocks the commission-estimate / variance / finance-webhook chain).
 
+> **Remediation complete (2026-06-12)** — the full discrepancy backlog below has been
+> remediated under plan `pipeline_compliance_remediation`. See the
+> [§Remediation status](#remediation-status-2026-06-12) section for the per-finding
+> resolution. Code: `tsc`+`vite build` clean; CDL EFs redeployed (cdl-write v9,
+> cdl-listing-lifecycle v2); HU `commission_rule` de-duplicated to one published row.
+
 | Process | UI surface | EF | Verdict |
 |---|---|---|---|
 | Contact funnel/lifecycle (`#contact-funnel`) | `/contacts` | `cdl-write` | **PASS** |
@@ -98,6 +104,34 @@ the Deal P&L UI (blocks the commission-estimate / variance / finance-webhook cha
 - **F-P1-1** — `contacts.full_name` left null on create.
 - **F-P5-3** — "escrow lock" is not a stored property column (implicit via status gating
   + lifecycle audit) — expectation gap vs. plan wording.
+
+## Remediation status (2026-06-12)
+
+All backlog items are resolved (code + CDL EF + one app-DB migration). Routing per
+`.cursor/rules/cursor-git-handoff.mdc`: UI + app migration → `matrix-pipeline-2-0`;
+CDL EFs → `matrix-platform-foundation`; this doc → `matrix-platform-kb`.
+
+| Finding | Resolution | Where |
+|---|---|---|
+| **F-P6-1** waterfall never computes | `useCommissionEstimate` property lookup now also matches `originating_system_key` (the key `Transactions.tsx` passes); + persist-failure toast + split placeholder copy | `src/hooks/useCommissionEstimate.ts`, `components/commission/DealPnLTab.tsx` |
+| **F-P6-2** duplicate HU rules | unpublished the two `(v2)` duplicates (identical params) via migration; deterministic `id` tie-breaker in `resolveRule` | app-DB migration `20260612143031_*`, `src/lib/commission/resolveRule.ts` |
+| **F-P6-3** deal-cost attribution | `member_key` = acting member via new `useActingMemberKey`; `transaction_key` already linked when selected | `src/hooks/useActingMemberKey.ts`, `components/commission/DealCostLogCard.tsx` |
+| **F-P7-1** referee LeadSource | **No change — working as designed.** `useCreateReferral` already sets `lead_source='Referral'` *only when unset* (FR-REF-02); the verification referee already had `Website`, correctly preserved | `src/hooks/useReferrals.ts` |
+| **F-P1-2 / F-P3-3 / F-P4-5** field-level history | `cdl-write.emitHistory` writes `new_value`/`previous_value`; app callers pass `fieldValue`/`previousValue` | `cdl-write`, `useContactMutations`, `useContactListingsEngagement`, `useProspecting`, `useReferrals` |
+| **F-P2-2 / F-P3-2 / F-P4-1 / F-P7-2** provenance | `cdl-write` defaults `originating_system_name` + `source_system_name` on source_id-envelope tables that carry them | `cdl-write` |
+| **F-P2-1** prospecting schedule | `next_send_timestamp = now()` on Create & subscribe | `src/hooks/useProspecting.ts` |
+| **F-P3-1 / F-P4-4** note authorship | `noted_by` + `created_by_member_key` = acting member (UI + EF belt-and-suspenders) | `useContactListingsEngagement`, `ContactListingsPanel`, `cdl-write` |
+| **F-P5-1** mls_status sync | `cdl-listing-lifecycle` sets `mls_status = standard_status` on each transition | `cdl-listing-lifecycle` |
+| **F-P5-2** cancelDeal UX | EF guard broadened (`TERMINAL_STATE`/`NOT_UNDER_CONTRACT` codes); UI gates the button on `Pending`, surfaces the error toast | `cdl-listing-lifecycle`, `pages/Transactions.tsx` |
+| **F-P1-1** full_name | composed from first+last on write when absent | `src/lib/contactsSchema.ts` |
+| **F-P4-3** listing_viewed_yn | a recorded showing marks the auto ContactListing viewed | `pages/Showings.tsx` |
+| **F-P4-2** appointment terminal state | appointment advances to `Completed` on record | `pages/Showings.tsx`, `useShowingChain.ts` |
+| **F-P4-6** caravan header history | header create/status-change/complete emit Caravan-scoped history rows | `src/hooks/useCaravans.ts` |
+| **F-P5-3** escrow lock | **KB clarification:** escrow is enforced via the EF's `cdl_lock_field`/`cdl_unlock_field` RPCs + status gating, not a stored `x_escrow_locked` column. No schema change. | `cdl-listing-lifecycle` |
+| **F-P4-7** caravan-run contact Activity | unchanged — broker-preview tours are property-only by design (not a defect) | — |
+
+Runtime UI re-validation on a fresh ZZ-UITEST thread is to follow once the git-watcher
+deploys the updated UI to `/pipeline/`.
 
 ## Test data lifecycle
 
