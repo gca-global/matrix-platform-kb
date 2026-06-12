@@ -18,6 +18,8 @@
 | [`cdl-crud-contract.md`](cdl-crud-contract.md) | Lovable CDL CRUD contract — 5 recipe shapes + 6 commandments. Canonical copy synced from `mem://infrastructure/lovable-cdl-crud-contract.md` | (operational) |
 | [`roadmap.md`](roadmap.md) | **Outcome-based roadmap + agent coordination surface** — `O-*` milestones keyed to KPI groups + FR clusters; read/update before any structural change | (coordination) |
 | [`phases.md`](phases.md) | 8-week atomic build plan (Lovable + Cursor swimlanes) | (plan) |
+| [`canonical-compliance-audit-2026-06.md`](canonical-compliance-audit-2026-06.md) | RESO DD 2.0 canonical-compliance audit (apps + CDL surface) | (audit) |
+| [`ui-process-hardening-verification-2026-06-12.md`](ui-process-hardening-verification-2026-06-12.md) | Week-7 UI↔data core-process hardening verification (8 PASS / 1 PARTIAL); discrepancy backlog | (verification) |
 | [`raw/context-v2.md`](raw/context-v2.md) | Immutable BRD (read for provenance only) | — |
 | [`log.md`](log.md) | Chronological append-only log | — |
 | [`AGENTS.md`](AGENTS.md) | LLM schema layer | — |
