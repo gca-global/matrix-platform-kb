@@ -240,7 +240,7 @@ A short checklist Lovable applies at the top of every relevant prompt:
 | `Property` (raw `properties`) | use READ-B only | n/a |
 | `Media` | use READ-B `includeMedia: true` | n/a |
 | `PropertyRooms` / `PropertyUnitTypes` | READ-A | n/a |
-| `Member` | READ-A | WRITE-B `cdl-write` resource `members` ✅ (insert = AD-provisioning of new owners; **`update` of AD-sourced fields only** — `job_title` / `x_company` — when the owner picker reconciles a drifted roster row; ADR-031). Roster is otherwise master-sourced by `mls-sync`. |
+| `Member` | READ-A | WRITE-B `cdl-write` resource `members` ✅ (insert = AD-provisioning of new owners; **`update` of AD-sourced fields only** — `job_title` / `office_name` — when the owner picker reconciles a drifted roster row; ADR-031). Roster is otherwise master-sourced by `mls-sync`. |
 | `Office` | READ-A | n/a |
 | `Contacts` | READ-C (`cdl-contacts-read`, ✅ live) | WRITE-B `cdl-write` resource `contacts` ✅ |
 | `ContactListings` | READ-C (`cdl-contact-listings-read`, ✅ live) | WRITE-B `cdl-write` resource `contact_listings` ✅ |
@@ -249,6 +249,7 @@ A short checklist Lovable applies at the top of every relevant prompt:
 | `SavedSearch` | READ-A (`saved_search`) | WRITE-B `cdl-write` resource `saved_search` ✅ |
 | `Prospecting` | READ-C (PII, via `cdl-write`-paired read TBD) | WRITE-B `cdl-write` resource `prospecting` ✅ |
 | `ShowingAvailability` / `ShowingRequest` / `Showing` (recorded) / `Caravan` / `CaravanStop` | READ-A | WRITE-B `cdl-write` (matching resource) ✅ |
+| `ShowingParticipation` (`showing_participation`) — buyer↔showing link (project-flavour; no RESO Showing→Contact), [ADR-033](../../architecture/decisions/ADR-033.md), supersedes `x_contact_key`/ADR-022 | READ via `cdl-read` resource `showing_participation` (service-role-only table; filterable `contact_key`/`showing_key` + array `in`) | WRITE-B `cdl-write` resource `showing_participation` ✅ (upsert, deterministic `<showing_key>:<contact_key>` source key) |
 | `LockOrBox` | service-role-only (access audit) | WRITE-B `cdl-write` resource `lock_or_box` ✅ |
 | `TransactionManagement` | READ-A (`transaction_management`) | WRITE-B `cdl-write` resource `transaction_management` ✅ (economics stay app-private). **Authoring split:** offer-side types (`PurchaseOffer`/`LeaseOffer`/`Other`) authored by Pipeline; listing-side types (`ListingForSale`/`ListingForLease`) authored by Atlas (`matrix-atlas-mls` *Listing Transactions*). Same table, no per-app partition. |
 | `HistoryTransactional` | READ-A | WRITE-B `cdl-write` resource `history_transactional` (insert-only) ✅ |

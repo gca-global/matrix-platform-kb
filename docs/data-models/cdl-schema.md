@@ -178,7 +178,7 @@ All EFs verify `Authorization: Bearer <SSO JWT>` themselves (HS256 first via `SS
 - **Admin EFs** (`mls-sync`, `mls-sync-orchestrator`, the 5 pipeline stages, `listing-publish`, …) use `SSO_ALLOWED_SCOPES` (default `system_admin,org_admin`) — set project-wide to `system_admin,org_admin`.
 - **Broker-scope read EFs** (`cdl-contacts-read`, `cdl-contact-listings-read`, `cdl-engagement-read`, `cdl-read`) use their **own** `SSO_READ_SCOPES` (default `self,team,global,org_admin,system_admin`) so a Broker (`self`) session can read. This is deliberately decoupled from the shared `SSO_ALLOWED_SCOPES` (which stays admin-only so the admin EFs are not widened). Mirrors how `listings-search` uses `SSO_LISTINGS_SCOPES`. Leave `SSO_READ_SCOPES` unset to keep the broad default.
 - **Broker-scope write EF** (`cdl-write`) uses its **own** `SSO_WRITE_SCOPES` (default `self,team,global,org_admin,system_admin`) so a Broker session can author CRM rows (contacts, showings, prospecting, …). Like the read EFs, it is decoupled from the shared `SSO_ALLOWED_SCOPES`; pointing it there would 403 every non-admin broker write. Leave `SSO_WRITE_SCOPES` unset to keep the broad default. (Authz scoping/owner-clamp is still enforced inside the EF as that mapping lands — see deferred note below.)
-- **Canonical write/read enforcement (audit 2026-06, `cdl-write` / `cdl-read`; v7 as of 2026-06-08 registers the `referral`/`document` resources).** `cdl-write` now validates every client-supplied column at the boundary: column names must be RESO snake_case (`/^[a-z][a-z0-9_]*$/` — rejects PascalCase/camelCase), EF-managed plumbing (`id`, `content_hash`, `created_at`, `updated_at`, `is_deleted`, `deleted_at`, `lifecycle_state*`) is rejected, and any `x_`-prefixed column not in the registered set (`x_privacy_level`, `x_contact_key`, `x_property_name`) is rejected with `code: NON_CANONICAL_COLUMN`. `cdl-read` restricts `order.column` to a per-resource allow-list (`filterable` ∪ `defaultOrder` ∪ common audit timestamps). This is the mechanical guard that keeps the write/sort surface canonical — drift becomes a rejected request, not a silent column. New registered extensions MUST be added to `REGISTERED_X_EXTENSIONS` in `cdl-write` **and** [`platform-extensions.md`](platform-extensions.md).
+- **Canonical write/read enforcement (audit 2026-06, `cdl-write` / `cdl-read`; v7 as of 2026-06-08 registers the `referral`/`document` resources).** `cdl-write` now validates every client-supplied column at the boundary: column names must be RESO snake_case (`/^[a-z][a-z0-9_]*$/` — rejects PascalCase/camelCase), EF-managed plumbing (`id`, `content_hash`, `created_at`, `updated_at`, `is_deleted`, `deleted_at`, `lifecycle_state*`) is rejected, and any `x_`-prefixed column not in the registered set (`x_privacy_level`, `x_property_name`) is rejected with `code: NON_CANONICAL_COLUMN`. `cdl-read` restricts `order.column` to a per-resource allow-list (`filterable` ∪ `defaultOrder` ∪ common audit timestamps). This is the mechanical guard that keeps the write/sort surface canonical — drift becomes a rejected request, not a silent column. New registered extensions MUST be added to `REGISTERED_X_EXTENSIONS` in `cdl-write` **and** [`platform-extensions.md`](platform-extensions.md).
 
 > **Owner-clamp deferred (accepted residual risk):** the PII read EFs (`cdl-contacts-read`, `cdl-contact-listings-read`, `cdl-engagement-read`) currently return **org-wide** rows for any allowed scope — no per-`owner_member_key` clamp. The `scopeToOwner` path exists but is inert because the SSO-user → `member_key` mapping is still being bootstrapped: legacy `members` are keyed on Cyprus/Qobrix emails while SSO logins are Azure AD staff, and the JWT carries no `member_key`. **Partial remediation (ADR-031, 2026-06-15):** `members` now has a canonical `member_alternate_id` column, and Members provisioned from Active Directory by `matrix-pipeline` (owner picker) store the **Azure AD object id** there — materializing the `MemberAlternateId` ↔ SSO mapping for newly-minted owners. Legacy feed-sourced rows still lack it (email-only join), so full owner-clamp remains a follow-up until the roster is backfilled and/or the JWT carries `member_key`.
 
@@ -296,7 +296,7 @@ canonical typed columns + `raw jsonb` (RESO record verbatim) +
 
 | Table | RESO Resource | Notes |
 |---|---|---|
-| `public.members` | Member | Roster identities + designations. Canonical `member_alternate_id` (RESO `MemberAlternateId`, added `20260615120000`) carries the **Azure AD object id** for Members provisioned from AD by `matrix-pipeline` (ADR-031) — the SSO-user ↔ `member_key` mapping attribute. `x_company` (extension, added `20260615140000`) carries the AD `companyName` (RESO Member has no Company field). Master-sourced by `mls-sync`; app authorship via `cdl-write` resource `members` (strict-RESO envelope) is **insert** (provision) + a targeted **`update`** of the AD-sourced fields (`job_title`, `x_company`) when the owner picker reconciles a drifted roster row (ADR-031). (Note: the `x_sir_designation` marker is spec-only — not materialized; see "SIR brand markers".) |
+| `public.members` | Member | Roster identities + designations. Canonical `member_alternate_id` (RESO `MemberAlternateId`, added `20260615120000`) carries the **Azure AD object id** for Members provisioned from AD by `matrix-pipeline` (ADR-031) — the SSO-user ↔ `member_key` mapping attribute. Canonical `office_name` (RESO `Member.OfficeName`, added `20260615160000`) carries the AD `companyName` (the member's brokerage/employer name; this retired the same-day `x_company` extension). Master-sourced by `mls-sync`; app authorship via `cdl-write` resource `members` (strict-RESO envelope) is **insert** (provision) + a targeted **`update`** of the AD-sourced fields (`job_title`, `office_name`) when the owner picker reconciles a drifted roster row (ADR-031). (Note: the `x_sir_designation` marker is spec-only — not materialized; see "SIR brand markers".) |
 | `public.offices` | Office | Companies-via-Office hierarchy (`main_office_key`). |
 | `public.contacts` | Contacts | PII; `service_role`-only RLS (no anon/authenticated SELECT). FR-CON attribute columns added `20260603150000`: `company`, `lead_source`, `referred_by`, `reverse_prospecting_enabled_yn`, `notes` (all RESO DD 2.0 Contacts fields) + `x_privacy_level` (extension). **`contact_type` is `text[]`** (RESO multi-value ContactType) since the same migration — was scalar `text`; the PII-scoped `v_property_contacts` view was dropped+recreated around the type change. |
 | `public.open_houses` | OpenHouse | Append-only; no soft-delete sweep. |
@@ -563,14 +563,18 @@ stays a thin passthrough (ADR-016):
   genuinely underivable FK pivots (`contact_id`, `property_id`,
   `contact_listing_id`) as fallback safety — the FKs still validate any non-null
   value. **All writers (EF, prospecting engine, future) are fixed at once.**
-- **Buyer-to-showing extension** `x_contact_key` on `showings`, `showing`,
-  `showing_request` — RESO DD 2.0 has no `ShowingContactKey`, so the buyer
-  Contact is carried as an `x_` platform extension (see
-  [ADR-022](../architecture/decisions/ADR-022.md) +
-  [platform-extensions.md](platform-extensions.md)). Indexed and added to the
-  `cdl-read` filterable allow-lists so the contact-side engagement timeline can
-  filter showings by buyer. (The demo's `contact_key` payloads were renamed to
-  `x_contact_key`, not given a bare `contact_key` column.) **Note:** showing
+- **Buyer-to-showing linkage** is the project-flavour resource
+  `public.showing_participation` (`showing_key` + `contact_key` +
+  `participant_role`), **not** an extension — RESO DD 2.0 has no Showing→Contact
+  relationship (see [ADR-033](../architecture/decisions/ADR-033.md), which
+  superseded the earlier `x_contact_key` extension of
+  [ADR-022](../architecture/decisions/ADR-022.md)). The `x_contact_key` columns
+  on `showings` / `showing` / `showing_request` were backfilled into the new
+  resource and dropped by `20260615170000_showing_participation_resource.sql`.
+  `cdl-read` exposes `showing_participation` (filterable `contact_key` /
+  `showing_key`) plus small array (`in`) filter support, so the contact-side
+  engagement timeline resolves `contact_key → showing_key[]` and then reads the
+  showing rows by `showing_key`. **Note:** showing
   **appointments** (`public.showings`) link to a listing via the unguarded
   `listing_key` witness, **not** `property_id` — `showings.property_id` is
   guarded by `fn_check_same_source_fk` (`trg_showings_check_property_src`), so a
@@ -692,7 +696,18 @@ hybrid envelope as the Phase-2 tables (`id uuid pk` + `source_id` +
 |---|---|---|
 | `public.referral` | Referral (project-flavour; no RESO equiv) | **service_role only** (PII-adjacent — links referrer/referee Contacts) |
 | `public.document` | Document (project-flavour; no RESO equiv) | **service_role only** (confidentiality-bearing) |
+| `public.showing_participation` | ShowingParticipation (project-flavour; no RESO Showing→Contact link) | **service_role only** (PII-adjacent — links buyer Contacts) |
 
+- **`public.showing_participation`** — buyer↔showing linkage
+  ([ADR-033](../architecture/decisions/ADR-033.md), supersedes the `x_contact_key`
+  extension of [ADR-022](../architecture/decisions/ADR-022.md)). `showing_key`
+  (chain correlation, shared by `showing_request`/`showings`/`showing`),
+  `contact_key` (buyer/witness Contact), `participant_role` (default `Buyer`),
+  + envelope (soft-delete + provenance). RESO models no Showing→Contact
+  relationship, so this is a project-flavour resource, not an `x_` column.
+  Read/written via `cdl-read`/`cdl-write` `resource:"showing_participation"`;
+  `cdl-read` supports array (`in`) filtering on `showing_key` for the
+  contact-side timeline (added `20260615170000`).
 - **`public.referral`** — `referral_key`, `referrer_contact_key`,
   `referee_contact_key`, `owner_member_key`, `referral_type`
   (Client/Partner/Broker/Internal), `referral_date`, `outcome`
@@ -852,6 +867,10 @@ were also aligned to emit canonical RESO directly as defence-in-depth.
 | 33 | `20260605181000_cdl_lookup_value_backfill.sql` | **P6 backfill**: normalize existing `properties` + `properties_published` rows (incl. `development_status`→`new_construction_yn` coupling). Idempotent. |
 | 34 | `20260605182000_cdl_lookup_value_guard.sql` | **P6 value guard**: `cdl_assert_canonical_lookup()` + `tg_properties_validate_lookups` BEFORE trigger rejecting any non-`StandardValue` closed-lookup value. |
 | 35 | `20260608120000_pipeline_referral_document_tables.sql` | **Week-4 project-flavour resources** ([ADR-025](../architecture/decisions/ADR-025.md)): `public.referral` + `public.document` (no RESO equivalent; canonical snake_case, no `x_`) with hybrid envelope + soft-delete + service-role-only RLS; added to `cdl-read`/`cdl-write` (v7). No `x_` offer columns (offer-economics deferred). |
+| 36 | `20260615120000_members_alternate_id_app_provisioning.sql` | **`members.member_alternate_id`** (RESO `MemberAlternateId`) for AD-provisioned owners ([ADR-031](../architecture/decisions/ADR-031.md)): carries the Azure AD object id, materializing the SSO↔roster mapping. |
+| 37 | `20260615140000_members_x_company_ad_sync.sql` | **(superseded same day)** interim `members.x_company` extension + `v_members_list` re-projection for AD `companyName`. Retired by 38 once `Member.OfficeName` was identified as canonical. |
+| 38 | `20260615160000_members_office_name_canonical.sql` | **Canonical `members.office_name`** (RESO `Member.OfficeName`, [ADR-031](../architecture/decisions/ADR-031.md)): adds the canonical column, backfills from + drops the `x_company` extension, re-projects `v_members_list` with `coalesce(m.office_name, o.office_name)`. |
+| 39 | `20260615170000_showing_participation_resource.sql` | **`public.showing_participation` project-flavour resource** ([ADR-033](../architecture/decisions/ADR-033.md), supersedes [ADR-022](../architecture/decisions/ADR-022.md)): buyer↔showing link (`showing_key`+`contact_key`+`participant_role`); backfills from + drops the `x_contact_key` columns/indexes on `showings`/`showing`/`showing_request`; service-role-only RLS; added to `cdl-read`/`cdl-write`. |
 
 ## Cross-reference
 
@@ -862,7 +881,7 @@ were also aligned to emit canonical RESO directly as defence-in-depth.
 | ADR — ingestion pipeline + status note on the actual implementation | [ADR-014](../architecture/decisions/ADR-014.md) |
 | ADR — Pipeline EF surface request | [ADR-015](../architecture/decisions/ADR-015.md) |
 | ADR — canonical-into-CDL acceleration (Phase-2 tables, re-model, `cdl-write`) | [ADR-016](../architecture/decisions/ADR-016.md) |
-| ADR — buyer-to-showing linkage (`x_contact_key`) | [ADR-022](../architecture/decisions/ADR-022.md) |
+| ADR — buyer-to-showing linkage (`showing_participation` resource; supersedes `x_contact_key`) | [ADR-033](../architecture/decisions/ADR-033.md) (supersedes [ADR-022](../architecture/decisions/ADR-022.md)) |
 | ADR — Referral + Document project-flavour resources (+ offer-economics deferral) | [ADR-025](../architecture/decisions/ADR-025.md) |
 | RESO canonical fields | [`reso-dd-kb/wiki/agent-docs/_index.md`](reso-dd-kb/wiki/agent-docs/_index.md) |
 | Platform extensions (`x_*`) | [platform-extensions.md](platform-extensions.md) |

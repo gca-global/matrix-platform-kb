@@ -49,9 +49,14 @@
 
 ### Showing Extensions
 
-| Extension Field | Data Type | Reason | SIR Source Field | Qobrix Source | Apps |
-|----------------|-----------|--------|-----------------|---------------|------|
-| x_contact_key | String | Buyer `Contact.ContactKey` attached to a Showing / ShowingAppointment / ShowingRequest. RESO DD 2.0 has no `ShowingContactKey` (Showing models the agent + listing, not a buyer contact) — see [ADR-022](../architecture/decisions/ADR-022.md). Loose witness (no FK); indexed; in the `cdl-read` filterable allow-list; not exported to any outbound RESO/Dash channel. **Scope:** used only where a process row has NO canonical Contact junction (showings). The **transaction** buyer is NOT modeled with `x_contact_key` — it uses the canonical **`ContactListings`** junction (`contact_key` + `listing_key`) per [ADR-026](../architecture/decisions/ADR-026.md). | — (custom) | — (custom) | Pipeline (Broker) |
+_None._ The buyer↔showing relationship is **not** an extension — RESO models no
+Showing→Contact link, so it is the project-flavour resource
+`public.showing_participation` (`showing_key` + `contact_key` + `participant_role`),
+governed by [ADR-033](../architecture/decisions/ADR-033.md). It superseded the
+earlier `x_contact_key` extension (ADR-022), which was dropped from
+`showings` / `showing` / `showing_request` by
+`20260615170000_showing_participation_resource.sql`. See "Extensions vs.
+project-flavour resources" under Governance Notes.
 
 ### Transaction Extensions
 
@@ -64,7 +69,8 @@
 | Extension Field | Data Type | Reason | SIR Source Field | Qobrix Source | Apps |
 |----------------|-----------|--------|-----------------|---------------|------|
 | x_commission_pct | Number (%) | Agent commission **split** percentage. RESO models listing-side *compensation* (`Property.BuyerBrokerageCompensation` + `BuyerBrokerageCompensationType`), not an individual member's comp split — there is no RESO Member field for it. Lives in the HRMS / source-mappings layer; not exported to outbound RESO/Dash channels. | Commission % | member.commission_pct | HRMS, Finance |
-| x_company | String | Member's employer / company name. RESO DD 2.0 Member has `JobTitle` (→ canonical `job_title`) but **no Company field**. Mirrors the Azure AD `companyName` for app-provisioned members; seeded at provision and kept fresh by the owner-picker AD-sync (`cdl-write` resource `members`, op `update`) — see [ADR-031](../architecture/decisions/ADR-031.md). Materialized on `members` + projected through `v_members_list`. Not exported to outbound RESO/Dash channels. | Company | member.company | Pipeline (Broker) |
+
+> **Member employer/company name is NOT an extension** — RESO DD 2.0 models it canonically as `Member.OfficeName` ("the legal name of the brokerage"), materialized as `members.office_name`. The Azure AD `companyName` of an app-provisioned member maps directly onto `office_name` (seeded at provision, kept fresh by the owner-picker AD-sync; see [ADR-031](../architecture/decisions/ADR-031.md)). An earlier `x_company` extension (migration `20260615140000`) was retired the same day by `20260615160000_members_office_name_canonical.sql` in favour of the canonical column.
 
 ## Extension Lookup Values — ScheduleType (Prospecting)
 
@@ -114,20 +120,20 @@ These are registered as platform-specific lookup values:
 |----------|-------|
 | Extension fields (Property) | 17 |
 | Extension fields (Contact) | 3 |
-| Extension fields (Showing) | 1 |
+| Extension fields (Showing) | 0 |
 | Extension fields (Transaction) | 1 |
-| Extension fields (Member) | 2 |
+| Extension fields (Member) | 1 |
 | Extension lookup values (PropertySubType) | 10 |
 | Extension lookup values (ScheduleType) | 3 |
-| **Total extensions** | **37** |
+| **Total extensions** | **35** |
 
-> Materialized in CDL today (the rest are spec-only): `properties.x_property_name` (+ `properties_published.x_property_name`, added 2026-06-05 by `20260605170000_add_x_property_name_to_properties_published.sql`), `contacts.x_privacy_level`, `x_contact_key` on `showings` / `showing` / `showing_request`, and `members.x_company` (added 2026-06-15 by `20260615140000_members_x_company_ad_sync.sql`; AD-sourced, see [ADR-031](../architecture/decisions/ADR-031.md)). The `x_privacy_level` / `x_contact_key` columns were renamed from the legacy `x_sm_` prefix by migration `20260605160000_rename_x_sm_extensions_to_x.sql` ([ADR-023](../architecture/decisions/ADR-023.md)).
+> Materialized in CDL today (the rest are spec-only): `properties.x_property_name` (+ `properties_published.x_property_name`, added 2026-06-05 by `20260605170000_add_x_property_name_to_properties_published.sql`) and `contacts.x_privacy_level`. `x_privacy_level` was renamed from the legacy `x_sm_` prefix by migration `20260605160000_rename_x_sm_extensions_to_x.sql` ([ADR-023](../architecture/decisions/ADR-023.md)). (The member employer name is canonical `members.office_name`, and the buyer↔showing link is the `showing_participation` project-flavour resource — neither is an extension; see above.)
 
 ## Governance Notes
 
 - **Regional scope**: Most extensions are Cyprus-specific or Mediterranean-specific. When Sharp Matrix expands to Hungary and Kazakhstan, additional regional extensions may be needed (e.g., Hungarian land registry fields, Kazakh property registration).
 - **Prefix**: The platform extension prefix is `x_` ([ADR-023](../architecture/decisions/ADR-023.md)). It superseded the former vendor-tagged `x_sm_` prefix on 2026-06-05; the four materialized columns were renamed by migration `20260605160000_rename_x_sm_extensions_to_x.sql`. RESO DD 2.0 itself defines no extension prefix — `x_` is the platform's local-field marker and these columns are never emitted to outbound RESO/Dash channels.
-- **Extensions vs. project-flavour resources (`x_` is for fields, not whole resources)**: The `x_` prefix marks an extension **field on an existing RESO resource** (e.g. `x_contact_key` on `ShowingAppointment`). A **wholly new resource that RESO does not model at all** is NOT an extension and takes **no `x_` prefix** — it is a *project-flavour CDL resource* with plain canonical snake_case columns, governed by its own ADR. Live examples: `public.referral` (FR-REF) and `public.document` (FR-DOC), added 2026-06-08 — RESO has no `Referral` resource and only Property-level document *flags*, no `Document` resource ([ADR-025](../architecture/decisions/ADR-025.md)). This mirrors how `saved_search`/`prospecting`/`caravan` were added as resources (not prefixed). Do not "extend" by inventing `x_`-prefixed columns when the right move is a new resource.
+- **Extensions vs. project-flavour resources (`x_` is for fields, not whole resources)**: The `x_` prefix marks an extension **field on an existing RESO resource** (e.g. `x_privacy_level` on `Contacts`). A **wholly new resource/relationship that RESO does not model at all** is NOT an extension and takes **no `x_` prefix** — it is a *project-flavour CDL resource* with plain canonical snake_case columns, governed by its own ADR. Live examples: `public.referral` (FR-REF) and `public.document` (FR-DOC), added 2026-06-08 — RESO has no `Referral` resource and only Property-level document *flags*, no `Document` resource ([ADR-025](../architecture/decisions/ADR-025.md)); and `public.showing_participation`, added 2026-06-15 — RESO has no Showing→Contact link, so the buyer↔showing relationship is a resource, not an `x_` column ([ADR-033](../architecture/decisions/ADR-033.md), which superseded the earlier `x_contact_key` extension of [ADR-022](../architecture/decisions/ADR-022.md)). This mirrors how `saved_search`/`prospecting`/`caravan` were added as resources (not prefixed). Do not "extend" by inventing `x_`-prefixed columns when the right move is a new resource.
 - **Zero speculative `x_` for deferred scope**: When a workstream is deferred (e.g. the 2026-06-08 offer-economics deferral — ADR-025), do **not** pre-add `x_` columns "to be ready". The datamodel stays clean; the extension is introduced only when the feature lands and only for the residual gap with no canonical RESO home.
 - **Retirement**: If a future RESO DD version (e.g., DD 2.1) adds a field that matches an `x_*` extension, the extension should be migrated to the RESO name with a deprecation period.
 - **Naming collisions**: Never reuse a retired extension name for a different purpose.

@@ -36,4 +36,5 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-028](ADR-028.md) | CRM-internal Commission Engine (ERP-lite); app-private, per-country rules, role-config + JWT-scope authz, Finance-ERP reconciliation | Accepted |
 | [ADR-029](ADR-029.md) | "Contract agreed" = Pending edge; close = settlement; pipeline stage projection; per-country collection anchor | Accepted |
 | [ADR-030](ADR-030.md) | Promote transaction linkage from `HistoryTransactional.raw` to a governed `x_transaction_key` extension | Proposed |
-| [ADR-031](ADR-031.md) | matrix-pipeline may provision a CDL Member from Active Directory via `cdl-write` (+ canonical `member_alternate_id`) | Accepted |
+| [ADR-031](ADR-031.md) | matrix-pipeline may provision and AD-sync a CDL Member from Active Directory via `cdl-write` (canonical `member_alternate_id` + `office_name`) | Accepted |
+| [ADR-033](ADR-033.md) | Buyer↔showing linkage as the `showing_participation` project-flavour resource (supersedes the `x_contact_key` extension / ADR-022) | Accepted |
