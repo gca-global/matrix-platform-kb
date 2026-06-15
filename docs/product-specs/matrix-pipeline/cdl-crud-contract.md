@@ -162,10 +162,11 @@ op. This replaces the per-resource `cdl-<resource>-write` family that ADR-015 #6
 proposed (decision recorded in ADR-016: one dispatcher is cheaper to ship and
 maintain; the redaction/scope contract is uniform).
 
-Writable `resource` values: `contacts`, `contact_listings`,
-`contact_listing_notes`, `showings` (ShowingAppointment), `showing` (recorded),
-`showing_request`, `showing_availability`, `saved_search`, `prospecting`,
-`lock_or_box`, `caravan`, `caravan_stop`, `transaction_management`,
+Writable `resource` values: `contacts`, `members` (AD-provisioned — ADR-031),
+`contact_listings`, `contact_listing_notes`, `showings` (ShowingAppointment),
+`showing` (recorded), `showing_request`, `showing_availability`, `saved_search`,
+`prospecting`, `lock_or_box`, `caravan`, `caravan_stop`,
+`transaction_management`, `referral`, `document`,
 `history_transactional` (insert-only).
 
 ```typescript
@@ -206,16 +207,19 @@ off one of two envelopes, selected by `systemColumn`:
 | Envelope | `systemColumn` | natural key | soft-delete | resources |
 |---|---|---|---|---|
 | Pipeline-authored | `source_id` | `(source_id, source_<resource>_key)` | yes (`is_deleted`/`deleted_at`) | `contact_listings`, `contact_listing_notes`, `showing`, `showing_request`, `showing_availability`, `saved_search`, `prospecting`, `lock_or_box`, `caravan`, `caravan_stop`, `transaction_management` |
-| Strict-RESO | `originating_system_name` | `(originating_system_name, originating_system_<resource>_key)` | **no column** | `contacts`, `showings` (ShowingAppointment) |
+| Strict-RESO | `originating_system_name` | `(originating_system_name, originating_system_<resource>_key)` | **no column** | `contacts`, `members`, `showings` (ShowingAppointment) |
 
 The strict-RESO tables were hardened by the `strict_reso_wave` migrations
 (`20260515130000+`), which **dropped** `source_id` / `content_hash` /
-`is_deleted` / `deleted_at`. So for `contacts` and `showings`: upserts conflict
-on `(originating_system_name, originating_system_<resource>_key)`, `cdl-write`
-defaults `originating_system_name` to the Pipeline source slug, and **`delete`
-is rejected** (no soft-delete column — hard-deleting PII is a stewardship
-decision, not a default). Callers must never send `source_id`/`is_deleted` for
-these two resources.
+`is_deleted` / `deleted_at`. So for `contacts`, `members`, and `showings`:
+upserts conflict on `(originating_system_name, originating_system_<resource>_key)`,
+`cdl-write` defaults `originating_system_name` to the Pipeline source slug, mints
+the canonical key (`member_key` / `contact_key` / `showing_appointment_key`) as a
+UUID when absent, and **`delete` is rejected** (no soft-delete column —
+hard-deleting PII is a stewardship decision, not a default). Callers must never
+send `source_id`/`is_deleted` for these resources. For `members` specifically,
+the Pipeline only **inserts** (provisioning a new owner from Active Directory);
+the canonical roster remains master-sourced by `mls-sync` (ADR-031).
 
 ## The six commandments {#commandments}
 
@@ -236,7 +240,7 @@ A short checklist Lovable applies at the top of every relevant prompt:
 | `Property` (raw `properties`) | use READ-B only | n/a |
 | `Media` | use READ-B `includeMedia: true` | n/a |
 | `PropertyRooms` / `PropertyUnitTypes` | READ-A | n/a |
-| `Member` | READ-A | n/a (read-only consumer) |
+| `Member` | READ-A | WRITE-B `cdl-write` resource `members` ✅ (insert-only; AD-provisioning of new owners, ADR-031). Roster is otherwise master-sourced by `mls-sync`. |
 | `Office` | READ-A | n/a |
 | `Contacts` | READ-C (`cdl-contacts-read`, ✅ live) | WRITE-B `cdl-write` resource `contacts` ✅ |
 | `ContactListings` | READ-C (`cdl-contact-listings-read`, ✅ live) | WRITE-B `cdl-write` resource `contact_listings` ✅ |
