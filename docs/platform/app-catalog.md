@@ -158,6 +158,9 @@ Three apps are backfilled into **every** role's `apps_allowed` so they stay broa
 **Status**: Done
 **Users**: Brokers, Marketing, Sales
 **URL**: `/comms/`
+**OAuth client_id**: `WSvfGsovutXBHJfQOdL9uPA4TnMIIVrZ`
+**App DB**: `ujowkipnqgtazmtdsnlm`
+**Permissions model**: `app_permissions` table with `app_id = 'comms'` (ITSM pattern); universal Home at `/` excluded from permission matrix. Per-app SSO token storage (`:comms` suffix) — see ADR-032.
 **Powered by**: Twilio + Meta WhatsApp Business API
 **Key Features**:
 - WhatsApp Business messaging (1:1 conversations)
