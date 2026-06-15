@@ -240,7 +240,7 @@ A short checklist Lovable applies at the top of every relevant prompt:
 | `Property` (raw `properties`) | use READ-B only | n/a |
 | `Media` | use READ-B `includeMedia: true` | n/a |
 | `PropertyRooms` / `PropertyUnitTypes` | READ-A | n/a |
-| `Member` | READ-A | WRITE-B `cdl-write` resource `members` ✅ (insert-only; AD-provisioning of new owners, ADR-031). Roster is otherwise master-sourced by `mls-sync`. |
+| `Member` | READ-A | WRITE-B `cdl-write` resource `members` ✅ (insert = AD-provisioning of new owners; **`update` of AD-sourced fields only** — `job_title` / `x_company` — when the owner picker reconciles a drifted roster row; ADR-031). Roster is otherwise master-sourced by `mls-sync`. |
 | `Office` | READ-A | n/a |
 | `Contacts` | READ-C (`cdl-contacts-read`, ✅ live) | WRITE-B `cdl-write` resource `contacts` ✅ |
 | `ContactListings` | READ-C (`cdl-contact-listings-read`, ✅ live) | WRITE-B `cdl-write` resource `contact_listings` ✅ |

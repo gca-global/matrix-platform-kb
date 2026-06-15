@@ -64,6 +64,7 @@
 | Extension Field | Data Type | Reason | SIR Source Field | Qobrix Source | Apps |
 |----------------|-----------|--------|-----------------|---------------|------|
 | x_commission_pct | Number (%) | Agent commission **split** percentage. RESO models listing-side *compensation* (`Property.BuyerBrokerageCompensation` + `BuyerBrokerageCompensationType`), not an individual member's comp split — there is no RESO Member field for it. Lives in the HRMS / source-mappings layer; not exported to outbound RESO/Dash channels. | Commission % | member.commission_pct | HRMS, Finance |
+| x_company | String | Member's employer / company name. RESO DD 2.0 Member has `JobTitle` (→ canonical `job_title`) but **no Company field**. Mirrors the Azure AD `companyName` for app-provisioned members; seeded at provision and kept fresh by the owner-picker AD-sync (`cdl-write` resource `members`, op `update`) — see [ADR-031](../architecture/decisions/ADR-031.md). Materialized on `members` + projected through `v_members_list`. Not exported to outbound RESO/Dash channels. | Company | member.company | Pipeline (Broker) |
 
 ## Extension Lookup Values — ScheduleType (Prospecting)
 
@@ -115,12 +116,12 @@ These are registered as platform-specific lookup values:
 | Extension fields (Contact) | 3 |
 | Extension fields (Showing) | 1 |
 | Extension fields (Transaction) | 1 |
-| Extension fields (Member) | 1 |
+| Extension fields (Member) | 2 |
 | Extension lookup values (PropertySubType) | 10 |
 | Extension lookup values (ScheduleType) | 3 |
-| **Total extensions** | **36** |
+| **Total extensions** | **37** |
 
-> Materialized in CDL today (the rest are spec-only): `properties.x_property_name` (+ `properties_published.x_property_name`, added 2026-06-05 by `20260605170000_add_x_property_name_to_properties_published.sql`), `contacts.x_privacy_level`, and `x_contact_key` on `showings` / `showing` / `showing_request`. The `x_privacy_level` / `x_contact_key` columns were renamed from the legacy `x_sm_` prefix by migration `20260605160000_rename_x_sm_extensions_to_x.sql` ([ADR-023](../architecture/decisions/ADR-023.md)).
+> Materialized in CDL today (the rest are spec-only): `properties.x_property_name` (+ `properties_published.x_property_name`, added 2026-06-05 by `20260605170000_add_x_property_name_to_properties_published.sql`), `contacts.x_privacy_level`, `x_contact_key` on `showings` / `showing` / `showing_request`, and `members.x_company` (added 2026-06-15 by `20260615140000_members_x_company_ad_sync.sql`; AD-sourced, see [ADR-031](../architecture/decisions/ADR-031.md)). The `x_privacy_level` / `x_contact_key` columns were renamed from the legacy `x_sm_` prefix by migration `20260605160000_rename_x_sm_extensions_to_x.sql` ([ADR-023](../architecture/decisions/ADR-023.md)).
 
 ## Governance Notes
 
