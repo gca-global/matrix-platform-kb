@@ -463,10 +463,18 @@ the SSO `mint-delegated-token` EF (service credential only) to mint a
 **short-lived ES256 JWT per request** against a **revocable delegation grant**
 (`sso_delegation_grants`), and runs tools through a per-user RLS-bound PostgREST
 client (Third-Party Auth). No user credential is duplicated into the app; access
-ends on grant revoke or 90-day inactivity. Least privilege is enforced by a
-reduced tool surface + **step-up consent** for sensitive/write actions. Binding
-assurance is per-platform: Teams auto-binds (`aadObjectId` = `azure_oid`, high),
-Telegram/WhatsApp require a one-time interactive login (interactive). See
+ends on grant revoke or 90-day inactivity. Agents authenticate with **one shared
+agent key** (hashed in `app_settings.mcp.agent_key`, **distinct from the JWT
+signing key** — an agent never holds a token-minting secret). Least privilege is
+enforced by **tool tiering**: *basic* tools (`whoami`, `search_kb`, `get_article`,
+`create_ticket`) need only the agent key and run leak-safe (KB published-only,
+write-only ticket creation), while *advanced* tools require a verified **1:1**
+identity (`X-Chat-Scope: direct` + a usable user id) and a linked SSO account —
+group chats and unidentified users are basic-only and get an `advanced_requires_dm`
+nudge to continue in a direct message. **Step-up consent** still gates
+`approve`/`reject` and ticket close/resolve. Binding assurance is per-platform:
+Teams auto-binds (`aadObjectId` = `azure_oid`, high), Telegram/WhatsApp require a
+one-time interactive login (interactive). See
 [ADR-032](../architecture/decisions/ADR-032.md).
 
 ## OAuth 2.1 + PKCE posture

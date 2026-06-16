@@ -113,18 +113,19 @@ All functions use `verify_jwt: false` and implement **custom JWT verification** 
 
 Apps send `Authorization: Bearer <token>` with the SSO JWT obtained from the OAuth flow.
 
-## HumaticAI → MCP ingestion contract (ADR-032)
+## Chat agent → MCP ingestion contract (ADR-032)
 
-The HumaticAI chat agent calls the ITSM `mcp-server` MCP endpoint as a tool while
-holding **no SSO tokens or per-user credentials**. The contract:
+Chat agents (e.g. **HumaticAI**) call the ITSM `mcp-server` MCP endpoint as a tool
+while holding **no SSO tokens or per-user credentials**. The contract:
 
-1. **Authenticate to the MCP with the agent key.** Send
-   `Authorization: Bearer <agent_key>`. HumaticAI is a **registered MCP client**
-   (`mcp_oauth_clients`, `client_id = humatic-ai`) whose `client_secret` IS this
-   key (only its hash is stored). Generate/rotate it from Settings → MCP →
-   Connections; it appears there as a "Service API key" connection.
+1. **Authenticate to the MCP with the shared chat-agent key.** Send
+   `Authorization: Bearer <agent_key>`. There is **one shared key** for all chat
+   agents, stored **hashed** in `app_settings.mcp.agent_key` (distinct from the
+   JWT signing key). Generate/rotate it from Settings → MCP → Connections.
 2. **Assert the chat identity via request headers** (not LLM tool args):
    - `X-Chat-Platform`: `telegram` | `whatsapp` | `teams`
+   - `X-Chat-Scope`: `direct` | `group` — `group` (or a missing user id) forces
+     **basic-only** mode (see tiering below).
    - `X-Chat-User-Id`: the platform's **permanent** user id (Telegram numeric
      `user_id`; Teams `aadObjectId`; WhatsApp `wa_id`). Never `@handle`/phone for TG.
    - `X-Chat-Aad-Oid` (+ optionally `X-Chat-Email`): for Teams auto-bind.
@@ -133,10 +134,24 @@ holding **no SSO tokens or per-user credentials**. The contract:
    - Telegram: `X-Telegram-Bot-Api-Secret-Token` (+ IP pinning)
    - WhatsApp: `X-Hub-Signature-256` (app-secret HMAC)
    - Teams: Bot Framework JWT (Microsoft-signed)
-4. **Handle MCP responses**: `not_linked` (code `-32003`, returns `{ link_url }`
-   — show the user the one-time link) and `consent_required` (code `-32004`,
-   returns `{ link_url }` for a step-up confirmation). Linked calls return
-   user-scoped data under RLS.
+4. **Basic vs advanced tools (tiering).**
+   - **Basic** (`whoami`, `search_kb`, `get_article`, `create_ticket`): work with
+     **just the agent key** — no identity, no linkage, no SSO URL. Available in
+     group chats and to unidentified users.
+   - **Advanced** (all others): require a verified **1:1** identity, i.e.
+     `X-Chat-Scope: direct` **and** a usable `X-Chat-User-Id` (Teams: `X-Chat-Aad-Oid`).
+5. **Handle MCP responses**:
+   - `advanced_requires_dm` (code `-32003`): an advanced tool was called without a
+     verified identity. `data` carries `cause` (`group_chat` | `no_user_id`),
+     `tool`, `tier`, `chat_scope`, `platform`, `remediation: ask_user_to_dm`,
+     `agent_guidance`, and `available_here` (basic tools still usable). The agent
+     should relay this in its own words — ask the user to re-send the request in a
+     direct (1:1) message — and must **not** leak anyone's personal data.
+   - `not_linked` (code `-32003`, returns `{ link_url }`): a 1:1, identified but
+     unlinked user calling an advanced tool — show the one-time link.
+   - `consent_required` (code `-32004`, returns `{ link_url }`): step-up
+     confirmation for `approve`/`reject` or ticket close/resolve.
+   - Linked advanced calls return user-scoped data under RLS.
 
 The MCP mints a short-lived per-request SSO JWT (`mint-delegated-token`) and
 never returns it to the agent. See ADR-032 and `sso-edge-functions.md`.
