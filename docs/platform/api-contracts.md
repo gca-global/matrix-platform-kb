@@ -118,10 +118,12 @@ Apps send `Authorization: Bearer <token>` with the SSO JWT obtained from the OAu
 Chat agents (e.g. **HumaticAI**) call the ITSM `mcp-server` MCP endpoint as a tool
 while holding **no SSO tokens or per-user credentials**. The contract:
 
-1. **Authenticate to the MCP with the shared chat-agent key.** Send
-   `Authorization: Bearer <agent_key>`. There is **one shared key** for all chat
-   agents, stored **hashed** in `app_settings.mcp.agent_key` (distinct from the
-   JWT signing key). Generate/rotate it from Settings → MCP → Connections.
+1. **Authenticate to the MCP with the MCP signing key.** Send
+   `Authorization: Bearer <mcp_signing_key>`. There is **one** MCP key — the
+   signing key in `app_settings.mcp.jwt_secret` (managed from Settings → MCP →
+   Configuration). It both signs MCP JWTs and is the bearer chat agents present;
+   there is no separate agent key. The UI shows it masked only, so retrieve the
+   value out-of-band to configure the agent.
 2. **Assert the chat identity via request headers** (not LLM tool args):
    - `X-Chat-Platform`: `telegram` | `whatsapp` | `teams`
    - `X-Chat-Scope`: `direct` | `group` — `group` (or a missing user id) forces
@@ -136,7 +138,7 @@ while holding **no SSO tokens or per-user credentials**. The contract:
    - Teams: Bot Framework JWT (Microsoft-signed)
 4. **Basic vs advanced tools (tiering).**
    - **Basic** (`whoami`, `search_kb`, `get_article`, `create_ticket`): work with
-     **just the agent key** — no identity, no linkage, no SSO URL. Available in
+     **just the MCP key** — no identity, no linkage, no SSO URL. Available in
      group chats and to unidentified users.
    - **Advanced** (all others): require a verified **1:1** identity, i.e.
      `X-Chat-Scope: direct` **and** a usable `X-Chat-User-Id` (Teams: `X-Chat-Aad-Oid`).

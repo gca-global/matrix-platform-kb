@@ -463,9 +463,12 @@ the SSO `mint-delegated-token` EF (service credential only) to mint a
 **short-lived ES256 JWT per request** against a **revocable delegation grant**
 (`sso_delegation_grants`), and runs tools through a per-user RLS-bound PostgREST
 client (Third-Party Auth). No user credential is duplicated into the app; access
-ends on grant revoke or 90-day inactivity. Agents authenticate with **one shared
-agent key** (hashed in `app_settings.mcp.agent_key`, **distinct from the JWT
-signing key** — an agent never holds a token-minting secret). Least privilege is
+ends on grant revoke or 90-day inactivity. Agents authenticate with the **single
+MCP signing key** (`app_settings.mcp.jwt_secret`) — there is no separate agent
+key. Accepted trade-off: the agent bearer equals the signing secret, but a forged
+HS256 token still cannot impersonate a user because `mcp-server` requires a
+matching non-revoked `mcp_oauth_tokens` row, and the chat-agent path requires
+platform-verified chat headers. Least privilege is
 enforced by **tool tiering**: *basic* tools (`whoami`, `search_kb`, `get_article`,
 `create_ticket`) need only the agent key and run leak-safe (KB published-only,
 write-only ticket creation), while *advanced* tools require a verified **1:1**
