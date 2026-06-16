@@ -119,8 +119,10 @@ The HumaticAI chat agent calls the ITSM `mcp-server` MCP endpoint as a tool whil
 holding **no SSO tokens or per-user credentials**. The contract:
 
 1. **Authenticate to the MCP with the agent key.** Send
-   `Authorization: Bearer <agent_key>` (the HumaticAI service key from Settings →
-   MCP; stored hashed in `app_settings.mcp.agent_key`).
+   `Authorization: Bearer <agent_key>`. HumaticAI is a **registered MCP client**
+   (`mcp_oauth_clients`, `client_id = humatic-ai`) whose `client_secret` IS this
+   key (only its hash is stored). Generate/rotate it from Settings → MCP →
+   Connections; it appears there as a "Service API key" connection.
 2. **Assert the chat identity via request headers** (not LLM tool args):
    - `X-Chat-Platform`: `telegram` | `whatsapp` | `teams`
    - `X-Chat-User-Id`: the platform's **permanent** user id (Telegram numeric
