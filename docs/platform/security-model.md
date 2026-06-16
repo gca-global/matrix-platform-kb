@@ -454,6 +454,21 @@ Apps use `role_configurations.pages` to control which pages each role can access
 2. Use `canPerformAction('action-key')` in component logic
 3. Configure which roles can perform this action in `role_configurations`
 
+## Delegated minting for chat agents (ADR-032)
+
+SSO is the **sole identity authority** — apps never store user credentials
+(passwords, refresh tokens). For the ITSM MCP chat-identity binding, the
+HumaticAI agent acts for a chat user **without holding any token**: the MCP calls
+the SSO `mint-delegated-token` EF (service credential only) to mint a
+**short-lived ES256 JWT per request** against a **revocable delegation grant**
+(`sso_delegation_grants`), and runs tools through a per-user RLS-bound PostgREST
+client (Third-Party Auth). No user credential is duplicated into the app; access
+ends on grant revoke or 90-day inactivity. Least privilege is enforced by a
+reduced tool surface + **step-up consent** for sensitive/write actions. Binding
+assurance is per-platform: Teams auto-binds (`aadObjectId` = `azure_oid`, high),
+Telegram/WhatsApp require a one-time interactive login (interactive). See
+[ADR-032](../architecture/decisions/ADR-032.md).
+
 ## OAuth 2.1 + PKCE posture
 
 All Matrix Apps are **public OAuth clients** and authenticate with OAuth 2.1 +

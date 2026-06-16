@@ -113,6 +113,32 @@ All functions use `verify_jwt: false` and implement **custom JWT verification** 
 
 Apps send `Authorization: Bearer <token>` with the SSO JWT obtained from the OAuth flow.
 
+## HumaticAI → MCP ingestion contract (ADR-032)
+
+The HumaticAI chat agent calls the ITSM `mcp-server` MCP endpoint as a tool while
+holding **no SSO tokens or per-user credentials**. The contract:
+
+1. **Authenticate to the MCP with the agent key.** Send
+   `Authorization: Bearer <agent_key>` (the HumaticAI service key from Settings →
+   MCP; stored hashed in `app_settings.mcp.agent_key`).
+2. **Assert the chat identity via request headers** (not LLM tool args):
+   - `X-Chat-Platform`: `telegram` | `whatsapp` | `teams`
+   - `X-Chat-User-Id`: the platform's **permanent** user id (Telegram numeric
+     `user_id`; Teams `aadObjectId`; WhatsApp `wa_id`). Never `@handle`/phone for TG.
+   - `X-Chat-Aad-Oid` (+ optionally `X-Chat-Email`): for Teams auto-bind.
+3. **Verify the platform webhook signature BEFORE forwarding a chat id.** The
+   chat id is platform-asserted, never user-asserted:
+   - Telegram: `X-Telegram-Bot-Api-Secret-Token` (+ IP pinning)
+   - WhatsApp: `X-Hub-Signature-256` (app-secret HMAC)
+   - Teams: Bot Framework JWT (Microsoft-signed)
+4. **Handle MCP responses**: `not_linked` (code `-32003`, returns `{ link_url }`
+   — show the user the one-time link) and `consent_required` (code `-32004`,
+   returns `{ link_url }` for a step-up confirmation). Linked calls return
+   user-scoped data under RLS.
+
+The MCP mints a short-lived per-request SSO JWT (`mint-delegated-token`) and
+never returns it to the agent. See ADR-032 and `sso-edge-functions.md`.
+
 ## Contract Governance
 
 | Practice | Detail |

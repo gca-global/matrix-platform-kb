@@ -239,6 +239,24 @@ lookup with no signature check — KB gap H4, closed).
 
 **Relationship to `switch-role`**: Role switching changes *what you can do* (scope + CRUD). Tenant switching changes *which organization's data you see* (cross-tenant context for platform admins).
 
+## Delegated Minting (ADR-032)
+
+### `mint-delegated-token`
+
+Service-to-service minting for the ITSM MCP chat-identity binding (HumaticAI agent). Lets a **delegate app** (the ITSM MCP) act for a user **without holding any user credential**, against a **revocable delegation grant**. `verify_jwt = false`; gated by a **service credential** in the `X-Delegation-Secret` header (env `MCP_DELEGATION_SECRET`) — never a per-user token.
+
+Single deployable, routed by `action` in the JSON body:
+
+| Action | Input | Output | Notes |
+|---|---|---|---|
+| `mint` | `{ grant_id }` | `{ access_token, token_type, expires_in, scope }` | Active-grant check + 90-day inactivity expiry; mints a **short-lived (~30 min) ES256 JWT** for the grant's user (claim shape per `oauth-token`, signed exactly as that app expects — ES256 for SSO-instance apps); updates `last_minted_at`/`mint_count`; per-isolate rate limit. **No token is stored** (verified by signature, so no `sso_access_tokens` row). |
+| `create_grant` | `{ platform, client_id, external_user_ref, assurance, (user_bearer \| azure_oid \| email) }` | `{ grant_id, user_id, email, tenant_id, assurance }` | Resolves the canonical SSO user: interactive ⇒ verify `user_bearer`; Teams auto-bind ⇒ `mcp_resolve_user(azure_oid|email)`. Supersedes any prior active grant for `(client_id, platform, external_user_ref)`. |
+| `revoke_grant` | `{ grant_id }` | `{ ok }` | Marks the grant revoked (called from ITSM admin revoke). |
+
+**Backing store**: `sso_delegation_grants` (service-role only) + `mcp_resolve_user(email, azure_oid)` SECURITY DEFINER RPC (service-role execute only). **Signing reliability**: same ES256-or-fail-closed rule as `oauth-token`/`switch-role`.
+
+**Trust chain**: the minted token is the last hop of `Platform → (signed webhook) → HumaticAI → (agent key) → MCP → (X-Delegation-Secret) → mint`. The chat id is platform-asserted; HumaticAI must verify the platform webhook signature before forwarding it.
+
 ## Admin Functions
 
 All admin functions require `org_admin` or `system_admin` scope.
