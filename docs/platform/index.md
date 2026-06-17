@@ -69,6 +69,7 @@ See [app-template.md](app-template.md) for full technical details.
 | [mls-datamart.md](mls-datamart.md) | MLS 2.0 data pipeline: sources, Databricks ETL, Supabase CDL sync |
 | [ecosystem-architecture.md](ecosystem-architecture.md) | Full platform architecture: channels, apps, data layer, AI/ML |
 | [app-catalog.md](app-catalog.md) | All apps in the platform: purpose, users, RESO resources consumed |
+| [matrix-mcp-server.md](matrix-mcp-server.md) | MCP server (MLS/property): AI-agent access layer over CDL — endpoint, tools, auth, status (live demo) |
 | [testing-strategy.md](testing-strategy.md) | Testing: unit (Vitest), integration, E2E (Playwright), contract testing |
 | [api-contracts.md](api-contracts.md) | Edge Function API surface, OpenAPI reference, per-app dependencies |
 | [new-app-auth-troubleshooting.md](new-app-auth-troubleshooting.md) | Troubleshooting: new app auth failures (401/400/403), stale sessions, Lovable preview issues |
