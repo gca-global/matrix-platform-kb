@@ -118,25 +118,30 @@ Apps send `Authorization: Bearer <token>` with the SSO JWT obtained from the OAu
 Chat agents (e.g. **HumaticAI**) call the ITSM `mcp-server` MCP endpoint as a tool
 while holding **no SSO tokens or per-user credentials**. The contract:
 
-1. **Authenticate via OAuth client-credentials (`private_key_jwt`).** Each agent
-   is registered as its own client (Settings → MCP → Agents) with its own public
-   key. The agent builds a short-lived JWT **client assertion** signed with its
-   private key — `iss=sub=<client_id>`, `aud=<token endpoint>`, `exp` ≤ 5 min,
-   unique `jti` — and POSTs it to `mcp-oauth/token`:
+1. **Authenticate via OAuth 2.1 authorization-code + PKCE (HubSpot-style).** Each
+   agent is registered as its own confidential client (Settings → MCP → Agents)
+   with a `client_id` + `client_secret` + redirect URL(s). The connector runs the
+   standard browser flow — `mcp-oauth/authorize` → `/oauth/consent` (operator signs
+   in once via SSO and approves) → single-use `code` → token exchange with PKCE
+   **and the client secret**:
 
    ```
    POST {SUPABASE_URL}/functions/v1/mcp-oauth/token
    Content-Type: application/x-www-form-urlencoded
 
-   grant_type=client_credentials
-   &client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer
-   &client_assertion=<signed-jwt>
+   grant_type=authorization_code
+   &code=<authorization-code>
+   &code_verifier=<pkce-verifier>
+   &redirect_uri=<registered-redirect>
+   &client_id=<client_id>
+   &client_secret=<client_secret>   # or HTTP Basic; omit for public clients
    ```
 
-   The AS verifies the signature against the registered public key, rejects a
-   reused `jti` (replay), and returns a **1h** `access_token` (no refresh). Cache
-   it and refresh at ~80% TTL. Then call `mcp-server` with
-   `Authorization: Bearer <access_token>`. The signing key
+   Returns a **1h** `access_token` **+ 30d** `refresh_token`; refresh with
+   `grant_type=refresh_token` (rotates the refresh token). Then call `mcp-server`
+   with `Authorization: Bearer <access_token>`. Clients that auto-discover OAuth
+   (Claude, Cursor, MCP Inspector) only need the MCP URL — they read
+   `/.well-known/oauth-protected-resource` and run the flow. The signing key
    (`app_settings.mcp.jwt_secret`) is **server-only** — never a bearer.
 2. **Assert the chat identity via request headers** (not LLM tool args):
    - `X-Chat-Platform`: `telegram` | `whatsapp` | `teams`

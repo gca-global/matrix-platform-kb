@@ -463,15 +463,15 @@ the SSO `mint-delegated-token` EF (service credential only) to mint a
 **short-lived ES256 JWT per request** against a **revocable delegation grant**
 (`sso_delegation_grants`), and runs tools through a per-user RLS-bound PostgREST
 client (Third-Party Auth). No user credential is duplicated into the app; access
-ends on grant revoke or 90-day inactivity. Agents authenticate with **OAuth
-client-credentials via `private_key_jwt`** (RFC 7523): each agent is its own
-client with its own registered public key, signs a short-lived assertion
-(one-time `jti`, ≤ 5 min) with its private key, and exchanges it at
-`mcp-oauth/token` for a 1h MCP access token. The signing key
-(`app_settings.mcp.jwt_secret`) is **server-only** — it signs issued access
-tokens and is never a bearer, so a leaked signing key cannot be replayed as an
-agent credential, and a leaked agent key is rotated/revoked **per-agent**. Least
-privilege is
+ends on grant revoke or 90-day inactivity. Agents authenticate with **OAuth 2.1
+authorization-code + PKCE** (HubSpot-style): each agent is its own client with its
+own `client_id` + `client_secret` (hashed at rest) + redirect URL(s); the operator
+authorizes once in a browser via SSO, and the connector exchanges the code (PKCE +
+client secret) at `mcp-oauth/token` for a 1h MCP access token + 30d refresh token.
+The signing key (`app_settings.mcp.jwt_secret`) is **server-only** — it signs
+issued access tokens and is never a bearer, so a leaked signing key cannot be
+replayed as an agent credential, and a leaked agent secret is rotated/revoked
+**per-agent**. Least privilege is
 enforced by **tool tiering**: *basic* tools (`whoami`, `search_kb`, `get_article`,
 `create_ticket`) need only the agent access token and run leak-safe (KB published-only,
 write-only ticket creation), while *advanced* tools require a verified **1:1**
