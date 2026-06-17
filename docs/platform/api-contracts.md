@@ -118,12 +118,26 @@ Apps send `Authorization: Bearer <token>` with the SSO JWT obtained from the OAu
 Chat agents (e.g. **HumaticAI**) call the ITSM `mcp-server` MCP endpoint as a tool
 while holding **no SSO tokens or per-user credentials**. The contract:
 
-1. **Authenticate to the MCP with the MCP signing key.** Send
-   `Authorization: Bearer <mcp_signing_key>`. There is **one** MCP key — the
-   signing key in `app_settings.mcp.jwt_secret` (managed from Settings → MCP →
-   Configuration). It both signs MCP JWTs and is the bearer chat agents present;
-   there is no separate agent key. The UI shows it masked only, so retrieve the
-   value out-of-band to configure the agent.
+1. **Authenticate via OAuth client-credentials (`private_key_jwt`).** Each agent
+   is registered as its own client (Settings → MCP → Agents) with its own public
+   key. The agent builds a short-lived JWT **client assertion** signed with its
+   private key — `iss=sub=<client_id>`, `aud=<token endpoint>`, `exp` ≤ 5 min,
+   unique `jti` — and POSTs it to `mcp-oauth/token`:
+
+   ```
+   POST {SUPABASE_URL}/functions/v1/mcp-oauth/token
+   Content-Type: application/x-www-form-urlencoded
+
+   grant_type=client_credentials
+   &client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+   &client_assertion=<signed-jwt>
+   ```
+
+   The AS verifies the signature against the registered public key, rejects a
+   reused `jti` (replay), and returns a **1h** `access_token` (no refresh). Cache
+   it and refresh at ~80% TTL. Then call `mcp-server` with
+   `Authorization: Bearer <access_token>`. The signing key
+   (`app_settings.mcp.jwt_secret`) is **server-only** — never a bearer.
 2. **Assert the chat identity via request headers** (not LLM tool args):
    - `X-Chat-Platform`: `telegram` | `whatsapp` | `teams`
    - `X-Chat-Scope`: `direct` | `group` — `group` (or a missing user id) forces
@@ -138,8 +152,8 @@ while holding **no SSO tokens or per-user credentials**. The contract:
    - Teams: Bot Framework JWT (Microsoft-signed)
 4. **Basic vs advanced tools (tiering).**
    - **Basic** (`whoami`, `search_kb`, `get_article`, `create_ticket`): work with
-     **just the MCP key** — no identity, no linkage, no SSO URL. Available in
-     group chats and to unidentified users.
+     **just the agent access token** — no chat headers, no linkage, no SSO URL.
+     Available in group chats and to unidentified users.
    - **Advanced** (all others): require a verified **1:1** identity, i.e.
      `X-Chat-Scope: direct` **and** a usable `X-Chat-User-Id` (Teams: `X-Chat-Aad-Oid`).
 5. **Handle MCP responses**:

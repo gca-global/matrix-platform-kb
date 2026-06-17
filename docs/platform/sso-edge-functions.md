@@ -255,7 +255,7 @@ Single deployable, routed by `action` in the JSON body:
 
 **Backing store**: `sso_delegation_grants` (service-role only) + `mcp_resolve_user(email, azure_oid)` SECURITY DEFINER RPC (service-role execute only). **Signing reliability**: same ES256-or-fail-closed rule as `oauth-token`/`switch-role`.
 
-**Trust chain**: the minted token is the last hop of `Platform → (signed webhook) → HumaticAI → (MCP signing key) → MCP → (X-Delegation-Secret) → mint`. The chat id is platform-asserted; HumaticAI must verify the platform webhook signature before forwarding it.
+**Trust chain**: the minted token is the last hop of `Platform → (signed webhook) → HumaticAI → (private_key_jwt → MCP access token) → MCP → (X-Delegation-Secret) → mint`. The agent authenticates to MCP with OAuth client-credentials (`private_key_jwt`); the signing key is never a bearer. The chat id is platform-asserted; HumaticAI must verify the platform webhook signature before forwarding it.
 
 ## Admin Functions
 

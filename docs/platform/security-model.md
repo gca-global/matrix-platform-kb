@@ -463,14 +463,17 @@ the SSO `mint-delegated-token` EF (service credential only) to mint a
 **short-lived ES256 JWT per request** against a **revocable delegation grant**
 (`sso_delegation_grants`), and runs tools through a per-user RLS-bound PostgREST
 client (Third-Party Auth). No user credential is duplicated into the app; access
-ends on grant revoke or 90-day inactivity. Agents authenticate with the **single
-MCP signing key** (`app_settings.mcp.jwt_secret`) — there is no separate agent
-key. Accepted trade-off: the agent bearer equals the signing secret, but a forged
-HS256 token still cannot impersonate a user because `mcp-server` requires a
-matching non-revoked `mcp_oauth_tokens` row, and the chat-agent path requires
-platform-verified chat headers. Least privilege is
+ends on grant revoke or 90-day inactivity. Agents authenticate with **OAuth
+client-credentials via `private_key_jwt`** (RFC 7523): each agent is its own
+client with its own registered public key, signs a short-lived assertion
+(one-time `jti`, ≤ 5 min) with its private key, and exchanges it at
+`mcp-oauth/token` for a 1h MCP access token. The signing key
+(`app_settings.mcp.jwt_secret`) is **server-only** — it signs issued access
+tokens and is never a bearer, so a leaked signing key cannot be replayed as an
+agent credential, and a leaked agent key is rotated/revoked **per-agent**. Least
+privilege is
 enforced by **tool tiering**: *basic* tools (`whoami`, `search_kb`, `get_article`,
-`create_ticket`) need only the agent key and run leak-safe (KB published-only,
+`create_ticket`) need only the agent access token and run leak-safe (KB published-only,
 write-only ticket creation), while *advanced* tools require a verified **1:1**
 identity (`X-Chat-Scope: direct` + a usable user id) and a linked SSO account —
 group chats and unidentified users are basic-only and get an `advanced_requires_dm`
