@@ -8,7 +8,7 @@ tags: [entity]
 
 # Business entities — canonical RESO + project-flavour Referral
 
-> Fifteen canonical RESO entities + one project-flavour entity (`Referral`). For each: definition, where it is mastered (write authority vs physical store), key attributes, and what concepts (Lead / Opportunity / Offer / Contract / Commission / Payment Event) are realized **without** their own entity. Column-semantics note at the bottom.
+> Fifteen canonical RESO entities + project-flavour entities (`Referral`, `Document`, `ShowingParticipation`, and — since [ADR-034](../../../architecture/decisions/ADR-034.md) — the stored `Opportunity` super-resource `opportunity`/`opportunity_link`). For each: definition, where it is mastered (write authority vs physical store), key attributes, and what concepts (Lead / Opportunity / Offer / Contract / Commission / Payment Event) are realized **without** their own entity. Column-semantics note at the bottom.
 
 ## TOC
 
@@ -242,7 +242,7 @@ Source: raw/context-v2.md §5, §9.3.
 | Concept | Where it is realized instead of being a standalone entity |
 |---|---|
 | `Lead` | `Contacts.ContactType = Lead` (ContactType funnel: Lead → Prospect → Ready to Buy → Buyer / Seller / …). |
-| `Opportunity` | Projection over `(Contacts.ContactType + N×SavedSearch + N×Prospecting + N×ContactListings + optional TransactionManagement + Property.StandardStatus)`. The 5-stage pipeline persists as a UI/UX projection (see [wiki/overview.md#pipeline](overview.md#pipeline)), not as a stored entity. |
+| `Opportunity` | **Stored project-flavour CDL super-resource** (`opportunity` + `opportunity_link`, [ADR-034](../../../architecture/decisions/ADR-034.md), [opportunity-model.md](../../../data-models/opportunity-model.md)) that aggregates `Contacts` + N×`SavedSearch`/`Prospecting`/`ContactListings` + Showing chain + `Caravan` + `Referral` + optional `TransactionManagement` + target `Property.StandardStatus`. The Opportunity is the explicit **subject of the pipeline**; its **5-stage position is a calculated projection** (`deriveOpportunityStage`), **never a stored `stage` column** — the stored part is only the anchor + links. (Pre-ADR-034 there was no stored anchor at all; the subject was the implicit `(Contacts × SavedSearch)` pair.) |
 | `Opportunity Property Interest` | `ContactListings` + `ContactListingPreference` (Favorite / Possibility / Discard) + Showing chain rows + `TransactionManagement` rows. |
 | `Offer` | `TransactionManagement` (TransactionType: PurchaseOffer / LeaseOffer) + `HistoryTransactional` for lifecycle statuses + push of `Property.StandardStatus`. |
 | `Viewing` (as a single entity) | Canonical 5-resource Showing chain. |

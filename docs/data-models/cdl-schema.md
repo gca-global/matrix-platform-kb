@@ -724,6 +724,36 @@ hybrid envelope as the Phase-2 tables (`id uuid pk` + `source_id` +
 Both are added to the `cdl-write` RESOURCES map (`resourceName` `Referral`/`Document`,
 `hasSoftDelete`) and the `cdl-read` whitelist (`cdl-write` v7 / `cdl-read` v7).
 
+### Opportunity super-resource (2026-06-17)
+
+`20260617120000_opportunity_super_resource.sql` ([ADR-034](../architecture/decisions/ADR-034.md),
+[opportunity-model.md](opportunity-model.md)). Adds the stored **Opportunity**
+anchor that becomes the **subject of the pipeline** (replacing the implicit
+`(Contacts × SavedSearch)` projection subject). RESO models no Opportunity/Deal
+resource, so these are **project-flavour CDL resources** (plain canonical
+snake_case, no `x_`), same hybrid envelope + soft-delete + provenance + service-role-only
+RLS as `referral`/`document`/`showing_participation`.
+
+| Table | "Resource" | RLS read surface |
+|---|---|---|
+| `public.opportunity` | Opportunity (project-flavour; no RESO equiv) | **service_role only** (PII-adjacent — anchors a Contact) |
+| `public.opportunity_link` | OpportunityLink (project-flavour join) | **service_role only** |
+
+- **`public.opportunity`** — stored anchor + minimal header: `opportunity_key`,
+  `contact_key` (nullable — supports create-without-contact origins),
+  `owner_member_key`, `title`, `origin` (`contact`/`web`/`referral`/`import`),
+  `opportunity_status` (`open`/`won`/`lost`/`archived` — operational anchor state,
+  **NOT** the funnel stage), `close_reason`, `tenant_id`, + envelope. **No `stage`
+  column** — the 5-stage funnel position is a **calculated projection**
+  (`deriveOpportunityStage`), never stored ([ADR-034](../architecture/decisions/ADR-034.md) D2).
+- **`public.opportunity_link`** — many-to-many join: `opportunity_key`,
+  `resource_name` (`Contacts`/`SavedSearch`/`ContactListings`/`Showing`/
+  `ShowingAppointment`/`Caravan`/`Referral`/`TransactionManagement`),
+  `resource_key`, `role`, + envelope. **Loose text refs, no FK** (consistent with
+  the CDL envelope; co-location gives indexed joins, [ADR-034](../architecture/decisions/ADR-034.md) D3).
+- Added to the `cdl-write` RESOURCES map (`resourceName` `Opportunity`/`OpportunityLink`,
+  `hasSoftDelete`, `sourceEnvelopeProvenance`) and the `cdl-read` whitelist.
+
 > **Authorization (no SSO permission-key layer for matrix-pipeline).** Unlike the
 > three legacy apps in `sso_app_permissions` (`agency-portal`/`client-connect`/
 > `meeting-hub`), `matrix-pipeline` gates pages via **`role_configurations` page

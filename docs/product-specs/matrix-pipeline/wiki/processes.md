@@ -141,7 +141,7 @@ flowchart LR
 
 ### Stage projection & collection anchor (ADR-029)
 
-Per [ADR-029](../../../architecture/decisions/ADR-029.md), the broker-facing funnel stage is a **projection**, not a stored column, and the two "closed" notions are kept distinct:
+Per [ADR-029](../../../architecture/decisions/ADR-029.md), the broker-facing funnel stage is a **projection**, not a stored column, and the two "closed" notions are kept distinct. Since [ADR-034](../../../architecture/decisions/ADR-034.md) the **subject** of this projection is the stored `Opportunity` super-resource (`opportunity`/`opportunity_link`, see [opportunity-model.md](../../../data-models/opportunity-model.md)) — the offer `TransactionManagement` is linked into the opportunity's `contract` stage rather than authored standalone — but the stage itself is still **calculated, never stored**:
 
 - Stage **"Closed" (deal won)** = `Property.PurchaseContractDate IS NOT NULL` — fires at contract signing (`acceptOffer` → `Pending`). This matches commercial practice in CY/HU/KZ (commission earned at CoS / adásvételi signing).
 - **"Settled"** (badge/substate) = canonical `Property.StandardStatus = Closed` — fires at settlement (final payment + possession), via `closeDeal`. RESO `CloseDate` means settlement, NOT title-deed registration (CY title deeds may lag years and are tracked project-flavour only).

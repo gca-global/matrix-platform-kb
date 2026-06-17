@@ -247,7 +247,7 @@ Not canonical RESO and not cross-app:
 
 - `Activity` (calls, tasks, follow-ups — CRM workflow state; extended markup for cost attribution — see [wiki/requirements.md#fr-act-activities](requirements.md#fr-act-activities) FR-ACT-10).
 - `Document` references (document metadata; files live in external systems).
-- Pipeline-state UI cache (5-stage funnel as UI/UX projection — see [wiki/overview.md#pipeline](overview.md#pipeline)).
+- Pipeline-state UI cache (5-stage funnel as a **calculated** projection — see [wiki/overview.md#pipeline](overview.md#pipeline)). The Opportunity *anchor* it projects onto is stored in the CDL (`opportunity`/`opportunity_link`, [ADR-034](../../../architecture/decisions/ADR-034.md)), not in the app DB; the *stage* is never stored anywhere.
 - Drafts, app-specific lookup tables.
 - Any UI preferences, view configs, caches.
 - **Deal Commercialization, GCI, and Commission Engine state** ([wiki/commission-engine.md](commission-engine.md)) — operational deal costs, commission rates and rules, computed per-deal P&L and broker compensation. Detailed app-private data model, formulas, and FRs. **As-built (2026-06-10, [ADR-028](../../../architecture/decisions/ADR-028.md#implementation-status-as-built)):** the shipped tables are `deal_cost_event`, `cost_rate_card`, `commission_rule` (country-scoped, date-versioned), `commission_estimate` (the conceptual `DealPnL`, generalized per listing/sales-contract), and `broker_compensation` — all real app-private tables, not computed views. The project-flavour deviation is recorded in the [#escape-hatch](#escape-hatch).
@@ -276,7 +276,7 @@ Source: raw/context-v2.md §5a.7.
 - **Integration gate**: contracts and **actual** payments / commission ledger are **not** first-class CRM data entities. External systems (contract management + Finance ERP) are the sole source of truth for legally significant records; CRM observes them via webhooks and mirrors via `Property.StandardStatus` + `HistoryTransactional`. Permitted deviation: forecast GCI, commission rule engine, per-deal P&L are stored in CRM app-private tables of the [wiki/commission-engine.md](commission-engine.md) subsystem as an advisory tool for the sales broker, with an explicit reconciliation pattern against the actual ledger in external Finance ERP. See [#escape-hatch](#escape-hatch).
 - **AI gate**: AI features read and update exclusively canonical resources. Introducing "AI-only" fields not mapped to RESO DD 2.0 is forbidden.
 - **CDL access gate**: for any CDL table with RLS disabled, CRM **MUST** go through dedicated CDL EFs with SSO JWT scope check — not via direct anon/authenticated PostgREST. Until table-level RLS is enabled per Pattern B (`security-model.md`), the CDL EF is the only access-control mechanism. Direct PostgREST access from the CRM app layer is forbidden. **2026-05-29:** `public.contact_listings` + `public.contact_listing_notes` are now RLS-enabled (service-role-only) and reached via `cdl-contact-listings-read` / `cdl-write` — the engagement-data violation is closed. The gate still applies to the remaining RLS-disabled ingestion-side tables: `public.properties`, `public.property_media`, `public.property_field_overrides`, `public.mls_*`, `public.ingest_audit`, `cdl_staging.*` (S1 backlog, Pattern B).
-- **Pipeline gate**: the 5-stage pipeline is **not** stored as a table. The stage is derived from canonical state ([wiki/overview.md#pipeline](overview.md#pipeline)). Any implementation that materializes `pipeline_stages` as a stand-alone table violates compliance.
+- **Pipeline gate**: the pipeline **stage** is **not** stored. It is derived from canonical state ([wiki/overview.md#pipeline](overview.md#pipeline)). Any implementation that materializes `pipeline_stages` or a `stage` column violates compliance. **Refined by [ADR-034](../../../architecture/decisions/ADR-034.md)**: a stored `Opportunity` *anchor* (`opportunity` + `opportunity_link` in the CDL) **is** allowed — it is the explicit subject the stage projects onto — but the **stage stays calculated only** (`deriveOpportunityStage`), so the "no stored stage / no `pipeline_stages` table" rule is preserved. Storing the stage on the opportunity row is forbidden.
 
 Source: raw/context-v2.md §11.5.
 
@@ -339,7 +339,7 @@ Source: raw/context-v2.md §11.3.
 ```mermaid
 flowchart LR
   L[Lead BRD entity] -- ContactType funnel --> CT["Contacts.ContactType=Lead → Prospect → ..."]
-  O[Opportunity BRD entity] -- projection --> P["(Contacts × SavedSearch) + Prospecting + ContactListings + TransactionManagement + Property.StandardStatus"]
+  O[Opportunity BRD entity] -- stored anchor + calculated stage --> P["opportunity + opportunity_link → Contacts + SavedSearch + Prospecting + ContactListings + Showing chain + Caravan + Referral + TransactionManagement + Property.StandardStatus (ADR-034)"]
   OPI[Opportunity Property Interest] -- engagement --> CL["ContactListings + ContactListingPreference + ContactListingNotes"]
   OFF[Offer BRD entity] -- canonical --> TM["TransactionManagement + HistoryTransactional"]
   V[Viewing BRD entity] -- 5-resource chain --> SHC["ShowingAvailability → ShowingRequest → ShowingAppointment → Showing → LockOrBox"]
