@@ -465,13 +465,17 @@ the SSO `mint-delegated-token` EF (service credential only) to mint a
 client (Third-Party Auth). No user credential is duplicated into the app; access
 ends on grant revoke or 90-day inactivity. Agents authenticate with **OAuth 2.1
 authorization-code + PKCE** (HubSpot-style): each agent is its own client with its
-own `client_id` + `client_secret` (hashed at rest) + redirect URL(s); the operator
+own `client_id` + `client_secret` + redirect URL(s); the operator
 authorizes once in a browser via SSO, and the connector exchanges the code (PKCE +
 client secret) at `mcp-oauth/token` for a 1h MCP access token + 30d refresh token.
+The secret is kept as a **SHA-256 hash** (token-endpoint verification) **and**
+AES-256-GCM-**encrypted at rest** (`client_secret_enc`) so an admin can **re-Show**
+it from Settings → MCP → Agents → Manage; the encryption key (`MCP_SECRET_ENC_KEY`)
+lives only in the `mcp-admin` EF env, and every reveal is **admin-only and audited**.
 The signing key (`app_settings.mcp.jwt_secret`) is **server-only** — it signs
 issued access tokens and is never a bearer, so a leaked signing key cannot be
-replayed as an agent credential, and a leaked agent secret is rotated/revoked
-**per-agent**. Least privilege is
+replayed as an agent credential, and a leaked agent secret is rotated or the agent
+permanently **deleted** **per-agent** (blast radius unchanged). Least privilege is
 enforced by **tool tiering**: *basic* tools (`whoami`, `search_kb`, `get_article`,
 `create_ticket`) need only the agent access token and run leak-safe (KB published-only,
 write-only ticket creation), while *advanced* tools require a verified **1:1**
