@@ -8,7 +8,7 @@ tags: [process]
 
 # Business processes
 
-> Six top-level business processes, all built on canonical RESO DD 2.0 resources. `Lead`, `Opportunity`, `Offer`, `Contract`, `Commission`, `Payment Event` are **not** CRM data-model entities — they are either dissolved into the canonical model or realized through canonical `Property.StandardStatus` + `HistoryTransactional` + external integrations (see [wiki/integration.md](integration.md)).
+> Six top-level business processes, all built on canonical RESO DD 2.0 resources plus app-private CRM workflow anchors. `Lead`, `Offer`, `Contract`, `Commission`, `Payment Event` are **not** standalone canonical entities — they are either dissolved into the canonical model or realized through canonical `Property.StandardStatus` + `HistoryTransactional` + external integrations (see [wiki/integration.md](integration.md)). `Opportunity` is now an explicit stored app-DB super-resource (`opportunity` / `opportunity_link`, [ADR-035](../../../architecture/decisions/ADR-035.md)) with a calculated (never stored) stage.
 
 ## TOC
 
@@ -141,7 +141,7 @@ flowchart LR
 
 ### Stage projection & collection anchor (ADR-029)
 
-Per [ADR-029](../../../architecture/decisions/ADR-029.md), the broker-facing funnel stage is a **projection**, not a stored column, and the two "closed" notions are kept distinct. Since [ADR-034](../../../architecture/decisions/ADR-034.md) the **subject** of this projection is the stored `Opportunity` super-resource (`opportunity`/`opportunity_link`, see [opportunity-model.md](../../../data-models/opportunity-model.md)) — the offer `TransactionManagement` is linked into the opportunity's `contract` stage rather than authored standalone — but the stage itself is still **calculated, never stored**:
+Per [ADR-029](../../../architecture/decisions/ADR-029.md), the broker-facing funnel stage is a **projection**, not a stored column, and the two "closed" notions are kept distinct. Since [ADR-034](../../../architecture/decisions/ADR-034.md) (home updated by [ADR-035](../../../architecture/decisions/ADR-035.md)) the **subject** of this projection is the stored `Opportunity` super-resource (`opportunity`/`opportunity_link`, now in the **App DB** — see [opportunity-model.md](../../../data-models/opportunity-model.md)) — the offer `TransactionManagement` is linked into the opportunity's `contract` stage rather than authored standalone — but the stage itself is still **calculated, never stored**:
 
 - Stage **"Closed" (deal won)** = `Property.PurchaseContractDate IS NOT NULL` — fires at contract signing (`acceptOffer` → `Pending`). This matches commercial practice in CY/HU/KZ (commission earned at CoS / adásvételi signing).
 - **"Settled"** (badge/substate) = canonical `Property.StandardStatus = Closed` — fires at settlement (final payment + possession), via `closeDeal`. RESO `CloseDate` means settlement, NOT title-deed registration (CY title deeds may lag years and are tracked project-flavour only).

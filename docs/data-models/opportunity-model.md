@@ -1,14 +1,17 @@
 ---
-title: Opportunity model — stored CDL super-resource, calculated stage
+title: Opportunity model — App-DB-private super-resource, calculated stage
 ---
 
 # Opportunity model (`opportunity` + `opportunity_link`)
 
-> Governing decision: [ADR-034](../architecture/decisions/ADR-034.md). This is a
-> **project-flavour CDL resource** (no RESO DD 2.0 equivalent), in the same family
-> as `referral` / `document` / `showing_participation` ([ADR-025](../architecture/decisions/ADR-025.md),
-> [ADR-033](../architecture/decisions/ADR-033.md)). It is the **subject of the
-> 5-stage pipeline**; the **stage itself is calculated, never stored**.
+> Governing decision: [ADR-035](../architecture/decisions/ADR-035.md) (supersedes
+> [ADR-034](../architecture/decisions/ADR-034.md)). This is an **App-DB-private CRM
+> resource** in the Pipeline App DB (`kzvhqgpedapzqmwgikrw`, Lovable-managed), in
+> the same family as `activities` / `role_configurations` / the commission engine
+> — **not** a CDL resource (RESO DD 2.0 has no Opportunity/Deal). It is read and
+> written **directly with the `supabase` app client under SSO-claim RLS**, never
+> through `cdl-write`/`cdl-read`. It is the **subject of the 5-stage pipeline**;
+> the **stage itself is calculated, never stored**.
 
 ## Purpose
 
@@ -26,29 +29,23 @@ materialized** (Pipeline gate, [architecture.md](../product-specs/matrix-pipelin
 
 ## `public.opportunity`
 
-Stored anchor + minimal header. **No `stage` column.** Source envelope mirrors
-`referral`/`document`.
+Stored anchor + minimal header in the **App DB**. **No `stage` column.** App-DB
+Pattern B columns (mirrors `public.activities`).
 
 | Column | Type | Notes |
 |---|---|---|
 | `id` | uuid PK | surrogate, `gen_random_uuid()` |
-| `source_id` | text | envelope; defaulted to `matrix-pipeline` by `cdl-write` |
-| `source_opportunity_key` | text | natural key with `source_id` (`unique`) |
-| `content_hash` | text | envelope |
-| `is_visible` / `is_deleted` / `deleted_at` | bool/bool/timestamptz | soft-delete |
-| `opportunity_key` | text | canonical key (auto-minted by `cdl-write`) |
+| `tenant_id` | uuid | `get_current_tenant_id()` default; RLS scope |
+| `owner_id` | uuid | `get_my_record_id_v2()` (SSO `sub`) default; RLS self/team scope |
+| `opportunity_key` | text UNIQUE | stable text correlation id (`gen_random_uuid()::text` default); used by links |
 | `opportunity_id` | text | optional external id |
-| `contact_key` | text | primary/anchor contact (loose ref → `contacts.contact_key`); **nullable** to allow create-without-contact origins |
-| `owner_member_key` | text | owning agent (loose ref → `members.member_key`) |
+| `contact_key` | text | primary/anchor contact (loose ref → CDL `contacts.contact_key`); **nullable** to allow create-without-contact origins |
+| `owner_member_key` | text | owning agent (CDL `members.member_key`) for display/assignment — NOT the RLS owner |
 | `title` | text | human label |
 | `origin` | text | `contact` \| `web` \| `referral` \| `import` \| … (supports "from another site") |
 | `opportunity_status` | text | `open` \| `won` \| `lost` \| `archived` — **operational lifecycle of the anchor only**, NOT the funnel stage |
 | `close_reason` | text | free text for won/lost |
-| `tenant_id` | text | tenant scoping |
-| `modification_timestamp` / `original_entry_timestamp` | timestamptz | |
-| `originating_system_*` / `source_system_*` | text | provenance triple |
-| `locked_fields` / `raw` | jsonb | stewardship + envelope |
-| `created_at` / `updated_at` | timestamptz | `cdl_set_updated_at` trigger |
+| `modification_timestamp` / `created_at` / `updated_at` | timestamptz | trigger-maintained (`opportunity_touch_timestamps`) |
 
 > `opportunity_status` (`open`/`won`/`lost`) is the **anchor's** operational state
 > for filtering/archival. It is distinct from the **calculated funnel stage**
@@ -58,25 +55,21 @@ Stored anchor + minimal header. **No `stage` column.** Source envelope mirrors
 
 ## `public.opportunity_link`
 
-Many-to-many join from an opportunity to its sub-resources. **Loose text refs, no
-FK** (consistent with the CDL envelope; see [ADR-034](../architecture/decisions/ADR-034.md) D3).
+Many-to-many join from an opportunity to its CDL sub-resources. **Loose text refs,
+no FK** (the sub-resources live in the CDL, resolved app-side; see
+[ADR-035](../architecture/decisions/ADR-035.md) D3, carried from ADR-034 D3).
 
 | Column | Type | Notes |
 |---|---|---|
 | `id` | uuid PK | surrogate |
-| `source_id` | text | envelope |
-| `source_opportunity_link_key` | text | natural key with `source_id` (`unique`) |
-| `is_visible` / `is_deleted` / `deleted_at` | | soft-delete |
-| `opportunity_link_key` | text | canonical key |
+| `tenant_id` | uuid | RLS scope |
+| `owner_id` | uuid | RLS self/team scope |
+| `opportunity_link_key` | text UNIQUE | deterministic `<opportunity_key>:<resource_name>:<resource_key>` (idempotent) |
 | `opportunity_key` | text | parent opportunity (loose ref → `opportunity.opportunity_key`) |
 | `resource_name` | text | `Contacts` \| `SavedSearch` \| `ContactListings` \| `Showing` \| `ShowingAppointment` \| `Caravan` \| `Referral` \| `TransactionManagement` |
-| `resource_key` | text | the linked row's canonical key |
+| `resource_key` | text | the linked CDL row's canonical key |
 | `role` | text | `subject` \| `buyer` \| `seller` \| `target_listing` \| `offer` \| … |
-| `added_at` | timestamptz | |
-| provenance + `raw` + timestamps | | same envelope |
-
-A deterministic source key `<opportunity_key>:<resource_name>:<resource_key>` makes
-linking idempotent.
+| `added_at` / `modification_timestamp` / `created_at` / `updated_at` | timestamptz | |
 
 ## Calculated stage
 
@@ -97,13 +90,15 @@ Closed (settled). Nothing here is persisted on the opportunity row.
 
 ## Access path
 
-- **Write**: `cdl-write` dispatcher (`resource: 'opportunity' | 'opportunity_link'`),
-  insert/update/upsert/delete; envelope + `HistoryTransactional` auto-emitted. No
-  app service-role key ([ADR-012](../architecture/decisions/ADR-012.md)).
-- **Read**: `cdl-read` (`resource: 'opportunity' | 'opportunity_link'`), filterable
-  by `opportunity_key` / `contact_key` / `owner_member_key` / `resource_name` /
-  `resource_key`. Service-role-only at the table (PII-adjacent — links Contacts).
+- **Read + Write**: direct `supabase` app client
+  (`supabase.from('opportunity' | 'opportunity_link')`) under SSO-claim RLS
+  (Pattern B, 5-level scope). **NOT** a `cdl-write`/`cdl-read` resource; never
+  routed through `invokeCdl`. The app sends the SSO ES256 JWT on every App-DB
+  request and holds no CDL service-role key ([ADR-013](../architecture/decisions/ADR-013.md)).
+- **Sub-resource resolution**: the detail view resolves each linked CDL
+  sub-resource (Contacts / SavedSearch / ContactListings / Showing / …) via its
+  existing CDL read EF — there is no cross-project SQL join.
 - **No stage write path.**
 
-See the app-side EF contract mirror at
-`matrix-pipeline-2-0/docs/cdl-ef-contracts/opportunity.md`.
+App schema: `matrix-pipeline-2-0/supabase/migrations/20260618120000_opportunity_appdb.sql`.
+See the app-side data-model doc at `matrix-pipeline-2-0/docs/opportunity-appdb.md`.

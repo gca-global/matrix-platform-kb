@@ -724,35 +724,22 @@ hybrid envelope as the Phase-2 tables (`id uuid pk` + `source_id` +
 Both are added to the `cdl-write` RESOURCES map (`resourceName` `Referral`/`Document`,
 `hasSoftDelete`) and the `cdl-read` whitelist (`cdl-write` v7 / `cdl-read` v7).
 
-### Opportunity super-resource (2026-06-17)
+### Opportunity super-resource — MOVED to the App DB (2026-06-18, ADR-035)
 
-`20260617120000_opportunity_super_resource.sql` ([ADR-034](../architecture/decisions/ADR-034.md),
-[opportunity-model.md](opportunity-model.md)). Adds the stored **Opportunity**
-anchor that becomes the **subject of the pipeline** (replacing the implicit
-`(Contacts × SavedSearch)` projection subject). RESO models no Opportunity/Deal
-resource, so these are **project-flavour CDL resources** (plain canonical
-snake_case, no `x_`), same hybrid envelope + soft-delete + provenance + service-role-only
-RLS as `referral`/`document`/`showing_participation`.
-
-| Table | "Resource" | RLS read surface |
-|---|---|---|
-| `public.opportunity` | Opportunity (project-flavour; no RESO equiv) | **service_role only** (PII-adjacent — anchors a Contact) |
-| `public.opportunity_link` | OpportunityLink (project-flavour join) | **service_role only** |
-
-- **`public.opportunity`** — stored anchor + minimal header: `opportunity_key`,
-  `contact_key` (nullable — supports create-without-contact origins),
-  `owner_member_key`, `title`, `origin` (`contact`/`web`/`referral`/`import`),
-  `opportunity_status` (`open`/`won`/`lost`/`archived` — operational anchor state,
-  **NOT** the funnel stage), `close_reason`, `tenant_id`, + envelope. **No `stage`
-  column** — the 5-stage funnel position is a **calculated projection**
-  (`deriveOpportunityStage`), never stored ([ADR-034](../architecture/decisions/ADR-034.md) D2).
-- **`public.opportunity_link`** — many-to-many join: `opportunity_key`,
-  `resource_name` (`Contacts`/`SavedSearch`/`ContactListings`/`Showing`/
-  `ShowingAppointment`/`Caravan`/`Referral`/`TransactionManagement`),
-  `resource_key`, `role`, + envelope. **Loose text refs, no FK** (consistent with
-  the CDL envelope; co-location gives indexed joins, [ADR-034](../architecture/decisions/ADR-034.md) D3).
-- Added to the `cdl-write` RESOURCES map (`resourceName` `Opportunity`/`OpportunityLink`,
-  `hasSoftDelete`, `sourceEnvelopeProvenance`) and the `cdl-read` whitelist.
+> **`opportunity` + `opportunity_link` are no longer CDL tables.** They were
+> briefly added to the CDL under [ADR-034](../architecture/decisions/ADR-034.md)
+> (migration `20260617120000_opportunity_super_resource.sql`) and **relocated to
+> the Pipeline App DB** (`kzvhqgpedapzqmwgikrw`, Lovable-managed) the next day under
+> [ADR-035](../architecture/decisions/ADR-035.md). The CDL tables were dropped
+> (`20260618130000_drop_opportunity_super_resource.sql`) and both resources were
+> de-registered from `cdl-write` (→ v15) and `cdl-read` (→ v12).
+>
+> The Opportunity is app-private CRM workflow (RESO DD 2.0 has no Opportunity/Deal),
+> read/written directly via the `supabase` app client under SSO-claim RLS — see
+> [opportunity-model.md](opportunity-model.md) and
+> `matrix-pipeline-2-0/docs/opportunity-appdb.md`. The funnel **stage is still
+> calculated, never stored**, and links are still loose `(resource_name,
+> resource_key)` refs resolved app-side via the CDL read EFs.
 
 > **Authorization (no SSO permission-key layer for matrix-pipeline).** Unlike the
 > three legacy apps in `sso_app_permissions` (`agency-portal`/`client-connect`/
