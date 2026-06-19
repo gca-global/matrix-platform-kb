@@ -65,7 +65,7 @@ Portal **tile visibility is access-controlled** by the user's `allowed_apps` set
 
 ### CORE-exclusive apps
 
-Eight apps are reserved for the **`CORE Team`** role and are intentionally hidden from every other role:
+Seven apps are reserved for the **`CORE Team`** role and are intentionally hidden from every other role:
 
 | App | OAuth `client_id` |
 |---|---|
@@ -76,17 +76,19 @@ Eight apps are reserved for the **`CORE Team`** role and are intentionally hidde
 | Matrix Comms | `WSvfGsovutXBHJfQOdL9uPA4TnMIIVrZ` |
 | Nyx Monitoring | `nyx-monitoring-vm-sso-v1` |
 | Matrix Analytics 2.0 | `0c4ad723-0814-4a71-a6e1-63031be4ff5c` |
-| IT Service & Asset Management (ITSM 2.1) | `n~~I~WvqoL3FuQ_nj~G6LClHKED1HsDK` |
 
 ### Universal apps (available to all roles)
 
-Three apps are backfilled into **every** role's `apps_allowed` so they stay broadly available. The Portal keeps `show_in_portal=false` (it is the launcher itself, never a tile) but is retained in `apps_allowed` for completeness:
+Four apps are backfilled into **every** role's `apps_allowed` so they stay broadly available. The Portal keeps `show_in_portal=false` (it is the launcher itself, never a tile) but is retained in `apps_allowed` for completeness:
 
 | App | OAuth `client_id` | Tile? |
 |---|---|---|
 | Sharp Matrix Portal | `sharp-matrix-vm-sso-v2-3645cb7d428fbcbc` | No (launcher) |
 | New Client Registration | `matrix-client-connect-vm-sso-v1-1c1de280d958ddbe` | Yes |
 | Appointment Reports | `matrix-meeting-hub-vm-sso-v1-bac504231b61ad12` | Yes |
+| IT Service & Asset Management (ITSM 2.1) | `n~~I~WvqoL3FuQ_nj~G6LClHKED1HsDK` | Yes |
+
+> **2026-06-19:** ITSM 2.1 was promoted from CORE-exclusive to universal (available to all users) — supersedes the CORE-exclusive grant in `20260609101500_core_team_itsm_and_analytics_visibility.sql`. See `20260619140000_itsm_universal_app_access.sql`.
 
 > Enforcement is **visibility-only**: `oauth-authorize` still gates app launches on the coarse `rw_*` permissions, so `allowed_apps` controls which tiles a user sees rather than hard-blocking deep links. See [security-model.md](security-model.md#portal-app-tile-visibility-allowed_apps).
 
