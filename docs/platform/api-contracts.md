@@ -146,7 +146,7 @@ while holding **no SSO tokens or per-user credentials**. The contract:
 2. **Assert the chat identity via request headers** (not LLM tool args):
    - `X-Chat-Platform`: `telegram` | `whatsapp` | `teams`
    - `X-Chat-Scope`: `direct` | `group` — `group` (or a missing user id) forces
-     **basic-only** mode (see tiering below).
+     **public-only** execution mode (see tiering below).
    - `X-Chat-User-Id`: the platform's **permanent** user id (Telegram numeric
      `user_id`; Teams `aadObjectId`; WhatsApp `wa_id`). Never `@handle`/phone for TG.
    - `X-Chat-Aad-Oid` (+ optionally `X-Chat-Email`): for Teams auto-bind.
@@ -155,29 +155,32 @@ while holding **no SSO tokens or per-user credentials**. The contract:
    - Telegram: `X-Telegram-Bot-Api-Secret-Token` (+ IP pinning)
    - WhatsApp: `X-Hub-Signature-256` (app-secret HMAC)
    - Teams: Bot Framework JWT (Microsoft-signed)
-4. **Basic vs advanced tools (tiering).**
-   - **Basic** (`whoami`, `search_kb`, `get_article`, `create_ticket`): executable with
+4. **Public vs private tools (tiering).**
+   - **Public** (`whoami`, `tool_guidance`, `search_kb`, `get_article`, `create_ticket`): executable with
      **just the agent access token** — no chat headers, no linkage, no SSO URL.
      Available in group chats and to unidentified users.
-   - **Advanced** (all others except `link_account`): executable only with a verified **1:1**
-     identity (`X-Chat-Scope: direct` + usable `X-Chat-User-Id`) and a linked SSO account.
+   - **Private** (`list_tickets`, `get_ticket`, `update_ticket`, `search_assets`, `get_asset`):
+     executable only with a verified **1:1** identity (`X-Chat-Scope: direct` + usable
+     `X-Chat-User-Id`) and a linked SSO account.
+   - **Link** (`link_account`): one-time SSO binding before private tools (Telegram/WhatsApp).
    - **`tools/list` always returns the full catalogue** for agent tokens (minus
-     admin-disabled tools). Each tool includes an `annotations.tier` (`basic` |
-     `advanced` | `link`) and an availability suffix in `description` so the LLM
-     knows what exists even when a call would be blocked. **Execution** is still
+     admin-disabled tools). Each tool includes an `annotations.tier` (`public` |
+     `private` | `link`), HubSpot-style structured sections in `description`, and
+     an `<availability>` suffix so the LLM knows what exists even when a call would
+     be blocked. Call **`tool_guidance`** for deeper workflows. **Execution** is still
      gated at `tools/call` — listing does not grant access.
 5. **Handle MCP responses**:
-   - `advanced_requires_dm` (code `-32003`): an advanced tool was called without a
+   - `private_requires_dm` (code `-32003`): a private tool was called without a
      verified identity. `data` carries `cause` (`group_chat` | `no_user_id`),
      `tool`, `tier`, `chat_scope`, `platform`, `remediation: ask_user_to_dm`,
-     `agent_guidance`, and `available_here` (basic tools still usable). The agent
+     `agent_guidance`, and `available_here` (public tools still usable). The agent
      should relay this in its own words — ask the user to re-send the request in a
      direct (1:1) message — and must **not** leak anyone's personal data.
    - `not_linked` (code `-32003`, returns `{ link_url }`): a 1:1, identified but
-     unlinked user calling an advanced tool — show the one-time link.
+     unlinked user calling a private tool — show the one-time link.
    - `consent_required` (code `-32004`, returns `{ link_url }`): step-up
-     confirmation for `approve`/`reject` or ticket close/resolve.
-   - Linked advanced calls return user-scoped data under RLS.
+     confirmation for ticket close/resolve via `update_ticket`.
+   - Linked private calls return user-scoped data under RLS.
 
 The MCP mints a short-lived per-request SSO JWT (`mint-delegated-token`) and
 never returns it to the agent. See ADR-032 and `sso-edge-functions.md`.

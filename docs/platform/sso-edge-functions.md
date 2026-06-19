@@ -257,6 +257,16 @@ Single deployable, routed by `action` in the JSON body:
 
 **Trust chain**: the minted token is the last hop of `Platform → (signed webhook) → HumaticAI → (OAuth code+PKCE+secret → MCP access token) → MCP → (X-Delegation-Secret) → mint`. The agent authenticates to MCP with OAuth 2.1 authorization-code + PKCE (confidential client: `client_id` + `client_secret`); the signing key is never a bearer. The chat id is platform-asserted; HumaticAI must verify the platform webhook signature before forwarding it.
 
+**ITSM MCP tool tiers (app DB `mcp-server`, ADR-032)**: `tools/list` returns the full catalogue for agent tokens; execution is gated at `tools/call`.
+
+| Tier | Tools | Requirements |
+|------|-------|--------------|
+| **Public** | `whoami`, `tool_guidance`, `search_kb`, `get_article`, `create_ticket` | Agent access token only — works in group chats and before user identity is known |
+| **Private** | `list_tickets`, `get_ticket`, `update_ticket`, `search_assets`, `get_asset` | Direct 1:1 chat + `X-Chat-*` headers + linked Sharp SIR SSO account |
+| **Link** | `link_account` | Direct 1:1 chat + verified platform user id (one-time SSO URL for Telegram/WhatsApp) |
+
+Each tool description uses HubSpot-style structured sections (`<capabilities>` / `<when_to_use>`, `<returns>`, `<usage_guidance>`, `<availability>`). Call **`tool_guidance`** for deeper cross-tool workflows. Blocked private calls return JSON-RPC `-32003` with `reason: private_requires_dm` (`cause`: `group_chat` \| `no_user_id`). Step-up consent applies to ticket close/resolve via `update_ticket` only. Approval MCP tools (`list_pending_approvals`, `approve`, `reject`) were removed — the in-app approval UI remains.
+
 ## Admin Functions
 
 All admin functions require `org_admin` or `system_admin` scope.

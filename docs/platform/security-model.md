@@ -476,13 +476,13 @@ The signing key (`app_settings.mcp.jwt_secret`) is **server-only** — it signs
 issued access tokens and is never a bearer, so a leaked signing key cannot be
 replayed as an agent credential, and a leaked agent secret is rotated or the agent
 permanently **deleted** **per-agent** (blast radius unchanged). Least privilege is
-enforced by **tool tiering**: *basic* tools (`whoami`, `search_kb`, `get_article`,
+enforced by **tool tiering**: *public* tools (`whoami`, `tool_guidance`, `search_kb`, `get_article`,
 `create_ticket`) need only the agent access token and run leak-safe (KB published-only,
-write-only ticket creation), while *advanced* tools require a verified **1:1**
+write-only ticket creation), while *private* tools require a verified **1:1**
 identity (`X-Chat-Scope: direct` + a usable user id) and a linked SSO account —
-group chats and unidentified users are basic-only and get an `advanced_requires_dm`
+group chats and unidentified users are public-only and get a `private_requires_dm`
 nudge to continue in a direct message. **Step-up consent** still gates
-`approve`/`reject` and ticket close/resolve. Binding assurance is per-platform:
+ticket close/resolve via `update_ticket`. Binding assurance is per-platform:
 Teams auto-binds (`aadObjectId` = `azure_oid`, high), Telegram/WhatsApp require a
 one-time interactive login (interactive). See
 [ADR-032](../architecture/decisions/ADR-032.md).
