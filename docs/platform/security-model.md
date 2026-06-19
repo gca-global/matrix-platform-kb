@@ -328,7 +328,23 @@ The `team` scope requires checking whether a record's owner is in the same team 
 
 Apps deploying tables to CDL should use `is_in_my_teams()`. Apps with their own DB should create an app-specific `get_my_record_id_v2()` and `is_my_direct_report_v2()` following the template in `001_sso_helper_functions.sql`.
 
-### Legacy CDL Functions (Backward Compatibility)
+### ITSM-specific ticket scope (itsm-2-1)
+
+ITSM **diverges** from generic Pattern B for `service_desk_tickets`:
+
+| Scope | Ticket visibility | Cross-tenant |
+|-------|-----------------|--------------|
+| `self` | Own tickets only (`created_by` or `assigned_to` = JWT `sub`) | Active tenant only |
+| `team` | Own/assigned **or** `requester_team_id` ∈ JWT `team_ids` | Active tenant only |
+| `global` / `org_admin` | All tickets in active tenant | Active tenant only |
+| `system_admin` | All tickets in **active tenant only** (`uoi`) | **No** cross-tenant read at RLS — use Switch Organization to change `uoi` |
+
+- **`requester_team_id`** is stamped on ticket create from the requester's primary SSO team (`UnifiedTicketForm`).
+- **`Broker`** role uses `scope=self`, `crud=cru` — requesters can create/read/update own tickets without global scope.
+- UI queries use `scopeRead(query, tenantId)` as defense-in-depth alongside RLS.
+
+Migration: `itsm-2-1/supabase/migrations/20260619130000_p2_ticket_team_tenancy.sql`
+
 
 The CDL instance also has legacy helper functions used by older apps (`matrix-client-connect`, `matrix-meeting-hub`). These are kept for backward compatibility and should NOT be used by new apps:
 
