@@ -22,9 +22,9 @@ A proposed "final model" selected **24 resources** for the Opportunity lifecycle
 1. **Storage is snake_case canonical, not PascalCase.** RESO `ListingKey` → `listing_key`, `ContactKey` → `contact_key`. RESO PascalCase is the *interop* name (RESO Web API / syndication), not the column name. See [reso-dd-kb canonical DBML](reso-dd-kb/wiki/dbml/canonical.dbml).
 2. **`Opportunity` is not a CDL extension resource.** It is an **App-DB-private super-resource** (`opportunity` + `opportunity_link`) in the Pipeline app DB (`kzvhqgpedapzqmwgikrw`), and its **funnel stage is calculated, never stored** ([ADR-035](../architecture/decisions/ADR-035.md), [opportunity-model.md](opportunity-model.md)).
 3. **`ShowingItinerary` is not a RESO/CDL resource — it is modeled as an App-DB-private (Tier 4) resource, exactly like `Opportunity`.** RESO DD 2.0 has no itinerary concept, and the canonical CDL already carries the **5-resource Showing chain** plus **`Caravan`/`CaravanStop`** (broker/network curated tours) with buyer linkage via **`showing_participation`** ([ADR-033](../architecture/decisions/ADR-033.md)). The CRM-specific buyer **viewing itinerary** (an agent grouping a single client's own showings into one outing) is a CRM-only construct with no canonical-sharing need, so it lives in the Pipeline app DB (`kzvhqgpedapzqmwgikrw`) as `showing_itinerary` (+ `showing_itinerary_stop`), accessed with the app `supabase` client under SSO-claim RLS — never via `cdl-write`/`cdl-read`. See §4 and §8.1.
-4. **Five proposed resources are not implemented as CDL tables:** `OUID`, `Teams` (created then dropped), `TeamMembers`, `SocialMedia`, `InternetTrackingSummary`. Most are deliberate (multitenancy is handled differently; aggregations are derived).
+4. **Five proposed resources are not implemented as CDL tables:** `OUID`, `Teams` (created then dropped), `TeamMembers`, `SocialMedia`, `InternetTrackingSummary`. Of these, **`SocialMedia` and `InternetTrackingSummary` are now scoped to be built** as canonical CDL (Tier 1) resources; **`OUID`, `Teams`, and `TeamMembers` are deferred (out of scope for now)**.
 
-**Net finding: the lifecycle data model is substantially complete.** Of the 24 proposed resources, **19 are live in the CDL**, **`Opportunity` already exists at Tier 4**, and **`ShowingItinerary` is the one net-new build — a Tier 4 app-DB resource** (`matrix-pipeline-2-0`), not a CDL table. No core-lifecycle CDL table is required; the remaining gaps (OUID, Teams/TeamMembers, SocialMedia, InternetTrackingSummary) are deliberate skips or conditional.
+**Net finding: the lifecycle data model is substantially complete.** Of the 24 proposed resources, **19 are live in the CDL** and **`Opportunity` already exists at Tier 4**. The recommended build set is now **three resources**: `ShowingItinerary` (Tier 4, app DB — `matrix-pipeline-2-0`), plus `SocialMedia` and `InternetTrackingSummary` (Tier 1, canonical CDL — `matrix-platform-foundation/supabase-cdl/`). `OUID`, `Teams`, and `TeamMembers` are explicitly deferred.
 
 The platform models "beyond RESO" needs through a **4-tier governance model** (§4), which the proposal collapsed into a single "extension" bucket.
 
@@ -75,7 +75,7 @@ Status legend: **Live** = table exists in CDL today · **App-DB** = exists in Pi
 |---|---|---|---|---|---|
 | 8 | SavedSearch | SavedSearch | `public.saved_search` | Live | Correct |
 | 9 | Prospecting | Prospecting | `public.prospecting` | Live | Correct |
-| 10 | SocialMedia | SocialMedia | — | Not built | Diverges — no standalone table |
+| 10 | SocialMedia | SocialMedia | — (planned `public.social_media`) | Not built → **build** | Diverges — no standalone table today; **promoted to a recommended CDL (Tier 1) build** (§7/§8). Canonical: [social_media.md](reso-dd-kb/wiki/agent-docs/resources/social_media.md) |
 
 ### 3.4 Matching → Viewing
 
@@ -86,7 +86,7 @@ Status legend: **Live** = table exists in CDL today · **App-DB** = exists in Pi
 | 13 | Media | Media | `public.property_media` | Live | Correct (Property-child Media) |
 | 14 | ContactListingNotes | ContactListingNotes | `public.contact_listing_notes` | Live | Correct (replaces `matched_properties[].notes`) |
 | 15 | InternetTracking | InternetTracking | `public.internet_tracking_events` | Live | Correct |
-| 16 | InternetTrackingSummary | InternetTrackingSummary | — | Derived | Diverges — aggregates derived in BI/views, not stored |
+| 16 | InternetTrackingSummary | InternetTrackingSummary | — (planned `public.internet_tracking_summary`) | Not built → **build** | Diverges — aggregates not stored today; **promoted to a recommended CDL (Tier 1) build** (§7/§8) as the home for per-listing engagement counts. Canonical: [internet_tracking_summary.md](reso-dd-kb/wiki/agent-docs/resources/internet_tracking_summary.md) |
 
 ### 3.5 Viewing
 
@@ -124,7 +124,7 @@ These canonical/project-flavour resources are part of the live lifecycle and sho
 | Document | `public.document` | CRM document ([ADR-025](../architecture/decisions/ADR-025.md)) |
 | OpenHouse | `public.open_houses` | Public viewings (excluded from CRM scope, but exists) |
 
-**Tally:** 19 of 24 proposed resources are live in the CDL; `Opportunity` is live at Tier 4 (app DB); `ShowingItinerary` is the one recommended net-new build, at Tier 4 (app DB); 4 are deliberate skips/conditional (OUID, Teams+TeamMembers, SocialMedia, InternetTrackingSummary); plus 6 live resources the proposal omitted.
+**Tally:** 19 of 24 proposed resources are live in the CDL; `Opportunity` is live at Tier 4 (app DB). Recommended builds: `ShowingItinerary` (Tier 4, app DB), `SocialMedia` + `InternetTrackingSummary` (Tier 1, CDL). Deferred: `OUID`, `Teams`, `TeamMembers`. Plus 6 live resources the proposal omitted.
 
 ---
 
@@ -205,7 +205,7 @@ flowchart LR
 |---|---|
 | `matched_properties[]` | `contact_listings` rows (one per Contact × Listing) |
 | `matched_properties[].notes` | `contact_listing_notes` |
-| `matched_properties[].engagement_metrics` | `contact_listings` timestamps/preference + `showing_participation` + `history_transactional` (no `internet_tracking_summary` table) |
+| `matched_properties[].engagement_metrics` | per-contact engagement via `contact_listings` timestamps/preference + `showing_participation` + `history_transactional`; **per-listing aggregate counts via the planned `internet_tracking_summary`** (§8) |
 | `OpportunityStatus` enum (`qualification`…`won`/`lost`) | split: calculated **stage** (qualification/matching/viewing/contract/closed) + stored anchor **`opportunity_status`** (`open`/`won`/`lost`/`archived`) |
 
 ---
@@ -225,18 +225,18 @@ flowchart LR
 
 ## 7. Part B — Target Model & Gap Analysis
 
-For each unbuilt/divergent item, a decision: **Required** (build now), **Conditional** (build only when a named precondition is met), or **Skip** (deliberate no-op with rationale).
+For each unbuilt/divergent item, a decision: **Required** (build now, this revision) or **Deferred** (explicitly out of scope for now, with the precondition that would reopen it).
 
 | Gap | Decision | Rationale |
 |---|---|---|
-| OUID table | **Skip** | Multitenancy handled by SSO claims + RLS. Reconsider only if RESO Web API org-identity export is required. |
-| Teams + TeamMembers | **Conditional** | Build (paired) only when team-based / luxury team deals enter CRM scope. Teams was dropped in `20260504080000`; restoring it without TeamMembers would be incomplete. |
-| SocialMedia | **Skip / defer** | Low lifecycle value. If needed, model as nested attributes on `contacts`/`members` rather than a standalone resource. |
-| InternetTrackingSummary | **Skip → derive** | Aggregations belong in BI / SQL views over `internet_tracking_events`, not a stored RESO table. |
 | ShowingItinerary | **Required (Tier 4, app DB)** | Build `showing_itinerary` + `showing_itinerary_stop` in the Pipeline app DB, mirroring the `Opportunity`/`opportunity_link` pattern (anchor + loose refs to canonical CDL showings). NOT a CDL table; does not duplicate `Caravan` (broker tour) — this is the buyer's personal viewing tour. Design in §8.1. |
-| Opportunity / matched_properties / engagement_metrics | **No change** | Already correctly modeled (Tier 4 anchor; `contact_listings`; derived engagement). |
+| SocialMedia | **Required (Tier 1, CDL)** | Build `public.social_media` as the canonical RESO resource — a polymorphic attach (`resource_name` + `resource_record_key`) to `contacts`/`members`. Used in Qualification to capture client/agent social profiles + engagement. Canonical: [social_media.md](reso-dd-kb/wiki/agent-docs/resources/social_media.md). |
+| InternetTrackingSummary | **Required (Tier 1, CDL)** | Build `public.internet_tracking_summary` as the canonical RESO resource — periodised per-listing aggregate counts (views, impressions, favorited, shared, inquiries, showing-requested/completed, CMA counts) computed from `internet_tracking_events`. This is the home for the proposal's `engagement_metrics`. Canonical: [internet_tracking_summary.md](reso-dd-kb/wiki/agent-docs/resources/internet_tracking_summary.md). |
+| OUID table | **Deferred (out of scope)** | Multitenancy handled by SSO claims + RLS. Reconsider only if RESO Web API org-identity export is required. |
+| Teams + TeamMembers | **Deferred (out of scope)** | Build (paired) only when team-based / luxury team deals enter CRM scope. Teams was dropped in `20260504080000`; restoring it without TeamMembers would be incomplete. |
+| Opportunity / matched_properties / engagement_metrics | **No change** | Already correctly modeled (Tier 4 anchor; `contact_listings`; per-listing aggregates land in the new `internet_tracking_summary`). |
 
-**Target model = current live model + one Tier 4 app-DB addition** (`ShowingItinerary`), with `Teams`/`TeamMembers` held as a conditional CDL addition. No core-lifecycle CDL table changes.
+**Target model = current live model + three additions:** `ShowingItinerary` (Tier 4, app DB) and `SocialMedia` + `InternetTrackingSummary` (Tier 1, canonical CDL). `OUID`, `Teams`, and `TeamMembers` are deferred.
 
 ---
 
@@ -244,13 +244,14 @@ For each unbuilt/divergent item, a decision: **Required** (build now), **Conditi
 
 | Gap | Decision | Concrete change | Owning repo + artifact | Trigger / precondition |
 |---|---|---|---|---|
-| ShowingItinerary | Required (Tier 4) | Add `showing_itinerary` + `showing_itinerary_stop` tables (Pattern B + SSO-claim RLS), mirroring `opportunity`/`opportunity_link`; app hook reads linked CDL showings via existing CDL read EFs | `matrix-pipeline-2-0/supabase/migrations/` (+ app `src` hook); update `opportunity-model.md`/wiki entities + this doc | Approved (this revision) |
-| Teams | Conditional | Re-create `public.teams` canonical table + RLS | `matrix-platform-foundation/supabase-cdl/migrations/` + new ADR | Team-based deal workflow approved for CRM |
-| TeamMembers | Conditional | Add `public.team_members` join (`team_key`, `member_key`, `team_member_type`) | `matrix-platform-foundation/supabase-cdl/migrations/` + same ADR | Paired with Teams above |
-| OUID | Skip (no-op) | None — document the SSO/RLS rationale | — | Revisit only for RESO Web API org export |
-| SocialMedia | Skip (no-op) | None | — | Revisit if social engagement enters qualification scope |
-| InternetTrackingSummary | Skip → derive | If reporting needs it, add a SQL view, not a table | `matrix-platform-foundation/supabase-cdl/migrations/` (view only) | BI reporting requirement |
-**Required change: one — `ShowingItinerary` at Tier 4 (app DB).** It does not touch the CDL. The lifecycle's canonical (CDL) model is complete as built; the only conditional CDL item is the `Teams`/`TeamMembers` pair, gated on a business decision.
+| ShowingItinerary | Required (Tier 4, app DB) | Add `showing_itinerary` + `showing_itinerary_stop` tables (Pattern B + SSO-claim RLS), mirroring `opportunity`/`opportunity_link`; app hook reads linked CDL showings via existing CDL read EFs | `matrix-pipeline-2-0/supabase/migrations/` (+ app `src` hook); update `opportunity-model.md`/wiki entities + this doc | Approved (this revision) |
+| SocialMedia | Required (Tier 1, CDL) | Add `public.social_media` (canonical RESO: `social_media_key` PK, polymorphic `resource_name`/`resource_record_key`/`resource_record_id`, `social_media_type`, `social_media_url_or_id`, `display_name`) + RLS; wire into `cdl-read`/`cdl-write` resource dispatch | `matrix-platform-foundation/supabase-cdl/migrations/` + EF update; update [cdl-schema.md](cdl-schema.md) | Approved (this revision) |
+| InternetTrackingSummary | Required (Tier 1, CDL) | Add `public.internet_tracking_summary` (canonical RESO: `internet_tracking_summary_key` PK, period `start_timestamp`/`end_timestamp`/`tracking_date`, `listing_id`, aggregate counts) populated from `internet_tracking_events`; wire into `cdl-read`/`cdl-engagement-read` | `matrix-platform-foundation/supabase-cdl/migrations/` (+ aggregation job/RPC); update [cdl-schema.md](cdl-schema.md) | Approved (this revision) |
+| OUID | Deferred (no-op) | None — document the SSO/RLS rationale | — | Revisit only for RESO Web API org export |
+| Teams | Deferred (no-op) | None now — would re-create `public.teams` canonical table + RLS | `matrix-platform-foundation/supabase-cdl/migrations/` + new ADR | Team-based deal workflow approved for CRM |
+| TeamMembers | Deferred (no-op) | None now — would add `public.team_members` join | `matrix-platform-foundation/supabase-cdl/migrations/` + same ADR | Paired with Teams above |
+
+**Required changes: three** — `ShowingItinerary` (Tier 4, app DB; no CDL impact) plus `SocialMedia` and `InternetTrackingSummary` (Tier 1, canonical CDL tables). `OUID`, `Teams`, and `TeamMembers` are deferred. Both CDL additions are canonical RESO resources (no `x_` extension), so they follow the standard `reso-dd-kb` field names and land via foundation migrations.
 
 **Handoff:** per the `cursor-git-handoff` rule, any CDL schema change lands as a committed migration in `matrix-platform-foundation/supabase-cdl/migrations/` (CDL is not linked to Lovable); any app-side change lands in `matrix-pipeline-2-0`. This document is the plan; execution is a separate, explicitly-requested step.
 
