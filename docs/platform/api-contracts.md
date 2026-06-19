@@ -144,25 +144,30 @@ while holding **no SSO tokens or per-user credentials**. The contract:
    `/.well-known/oauth-protected-resource` and run the flow. The signing key
    (`app_settings.mcp.jwt_secret`) is **server-only** — never a bearer.
 2. **Assert the chat identity via request headers** (not LLM tool args):
-   - `X-Chat-Platform`: `telegram` | `whatsapp` | `teams`
-   - `X-Chat-Scope`: `direct` | `group` — `group` (or a missing user id) forces
+   - `X-Chat-Platform`: `telegram` | `whatsapp` | `teams` | `web`
+   - `X-Chat-Scope`: `direct` | `group` — `group` (or a missing identity proof) forces
      **public-only** execution mode (see tiering below).
    - `X-Chat-User-Id`: the platform's **permanent** user id (Telegram numeric
-     `user_id`; Teams `aadObjectId`; WhatsApp `wa_id`). Never `@handle`/phone for TG.
+     `user_id`; Teams `aadObjectId`; WhatsApp `wa_id`; Web SSO user UUID = bearer `sub`).
+     Never `@handle`/phone for TG.
    - `X-Chat-Aad-Oid` (+ optionally `X-Chat-Email`): for Teams auto-bind.
-3. **Verify the platform webhook signature BEFORE forwarding a chat id.** The
-   chat id is platform-asserted, never user-asserted:
+   - `X-Chat-User-Bearer`: for **web** — the logged-in user's SSO access token (verified
+     on every request; this is the identity proof, not `X-Chat-Verified`).
+3. **Verify the platform webhook signature BEFORE forwarding a chat id** (Telegram /
+   WhatsApp / Teams only). The chat id is platform-asserted, never user-asserted:
    - Telegram: `X-Telegram-Bot-Api-Secret-Token` (+ IP pinning)
    - WhatsApp: `X-Hub-Signature-256` (app-secret HMAC)
    - Teams: Bot Framework JWT (Microsoft-signed)
+   - Web: no third-party webhook — identity is the SSO bearer in `X-Chat-User-Bearer`.
 4. **Public vs private tools (tiering).**
    - **Public** (`whoami`, `tool_guidance`, `search_kb`, `get_article`, `create_ticket`): executable with
      **just the agent access token** — no chat headers, no linkage, no SSO URL.
      Available in group chats and to unidentified users.
    - **Private** (`list_tickets`, `get_ticket`, `update_ticket`, `search_assets`, `get_asset`):
-     executable only with a verified **1:1** identity (`X-Chat-Scope: direct` + usable
-     `X-Chat-User-Id`) and a linked SSO account.
-   - **Link** (`link_account`): one-time SSO binding before private tools (Telegram/WhatsApp).
+     executable only with a verified **1:1** identity and a linked SSO account
+     (Telegram/WhatsApp/Teams via platform id + linkage; **web** via verified
+     `X-Chat-User-Bearer` auto-bind).
+   - **Link** (`link_account`): one-time SSO binding before private tools (Telegram/WhatsApp only; not web).
    - **`tools/list` always returns the full catalogue** for agent tokens (minus
      admin-disabled tools). Each tool includes an `annotations.tier` (`public` |
      `private` | `link`), HubSpot-style structured sections in `description`, and
@@ -171,11 +176,13 @@ while holding **no SSO tokens or per-user credentials**. The contract:
      gated at `tools/call` — listing does not grant access.
 5. **Handle MCP responses**:
    - `private_requires_dm` (code `-32003`): a private tool was called without a
-     verified identity. `data` carries `cause` (`group_chat` | `no_user_id`),
+     verified identity. `data` carries `cause` (`group_chat` | `no_user_id` |
+     `no_verified_session` for web),
      `tool`, `tier`, `chat_scope`, `platform`, `remediation: ask_user_to_dm`,
-     `agent_guidance`, and `available_here` (public tools still usable). The agent
-     should relay this in its own words — ask the user to re-send the request in a
-     direct (1:1) message — and must **not** leak anyone's personal data.
+     `agent_guidance`, and `available_here` (public tools still usable). For web,
+     `remediation` is `ensure_signed_in` (no `link_url`). The agent should relay
+     this in its own words — ask the user to re-send the request in a direct (1:1)
+     message (or sign in for web) — and must **not** leak anyone's personal data.
    - `not_linked` (code `-32003`, returns `{ link_url }`): a 1:1, identified but
      unlinked user calling a private tool — show the one-time link.
    - `consent_required` (code `-32004`, returns `{ link_url }`): step-up

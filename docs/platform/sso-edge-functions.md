@@ -250,7 +250,7 @@ Single deployable, routed by `action` in the JSON body:
 | Action | Input | Output | Notes |
 |---|---|---|---|
 | `mint` | `{ grant_id }` | `{ access_token, token_type, expires_in, scope }` | Active-grant check + 90-day inactivity expiry; mints a **short-lived (~30 min) ES256 JWT** for the grant's user (claim shape per `oauth-token`, signed exactly as that app expects — ES256 for SSO-instance apps); updates `last_minted_at`/`mint_count`; per-isolate rate limit. **No token is stored** (verified by signature, so no `sso_access_tokens` row). |
-| `create_grant` | `{ platform, client_id, external_user_ref, assurance, (user_bearer \| azure_oid \| email) }` | `{ grant_id, user_id, email, tenant_id, assurance }` | Resolves the canonical SSO user: interactive ⇒ verify `user_bearer`; Teams auto-bind ⇒ `mcp_resolve_user(azure_oid|email)`. Supersedes any prior active grant for `(client_id, platform, external_user_ref)`. |
+| `create_grant` | `{ platform, client_id, external_user_ref, assurance, (user_bearer \| azure_oid \| email) }` | `{ grant_id, user_id, email, tenant_id, assurance }` | Resolves the canonical SSO user: interactive ⇒ verify `user_bearer`; Teams auto-bind ⇒ `mcp_resolve_user(azure_oid|email)`; **Web** ⇒ `user_bearer` only (verified on every request; idempotent grant reuse). Supersedes any prior active grant for `(client_id, platform, external_user_ref)` except web reuse when the same user matches. |
 | `revoke_grant` | `{ grant_id }` | `{ ok }` | Marks the grant revoked (called from ITSM admin revoke). |
 
 **Backing store**: `sso_delegation_grants` (service-role only) + `mcp_resolve_user(email, azure_oid)` SECURITY DEFINER RPC (service-role execute only). **Signing reliability**: same ES256-or-fail-closed rule as `oauth-token`/`switch-role`.
@@ -262,10 +262,12 @@ Single deployable, routed by `action` in the JSON body:
 | Tier | Tools | Requirements |
 |------|-------|--------------|
 | **Public** | `whoami`, `tool_guidance`, `search_kb`, `get_article`, `create_ticket` | Agent access token only — works in group chats and before user identity is known |
-| **Private** | `list_tickets`, `get_ticket`, `update_ticket`, `search_assets`, `get_asset` | Direct 1:1 chat + `X-Chat-*` headers + linked Sharp SIR SSO account |
-| **Link** | `link_account` | Direct 1:1 chat + verified platform user id (one-time SSO URL for Telegram/WhatsApp) |
+| **Private** | `list_tickets`, `get_ticket`, `update_ticket`, `search_assets`, `get_asset` | Direct 1:1 chat + `X-Chat-*` headers + linked Sharp SIR SSO account (web: `X-Chat-User-Bearer` auto-bind) |
+| **Link** | `link_account` | Direct 1:1 chat + verified platform user id (one-time SSO URL for Telegram/WhatsApp; not web) |
 
-Each tool description uses HubSpot-style structured sections (`<capabilities>` / `<when_to_use>`, `<returns>`, `<usage_guidance>`, `<availability>`). Call **`tool_guidance`** for deeper cross-tool workflows. Blocked private calls return JSON-RPC `-32003` with `reason: private_requires_dm` (`cause`: `group_chat` \| `no_user_id`). Step-up consent applies to ticket close/resolve via `update_ticket` only. Approval MCP tools (`list_pending_approvals`, `approve`, `reject`) were removed — the in-app approval UI remains.
+Each tool description uses HubSpot-style structured sections (`<capabilities>` / `<when_to_use>`, `<returns>`, `<usage_guidance>`, `<availability>`). Call **`tool_guidance`** for deeper cross-tool workflows. Blocked private calls return JSON-RPC `-32003` with `reason: private_requires_dm` (`cause`: `group_chat` \| `no_user_id` \| `no_verified_session` for web). Step-up consent applies to ticket close/resolve via `update_ticket` only. Approval MCP tools (`list_pending_approvals`, `approve`, `reject`) were removed — the in-app approval UI remains.
+
+**Web identity headers** (Planet 9 / RAGChat): `X-Chat-Platform: web`, `X-Chat-Scope: direct`, `X-Chat-User-Id: <SSO user UUID>`, `X-Chat-User-Bearer: <SSO access token>`. The bearer is verified on every private call via `create_grant(user_bearer)` — not a bare `X-Chat-Verified` flag.
 
 ## Admin Functions
 

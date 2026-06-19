@@ -479,12 +479,13 @@ permanently **deleted** **per-agent** (blast radius unchanged). Least privilege 
 enforced by **tool tiering**: *public* tools (`whoami`, `tool_guidance`, `search_kb`, `get_article`,
 `create_ticket`) need only the agent access token and run leak-safe (KB published-only,
 write-only ticket creation), while *private* tools require a verified **1:1**
-identity (`X-Chat-Scope: direct` + a usable user id) and a linked SSO account —
-group chats and unidentified users are public-only and get a `private_requires_dm`
-nudge to continue in a direct message. **Step-up consent** still gates
+identity and a linked SSO account — Telegram/WhatsApp/Teams via platform id +
+linkage; **web** via `X-Chat-User-Bearer` (SSO access token verified on every
+request). Group chats and unidentified users are public-only and get a
+`private_requires_dm` nudge (`no_verified_session` for web). **Step-up consent** still gates
 ticket close/resolve via `update_ticket`. Binding assurance is per-platform:
 Teams auto-binds (`aadObjectId` = `azure_oid`, high), Telegram/WhatsApp require a
-one-time interactive login (interactive). See
+one-time interactive login (interactive), web auto-binds via SSO bearer (interactive). See
 [ADR-032](../architecture/decisions/ADR-032.md).
 
 ## OAuth 2.1 + PKCE posture
