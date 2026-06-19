@@ -156,11 +156,16 @@ while holding **no SSO tokens or per-user credentials**. The contract:
    - WhatsApp: `X-Hub-Signature-256` (app-secret HMAC)
    - Teams: Bot Framework JWT (Microsoft-signed)
 4. **Basic vs advanced tools (tiering).**
-   - **Basic** (`whoami`, `search_kb`, `get_article`, `create_ticket`): work with
+   - **Basic** (`whoami`, `search_kb`, `get_article`, `create_ticket`): executable with
      **just the agent access token** — no chat headers, no linkage, no SSO URL.
      Available in group chats and to unidentified users.
-   - **Advanced** (all others): require a verified **1:1** identity, i.e.
-     `X-Chat-Scope: direct` **and** a usable `X-Chat-User-Id` (Teams: `X-Chat-Aad-Oid`).
+   - **Advanced** (all others except `link_account`): executable only with a verified **1:1**
+     identity (`X-Chat-Scope: direct` + usable `X-Chat-User-Id`) and a linked SSO account.
+   - **`tools/list` always returns the full catalogue** for agent tokens (minus
+     admin-disabled tools). Each tool includes an `annotations.tier` (`basic` |
+     `advanced` | `link`) and an availability suffix in `description` so the LLM
+     knows what exists even when a call would be blocked. **Execution** is still
+     gated at `tools/call` — listing does not grant access.
 5. **Handle MCP responses**:
    - `advanced_requires_dm` (code `-32003`): an advanced tool was called without a
      verified identity. `data` carries `cause` (`group_chat` | `no_user_id`),
