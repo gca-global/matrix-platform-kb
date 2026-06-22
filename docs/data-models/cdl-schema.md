@@ -240,6 +240,21 @@ Response: `{ data, total, page, pageSize }`. Sortable fields: `published_at, pri
 
 `public.properties_published` is also exposed for direct anon `SELECT` (RLS: `is_visible AND NOT is_deleted`) for simple pages that don't need server-side filtering.
 
+## CDL Studio RESO DD audit
+
+[`matrix-cdl-studio`](../../matrix-cdl-studio/) (read-only schema inspector at `/cdl-studio/`) introspects the live CDL via the `cdl-schema-reader` Edge Function and compares tables/columns against the **RESO DD 2.0 corpus** cached in `public.reso_field_descriptions` (seeded from [`reso-dd-kb/wiki/cdl/reso_full_corpus.sql`](reso-dd-kb/wiki/cdl/reso_full_corpus.sql)).
+
+The audit UI uses the platform **4-tier governance taxonomy** ([`reso-crm-opportunity-lifecycle-model.md`](reso-crm-opportunity-lifecycle-model.md) §4, [`platform-extensions.md`](platform-extensions.md)):
+
+| Tier | CDL examples | Audit behaviour |
+|------|--------------|-----------------|
+| **1 — Canonical RESO** | `properties`, `showings` (→ `ShowingAppointment`), `transaction_management`, `property_media` (Media subset) | Two metrics: **column fidelity** (% of non-platform cols that map to the assigned resource) and **resource coverage** (materialized / canonical field count). Subset materialization is expected — low coverage on `properties` is not a defect. |
+| **2 — `x_` extension** | `x_property_name`, `x_privacy_level` | Registered extensions; never counted as drift. |
+| **3 — Project-flavour** | `referral`, `document`, `showing_participation` (ADR-025 / ADR-033) | No RESO resource assignment; internal schema review only. |
+| **4 — Infrastructure** | `mls_*`, `field_mappings`, `ingest_audit`, `reso_field_descriptions`, … | Excluded from RESO scoring. |
+
+Known CDL naming aliases are honoured in the audit registry (e.g. `properties.originating_system_key` → RESO `ListingKey`, per ADR-026). Platform housekeeping columns (`source_id`, `content_hash`, `locked_fields`, `raw`, …) are excluded from fidelity denominators (G3 per lifecycle model §3).
+
 ## Auth & multi-tenancy
 
 - All admin EFs (`mls-sync`, `mls-sync-orchestrator`, the 5 pipeline EF stages plus the `media-merge` RPC) require `scope` ∈ `SSO_ALLOWED_SCOPES` (default `system_admin,org_admin`).
