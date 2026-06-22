@@ -7,7 +7,7 @@
 >
 > **Exceptions (Cursor-managed, not Lovable-linked):**
 > - `matrix-mls` (app DB `wckwfbbqiupvallmhqbu`) — detached from Lovable after the CDL cutover (ADR-013/014). Changes go through Cursor + git directly.
-> - `matrix-cdl-studio` — **retired** as a write surface (see `matrix-cdl-studio/RETIREMENT.md`). Any future CDL inspector must be read-only with the CDL anon key.
+> - `matrix-cdl-studio` — **read-only CDL schema inspector** (retired as a CDL *write* surface per ADR-012/013; see `matrix-cdl-studio/RETIREMENT.md` if present). Auto-deployed by `github-watcher` on push to `main` (config key `sharpsir-group/matrix-cdl-studio`, secret env `WEBHOOK_SECRET_CDL_STUDIO`, Apache path `/cdl-studio/`). Production URL: `https://intranet.sharpsir.group/cdl-studio/`. OAuth client `pfyRzrbf1jkSVcPBW9E0uvWk2E80AH_5` — ensure redirect URI `https://intranet.sharpsir.group/cdl-studio/auth/callback` is registered (migration `20260622230000`).
 
 ## Delivery Status Summary
 
