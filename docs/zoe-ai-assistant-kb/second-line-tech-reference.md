@@ -336,6 +336,7 @@ All Sharp Matrix apps share the same stack:
 | Component | Hosted At |
 |-----------|----------|
 | Frontend apps | Apache (`/opt/bitnami/apache/htdocs/`) on `intranet.sharpsir.group` |
+| TLS renewal (ops) | [matrix-ops SSL runbook](https://github.com/sharpsir-group/matrix-ops/blob/main/runbooks/ssl-certificate-renewal.md#intranetsharpsirgroup) |
 | Edge Functions | Supabase (Deno runtime) |
 | Database | Supabase (PostgreSQL) |
 | File storage | Supabase Storage |
