@@ -198,6 +198,44 @@ Either:
 
 ---
 
+## 6. Infinite SSO login redirect loop — `accessToken` provider wiped the PKCE verifier
+
+### Symptoms
+
+- After a working SSO session exists, the app bounces: `/app/` → SSO login → auto
+  "Found existing session" → `/app/auth/callback?code=…` → back to SSO login → … forever.
+- Console shows `[AuthCallback] Missing state/verifier (cache cleared?), restarting login`
+  and repeated `[ensureFreshAuth] No tokens — session ended` **on the `/auth/callback` URL**.
+- Users describe it as "SSO auth is broken" — login never completes; the app never renders.
+- Appears right after switching the data-layer clients (`ssoClient`/`cdlClient`/App DB) from a
+  static `Authorization`-header snapshot to the supabase-js **`accessToken` hook**.
+
+### Root Cause
+
+supabase-js calls the `accessToken` hook on every PostgREST request, including provider
+queries (branding, i18n, role config) that fire while the user is on `/auth/callback` — before
+the OAuth code is exchanged. If the token provider chains into a **destructive** re-auth
+(`postgrestAccessToken` → `ensureFreshToken` → `ensureFreshAuth()` → `MatrixSSOStorage.clearAll()`),
+`clearAll()` deletes the OAuth `code_verifier` / `oauth_state` that `redirectToSSOLogin()` just
+stored. `AuthCallback` then finds the PKCE material missing → restarts login → loop.
+
+### How to Verify
+
+- In the browser console/log, confirm `clearAll` is invoked from the `accessToken` hook stack
+  (`… [as accessToken]`) with a verifier present, on the `/auth/callback` path.
+- Confirm the loop stops if you temporarily point the data-layer clients back at a static header.
+
+### Fix
+
+Make the `accessToken` provider **side-effect-free** (see the callout in
+`docs/platform/app-template.md` → *App DB Client Setup*): read current token → single-flight
+`refreshAccessToken()` on expiry → return `undefined` on failure. **Never** call
+`ensureFreshAuth()` / `clearAll()` from the `accessToken` hook. Keep the destructive fallback in
+the interactive `ensureFreshToken()` path (used by `adApiRequest`), which is not wired to the hook.
+This is fixed in the canonical template (`matrix-apps-template-2-2`, `matrix-sso.ts::postgrestAccessToken`).
+
+---
+
 ## Quick Diagnostic Flowchart
 
 ```
@@ -211,7 +249,9 @@ App calls oauth-authorize → what HTTP status?
 │
 ├─ 403 → "access_denied" → Section 4 (no permissions)
 │
-├─ 302 → Working correctly (redirects to SSO login)
+├─ 302 → Redirects to SSO login. If it then loops back through
+│         /auth/callback forever ("Missing state/verifier") → Section 6
+│         (accessToken provider wiped the PKCE verifier)
 │
 └─ 500 → Server error; check Supabase Edge Function logs
 ```

@@ -92,6 +92,43 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
 
 The `accessToken` hook injects the SSO JWT into every request. RLS policies read claims from `current_setting('request.jwt.claims')`.
 
+> ⚠️ **The `accessToken` provider MUST be side-effect-free — never destroy session/PKCE state.**
+>
+> supabase-js calls the `accessToken` hook on **every** PostgREST/EF request, including
+> requests fired by app-shell providers (branding, i18n, role config) **while the user is
+> sitting on `/auth/callback`** — before the OAuth code has been exchanged. If the provider
+> (e.g. `postgrestAccessToken` in `matrix-sso.ts`) chains into a destructive re-auth such as
+> `ensureFreshAuth()` → `MatrixSSOStorage.clearAll()`, it will **wipe the OAuth
+> `code_verifier` / `oauth_state`** that `redirectToSSOLogin()` just stored. `AuthCallback`
+> then sees the PKCE material missing, restarts login, bounces off the existing SSO session,
+> and the app is stuck in an **infinite SSO login redirect loop** ("SSO auth broken").
+>
+> **Rule:** the token provider does token resolution only — read current token → single-flight
+> `refreshAccessToken()` on expiry → return `undefined` (falls back to anon apikey) on any
+> failure. It must **never** call `ensureFreshAuth()` or `clearAll()`. Keep the destructive
+> "session is dead, clear + re-auth" fallback in the *interactive* `ensureFreshToken()` path
+> (used by `adApiRequest` and friends), which is **not** wired to the `accessToken` hook.
+>
+> Canonical implementation:
+>
+> ```typescript
+> // matrix-sso.ts — SIDE-EFFECT-FREE; used as the accessToken hook for ssoClient/cdlClient/App DB
+> export async function postgrestAccessToken(): Promise<string | undefined> {
+>   try {
+>     let t = MatrixSSOStorage.getAccessToken();
+>     if (!t || isTokenExpired(t)) t = await refreshAccessToken(); // non-destructive refresh only
+>     return t && t.length > 0 ? t : undefined;
+>   } catch {
+>     return undefined; // never clearAll()/ensureFreshAuth() here
+>   }
+> }
+> ```
+>
+> Regression history: shipped in qobrix-rls when `ssoClient`/`cdlClient` moved from a static
+> `Authorization`-header snapshot to the `accessToken` hook; the static-header pattern hid the
+> bug because reading a pre-captured header has no side effects. Confirmed via runtime logs
+> (`clearAll` called from the `[as accessToken]` stack with `hadVerifier:true` on `/auth/callback`).
+
 #### Provision Third-Party Auth on the App DB (REQUIRED)
 
 A freshly connected App DB project will **not** verify the SSO ES256 token until
