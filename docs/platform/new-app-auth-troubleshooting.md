@@ -236,6 +236,54 @@ This is fixed in the canonical template (`matrix-apps-template-2-2`, `matrix-sso
 
 ---
 
+## 7. Constant token-refresh churn — `atob()` can't decode base64url JWTs
+
+### Symptoms
+
+- Console shows a steady stream of `[SSO] Token expired or missing — refreshing before request…`
+  — many per page load, and more every few seconds while the page is active.
+- The proactive-refresh log (`[SSO] Token expires in N min, scheduling refresh in M min`) **never**
+  appears, so tokens are only ever refreshed reactively, on demand.
+- Auth still *works* (requests succeed, the user stays logged in) — it's pure churn: extra
+  `oauth-token` round-trips, added request latency, and console noise.
+- Symptom gets much louder right after moving the data-layer clients onto the `accessToken` hook
+  (Section 6 fix), because now every SSO/CDL/App-DB request runs `isTokenExpired()`.
+
+### Root Cause
+
+`getTokenExpiry()` decoded the JWT payload with `JSON.parse(atob(parts[1]))`. JWT segments are
+**base64url** (`-`/`_`, no padding), but `atob()` only accepts standard base64 and **throws** on
+`-`/`_`. Real tokens almost always contain a `-`/`_` in the payload (UUID `sub`, timestamps, etc.),
+so the decode threw, was swallowed by the `catch`, and returned `null`. With no parseable expiry:
+
+- `isTokenExpired()` returns `true` **forever** (`if (!expiry) return true;`) → every request
+  triggers a refresh (single-flight collapses concurrent callers, so it's throttled but relentless).
+- `scheduleProactiveRefresh()` bails at `if (!expiry) return;` → proactive refresh never schedules.
+
+### How to Verify
+
+- Grep the SSO access token's payload segment for `-` or `_`; run `atob()` on it and confirm it
+  throws `InvalidCharacterError`, while a base64url decode succeeds and yields `exp`.
+- Confirm the token's real TTL is normal (SSO issues `expires_in: 3600`), i.e. the token is *not*
+  actually short-lived — the client just couldn't read `exp`.
+
+### Fix
+
+Decode base64url safely in `getTokenExpiry()`: `replace(/-/g,'+').replace(/_/g,'/')`, re-pad to a
+multiple of 4, then UTF-8 decode (`TextDecoder` over the byte array) so non-ASCII claims survive:
+
+```ts
+const b64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+const padded = b64 + '='.repeat((4 - (b64.length % 4)) % 4);
+const bytes = Uint8Array.from(atob(padded), (c) => c.charCodeAt(0));
+const payload = JSON.parse(new TextDecoder().decode(bytes));
+```
+
+Any JWT decode in the app must use this base64url-safe form — never raw `atob()` on a JWT segment.
+Fixed in the canonical template (`matrix-apps-template-2-2`, `matrix-sso.ts::getTokenExpiry`).
+
+---
+
 ## Quick Diagnostic Flowchart
 
 ```
@@ -254,6 +302,10 @@ App calls oauth-authorize → what HTTP status?
 │         (accessToken provider wiped the PKCE verifier)
 │
 └─ 500 → Server error; check Supabase Edge Function logs
+
+Auth works but console floods with "Token expired or missing — refreshing…"
+and "Token expires in N min" never logs → Section 7
+(getTokenExpiry() uses atob() on a base64url JWT → exp unparseable)
 ```
 
 ---

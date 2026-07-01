@@ -128,6 +128,14 @@ The `accessToken` hook injects the SSO JWT into every request. RLS policies read
 > `Authorization`-header snapshot to the `accessToken` hook; the static-header pattern hid the
 > bug because reading a pre-captured header has no side effects. Confirmed via runtime logs
 > (`clearAll` called from the `[as accessToken]` stack with `hadVerifier:true` on `/auth/callback`).
+>
+> ⚠️ **`isTokenExpired()` / `getTokenExpiry()` MUST decode base64url — never raw `atob()` on a JWT.**
+> The hook above calls `isTokenExpired(t)` on **every** request. JWT segments are base64url
+> (`-`/`_`, no padding); `atob()` throws on `-`/`_`, so a raw `JSON.parse(atob(seg))` fails for
+> virtually every real token, the `catch` returns "no expiry", and `isTokenExpired()` returns `true`
+> forever → the hook refreshes on every request and proactive refresh never schedules. Decode with
+> `seg.replace(/-/g,'+').replace(/_/g,'/')`, re-pad to a multiple of 4, then UTF-8 decode. See
+> `new-app-auth-troubleshooting.md` → §7.
 
 #### Provision Third-Party Auth on the App DB (REQUIRED)
 
