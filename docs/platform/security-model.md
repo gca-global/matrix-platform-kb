@@ -227,6 +227,8 @@ This is a strict intersection with **no admin bypass** — a `system_admin` who 
 
 **CORE-exclusive policy.** Eight apps (HRMS, Matrix FM, Management Console, Matrix Stardom, Matrix Comms, Nyx Monitoring, Matrix Analytics 2.0, IT Service & Asset Management / ITSM 2.1) are present only in the `CORE Team` role's `apps_allowed`; three apps (Portal, New Client Registration, Appointment Reports) are backfilled into every role. See [app-catalog.md — App Access Control](app-catalog.md#app-access-control-portal-tile-visibility) for the full `client_id` mapping.
 
+**UAT exception (tenant-isolated).** Because `sso_roles` are global (no tenant column) and there is no per-tenant/per-user `apps_allowed` override, granting a CORE-exclusive app to a UAT tenant is done with **dedicated cloned roles**, never by editing a shared production role. The Acme UAT tenant (`025a9ba8-2b99-42a1-b6aa-cc573cbef1b5`) uses four HRMS-enabled clones — `Acme UAT - {Organization Admin, Area Manager, Broker, Senior Broker}` (UUIDs `ac000001..4`) — assigned only to `@acmecorp.com` personas, with their `sso_role_configurations` cloned from the base roles. See `matrix-platform-foundation/supabase/sso/migrations/20260702220000_acme_uat_hrms_roles.sql`. This keeps the CORE-exclusive policy intact for production Sharp SIR.
+
 ## RLS Helper Functions
 
 All functions are `STABLE` with `SET search_path = public` for security and performance. Wrap calls in `(SELECT func())` in RLS policies for initPlan caching.
