@@ -10,6 +10,7 @@
 | [digital-strategy-2026-2028.md](digital-strategy-2026-2028.md) | Full digital strategy: 3 markets, client segments, 7-phase roadmap, KPI targets |
 | [ai-driven-sales-model.md](ai-driven-sales-model.md) | The complete 16-element AI-driven model extracted from the vision deck |
 | [core-beliefs.md](core-beliefs.md) | Design philosophy, operating principles, and agent-first beliefs |
+| [23-tasks-value-map.md](23-tasks-value-map.md) | Alloy Advisors 23 deal tasks mapped to Sharp Matrix apps, value levers, and delivery status |
 
 ## Key Concepts
 
