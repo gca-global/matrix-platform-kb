@@ -452,6 +452,30 @@ Apps use `role_configurations.pages` to control which pages each role can access
 | Sales Director | global | home, directory, profile, org-structure, reports, settings | create, edit, delete, export |
 | Broker | self | home, directory, profile | (none) |
 
+## Role-to-Page Mapping Example (Qobrix Sales Automation)
+
+App DB project: `ycbwgnihbrqammkgngum`. Config store: SSO `sso_role_configurations` with `app_id = yeBljGGVpyC96RljEDov8n-td2I52cgX`.
+
+| Role | Scope | Pages | Actions |
+|------|-------|-------|---------|
+| Organization Admin | org_admin | `['*']` (admin fallback) | `['*']` |
+| Area Manager | team | home, profile | create, edit, delete, export |
+| Broker / Senior Broker | self | home, profile | create, edit |
+
+Sales module routes (contacts, pipeline, properties, offers) gate under page key `home`. Listings catalog visibility is L2 (RLS), not L1 — see [ADR-036](../architecture/decisions/ADR-036.md).
+
+## Role-to-Page Mapping Example (ITSM)
+
+App DB project: `irjrcskfcyierdbefrpk`. Config store: `app_permissions` with `app_id = itsm`, `member_type = role UUID`.
+
+| Role archetype | Scope | Pages |
+|----------------|-------|-------|
+| Requester (Broker, Senior Broker) | self | dashboard, sd-catalog, kb, myrequests, sd-my-assets |
+| Agent (Area Manager) | team | above + sd-my-queue, sd-team-queue, sd-approvals, sd-analytics |
+| Organization Admin | org_admin | `['*']` (admin fallback) |
+
+Ticket visibility is L2: self sees own tickets; team sees own/assigned + `requester_team_id ∈ team_ids`. See [tenant-role-configuration.md](tenant-role-configuration.md).
+
 ## How-To Guides
 
 ### Add a New Role

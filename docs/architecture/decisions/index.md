@@ -41,3 +41,4 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-033](ADR-033.md) | Buyer↔showing linkage as the `showing_participation` project-flavour resource (supersedes the `x_contact_key` extension / ADR-022) | Accepted |
 | [ADR-034](ADR-034.md) | Opportunity as a stored CDL super-resource (`opportunity`/`opportunity_link`) with a calculated (never materialized) pipeline stage; amends ADR-029; demotes `transaction_management` to a sub-resource | Superseded by ADR-035 |
 | [ADR-035](ADR-035.md) | Opportunity (`opportunity`/`opportunity_link`) relocated from the CDL to the Pipeline App DB (Lovable-owned), accessed directly via the supabase client under SSO-claim RLS; stage still calculated, links still loose-key; supersedes ADR-034 | Accepted |
+| [ADR-036](ADR-036.md) | Property/project listings are a tenant-shared catalog with opt-out `is_private` visibility (Qobrix Sales Automation App DB) | Accepted |
