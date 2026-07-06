@@ -20,7 +20,7 @@ Admin scopes (`global`, `org_admin`, `system_admin`) always pass L1 when no expl
 | `NULL` | Global/shared role | Shown for every organization |
 | UUID | Tenant-specific role | Shown only when that org is selected |
 
-Acme UAT cloned roles (`ac000001`–`ac000004`) are tenant-scoped to `025a9ba8-2b99-42a1-b6aa-cc573cbef1b5`.
+Acme UAT cloned roles (`ac000001`–`ac000004`) are tenant-scoped to `025a9ba8-2b99-42a1-b6aa-cc573cbef1b5`. They reuse the same **display names** as the global base roles (e.g. `Broker`) but are distinct rows — pick the copy under the user's organization in Console, not Global / shared.
 
 ## Data classification by app
 
@@ -74,6 +74,7 @@ All four Acme roles include: Portal, Meeting Hub, Client Connect, New Client Reg
 |------|-----------|---------|
 | `matrix-platform-foundation` | `20260704100000_sso_roles_tenant_id.sql` | `sso_roles.tenant_id` column |
 | `matrix-platform-foundation` | `20260704110000_acme_uat_multiapp_config.sql` | Qobrix apps_allowed + role configs + teams |
+| `matrix-platform-foundation` | `20260706100000_acme_uat_role_name_cleanup.sql` | Drop `Acme UAT -` prefix; tenant_id disambiguates |
 | `matrix-qobrix-sales-automation-rls` | `20260704100000_catalog_listings_is_private.sql` | Catalog RLS + `is_private` |
 | `itsm-2-1` | `20260704110000_acme_uat_app_permissions.sql` | Requester vs agent ITSM pages |
 | `matrix-hrms` | `20260704110000_acme_uat_manager_hierarchy.sql` | `employee_managers` for HRMS team scope |
