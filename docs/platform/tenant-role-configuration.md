@@ -20,7 +20,7 @@ Admin scopes (`global`, `org_admin`, `system_admin`) always pass L1 when no expl
 | `NULL` | Global/shared role | Shown for every organization |
 | UUID | Tenant-specific role | Shown only when that org is selected |
 
-Acme UAT cloned roles (`ac000001`–`ac000004`) are tenant-scoped to `025a9ba8-2b99-42a1-b6aa-cc573cbef1b5`. They reuse the same **display names** as the global base roles (e.g. `Broker`) but are distinct rows — pick the copy under the user's organization in Console, not Global / shared.
+Acme UAT cloned roles (`ac000001`–`ac000005`) are tenant-scoped to `025a9ba8-2b99-42a1-b6aa-cc573cbef1b5`. They reuse the same **display names** as the global base roles (e.g. `Broker`) but are distinct rows — pick the copy under the user's organization in Console, not Global / shared. **IT Staff** (`ac000005`) is a dedicated Acme role with a unique name for the IT division.
 
 ## Data classification by app
 
@@ -52,10 +52,11 @@ Acme UAT cloned roles (`ac000001`–`ac000004`) are tenant-scoped to `025a9ba8-2
 
 | Persona | SSO role UUID | Scope | CRUD | Teams | HRMS pages | Qobrix pages | ITSM pages |
 |---------|---------------|-------|------|-------|------------|--------------|------------|
-| Org Admin (×5) | `ac000001` | org_admin | crud | — | `*` (admin fallback) | `*` | `*` |
+| Org Admin (×3) | `ac000001` | org_admin | crud | — | `*` (admin fallback) | `*` | `*` |
 | Area Manager (×4) | `ac000002` | team | crud | Athens or Thessaloniki sales team | cloned from base Area Manager | home, profile + create/edit/delete/export | requester + agent queue pages |
 | Broker (×5) | `ac000003` | self | cru | team membership | cloned from base Broker | home, profile + create/edit | self-service only |
 | Senior Broker (×2) | `ac000004` | self | cru | team membership | cloned from base Senior Broker | home, profile + create/edit | self-service only |
+| IT Staff (×5) | `ac000005` | org_admin | crud | — | `*` (admin fallback) | `*` | `*` (admin bypass) |
 
 ### Sales teams
 
@@ -66,7 +67,9 @@ Acme UAT cloned roles (`ac000001`–`ac000004`) are tenant-scoped to `025a9ba8-2
 
 ### App reachability (`apps_allowed`)
 
-All four Acme roles include: Portal, Meeting Hub, Client Connect, New Client Registration, HRMS, ITSM, **Qobrix Sales Automation** (`yeBljGGVpyC96RljEDov8n-td2I52cgX`).
+All five Acme tenant roles include: Portal, Meeting Hub, Client Connect, New Client Registration, HRMS, ITSM, **Qobrix Sales Automation** (`yeBljGGVpyC96RljEDov8n-td2I52cgX`).
+
+**Financial Management (FM)** (`LAmZA9MrZSpJ3NV~a5zyZI8W0.DYscHl`) is granted to **Organization Admin**, **Area Manager**, and **IT Staff** only (management-level; brokers excluded). FM uses legacy partial route-gating — `apps_allowed` controls tile visibility; per-page config in the FM app DB is not fully enforced on routes.
 
 ## Configuration migrations
 
@@ -75,6 +78,7 @@ All four Acme roles include: Portal, Meeting Hub, Client Connect, New Client Reg
 | `matrix-platform-foundation` | `20260704100000_sso_roles_tenant_id.sql` | `sso_roles.tenant_id` column |
 | `matrix-platform-foundation` | `20260704110000_acme_uat_multiapp_config.sql` | Qobrix apps_allowed + role configs + teams |
 | `matrix-platform-foundation` | `20260706100000_acme_uat_role_name_cleanup.sql` | Drop `Acme UAT -` prefix; tenant_id disambiguates |
+| `matrix-platform-foundation` | `20260706110000_acme_it_staff_role.sql` | IT Staff role (`ac000005`) + FM apps_allowed |
 | `matrix-qobrix-sales-automation-rls` | `20260704100000_catalog_listings_is_private.sql` | Catalog RLS + `is_private` |
 | `itsm-2-1` | `20260704110000_acme_uat_app_permissions.sql` | Requester vs agent ITSM pages |
 | `matrix-hrms` | `20260704110000_acme_uat_manager_hierarchy.sql` | `employee_managers` for HRMS team scope |
