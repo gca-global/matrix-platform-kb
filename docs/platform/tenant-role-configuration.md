@@ -69,7 +69,7 @@ Acme UAT cloned roles (`ac000001`–`ac000005`) are tenant-scoped to `025a9ba8-2
 
 All five Acme tenant roles include: Portal, Meeting Hub, Client Connect, New Client Registration, HRMS, ITSM, **Qobrix Sales Automation** (`yeBljGGVpyC96RljEDov8n-td2I52cgX`).
 
-**Financial Management (FM)** (`LAmZA9MrZSpJ3NV~a5zyZI8W0.DYscHl`) is granted to **Organization Admin**, **Area Manager**, and **IT Staff** only (management-level; brokers excluded). FM uses legacy partial route-gating — `apps_allowed` controls tile visibility; per-page config in the FM app DB is not fully enforced on routes.
+**Financial Management (FM)** (`LAmZA9MrZSpJ3NV~a5zyZI8W0.DYscHl`) is granted to **Organization Admin** and **Area Manager** only (management-level sales; IT Staff and brokers excluded). FM uses legacy partial route-gating — `apps_allowed` controls tile visibility; per-page config in the FM app DB is not fully enforced on routes.
 
 ## Configuration migrations
 
@@ -78,7 +78,8 @@ All five Acme tenant roles include: Portal, Meeting Hub, Client Connect, New Cli
 | `matrix-platform-foundation` | `20260704100000_sso_roles_tenant_id.sql` | `sso_roles.tenant_id` column |
 | `matrix-platform-foundation` | `20260704110000_acme_uat_multiapp_config.sql` | Qobrix apps_allowed + role configs + teams |
 | `matrix-platform-foundation` | `20260706100000_acme_uat_role_name_cleanup.sql` | Drop `Acme UAT -` prefix; tenant_id disambiguates |
-| `matrix-platform-foundation` | `20260706110000_acme_it_staff_role.sql` | IT Staff role (`ac000005`) + FM apps_allowed |
+| `matrix-platform-foundation` | `20260706110000_acme_it_staff_role.sql` | IT Staff role (`ac000005`) + FM on Org Admin / Area Manager |
+| `matrix-platform-foundation` | `20260706120000_acme_it_staff_remove_fm.sql` | Remove FM from IT Staff `apps_allowed` |
 | `matrix-qobrix-sales-automation-rls` | `20260704100000_catalog_listings_is_private.sql` | Catalog RLS + `is_private` |
 | `itsm-2-1` | `20260704110000_acme_uat_app_permissions.sql` | Requester vs agent ITSM pages |
 | `matrix-hrms` | `20260704110000_acme_uat_manager_hierarchy.sql` | `employee_managers` for HRMS team scope |
