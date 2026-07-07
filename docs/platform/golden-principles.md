@@ -228,7 +228,7 @@ authenticated client when RLS keys on `auth.jwt()` claims.
 
 | Table | Client | Reason |
 |-------|--------|--------|
-| `sso_tenants` | anon (`ssoClient`) | Has anon SELECT policy for active tenants (branding) |
+| `sso_tenants` | authed (`ssoAuthedClient` / `ssoClient`) | Anon SELECT revoked 2026-07-07; roster (system_admin) and own-tenant branding require authenticated SSO JWT + RLS |
 | `sso_roles` | authed (`ssoAuthedClient`) | RLS requires `authenticated` role |
 | `app_settings` | authed (`ssoAuthedClient`) | RLS keys on tenant / `rw_global` |
 | `role_configurations` (App DB) | `supabase` (app client) | App DB, RLS via SSO JWT; SELECT is public/`true` |

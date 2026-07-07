@@ -32,6 +32,8 @@ This is analogous to role switching (`switch-role`) but operates on the organiza
 
 Both produce a fresh JWT with new tokens. The frontend clears all cached data on tenant switch to prevent cross-tenant data leaks.
 
+**Tenant roster + branding reads (post-login):** After the 2026-07-07 anon lockdown (C8/C9), apps must load the active-tenant roster (`TenantSwitcher`) and per-tenant branding (`useTenantBranding`, `OrgAdminPanel`) via the **authenticated** SSO client (`ssoAuthedClient` / `ssoClient` with `postgrestAccessToken`), not the anon key. The SSO project verifies the ES256 JWT via its GoTrue standby key; RLS policy `"Users can view own tenant"` (`has_rw_global_permission() OR id = get_my_tenant_id()`) covers system_admin roster reads and own-tenant branding. Pre-login branding is intentionally unavailable (apps fall back to defaults).
+
 ## CRUD Permission Strings
 
 Format: any combination of characters `c`, `r`, `u`, `d`.
@@ -110,7 +112,7 @@ The `oauth-token` and `switch-role` Edge Functions implement a **hybrid signing 
 | Condition | Algorithm | Key Source | Used By |
 |-----------|-----------|-----------|---------|
 | App has **no** `jwt_secret_name` (own DB trusts SSO via TPA, or uses SSO PostgREST) | **ES256** | Vault secret `sso_es256_signing_key` (JWK with `kid`) | Apps verifying via the SSO JWKS |
-| App **has** `jwt_secret_name` (own Supabase project, not yet on TPA) | **HS256** | App-specific secret from vault, or SSO `JWT_SECRET` fallback | Domain-Specific apps (HRMS, FM, ITSM) |
+| App **has** `jwt_secret_name` (own Supabase project, not yet on TPA) | **HS256** | App-specific secret from vault, or SSO `JWT_SECRET` fallback | Domain-Specific apps not yet on TPA (FM, ITSM) |
 | ES256 key unavailable in vault (ES256 apps) | **fail closed `503`** | — | No silent HS256 downgrade — see ADR-011 (2026-05-31) |
 
 **Why hybrid**: Each Supabase project's PostgREST only trusts keys registered in that project. The ES256 signing key (`dab1e43f`) is a standby key in the SSO project and is served at the SSO `/auth/v1/.well-known/jwks.json`. An **own-DB app** makes its PostgREST trust SSO ES256 tokens by registering **Supabase Third-Party Auth** against that JWKS + the SSO issuer URL (see [ADR-018](../architecture/decisions/ADR-018.md)) — no key import, no secret sharing. Apps not yet on TPA stay on HS256 (`jwt_secret_name` set), signed with their project's legacy secret.
@@ -123,9 +125,10 @@ The `oauth-token` and `switch-role` Edge Functions implement a **hybrid signing 
 2. **Done**: ES256 public key imported as standby key in SSO project (`xgubaguglsnokjyudgvc`)
 3. **Done**: `oauth-token` / `switch-role` / `switch-tenant` sign ES256 (key cached + retried; **fail-closed `503`** for ES256 apps instead of HS256 downgrade — ADR-011)
 4. **Done (2026-05-31)**: SSO mints `iss` = SSO issuer URL; **Third-Party Auth registered on the MLS app DB** (`wckwfbbqiupvallmhqbu`) so Pipeline / Atlas / Matrix MLS verify ES256 natively via PostgREST — [ADR-018](../architecture/decisions/ADR-018.md)
-5. **Next**: Register the same TPA on each remaining own-DB app project (HRMS, ITSM, FM), then drop their `jwt_secret_name` (ES256)
-6. **Next**: Promote ES256 to "current" key in all projects, retire HS256 legacy keys
-7. **Final**: Remove HS256 signing code from Edge Functions
+5. **Done (2026-07-02)**: **HRMS migrated to ES256** — TPA registered on the HRMS app DB (`wltuhltnwhudgkkdsvsr`, integration `82baa4cc`) + `jwt_secret_name` cleared, so HRMS mints ES256 and reads `sso_roles` / `sso_role_configurations` on the SSO project natively (fixes Settings > Permissions `PGRST301`). HRMS frontend sends the SSO token to SSO PostgREST via the `postgrestAccessToken` hook (no native token).
+6. **Next**: Register the same TPA on each remaining own-DB app project (ITSM, FM), then drop their `jwt_secret_name` (ES256)
+7. **Next**: Promote ES256 to "current" key in all projects, retire HS256 legacy keys
+8. **Final**: Remove HS256 signing code from Edge Functions
 
 ### Token Verification Order (in `switch-role`)
 
@@ -225,6 +228,8 @@ This is a strict intersection with **no admin bypass** — a `system_admin` who 
 **Scope of enforcement.** This controls **tile visibility**, not deep-link authorization. `oauth-authorize` still gates the actual app launch on the coarse `rw_*` / `app_access` permissions, so `allowed_apps` is the discoverability/visibility layer rather than a hard per-app launch gate. Apps requiring a hard block must enforce it inside their own `ProtectedRoute` / RLS.
 
 **CORE-exclusive policy.** Eight apps (HRMS, Matrix FM, Management Console, Matrix Stardom, Matrix Comms, Nyx Monitoring, Matrix Analytics 2.0, IT Service & Asset Management / ITSM 2.1) are present only in the `CORE Team` role's `apps_allowed`; three apps (Portal, New Client Registration, Appointment Reports) are backfilled into every role. See [app-catalog.md — App Access Control](app-catalog.md#app-access-control-portal-tile-visibility) for the full `client_id` mapping.
+
+**UAT exception (tenant-isolated).** There is no per-tenant/per-user `apps_allowed` override, so granting a CORE-exclusive app to a UAT tenant is done with **dedicated cloned roles**, never by editing a shared production role. The Acme UAT tenant (`025a9ba8-2b99-42a1-b6aa-cc573cbef1b5`) uses HRMS-enabled clones — `{Organization Admin, Area Manager, Broker, Senior Broker}` (UUIDs `ac000001..4`, `sso_roles.tenant_id` = Acme) — plus a dedicated **IT Staff** role (`ac000005`, `org_admin`) for the IT division. **Financial Management (FM)** reachability is added via `apps_allowed` on Org Admin and Area Manager (`20260706110000_acme_it_staff_role.sql`; IT Staff explicitly excluded in `20260706120000_acme_it_staff_remove_fm.sql`). Console disambiguates same-named global vs tenant roles via the **Organization** column and Edit User role groups. See `matrix-platform-foundation/supabase/sso/migrations/20260702220000_acme_uat_hrms_roles.sql` and `20260706100000_acme_uat_role_name_cleanup.sql`. This keeps the CORE-exclusive policy intact for production Sharp SIR.
 
 ## RLS Helper Functions
 
@@ -449,6 +454,30 @@ Apps use `role_configurations.pages` to control which pages each role can access
 | Sales Director | global | home, directory, profile, org-structure, reports, settings | create, edit, delete, export |
 | Broker | self | home, directory, profile | (none) |
 
+## Role-to-Page Mapping Example (Qobrix Sales Automation)
+
+App DB project: `ycbwgnihbrqammkgngum`. Config store: SSO `sso_role_configurations` with `app_id = yeBljGGVpyC96RljEDov8n-td2I52cgX`.
+
+| Role | Scope | Pages | Actions |
+|------|-------|-------|---------|
+| Organization Admin | org_admin | `['*']` (admin fallback) | `['*']` |
+| Area Manager | team | home, profile | create, edit, delete, export |
+| Broker / Senior Broker | self | home, profile | create, edit |
+
+Sales module routes (contacts, pipeline, properties, offers) gate under page key `home`. Listings catalog visibility is L2 (RLS), not L1 — see [ADR-036](../architecture/decisions/ADR-036.md).
+
+## Role-to-Page Mapping Example (ITSM)
+
+App DB project: `irjrcskfcyierdbefrpk`. Config store: `app_permissions` with `app_id = itsm`, `member_type = role UUID`.
+
+| Role archetype | Scope | Pages |
+|----------------|-------|-------|
+| Requester (Broker, Senior Broker) | self | dashboard, sd-catalog, kb, myrequests, sd-my-assets |
+| Agent (Area Manager) | team | above + sd-my-queue, sd-team-queue, sd-approvals, sd-analytics |
+| Organization Admin | org_admin | `['*']` (admin fallback) |
+
+Ticket visibility is L2: self sees own tickets; team sees own/assigned + `requester_team_id ∈ team_ids`. See [tenant-role-configuration.md](tenant-role-configuration.md).
+
 ## How-To Guides
 
 ### Add a New Role
@@ -585,9 +614,10 @@ which keeps this change "same security level, faster + simpler."
 | # | Finding | Severity | Detail | Remediation |
 |---|---------|----------|--------|-------------|
 | S1 | **CDL multi-tenancy on `public.properties` / `properties_published` / `property_media`** | HIGH | The canonical listing tables are not tenant-scoped today (single CDL-wide dataset keyed by `source_id`). Multi-tenant scoping for distinct tenants pulling distinct MLS feeds is an open item. | Decide between (a) adding `tenant_id` to `properties`/`property_media` and tenant-scoped RLS, or (b) keeping `source_id` as the tenancy key and enforcing per-tenant `source_id` allow-lists at the EF layer. Resolve before more than one tenant ingests via `mls-sync`. (The MLS Sync control plane — `mls_settings`, `mls_sync_jobs`, `mls_sync_state`, `mls_orchestrator_runs` — is already per-tenant.) |
-| S2 | **4 SECURITY DEFINER views on SSO tables** | HIGH | `user_role_assignments`, `tenants`, `role_configurations`, `app_permissions` bypass the caller's RLS context. **Anon SELECT revoked 2026-07-07 (C9 — Category A).** | Remaining (Category B): convert to `SECURITY INVOKER` (Postgres 15+) or add explicit `WHERE` clauses that re-check caller permissions (still readable by any `authenticated` user). |
+| S2 | **4 SECURITY DEFINER views on SSO tables** | HIGH | `user_role_assignments`, `tenants`, `role_configurations`, `app_permissions` bypass the caller's RLS context. | Convert to `SECURITY INVOKER` (Postgres 15+) or add explicit `WHERE` clauses that re-check caller permissions. |
+| S3 | **`app_settings` allows anonymous INSERT/UPDATE** | HIGH | RLS policies `Anon can insert app_settings` and `Anon can update app_settings` use `WITH CHECK (true)`. | Restrict to `authenticated` role or add tenant/scope checks. |
 | S4 | **Leaked password protection disabled** | MEDIUM | Supabase Auth's HaveIBeenPwned integration is off. | Enable in Dashboard → Auth → Security → "Leaked password protection". |
-| S5 | **`sso_scope_levels` RLS disabled** | MEDIUM | SSO config table exposed to PostgREST without RLS. **Anon DML revoked 2026-07-07 (C9 — Category A).** | Remaining (Category B): `ALTER TABLE sso_scope_levels ENABLE ROW LEVEL SECURITY;` + add read-only policy for authenticated (still fully open to the `authenticated` role while RLS is off). Same applies to the 18 legacy `mls_*` tables. |
+| S5 | **`sso_scope_levels` RLS disabled** | MEDIUM | SSO config table exposed to PostgREST without RLS. | `ALTER TABLE sso_scope_levels ENABLE ROW LEVEL SECURITY;` + add read-only policy for authenticated. |
 
 ### Medium-Term (Hardening)
 
@@ -610,8 +640,6 @@ which keeps this change "same security level, faster + simpler."
 | ~~C5~~ | ES256 JWT signing for SSO instance | 2026-04-09 | ADR-011: ES256 key generated, vault stored, standby imported, Edge Functions updated |
 | ~~C6~~ | HRMS edge functions used old `rw_global`/`rw_org` permission model | 2026-04-13 | Migrated `employee-sync`, `hrms-ad-admin`, `hrms-sync-permissions` to scope-based checks (`scope.id` from JWT claims). Dropped `sso_user_permissions` cache table. `hrms-sync-permissions` rewritten to be stateless. |
 | ~~C7~~ | Fresh login looped in storage-stripping embedded browsers (Cursor webview) — orphaned PKCE verifier | 2026-05-31 | ADR-019: server-managed PKCE opt-in (`sso_applications.server_managed_pkce`); `oauth-token` requires `code_verifier` only when not flagged. Enabled for Matrix Pipeline 2.0. |
-| ~~C8~~ | Anonymous read of the `sso_tenants` roster (tenant names + UUIDs) via the public `anon` key | 2026-07-07 | Dropped `anon_read_active_tenants` policy + `REVOKE ALL ON public.sso_tenants FROM anon` (migration `20260707115000`). Authenticated policy "Users can view own tenant" retained. |
-| ~~C9~~ | **Category A — full anonymous (`anon`) attack surface on the SSO project** (verified live via `has_table_privilege`/`has_function_privilege`) | 2026-07-07 | Migration `20260707121000_close_anon_category_a.sql`. **CRITICAL:** `REVOKE EXECUTE` from `PUBLIC`/`anon`/`authenticated` on 6 SECURITY DEFINER functions — `get_openai_api_key` (was leaking a live OpenAI secret), `create_jwt_secret`, `sso_rename_client_id`, `audit_sso_applications`, `cleanup_expired_sso_tokens`, `sso_clear_expired_authcode_tokens` (`service_role`/EFs retained); `REVOKE TRUNCATE ON ALL TABLES FROM anon` (was 67 tables incl. token/role/tenant tables — TRUNCATE ignores RLS); `REVOKE ALL FROM anon` on 19 RLS-disabled tables (`mls_*` incl. `mls_contacts` PII + `sso_scope_levels`). **HIGH:** `REVOKE SELECT FROM anon` on 4 definer views (S2); dropped `app_settings` anon INSERT/UPDATE policies + revoked anon writes (S3). **MEDIUM:** narrowed `kb_embeddings` read to `authenticated` + revoked anon. Scope limited to `anon`/`PUBLIC`; `authenticated` apps and `service_role` EFs unaffected. Verified over the wire (anon `get_openai_api_key`, `mls_contacts`, `tenants` → HTTP 401). Defense-in-depth for the `authenticated` role (RLS-enable, `SECURITY INVOKER` views, trimming `true` policies) tracked as Category B; `developers`/`developer_projects` (website) intentionally left. |
 
 ## Cross-Reference
 
