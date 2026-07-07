@@ -67,7 +67,9 @@ Acme UAT cloned roles (`ac000001`–`ac000005`) are tenant-scoped to `025a9ba8-2
 
 ### App reachability (`apps_allowed`)
 
-All five Acme tenant roles include: Portal, Meeting Hub, Client Connect, New Client Registration, HRMS, ITSM, **Qobrix Sales Automation** (`yeBljGGVpyC96RljEDov8n-td2I52cgX`).
+All five Acme tenant roles include: Portal, HRMS, ITSM, **Qobrix Sales Automation** (`yeBljGGVpyC96RljEDov8n-td2I52cgX`).
+
+**Excluded from Acme portal** (not in `apps_allowed`): **New Client Registration** (`matrix-client-connect-vm-sso-v1-1c1de280d958ddbe`) and **Appointment Reports** (`matrix-meeting-hub-vm-sso-v1-bac504231b61ad12`) — Sharp SIR sales workflows not used in Acme UAT (`20260706130000_acme_remove_client_reg_and_appointment_reports.sql`).
 
 **Financial Management (FM)** (`LAmZA9MrZSpJ3NV~a5zyZI8W0.DYscHl`) is granted to **Organization Admin** and **Area Manager** only (management-level sales; IT Staff and brokers excluded). FM uses legacy partial route-gating — `apps_allowed` controls tile visibility; per-page config in the FM app DB is not fully enforced on routes.
 
@@ -80,6 +82,7 @@ All five Acme tenant roles include: Portal, Meeting Hub, Client Connect, New Cli
 | `matrix-platform-foundation` | `20260706100000_acme_uat_role_name_cleanup.sql` | Drop `Acme UAT -` prefix; tenant_id disambiguates |
 | `matrix-platform-foundation` | `20260706110000_acme_it_staff_role.sql` | IT Staff role (`ac000005`) + FM on Org Admin / Area Manager |
 | `matrix-platform-foundation` | `20260706120000_acme_it_staff_remove_fm.sql` | Remove FM from IT Staff `apps_allowed` |
+| `matrix-platform-foundation` | `20260706130000_acme_remove_client_reg_and_appointment_reports.sql` | Hide New Client Reg + Appointment Reports on Acme portal |
 | `matrix-qobrix-sales-automation-rls` | `20260704100000_catalog_listings_is_private.sql` | Catalog RLS + `is_private` |
 | `itsm-2-1` | `20260704110000_acme_uat_app_permissions.sql` | Requester vs agent ITSM pages |
 | `matrix-hrms` | `20260704110000_acme_uat_manager_hierarchy.sql` | `employee_managers` for HRMS team scope |
