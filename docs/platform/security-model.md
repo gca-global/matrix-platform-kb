@@ -638,6 +638,7 @@ which keeps this change "same security level, faster + simpler."
 | ~~C5~~ | ES256 JWT signing for SSO instance | 2026-04-09 | ADR-011: ES256 key generated, vault stored, standby imported, Edge Functions updated |
 | ~~C6~~ | HRMS edge functions used old `rw_global`/`rw_org` permission model | 2026-04-13 | Migrated `employee-sync`, `hrms-ad-admin`, `hrms-sync-permissions` to scope-based checks (`scope.id` from JWT claims). Dropped `sso_user_permissions` cache table. `hrms-sync-permissions` rewritten to be stateless. |
 | ~~C7~~ | Fresh login looped in storage-stripping embedded browsers (Cursor webview) — orphaned PKCE verifier | 2026-05-31 | ADR-019: server-managed PKCE opt-in (`sso_applications.server_managed_pkce`); `oauth-token` requires `code_verifier` only when not flagged. Enabled for Matrix Pipeline 2.0. |
+| ~~C8~~ | Anonymous read of the `sso_tenants` roster (tenant names + UUIDs) via the public `anon` key | 2026-07-07 | Dropped the `anon_read_active_tenants` policy and `REVOKE ALL ON public.sso_tenants FROM anon` (migration `20260707115000_close_anon_read_sso_tenants.sql`). The `authenticated` policy "Users can view own tenant" (own tenant + `rw_global` admins) is retained, so Console/admin and app reads are unaffected. Scope limited to `sso_tenants`; `developers`/`developer_projects` (website) and the broader blanket `anon` grants were intentionally left for a separate hardening pass. |
 
 ## Cross-Reference
 
