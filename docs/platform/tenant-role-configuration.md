@@ -67,7 +67,7 @@ Acme UAT cloned roles (`ac000001`–`ac000005`) are tenant-scoped to `025a9ba8-2
 
 ### App reachability (`apps_allowed`)
 
-All five Acme tenant roles include: Portal, HRMS, ITSM, **Qobrix Sales Automation** (`yeBljGGVpyC96RljEDov8n-td2I52cgX`).
+All five Acme tenant roles include: Portal, HRMS, ITSM, **Qobrix Sales Automation RLS** (`yeBljGGVpyC96RljEDov8n-td2I52cgX`) — portal tile enabled at `https://intranet.sharpsir.group/qobrix-rls/` (`20260706140000_acme_qobrix_rls_portal_tile.sql`).
 
 **Excluded from Acme portal** (not in `apps_allowed`): **New Client Registration** (`matrix-client-connect-vm-sso-v1-1c1de280d958ddbe`) and **Appointment Reports** (`matrix-meeting-hub-vm-sso-v1-bac504231b61ad12`) — Sharp SIR sales workflows not used in Acme UAT (`20260706130000_acme_remove_client_reg_and_appointment_reports.sql`).
 
@@ -83,6 +83,7 @@ All five Acme tenant roles include: Portal, HRMS, ITSM, **Qobrix Sales Automatio
 | `matrix-platform-foundation` | `20260706110000_acme_it_staff_role.sql` | IT Staff role (`ac000005`) + FM on Org Admin / Area Manager |
 | `matrix-platform-foundation` | `20260706120000_acme_it_staff_remove_fm.sql` | Remove FM from IT Staff `apps_allowed` |
 | `matrix-platform-foundation` | `20260706130000_acme_remove_client_reg_and_appointment_reports.sql` | Hide New Client Reg + Appointment Reports on Acme portal |
+| `matrix-platform-foundation` | `20260706140000_acme_qobrix_rls_portal_tile.sql` | Enable Qobrix Sales Automation RLS portal tile |
 | `matrix-qobrix-sales-automation-rls` | `20260704100000_catalog_listings_is_private.sql` | Catalog RLS + `is_private` |
 | `itsm-2-1` | `20260704110000_acme_uat_app_permissions.sql` | Requester vs agent ITSM pages |
 | `matrix-hrms` | `20260704110000_acme_uat_manager_hierarchy.sql` | `employee_managers` for HRMS team scope |
