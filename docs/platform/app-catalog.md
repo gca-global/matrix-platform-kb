@@ -313,7 +313,7 @@ Four apps are backfilled into **every** role's `apps_allowed` so they stay broad
 - Active Directory employee sync
 - External incident ingestion via webhook
 - MLS integration settings (inherited from template)
-- Role-based permissions via `app_permissions` (app_id: `itsm`)
+- Role-based permissions via SSO `sso_role_configurations` (app_id: `itsm`)
 
 ### HRMS (Human Resources Management)
 **Status**: In Progress

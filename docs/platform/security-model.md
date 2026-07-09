@@ -487,7 +487,7 @@ Sales module routes (contacts, pipeline, properties, offers) gate under page key
 
 ## Role-to-Page Mapping Example (ITSM)
 
-App DB project: `irjrcskfcyierdbefrpk`. Config store: `app_permissions` with `app_id = itsm`, `member_type = role UUID`.
+App DB project: `irjrcskfcyierdbefrpk`. Config store: SSO `sso_role_configurations` with `app_id = itsm` (same shared model as HRMS / Qobrix; migrated from app-local `app_permissions` on 2026-07-09).
 
 | Role archetype | Scope | Pages |
 |----------------|-------|-------|
