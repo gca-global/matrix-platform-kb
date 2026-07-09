@@ -229,7 +229,18 @@ This is a strict intersection with **no admin bypass** — a `system_admin` who 
 
 **CORE-exclusive policy.** Eight apps (HRMS, Matrix FM, Management Console, Matrix Stardom, Matrix Comms, Nyx Monitoring, Matrix Analytics 2.0, IT Service & Asset Management / ITSM 2.1) are present only in the `CORE Team` role's `apps_allowed`; three apps (Portal, New Client Registration, Appointment Reports) are backfilled into every role. See [app-catalog.md — App Access Control](app-catalog.md#app-access-control-portal-tile-visibility) for the full `client_id` mapping.
 
-**UAT exception (tenant-isolated).** There is no per-tenant/per-user `apps_allowed` override, so granting a CORE-exclusive app to a UAT tenant is done with **dedicated cloned roles**, never by editing a shared production role. The Acme UAT tenant (`025a9ba8-2b99-42a1-b6aa-cc573cbef1b5`) uses HRMS-enabled clones — `{Organization Admin, Area Manager, Broker, Senior Broker}` (UUIDs `ac000001..4`, `sso_roles.tenant_id` = Acme) — plus a dedicated **IT Staff** role (`ac000005`, `org_admin`) for the IT division. **Financial Management (FM)** reachability is added via `apps_allowed` on Org Admin and Area Manager (`20260706110000_acme_it_staff_role.sql`; IT Staff explicitly excluded in `20260706120000_acme_it_staff_remove_fm.sql`). Console disambiguates same-named global vs tenant roles via the **Organization** column and Edit User role groups. See `matrix-platform-foundation/supabase/sso/migrations/20260702220000_acme_uat_hrms_roles.sql` and `20260706100000_acme_uat_role_name_cleanup.sql`. This keeps the CORE-exclusive policy intact for production Sharp SIR.
+**UAT exception (tenant-isolated).** There is no per-tenant/per-user `apps_allowed` override, so granting a CORE-exclusive app to a UAT tenant is done with **dedicated cloned roles**, never by editing a shared production role. The Acme UAT tenant (`025a9ba8-2b99-42a1-b6aa-cc573cbef1b5`) uses tenant-scoped roles (`sso_roles.tenant_id` = Acme, UUIDs `ac000001..ac000020`):
+
+| Domain | Roles (scope) |
+|--------|----------------|
+| Admin | Organization Admin (`org_admin`), IT Staff (`org_admin`) |
+| Sales | Area Manager (`team`), Senior Broker (`self`), Broker (`self`), Sales Director (`team`), Call Centre / Lead Qualifier (`team`), Listing Coordinator (`team`), Marketing Manager (`team`) |
+| Executive / Ops | Managing Director (`global`), Operations Manager (`team`) |
+| HR | HR Manager (`team`), HR Officer (`team`) |
+| Finance | Finance Manager (`team`), Finance Officer (`team`) — FM page config in FM app (not `sso_role_configurations`) |
+| ITSM | IT End User / Requester (`self`), Service Desk Agent (`team`), Service Desk Manager (`global`), Asset Manager (`team`), Change Approver (`team`) |
+
+Per-app page/action access for HRMS, ITSM, Qobrix v1.0, and Qobrix RLS is seeded in `sso_role_configurations` (`20260709150000_acme_cross_domain_roles.sql`). **Financial Management (FM)** reachability is via `apps_allowed`; FM uses its own `role_configurations` store. Console disambiguates same-named global vs tenant roles via the **Organization** column. See `matrix-platform-foundation/supabase/sso/migrations/20260702220000_acme_uat_hrms_roles.sql` through `20260709150000_acme_cross_domain_roles.sql`. This keeps the CORE-exclusive policy intact for production Sharp SIR.
 
 ## RLS Helper Functions
 

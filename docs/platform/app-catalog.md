@@ -473,6 +473,22 @@ Capabilities previously listed under Manager App (revenue forecast, team product
 
 R = Read, W = Write, R/W = Read and Write
 
+## Acme Corporation (UAT tenant)
+
+Tenant ID: `025a9ba8-2b99-42a1-b6aa-cc573cbef1b5`. Dedicated tenant-scoped roles (`ac000001..ac000020`) grant CORE-exclusive apps without editing production Sharp SIR roles. Full role catalog and per-app permission matrix: [security-model.md — UAT exception](security-model.md#uat-exception-tenant-isolated).
+
+**Permission stores by app (Acme):**
+
+| App | Config store | `app_id` |
+|-----|--------------|----------|
+| HRMS | `sso_role_configurations` | `hrms` |
+| ITSM | `sso_role_configurations` | `itsm` |
+| Qobrix v1.0 | `sso_role_configurations` | `Dk4cIY3~VvwYYgFIU.2gCdAfewWb34AZ` |
+| Qobrix RLS | `sso_role_configurations` | `yeBljGGVpyC96RljEDov8n-td2I52cgX` |
+| Financial Management | App-local `role_configurations` | — (configure in FM Settings) |
+
+Migration: `matrix-platform-foundation/supabase/sso/migrations/20260709150000_acme_cross_domain_roles.sql`.
+
 ## O365 Integration Matrix
 
 > O365 integration is a matrix-pipeline 2.0 capability cluster ([`wiki/integration.md#o365`](../product-specs/matrix-pipeline/wiki/integration.md)). All capabilities below are role-filtered inside the same matrix-pipeline app — there is no separate Broker / Manager app surface.
