@@ -491,10 +491,30 @@ App DB project: `ycbwgnihbrqammkgngum`. Config store: SSO `sso_role_configuratio
 | Role | Scope | Pages | Actions |
 |------|-------|-------|---------|
 | Organization Admin | org_admin | `['*']` (admin fallback) | `['*']` |
-| Area Manager | team | home, profile | create, edit, delete, export |
+| Managing Director / Sales Director | global/team | `['*']` | `['*']` |
+| Area Manager | team | home, management, profile | create, edit, delete, export |
+| Operations Manager | team | home, management, profile, properties | export |
+| Listing Coordinator / Marketing Manager | team | home, profile, properties | create, edit, export |
+| Call Centre / Lead Qualifier | team | home, profile | create, edit |
 | Broker / Senior Broker | self | home, profile | create, edit |
 
-Sales module routes (contacts, pipeline, properties, offers) gate under page key `home`. Listings catalog visibility is L2 (RLS), not L1 — see [ADR-036](../architecture/decisions/ADR-036.md).
+**Section-level page keys (2026-07-09).** The sidebar is split into sections so
+managers and individual contributors can be gated separately:
+
+| Page key | Sidebar section / items |
+|----------|-------------------------|
+| `home` | **Agent Workspace** — My Day, Calendar, Pipeline, Follow-ups, Offers, Contacts, Properties, Projects |
+| `management` | **Management View** — Dashboard, Agents, Reports |
+| `trash` | Trash / Restore |
+| `properties` | MLS Properties (CDL catalog) |
+| `ad-employees` | Employees |
+| `design-showcase`, `settings`, `profile` | template / admin / account |
+
+Both Qobrix apps share this taxonomy (RLS `yeBljGGVpyC96RljEDov8n-td2I52cgX`,
+v1.0 `Dk4cIY3~VvwYYgFIU.2gCdAfewWb34AZ`). Only team-managing roles receive
+`management`; ICs keep Agent Workspace only. Listings catalog visibility is L2
+(RLS), not L1 — see [ADR-036](../architecture/decisions/ADR-036.md).
+Migration: `20260709170000_qobrix_section_page_keys.sql`.
 
 ## Role-to-Page Mapping Example (ITSM)
 
