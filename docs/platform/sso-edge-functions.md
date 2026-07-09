@@ -5,6 +5,29 @@
 >
 > **For Lovable**: These are the Edge Functions your app calls for authentication, role management, and admin operations. All are deployed with `verify_jwt: false` unless noted — your code handles JWT verification.
 
+## Canonical token verification (`_shared/verify-sso-jwt.ts`)
+
+> **One verifier for the whole SSO EF surface (2026-07-09 — ADR-011).** Every
+> verifying SSO Edge Function calls `verifySsoJwt(token, { supabase, allowOpaque })`
+> from `supabase/sso/functions/_shared/verify-sso-jwt.ts`. Verification order:
+>
+> 1. **ES256 via JWKS** — `createRemoteJWKSet` against the public `sso-jwks`
+>    endpoint (the **public** key). This is the canonical path.
+> 2. **HS256** — app-specific secret (via `client_id` → `jwt_secret_name` →
+>    vault) else `JWT_SECRET`. Legacy fallback for `jwt_secret_name` apps only.
+> 3. **Opaque** — `sso_access_tokens` DB lookup, **only** when `allowOpaque:true`
+>    (`oauth-userinfo`, `switch-*`, `mint-delegated-token`).
+>
+> **Never verify with the private key.** WebCrypto refuses to verify with a
+> private key; verification uses the public JWKS. The private vault key
+> (`sso_es256_signing_key`) is used **only for signing** in `oauth-token`,
+> `switch-role`, `switch-tenant`, `mint-delegated-token`. The per-EF
+> "Token verification order" notes below are all instances of this one helper.
+>
+> Refactored onto the helper: `resolve-users`, `sso-member-roster-lint`,
+> `admin-tenants`, `oauth-userinfo`, `switch-tenant`, `switch-role`,
+> `mint-delegated-token`, and `_shared/admin.ts` (all `admin-*` EFs).
+
 ## OAuth Flow Functions
 
 These implement the OAuth 2.0 + PKCE flow used by all Matrix Apps.
@@ -273,7 +296,7 @@ Each tool description uses HubSpot-style structured sections (`<capabilities>` /
 
 All admin functions require `org_admin` or `system_admin` scope.
 
-**Token verification (`_shared/admin.ts` — `requireAdmin` / `requireAdminOrOrgAdmin` / `requireUserManagement`)**: ES256 (public vault key) → HS256 (app-specific via `jwt_secret_name`, else `JWT_SECRET`) → Supabase-native (`auth.getUser`) fallback. There is **no** opaque-token DB fallback here (unlike `oauth-userinfo`), so the signature path must actually verify.
+**Token verification (`_shared/admin.ts` — `requireAdmin` / `requireAdminOrOrgAdmin` / `requireUserManagement`)**: delegates to the shared `verifySsoJwt()` helper — **ES256 via the public JWKS** (`sso-jwks`) → HS256 (app-specific via `jwt_secret_name`, else `JWT_SECRET`) → then a Supabase-native (`auth.getUser`) fallback for Console sessions. There is **no** opaque-token DB fallback here (unlike `oauth-userinfo`), so the signature path must actually verify. As of 2026-07-09 this no longer fetches the private vault key — see [ADR-011 §Verification consolidation](../architecture/decisions/ADR-011.md).
 
 > **2026-06-01 fix — admin EFs 401'd for ES256 apps (e.g. Matrix Pipeline 2.0).** The shared admin helper previously ran an **HS256-only** `jwtVerify`. ES256 SSO tokens (apps with no `jwt_secret_name`) failed it, fell through to `auth.getUser()` (which rejects custom tokens), and returned **401** — most visibly on the Pipeline **AD Employees** page (`admin-ad-users`). HRMS was unaffected because it uses an HS256 app secret (`jwt_secret_smhrms`). Fix: add ES256-first verification mirroring `oauth-userinfo`, **deriving the PUBLIC JWK (drop `d`)** before `importJWK`. Importing the stored *private* JWK as-is yields a sign-only key that `jwtVerify` cannot use (it would throw and silently downgrade to HS256). All 9 admin EFs that import `_shared/admin.ts` (`admin-ad-users`, `admin-users`, `admin-roles`, `admin-apps`, `admin-groups`, `admin-permissions`, `admin-privileges`, `admin-dashboard`, `admin-microsoft-auth`) were redeployed (`verify_jwt=false`). Verified: a minted `rw_global`/`global`-scope ES256 token → `admin-ad-users` 200 (was 401). Note `admin-dashboard` also had a stale `./_shared` import path corrected to `../_shared`. **Related latent issue (not fixed here):** `oauth-userinfo`'s ES256 path imports the private JWK too, so it is effectively inert and only succeeds via its opaque-token DB fallback — it should adopt the same public-key derivation (follow-up).
 

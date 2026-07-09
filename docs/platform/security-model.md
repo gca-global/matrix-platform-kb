@@ -130,14 +130,21 @@ The `oauth-token` and `switch-role` Edge Functions implement a **hybrid signing 
 7. **Next**: Promote ES256 to "current" key in all projects, retire HS256 legacy keys
 8. **Final**: Remove HS256 signing code from Edge Functions
 
-### Token Verification Order (in `switch-role`)
+### Token Verification Order (canonical — `_shared/verify-sso-jwt.ts`)
 
-Incoming bearer tokens are verified in this order:
+> **2026-07-09 (ADR-011):** every verifying SSO Edge Function delegates to one
+> shared helper, `verifySsoJwt()`. Incoming bearer tokens are verified in this
+> order:
 
-1. **ES256** — via vault key (new asymmetric tokens)
-2. **App-specific HS256** — via `get_vault_secret(app.jwt_secret_name)` (app project tokens)
+1. **ES256 via the public JWKS** — `createRemoteJWKSet` against the `sso-jwks`
+   endpoint (the **public** key). Canonical path. **Never** verified with the
+   private vault key — WebCrypto refuses to verify with a private key.
+2. **App-specific HS256** — via `get_vault_secret(app.jwt_secret_name)` (legacy `jwt_secret_name` app tokens)
 3. **SSO HS256** — via `JWT_SECRET` env var (legacy SSO tokens)
-4. **Opaque lookup** — match raw token string in `sso_access_tokens` table
+4. **Opaque lookup** — match raw token string in `sso_access_tokens` (only when the caller passes `allowOpaque`)
+
+The private vault key (`sso_es256_signing_key`) is used **only for signing**
+(`oauth-token`, `switch-role`, `switch-tenant`, `mint-delegated-token`).
 
 ### ES256 Key Details
 
@@ -676,7 +683,7 @@ which keeps this change "same security level, faster + simpler."
 | H1 | **Promote ES256 standby key to "current"** | MEDIUM | ES256 key is standby in SSO project. Once stable, promote to current and retire HS256. | Dashboard → Settings → JWT Signing Keys → Promote. Then update Edge Functions to remove HS256 fallback. |
 | H2 | **5 functions with mutable `search_path`** | LOW | `match_kb_embeddings`, `create_jwt_secret`, `mask_secret`, `update_ad_users_updated_at`, `audit_sso_applications` lack `SET search_path = public`. | Add `SET search_path = public` to each function definition. |
 | H3 | **`pg_trgm` extension in public schema** | LOW | Should be in a dedicated `extensions` schema. | `ALTER EXTENSION pg_trgm SET SCHEMA extensions;` (create schema first if needed). |
-| H4 | **`oauth-userinfo` not updated for ES256** | LOW | `oauth-userinfo` still uses HS256-only verification. Should try ES256 first. | Update verification chain to match `switch-role` pattern (ES256 → app HS256 → SSO HS256). |
+| ~~H4~~ | ~~`oauth-userinfo` not updated for ES256~~ | RESOLVED (2026-07-09) | `oauth-userinfo` now delegates to the shared `verifySsoJwt()` helper — ES256 via public JWKS first, then HS256, then opaque lookup. See [ADR-011 §Verification consolidation](../architecture/decisions/ADR-011.md). |
 | H5 | **`developer_projects` / `developers` permissive INSERT/UPDATE** | LOW | RLS policies use `WITH CHECK (true)` for all roles. | Add tenant_id checks to INSERT/UPDATE policies. |
 
 ### Completed

@@ -180,6 +180,17 @@ export const ssoClient = buildSsoClient();
 export const cdlClient = buildCdlClient();
 ```
 
+> **SSO-data reads (org switcher, branding, role config) — direct authenticated
+> `ssoClient` read, not an Edge Function.** The `TenantSwitcher` tenant roster,
+> `useTenantBranding`, `OrgAdminPanel`, and `sso_role_configurations` are read
+> through the **authenticated** `ssoClient` (SSO JWT via `postgrestAccessToken`)
+> against SSO PostgREST, gated by RLS (`"Users can view own tenant"`). Do **not**
+> route the switcher through the `admin-tenants` Edge Function — that EF hop was
+> a workaround for the (now-fixed) private-JWK verify bug and was reverted
+> 2026-07-09. SSO EF calls that genuinely need an EF go through the single
+> `invokeWithAuth` invoker. See [ADR-011](../architecture/decisions/ADR-011.md)
+> and [security-model.md](security-model.md).
+
 **How RLS claims reach CDL PostgREST**: the CDL RLS helpers
 (`public.get_active_scope`, `public.get_crud`,
 `public.get_current_tenant_id`, …) read claims directly from
