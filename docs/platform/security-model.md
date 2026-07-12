@@ -373,19 +373,35 @@ Migration: `itsm-2-1/supabase/migrations/20260619130000_p2_ticket_team_tenancy.s
 Canonical Pattern B treats `global` as tenant-wide **read** (writes of others'
 rows reserved for `org_admin` / `system_admin`; see golden-principles S1 and
 `003_data_model_template.sql`). **Qobrix Sales Automation**
-(`matrix-qobrix-sales-automation-rls`, app DB `ycbwgnihbrqammkgngum`)
+(`matrix-qobrix-sales-automation-rls` / `matrix-qobrix-sales-automation-v1-0`,
+app DB `ycbwgnihbrqammkgngum` / `rpoeezssicpzexarmwqq`)
 **intentionally diverges**: UPDATE/DELETE on owned CRM tables include
 `'global'`, so a sales director can mutate any tenant CRM row for oversight.
 
 - **Justification:** sales-director oversight of broker pipeline/contacts/offers.
-- **App doc:** `matrix-qobrix-sales-automation-rls/docs/supabase/app-owned-data.md`
-  ("Scope write model — divergence from platform Pattern B").
+- **App doc:** `matrix-qobrix-sales-automation-v1-0/docs/supabase/app-owned-data.md`
+  (three-toggle source-gating contract + Pattern B divergence).
 - **Campaigns** use Pattern C tenant-shared SELECT; **notifications** INSERT
   binds `tenant_id` to JWT `uoi` —
   migration `20260709120000_campaigns_shared_read_and_notifications_tenant_check.sql`.
 - **Related:** HRMS also documents app-specific `global` full-CRUD on many
   tables in `docs/data-models/hrms-data-access-matrix.md` — same class of
   exception (app matrix overrides platform default).
+
+### Qobrix / App-DB source gating (v1.0 three toggles)
+
+`matrix-qobrix-sales-automation-v1-0` exposes three independent client toggles
+(Qobrix avatar menu + Setup). Contract:
+
+| Toggle | OFF | ON |
+|---|---|---|
+| Write Qobrix | No write reaches Qobrix; **App-DB writes always allowed** (RLS) | Qobrix-sourced rows editable; writes route back to Qobrix |
+| Read Qobrix | Non-listing readers App-DB only / empty | Merge Qobrix for everything except properties/projects |
+| Read Qobrix Listings | Properties/projects App-DB only | Merge Qobrix listings (independent of Read Qobrix) |
+
+Auth/session and explicit backfill/sync are exempt from the read gates. UI
+edit-ability keys off `row_source` via `useCanEdit` / `isEditable(row, writeMode)`.
+Canonical detail: `matrix-qobrix-sales-automation-v1-0/docs/supabase/app-owned-data.md`.
 
 
 The CDL instance also has legacy helper functions used by older apps (`matrix-client-connect`, `matrix-meeting-hub`). These are kept for backward compatibility and should NOT be used by new apps:
