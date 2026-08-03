@@ -34,6 +34,21 @@ Both produce a fresh JWT with new tokens. The frontend clears all cached data on
 
 **Tenant roster + branding reads (post-login):** After the 2026-07-07 anon lockdown (C8/C9), apps must load the active-tenant roster (`TenantSwitcher`) and per-tenant branding (`useTenantBranding`, `OrgAdminPanel`) via the **authenticated** SSO client (`ssoAuthedClient` / `ssoClient` with `postgrestAccessToken`), not the anon key. The SSO project verifies the ES256 JWT via its GoTrue standby key; RLS policy `"Users can view own tenant"` (`has_rw_global_permission() OR id = get_my_tenant_id()`) covers system_admin roster reads and own-tenant branding. Pre-login branding is intentionally unavailable (apps fall back to defaults).
 
+### One Sharp production tenant (all countries)
+
+Sharp SIR operates in **Cyprus, Hungary, and Kazakhstan**, but SSO uses **one production tenant** for all of them:
+
+| Tenant | UUID | Role |
+|--------|------|------|
+| Sharp Sotheby's International Realty | `1d306081-79be-42cb-91bc-9f9d5f0fd7dd` | **Production** — all Sharp countries |
+| Acme Corporation | `025a9ba8-2b99-42a1-b6aa-cc573cbef1b5` | **UAT only** — keep separate |
+
+Legacy per-country stub tenants (Hungary / Kazakhstan / Russia) and Debug Test were soft-removed (`is_active = false`) in `20260709133000_soft_remove_legacy_tenants_rename_global_admin.sql`. They must not appear in `user_metadata.tenant_id`.
+
+**Remediation (2026-08-03):** migration `20260803140000_migrate_sharp_user_metadata_tenant.sql` rewrote stale/null Sharp-user metadata onto Sharp SIR. `oauth-token` / `oauth-userinfo` `resolveDefaultTenant` now **ignores inactive metadata tenants**, prefers an active role tenant, and self-heals metadata. Country is a business attribute (office / team / listing country), not a separate SSO tenant.
+
+Apps load `sso_role_configurations` filtered by JWT/`AuthContext` `tenantId` — a user stuck on an inactive country stub gets **no page grants** even when their role has correct Sharp SIR configs (this is what blocked Area Manager access for users with Hungary metadata).
+
 ## CRUD Permission Strings
 
 Format: any combination of characters `c`, `r`, `u`, `d`.
