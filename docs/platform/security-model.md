@@ -539,6 +539,14 @@ v1.0 `Dk4cIY3~VvwYYgFIU.2gCdAfewWb34AZ`). Only team-managing roles receive
 (RLS), not L1 — see [ADR-036](../architecture/decisions/ADR-036.md).
 Migration: `20260709170000_qobrix_section_page_keys.sql`.
 
+**Sharp SIR production (v1.0 only).** Acme UAT keeps the stricter Area Manager
+page list above. Sharp SIR Area Manager (`7ca9475d-…`) matches Sharp SIR Broker
+on Qobrix v1.0: `pages = ['*']`, `actions = ['*']`, and
+`Dk4cIY3~VvwYYgFIU.2gCdAfewWb34AZ` in `apps_allowed` (migration
+`20260803120000_sir_area_manager_qobrix_v10_wildcard.sql`). Team-scope roles
+without a config row get `NO_ACCESS` in `useRoleConfig` — the wildcard grant
+is required for Area Managers to pass `ProtectedRoute`.
+
 ## Role-to-Page Mapping Example (ITSM)
 
 App DB project: `irjrcskfcyierdbefrpk`. Config store: SSO `sso_role_configurations` with `app_id = itsm` (same shared model as HRMS / Qobrix; migrated from app-local `app_permissions` on 2026-07-09).
