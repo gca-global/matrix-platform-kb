@@ -23,6 +23,17 @@ gains a `reserveListing` action, reservation **lives stage-side only**:
 When the CDL action lands, this doc's stage-side rules remain the UX
 contract; the CDL write becomes an additional side-effect.
 
+## Visibility (colleagues vs client)
+
+| Surface | Behaviour |
+|---|---|
+| Matching / Properties / Listings (brokers) | Reserved units **stay visible** next to Available. Badge = Reserved. Overlay uses `reserved_unit_ids` when Qobrix still says `available`. |
+| Client shortlist (`collection_items`) | Cannot add a reserved unit (`listing_reserved`). |
+| Public share link | Reserved units stripped at create time and again on `collection-share-read` / `item-read`. |
+| Public marketing website | Out of band for this app. Stage-side sets `properties.status = 'reserved'`; website/Qobrix Under Offer still need the existing ops path until CDL `Active Under Contract` lands. |
+
+Cancel / deposit-deadline lift restores `properties.status = 'available'`.
+
 ## Document trail (replaces buyer/seller agreed)
 
 | Checkbox | Column | Effect |
