@@ -278,6 +278,10 @@ Notes:
   `Property.ShowingStatus`; values `Accepting Requests` / `On Hold` /
   `No Showings` / `Restricted Showings`). See
   [`showing-lifecycle.md`](showing-lifecycle.md).
+- Stage-side CY reservation (Offer Acceptance / deposit deadline) lives
+  in the Sales Automation app until CDL gains `reserveListing` —
+  see [`reservation-lifecycle.md`](reservation-lifecycle.md) and
+  ADR-029's future refinement.
 - `OpenHouse`: only valid while `StandardStatus = Active`. See
   [`open-house-lifecycle.md`](open-house-lifecycle.md).
 - `ContactListings`: a contact's "favourite" survives status
