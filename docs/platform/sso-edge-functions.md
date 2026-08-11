@@ -333,6 +333,20 @@ All admin functions require `org_admin` or `system_admin` scope.
 | `sso-token-exchange` | `POST` | Exchanges external tokens for SSO tokens |
 | `sso-member-roster-lint` | `POST` | Daily lint: diffs SSO `auth.users` ↔ CDL `public.members` (by email) and persists a drift report. `verify_jwt: false`. |
 
+### `sync-ad-users` (directory cache)
+
+SSO owns the Entra/Azure AD directory snapshot in `public.ad_users` on project `xgubaguglsnokjyudgvc`. Apps such as **ITSM** and **HRMS** **consume** that cache (PostgREST / `admin-ad-users`) — they do **not** run their own Graph directory sync.
+
+- **Schedule**: `pg_cron` job `ad-users-sync-30min` (`*/30 * * * *`) → `POST /sync-ad-users?triggered_by=scheduled`.
+- **Manual full sync**: `POST /sync-ad-users?full=true&triggered_by=manual` (service-role bearer) or `POST /admin-ad-users/sync?full=true` (admin JWT).
+- **Enrich-on-delta / fast-path-on-full**: per-user manager, profile (`aboutMe`…), and photo Graph calls run only on **delta** syncs. Full syncs skip them so the Edge Function finishes within its wall-clock limit (photos remain on `sync-ad-photos`). All Requestor-search fields (`displayName`, `givenName`, `surname`, `mail`, `jobTitle`, `department`, `officeLocation`, `usageLocation`, `accountEnabled`) come from the delta `$select`.
+- **Stale-lock watchdog**: if `ad_sync_status.status = 'running'` for more than 15 minutes, the next run clears the lock (and orphaned `ad_sync_log` rows) and continues. Fresh concurrent runs still get `409 sync_in_progress`.
+- **Ops runbook** (stuck / stale directory):
+  1. Deploy the current `sync-ad-users` source (`verify_jwt: false`).
+  2. If still stuck: `UPDATE ad_sync_status SET status='idle', error_message=NULL WHERE id='default' AND status='running'`; cancel orphaned `ad_sync_log` rows with `status='running'`.
+  3. `POST …/sync-ad-users?full=true&triggered_by=manual`.
+  4. Confirm `status='idle'`, `delta_link` present, and spot-check users; confirm the next scheduled delta completes (`success`, not 409).
+
 ### `sso-member-roster-lint`
 
 Added 2026-06-03 for the matrix-pipeline Week 1 Cursor task (risk **R3** — identity-boundary drift; see [`product-specs/matrix-pipeline/phases.md#week-1-cursor`](../product-specs/matrix-pipeline/phases.md) and [`product-specs/matrix-pipeline/wiki/architecture.md#identity-boundary`](../product-specs/matrix-pipeline/wiki/architecture.md)).
