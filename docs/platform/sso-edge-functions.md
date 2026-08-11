@@ -339,7 +339,7 @@ SSO owns the Entra/Azure AD directory snapshot in `public.ad_users` on project `
 
 - **Schedule**: `pg_cron` job `ad-users-sync-30min` (`*/30 * * * *`) → `POST /sync-ad-users?triggered_by=scheduled`.
 - **Manual full sync**: `POST /sync-ad-users?full=true&triggered_by=manual` (service-role bearer) or `POST /admin-ad-users/sync?full=true` (admin JWT).
-- **Enrich-on-delta / fast-path-on-full**: per-user manager, profile (`aboutMe`…), and photo Graph calls run only on **delta** syncs. Full syncs skip them so the Edge Function finishes within its wall-clock limit (photos remain on `sync-ad-photos`). All Requestor-search fields (`displayName`, `givenName`, `surname`, `mail`, `jobTitle`, `department`, `officeLocation`, `usageLocation`, `accountEnabled`) come from the delta `$select`.
+- **Enrich-on-delta / fast-path-on-full**: per-user manager, profile (`aboutMe`…), and photo Graph calls run only on **delta** syncs. Full syncs skip them so the Edge Function finishes within its wall-clock limit (photos remain on `sync-ad-photos`). On full-sync **UPDATE**s, enrichment columns (`manager*`, profile fields, `photoUrl`) are omitted from the patch so prior values are not wiped. All Requestor-search fields (`displayName`, `givenName`, `surname`, `mail`, `jobTitle`, `department`, `officeLocation`, `usageLocation`, `accountEnabled`) come from the delta `$select`.
 - **Stale-lock watchdog**: if `ad_sync_status.status = 'running'` for more than 15 minutes, the next run clears the lock (and orphaned `ad_sync_log` rows) and continues. Fresh concurrent runs still get `409 sync_in_progress`.
 - **Ops runbook** (stuck / stale directory):
   1. Deploy the current `sync-ad-users` source (`verify_jwt: false`).
