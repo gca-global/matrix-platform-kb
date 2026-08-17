@@ -12,6 +12,7 @@ date: 2026-08-17
 
 ## Unreleased — 2026-08-17
 
+- **ADR-038**: ITSM is ES256-only (SSO PostgREST bearer + MCP access-token issuer). Supersedes ADR-032 for the MCP HMAC signing algorithm only; chat-agent/OAuth design stands. Corrects `security-model.md` hybrid table (ITSM already on TPA; remaining HS256 apps are FM / Meeting Hub, etc.).
 - Agent release-notes & versioning policy aligned with `matrix-itsm` (SemVer, day-batch PATCH, `scripts/release.sh`).
 - Removed third-party AI vendor brand names from chat/AI surfaces; those docs now refer to a generic chat agent / website AI chat.
 - Proprietary copyright notice (Sharp SIR + GCA Global) added at agent entry points (`LICENSE`, `AGENTS.md`, `README.md`, `docs/index.md`, `docs/platform/kb-methodology.md`).

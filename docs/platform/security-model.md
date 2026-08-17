@@ -126,8 +126,8 @@ The `oauth-token` and `switch-role` Edge Functions implement a **hybrid signing 
 
 | Condition | Algorithm | Key Source | Used By |
 |-----------|-----------|-----------|---------|
-| App has **no** `jwt_secret_name` (own DB trusts SSO via TPA, or uses SSO PostgREST) | **ES256** | Vault secret `sso_es256_signing_key` (JWK with `kid`) | Apps verifying via the SSO JWKS |
-| App **has** `jwt_secret_name` (own Supabase project, not yet on TPA) | **HS256** | App-specific secret from vault, or SSO `JWT_SECRET` fallback | Domain-Specific apps not yet on TPA (FM, ITSM) |
+| App has **no** `jwt_secret_name` (own DB trusts SSO via TPA, or uses SSO PostgREST) | **ES256** | Vault secret `sso_es256_signing_key` (JWK with `kid`) | Apps verifying via the SSO JWKS (Pipeline / Atlas MLS, HRMS, **ITSM**, …) |
+| App **has** `jwt_secret_name` (own Supabase project, not yet on TPA) | **HS256** | App-specific secret from vault, or SSO `JWT_SECRET` fallback | Remaining Domain-Specific apps not yet on TPA (e.g. FM, Meeting Hub) |
 | ES256 key unavailable in vault (ES256 apps) | **fail closed `503`** | — | No silent HS256 downgrade — see ADR-011 (2026-05-31) |
 
 **Why hybrid**: Each Supabase project's PostgREST only trusts keys registered in that project. The ES256 signing key (`dab1e43f`) is a standby key in the SSO project and is served at the SSO `/auth/v1/.well-known/jwks.json`. An **own-DB app** makes its PostgREST trust SSO ES256 tokens by registering **Supabase Third-Party Auth** against that JWKS + the SSO issuer URL (see [ADR-018](../architecture/decisions/ADR-018.md)) — no key import, no secret sharing. Apps not yet on TPA stay on HS256 (`jwt_secret_name` set), signed with their project's legacy secret.
@@ -141,9 +141,10 @@ The `oauth-token` and `switch-role` Edge Functions implement a **hybrid signing 
 3. **Done**: `oauth-token` / `switch-role` / `switch-tenant` sign ES256 (key cached + retried; **fail-closed `503`** for ES256 apps instead of HS256 downgrade — ADR-011)
 4. **Done (2026-05-31)**: SSO mints `iss` = SSO issuer URL; **Third-Party Auth registered on the MLS app DB** (`wckwfbbqiupvallmhqbu`) so Pipeline / Atlas / Matrix MLS verify ES256 natively via PostgREST — [ADR-018](../architecture/decisions/ADR-018.md)
 5. **Done (2026-07-02)**: **HRMS migrated to ES256** — TPA registered on the HRMS app DB (`wltuhltnwhudgkkdsvsr`, integration `82baa4cc`) + `jwt_secret_name` cleared, so HRMS mints ES256 and reads `sso_roles` / `sso_role_configurations` on the SSO project natively (fixes Settings > Permissions `PGRST301`). HRMS frontend sends the SSO token to SSO PostgREST via the `postgrestAccessToken` hook (no native token).
-6. **Next**: Register the same TPA on each remaining own-DB app project (ITSM, FM), then drop their `jwt_secret_name` (ES256)
-7. **Next**: Promote ES256 to "current" key in all projects, retire HS256 legacy keys
-8. **Final**: Remove HS256 signing code from Edge Functions
+6. **Done (2026-06-09 TPA; hardened 2026-08-17)**: **ITSM migrated to ES256** — TPA provisioned on app DB `irjrcskfcyierdbefrpk` (`jwt_secret_name` null). Frontend rejects non-ES256 bearers (guards against sibling-app HS256 overwrite of shared `matrix_sso_*` localStorage). MCP access-token issuer rekeyed from HMAC to ES256 P-256 — [ADR-038](../architecture/decisions/ADR-038.md).
+7. **Next**: Register the same TPA on remaining own-DB app projects (FM, Meeting Hub, …), then drop their `jwt_secret_name` (ES256)
+8. **Next**: Promote ES256 to "current" key in all projects, retire HS256 legacy keys
+9. **Final**: Remove HS256 signing code from Edge Functions
 
 ### Token Verification Order (canonical — `_shared/verify-sso-jwt.ts`)
 
