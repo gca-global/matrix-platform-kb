@@ -37,7 +37,7 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-029](ADR-029.md) | "Contract agreed" = Pending edge; close = settlement; pipeline stage projection; per-country collection anchor | Accepted |
 | [ADR-030](ADR-030.md) | Promote transaction linkage from `HistoryTransactional.raw` to a governed `x_transaction_key` extension | Proposed |
 | [ADR-031](ADR-031.md) | matrix-pipeline may provision and AD-sync a CDL Member from Active Directory via `cdl-write` (canonical `member_alternate_id` + `office_name`) | Accepted |
-| [ADR-032](ADR-032.md) | Chat-identity binding + delegated minting for the ITSM MCP (HumaticAI agent): per-platform assurance, `mint-delegated-token` EF, step-up consent, webhook trust-chain | Accepted |
+| [ADR-032](ADR-032.md) | Chat-identity binding + delegated minting for the ITSM MCP (chat agent): per-platform assurance, `mint-delegated-token` EF, step-up consent, webhook trust-chain | Accepted |
 | [ADR-033](ADR-033.md) | Buyer↔showing linkage as the `showing_participation` project-flavour resource (supersedes the `x_contact_key` extension / ADR-022) | Accepted |
 | [ADR-034](ADR-034.md) | Opportunity as a stored CDL super-resource (`opportunity`/`opportunity_link`) with a calculated (never materialized) pipeline stage; amends ADR-029; demotes `transaction_management` to a sub-resource | Superseded by ADR-035 |
 | [ADR-035](ADR-035.md) | Opportunity (`opportunity`/`opportunity_link`) relocated from the CDL to the Pipeline App DB (Lovable-owned), accessed directly via the supabase client under SSO-claim RLS; stage still calculated, links still loose-key; supersedes ADR-034 | Accepted |

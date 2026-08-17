@@ -162,9 +162,9 @@ WhatsApp message templates can be created in any language supported by WhatsApp.
 
 ## AI Features
 
-### HumaticAI Integration
+### AI Integration
 
-Matrix Comms integrates with HumaticAI for:
+Matrix Comms uses an AI assistant for:
 
 - **Autonomous first responses** — the AI can automatically reply to incoming messages when the bot is turned on for a conversation and the AI service has been set up by your Admin.
 - **NBPS (Next Best Prompt Suggestions)** — the AI suggests reply options that the broker can choose from or edit.
@@ -261,7 +261,7 @@ A: You can see delivery and read receipts in the campaign analytics, subject to 
 
 | Problem | Possible Cause | What to Do |
 |---------|---------------|------------|
-| **AI suggestions not appearing** | Bot is disabled for this conversation, or HumaticAI service is down | Check the bot toggle. If it's on and suggestions still don't appear, try refreshing. Report to Admin if persistent. |
+| **AI suggestions not appearing** | Bot is disabled for this conversation, or the AI service is down | Check the bot toggle. If it's on and suggestions still don't appear, try refreshing. Report to Admin if persistent. |
 | **AI gave an incorrect reply** | AI misunderstood the context | Toggle the bot off for this conversation and reply manually. Report the incorrect reply to your Admin for AI training feedback. |
 
 ### Campaigns

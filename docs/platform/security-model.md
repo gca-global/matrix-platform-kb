@@ -599,7 +599,7 @@ Ticket visibility is L2: self sees own tickets; team sees own/assigned + `reques
 
 SSO is the **sole identity authority** — apps never store user credentials
 (passwords, refresh tokens). For the ITSM MCP chat-identity binding, the
-HumaticAI agent acts for a chat user **without holding any token**: the MCP calls
+chat agent acts for a chat user **without holding any token**: the MCP calls
 the SSO `mint-delegated-token` EF (service credential only) to mint a
 **short-lived ES256 JWT per request** against a **revocable delegation grant**
 (`sso_delegation_grants`), and runs tools through a per-user RLS-bound PostgREST

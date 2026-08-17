@@ -1,6 +1,6 @@
 # Matrix Stardom — Shared Prompt Workspace
 
-> **Matrix Stardom** is a Lovable-managed Matrix app (`sharpsir-group/matrix-stardom`) that serves as the team's shared **HumaticAI workspace**: a place to ask the AI, share the conversations behind the answers, and curate the best prompts as a team. This spec documents the prompt-workspace capability set (prompt library, curation, scheduled automations, engagement-driven ranking) built on top of the app shell.
+> **Matrix Stardom** is a Lovable-managed Matrix app (`sharpsir-group/matrix-stardom`) that serves as the team's shared **AI prompt workspace**: a place to ask the AI, share the conversations behind the answers, and curate the best prompts as a team. This spec documents the prompt-workspace capability set (prompt library, curation, scheduled automations, engagement-driven ranking) built on top of the app shell.
 >
 > Deploy / hosting / OAuth details live in [`../platform/app-catalog.md`](../platform/app-catalog.md) (entry 18a). This doc covers the data model and behavior.
 
@@ -47,20 +47,20 @@ propose ──► proposed ──(admin approve)──► approved ──(admin 
 
 Selected prompts can run on a cadence to produce periodic AI output (e.g. weekly exec summaries, quarter-end stats).
 
-- **`humaticai-chat` EF** exposes a non-streaming `action: 'run'` that consumes the HumaticAI SSE stream server-side and returns `{ content, thread_id }`.
-- **`prompt-scheduler` EF** (`verify_jwt = false`) processes due `prompt_schedules`: backfills `next_run_at` for new schedules, creates a `shared_conversation` + user/assistant `shared_messages`, calls `humaticai-chat` in run mode, logs a `prompt_runs` row, and advances `next_run_at` via a tz-aware `computeNextRun` helper. Returns `{ processed, succeeded, failed }`.
+- **Chat EF** exposes a non-streaming `action: 'run'` that consumes the RagChat SSE stream server-side and returns `{ content, thread_id }`.
+- **`prompt-scheduler` EF** (`verify_jwt = false`) processes due `prompt_schedules`: backfills `next_run_at` for new schedules, creates a `shared_conversation` + user/assistant `shared_messages`, calls the chat EF in run mode, logs a `prompt_runs` row, and advances `next_run_at` via a tz-aware `computeNextRun` helper. Returns `{ processed, succeeded, failed }`.
 - **Cadence timing (all at 07:00 local, DST-safe):** `weekly_mon_morning` fires every **Monday 07:00** (reports the just-closed week); `monthly_after_end` fires on the **1st of the month 07:00** (day after month-end, reports last month); `quarter_after_end` fires on the **1st of the quarter** — Jan/Apr/Jul/Oct **07:00** (day after quarter-end, reports last quarter).
-- **Period context:** before each run the scheduler prepends a `periodPreamble(cadence, now, tz)` line (e.g. `Reporting period: last week, 1 Jun 2026 to 7 Jun 2026.`) to **both** the stored user message and the `humaticai-chat` `message`, so the model anchors on the closed window rather than "today".
+- **Period context:** before each run the scheduler prepends a `periodPreamble(cadence, now, tz)` line (e.g. `Reporting period: last week, 1 Jun 2026 to 7 Jun 2026.`) to **both** the stored user message and the chat EF `message`, so the model anchors on the closed window rather than "today".
 - **Trigger:** `pg_cron` (+`pg_net`) job `prompt-scheduler-hourly` (`0 * * * *`) POSTs to the EF. **Auth uses the public `anon` key, NOT `service_role`** — the EF runs `verify_jwt = false` and uses its own injected `SUPABASE_SERVICE_ROLE_KEY` for DB writes, so the cron only needs to satisfy the API gateway. This keeps the secret out of the committed migration. (See `~/.cursorrules` → verify_jwt guidance.)
 
 The **Automations** tab in the AI Lab manages schedules (cadence, enable/disable, delete) and has a **"New automation"** button (admin) that opens `ScheduleDialog` in **picker mode**: when no `promptId` is passed the dialog renders a searchable prompt picker sourcing **approved/board prompts plus the user's own non-archived prompts** (so a schedule can be created in-panel, not only from a prompt card). The **Stats** tab shows run history, success rate, and a most-endorsed leaderboard from `prompt_runs` + `prompts`.
 
 ### Streaming: sub-turn separation
 
-HumaticAI's RAGChat emits `message_complete` then `new_message` SSE events between content phases when it runs tools (see `matrix-comms/docs/humaticai-widget.md`). Both SSE parsers — the client `consumeSse`/`handleSseEvent` in `src/lib/humaticAi.ts` and the server-side `consumeSseToText`/`handleSseEvent` in `supabase/functions/humaticai-chat/index.ts` — treat those signals as a **sub-turn boundary** via a shared `handleSubTurnBoundary` helper:
+RagChat emits `message_complete` then `new_message` SSE events between content phases when it runs tools. Both SSE parsers — the client `consumeSse`/`handleSseEvent` and the server-side `consumeSseToText`/`handleSseEvent` in the chat EF — treat those signals as a **sub-turn boundary** via a shared `handleSubTurnBoundary` helper:
 
 - **Plain-text buffers** get a blank line (`\n\n`) appended at the boundary (the client also emits `onDelta('\n\n')` so the live bubble shows the gap immediately), so consecutive sub-turns no longer run together (`"…in parallel."` + `"A key finding…"`).
-- **JSON buffers** keep the existing behavior: they only split into a `HUMATICAI_SEGMENT_SEPARATOR`-joined segment once structurally complete, preserving `json_only` dashboard parsing (`useHumaticaiJson` splits on that marker).
+- **JSON buffers** keep the existing behavior: they only split into a segment-separator-joined segment once structurally complete, preserving `json_only` dashboard parsing (the JSON parser hook splits on that marker).
 - Repeated boundary signals are **de-duped** (no-op on an empty / already-`\n\n`-terminated buffer).
 
 ## 5. "Most popular" ranking
@@ -88,7 +88,7 @@ The Home **"Board-approved · Best prompts"** cards mirror the `ConversationCard
 
 Conversation cards, dashboard banners, and the conversation thread use **peer-primary attribution**: the **digital peer that actually responds is the lead avatar** (responder), and the human who started the thread is demoted to an "Asked by [name · job title]" sub-line. This frames Stardom as a *human + digital-peer* collaboration workspace rather than a plain AI chat.
 
-- The sole digital peer today is **Alex · CRM Analyst · Digital Peer** (the RAGChat persona behind `alexPromptLibrary.ts`). Identity lives in a single shared constant `src/lib/digitalPeer.ts` (`{ name, role, kind, avatar }`); the avatar is vendored at `public/peers/alex.png` (from `humaticai.com/ragchat/avatars/…`), with the legacy `Sparkles` + `bg-accent` `AvatarFallback` as the graceful fallback.
+- The sole digital peer today is **Alex · CRM Analyst · Digital Peer** (the RagChat persona behind `alexPromptLibrary.ts`). Identity lives in a single shared constant `src/lib/digitalPeer.ts` (`{ name, role, kind, avatar }`); the avatar is vendored at `public/peers/alex.png`, with the legacy `Sparkles` + `bg-accent` `AvatarFallback` as the graceful fallback.
 - Applied in `ConversationCard.tsx`, `dashboards/DiscussedByTeam.tsx`, and the assistant bubble in `SharedConversationThread.tsx`.
 - This is intentionally a **single constant, not a registry** — the registry lands with the planned multi-digital-peer workspace (CRM / HR / IT / SDR / SEO / SMM peers).
 

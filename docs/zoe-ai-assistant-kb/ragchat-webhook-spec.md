@@ -1,4 +1,4 @@
-# RagChat / Humatic AI — Webhook Lead Integration Spec
+# RagChat — Webhook Lead Integration Spec
 
 ## What RagChat sends
 

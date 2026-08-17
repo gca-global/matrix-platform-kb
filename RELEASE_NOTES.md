@@ -13,6 +13,7 @@ date: 2026-08-17
 ## Unreleased — 2026-08-17
 
 - Agent release-notes & versioning policy aligned with `matrix-itsm` (SemVer, day-batch PATCH, `scripts/release.sh`).
+- Removed third-party AI vendor brand names from chat/AI surfaces; those docs now refer to RagChat or a generic chat agent.
 
 ## v1.0.0 — 2026-08-17 — Baseline Matrix Platform Knowledge Base
 

@@ -266,7 +266,7 @@ lookup with no signature check — KB gap H4, closed).
 
 ### `mint-delegated-token`
 
-Service-to-service minting for the ITSM MCP chat-identity binding (HumaticAI agent). Lets a **delegate app** (the ITSM MCP) act for a user **without holding any user credential**, against a **revocable delegation grant**. `verify_jwt = false`; gated by a **service credential** in the `X-Delegation-Secret` header (env `MCP_DELEGATION_SECRET`) — never a per-user token.
+Service-to-service minting for the ITSM MCP chat-identity binding (chat agent). Lets a **delegate app** (the ITSM MCP) act for a user **without holding any user credential**, against a **revocable delegation grant**. `verify_jwt = false`; gated by a **service credential** in the `X-Delegation-Secret` header (env `MCP_DELEGATION_SECRET`) — never a per-user token.
 
 Single deployable, routed by `action` in the JSON body:
 
@@ -278,7 +278,7 @@ Single deployable, routed by `action` in the JSON body:
 
 **Backing store**: `sso_delegation_grants` (service-role only) + `mcp_resolve_user(email, azure_oid)` SECURITY DEFINER RPC (service-role execute only). **Signing reliability**: same ES256-or-fail-closed rule as `oauth-token`/`switch-role`.
 
-**Trust chain**: the minted token is the last hop of `Platform → (signed webhook) → HumaticAI → (OAuth code+PKCE+secret → MCP access token) → MCP → (X-Delegation-Secret) → mint`. The agent authenticates to MCP with OAuth 2.1 authorization-code + PKCE (confidential client: `client_id` + `client_secret`); the signing key is never a bearer. The chat id is platform-asserted; HumaticAI must verify the platform webhook signature before forwarding it.
+**Trust chain**: the minted token is the last hop of `Platform → (signed webhook) → chat agent → (OAuth code+PKCE+secret → MCP access token) → MCP → (X-Delegation-Secret) → mint`. The agent authenticates to MCP with OAuth 2.1 authorization-code + PKCE (confidential client: `client_id` + `client_secret`); the signing key is never a bearer. The chat id is platform-asserted; the agent must verify the platform webhook signature before forwarding it.
 
 **ITSM MCP tool tiers (app DB `mcp-server`, ADR-032)**: `tools/list` returns the full catalogue for agent tokens; execution is gated at `tools/call`.
 

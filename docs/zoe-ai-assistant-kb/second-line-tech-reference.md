@@ -170,7 +170,7 @@ Edge Functions run on Supabase's Deno runtime. They handle OAuth, admin APIs, AI
 | `vendor-logo` | ITSM | Vendor logo proxy (Clearbit/Google) | External API unavailable |
 | `lead-webhook` | Pipeline | External lead ingestion | Integration config missing in app_settings |
 | `mls-sync-orchestrator` | Pipeline | MLS data sync orchestration | MLS credentials, connection timeout |
-| `semantic-search` | Pipeline | Semantic/AI property search | Humatic AI service unavailable |
+| `semantic-search` | Pipeline | Semantic/AI property search | AI search service unavailable |
 | `parse-opportunity-info` | Pipeline | Voice/text → structured deal data | AI API key missing |
 | `date-reminders` | Pipeline | Scheduled contact date reminders | Cron scheduling, notification delivery |
 | `log-share-event` | Pipeline | Shared list access analytics | — |
@@ -373,7 +373,7 @@ All Sharp Matrix apps share the same stack:
 |---------|---------|---------|---------------|
 | **Microsoft Azure AD** | SSO | User authentication, profile sync | Token expiry, sync delays, account not linked |
 | **Twilio** | Comms | WhatsApp Business API | API rate limits, template approval delays, webhook failures |
-| **HumaticAI** | Comms | AI-powered reply suggestions | Service availability, incorrect AI responses |
+| **RagChat** | Comms | AI-powered reply suggestions | Service availability, incorrect AI responses |
 | **OpenAI / Gemini** | Client Connect, Meeting Hub | Voice-to-form AI processing | API key expiry, rate limits, parsing errors |
 | **Lovable AI Gateway** | Meeting Hub, Portal | AI processing backend | Service availability |
 | **Qobrix CRM** | ETL Pipeline | Legacy data source (being replaced) | API changes, rate limits |

@@ -213,7 +213,7 @@ Four apps are backfilled into **every** role's `apps_allowed` so they stay broad
 ### AI Web Assistant
 **Status**: Done
 **Users**: Website visitors (anonymous and authenticated)
-**Powered by**: RagChat / Humatic AI
+**Powered by**: RagChat
 **Key Features**:
 - Conversational AI embedded on public website
 - Property search assistance and recommendations
