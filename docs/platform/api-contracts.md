@@ -115,7 +115,7 @@ Apps send `Authorization: Bearer <token>` with the SSO JWT obtained from the OAu
 
 ## Chat agent → MCP ingestion contract (ADR-032)
 
-Chat agents (e.g. RagChat, Claude, Cursor) call the ITSM `mcp-server` MCP endpoint as a tool
+Chat agents (e.g. Claude, Cursor) call the ITSM `mcp-server` MCP endpoint as a tool
 while holding **no SSO tokens or per-user credentials**. The contract:
 
 1. **Authenticate via OAuth 2.1 authorization-code + PKCE (HubSpot-style).** Each

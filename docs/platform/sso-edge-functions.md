@@ -290,7 +290,7 @@ Single deployable, routed by `action` in the JSON body:
 
 Each tool description uses HubSpot-style structured sections (`<capabilities>` / `<when_to_use>`, `<returns>`, `<usage_guidance>`, `<availability>`). Call **`tool_guidance`** for deeper cross-tool workflows. Blocked private calls return JSON-RPC `-32003` with `reason: private_requires_dm` (`cause`: `group_chat` \| `no_user_id` \| `no_verified_session` for web). Step-up consent applies to ticket close/resolve via `update_ticket` only. Approval MCP tools (`list_pending_approvals`, `approve`, `reject`) were removed — the in-app approval UI remains.
 
-**Web identity headers** (Planet 9 / RAGChat): `X-Chat-Platform: web`, `X-Chat-Scope: direct`, `X-Chat-User-Id: <SSO user UUID>`, `X-Chat-User-Bearer: <SSO access token>`. The bearer is verified on every private call via `create_grant(user_bearer)` — not a bare `X-Chat-Verified` flag.
+**Web identity headers** (in-app chat): `X-Chat-Platform: web`, `X-Chat-Scope: direct`, `X-Chat-User-Id: <SSO user UUID>`, `X-Chat-User-Bearer: <SSO access token>`. The bearer is verified on every private call via `create_grant(user_bearer)` — not a bare `X-Chat-Verified` flag.
 
 ## Admin Functions
 

@@ -2,7 +2,7 @@
 
 This directory contains the full knowledge base for the **Zoe AI Assistant** — the Sharp Matrix platform's AI-powered support agent.
 
-The RAG-chat webhook contract that feeds Zoe lives next door at [`ragchat-webhook-spec.md`](ragchat-webhook-spec.md).
+The website AI chat lead-webhook contract lives next door at [`ai-chat-webhook-spec.md`](ai-chat-webhook-spec.md).
 
 ## Purpose
 

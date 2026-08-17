@@ -64,7 +64,7 @@ docs/                                   ← KB knowledge layer (system of record
 ├── exec-plans/                        ← index.md, quality-score.md, tech-debt-tracker, active/completed plans
 ├── references/                        ← API catalogs, integration endpoints
 ├── vision/                            ← Digital strategy 2026-2028, AI sales model
-└── zoe-ai-assistant-kb/               ← Zoe AI Assistant RAG knowledge base + ragchat-webhook-spec.md
+└── zoe-ai-assistant-kb/               ← Zoe AI Assistant RAG knowledge base + ai-chat-webhook-spec.md
 raw/                                    ← Hand-supplied source artifacts
 ├── dash/                              ← 6 SIR DOCX listing forms
 ├── qobrix/qobrix_openapi.yaml         ← Qobrix OpenAPI 3.0 spec
@@ -110,7 +110,7 @@ scripts/
 
 ## For Zoe AI Assistant (1st & 2nd Line Support)
 
-Start at `docs/zoe-ai-assistant-kb/index.md`. For end-user questions, navigate to the relevant app article (`portal.md`, `client-connect.md`, `pipeline.md`, `hrms.md`, `itsm.md`, `financial-management.md`, `comms.md`, `meeting-hub.md`, `platform-sso-auth.md`). For 2nd-line technical questions, see `docs/zoe-ai-assistant-kb/second-line-tech-reference.md`. To author a new article, follow `docs/zoe-ai-assistant-kb/kb-generation-guide.md`. The Zoe RAG-chat webhook contract lives at `docs/zoe-ai-assistant-kb/ragchat-webhook-spec.md`.
+Start at `docs/zoe-ai-assistant-kb/index.md`. For end-user questions, navigate to the relevant app article (`portal.md`, `client-connect.md`, `pipeline.md`, `hrms.md`, `itsm.md`, `financial-management.md`, `comms.md`, `meeting-hub.md`, `platform-sso-auth.md`). For 2nd-line technical questions, see `docs/zoe-ai-assistant-kb/second-line-tech-reference.md`. To author a new article, follow `docs/zoe-ai-assistant-kb/kb-generation-guide.md`. The website AI chat lead-webhook contract lives at `docs/zoe-ai-assistant-kb/ai-chat-webhook-spec.md`.
 
 ## Source Repos & Files
 

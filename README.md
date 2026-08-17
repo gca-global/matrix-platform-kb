@@ -78,7 +78,7 @@ Zoe's knowledge base lives in [`docs/zoe-ai-assistant-kb/`](docs/zoe-ai-assistan
 | [incident-reporting.md](docs/zoe-ai-assistant-kb/incident-reporting.md) | How to report an incident — severity guide, escalation path |
 | [second-line-tech-reference.md](docs/zoe-ai-assistant-kb/second-line-tech-reference.md) | Architecture deep-dive for 2nd line support analysts |
 | [kb-generation-guide.md](docs/zoe-ai-assistant-kb/kb-generation-guide.md) | How to generate a KB article for any new Matrix app |
-| [ragchat-webhook-spec.md](docs/zoe-ai-assistant-kb/ragchat-webhook-spec.md) | RAG-chat webhook contract (Zoe ingestion) |
+| [ai-chat-webhook-spec.md](docs/zoe-ai-assistant-kb/ai-chat-webhook-spec.md) | Website AI chat lead-webhook contract |
 
 ### Platform Overview
 
@@ -135,7 +135,7 @@ docs/                              ← KB knowledge layer (system of record)
   product-specs/                   ← matrix-pipeline/ (CRM SOT) + Portal / Marketing / Listing-Forms / Personalization
   vision/                          ← Digital strategy 2026-2028, AI sales model
   references/                      ← API catalogs, field summaries
-  zoe-ai-assistant-kb/             ← Zoe RAG support KB + ragchat-webhook-spec.md
+  zoe-ai-assistant-kb/             ← Zoe RAG support KB + ai-chat-webhook-spec.md
 raw/                               ← Hand-supplied source artifacts
   dash/                            ← SIR/Anywhere.com listing forms (DOCX)
   qobrix/                          ← Qobrix OpenAPI spec (YAML)

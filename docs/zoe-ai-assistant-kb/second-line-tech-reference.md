@@ -373,7 +373,7 @@ All Sharp Matrix apps share the same stack:
 |---------|---------|---------|---------------|
 | **Microsoft Azure AD** | SSO | User authentication, profile sync | Token expiry, sync delays, account not linked |
 | **Twilio** | Comms | WhatsApp Business API | API rate limits, template approval delays, webhook failures |
-| **RagChat** | Comms | AI-powered reply suggestions | Service availability, incorrect AI responses |
+| **AI assistant** | Comms | AI-powered reply suggestions | Service availability, incorrect AI responses |
 | **OpenAI / Gemini** | Client Connect, Meeting Hub | Voice-to-form AI processing | API key expiry, rate limits, parsing errors |
 | **Lovable AI Gateway** | Meeting Hub, Portal | AI processing backend | Service availability |
 | **Qobrix CRM** | ETL Pipeline | Legacy data source (being replaced) | API changes, rate limits |

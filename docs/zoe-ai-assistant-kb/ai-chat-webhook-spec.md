@@ -1,6 +1,6 @@
-# RagChat — Webhook Lead Integration Spec
+# Website AI Chat — Webhook Lead Integration Spec
 
-## What RagChat sends
+## What the website AI chat sends
 
 `POST {webhook_url}` with `Content-Type: application/json`
 
@@ -58,7 +58,7 @@
 - Deal stage, pipeline, priority
 - Any CRM-specific fields
 
-## What RagChat expects back
+## What the website AI chat expects back
 
 ### Success (HTTP 2xx)
 
@@ -76,7 +76,7 @@ or
 { "lead_id": "123" }
 ```
 
-RagChat stores this as `crm_remote_id`, shown in the Leads table as "Sent #123".
+The website AI chat stores this as `crm_remote_id`, shown in the Leads table as "Sent #123".
 If no ID is returned, the lead is still marked as "Sent" but without a reference number.
 
 ### Failure (HTTP 4xx/5xx)
@@ -87,7 +87,7 @@ Return optional JSON error:
 { "error": "Description of what went wrong" }
 ```
 
-RagChat marks the lead as "Failed" and stores the error message for display and retry.
+The website AI chat marks the lead as "Failed" and stores the error message for display and retry.
 
 ## Matrix Pipeline implementation
 

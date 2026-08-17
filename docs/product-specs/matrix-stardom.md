@@ -47,7 +47,7 @@ propose ──► proposed ──(admin approve)──► approved ──(admin 
 
 Selected prompts can run on a cadence to produce periodic AI output (e.g. weekly exec summaries, quarter-end stats).
 
-- **Chat EF** exposes a non-streaming `action: 'run'` that consumes the RagChat SSE stream server-side and returns `{ content, thread_id }`.
+- **Chat EF** exposes a non-streaming `action: 'run'` that consumes the AI chat SSE stream server-side and returns `{ content, thread_id }`.
 - **`prompt-scheduler` EF** (`verify_jwt = false`) processes due `prompt_schedules`: backfills `next_run_at` for new schedules, creates a `shared_conversation` + user/assistant `shared_messages`, calls the chat EF in run mode, logs a `prompt_runs` row, and advances `next_run_at` via a tz-aware `computeNextRun` helper. Returns `{ processed, succeeded, failed }`.
 - **Cadence timing (all at 07:00 local, DST-safe):** `weekly_mon_morning` fires every **Monday 07:00** (reports the just-closed week); `monthly_after_end` fires on the **1st of the month 07:00** (day after month-end, reports last month); `quarter_after_end` fires on the **1st of the quarter** — Jan/Apr/Jul/Oct **07:00** (day after quarter-end, reports last quarter).
 - **Period context:** before each run the scheduler prepends a `periodPreamble(cadence, now, tz)` line (e.g. `Reporting period: last week, 1 Jun 2026 to 7 Jun 2026.`) to **both** the stored user message and the chat EF `message`, so the model anchors on the closed window rather than "today".
@@ -57,7 +57,7 @@ The **Automations** tab in the AI Lab manages schedules (cadence, enable/disable
 
 ### Streaming: sub-turn separation
 
-RagChat emits `message_complete` then `new_message` SSE events between content phases when it runs tools. Both SSE parsers — the client `consumeSse`/`handleSseEvent` and the server-side `consumeSseToText`/`handleSseEvent` in the chat EF — treat those signals as a **sub-turn boundary** via a shared `handleSubTurnBoundary` helper:
+The AI chat backend emits `message_complete` then `new_message` SSE events between content phases when it runs tools. Both SSE parsers — the client `consumeSse`/`handleSseEvent` and the server-side `consumeSseToText`/`handleSseEvent` in the chat EF — treat those signals as a **sub-turn boundary** via a shared `handleSubTurnBoundary` helper:
 
 - **Plain-text buffers** get a blank line (`\n\n`) appended at the boundary (the client also emits `onDelta('\n\n')` so the live bubble shows the gap immediately), so consecutive sub-turns no longer run together (`"…in parallel."` + `"A key finding…"`).
 - **JSON buffers** keep the existing behavior: they only split into a segment-separator-joined segment once structurally complete, preserving `json_only` dashboard parsing (the JSON parser hook splits on that marker).
@@ -88,7 +88,7 @@ The Home **"Board-approved · Best prompts"** cards mirror the `ConversationCard
 
 Conversation cards, dashboard banners, and the conversation thread use **peer-primary attribution**: the **digital peer that actually responds is the lead avatar** (responder), and the human who started the thread is demoted to an "Asked by [name · job title]" sub-line. This frames Stardom as a *human + digital-peer* collaboration workspace rather than a plain AI chat.
 
-- The sole digital peer today is **Alex · CRM Analyst · Digital Peer** (the RagChat persona behind `alexPromptLibrary.ts`). Identity lives in a single shared constant `src/lib/digitalPeer.ts` (`{ name, role, kind, avatar }`); the avatar is vendored at `public/peers/alex.png`, with the legacy `Sparkles` + `bg-accent` `AvatarFallback` as the graceful fallback.
+- The sole digital peer today is **Alex · CRM Analyst · Digital Peer** (the AI persona behind `alexPromptLibrary.ts`). Identity lives in a single shared constant `src/lib/digitalPeer.ts` (`{ name, role, kind, avatar }`); the avatar is vendored at `public/peers/alex.png`, with the legacy `Sparkles` + `bg-accent` `AvatarFallback` as the graceful fallback.
 - Applied in `ConversationCard.tsx`, `dashboards/DiscussedByTeam.tsx`, and the assistant bubble in `SharedConversationThread.tsx`.
 - This is intentionally a **single constant, not a registry** — the registry lands with the planned multi-digital-peer workspace (CRM / HR / IT / SDR / SEO / SMM peers).
 

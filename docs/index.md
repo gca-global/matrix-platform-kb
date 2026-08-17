@@ -144,7 +144,7 @@ RAG-optimized support documentation for the Zoe AI assistant — 1st line suppor
 | [zoe-ai-assistant-kb/platform-sso-auth.md](zoe-ai-assistant-kb/platform-sso-auth.md) | SSO & Auth — login, roles, permissions, scope, SSO Console, user management |
 | [zoe-ai-assistant-kb/second-line-tech-reference.md](zoe-ai-assistant-kb/second-line-tech-reference.md) | 2nd Line Support — technology overview, architecture, links to deep-dive docs |
 | [zoe-ai-assistant-kb/kb-generation-guide.md](zoe-ai-assistant-kb/kb-generation-guide.md) | How to generate a support KB article for any new Matrix app |
-| [zoe-ai-assistant-kb/ragchat-webhook-spec.md](zoe-ai-assistant-kb/ragchat-webhook-spec.md) | RAG-chat webhook spec (Zoe AI ingestion contract) |
+| [zoe-ai-assistant-kb/ai-chat-webhook-spec.md](zoe-ai-assistant-kb/ai-chat-webhook-spec.md) | Website AI chat lead-webhook spec |
 
 ---
 
