@@ -467,6 +467,43 @@ const sidebarSections = [
 ];
 ```
 
+Prefer a **shared nav registry** so desktop and mobile stay in sync (see below) rather than duplicating section arrays inside `AppSidebar.tsx` alone.
+
+### Mobile navigation and safe areas
+
+Mobile navigation is a **real routed page** (`/menu`), not a Radix Sheet/drawer overlay.
+
+| Concern | Contract |
+|---------|----------|
+| **Entry** | Hamburger navigates to `/menu`. Desktop (`md+`) keeps the collapsible sidebar rail. |
+| **History** | Nav rows use `replace` so Back never reopens the menu. |
+| **Chrome** | Footer (theme / language / back-to-portal) is pinned with `pb-safe`; the nav list scrolls independently. |
+| **Registry** | Templates: `src/lib/navSections.ts`. MSA-style apps: `src/config/pages.ts` (`SIDEBAR_SECTIONS`). Both `AppSidebar` and `MobileNav` import the same source. |
+
+**Document-scroll contract.** On mobile the **document** owns vertical scrolling — do not lock the shell with `h-screen overflow-hidden`. Desktop uses `md:h-svh md:overflow-hidden` with an internal scroller. The header is in-flow on mobile and sticky on `md+`.
+
+**Runtime `theme-color`.** Call `initThemeColor()` from `useTheme.ts`. It writes `<meta name="theme-color">` from `--background` for Chrome/Android, and **removes** the meta on iPhone/iPad so WebKit compact chrome composites over page content. Do **not** ship a static opaque `<meta name="theme-color">` in `index.html` for mobile WebKit.
+
+**Menu canvas marker.** Set `html[data-surface="menu"]` while on `/menu` so the document paints the sidebar palette; Safari glass and rubber-band gaps then match the menu surface.
+
+**Safe-area utilities** (in `index.css`):
+
+| Class | Role |
+|-------|------|
+| `.pt-safe` / `.pb-safe` / `.px-safe` | `env(safe-area-inset-*)` padding |
+| `.pb-safe-content` | `calc(env(safe-area-inset-bottom, 0px) + 4.5rem)` on mobile (Safari floating toolbar); `1rem` at `md+` |
+
+Viewport meta: use `viewport-fit=cover` and do **not** set `user-scalable=no`.
+
+**Sheet overlay cut.** Other Sheets still need `SheetOverlay` at `fixed inset-x-0 top-0 h-[100vh] h-[100lvh]` — plain `inset-0` resolves against iOS Safari's small viewport and leaves a gap under the overlay.
+
+**Adoption status (as of 2026-08-17)**
+
+| Status | Apps |
+|--------|------|
+| Landed | `matrix-itsm`, `matrix-apps-template-2-1`, `matrix-apps-template-2-2`, `matrix-sa-staging-main` (`main`), `matrix-sa-hungary-staging-main` |
+| Still on locked shell (follow-up) | `matrix-pipeline-2-0`, `matrix-atlas-mls`, `matrix-stardom`, `matrix-fm`, `matrix-qobrix-sales-automation-rls`, `task-manager-hu-1.3`, `matrix-analytics`, `matrix-hrms`, `matrix-hrms-sandbox-3.0`, `matrix-cdl-studio` |
+
 ### Sharp Design System
 
 | Element | Value |
