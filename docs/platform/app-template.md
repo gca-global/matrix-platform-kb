@@ -585,7 +585,7 @@ Lovable prompts for each app are stored alongside UAT materials:
 | TypeScript strictness | Relaxed for Lovable compatibility |
 | `CLIENT_ID` | Must be updated in `matrix-sso.ts` after app registration in SSO Console |
 | `BASE_PATH` | Set in `matrix-sso.ts` for production subdirectory routing |
-| **Remix → reset RN + version** | On a **new** Lovable remix from `matrix-apps-template-2-1` (or 2.2), immediately set `package.json` / lockfile `version` to `0.0.0`, rewrite `RELEASE_NOTES.md` for the new app (Unreleased only — delete template `vX.Y.Z` sections), and rebrand `AGENTS.md` (name, repo, push URL). Do not copy template GitHub tags. First product cut is this app's `v1.0.0`. See template [`AGENTS.md`](https://github.com/sharpsir-group/matrix-apps-template-2-1/blob/main/AGENTS.md) § On new Lovable remix. |
+| **Remix → reset RN + version** | Templates keep their own generation trail (`matrix-apps-template-2-1` → `2.1.x`, `2-2` → `2.2.x`). On a **new** Lovable remix, immediately set `package.json` / lockfile `version` to `0.0.0`, rewrite `RELEASE_NOTES.md` for the new app (Unreleased only — delete template `vX.Y.Z` sections), and rebrand `AGENTS.md` (name, repo, push URL). Do not copy template GitHub tags. First product cut is this app's `v1.0.0`. Cursor and Lovable both must follow this. See template [`AGENTS.md`](https://github.com/sharpsir-group/matrix-apps-template-2-1/blob/main/AGENTS.md) § On new Lovable remix. |
 
 ## Real App Example: Matrix HRMS
 
