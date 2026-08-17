@@ -119,7 +119,7 @@ Start at `docs/zoe-ai-assistant-kb/index.md`. For end-user questions, navigate t
 | `/home/bitnami/matrix-apps-template-2-1` | React/TS | **Canonical** app template — dual-Supabase, SSO, permissions, RLS, UI. (The prior `matrix-apps-template` is obsolete — do not use.) |
 | `/home/bitnami/matrix-hrms` | React/TS | HRMS app (Domain-Specific) |
 | `/home/bitnami/matrix-pipeline` | React/TS | Pipeline CRM (CDL-Connected) |
-| `/home/bitnami/itsm-2-1` | React/TS | ITSM (Domain-Specific) |
+| `/home/bitnami/matrix-itsm` | React/TS | ITSM (Domain-Specific) — [`gca-global/matrix-itsm`](https://github.com/gca-global/matrix-itsm) |
 | `/home/bitnami/matrix-fm` | React/TS | Financial Management (Domain-Specific) |
 | `/home/bitnami/matrix-mls` | React/TS | MLS Listing Management (CDL-Connected) — Cursor-managed, see ADR-013 |
 | `/home/bitnami/matrix-atlas-mls` | React/TS | Atlas — MLS Sync admin & Listings Search (CDL-Connected) |

@@ -4,7 +4,7 @@
 > Examples:
 > - `/home/bitnami/matrix-hrms` — Domain-Specific app (HR, 25+ tables)
 > - `/home/bitnami/matrix-pipeline` — CDL-Connected app (CRM, leads, pipeline)
-> - `/home/bitnami/itsm-2-1` — Domain-Specific app (IT service desk, CMDB)
+> - `/home/bitnami/matrix-itsm` — Domain-Specific app (IT service desk, CMDB; repo: `gca-global/matrix-itsm`)
 > - `/home/bitnami/matrix-fm` — Domain-Specific app (financial reporting, budgeting)
 >
 > **For Lovable**: Read this document before building ANY Matrix App. It defines the
@@ -17,7 +17,7 @@ Before building, determine which type of app you're creating:
 | Type | CDL Usage | App DB Usage | Example |
 |------|-----------|-------------|---------|
 | **CDL-Connected** | Reads/writes shared RESO tables (`Property`, `Member`, `Contacts`, `SavedSearch`, `ShowingAppointment`, `TransactionManagement`, …) | May have some app-private tables (e.g. matrix-pipeline Commission Engine ERP-lite) | Matrix Pipeline 2.0 (`/home/bitnami/matrix-pipeline`, consolidates broker / manager / contact-center / listing-coordinator workflows), Client Portal, Marketing App |
-| **Domain-Specific** | Only uses CDL for auth/permissions/tenants | Has its own Supabase instance with domain tables | HRMS (`/home/bitnami/matrix-hrms`), Matrix FM (`/home/bitnami/matrix-fm`), ITSM (`/home/bitnami/itsm-2-1`) |
+| **Domain-Specific** | Only uses CDL for auth/permissions/tenants | Has its own Supabase instance with domain tables | HRMS (`/home/bitnami/matrix-hrms`), Matrix FM (`/home/bitnami/matrix-fm`), ITSM (`/home/bitnami/matrix-itsm`) |
 
 **Decision rule**: If your app works with real estate listings, contacts, agents, or showings → CDL-Connected. If your app has its own domain (HR, finance, operations) → Domain-Specific.
 

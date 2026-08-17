@@ -298,7 +298,7 @@ Four apps are backfilled into **every** role's `apps_allowed` so they stay broad
 **Users**: IT staff, IT Admins, All internal users (ticket submitters)
 **App Type**: Domain-Specific (own Supabase instance)
 **Supabase Instance**: `irjrcskfcyierdbefrpk`
-**Repo**: `/home/bitnami/itsm-2-1`
+**Repo**: `/home/bitnami/matrix-itsm` ([`gca-global/matrix-itsm`](https://github.com/gca-global/matrix-itsm))
 **Key Features** (target):
 - Service desk with ticket lifecycle (Incident, Service Request, Change, Problem)
 - SLA tracking with priority-based breach time

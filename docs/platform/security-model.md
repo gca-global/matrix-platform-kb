@@ -366,7 +366,7 @@ The `team` scope requires checking whether a record's owner is in the same team 
 
 Apps deploying tables to CDL should use `is_in_my_teams()`. Apps with their own DB should create an app-specific `get_my_record_id_v2()` and `is_my_direct_report_v2()` following the template in `001_sso_helper_functions.sql`.
 
-### ITSM-specific ticket scope (itsm-2-1)
+### ITSM-specific ticket scope (matrix-itsm)
 
 ITSM **diverges** from generic Pattern B for `service_desk_tickets`:
 
@@ -381,7 +381,7 @@ ITSM **diverges** from generic Pattern B for `service_desk_tickets`:
 - **`Broker`** role uses `scope=self`, `crud=cru` — requesters can create/read/update own tickets without global scope.
 - UI queries use `scopeRead(query, tenantId)` as defense-in-depth alongside RLS.
 
-Migration: `itsm-2-1/supabase/migrations/20260619130000_p2_ticket_team_tenancy.sql`
+Migration: `matrix-itsm/supabase/migrations/20260619130000_p2_ticket_team_tenancy.sql`
 
 ### Qobrix Sales Automation — `global` write-all (app-specific exception)
 
