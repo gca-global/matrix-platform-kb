@@ -12,6 +12,8 @@ date: 2026-08-17
 
 ## Unreleased — 2026-08-17
 
+- Documented floored safe-area gutter variants (`.px-safe-4` / `.px-safe-6` / `.pb-safe-6`) in `docs/platform/app-template.md` — bare `.px-safe` overrides Tailwind `px-N` on non-notched viewports.
+
 - Documented mobile `/menu` navigation + safe-area / theme-color / document-scroll contract in `docs/platform/app-template.md` (adoption status as of 2026-08-17).
 - Documented Cyprus Area Manager team coverage via SSO group **CSIR Sales** (scope stays `team`; `oauth-token` honours `active_role_id` on login).
 - Dropped remaining third-party AI vendor names from ADR-032 / ADR-038 status lines.

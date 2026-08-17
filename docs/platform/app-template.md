@@ -490,7 +490,9 @@ Mobile navigation is a **real routed page** (`/menu`), not a Radix Sheet/drawer 
 
 | Class | Role |
 |-------|------|
-| `.pt-safe` / `.pb-safe` / `.px-safe` | `env(safe-area-inset-*)` padding |
+| `.pt-safe` / `.pb-safe` / `.px-safe` | `env(safe-area-inset-*)` padding only — use when the element has **no** competing Tailwind `p-`/`px-`/`py-` class |
+| `.px-safe-4` / `.px-safe-6` | `max(1rem\|1.5rem, env(safe-area-inset-left\|right))` — floored gutters for pages that also need a fixed horizontal padding. Bare `.px-safe` is emitted after Tailwind utilities and wins the cascade, collapsing `px-4`/`p-6` to 0 on non-notched viewports |
+| `.pb-safe-6` | `max(1.5rem, env(safe-area-inset-bottom))` — same floor rule for bottom padding |
 | `.pb-safe-content` | `calc(env(safe-area-inset-bottom, 0px) + 4.5rem)` on mobile (Safari floating toolbar); `1rem` at `md+` |
 
 Viewport meta: use `viewport-fit=cover` and do **not** set `user-scalable=no`.
