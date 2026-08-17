@@ -563,6 +563,17 @@ on Qobrix v1.0: `pages = ['*']`, `actions = ['*']`, and
 without a config row get `NO_ACCESS` in `useRoleConfig` — the wildcard grant
 is required for Area Managers to pass `ProtectedRoute`.
 
+**Cyprus Area Manager team membership.** Area Manager stays at scope `team`
+(not `global`), so Hungary/Kazakhstan leads stay out of a CY manager's view.
+Country coverage is the SSO group **CSIR Sales** (`4d2bdfe9-…`): Cyprus Broker
+and Area Manager holders (`@cyprus-sothebysrealty.com`,
+`@sothebysrealty-cyprus.com`) are members (migration
+`20260817143000_populate_csir_sales_cyprus_brokers.sql`). Team-scoped RLS and
+board filters match `owner_team_id` against JWT `team_ids`. Dual-role users
+(Broker + Area Manager) switch via the avatar RoleSwitcher; `oauth-token`
+honours `user_metadata.active_role_id` on both code exchange and refresh so
+the chosen role survives re-login.
+
 ## Role-to-Page Mapping Example (ITSM)
 
 App DB project: `irjrcskfcyierdbefrpk`. Config store: SSO `sso_role_configurations` with `app_id = itsm` (same shared model as HRMS / Qobrix; migrated from app-local `app_permissions` on 2026-07-09).

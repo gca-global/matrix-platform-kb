@@ -12,6 +12,7 @@ date: 2026-08-17
 
 ## Unreleased — 2026-08-17
 
+- Documented Cyprus Area Manager team coverage via SSO group **CSIR Sales** (scope stays `team`; `oauth-token` honours `active_role_id` on login).
 - Dropped remaining third-party AI vendor names from ADR-032 / ADR-038 status lines.
 - Moved the GitHub repo to [`gca-global/matrix-platform-kb`](https://github.com/gca-global/matrix-platform-kb). The previous `sharpsir-group/matrix-platform-kb` URL permanently redirects.
 - **ADR-038**: ITSM is ES256-only (SSO PostgREST bearer + MCP access-token issuer). Supersedes ADR-032 for the MCP HMAC signing algorithm only; chat-agent/OAuth design stands. Corrects `security-model.md` hybrid table (ITSM already on TPA; remaining HS256 apps are FM / Meeting Hub, etc.).
