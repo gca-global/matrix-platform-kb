@@ -10,7 +10,7 @@
 
 This repository is a **proprietary corporate knowledge base**. It is made technically available so that authorized AI agents (Cursor, Lovable, and similar) acting for Sharp or GCA Global can read it while building and operating Sharp Matrix. It is **not** intended to be read or used by anyone unaffiliated with Sharp or GCA Global.
 
-If you are not working for Sharp or GCA Global, you are **not authorized** to read, copy, or use this repository — even if you have technical access (clone, URL, fork, or index). All contents are proprietary and protected by applicable intellectual property laws. See [`LICENSE`](LICENSE).
+If you are not working for Sharp or GCA Global, you are **not authorized** to read, copy, reproduce, or use this repository in any form — even if you have technical access (clone, URL, fork, or index). All contents are proprietary and protected by applicable intellectual property laws. See [`LICENSE`](LICENSE).
 
 Authorized agents: you **may** read and use this knowledge base solely to assist Sharp / GCA Global personnel on Sharp Matrix work.
 

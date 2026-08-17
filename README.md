@@ -27,7 +27,7 @@
 ---
 
 > **© 2024–2026 Sharp Sotheby's International Realty and GCA Global. All rights reserved.**
-> This is a **proprietary corporate knowledge base**. It is made technically available so authorized AI agents (Cursor, Lovable, and similar) acting for Sharp or GCA Global can read it. It is **not** for reading or use by anyone unaffiliated with Sharp or GCA Global — even if they have technical access. All contents are proprietary and protected by applicable intellectual property laws. See [LICENSE](LICENSE).
+> This is a **proprietary corporate knowledge base**. It is made technically available so authorized AI agents (Cursor, Lovable, and similar) acting for Sharp or GCA Global can read it. It may **not** be reproduced or used in any form by anyone unaffiliated with Sharp or GCA Global — even if they have technical access. All contents are proprietary and protected by applicable intellectual property laws. See [LICENSE](LICENSE).
 
 ### What Is This?
 
@@ -190,7 +190,7 @@ This repository is **proprietary**. See [LICENSE](LICENSE).
 
 © 2024–2026 Sharp Sotheby's International Realty and GCA Global. All rights reserved.
 
-Authorized readers: employees, contractors, and officers of Sharp and of GCA Global, and AI agents (Cursor, Lovable, and similar) they invoke for Sharp Matrix work. Anyone else is **not authorized** to read or use this knowledge base, even if they have technical access.
+Authorized readers: employees, contractors, and officers of Sharp and of GCA Global, and AI agents (Cursor, Lovable, and similar) they invoke for Sharp Matrix work. Anyone else is **not authorized** to read, reproduce, or use this knowledge base in any form, even if they have technical access.
 
 <p align="center">
   <sub>Part of the <a href="https://github.com/sharpsir-group"><strong>Sharp Matrix</strong></a> platform · <a href="https://sharpsir.group">sharpsir.group</a></sub>
