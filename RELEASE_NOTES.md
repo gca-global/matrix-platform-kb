@@ -12,6 +12,8 @@ date: 2026-08-17
 
 ## Unreleased — 2026-08-17
 
+- Design system: expanded mobile chrome / FAB clearance contract in `docs/platform/app-template.md` (transparency stack, SidebarLayout class strings, `pb-safe-content` ↔ `.bottom-safe-fab` distance formula).
+
 - Documented floored safe-area gutter variants (`.px-safe-4` / `.px-safe-6` / `.pb-safe-6`) in `docs/platform/app-template.md` — bare `.px-safe` overrides Tailwind `px-N` on non-notched viewports.
 
 - Documented mobile `/menu` navigation + safe-area / theme-color / document-scroll contract in `docs/platform/app-template.md` (adoption status as of 2026-08-17).

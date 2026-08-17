@@ -471,7 +471,7 @@ Prefer a **shared nav registry** so desktop and mobile stay in sync (see below) 
 
 ### Mobile navigation and safe areas
 
-Mobile navigation is a **real routed page** (`/menu`), not a Radix Sheet/drawer overlay.
+Mobile navigation is a **real routed page** (`/menu`), not a Radix Sheet/drawer overlay. This section is the **platform design-system contract** for translucent browser chrome, safe-area gutters, and floating controls. Templates ship the utilities and shell classes; apps must not invent a parallel stack.
 
 | Concern | Contract |
 |---------|----------|
@@ -480,30 +480,75 @@ Mobile navigation is a **real routed page** (`/menu`), not a Radix Sheet/drawer 
 | **Chrome** | Footer (theme / language / back-to-portal) is pinned with `pb-safe`; the nav list scrolls independently. |
 | **Registry** | Templates: `src/lib/navSections.ts`. MSA-style apps: `src/config/pages.ts` (`SIDEBAR_SECTIONS`). Both `AppSidebar` and `MobileNav` import the same source. |
 
-**Document-scroll contract.** On mobile the **document** owns vertical scrolling — do not lock the shell with `h-screen overflow-hidden`. Desktop uses `md:h-svh md:overflow-hidden` with an internal scroller. The header is in-flow on mobile and sticky on `md+`.
+#### Why the bars look stable (transparency stack)
 
-**Runtime `theme-color`.** Call `initThemeColor()` from `useTheme.ts`. It writes `<meta name="theme-color">` from `--background` for Chrome/Android, and **removes** the meta on iPhone/iPad so WebKit compact chrome composites over page content. Do **not** ship a static opaque `<meta name="theme-color">` in `index.html` for mobile WebKit.
+Safari’s compact URL / bottom control bars are **translucent**. Stability comes from letting page paint show through those bars — not from fighting them with opaque `theme-color` or a locked `h-screen` shell.
 
-**Menu canvas marker.** Set `html[data-surface="menu"]` while on `/menu` so the document paints the sidebar palette; Safari glass and rubber-band gaps then match the menu surface.
+1. **Document scroll on mobile.** The document owns vertical scrolling. Do **not** lock the shell with `h-screen overflow-hidden` on small viewports. Desktop uses `md:h-svh md:overflow-hidden` with an internal scroller. The header is in-flow on mobile and sticky on `md+`.
+2. **Transparent shell.** `SidebarLayout` outer shell is `bg-transparent` on mobile and `md:bg-background` on desktop so the document canvas (`html` / `body` `bg-background`) shows through Safari glass.
+3. **Runtime `theme-color`.** Call `initThemeColor()` from `useTheme.ts` before first paint (`main.tsx`). It writes `<meta name="theme-color">` from `--background` for Chrome/Android, and **removes** the meta on iPhone/iPad so WebKit compact chrome composites over page content. Do **not** ship a static opaque `<meta name="theme-color">` in `index.html` for mobile WebKit. Viewport: `viewport-fit=cover`; do **not** set `user-scalable=no`.
+4. **Menu canvas marker.** Set `html[data-surface="menu"]` while on `/menu` so the document paints the sidebar palette; Safari glass and rubber-band gaps then match the menu surface.
 
-**Safe-area utilities** (in `index.css`):
+#### `SidebarLayout` class contract (copy these strings)
 
-| Class | Role |
-|-------|------|
-| `.pt-safe` / `.pb-safe` / `.px-safe` | `env(safe-area-inset-*)` padding only — use when the element has **no** competing Tailwind `p-`/`px-`/`py-` class |
-| `.px-safe-4` / `.px-safe-6` | `max(1rem\|1.5rem, env(safe-area-inset-left\|right))` — floored gutters for pages that also need a fixed horizontal padding. Bare `.px-safe` is emitted after Tailwind utilities and wins the cascade, collapsing `px-4`/`p-6` to 0 on non-notched viewports |
-| `.pb-safe-6` | `max(1.5rem, env(safe-area-inset-bottom))` — same floor rule for bottom padding |
-| `.pb-safe-content` | `calc(env(safe-area-inset-bottom, 0px) + 4.5rem)` on mobile (Safari floating toolbar); `1rem` at `md+` |
+| Layer | Classes |
+|-------|---------|
+| **Outer shell** | `flex min-h-svh min-h-[100dvh] w-full min-w-0 overflow-x-hidden bg-transparent px-safe md:h-svh md:h-[100dvh] md:min-h-0 md:overflow-hidden md:bg-background` |
+| **On `/menu`** | also `h-svh h-[100dvh] min-h-0 overflow-hidden` (lock the menu panel; list scrolls inside) |
+| **Header** | `relative z-30 h-14 shrink-0 box-content pt-safe … md:sticky md:top-0` |
+| **Main scroller** | normal routes: `pb-safe-content`; `/menu`: `min-h-0 flex-1 overflow-hidden` (**no** `pb-safe-content`) |
 
-Viewport meta: use `viewport-fit=cover` and do **not** set `user-scalable=no`.
+Reference implementations: `matrix-itsm`, `matrix-apps-template-2-1`, `matrix-apps-template-2-2`, MSA staging.
 
-**Sheet overlay cut.** Other Sheets still need `SheetOverlay` at `fixed inset-x-0 top-0 h-[100vh] h-[100lvh]` — plain `inset-0` resolves against iOS Safari's small viewport and leaves a gap under the overlay.
+#### Safe-area utilities (in `index.css`)
 
-**Adoption status (as of 2026-08-17)**
+| Class | CSS | When to use |
+|-------|-----|-------------|
+| `.pt-safe` / `.pb-safe` / `.px-safe` | `env(safe-area-inset-*)` only | Element has **no** competing Tailwind `p-` / `px-` / `py-` |
+| `.px-safe-4` / `.px-safe-6` | `max(1rem\|1.5rem, env(…))` | Full-page flows that also need a fixed gutter. Bare `.px-safe` is unlayered CSS after Tailwind utilities and **wins the cascade**, collapsing `px-4` / `p-6` to 0 on non-notched viewports |
+| `.pb-safe-6` | `max(1.5rem, env(safe-area-inset-bottom))` | Same floor rule for bottom padding |
+| `.pb-safe-content` | `calc(env(safe-area-inset-bottom, 0px) + 4.5rem)` mobile; `1rem` at `md+` | Scrollable main content under Safari’s floating bottom toolbar |
+| `.bottom-safe-fab` / `.right-safe-fab` | `max(1.25rem, env(…) + 0.75rem)` | Fixed FABs / floating panels (see below) |
+
+**Decision tree**
+
+- Pinned footers, `/menu` footer → `.pb-safe` (hardware inset only).
+- Scrollable route content inside `SidebarLayout` → `.pb-safe-content` (inset + **4.5rem** toolbar reserve).
+- Full-page auth / OAuth / share heroes outside the shell → `min-h-svh min-h-[100dvh]` + `.px-safe-4` (or `-6`) + `.pb-safe-content` when the page scrolls; `.pb-safe` / `.pb-safe-6` when it is a short centered card.
+- Fixed floating action (Ask AI, composer, help) → `.bottom-safe-fab` + `.right-safe-fab` — **never** bare `bottom-5` alone on notched devices.
+
+#### Floating controls vs Safari bottom bar (calculated distance)
+
+Safari’s bottom control bar floats over the page. Content and FABs must clear it on purpose, not by accident:
+
+| Layer | Offset from viewport bottom | Role |
+|-------|----------------------------|------|
+| Hardware home indicator | `env(safe-area-inset-bottom)` | Notch / home bar |
+| Scroll content end | **inset + 4.5rem** (`.pb-safe-content`) | Last content clears the translucent toolbar **and** a ~48px FAB |
+| FAB / chat launcher | **`max(1.25rem, inset + 0.75rem)`** (`.bottom-safe-fab`) | Sits in the glass zone, tappable; pairs with content reserve so list ends above the button |
+
+Why **4.5rem** on content: FAB is `h-12` (3rem) + ~1.25rem bottom offset + a small gap ≈ **4.5rem**. Changing one without the other reintroduces collisions on iPhone Safari.
+
+```tsx
+// Correct — design-system utilities
+<Button className="fixed z-50 h-12 w-12 rounded-full bottom-safe-fab right-safe-fab" />
+
+// Wrong — ignores inset; collides with home indicator / toolbar on notched phones
+<Button className="fixed bottom-5 right-5 …" />
+```
+
+Open chat / sheet panels that share the same corner must use the **same** `.bottom-safe-fab` / `.right-safe-fab` classes (or the expanded `inset-4` fullscreen variant on small screens).
+
+#### Sheet overlay cut
+
+Other Sheets still need `SheetOverlay` at `fixed inset-x-0 top-0 h-[100vh] h-[100lvh]` — plain `inset-0` resolves against iOS Safari's small viewport and leaves a gap under the overlay.
+
+#### Adoption status (as of 2026-08-17)
 
 | Status | Apps |
 |--------|------|
-| Landed | `matrix-itsm`, `matrix-apps-template-2-1`, `matrix-apps-template-2-2`, `matrix-sa-staging-main` (`main`), `matrix-sa-hungary-staging-main` |
+| Landed (shell + safe-area + `/menu`) | `matrix-itsm`, `matrix-apps-template-2-1`, `matrix-apps-template-2-2`, `matrix-sa-staging-main` (`main` + `cdto`), `matrix-sa-hungary-staging-main` |
+| FAB utilities (`.bottom-safe-fab`) | Templates + MSA Ask AI widget; other apps adopt when they add a fixed FAB |
 | Still on locked shell (follow-up) | `matrix-pipeline-2-0`, `matrix-atlas-mls`, `matrix-stardom`, `matrix-fm`, `matrix-qobrix-sales-automation-rls`, `task-manager-hu-1.3`, `matrix-analytics`, `matrix-hrms`, `matrix-hrms-sandbox-3.0`, `matrix-cdl-studio` |
 
 ### Sharp Design System
