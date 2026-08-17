@@ -2,7 +2,7 @@
 
 > **Audience:** 2nd Line Support analysts, IT operations, technical staff ONLY
 > **Purpose:** Technology orientation and pointers to deep-dive documentation for incident qualification and resolution.
-> **Repository:** [github.com/sharpsir-group/matrix-platform-kb](https://github.com/sharpsir-group/matrix-platform-kb)
+> **Repository:** [github.com/gca-global/matrix-platform-kb](https://github.com/gca-global/matrix-platform-kb)
 
 ---
 
@@ -31,7 +31,7 @@ When a 1st line incident is escalated to you, use this reference to:
 All documentation links point to the GitHub repository raw files for direct access:
 
 ```
-Base URL: https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/
+Base URL: https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/
 ```
 
 ---
@@ -65,10 +65,10 @@ Sharp Matrix is built on three platforms:
 
 | Topic | Document | GitHub Raw URL |
 |-------|----------|---------------|
-| Full architecture | `docs/architecture/overview.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/architecture/overview.md) |
-| Platform overview | `docs/platform/index.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/index.md) |
-| Ecosystem architecture | `docs/platform/ecosystem-architecture.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/ecosystem-architecture.md) |
-| App catalog (all apps & status) | `docs/platform/app-catalog.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/app-catalog.md) |
+| Full architecture | `docs/architecture/overview.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/architecture/overview.md) |
+| Platform overview | `docs/platform/index.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/index.md) |
+| Ecosystem architecture | `docs/platform/ecosystem-architecture.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/ecosystem-architecture.md) |
+| App catalog (all apps & status) | `docs/platform/app-catalog.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/app-catalog.md) |
 
 ---
 
@@ -125,9 +125,9 @@ Staff: `broker`, `senior_broker` | Team: `team_leader`, `sales_manager`, `office
 
 | Topic | Document | GitHub Raw URL |
 |-------|----------|---------------|
-| Security model (full) | `docs/platform/security-model.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/security-model.md) |
-| App template (auth flow) | `docs/platform/app-template.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/app-template.md) |
-| GDPR & compliance | `docs/platform/compliance.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/compliance.md) |
+| Security model (full) | `docs/platform/security-model.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/security-model.md) |
+| App template (auth flow) | `docs/platform/app-template.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/app-template.md) |
+| GDPR & compliance | `docs/platform/compliance.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/compliance.md) |
 
 ---
 
@@ -208,9 +208,9 @@ Edge Functions run on Supabase's Deno runtime. They handle OAuth, admin APIs, AI
 
 | Topic | Document | GitHub Raw URL |
 |-------|----------|---------------|
-| API contracts | `docs/platform/api-contracts.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/api-contracts.md) |
-| App template (Edge Functions) | `docs/platform/app-template.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/app-template.md) |
-| Operations & deployment | `docs/platform/operations.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/operations.md) |
+| API contracts | `docs/platform/api-contracts.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/api-contracts.md) |
+| App template (Edge Functions) | `docs/platform/app-template.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/app-template.md) |
+| Operations & deployment | `docs/platform/operations.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/operations.md) |
 
 ---
 
@@ -278,12 +278,12 @@ All Supabase tables use RLS policies enforced by JWT claims. Key RLS helper func
 
 | Topic | Document | GitHub Raw URL |
 |-------|----------|---------------|
-| CDL schema (cross-app data layer — listings + control plane + EFs) | `docs/data-models/cdl-schema.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/cdl-schema.md) |
-| Dash data model | `docs/data-models/dash-data-model.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/dash-data-model.md) |
-| Platform extensions (x_*) | `docs/data-models/platform-extensions.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/platform-extensions.md) |
-| RESO canonical schema | `docs/data-models/reso-dd-kb/wiki/dbml/canonical.dbml` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/reso-dd-kb/wiki/dbml/canonical.dbml) |
-| Field mapping (Dash ↔ RESO ↔ Qobrix) | `docs/data-models/property-field-mapping.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/property-field-mapping.md) |
-| Data quality | `docs/data-models/data-quality.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/data-quality.md) |
+| CDL schema (cross-app data layer — listings + control plane + EFs) | `docs/data-models/cdl-schema.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/data-models/cdl-schema.md) |
+| Dash data model | `docs/data-models/dash-data-model.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/data-models/dash-data-model.md) |
+| Platform extensions (x_*) | `docs/data-models/platform-extensions.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/data-models/platform-extensions.md) |
+| RESO canonical schema | `docs/data-models/reso-dd-kb/wiki/dbml/canonical.dbml` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/data-models/reso-dd-kb/wiki/dbml/canonical.dbml) |
+| Field mapping (Dash ↔ RESO ↔ Qobrix) | `docs/data-models/property-field-mapping.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/data-models/property-field-mapping.md) |
+| Data quality | `docs/data-models/data-quality.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/data-models/data-quality.md) |
 
 ---
 
@@ -306,10 +306,10 @@ Qobrix API → Bronze (raw JSON) → Silver (cleaned, typed) → Gold (aggregate
 
 | Topic | Document | GitHub Raw URL |
 |-------|----------|---------------|
-| ETL pipeline architecture | `docs/data-models/etl-pipeline.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/etl-pipeline.md) |
-| MLS datamart & migration | `docs/platform/mls-datamart.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/mls-datamart.md) |
-| Data contracts | `docs/data-models/data-contracts.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/data-contracts.md) |
-| RESO Web API | `docs/data-models/reso-web-api.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/data-models/reso-web-api.md) |
+| ETL pipeline architecture | `docs/data-models/etl-pipeline.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/data-models/etl-pipeline.md) |
+| MLS datamart & migration | `docs/platform/mls-datamart.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/mls-datamart.md) |
+| Data contracts | `docs/data-models/data-contracts.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/data-models/data-contracts.md) |
+| RESO Web API | `docs/data-models/reso-web-api.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/data-models/reso-web-api.md) |
 
 ---
 
@@ -360,10 +360,10 @@ All Sharp Matrix apps share the same stack:
 
 | Topic | Document | GitHub Raw URL |
 |-------|----------|---------------|
-| App template (full stack details) | `docs/platform/app-template.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/app-template.md) |
-| Testing strategy | `docs/platform/testing-strategy.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/testing-strategy.md) |
-| Performance targets | `docs/platform/performance.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/performance.md) |
-| Mobile strategy | `docs/platform/mobile-strategy.md` | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/platform/mobile-strategy.md) |
+| App template (full stack details) | `docs/platform/app-template.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/app-template.md) |
+| Testing strategy | `docs/platform/testing-strategy.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/testing-strategy.md) |
+| Performance targets | `docs/platform/performance.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/performance.md) |
+| Mobile strategy | `docs/platform/mobile-strategy.md` | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/platform/mobile-strategy.md) |
 
 ---
 
@@ -387,8 +387,8 @@ Understanding the business helps qualify incidents correctly.
 
 | Process | Summary | Deep-Dive |
 |---------|---------|-----------|
-| **Canonical RESO processes** (Listing / Showing / OpenHouse / Lead-Contact / Transaction / Member / Office / Team / Caravan / Media lifecycles) | Vendor-neutral RESO state machines | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/business-processes/canonical-processes/USAGE.md) |
-| **Matrix Pipeline 2.0 (CRM)** | Sharp-SIR luxury sales CRM product spec — entities, FRs, AI, phases | [View](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/product-specs/matrix-pipeline/INDEX.md) |
+| **Canonical RESO processes** (Listing / Showing / OpenHouse / Lead-Contact / Transaction / Member / Office / Team / Caravan / Media lifecycles) | Vendor-neutral RESO state machines | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/business-processes/canonical-processes/USAGE.md) |
+| **Matrix Pipeline 2.0 (CRM)** | Sharp-SIR luxury sales CRM product spec — entities, FRs, AI, phases | [View](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/product-specs/matrix-pipeline/INDEX.md) |
 
 ---
 
@@ -453,7 +453,7 @@ When you receive an escalated incident, follow this decision tree:
 
 | Resource | URL |
 |----------|-----|
-| Knowledge Base (GitHub) | [github.com/sharpsir-group/matrix-platform-kb](https://github.com/sharpsir-group/matrix-platform-kb) |
+| Knowledge Base (GitHub) | [github.com/gca-global/matrix-platform-kb](https://github.com/gca-global/matrix-platform-kb) |
 | Supabase Dashboard (SSO) | [https://supabase.com/dashboard/project/xgubaguglsnokjyudgvc](https://supabase.com/dashboard/project/xgubaguglsnokjyudgvc) |
 | Supabase Dashboard (Comms) | [https://supabase.com/dashboard/project/ujowkipnqgtazmtdsnlm](https://supabase.com/dashboard/project/ujowkipnqgtazmtdsnlm) |
 | Supabase Dashboard (Pipeline) | [https://supabase.com/dashboard/project/mydojctcewxrbwjckuyz](https://supabase.com/dashboard/project/mydojctcewxrbwjckuyz) |
@@ -463,5 +463,5 @@ When you receive an escalated incident, follow this decision tree:
 | Supabase Dashboard (Matrix FM) | [https://supabase.com/dashboard/project/retujkznogwplfrbniet](https://supabase.com/dashboard/project/retujkznogwplfrbniet) |
 | SSO Console | [https://intranet.sharpsir.group/sso-console/](https://intranet.sharpsir.group/sso-console/) |
 | Agency Portal | [https://intranet.sharpsir.group/agency-portal/](https://intranet.sharpsir.group/agency-portal/) |
-| Full KB Index | [docs/index.md](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/docs/index.md) |
-| AGENTS.md (entry point) | [AGENTS.md](https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/AGENTS.md) |
+| Full KB Index | [docs/index.md](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/docs/index.md) |
+| AGENTS.md (entry point) | [AGENTS.md](https://raw.githubusercontent.com/gca-global/matrix-platform-kb/main/AGENTS.md) |

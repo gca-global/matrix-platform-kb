@@ -183,7 +183,7 @@ Docs-only repo; version tracked in VERSION + RELEASE_NOTES.md.
 5. Tag + publish:
    ```bash
    git tag -a vX.Y.Z -m "vX.Y.Z — <short title>"
-   git push "https://x-access-token:$(gh auth token)@github.com/sharpsir-group/matrix-platform-kb.git" vX.Y.Z
+   git push "https://x-access-token:$(gh auth token)@github.com/gca-global/matrix-platform-kb.git" vX.Y.Z
    # Prefer .github/workflows/release.yml; fallback:
    # gh release create vX.Y.Z --title "vX.Y.Z — <short title>" --notes-file -
    ```

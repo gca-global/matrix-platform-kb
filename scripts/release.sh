@@ -13,7 +13,7 @@ bump() {
 }
 NEW=$(bump "$ARG")
 TODAY=$(date -u +%Y-%m-%d)
-PUSH="https://x-access-token:$(gh auth token)@github.com/sharpsir-group/matrix-platform-kb.git"
+PUSH="https://x-access-token:$(gh auth token)@github.com/gca-global/matrix-platform-kb.git"
 echo "Bumping $CURRENT -> $NEW ($TODAY)"
 printf '%s\n' "$NEW" > VERSION
 python3 - "$NEW" "$TODAY" <<'PY'
