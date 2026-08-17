@@ -131,3 +131,59 @@ Start at `docs/zoe-ai-assistant-kb/index.md`. For end-user questions, navigate t
 | `docs/data-models/reso-dd-kb/` | Markdown + CSV + DBML | Canonical RESO DD 2.0 (41 resources, 1,745 fields, 222 lookups). Start at `USAGE.md`. |
 | `raw/dash/BlankForm_*.docx` | DOCX | SIR/Anywhere.com listing forms (6 types) |
 | `raw/current-business-practice/*.xlsx` | XLSX | Listing checklists 2024–2026 |
+
+## Release notes & versioning (Cursor + any agent)
+
+Ship changes to `main` freely during the day.
+**Do not** cut a new `vX.Y.Z` tag / GitHub Release for every mid-day fix.
+Version and publish **once per cadence** as below — SemVer with a day-batch default.
+Same convention as `matrix-itsm` / `matrix-qobrix-sales-automation-v1-0`.
+
+Docs-only repo; version tracked in VERSION + RELEASE_NOTES.md.
+
+| Surface | Rule |
+|---------|------|
+| [`RELEASE_NOTES.md`](RELEASE_NOTES.md) | Keep an `## Unreleased — YYYY-MM-DD` section at the top while work is in flight. Append bullets as you ship (**why** + user/ops-visible effect). At cut time, rename that section to `## vX.Y.Z — YYYY-MM-DD — <title>` (newest first). |
+| [`VERSION`](VERSION) file (no package.json in this repo) | Bump **only** when cutting a release (same commit as the notes roll-up). |
+| GitHub Releases + tags | One annotated tag `vX.Y.Z` + GitHub Release per cut (`.github/workflows/release.yml` on tag push when present). Never retag; never force-move a published tag. |
+
+### Cadence (when to bump)
+
+| Bump | When | Typical trigger |
+|------|------|-----------------|
+| **PATCH** (`x.y.Z`) | **Default end-of-day cut** | Bug fixes, small docs/UX, scripts accumulated that day. One PATCH per calendar day unless nothing user/ops-visible shipped. |
+| **MINOR** (`x.Y.0`) | **Large package built** | Cohesive feature set / noteworthy module. Cut when done; reset PATCH to `0`. |
+| **MAJOR** (`X.0.0`) | **Breaking change** | Breaking contracts, public paths, or incompatible ops workflows. Reset MINOR and PATCH to `0`. |
+
+**Baseline:** GitHub `v1.0.0` is the retrospective product baseline. Later tags are deltas from it; never retag `v1.0.0`.
+
+### During the day (agents)
+
+1. Commit + push as usual.
+2. Append bullets under `## Unreleased — YYYY-MM-DD` in `RELEASE_NOTES.md` (create the section if missing). Prefer grouping related bullets; do **not** bump version or create a tag yet.
+3. Docs-only / pure refactor with no user/ops-visible effect: skip Unreleased unless the change **redefines agent rules** (then note it).
+
+### Cutting a release (EOD PATCH, or immediate MINOR/MAJOR)
+
+1. Ensure `main` is clean and includes everything for the cut (`git fetch` + ff-only if needed).
+2. Fold `Unreleased` → `## vX.Y.Z — YYYY-MM-DD — <short title>` with a crisp summary.
+3. Bump [`VERSION`](VERSION) to `X.Y.Z` (or run `scripts/release.sh patch|minor|major`).
+4. Commit message like `release: vX.Y.Z — <short title>`; push to `main`.
+5. Tag + publish:
+   ```bash
+   git tag -a vX.Y.Z -m "vX.Y.Z — <short title>"
+   git push "https://x-access-token:$(gh auth token)@github.com/sharpsir-group/matrix-platform-kb.git" vX.Y.Z
+   # Prefer .github/workflows/release.yml; fallback:
+   # gh release create vX.Y.Z --title "vX.Y.Z — <short title>" --notes-file -
+   ```
+   Body should mirror the `RELEASE_NOTES.md` section for that version.
+
+Helper: [`scripts/release.sh`](scripts/release.sh) bumps version and folds notes
+(still review title, commit, tag, and push yourself).
+
+### Anti-patterns (avoid)
+
+- Mid-day PATCH spam for three small fixes — batch into one EOD PATCH.
+- Shipping a large package under a PATCH bump — use MINOR.
+- Empty releases (no user/ops-visible / agent-rule change).
+- Editing or moving an already-published tag.
