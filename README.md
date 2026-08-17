@@ -26,6 +26,9 @@
 
 ---
 
+> **© 2024–2026 Sharp Sotheby's International Realty and GCA Global. All rights reserved.**
+> This is a **proprietary corporate knowledge base**. It is made technically available so authorized AI agents (Cursor, Lovable, and similar) acting for Sharp or GCA Global can read it. It is **not** for reading or use by anyone unaffiliated with Sharp or GCA Global — even if they have technical access. All contents are proprietary and protected by applicable intellectual property laws. See [LICENSE](LICENSE).
+
 ### What Is This?
 
 This repository is the **agent harness** for the Sharp Matrix platform — the structured, LLM-readable knowledge base that enables AI agents to build, extend, and operate a 24-app digital ecosystem for luxury real estate brokerage.
@@ -119,6 +122,7 @@ Three top-level buckets: `docs/` (KB knowledge layer), `raw/` (hand-supplied sou
 ```
 AGENTS.md                          ← Entry point for LLMs (TOC)
 README.md                          ← This file
+LICENSE                            ← Proprietary copyright; restricted to Sharp & GCA Global
 docs/                              ← KB knowledge layer (system of record)
   index.md                         ← Master index with chapter summaries
   platform/                        ← App template, security, ops, compliance, app-catalog, ecosystem, golden-principles
@@ -182,9 +186,11 @@ scripts/
 
 ### License
 
-This repository is proprietary. See [LICENSE](LICENSE) for details.
+This repository is **proprietary**. See [LICENSE](LICENSE).
 
-© 2024–2026 Sharp Sotheby's International Realty. All rights reserved.
+© 2024–2026 Sharp Sotheby's International Realty and GCA Global. All rights reserved.
+
+Authorized readers: employees, contractors, and officers of Sharp and of GCA Global, and AI agents (Cursor, Lovable, and similar) they invoke for Sharp Matrix work. Anyone else is **not authorized** to read or use this knowledge base, even if they have technical access.
 
 <p align="center">
   <sub>Part of the <a href="https://github.com/sharpsir-group"><strong>Sharp Matrix</strong></a> platform · <a href="https://sharpsir.group">sharpsir.group</a></sub>

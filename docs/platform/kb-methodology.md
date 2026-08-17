@@ -42,6 +42,8 @@ Checklist for changes that could affect Lovable:
 
 ## Contribution Guidelines
 
+This knowledge base is **proprietary** (Sharp Sotheby's International Realty and GCA Global). Contribute only if you are authorized Sharp / GCA Global personnel (or an AI agent acting for them). See [`LICENSE`](../../LICENSE).
+
 **Adding a new doc:**
 
 1. Create file (kebab-case.md)

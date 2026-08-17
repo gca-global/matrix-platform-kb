@@ -4,6 +4,16 @@
 > Deliberately short: each pointer leads to a deeper source of truth.
 > Read this first, then navigate to the relevant chapter.
 
+## Copyright — proprietary corporate knowledge base
+
+**© 2024–2026 Sharp Sotheby's International Realty and GCA Global. All rights reserved.**
+
+This repository is a **proprietary corporate knowledge base**. It is made technically available so that authorized AI agents (Cursor, Lovable, and similar) acting for Sharp or GCA Global can read it while building and operating Sharp Matrix. It is **not** intended to be read or used by anyone unaffiliated with Sharp or GCA Global.
+
+If you are not working for Sharp or GCA Global, you are **not authorized** to read, copy, or use this repository — even if you have technical access (clone, URL, fork, or index). All contents are proprietary and protected by applicable intellectual property laws. See [`LICENSE`](LICENSE).
+
+Authorized agents: you **may** read and use this knowledge base solely to assist Sharp / GCA Global personnel on Sharp Matrix work.
+
 ## Platform Identity
 
 **Sharp Matrix** is the **technology platform** powering **Sharp SIR** (Sharp Sotheby's International Realty), a luxury real estate brokerage and SIR-network affiliate currently operating in **Cyprus**, **Hungary**, and **Kazakhstan** (more markets planned). Four module families share the CDL: **CRM** (`matrix-pipeline`, `matrix-comms`, `matrix-client-connect`), **FM** (financial-entries, commissions, deal closings), **HR** (`matrix-hrms`), **MLS** (`matrix-atlas-mls`, `matrix-mls-2-0`, `matrix-cy-website`).
@@ -40,6 +50,7 @@ For new-app auth issues (401/400/403), see `docs/platform/new-app-auth-troublesh
 ```
 AGENTS.md                              ← This file (TOC)
 README.md
+LICENSE                                ← Proprietary copyright; restricted to Sharp & GCA Global
 docs/                                   ← KB knowledge layer (system of record)
 ├── index.md                           ← Master KB index (start here)
 ├── platform/                          ← App template, security, ops, compliance, app-catalog, ecosystem, golden-principles

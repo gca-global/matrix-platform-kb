@@ -1,5 +1,7 @@
 # Sharp Matrix Platform — Knowledge Base Index
 
+> **© 2024–2026 Sharp Sotheby's International Realty and GCA Global.** Proprietary corporate knowledge base — authorized AI agents (Cursor, Lovable) acting for Sharp or GCA Global may read it; anyone unaffiliated is not authorized to read or use it, even with technical access. See [`LICENSE`](../LICENSE).
+>
 > Master index for the LLM-readable knowledge base.
 > Each chapter is self-contained. Start here, then navigate to the chapter you need.
 >
