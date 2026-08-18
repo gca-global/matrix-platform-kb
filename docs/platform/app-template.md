@@ -551,6 +551,29 @@ Other Sheets still need `SheetOverlay` at `fixed inset-x-0 top-0 h-[100vh] h-[10
 | FAB utilities (`.bottom-safe-fab`) | Templates + MSA Ask AI widget; other apps adopt when they add a fixed FAB |
 | Still on locked shell (follow-up) | `matrix-pipeline-2-0`, `matrix-atlas-mls`, `matrix-stardom`, `matrix-fm`, `matrix-qobrix-sales-automation-rls`, `task-manager-hu-1.3`, `matrix-analytics`, `matrix-hrms`, `matrix-hrms-sandbox-3.0`, `matrix-cdl-studio` |
 
+### Stale-bundle detection (update-available toast)
+
+Watcher (and GitHub Actions) deploys replace hashed `assets/index-*.js` in `index.html`. Apache already sends `no-cache` for `index.html`, but an **already-open tab** keeps running the old bundle until the user reloads.
+
+Ship `src/hooks/useAppVersionPoller.ts` and mount a tiny `<AppVersionPoller />` (hook call, returns `null`) **inside `AuthProvider`**, above `<Routes>`. In MSA-style apps with a public `/share/*` tree, mount it inside the authed shell (`TermDetailProvider` / `AuthedApp`) so share-link recipients never see a reload prompt.
+
+The hook:
+
+1. Polls `{BASE_URL}/index.html?t=…` every 60s, plus on `focus` and `visibilitychange`, with `cache: 'no-store'`.
+2. Extracts the hashed `/assets/index-*.js` reference.
+3. On the first mismatch vs the tab’s boot baseline, fires **one** sonner toast (`duration: Infinity`) with a **Reload** action. It does **not** auto-reload (that would surprise mid-edit).
+
+**Resolve the path from Vite, not `getBasePath()`.** Use `import.meta.env.BASE_URL` (the value github-watcher patches into `vite.config.ts` `base`). Several templates still hardcode `const BASE_PATH = '/matrix-apps-template'` in `matrix-sso.ts`; polling that URL 404s and the toast never fires. `BASE_URL` is `''` on root-mounted / Lovable preview builds and `/itsm` (etc.) under the watcher.
+
+No extra dependency: every Matrix SPA already mounts `<Sonner />` in `App.tsx`. Keep the hook free of `matrix-sso` so Lovable regenerating `App.tsx` does not pull SSO into the poller.
+
+#### Adoption status (as of 2026-08-18)
+
+| Status | Apps |
+|--------|------|
+| Landed (`useAppVersionPoller` + `App.tsx` mount) | `matrix-sa-staging-main` (`main` + `cdto`), `matrix-sa-hungary-staging-main`, `matrix-itsm`, `matrix-apps-template-2-2`, `matrix-digital-employees` |
+| Follow-up (copy the same hook; mount inside `AuthProvider`) | `matrix-apps-template-2-1`, `matrix-hrms`, `matrix-pipeline-2-0`, `matrix-analytics`, `matrix-atlas-mls`, `matrix-qobrix-sales-automation-rls`, `matrix-stardom`, `matrix-fm`, `matrix-cdl-studio` |
+
 ### Sharp Design System
 
 | Element | Value |
@@ -746,6 +769,7 @@ Source: `/home/bitnami/matrix-hrms` — a Domain-Specific app built from the tem
 | `src/integrations/supabase/dataLayerTypes.ts` | SSO/CDL TypeScript types |
 | `src/hooks/useActiveRole.ts` | CRUD permission helpers |
 | `src/hooks/useRoleConfig.ts` | Page/action permission checks |
+| `src/hooks/useAppVersionPoller.ts` | Stale-bundle detector (poll `index.html`, sonner Reload toast). Canonical copy lives in `matrix-apps-template-2-2`; uses `import.meta.env.BASE_URL`, not `getBasePath()`. |
 | `src/components/AppSidebar.tsx` | Main sidebar with role-based sections |
 | `src/layouts/SidebarLayout.tsx` | Layout wrapper (sidebar + content) |
 | `supabase/migrations/001_sso_helper_functions.sql` | RLS helper functions |
