@@ -14,6 +14,8 @@ date: 2026-08-17
 
 - Catalogued Digital Employees (`gca-global/matrix-digital-employees`) as a github-watcher SPA at `/digital-employees/`.
 
+- Documented that the template's GitHub Actions `deploy.yml` (rsync) is unused and disabled platform-wide, with the re-disable step for new remixes, in `docs/platform/app-template.md`.
+
 ## Unreleased — 2026-08-17
 
 - Documented stale-bundle detection (`useAppVersionPoller`: poll `index.html` via `import.meta.env.BASE_URL`, sonner Reload toast) in `docs/platform/app-template.md`, with adoption status as of 2026-08-18.
