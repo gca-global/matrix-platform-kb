@@ -274,9 +274,17 @@ Migration `20260819150000_cdl_rls_lockdown_phase1.sql` closes the Supabase secur
 | **B — canonical master** | `properties`, `property_media` | `SELECT` only (write/TRUNCATE revoked) | `anon` + `authenticated` SELECT `USING (true)`; `service_role` ALL |
 | **C — source registry** | `mls_sources` | `SELECT` only | same as Group B |
 
-**Phase 2 (planned):** migrate browser reads of raw `properties` / `property_media` to `properties_published` and/or `listings-search` EF so Group B can move to READ-B-only (see `cdl-crud-contract.md` §READ-A divergence).
+**Phase 2 (2026-08-19, wave 2E):** MSA / Qobrix RLS / Digital Employees / app templates now read `properties`, `property_media`, and `mls_sources` via authenticated `cdlClient` (SSO ES256 JWT → CDL Third-Party Auth). Migration `20260819165000_cdl_wave2e_anon_revoke_reads.sql` drops `*_anon_select` policies and revokes anon SELECT on Groups B/C. `cdl_staging.*` gets RLS + `service_role`-only policies.
 
-`cdl_staging.*` tables remain without RLS (service-role-only ingestion path; separate hardening ticket).
+| Group | Tables | `anon` / `authenticated` | RLS policies |
+|---|---|---|---|
+| **B — canonical master** | `properties`, `property_media` | `authenticated` SELECT only | `authenticated` SELECT `USING (true)`; `service_role` ALL |
+| **C — source registry** | `mls_sources` | `authenticated` SELECT only | same as Group B |
+| **D — staging** | `cdl_staging.listings_raw`, `listings_mapped`, `media_staging` | `REVOKE ALL` from anon/authenticated | `service_role` ALL only |
+
+**Rollback:** `matrix-platform-foundation/supabase/cdl/rollback/20260819_wave2_cdl.sql`.
+
+~~`cdl_staging.*` tables remain without RLS (service-role-only ingestion path; separate hardening ticket).~~ **Resolved in wave 2E** — see Group D above.
 
 ## Migrations applied
 
@@ -289,6 +297,7 @@ In order (see `matrix-platform-foundation/supabase/cdl/migrations/`):
 5. `20260426160000_cdl_media_staging.sql` — `cdl_staging.media_staging` table + `public.merge_media_from_staging(uuid, text)` RPC. Phase 1 Best-in-Class.
 6. `20260426170000_cdl_drop_sync_mode.sql` — Drops `public.mls_settings.sync_mode` (legacy engine selector). Deployed AFTER the EF + UI rollout that no longer reads/writes the column.
 7. `20260819150000_cdl_rls_lockdown_phase1.sql` — RLS Phase 1 on 12 `public` tables: revoke write/TRUNCATE from `anon`/`authenticated`; enable RLS with service-role policies (Group A) or anon/authed SELECT + service-role ALL (Groups B/C). See §Row Level Security above.
+8. `20260819165000_cdl_wave2e_anon_revoke_reads.sql` — Wave 2E: remove anon SELECT on Groups B/C; enable RLS on `cdl_staging.*` with service-role-only policies. Prerequisite: app repos use `cdlClient` (authenticated SSO JWT). See §Row Level Security above.
 
 ## Atlas-side wiring (`matrix-atlas-mls`)
 

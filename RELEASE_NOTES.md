@@ -10,6 +10,10 @@ date: 2026-08-17
 **Version trail:** GitHub Releases/tags `vX.Y.Z` + this file + [`VERSION`](VERSION).
 **Agent rules:** [`AGENTS.md`](AGENTS.md) § Release notes & versioning.
 
+## Unreleased — 2026-08-19
+
+- **RLS wave 2 KB:** `security-model.md` — resolved S3, partial H5, new anon-GRANT defect class + C7; `cdl-schema.md` — wave 2E Groups B/C/D; `cdl-crud-contract.md` — READ-A now authenticated-only on `properties`/`property_media`.
+
 ## Unreleased — 2026-08-18
 
 - Catalogued Digital Employees (`gca-global/matrix-digital-employees`) as a github-watcher SPA at `/digital-employees/`.

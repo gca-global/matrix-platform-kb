@@ -41,7 +41,7 @@ const ssoJwt = await getSsoAccessToken();
 | Client | Project | Use for |
 |---|---|---|
 | `ssoClient` | `xgubaguglsnokjyudgvc` (SSO) | identity, roles, permissions, `useUserDisplay`, `resolve-users` EF |
-| `cdlClient` | `ofzcokolkeejgqfjaszq` (CDL) | **reads** of allow-listed public canonical resources via direct PostgREST (anon SELECT policy, `qual = true`); **scoped/PII reads + all writes** via dedicated Pipeline EFs (SSO JWT auto-injected by `invokeCdl`) |
+| `cdlClient` | `ofzcokolkeejgqfjaszq` (CDL) | **reads** of allow-listed public canonical resources via direct PostgREST under SSO JWT (Third-Party Auth → `authenticated` role); **scoped/PII reads + all writes** via dedicated Pipeline EFs (SSO JWT auto-injected by `invokeCdl`) |
 | `appClient` | per-app DB (Lovable-managed) | every CRM app-private resource + every Phase-1-4 write that does not yet have a Pipeline EF |
 
 The **same SSO JWT** is the bearer for SSO and for every CDL **EF** call. CDL verifies it via Supabase Third-Party Auth ([`../../architecture/decisions/ADR-012.md`](../../architecture/decisions/ADR-012.md)). Pipeline **never** holds the CDL service-role key.
@@ -50,7 +50,7 @@ The **same SSO JWT** is the bearer for SSO and for every CDL **EF** call. CDL ve
 
 This is the one rule that decides *how* any given CDL resource is reached. It is grounded in Supabase's own guidance, not invented here:
 
-- **Supabase Data API + RLS is the default for reads.** Per [Securing your API](https://supabase.com/docs/guides/api/securing-your-api): "The data APIs are designed to work with Postgres Row Level Security… Any table you create in the `public` schema will be accessible via the Supabase Data API. To restrict access, enable RLS." So **public, non-sensitive** canonical tables that carry an anon `SELECT` policy (`qual = true`) are read **directly via PostgREST** on `cdlClient` (the anon key is sufficient — no identity needed for global reference data). This is the READ-A allow-list.
+- **Supabase Data API + RLS is the default for reads.** Per [Securing your API](https://supabase.com/docs/guides/api/securing-your-api): "The data APIs are designed to work with Postgres Row Level Security… Any table you create in the `public` schema will be accessible via the Supabase Data API. To restrict access, enable RLS." **Public, non-sensitive** canonical tables with an authenticated SELECT policy (`qual = true`) are read **directly via PostgREST** on `cdlClient` with the SSO JWT (Third-Party Auth). This is the READ-A allow-list. Anon-only reads were removed from `properties` / `property_media` / `mls_sources` in CDL wave 2E (Aug 2026).
 - **Send the JWT (or use an EF) the moment a read is identity-scoped.** Cross-project identity is carried by the **SSO JWT via Third-Party Auth** ([Third-party auth](https://supabase.com/docs/guides/auth/third-party/overview): the API "will trust JWTs issued by the provider"; requires asymmetric signing — our SSO ES256). In this architecture, identity-scoped and **PII** reads (`contacts`, `contact_listings`, `contact_listing_notes`) do **not** use JWT-scoped PostgREST — they go through a **Pipeline EF** (READ-C), because Supabase's [*"Enforce additional rules on each request"*](https://supabase.com/docs/guides/api/securing-your-api) guidance applies: "Using Row Level Security policies may not always be adequate" (PII, service-role-only RLS, server-side checks) → put it behind an Edge Function.
 - **All canonical writes go through an EF.** Browsers never write CDL PostgREST directly; writes use `invokeCdl` (service-role inside the EF, SSO-JWT-scoped authz, emits `HistoryTransactional`). This is WRITE-B; until the EF ships, queue in the app-DB `*_pending` table (WRITE-A fallback).
 - **Never** read an **RLS-disabled** table directly (e.g. `contact_listings` today) — Supabase warns such tables are "accessible to the public using the anon role"; that is a CDL access-gate violation. Use the EF. And **never** use the CDL service-role key in app code. (RLS-disabled here is a **temporary dev-phase condition**, not the target — target is RLS enabled per Pattern B before production sign-off; see [`wiki/architecture.md` Security advisory](wiki/architecture.md). The EF access gate is the rule during dev **and** stays the canonical write path after RLS lands, so building against it now is correct either way.)
@@ -63,9 +63,9 @@ The matrix in [`mem://infrastructure/cdl-coverage.md` §A2](#) tells you which s
 
 ### Recipe READ-A — direct PostgREST on the CDL client {#read-a}
 
-For tables with RLS enabled + an anon SELECT policy with `qual = true`. Today: `members`, `offices`, `properties_published`, `property_rooms`, `property_unit_types`, `showings`, `history_transactional`, `internet_tracking_events`, `open_houses`, `mls_sources`, `reso_field_descriptions`, `reso_lookup_value_descriptions`.
+For tables with RLS enabled + an authenticated SELECT policy with `qual = true`. Today: `members`, `offices`, `properties`, `property_media`, `properties_published`, `property_rooms`, `property_unit_types`, `showings`, `history_transactional`, `internet_tracking_events`, `open_houses`, `mls_sources`, `reso_field_descriptions`, `reso_lookup_value_descriptions`. All require `cdlClient` with SSO JWT (CDL Third-Party Auth) — anon SELECT was removed in wave 2E.
 
-> **KB divergence (Phase 1 RLS, Aug 2026):** `public.properties` and `public.property_media` are **not** on the READ-A allow-list above (canonical contract says use READ-B / `listings-search` for property-shaped reads). Several apps still read them directly via `cdlAnonClient` today (`matrix-pipeline-2-0`, `matrix-atlas-mls`, app templates 2-1/2-2). Migration `20260819150000_cdl_rls_lockdown_phase1.sql` temporarily legalizes anon/authenticated SELECT on those two tables (`USING (true)`) while revoking all writes. **Phase 2** migrates those call sites to `properties_published` and/or `listings-search`, then removes the direct anon path.
+> **Resolved (Aug 2026, wave 2E):** MSA, Qobrix RLS, Digital Employees, and app templates 2-1/2-2 now use authenticated `cdlClient` for `properties` / `property_media` reads. Migration `20260819165000_cdl_wave2e_anon_revoke_reads.sql` dropped `*_anon_select` policies. Prefer `properties_published` or `listings-search` for new property-shaped UI where filtering/pagination matters.
 
 ```typescript
 const { data, error } = await cdlClient
@@ -239,8 +239,8 @@ A short checklist Lovable applies at the top of every relevant prompt:
 | Resource | Read | Write |
 |---|---|---|
 | `Property` (`properties_published`) | READ-A or READ-B | n/a (Atlas-owned) |
-| `Property` (raw `properties`) | READ-B (contract); **legacy direct anon SELECT** until Phase 2 | n/a |
-| `Media` (`property_media`) | READ-B (contract); **legacy direct anon SELECT** until Phase 2 | n/a |
+| `Property` (raw `properties`) | READ-A (authenticated `cdlClient`) or READ-B | n/a |
+| `Media` (`property_media`) | READ-A (authenticated `cdlClient`) or READ-B | n/a |
 | `PropertyRooms` / `PropertyUnitTypes` | READ-A | n/a |
 | `Member` | READ-A | WRITE-B `cdl-write` resource `members` ✅ (insert = AD-provisioning of new owners; **`update` of AD-sourced fields only** — `job_title` / `office_name` — when the owner picker reconciles a drifted roster row; ADR-031). Roster is otherwise master-sourced by `mls-sync`. |
 | `Office` | READ-A | n/a |

@@ -723,7 +723,7 @@ which keeps this change "same security level, faster + simpler."
 |---|---------|----------|--------|-------------|
 | S1 | **CDL multi-tenancy on `public.properties` / `properties_published` / `property_media`** | HIGH | The canonical listing tables are not tenant-scoped today (single CDL-wide dataset keyed by `source_id`). Multi-tenant scoping for distinct tenants pulling distinct MLS feeds is an open item. | Decide between (a) adding `tenant_id` to `properties`/`property_media` and tenant-scoped RLS, or (b) keeping `source_id` as the tenancy key and enforcing per-tenant `source_id` allow-lists at the EF layer. Resolve before more than one tenant ingests via `mls-sync`. (The MLS Sync control plane — `mls_settings`, `mls_sync_jobs`, `mls_sync_state`, `mls_orchestrator_runs` — is already per-tenant.) |
 | S2 | **4 SECURITY DEFINER views on SSO tables** | HIGH | `user_role_assignments`, `tenants`, `role_configurations`, `app_permissions` bypass the caller's RLS context. | Convert to `SECURITY INVOKER` (Postgres 15+) or add explicit `WHERE` clauses that re-check caller permissions. |
-| S3 | **`app_settings` allows anonymous INSERT/UPDATE** | HIGH | RLS policies `Anon can insert app_settings` and `Anon can update app_settings` use `WITH CHECK (true)`. | Restrict to `authenticated` role or add tenant/scope checks. |
+| S3 | **`app_settings` allows anonymous INSERT/UPDATE** | RESOLVED (2026-08-19) | Wave 2C (`20260819163000_sso_wave2c_anon_revoke_business.sql`): `REVOKE ALL … FROM anon` on all SSO public tables; `app_settings` policies now `TO authenticated` only. Browser apps already executed as `authz_role=authenticated`. |
 | S4 | **Leaked password protection disabled** | MEDIUM | Supabase Auth's HaveIBeenPwned integration is off. | Enable in Dashboard → Auth → Security → "Leaked password protection". |
 | ~~S5~~ | ~~**`sso_scope_levels` RLS disabled**~~ | RESOLVED (2026-08-19) | Migration `20260819151000_sso_enable_rls_category_b.sql`: RLS enabled + `sso_scope_levels_authed_read` (authenticated SELECT). EFs continue via `service_role`. |
 
@@ -735,7 +735,7 @@ which keeps this change "same security level, faster + simpler."
 | H2 | **5 functions with mutable `search_path`** | LOW | `match_kb_embeddings`, `create_jwt_secret`, `mask_secret`, `update_ad_users_updated_at`, `audit_sso_applications` lack `SET search_path = public`. | Add `SET search_path = public` to each function definition. |
 | H3 | **`pg_trgm` extension in public schema** | LOW | Should be in a dedicated `extensions` schema. | `ALTER EXTENSION pg_trgm SET SCHEMA extensions;` (create schema first if needed). |
 | ~~H4~~ | ~~`oauth-userinfo` not updated for ES256~~ | RESOLVED (2026-07-09) | `oauth-userinfo` now delegates to the shared `verifySsoJwt()` helper — ES256 via public JWKS first, then HS256, then opaque lookup. See [ADR-011 §Verification consolidation](../architecture/decisions/ADR-011.md). |
-| H5 | **`developer_projects` / `developers` permissive INSERT/UPDATE** | LOW | RLS policies use `WITH CHECK (true)` for all roles. | Add tenant_id checks to INSERT/UPDATE policies. |
+| H5 | **`developer_projects` / `developers` permissive INSERT/UPDATE** | PARTIAL (2026-08-19) | Wave 2C replaced `{public} USING(true)` policies with `TO authenticated` only — **anon can no longer read/write** developer rows. Cross-tenant `USING(true)` for `authenticated` remains (separate Phase 3 ticket). | Add tenant_id checks to INSERT/UPDATE/SELECT policies for `authenticated`. |
 
 ### Completed
 
@@ -746,7 +746,12 @@ which keeps this change "same security level, faster + simpler."
 | ~~C3~~ | sso_role_configurations not readable by native tokens | 2026-04-09 | Migration 041: added `auth.uid()` tenant fallback |
 | ~~C4~~ | sso_applications anonymous read exposes all columns | 2026-04-09 | Migration 041: restricted anon to display columns only |
 | ~~C5~~ | ES256 JWT signing for SSO instance | 2026-04-09 | ADR-011: ES256 key generated, vault stored, standby imported, Edge Functions updated |
-| ~~C6~~ | HRMS edge functions used old `rw_global`/`rw_org` permission model | 2026-04-13 | Migrated `employee-sync`, `hrms-ad-admin`, `hrms-sync-permissions` to scope-based checks (`scope.id` from JWT claims). Dropped `sso_user_permissions` cache table. `hrms-sync-permissions` rewritten to be stateless. |
+| ~~C7~~ | SSO/CDL/MSA/ITSM anon GRANT + `USING(true)` bypass | 2026-08-19 | Wave 2 (`20260819162000`–`20260819165000`): revoked anon DML on SSO token/permission/business tables, MSA app DB, ITSM, Qobrix RLS, CY Web Site; CDL anon SELECT removed from `properties`/`property_media`/`mls_sources` after app repos switched to `cdlClient`. Rollback SQL in `matrix-platform-foundation/supabase/*/rollback/20260819_wave2_*.sql`. |
+
+### Anon GRANT vs RLS (defect class)
+
+Supabase security linter flags **RLS disabled** tables. A separate class — not caught by that alert — is **RLS enabled + anon still holds GRANT + policy `USING(true)` / `WITH CHECK(true)` for role `{public}` or `{anon}`**. PostgREST then executes as `authenticated` when the client sends a valid JWT (normal browser path), but anyone with the **publishable anon key alone** can still read/write every row the policy allows. Wave 1 (Aug 2026) enabled RLS on CDL/SSO tables missing it; Wave 2 closed the remaining anon GRANT holes project-wide. **Remediation pattern:** `REVOKE` anon DML (and sensitive SELECT) + narrow policies to `TO authenticated` or `service_role` as appropriate; never rely on "apps always send JWT" without revoking anon grants.
+
 | ~~C7~~ | Fresh login looped in storage-stripping embedded browsers (Cursor webview) — orphaned PKCE verifier | 2026-05-31 | ADR-019: server-managed PKCE opt-in (`sso_applications.server_managed_pkce`); `oauth-token` requires `code_verifier` only when not flagged. Enabled for Matrix Pipeline 2.0. |
 
 ## Cross-Reference
