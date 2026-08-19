@@ -65,6 +65,8 @@ The matrix in [`mem://infrastructure/cdl-coverage.md` §A2](#) tells you which s
 
 For tables with RLS enabled + an anon SELECT policy with `qual = true`. Today: `members`, `offices`, `properties_published`, `property_rooms`, `property_unit_types`, `showings`, `history_transactional`, `internet_tracking_events`, `open_houses`, `mls_sources`, `reso_field_descriptions`, `reso_lookup_value_descriptions`.
 
+> **KB divergence (Phase 1 RLS, Aug 2026):** `public.properties` and `public.property_media` are **not** on the READ-A allow-list above (canonical contract says use READ-B / `listings-search` for property-shaped reads). Several apps still read them directly via `cdlAnonClient` today (`matrix-pipeline-2-0`, `matrix-atlas-mls`, app templates 2-1/2-2). Migration `20260819150000_cdl_rls_lockdown_phase1.sql` temporarily legalizes anon/authenticated SELECT on those two tables (`USING (true)`) while revoking all writes. **Phase 2** migrates those call sites to `properties_published` and/or `listings-search`, then removes the direct anon path.
+
 ```typescript
 const { data, error } = await cdlClient
   .from('properties_published')
@@ -237,8 +239,8 @@ A short checklist Lovable applies at the top of every relevant prompt:
 | Resource | Read | Write |
 |---|---|---|
 | `Property` (`properties_published`) | READ-A or READ-B | n/a (Atlas-owned) |
-| `Property` (raw `properties`) | use READ-B only | n/a |
-| `Media` | use READ-B `includeMedia: true` | n/a |
+| `Property` (raw `properties`) | READ-B (contract); **legacy direct anon SELECT** until Phase 2 | n/a |
+| `Media` (`property_media`) | READ-B (contract); **legacy direct anon SELECT** until Phase 2 | n/a |
 | `PropertyRooms` / `PropertyUnitTypes` | READ-A | n/a |
 | `Member` | READ-A | WRITE-B `cdl-write` resource `members` ✅ (insert = AD-provisioning of new owners; **`update` of AD-sourced fields only** — `job_title` / `office_name` — when the owner picker reconciles a drifted roster row; ADR-031). Roster is otherwise master-sourced by `mls-sync`. |
 | `Office` | READ-A | n/a |

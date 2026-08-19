@@ -725,7 +725,7 @@ which keeps this change "same security level, faster + simpler."
 | S2 | **4 SECURITY DEFINER views on SSO tables** | HIGH | `user_role_assignments`, `tenants`, `role_configurations`, `app_permissions` bypass the caller's RLS context. | Convert to `SECURITY INVOKER` (Postgres 15+) or add explicit `WHERE` clauses that re-check caller permissions. |
 | S3 | **`app_settings` allows anonymous INSERT/UPDATE** | HIGH | RLS policies `Anon can insert app_settings` and `Anon can update app_settings` use `WITH CHECK (true)`. | Restrict to `authenticated` role or add tenant/scope checks. |
 | S4 | **Leaked password protection disabled** | MEDIUM | Supabase Auth's HaveIBeenPwned integration is off. | Enable in Dashboard → Auth → Security → "Leaked password protection". |
-| S5 | **`sso_scope_levels` RLS disabled** | MEDIUM | SSO config table exposed to PostgREST without RLS. | `ALTER TABLE sso_scope_levels ENABLE ROW LEVEL SECURITY;` + add read-only policy for authenticated. |
+| ~~S5~~ | ~~**`sso_scope_levels` RLS disabled**~~ | RESOLVED (2026-08-19) | Migration `20260819151000_sso_enable_rls_category_b.sql`: RLS enabled + `sso_scope_levels_authed_read` (authenticated SELECT). EFs continue via `service_role`. |
 
 ### Medium-Term (Hardening)
 

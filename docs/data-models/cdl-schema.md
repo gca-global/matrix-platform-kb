@@ -264,6 +264,20 @@ Known CDL naming aliases are honoured in the audit registry (e.g. `properties.or
 - The control-plane tables are tenant-scoped: every row carries `tenant_id` extracted from the JWT (`tenant_id` / `tenant.id` / `active_role.tenant_id`). The EFs run as `service_role` and enforce isolation by always filtering on the verified `tenant_id`.
 - `public.properties` / `public.properties_published` / `public.property_media` are **not** tenant-scoped today — they share a single CDL-wide listing dataset keyed by `source_id`. Tenant-vs-source mapping for read access is handled at the EF layer when needed (e.g. `listings-search` can be filtered to `filters.sourceId`). Multi-tenant scoping of the canonical listings tables remains an open item if/when distinct tenants run distinct MLS feeds against the same CDL.
 
+## Row Level Security — Phase 1 lockdown (Aug 2026)
+
+Migration `20260819150000_cdl_rls_lockdown_phase1.sql` closes the Supabase security alert on 12 `public` tables that had RLS disabled with full `anon`/`authenticated` grants (including **TRUNCATE**). All ingestion and admin writes continue through Edge Functions (`service_role`, bypasses RLS).
+
+| Group | Tables | `anon` / `authenticated` | RLS policies |
+|---|---|---|---|
+| **A — service/ingestion** | `mls_settings`, `mls_sync_jobs`, `mls_sync_state`, `mls_orchestrator_runs`, `field_mappings`, `ingest_audit`, `property_field_overrides`, `property_lifecycle_events`, `reso_lookup_value_map` | `REVOKE ALL` — no PostgREST access | `service_role` ALL only |
+| **B — canonical master** | `properties`, `property_media` | `SELECT` only (write/TRUNCATE revoked) | `anon` + `authenticated` SELECT `USING (true)`; `service_role` ALL |
+| **C — source registry** | `mls_sources` | `SELECT` only | same as Group B |
+
+**Phase 2 (planned):** migrate browser reads of raw `properties` / `property_media` to `properties_published` and/or `listings-search` EF so Group B can move to READ-B-only (see `cdl-crud-contract.md` §READ-A divergence).
+
+`cdl_staging.*` tables remain without RLS (service-role-only ingestion path; separate hardening ticket).
+
 ## Migrations applied
 
 In order (see `matrix-platform-foundation/supabase/cdl/migrations/`):
@@ -274,6 +288,7 @@ In order (see `matrix-platform-foundation/supabase/cdl/migrations/`):
 4. `20260426130000_cdl_full_reso_ingestion.sql` — Full RESO ingestion: 8 new resource tables (`members`, `offices`, `contacts`, `open_houses`, `showings` [RESO ShowingAppointment], `history_transactional`, `internet_tracking_events`, `teams`), `mls_sources` registry, `cdl_lock_field` / `cdl_unlock_field` stewardship RPCs, `property_field_overrides`. **Note:** `teams` was later DROPPED in `20260504080000` (PR1.5).
 5. `20260426160000_cdl_media_staging.sql` — `cdl_staging.media_staging` table + `public.merge_media_from_staging(uuid, text)` RPC. Phase 1 Best-in-Class.
 6. `20260426170000_cdl_drop_sync_mode.sql` — Drops `public.mls_settings.sync_mode` (legacy engine selector). Deployed AFTER the EF + UI rollout that no longer reads/writes the column.
+7. `20260819150000_cdl_rls_lockdown_phase1.sql` — RLS Phase 1 on 12 `public` tables: revoke write/TRUNCATE from `anon`/`authenticated`; enable RLS with service-role policies (Group A) or anon/authed SELECT + service-role ALL (Groups B/C). See §Row Level Security above.
 
 ## Atlas-side wiring (`matrix-atlas-mls`)
 
