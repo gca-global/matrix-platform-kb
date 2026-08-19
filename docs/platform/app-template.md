@@ -4,7 +4,7 @@
 > Examples:
 > - `/home/bitnami/matrix-hrms` — Domain-Specific app (HR, 25+ tables)
 > - `/home/bitnami/matrix-pipeline` — CDL-Connected app (CRM, leads, pipeline)
-> - `/home/bitnami/matrix-itsm` — Domain-Specific app (IT service desk, CMDB; repo: `gca-global/matrix-itsm`)
+> - `/home/bitnami/matrix-itsm` — Domain-Specific app (IT service desk, CMDB; repo: `gca-ltd/matrix-itsm`)
 > - `/home/bitnami/matrix-fm` — Domain-Specific app (financial reporting, budgeting)
 >
 > **For Lovable**: Read this document before building ANY Matrix App. It defines the

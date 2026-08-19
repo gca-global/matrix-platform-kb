@@ -130,7 +130,7 @@ Start at `docs/zoe-ai-assistant-kb/index.md`. For end-user questions, navigate t
 | `/home/bitnami/matrix-apps-template-2-1` | React/TS | **Canonical** app template — dual-Supabase, SSO, permissions, RLS, UI. (The prior `matrix-apps-template` is obsolete — do not use.) |
 | `/home/bitnami/matrix-hrms` | React/TS | HRMS app (Domain-Specific) |
 | `/home/bitnami/matrix-pipeline` | React/TS | Pipeline CRM (CDL-Connected) |
-| `/home/bitnami/matrix-itsm` | React/TS | ITSM (Domain-Specific) — [`gca-global/matrix-itsm`](https://github.com/gca-global/matrix-itsm) |
+| `/home/bitnami/matrix-itsm` | React/TS | ITSM (Domain-Specific) — [`gca-ltd/matrix-itsm`](https://github.com/gca-ltd/matrix-itsm) |
 | `/home/bitnami/matrix-fm` | React/TS | Financial Management (Domain-Specific) |
 | `/home/bitnami/matrix-mls` | React/TS | MLS Listing Management (CDL-Connected) — Cursor-managed, see ADR-013 |
 | `/home/bitnami/matrix-atlas-mls` | React/TS | Atlas — MLS Sync admin & Listings Search (CDL-Connected) |
@@ -183,7 +183,7 @@ Docs-only repo; version tracked in VERSION + RELEASE_NOTES.md.
 5. Tag + publish:
    ```bash
    git tag -a vX.Y.Z -m "vX.Y.Z — <short title>"
-   git push "https://x-access-token:$(gh auth token)@github.com/gca-global/matrix-platform-kb.git" vX.Y.Z
+   git push "https://x-access-token:$(gh auth token)@github.com/gca-ltd/matrix-platform-kb.git" vX.Y.Z
    # Prefer .github/workflows/release.yml; fallback:
    # gh release create vX.Y.Z --title "vX.Y.Z — <short title>" --notes-file -
    ```

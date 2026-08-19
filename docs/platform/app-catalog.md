@@ -63,7 +63,7 @@
 
 > **Matrix Stardom** — AI workspace for digital peers & people. `sharpsir-group/matrix-stardom`, Lovable-managed Matrix app shell. Auto-deployed by `github-watcher` on push to `main` (config key `sharpsir-group/matrix-stardom`, secret env `WEBHOOK_SECRET_STARDOM`, Apache path `/stardom/`). Production URL: `https://intranet.sharpsir.group/stardom/`. Ensure the OAuth app’s redirect URIs in the SSO Console include `https://intranet.sharpsir.group/stardom/auth/callback` (and Lovable preview URIs if used). **Intranet-only:** root Apache `htdocs/.htaccess` 301-redirects shareable paths that omit the `/stardom/` prefix (e.g. `/shared-conversation/…` → `/stardom/shared-conversation/…`) — same pattern as Pipeline `/list` → `/pipeline/list`; the Lovable repo stays at `/` with no committed `base`.
 >
-> **Digital Employees** (SSO title **AI Agents**) — `gca-global/matrix-digital-employees`, remixed from `matrix-apps-template-2-2`. Auto-deployed by `github-watcher` on push to `main` (config key `gca-global/matrix-digital-employees`, secret env `WEBHOOK_SECRET_DIGITAL_EMPLOYEES`, Apache path `/digital-employees/`). Production URL: `https://intranet.sharpsir.group/digital-employees/`. OAuth client `eXN8sUlGHJGHkcizgZNC0bdvOhSfbtst` — intranet redirect `https://intranet.sharpsir.group/digital-employees/auth/callback` (migration `20260818100000`). App DB / EFs on Supabase project `mihslqjjclbrqelnjjpb`. The leftover GitHub Actions rsync `deploy.yml` is unused (no `DEPLOY_*` secrets), same as ITSM.
+> **Digital Employees** (SSO title **AI Agents**) — `gca-ltd/matrix-digital-employees`, remixed from `matrix-apps-template-2-2`. Auto-deployed by `github-watcher` on push to `main` (config key `gca-ltd/matrix-digital-employees`, secret env `WEBHOOK_SECRET_DIGITAL_EMPLOYEES`, Apache path `/digital-employees/`). Production URL: `https://intranet.sharpsir.group/digital-employees/`. OAuth client `eXN8sUlGHJGHkcizgZNC0bdvOhSfbtst` — intranet redirect `https://intranet.sharpsir.group/digital-employees/auth/callback` (migration `20260818100000`). App DB / EFs on Supabase project `mihslqjjclbrqelnjjpb`. The leftover GitHub Actions rsync `deploy.yml` is unused (no `DEPLOY_*` secrets), same as ITSM.
 
 ### Planned
 
@@ -300,7 +300,7 @@ Four apps are backfilled into **every** role's `apps_allowed` so they stay broad
 **Users**: IT staff, IT Admins, All internal users (ticket submitters)
 **App Type**: Domain-Specific (own Supabase instance)
 **Supabase Instance**: `irjrcskfcyierdbefrpk`
-**Repo**: `/home/bitnami/matrix-itsm` ([`gca-global/matrix-itsm`](https://github.com/gca-global/matrix-itsm))
+**Repo**: `/home/bitnami/matrix-itsm` ([`gca-ltd/matrix-itsm`](https://github.com/gca-ltd/matrix-itsm))
 **Key Features** (target):
 - Service desk with ticket lifecycle (Incident, Service Request, Change, Problem)
 - SLA tracking with priority-based breach time
