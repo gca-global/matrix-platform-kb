@@ -389,7 +389,7 @@ Migration: `matrix-itsm/supabase/migrations/20260619130000_p2_ticket_team_tenanc
 Canonical Pattern B treats `global` as tenant-wide **read** (writes of others'
 rows reserved for `org_admin` / `system_admin`; see golden-principles S1 and
 `003_data_model_template.sql`). **Qobrix Sales Automation**
-(`matrix-qobrix-sales-automation-rls` / `matrix-sales-automation` (was `matrix-qobrix-sales-automation-v1-0`),
+(`matrix-qobrix-sales-automation-rls` / `matrix-sales-automation`,
 app DB `ycbwgnihbrqammkgngum` / `rpoeezssicpzexarmwqq`)
 **intentionally diverges**: UPDATE/DELETE on owned CRM tables include
 `'global'`, so a sales director can mutate any tenant CRM row for oversight.
