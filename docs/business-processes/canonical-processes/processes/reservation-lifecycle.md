@@ -1,7 +1,7 @@
 # Reservation lifecycle (stage-side, CY Sales Automation)
 
 > **Scope**: Sharp SIR Cyprus opportunity pipeline in
-> `matrix-qobrix-sales-automation-v1-0` (app DB `rpoeezssicpzexarmwqq`).
+> `gca-ltd/matrix-sales-automation` (was `matrix-qobrix-sales-automation-v1-0`; app DB `rpoeezssicpzexarmwqq`).
 > This document describes the **stage-side** reservation model. It does
 > **not** write RESO `StandardStatus → Active Under Contract` yet —
 > that remains the future refinement in

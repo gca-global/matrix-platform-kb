@@ -148,7 +148,7 @@ Start at `docs/zoe-ai-assistant-kb/index.md`. For end-user questions, navigate t
 Ship changes to `main` freely during the day.
 **Do not** cut a new `vX.Y.Z` tag / GitHub Release for every mid-day fix.
 Version and publish **once per cadence** as below — SemVer with a day-batch default.
-Same convention as `matrix-itsm` / `matrix-qobrix-sales-automation-v1-0`.
+Same convention as `matrix-itsm` / `matrix-sales-automation`.
 
 Docs-only repo; version tracked in VERSION + RELEASE_NOTES.md.
 

@@ -389,13 +389,13 @@ Migration: `matrix-itsm/supabase/migrations/20260619130000_p2_ticket_team_tenanc
 Canonical Pattern B treats `global` as tenant-wide **read** (writes of others'
 rows reserved for `org_admin` / `system_admin`; see golden-principles S1 and
 `003_data_model_template.sql`). **Qobrix Sales Automation**
-(`matrix-qobrix-sales-automation-rls` / `matrix-qobrix-sales-automation-v1-0`,
+(`matrix-qobrix-sales-automation-rls` / `matrix-sales-automation` (was `matrix-qobrix-sales-automation-v1-0`),
 app DB `ycbwgnihbrqammkgngum` / `rpoeezssicpzexarmwqq`)
 **intentionally diverges**: UPDATE/DELETE on owned CRM tables include
 `'global'`, so a sales director can mutate any tenant CRM row for oversight.
 
 - **Justification:** sales-director oversight of broker pipeline/contacts/offers.
-- **App doc:** `matrix-qobrix-sales-automation-v1-0/docs/supabase/app-owned-data.md`
+- **App doc:** `matrix-sales-automation/docs/supabase/app-owned-data.md` (repo `gca-ltd/matrix-sales-automation`)
   (three-toggle source-gating contract + Pattern B divergence).
 - **Campaigns** use Pattern C tenant-shared SELECT; **notifications** INSERT
   binds `tenant_id` to JWT `uoi` —
@@ -406,7 +406,7 @@ app DB `ycbwgnihbrqammkgngum` / `rpoeezssicpzexarmwqq`)
 
 ### Qobrix / App-DB source gating (v1.0 three toggles)
 
-`matrix-qobrix-sales-automation-v1-0` exposes three independent client toggles
+`matrix-sales-automation` (was `matrix-qobrix-sales-automation-v1-0`) exposes three independent client toggles
 (Qobrix avatar menu + Setup). Contract:
 
 | Toggle | OFF | ON |
@@ -417,7 +417,7 @@ app DB `ycbwgnihbrqammkgngum` / `rpoeezssicpzexarmwqq`)
 
 Auth/session and explicit backfill/sync are exempt from the read gates. UI
 edit-ability keys off `row_source` via `useCanEdit` / `isEditable(row, writeMode)`.
-Canonical detail: `matrix-qobrix-sales-automation-v1-0/docs/supabase/app-owned-data.md`.
+Canonical detail: `matrix-sales-automation/docs/supabase/app-owned-data.md`.
 
 
 The CDL instance also has legacy helper functions used by older apps (`matrix-client-connect`, `matrix-meeting-hub`). These are kept for backward compatibility and should NOT be used by new apps:
