@@ -51,7 +51,7 @@ Start with **[AGENTS.md](AGENTS.md)** — the entry point and navigation map for
 #### Raw URL Pattern
 
 ```
-https://raw.githubusercontent.com/gca-ltd/matrix-platform-kb/main/{path}
+https://raw.githubusercontent.com/sharpsir-group/matrix-platform-kb/main/{path}
 ```
 
 ### For Zoe — Our First AI Employee

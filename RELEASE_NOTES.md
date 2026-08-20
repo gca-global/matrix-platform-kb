@@ -6,9 +6,13 @@ date: 2026-08-17
 
 # Release notes — matrix-platform-kb
 
-**Repo:** [`gca-ltd/matrix-platform-kb`](https://github.com/gca-ltd/matrix-platform-kb)  
+**Repo:** [`sharpsir-group/matrix-platform-kb`](https://github.com/sharpsir-group/matrix-platform-kb)  
 **Version trail:** GitHub Releases/tags `vX.Y.Z` + this file + [`VERSION`](VERSION).
 **Agent rules:** [`AGENTS.md`](AGENTS.md) § Release notes & versioning.
+
+## Unreleased — 2026-08-20
+
+- **One KB repo:** cite as `sharpsir-group/matrix-platform-kb` (ecosystem convention); physical home remains `gca-ltd` during the org migration. Documented anti-doubling guard in `AGENTS.md` — never create a repo at the old `sharpsir-group` or `gca-global` paths.
 
 ## Unreleased — 2026-08-19
 

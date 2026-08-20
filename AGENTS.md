@@ -21,6 +21,21 @@ Authorized agents: you **may** read and use this knowledge base solely to assist
 **Built with**: Lovable + Supabase (CDL / system of record) + Databricks (DWH / ETL).
 **Practical data model**: RESO DD 2.0 in storage (snake_case canonical names); Dash names projected via `v_dash_*` views.
 
+## One Knowledge Base repo (do not double)
+
+There is **exactly one** Matrix Platform KB repository. Cite it as
+[`sharpsir-group/matrix-platform-kb`](https://github.com/sharpsir-group/matrix-platform-kb)
+everywhere (docs, raw.githubusercontent.com URLs, code comments). During the org
+migration the repo's **physical** GitHub home is `gca-ltd/matrix-platform-kb`;
+`sharpsir-group/…` and `gca-global/…` are rename redirects onto that same repo.
+
+- **Never** create a second repo at `sharpsir-group/matrix-platform-kb` or
+  `gca-global/matrix-platform-kb` — that would shadow the redirect and break every
+  citation across the ecosystem.
+- **Never** clone a second KB tree beside `/home/bitnami/matrix-platform-kb`.
+- **Git push / clone remotes** may use `gca-ltd/matrix-platform-kb` (the real path)
+  so pushes do not depend on a redirect. Citation form stays `sharpsir-group`.
+
 ## For LLMs — Start Here
 
 Before building or modifying any Matrix App:
