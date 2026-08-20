@@ -747,10 +747,25 @@ which keeps this change "same security level, faster + simpler."
 | ~~C4~~ | sso_applications anonymous read exposes all columns | 2026-04-09 | Migration 041: restricted anon to display columns only |
 | ~~C5~~ | ES256 JWT signing for SSO instance | 2026-04-09 | ADR-011: ES256 key generated, vault stored, standby imported, Edge Functions updated |
 | ~~C7~~ | SSO/CDL/MSA/ITSM anon GRANT + `USING(true)` bypass | 2026-08-19 | Wave 2 (`20260819162000`–`20260819165000`): revoked anon DML on SSO token/permission/business tables, MSA app DB, ITSM, Qobrix RLS, CY Web Site; CDL anon SELECT removed from `properties`/`property_media`/`mls_sources` after app repos switched to `cdlClient`. Rollback SQL in `matrix-platform-foundation/supabase/*/rollback/20260819_wave2_*.sql`. |
+| ~~C8~~ | `TRUNCATE` granted to anon/authenticated on every public table (RLS does not apply) | 2026-08-19 | Wave 2F (`20260819170000_wave2f_revoke_truncate.sql`, all six projects): revoked `TRUNCATE` from `anon` + `authenticated`; `service_role` keeps it. Default privileges for role `postgres` also revoked so new tables no longer inherit it. |
 
 ### Anon GRANT vs RLS (defect class)
 
 Supabase security linter flags **RLS disabled** tables. A separate class — not caught by that alert — is **RLS enabled + anon still holds GRANT + policy `USING(true)` / `WITH CHECK(true)` for role `{public}` or `{anon}`**. PostgREST then executes as `authenticated` when the client sends a valid JWT (normal browser path), but anyone with the **publishable anon key alone** can still read/write every row the policy allows. Wave 1 (Aug 2026) enabled RLS on CDL/SSO tables missing it; Wave 2 closed the remaining anon GRANT holes project-wide. **Remediation pattern:** `REVOKE` anon DML (and sensitive SELECT) + narrow policies to `TO authenticated` or `service_role` as appropriate; never rely on "apps always send JWT" without revoking anon grants.
+
+### TRUNCATE bypasses RLS (defect class)
+
+`TRUNCATE` is **not** subject to row security — Postgres checks only the table-level privilege, so no `USING` / `WITH CHECK` clause can restrict it. A role holding `TRUNCATE` can empty a table regardless of how carefully its policies are scoped. Supabase's default grants hand `arwdDxtm` to `anon` and `authenticated` on every new table in `public`, and `D` is `TRUNCATE`.
+
+Wave 2F revoked it from both roles across all six projects (253 `authenticated` + 30 `anon` table privileges) and left `service_role` untouched, since Edge Functions and ingestion legitimately truncate staging tables. Because the grant comes from *default privileges*, a one-off revoke drifts back on the next table: the migration therefore also runs `ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public REVOKE TRUNCATE ON TABLES FROM anon, authenticated`.
+
+**Residual:** the `supabase_admin` default ACL still carries `D` and cannot be altered without superuser. Tables created by that role would re-acquire `TRUNCATE`; Matrix migrations and Lovable both create tables as `postgres`, so this is latent rather than active. Re-check with:
+
+```sql
+SELECT grantee, count(*) FROM information_schema.role_table_grants
+WHERE table_schema='public' AND privilege_type='TRUNCATE'
+  AND grantee IN ('anon','authenticated') GROUP BY grantee;
+```
 
 | ~~C7~~ | Fresh login looped in storage-stripping embedded browsers (Cursor webview) — orphaned PKCE verifier | 2026-05-31 | ADR-019: server-managed PKCE opt-in (`sso_applications.server_managed_pkce`); `oauth-token` requires `code_verifier` only when not flagged. Enabled for Matrix Pipeline 2.0. |
 
