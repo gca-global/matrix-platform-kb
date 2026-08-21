@@ -10,6 +10,10 @@ date: 2026-08-17
 **Version trail:** GitHub Releases/tags `vX.Y.Z` + this file + [`VERSION`](VERSION).
 **Agent rules:** [`AGENTS.md`](AGENTS.md) § Release notes & versioning.
 
+## Unreleased — 2026-08-21
+
+- **ADR-039 / ADR-040**: MCP platform reference is now the Qobrix CRM stack (modes A–D, RS/AS split); Digital Employees client contract documented. ADR-032 and ADR-038 marked Obsolete as platform MCP references. Rewrote `docs/platform/matrix-mcp-server.md` and added `docs/platform/mcp-client.md`.
+
 ## Unreleased — 2026-08-20
 
 - **One KB repo:** cite as `sharpsir-group/matrix-platform-kb` (ecosystem convention); physical home remains `gca-ltd` during the org migration. Documented anti-doubling guard in `AGENTS.md` — never create a repo at the old `sharpsir-group` or `gca-global` paths.
