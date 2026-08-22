@@ -20,38 +20,42 @@ explicit **principal** with governance (Allow / Ask / Deny, rate limits, audit).
 | `oauth_user` | Mode D | Per-principal OAuth 2.1 + PKCE; PRM discovery |
 | `oauth_service` | — | Client-credentials |
 
+## Agent contract
+
+The agent receives **exactly** the tool catalogue each MCP server publishes via
+`tools/list` (cached in `mcp_tools`). Policy, rate limits, audit and session
+handling wrap those tools — we do **not** inject synthetic tools.
+
+### `server_managed` (Qobrix Mode C via `/mcp-c`)
+
+The MCP server returns its own connect URL inside the tool result text (Markdown
+link, `isError: false`). The client relays that text **verbatim** to the model.
+There is no platform `AUTH_REQUIRED:` prefix and no chat sign-in UI.
+
+Per-user vault isolation uses signed `X-Chat-*` headers
+(`QOBRIX_MCP_IDENTITY_SECRET` on both the MCP host and the Edge Function).
+
+### `oauth_user` (remote Mode D connectors)
+
+The client is an OAuth 2.1 + PKCE user agent; callback
+`{SUPABASE_URL}/functions/v1/mcp-oauth/callback`. HTTP 401 from the remote
+server surfaces as a tool error — not a custom platform protocol.
+
+### System directives
+
+Runtime imperative fragments (date/time guidance, RAG/memory wrappers, tool
+messages) live in `employees.system_directives` and the employee **System** tab
+— not in hardcoded Edge Function strings. See [ADR-041](../architecture/decisions/ADR-041.md).
+
 ## Module layout
 
 ```
 supabase/functions/_shared/mcp/
   types.ts, errors.ts, crypto.ts, transport.ts, client.ts, registry.ts, principal.ts
-  auth/apikey.ts, auth/server-managed.ts
+  auth/apikey.ts, auth/identity.ts
   auth/oauth/{discovery,client,flow,tokens}.ts
+system-directives.ts
 ```
-
-Edge functions: `mcp-admin` (registry/policy/approvals), `mcp-oauth` (callback +
-start/status/disconnect). Legacy `tools-api` / `tools-oauth` are shims.
-
-Canonical redirect URI: `{SUPABASE_URL}/functions/v1/mcp-oauth/callback`  
-(Legacy `…/tools-oauth` kept for Qobrix AS allow-list.)
-
-## Agent contract
-
-The agent receives **exactly** the tool catalogue each MCP server publishes via
-`tools/list` (cached in `mcp_tools`). Policy, rate limits, audit and session
-handling wrap those tools — we do **not** inject synthetic tools (no platform
-`sign_in` helper). If the server itself exposes a session tool (e.g. Qobrix
-`qobrix_sign_in`), it appears only when enabled in policy.
-
-When a catalogue tool hits an unauthenticated session, the client returns a tool
-result starting with `AUTH_REQUIRED:` and the exact single-use OAuth URL minted
-by `createAuthUrl`. `AUTH_REQUIRED_TOOL_RULE` in the system prompt instructs the
-model to paste that URL as plain text — never invent or shorten it. The user
-opens the link, completes consent, and retries; the next tool call uses the
-stored per-principal grant.
-
-There is no separate chat UI for sign-in links — relay through the assistant
-reply is intentional.
 
 ## Schema
 
