@@ -469,6 +469,24 @@ const sidebarSections = [
 
 Prefer a **shared nav registry** so desktop and mobile stay in sync (see below) rather than duplicating section arrays inside `AppSidebar.tsx` alone.
 
+### In-app notifications (`notifications` table)
+
+The app template ships `useNotifications` + `NotificationBell` in the header. Two shapes exist in the platform:
+
+| Shape | Used by | `recipient_id` | Read state | Live updates |
+|-------|---------|----------------|------------|--------------|
+| **Person-scoped** | HRMS, ITSM (workflow inbox) | SSO user UUID per row | `is_read` / `read_at` on the row | `postgres_changes` when the browser holds a user JWT on PostgREST |
+| **Tenant-scoped operational** | Digital Employees (failures, approvals) | `NULL` = all tenant admins; optional UUID for direct messages | `notification_receipts` per `(notification_id, user_id)` | `realtime.send` broadcast on `notifications:<tenant_id>` + `notifications-api` EF |
+
+**Digital Employees rules (operational inbox):**
+
+- The browser is **anon-only** to the app DB — never query `notifications` directly from the SPA. All reads/writes go through `notifications-api` with Matrix SSO (`invokeWithAuth`).
+- DB triggers on `mcp_tool_calls`, `runs`, `outbound_deliveries`, `schedule_executions`, `eval_runs`, and `employees` (publish) insert rows and ping the broadcast topic.
+- Sidebar approval badges use `usePendingToolCalls()` (real count), not hardcoded template numbers.
+- Do **not** ship `EXAMPLE_NOTIFICATIONS` fallbacks — an empty inbox is correct when nothing has fired.
+
+HRMS person-scoped migrations live in `matrix-hrms/supabase/migrations/20260215200001_notifications.sql`. Digital Employees migrations live in `matrix-digital-employees/supabase/migrations/`.
+
 ### Mobile navigation and safe areas
 
 Mobile navigation is a **real routed page** (`/menu`), not a Radix Sheet/drawer overlay. This section is the **platform design-system contract** for translucent browser chrome, safe-area gutters, and floating controls. Templates ship the utilities and shell classes; apps must not invent a parallel stack.
