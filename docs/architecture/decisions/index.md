@@ -46,4 +46,4 @@ This directory contains Architecture Decision Records (ADRs) for the Sharp Matri
 | [ADR-038](ADR-038.md) | ITSM is ES256-only (SSO bearer + MCP issuer) | Obsolete — see ADR-039 |
 | [ADR-039](ADR-039.md) | MCP reference architecture: the Qobrix stack (modes A–D, RS/AS split, introspection + vault) | Accepted |
 | [ADR-040](ADR-040.md) | Digital Employees MCP client contract (five auth modes, principal model, encrypted tokens) | Accepted |
-| [ADR-041](ADR-041.md) | Dual-path Qobrix MCP (Mode D `/mcp` + Mode C `/mcp-c`); system directives; vanilla auth relay | Accepted |
+| [ADR-041](ADR-041.md) | Single-path Qobrix MCP (auto routing on `/mcp`); vanilla chat baseline | Accepted |
