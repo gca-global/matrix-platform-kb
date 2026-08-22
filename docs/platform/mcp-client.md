@@ -37,10 +37,21 @@ Canonical redirect URI: `{SUPABASE_URL}/functions/v1/mcp-oauth/callback`
 
 ## Agent contract
 
-Tool results that need sign-in start with `AUTH_REQUIRED:` and include the exact
-single-use URL. Models must paste that URL as plain text — never invent one.
-Sign-in tools are registered for OAuth / server-managed servers regardless of
-whether the tool catalogue is warm.
+The agent receives **exactly** the tool catalogue each MCP server publishes via
+`tools/list` (cached in `mcp_tools`). Policy, rate limits, audit and session
+handling wrap those tools — we do **not** inject synthetic tools (no platform
+`sign_in` helper). If the server itself exposes a session tool (e.g. Qobrix
+`qobrix_sign_in`), it appears only when enabled in policy.
+
+When a catalogue tool hits an unauthenticated session, the client returns a tool
+result starting with `AUTH_REQUIRED:` and the exact single-use OAuth URL minted
+by `createAuthUrl`. `AUTH_REQUIRED_TOOL_RULE` in the system prompt instructs the
+model to paste that URL as plain text — never invent or shorten it. The user
+opens the link, completes consent, and retries; the next tool call uses the
+stored per-principal grant.
+
+There is no separate chat UI for sign-in links — relay through the assistant
+reply is intentional.
 
 ## Schema
 
